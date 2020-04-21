@@ -12,6 +12,7 @@ target 'GetBetter' do
   pod 'Toaster'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'Firebase/Database'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftKeychainWrapper', '~>3.0.1'
 end

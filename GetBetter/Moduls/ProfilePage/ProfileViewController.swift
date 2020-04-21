@@ -47,8 +47,6 @@ class ProfileViewController: UIViewController {
         }
         if let photoURL = user.photoURL,
             let imageData = try? Data(contentsOf: photoURL) {
-            print(imageData)
-            print(photoURL.absoluteString)
             avatarImageView.image = UIImage(data: imageData)
         }
     }

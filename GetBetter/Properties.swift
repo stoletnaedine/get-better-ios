@@ -104,4 +104,8 @@ struct Properties {
         static let loadAvatar = "Загрузить аватар"
         static let avatarsDirectory = "avatars"
     }
+    
+    struct Write {
+        static let sphere = "Выберите сферу для события"
+    }
 }
