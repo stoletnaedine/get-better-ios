@@ -44,12 +44,12 @@ class PostViewController: UIViewController {
         if let post = postTextView.text, !post.isEmpty,
             let sphere = selectedSphere {
                 let ref = Database.database().reference()
-            ref.child("post").child(user.uid).setValue(["post": post])
-//                ref.child("post").child(user.uid).setValue([
-//                    "post": post,
-//                    "sphere": sphere,
-//                    "timestamp": String(NSDate().timeIntervalSince1970)
-//                ])
+            
+            ref.child("post").child(user.uid).childByAutoId().setValue([
+                    "post": post,
+                    "sphere": sphere,
+                    "timestamp": Date.currentTimeStamp
+                ])
             Toast(text: "Пост сохранен!").show()
         }
     }
