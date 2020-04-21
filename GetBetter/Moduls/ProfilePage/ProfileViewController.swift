@@ -19,21 +19,21 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileInfo), name: .updateProfile, object: nil)
         customizeView()
         customizeBarButton()
-        updateUserInfoInView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateUserInfoInView()
+        loadProfileInfo()
     }
     
     @IBAction func signOutButtonDidPressed(_ sender: UIButton) {
         NotificationCenter.default.post(name: .logout, object: nil)
     }
     
-    func updateUserInfoInView() {
+    @objc func updateProfileInfo() {
+        loadProfileInfo()
+    }
+    
+    func loadProfileInfo() {
         guard let user = Auth.auth().currentUser else {
             return
         }
@@ -45,9 +45,10 @@ class ProfileViewController: UIViewController {
         if let userEmail = user.email {
             emailLabel.text = userEmail
         }
-        
         if let photoURL = user.photoURL,
             let imageData = try? Data(contentsOf: photoURL) {
+            print(imageData)
+            print(photoURL.absoluteString)
             avatarImageView.image = UIImage(data: imageData)
         }
     }

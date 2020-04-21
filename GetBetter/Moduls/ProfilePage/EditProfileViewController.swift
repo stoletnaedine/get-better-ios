@@ -68,7 +68,6 @@ class EditProfileViewController: UIViewController {
         }
         
         if let name = nameTextField.text, !name.isEmpty {
-            print("!!!!!!!! nameTextField.text = \(name)")
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = name
             changeRequest.commitChanges(completion: { error in
@@ -79,7 +78,7 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let email = emailTextField.text {
+        if let email = emailTextField.text, !email.isEmpty {
             user.updateEmail(to: email, completion: { error in
                 if let error = error {
                     Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
@@ -99,6 +98,7 @@ class EditProfileViewController: UIViewController {
             })
         }
         
+        NotificationCenter.default.post(name: .updateProfile, object: nil)
         navigationController?.popViewController(animated: true)
     }
     

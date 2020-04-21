@@ -19,8 +19,7 @@ class RootManager {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(logout),
-                                               name: .logout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
         
         setupNavigationBar()
         configToaster()
