@@ -56,8 +56,8 @@ struct Properties {
     
     struct Auth {
         static let authTitleVC = "Авторизация"
-        static let description1 = "Для участия в мероприятиях войдите в приложение через социальные сети"
-        static let description2 = "Или авторизуйтесь через приложение"
+        static let description1 = "Войдите в приложение через социальные сети (пока не доступно)"
+        static let description2 = "или авторизуйтесь ниже"
         static let email = "E-mail"
         static let enterEmail = "Введите e-mail"
         static let password = "Пароль"
