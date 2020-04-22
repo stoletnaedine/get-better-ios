@@ -10,15 +10,8 @@ import Foundation
 
 struct Properties {
     
-    struct Url {
-        static let baseUrl = "https://helpapp-4976d.firebaseio.com"
-        static let event = baseUrl + "/event.json"
-        static let category = baseUrl + "/category.json"
-    }
-    
     struct Keychain {
-        static let emailKey = "HelpAppEmail"
-        static let passwordKey = "HelpAppPassword"
+        static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
         static let emailSuccessSaved = "Email успешно сохранен в Keychain"
     }
     

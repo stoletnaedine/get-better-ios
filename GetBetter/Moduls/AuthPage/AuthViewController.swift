@@ -55,7 +55,7 @@ class AuthViewController: UIViewController {
                     return
                 }
                 
-                if KeychainHelper.saveCredentials(email: email, password: password) {
+                if KeychainHelper.saveCredentials(email: email) {
                     Toast(text: Properties.Keychain.emailSuccessSaved).show()
                 }
                 

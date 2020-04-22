@@ -11,21 +11,15 @@ import SwiftKeychainWrapper
 
 class KeychainHelper {
     
-    static func saveCredentials(email: String, password: String) -> Bool {
+    static func saveCredentials(email: String) -> Bool {
         return KeychainWrapper.standard.set(email, forKey: Properties.Keychain.emailKey)
-            && KeychainWrapper.standard.set(password, forKey: Properties.Keychain.passwordKey)
     }
     
     static func getUserEmail() -> String? {
         return KeychainWrapper.standard.string(forKey: Properties.Keychain.emailKey)
     }
     
-    static func getUserPassword() -> String? {
-        return KeychainWrapper.standard.string(forKey: Properties.Keychain.passwordKey)
-    }
-    
     static func deleteCredentials() {
         KeychainWrapper.standard.removeObject(forKey: Properties.Keychain.emailKey)
-        KeychainWrapper.standard.removeObject(forKey: Properties.Keychain.passwordKey)
     }
 }
