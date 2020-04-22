@@ -25,6 +25,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var password2Label: UILabel!
     @IBOutlet weak var password2TextField: UITextField!
+    @IBOutlet weak var warningLabel: UILabel!
     
     let user = Auth.auth().currentUser
     
@@ -78,15 +79,6 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let email = emailTextField.text, !email.isEmpty {
-            user.updateEmail(to: email, completion: { error in
-                if let error = error {
-                    Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
-                    return
-                }
-            })
-        }
-        
         if let password1 = passwordTextField.text, !password1.isEmpty,
             let password2 = password2TextField.text, !password2.isEmpty,
             password1 == password2 {
@@ -95,6 +87,17 @@ class EditProfileViewController: UIViewController {
                     Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
                     return
                 }
+            })
+        }
+        
+        if let email = emailTextField.text, !email.isEmpty {
+            user.updateEmail(to: email, completion: { error in
+                if let error = error {
+                    print("\(error.localizedDescription)")
+                    Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
+                    return
+                }
+                NotificationCenter.default.post(name: .logout, object: nil)
             })
         }
         
@@ -142,6 +145,8 @@ class EditProfileViewController: UIViewController {
         passwordTextField.placeholder = Properties.Profile.enterPassword
         password2Label.text = Properties.Profile.password2
         password2TextField.placeholder = Properties.Profile.enterPassword2
+        warningLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 14)
+        warningLabel.text = Properties.Profile.warning
     }
     
     func customizeBarButon() {

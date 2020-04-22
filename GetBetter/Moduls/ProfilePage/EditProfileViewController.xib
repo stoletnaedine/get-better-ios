@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,6 +22,7 @@
                 <outlet property="passwordLabel" destination="mdL-2z-tYD" id="sqT-o0-ZDK"/>
                 <outlet property="passwordTextField" destination="glj-Pf-xBa" id="XZp-iS-l1Q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="warningLabel" destination="Br0-BS-dIh" id="y9Z-1R-9gh"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -65,47 +65,49 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="piE-pJ-i4P">
-                    <rect key="frame" x="20" y="338" width="374" height="30"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="20" y="338" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuf-To-UEE">
-                    <rect key="frame" x="20" y="393" width="374" height="21"/>
+                    <rect key="frame" x="20" y="397" width="374" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLo-Tj-2Os">
-                    <rect key="frame" x="20" y="424" width="374" height="30"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="20" y="428" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" textContentType="email"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdL-2z-tYD">
-                    <rect key="frame" x="20" y="479" width="374" height="21"/>
+                    <rect key="frame" x="20" y="487" width="374" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="glj-Pf-xBa">
-                    <rect key="frame" x="20" y="510" width="374" height="30"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="20" y="518" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" textContentType="password"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMJ-8P-FHW">
-                    <rect key="frame" x="20" y="565" width="374" height="21"/>
+                    <rect key="frame" x="20" y="577" width="374" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v61-oh-dLd">
-                    <rect key="frame" x="20" y="596" width="374" height="30"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="20" y="608" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" textContentType="password"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Br0-BS-dIh">
+                    <rect key="frame" x="20" y="672" width="374" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -114,7 +116,9 @@
                 <constraint firstItem="RxO-6g-uQ5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="90" id="2QJ-06-7dl"/>
                 <constraint firstItem="v61-oh-dLd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="2dy-Cs-2XZ"/>
                 <constraint firstItem="GLo-Tj-2Os" firstAttribute="top" secondItem="nuf-To-UEE" secondAttribute="bottom" constant="10" id="2vD-Dy-SON"/>
+                <constraint firstItem="Br0-BS-dIh" firstAttribute="top" secondItem="v61-oh-dLd" secondAttribute="bottom" constant="30" id="7mj-3H-P6C"/>
                 <constraint firstItem="glj-Pf-xBa" firstAttribute="top" secondItem="mdL-2z-tYD" secondAttribute="bottom" constant="10" id="CdD-Qp-f2z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Br0-BS-dIh" secondAttribute="trailing" constant="20" id="IaY-I4-QGA"/>
                 <constraint firstItem="v61-oh-dLd" firstAttribute="top" secondItem="dMJ-8P-FHW" secondAttribute="bottom" constant="10" id="M85-5i-l0y"/>
                 <constraint firstItem="ewl-u8-E0N" firstAttribute="top" secondItem="RxO-6g-uQ5" secondAttribute="bottom" constant="45" id="NXk-RN-5mc"/>
                 <constraint firstItem="mdL-2z-tYD" firstAttribute="top" secondItem="GLo-Tj-2Os" secondAttribute="bottom" constant="25" id="OK8-o9-FR0"/>
@@ -129,6 +133,7 @@
                 <constraint firstItem="nuf-To-UEE" firstAttribute="top" secondItem="piE-pJ-i4P" secondAttribute="bottom" constant="25" id="fIU-OM-J6a"/>
                 <constraint firstItem="GLo-Tj-2Os" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="fUa-cH-zxB"/>
                 <constraint firstItem="nuf-To-UEE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="g8I-LZ-qlc"/>
+                <constraint firstItem="Br0-BS-dIh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="gJW-pr-4NC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="glj-Pf-xBa" secondAttribute="trailing" constant="20" id="haf-tc-SGU"/>
                 <constraint firstItem="piE-pJ-i4P" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jtQ-Xf-U4Y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GLo-Tj-2Os" secondAttribute="trailing" constant="20" id="jx3-Nz-rlk"/>
@@ -137,6 +142,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="piE-pJ-i4P" secondAttribute="trailing" constant="20" id="zZB-qf-yzr"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
 </document>

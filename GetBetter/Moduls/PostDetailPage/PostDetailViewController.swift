@@ -21,6 +21,7 @@ class PostDetailViewController: UIViewController {
         if let post = self.post {
             fillViewController(post)
         }
+        customizeView()
     }
 
     func fillViewController(_ post: Post) {
@@ -28,5 +29,11 @@ class PostDetailViewController: UIViewController {
         self.sphereLabel.text = Sphere(rawValue: post.sphere ?? "relax")?.string
         self.timestampLabel.text = post.timestamp ?? ""
         self.title = post.text ?? "Событие"
+    }
+    
+    func customizeView() {
+        textLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
+        sphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 24)
+        timestampLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
     }
 }

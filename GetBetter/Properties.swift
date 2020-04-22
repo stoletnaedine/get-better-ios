@@ -95,6 +95,7 @@ struct Properties {
         static let enterPassword2 = "Повторите новый пароль"
         static let loadAvatar = "Загрузить аватар"
         static let avatarsDirectory = "avatars"
+        static let warning = "При смене Email будет необходимо заново войти в приложение"
     }
     
     struct Post {

@@ -24,24 +24,27 @@ class AddPostViewController: UIViewController {
         self.title = Properties.Post.postTitle
         customizeView()
         customizeBarButton()
-        
-        let picker = UIPickerView()
-        picker.dataSource = self
-        picker.delegate = self
-        
-        let dummy = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 0))
-        view.addSubview(dummy)
-        
-        dummy.inputView = picker
-        dummy.becomeFirstResponder()
     }
     
     func customizeView() {
         postTextView.backgroundColor = .lightGrey
         sphereLabel.text = Properties.Post.sphere
-        if let sphere = selectedSphere {
-            selectedSphereLabel.text = sphere
-        }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
+        selectedSphereLabel.isUserInteractionEnabled = true
+        selectedSphereLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func showPicker() {
+        let picker = UIPickerView()
+        picker.dataSource = self
+        picker.delegate = self
+        
+        let customtTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 0))
+        view.addSubview(customtTextField)
+        
+        customtTextField.inputView = picker
+        customtTextField.becomeFirstResponder()
     }
     
     func customizeBarButton() {
@@ -80,6 +83,7 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let sphere = Sphere.allCases[row]
+        selectedSphereLabel.text = sphere.string
         return sphere.string
     }
     
