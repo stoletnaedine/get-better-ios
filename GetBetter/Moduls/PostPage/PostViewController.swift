@@ -25,6 +25,18 @@ class PostViewController: UIViewController {
         spherePickerView.delegate = self
         customizeView()
         customizeBarButton()
+        
+        let picker = UIPickerView()
+        picker.dataSource = self
+        picker.delegate = self
+        
+        let dummy = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 0))
+        view.addSubview(dummy)
+        
+        dummy.inputView = picker
+        dummy.becomeFirstResponder()
+        
+        spherePickerView.isHidden = true
     }
     
     func customizeView() {
@@ -68,10 +80,12 @@ extension PostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Sphere(rawValue: row)?.string
+        let sphere = Sphere.allCases[row]
+        return sphere.string
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedSphere = Sphere(rawValue: row)?.string
+        let sphere = Sphere.allCases[row]
+        self.selectedSphere = sphere.rawValue
     }
 }

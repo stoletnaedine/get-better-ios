@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Sphere: Int, CaseIterable {
+enum Sphere: String, CaseIterable {
     case relations
     case health
     case environment
