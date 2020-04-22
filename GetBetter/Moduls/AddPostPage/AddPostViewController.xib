@@ -8,11 +8,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostViewController" customModule="GetBetter" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddPostViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="postTextView" destination="sLD-WP-KS7" id="pAl-6V-DAG"/>
+                <outlet property="selectedSphereLabel" destination="Sgf-FI-Pt4" id="Scb-NI-XuZ"/>
                 <outlet property="sphereLabel" destination="2oY-KO-BtC" id="tF1-Rs-iir"/>
-                <outlet property="spherePickerView" destination="0Yp-MD-59s" id="88t-YH-hYR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,35 +22,37 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sLD-WP-KS7">
-                    <rect key="frame" x="20" y="60" width="374" height="268"/>
+                    <rect key="frame" x="20" y="60" width="374" height="80"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="268" id="y4Y-yR-OOI"/>
+                        <constraint firstAttribute="height" constant="80" id="y4Y-yR-OOI"/>
                     </constraints>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oY-KO-BtC">
-                    <rect key="frame" x="20" y="368" width="374" height="21"/>
+                    <rect key="frame" x="20" y="180" width="374" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Yp-MD-59s">
-                    <rect key="frame" x="0.0" y="399" width="414" height="216"/>
-                </pickerView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-FI-Pt4">
+                    <rect key="frame" x="20" y="211" width="374" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="0Yp-MD-59s" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="1L3-EQ-s3m"/>
+                <constraint firstItem="Sgf-FI-Pt4" firstAttribute="top" secondItem="2oY-KO-BtC" secondAttribute="bottom" constant="10" id="75c-tc-LWa"/>
                 <constraint firstItem="sLD-WP-KS7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="HjA-im-nPX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2oY-KO-BtC" secondAttribute="trailing" constant="20" id="JNR-WO-6hV"/>
                 <constraint firstItem="sLD-WP-KS7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="LBw-te-ytN"/>
-                <constraint firstItem="0Yp-MD-59s" firstAttribute="top" secondItem="2oY-KO-BtC" secondAttribute="bottom" constant="10" id="UAm-Ss-9C3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sLD-WP-KS7" secondAttribute="trailing" constant="20" id="UDw-UJ-iRB"/>
-                <constraint firstItem="0Yp-MD-59s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="muQ-e8-9T9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Sgf-FI-Pt4" secondAttribute="trailing" constant="20" id="thX-KL-H2Z"/>
+                <constraint firstItem="Sgf-FI-Pt4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="v0B-3z-tfB"/>
                 <constraint firstItem="2oY-KO-BtC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="wgY-1r-X5d"/>
                 <constraint firstItem="2oY-KO-BtC" firstAttribute="top" secondItem="sLD-WP-KS7" secondAttribute="bottom" constant="40" id="wig-Sg-GEK"/>
             </constraints>

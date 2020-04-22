@@ -26,8 +26,8 @@ extension UIColor {
         return UIColor(red: 148/255, green: 153/255, blue: 138/255, alpha: 1)
     }
     
-    static var beige: UIColor {
-        return UIColor(red: 234/255, green: 237/255, blue: 232/255, alpha: 1)
+    static var lightGrey: UIColor {
+        return UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
     }
     
     static var ice: UIColor {

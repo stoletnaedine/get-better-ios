@@ -11,18 +11,17 @@ import Firebase
 import FirebaseDatabase
 import Toaster
 
-class PostViewController: UIViewController {
+class AddPostViewController: UIViewController {
     
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var sphereLabel: UILabel!
-    @IBOutlet weak var spherePickerView: UIPickerView!
+    @IBOutlet weak var selectedSphereLabel: UILabel!
     
     var selectedSphere: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.Post.postTitle
-        spherePickerView.delegate = self
         customizeView()
         customizeBarButton()
         
@@ -35,14 +34,14 @@ class PostViewController: UIViewController {
         
         dummy.inputView = picker
         dummy.becomeFirstResponder()
-        
-        spherePickerView.isHidden = true
     }
     
     func customizeView() {
-        postTextView.text = ""
-        postTextView.backgroundColor = .grayEvent
+        postTextView.backgroundColor = .lightGrey
         sphereLabel.text = Properties.Post.sphere
+        if let sphere = selectedSphere {
+            selectedSphereLabel.text = sphere
+        }
     }
     
     func customizeBarButton() {
@@ -69,7 +68,7 @@ class PostViewController: UIViewController {
     }
 }
 
-extension PostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
