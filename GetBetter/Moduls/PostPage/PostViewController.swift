@@ -21,7 +21,7 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Properties.TabBar.postTitle
+        self.title = Properties.Post.postTitle
         spherePickerView.delegate = self
         customizeView()
         customizeBarButton()
@@ -30,7 +30,7 @@ class PostViewController: UIViewController {
     func customizeView() {
         postTextView.text = ""
         postTextView.backgroundColor = .grayEvent
-        sphereLabel.text = Properties.Write.sphere
+        sphereLabel.text = Properties.Post.sphere
     }
     
     func customizeBarButton() {
@@ -48,7 +48,7 @@ class PostViewController: UIViewController {
             ref.child("post").child(user.uid).childByAutoId().setValue([
                     "post": post,
                     "sphere": sphere,
-                    "timestamp": Date.currentTimeStamp
+                    "timestamp": String(Date.currentTimeStamp)
                 ])
             Toast(text: "Пост сохранен!").show()
         }

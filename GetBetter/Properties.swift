@@ -36,7 +36,6 @@ struct Properties {
     struct TabBar {
         static let lifeCircleTitle = "Круг жизни"
         static let journalTitle = "Дневник"
-        static let postTitle = "Добавить"
         static let profileTitle = "Профиль"
     }
     
@@ -98,7 +97,8 @@ struct Properties {
         static let avatarsDirectory = "avatars"
     }
     
-    struct Write {
+    struct Post {
+        static let postTitle = "Добавить событие"
         static let sphere = "Выберите сферу для события"
     }
 }
