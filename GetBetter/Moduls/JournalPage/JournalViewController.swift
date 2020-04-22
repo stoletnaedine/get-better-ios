@@ -70,8 +70,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
-        cell.fillCell(posts[indexPath.row])
-        print("cell = \(cell)")
+        let post = posts[indexPath.row]
+        cell.textLabel?.text = post.post ?? ""
+        
+//        cell.fillCell(posts[indexPath.row])
         
         return cell
     }
