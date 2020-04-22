@@ -19,7 +19,7 @@ struct Properties {
     struct Keychain {
         static let emailKey = "HelpAppEmail"
         static let passwordKey = "HelpAppPassword"
-        static let credSuccessSaved = "Email и пароль сохранены в Keychain"
+        static let emailSuccessSaved = "Email успешно сохранен в Keychain"
     }
     
     struct Json {

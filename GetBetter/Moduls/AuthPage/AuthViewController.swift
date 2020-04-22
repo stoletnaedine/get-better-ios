@@ -56,7 +56,7 @@ class AuthViewController: UIViewController {
                 }
                 
                 if KeychainHelper.saveCredentials(email: email, password: password) {
-                    Toast(text: Properties.Keychain.credSuccessSaved).show()
+                    Toast(text: Properties.Keychain.emailSuccessSaved).show()
                 }
                 
                 guard let self = self else { return }

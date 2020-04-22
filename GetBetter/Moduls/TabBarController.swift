@@ -26,14 +26,10 @@ class TabBarController: UITabBarController {
         journalViewController.tabBarItem.image = UIImage(named: "journal")
         journalViewController.tabBarItem.title = Properties.TabBar.journalTitle
         
-        let writeViewController = UINavigationController(rootViewController: PostViewController())
-        writeViewController.tabBarItem.image = UIImage(named: "write")
-        writeViewController.tabBarItem.title = Properties.TabBar.postTitle
-        
         let profileViewController = UINavigationController(rootViewController: ProfileViewController())
         profileViewController.tabBarItem.image = UIImage(named: "profile")
         profileViewController.tabBarItem.title = Properties.TabBar.profileTitle
         
-        viewControllers = [circleViewController, journalViewController, writeViewController, profileViewController]
+        viewControllers = [circleViewController, journalViewController, profileViewController]
     }
 }

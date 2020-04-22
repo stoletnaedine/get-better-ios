@@ -29,6 +29,8 @@ class JournalViewController: UIViewController {
         self.tableView.delegate = self
         tableView.register(UINib(nibName: "JournalTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
+        customizeBarButton()
+        
         updatePosts()
     }
     
@@ -75,6 +77,16 @@ class JournalViewController: UIViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    func customizeBarButton() {
+        let addPostBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPost))
+        navigationItem.rightBarButtonItem = addPostBarButton
+    }
+    
+    @objc func addPost() {
+        let postViewController = PostViewController()
+        navigationController?.pushViewController(postViewController, animated: true)
     }
 }
 

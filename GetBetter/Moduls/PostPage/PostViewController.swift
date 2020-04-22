@@ -52,6 +52,8 @@ class PostViewController: UIViewController {
                 ])
             Toast(text: "Пост сохранен!").show()
         }
+        
+        navigationController?.popViewController(animated: true)
     }
 }
 
