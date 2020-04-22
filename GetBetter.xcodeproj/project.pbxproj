@@ -23,6 +23,8 @@
 		C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Properties.swift */; };
 		C32E419B242E4A8300A9C98B /* URLSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32E419A242E4A8300A9C98B /* URLSessionService.swift */; };
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
+		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
+		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
 		C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35EBD92244DE870004593CC /* GoogleService-Info.plist */; };
 		C36D8451239BDD9B004FEFD5 /* SFUIText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C36D844F239BDD9B004FEFD5 /* SFUIText-Regular.otf */; };
 		C36D8452239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf in Resources */ = {isa = PBXBuildFile; fileRef = C36D8450239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf */; };
@@ -76,6 +78,8 @@
 		C32D4CE023D0F3FC00AD9863 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		C32E419A242E4A8300A9C98B /* URLSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionService.swift; sourceTree = "<group>"; };
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
+		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
 		C35EBD92244DE870004593CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C36D844F239BDD9B004FEFD5 /* SFUIText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Regular.otf"; sourceTree = "<group>"; };
 		C36D8450239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OfficinaSansExtraBoldSCC.otf; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 			children = (
 				C3ED5A3023AFBF6600C7A492 /* PostViewController.swift */,
 				C3ED5A3123AFBF6600C7A492 /* PostViewController.xib */,
+				C35750D224507E7B00BA7006 /* PostDetailViewController.swift */,
+				C35750D324507E7B00BA7006 /* PostDetailViewController.xib */,
 			);
 			path = PostPage;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 				C3ED5A2F23AFBF3E00C7A492 /* ProfileViewController.xib in Resources */,
 				C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */,
 				C3ED5A2B23AFBF1300C7A492 /* LifeCircleController.xib in Resources */,
+				C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */,
 				C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */,
 				C37AECC5244F002C0080CCAC /* EditProfileViewController.xib in Resources */,
 				6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */,
@@ -471,6 +478,7 @@
 				C39D4698243261F9002BD1D7 /* ResponseData.swift in Sources */,
 				C37AECC4244F002C0080CCAC /* EditProfileViewController.swift in Sources */,
 				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,
+				C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */,
 				C3D2D2442432139A005C8577 /* Api.swift in Sources */,
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,

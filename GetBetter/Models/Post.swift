@@ -9,7 +9,7 @@
 import Foundation
 
 struct Post {
-    let post: String?
+    let text: String?
     let sphere: String?
     let timestamp: String?
 }

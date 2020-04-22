@@ -66,7 +66,7 @@ class JournalViewController: UIViewController {
                     print("key = \(key.element)")
                     
                     let entity = value?[key.element] as? NSDictionary
-                    let post = Post(post: entity?["post"] as? String ?? "",
+                    let post = Post(text: entity?["post"] as? String ?? "",
                                     sphere: entity?["sphere"] as? String ?? "",
                                     timestamp: entity?["timestamp"] as? String ?? "")
                     print("post = \(post)")
@@ -100,8 +100,15 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         let post = posts[indexPath.row]
-        cell.textLabel?.text = post.post ?? ""
+        cell.textLabel?.text = post.text ?? ""
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let postDetailViewController = PostDetailViewController()
+        let post = self.posts[indexPath.row]
+        postDetailViewController.post = post
+        navigationController?.pushViewController(postDetailViewController, animated: true)
     }
 }
