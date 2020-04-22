@@ -10,8 +10,8 @@
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
 		6EA85199244F7E8F00D40E14 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85198244F7E8F00D40E14 /* Date.swift */; };
 		6EA8519B244F827A00D40E14 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8519A244F827A00D40E14 /* Post.swift */; };
-		6EA8519E244F86FA00D40E14 /* JournalCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8519C244F86FA00D40E14 /* JournalCellTableViewCell.swift */; };
-		6EA8519F244F86FA00D40E14 /* JournalCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA8519D244F86FA00D40E14 /* JournalCellTableViewCell.xib */; };
+		6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8519C244F86FA00D40E14 /* JournalTableViewCell.swift */; };
+		6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA8519D244F86FA00D40E14 /* JournalTableViewCell.xib */; };
 		9277D388238C725200B3AECA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277D387238C725200B3AECA /* AppDelegate.swift */; };
 		9277D38F238C725300B3AECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9277D38E238C725300B3AECA /* Assets.xcassets */; };
 		9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9277D390238C725300B3AECA /* LaunchScreen.storyboard */; };
@@ -59,8 +59,8 @@
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		6EA85198244F7E8F00D40E14 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		6EA8519A244F827A00D40E14 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		6EA8519C244F86FA00D40E14 /* JournalCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCellTableViewCell.swift; sourceTree = "<group>"; };
-		6EA8519D244F86FA00D40E14 /* JournalCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalCellTableViewCell.xib; sourceTree = "<group>"; };
+		6EA8519C244F86FA00D40E14 /* JournalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewCell.swift; sourceTree = "<group>"; };
+		6EA8519D244F86FA00D40E14 /* JournalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalTableViewCell.xib; sourceTree = "<group>"; };
 		7583E478DC58EA23326CAB44 /* Pods-GetBetter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetBetter.release.xcconfig"; path = "Target Support Files/Pods-GetBetter/Pods-GetBetter.release.xcconfig"; sourceTree = "<group>"; };
 		8365CE35C6D2B5A56AAEC7F5 /* Pods-GetBetter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetBetter.debug.xcconfig"; path = "Target Support Files/Pods-GetBetter/Pods-GetBetter.debug.xcconfig"; sourceTree = "<group>"; };
 		9277D384238C725200B3AECA /* GetBetter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetBetter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +221,13 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		C35750D12450256700BA7006 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		C3724EC423AFABD000D49AD6 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,8 +276,9 @@
 			children = (
 				C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */,
 				C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */,
-				6EA8519C244F86FA00D40E14 /* JournalCellTableViewCell.swift */,
-				6EA8519D244F86FA00D40E14 /* JournalCellTableViewCell.xib */,
+				C35750D12450256700BA7006 /* Cell */,
+				6EA8519C244F86FA00D40E14 /* JournalTableViewCell.swift */,
+				6EA8519D244F86FA00D40E14 /* JournalTableViewCell.xib */,
 			);
 			path = JournalPage;
 			sourceTree = "<group>";
@@ -399,7 +407,7 @@
 				C3ED5A2B23AFBF1300C7A492 /* LifeCircleController.xib in Resources */,
 				C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */,
 				C37AECC5244F002C0080CCAC /* EditProfileViewController.xib in Resources */,
-				6EA8519F244F86FA00D40E14 /* JournalCellTableViewCell.xib in Resources */,
+				6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */,
 				C303978D23D6DB9B003FE9D4 /* Ubuntu.ttf in Resources */,
 				C36D8452239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf in Resources */,
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
@@ -478,7 +486,7 @@
 				6EA8519B244F827A00D40E14 /* Post.swift in Sources */,
 				C3ED5A3223AFBF6600C7A492 /* PostViewController.swift in Sources */,
 				C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */,
-				6EA8519E244F86FA00D40E14 /* JournalCellTableViewCell.swift in Sources */,
+				6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */,
 				C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */,
 				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,

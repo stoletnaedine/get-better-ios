@@ -14,15 +14,21 @@ class JournalViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var posts: [Post] = []
+    let cellIdentifier = "JournalCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.TabBar.journalTitle
+        
+        self.tableView.dataSource = self
         self.tableView.delegate = self
+        tableView.register(UINib(nibName: "JournalTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
         loadUserPosts(completion: { [weak self] postArray in
             self?.posts = postArray
+            self?.tableView.reloadData()
+            print("loaded posts = \(self?.posts.count)")
         })
-        print("loaded posts = \(posts.count)")
     }
     
     func loadUserPosts(completion: @escaping ([Post]) -> Void) {
@@ -56,14 +62,17 @@ class JournalViewController: UIViewController {
 }
 
 extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = JournalCellTableViewCell(style: .default, reuseIdentifier: "journalCell")
-        let post = posts[indexPath.row]
-        cell.fillCell(sphere: post.sphere, post: post.post, timestamp: post.timestamp)
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
+        cell.fillCell(posts[indexPath.row])
+        print("cell = \(cell)")
+        
         return cell
     }
 }

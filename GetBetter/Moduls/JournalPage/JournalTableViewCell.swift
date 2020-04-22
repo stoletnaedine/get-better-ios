@@ -2,13 +2,13 @@
 //  JournalCellTableViewCell.swift
 //  GetBetter
 //
-//  Created by Исламгулова Лариса on 21.04.2020.
+//  Created by Artur Islamgulov on 21.04.2020.
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
 import UIKit
 
-class JournalCellTableViewCell: UITableViewCell {
+class JournalTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var postLabel: UILabel!
@@ -16,18 +16,15 @@ class JournalCellTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func fillCell(sphere: String?, post: String?, timestamp: String?) {
-        self.sphereLabel.text = sphere
-        self.postLabel.text = post
-        self.timestampLabel.text = timestamp
+    func fillCell(_ post: Post) {
+        self.sphereLabel.text = post.sphere ?? ""
+        self.postLabel.text = post.post ?? ""
+        self.timestampLabel.text = post.timestamp ?? ""
     }
 }
