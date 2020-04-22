@@ -101,5 +101,7 @@ struct Properties {
     struct Post {
         static let postTitle = "Добавить событие"
         static let sphere = "Выберите сферу для события"
+        static let addPost = "Опишите событие, которое сегодня сделало вас лучше"
+        static let sphereDefault = "Нажмите здесь"
     }
 }

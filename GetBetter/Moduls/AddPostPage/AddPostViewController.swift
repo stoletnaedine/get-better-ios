@@ -13,6 +13,7 @@ import Toaster
 
 class AddPostViewController: UIViewController {
     
+    @IBOutlet weak var addPostLabel: UILabel!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var selectedSphereLabel: UILabel!
@@ -28,10 +29,12 @@ class AddPostViewController: UIViewController {
     }
     
     func customizeView() {
+        addPostLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
+        addPostLabel.text = Properties.Post.addPost
         postTextView.backgroundColor = .lightGrey
         sphereLabel.text = Properties.Post.sphere
         sphereLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
-        selectedSphereLabel.text = "Нажмите здесь"
+        selectedSphereLabel.text = Properties.Post.sphereDefault
         selectedSphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 30)
     }
     
