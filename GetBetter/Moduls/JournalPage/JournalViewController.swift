@@ -20,14 +20,31 @@ class JournalViewController: UIViewController {
         super.viewDidLoad()
         self.title = Properties.TabBar.journalTitle
         
+        let refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "Загрузка")
+        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        self.tableView.refreshControl = refresh
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         tableView.register(UINib(nibName: "JournalTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
+        updatePosts()
+    }
+    
+    @objc func refreshTableView() {
+        updatePosts()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+    
+    func updatePosts() {
         loadUserPosts(completion: { [weak self] postArray in
             self?.posts = postArray
-            self?.tableView.reloadData()
-            print("loaded posts = \(self?.posts.count)")
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
         })
     }
     
@@ -72,8 +89,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         let post = posts[indexPath.row]
         cell.textLabel?.text = post.post ?? ""
-        
-//        cell.fillCell(posts[indexPath.row])
         
         return cell
     }
