@@ -22,6 +22,7 @@ class AddPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.Post.postTitle
+        registerTapForSelectedSphereLabel()
         customizeView()
         customizeBarButton()
     }
@@ -29,7 +30,12 @@ class AddPostViewController: UIViewController {
     func customizeView() {
         postTextView.backgroundColor = .lightGrey
         sphereLabel.text = Properties.Post.sphere
-        
+        sphereLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
+        selectedSphereLabel.text = "Нажмите здесь"
+        selectedSphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 30)
+    }
+    
+    func registerTapForSelectedSphereLabel() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
         selectedSphereLabel.isUserInteractionEnabled = true
         selectedSphereLabel.addGestureRecognizer(tap)

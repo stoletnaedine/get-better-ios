@@ -27,7 +27,16 @@ class PostDetailViewController: UIViewController {
     func fillViewController(_ post: Post) {
         self.textLabel.text = post.text ?? ""
         self.sphereLabel.text = Sphere(rawValue: post.sphere ?? "relax")?.string
-        self.timestampLabel.text = post.timestamp ?? ""
+        if let timestampString = post.timestamp,
+            let timestampNumber = Double(timestampString) {
+            let date = Date(timeIntervalSince1970: timestampNumber / 1000)
+            let dayTimePeriodFormatter = DateFormatter()
+            dayTimePeriodFormatter.dateFormat = "dd/MMM/YY"
+            let dateString = dayTimePeriodFormatter.string(from: date as Date)
+            self.timestampLabel.text = dateString
+        } else {
+            self.timestampLabel.text = ""
+        }
         self.title = post.text ?? "Событие"
     }
     
