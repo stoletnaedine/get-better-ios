@@ -19,7 +19,10 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TODO не работает апдейт профиля после редактирования
         NotificationCenter.default.addObserver(self, selector: #selector(loadProfileInfoAndReloadView), name: .updateProfile, object: nil)
+        
         customizeView()
         customizeBarButton()
         loadProfileInfoAndReloadView()

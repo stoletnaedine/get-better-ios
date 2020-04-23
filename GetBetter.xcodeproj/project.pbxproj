@@ -22,6 +22,8 @@
 		C32D4CDE23D0EF9700AD9863 /* SFUIText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */; };
 		C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Properties.swift */; };
 		C32E419B242E4A8300A9C98B /* URLSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32E419A242E4A8300A9C98B /* URLSessionService.swift */; };
+		C33AD1DC245191BC00A08006 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD1DA245191BC00A08006 /* StartViewController.swift */; };
+		C33AD1DD245191BC00A08006 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33AD1DB245191BC00A08006 /* StartViewController.xib */; };
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
 		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
@@ -76,6 +78,8 @@
 		C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Medium.otf"; sourceTree = "<group>"; };
 		C32D4CE023D0F3FC00AD9863 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		C32E419A242E4A8300A9C98B /* URLSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionService.swift; sourceTree = "<group>"; };
+		C33AD1DA245191BC00A08006 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		C33AD1DB245191BC00A08006 /* StartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
@@ -222,6 +226,15 @@
 			path = RegisterPage;
 			sourceTree = "<group>";
 		};
+		C33AD1D9245191A500A08006 /* StartPage */ = {
+			isa = PBXGroup;
+			children = (
+				C33AD1DA245191BC00A08006 /* StartViewController.swift */,
+				C33AD1DB245191BC00A08006 /* StartViewController.xib */,
+			);
+			path = StartPage;
+			sourceTree = "<group>";
+		};
 		C34B14E724475EA700B58B18 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				C36D8453239BF322004FEFD5 /* TabBarController.swift */,
+				C33AD1D9245191A500A08006 /* StartPage */,
 				C39423D524404E6F0060CF50 /* AuthPage */,
 				C328EE022447291200445704 /* RegisterPage */,
 				C3724EC923AFAC5800D49AD6 /* LifeCirclePage */,
@@ -415,6 +429,7 @@
 				C36D8451239BDD9B004FEFD5 /* SFUIText-Regular.otf in Resources */,
 				C3ED5A2F23AFBF3E00C7A492 /* ProfileViewController.xib in Resources */,
 				C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */,
+				C33AD1DD245191BC00A08006 /* StartViewController.xib in Resources */,
 				C3ED5A2B23AFBF1300C7A492 /* LifeCircleController.xib in Resources */,
 				C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */,
 				C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */,
@@ -475,6 +490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C33AD1DC245191BC00A08006 /* StartViewController.swift in Sources */,
 				C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */,
 				C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
