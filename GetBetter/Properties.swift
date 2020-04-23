@@ -95,4 +95,8 @@ struct Properties {
             static let timestamp = "timestamp"
         }
     }
+    
+    struct SetupSphere {
+        static let question = "На сколько баллов (0-10) вы бы оценили эту сферу в своей жизни?"
+    }
 }

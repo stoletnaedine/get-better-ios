@@ -13,9 +13,9 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var sphereNameLabel: UILabel!
     @IBOutlet weak var sphereDescriptionLabel: UILabel!
-    @IBOutlet weak var valueTextField: UITextField!
+    @IBOutlet weak var valueForSphere: UILabel!
     
-    var sphereValue = 0
+    public var sphereValue = 0
     var sphereSetupPage: SphereSetupPage?
 
     override func viewDidLoad() {
@@ -33,10 +33,11 @@ class SetupSphereValueViewController: UIViewController {
     }
     
     func setupView() {
-        questionLabel.text = "На сколько вы бы оценили эту сферу в своей жизни?"
+        questionLabel.text = Properties.SetupSphere.question
         questionLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 16)
-        sphereNameLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 60)
+        sphereNameLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 50)
         sphereDescriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 14)
-        valueTextField.font = UIFont(name: Properties.Font.SFUITextMedium, size: 40)
+        valueForSphere.font = UIFont(name: Properties.Font.SFUITextMedium, size: 40)
+        valueForSphere.text = "0"
     }
 }
