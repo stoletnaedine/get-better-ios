@@ -9,6 +9,6 @@
 import Foundation
 
 struct SphereSetupPage {
-    let name: String
+    let sphere: Sphere
     let description: String
 }

@@ -23,13 +23,13 @@ class PageViewController: UIViewController {
     
     func fillViewControllers() {
         let relaxViewController = SetupSphereValueViewController()
-        relaxViewController.sphereSetupPage = SphereSetupPage(name: Sphere.relax.string, description: "О́тдых — состояние покоя, либо времяпрепровождение, целью которого является восстановление сил, достижение работоспособного состояния организма (рекреация)[1]; время, свободное от работы[2]. Вынужденное бездействие — такое, как ожидание или отбывание наказания, — отдыхом не является.")
+        relaxViewController.sphereSetupPage = SphereSetupPage(sphere: .relax, description: "О́тдых — состояние покоя, либо времяпрепровождение, целью которого является восстановление сил, достижение работоспособного состояния организма (рекреация)[1]; время, свободное от работы[2]. Вынужденное бездействие — такое, как ожидание или отбывание наказания, — отдыхом не является.")
         
         let workViewController = SetupSphereValueViewController()
-        workViewController.sphereSetupPage = SphereSetupPage(name: Sphere.work.string, description: "Труд — целесообразная, сознательная деятельность человека, направленная на удовлетворение потребностей индивида и общества. В процессе этой деятельности человек при помощи орудий труда осваивает, изменяет и приспосабливает к своим целям предметы природы, использует механические, физические и химические свойства предметов и явлений природы и заставляет их взаимно влиять друг на друга для достижения заранее намеченной цели.[1]")
+        workViewController.sphereSetupPage = SphereSetupPage(sphere: .work, description: "Труд — целесообразная, сознательная деятельность человека, направленная на удовлетворение потребностей индивида и общества. В процессе этой деятельности человек при помощи орудий труда осваивает, изменяет и приспосабливает к своим целям предметы природы, использует механические, физические и химические свойства предметов и явлений природы и заставляет их взаимно влиять друг на друга для достижения заранее намеченной цели.[1]")
         
         let environmentViewController = SetupSphereValueViewController()
-        environmentViewController.sphereSetupPage = SphereSetupPage(name: Sphere.environment.string, description: "Попадание в окружение крайне опасно для окружаемых войск. На тактическом уровне войска, находящиеся в окружении, подвержены атакам фактически со всех сторон и вынуждены перейти к круговой обороне. На стратегическом уровне окружение приводит к изоляции войск от линий снабжения и обеспечения")
+        environmentViewController.sphereSetupPage = SphereSetupPage(sphere: .environment, description: "Попадание в окружение крайне опасно для окружаемых войск. На тактическом уровне войска, находящиеся в окружении, подвержены атакам фактически со всех сторон и вынуждены перейти к круговой обороне. На стратегическом уровне окружение приводит к изоляции войск от линий снабжения и обеспечения")
         
         viewControllers = [
             workViewController,
@@ -55,12 +55,7 @@ class PageViewController: UIViewController {
     }
     
     @objc func saveSphereValues() {
-        print("saveSphereValues did tap")
-        let sph = viewControllers
-        for cv in sph {
-            let c = cv as! SetupSphereValueViewController
-            print("\(c.sphereValue)")
-        }
+        
     }
 }
 

@@ -13,23 +13,46 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var sphereNameLabel: UILabel!
     @IBOutlet weak var sphereDescriptionLabel: UILabel!
-    @IBOutlet weak var valueForSphere: UILabel!
+    @IBOutlet weak var valueForSphereLabel: UILabel!
     
-    public var sphereValue = 0
+    var sphereValue: Int?
+    var sphere: Sphere?
     var sphereSetupPage: SphereSetupPage?
+    let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        self.hideKeyboardWhenTappedAround()
         
         if let sphere = sphereSetupPage {
             fillView(from: sphere)
         }
+        registerTapForSelectedSphereLabel()
     }
     
-    func fillView(from sphere: SphereSetupPage) {
-        self.sphereNameLabel.text = sphere.name
-        self.sphereDescriptionLabel.text = sphere.description
+    func fillView(from sphereSetupPage: SphereSetupPage) {
+        self.sphereNameLabel.text = sphereSetupPage.sphere.string
+        self.sphereDescriptionLabel.text = sphereSetupPage.description
+        self.sphere = sphereSetupPage.sphere
+    }
+    
+    func registerTapForSelectedSphereLabel() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
+        valueForSphereLabel.isUserInteractionEnabled = true
+        valueForSphereLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func showPicker() {
+        let picker = UIPickerView()
+        picker.dataSource = self
+        picker.delegate = self
+        
+        let customtTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 0))
+        view.addSubview(customtTextField)
+        
+        customtTextField.inputView = picker
+        customtTextField.becomeFirstResponder()
     }
     
     func setupView() {
@@ -37,7 +60,27 @@ class SetupSphereValueViewController: UIViewController {
         questionLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 16)
         sphereNameLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 50)
         sphereDescriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 14)
-        valueForSphere.font = UIFont(name: Properties.Font.SFUITextMedium, size: 40)
-        valueForSphere.text = "0"
+        valueForSphereLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 40)
+        valueForSphereLabel.text = "0"
+    }
+}
+
+extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return values.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(values[row])
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        sphereValue = values[row]
+        valueForSphereLabel.text = String(values[row])
     }
 }
