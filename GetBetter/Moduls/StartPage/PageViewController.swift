@@ -11,29 +11,13 @@ import UIKit
 class PageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
-    var pageViewController: UIPageViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Настроим круг"
 
         fillViewControllers()
-        
-        if let firstViewController = viewControllers.first {
-            pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-            pageViewController.delegate = self
-            
-            pageViewController.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
-            pageViewController.dataSource = self
-            addChild(pageViewController)
-            view.addSubview(pageViewController.view)
-        }
-        
-        pageViewController!.view.frame = view.bounds
-        pageViewController.didMove(toParent: self)
-
-        // Add the page view controller's gesture recognizers to the view controller's view so that the gestures are started more easily.
-        view.gestureRecognizers = pageViewController.gestureRecognizers
+        setupPageControl()
     }
     
     func fillViewControllers() {
@@ -46,9 +30,22 @@ class PageViewController: UIViewController {
         let environmentViewController = SetupSphereValueViewController()
         environmentViewController.sphereSetupPage = SphereSetupPage(name: Sphere.environment.string, description: "Попадание в окружение крайне опасно для окружаемых войск. На тактическом уровне войска, находящиеся в окружении, подвержены атакам фактически со всех сторон и вынуждены перейти к круговой обороне. На стратегическом уровне окружение приводит к изоляции войск от линий снабжения и обеспечения, лишает их возможности подхода войсковых подкреплений и резервов, вывоза раненых и больных. Подобная ситуация ставит командование окруженными войсками в ситуацию очень ограниченного выбора — либо сражение насмерть, либо капитуляция.")
         
-        viewControllers.append(workViewController)
-        viewControllers.append(relaxViewController)
-        viewControllers.append(environmentViewController)
+        viewControllers = [
+            workViewController,
+            relaxViewController,
+            environmentViewController
+        ]
+    }
+    
+    func setupPageControl() {
+        guard let firstViewController = viewControllers.first else { return }
+        let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        pageViewController.delegate = self
+        
+        pageViewController.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
+        pageViewController.dataSource = self
+        addChild(pageViewController)
+        view.addSubview(pageViewController.view)
     }
 }
 

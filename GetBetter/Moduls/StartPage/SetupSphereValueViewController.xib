@@ -42,7 +42,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aLb-Bc-VEQ">
-                    <rect key="frame" x="194.5" y="286" width="25" height="30"/>
+                    <rect key="frame" x="194.5" y="246" width="25" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="one-time-code"/>
@@ -55,7 +55,7 @@
                 <constraint firstItem="I8I-HG-oR5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="E7l-P5-KuM"/>
                 <constraint firstItem="qj8-Nb-oVf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="FJy-8N-cM4"/>
                 <constraint firstItem="I8I-HG-oR5" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="OBu-nc-hwc"/>
-                <constraint firstItem="aLb-Bc-VEQ" firstAttribute="top" secondItem="I8I-HG-oR5" secondAttribute="bottom" constant="80" id="Vrq-OL-MWf"/>
+                <constraint firstItem="aLb-Bc-VEQ" firstAttribute="top" secondItem="I8I-HG-oR5" secondAttribute="bottom" constant="40" id="Vrq-OL-MWf"/>
                 <constraint firstItem="SZL-ic-fjL" firstAttribute="top" secondItem="qj8-Nb-oVf" secondAttribute="bottom" constant="30" id="egf-fP-pmx"/>
                 <constraint firstItem="aLb-Bc-VEQ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="oTy-LD-HKW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qj8-Nb-oVf" secondAttribute="trailing" constant="30" id="p7Z-ZL-m5s"/>
