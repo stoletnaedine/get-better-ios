@@ -65,7 +65,7 @@ class AddPostViewController: UIViewController {
                     .setValue([
                         Properties.Post.Field.post: post,
                         Properties.Post.Field.sphere: sphere,
-                        Properties.Post.Field.timestamp: Date.currentTimestampString
+                        Properties.Post.Field.timestamp: Date.currentTimestamp
                     ])
             
                 Toast(text: Properties.Post.postSavedSuccess).show()

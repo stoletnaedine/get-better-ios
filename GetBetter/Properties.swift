@@ -98,5 +98,6 @@ struct Properties {
     
     struct SetupSphere {
         static let question = "На сколько баллов (0-10) вы бы оценили эту сферу в своей жизни?"
+        static let setupTitle = "Welcome to GetBetter"
     }
 }

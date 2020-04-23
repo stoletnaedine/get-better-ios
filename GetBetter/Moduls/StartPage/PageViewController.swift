@@ -14,7 +14,7 @@ class PageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Настроим круг"
+        title = Properties.SetupSphere.setupTitle
 
         fillViewControllers()
         setupPageControl()

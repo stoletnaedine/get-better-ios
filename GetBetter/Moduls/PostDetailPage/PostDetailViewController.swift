@@ -29,8 +29,8 @@ class PostDetailViewController: UIViewController {
         self.textLabel.text = post.text ?? ""
         self.sphereLabel.text = Sphere(rawValue: post.sphere ?? "relax")?.name
         self.timestampLabel.text = ""
-        if let timestampString = post.timestamp {
-            self.timestampLabel.text = Date.convertToDate(from: timestampString)
+        if let timestamp = post.timestamp {
+            self.timestampLabel.text = Date.convertToDate(from: timestamp)
         }
     }
     

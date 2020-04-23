@@ -9,7 +9,7 @@
 import Foundation
 
 extension Date {
-    static var currentTimestampString: Int64 {
+    static var currentTimestamp: Int64 {
         return Int64(Date().timeIntervalSince1970)
     }
     

@@ -24,7 +24,7 @@ class RootManager {
         setupNavigationBar()
         configToaster()
         
-        if false {
+        if true {
             window?.rootViewController = UINavigationController(rootViewController: PageViewController())
             return
         }
