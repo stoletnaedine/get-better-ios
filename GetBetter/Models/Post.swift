@@ -11,5 +11,5 @@ import Foundation
 struct Post {
     let text: String?
     let sphere: String?
-    let timestamp: String?
+    let timestamp: Int64?
 }

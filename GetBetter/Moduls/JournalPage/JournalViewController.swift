@@ -74,7 +74,7 @@ class JournalViewController: UIViewController {
                     
                     let post = Post(text: entity?[Properties.Post.Field.post] as? String ?? "",
                                     sphere: entity?[Properties.Post.Field.sphere] as? String ?? "",
-                                    timestamp: entity?[Properties.Post.Field.timestamp] as? String ?? "")
+                                    timestamp: entity?[Properties.Post.Field.timestamp] as? Int64 ?? 0)
                     
                     postArray.append(post)
                 }
