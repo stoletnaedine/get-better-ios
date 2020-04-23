@@ -13,7 +13,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViewControllers()
-        selectedIndex = 1
+        selectedIndex = 0
         UITabBar.appearance().tintColor = .black
     }
     

@@ -18,7 +18,7 @@ struct Properties {
     struct LifeCircle {
         struct SegmentedControl {
             static let circle = "Круг"
-            static let values = "Подробнее"
+            static let details = "Подробнее"
         }
     }
     

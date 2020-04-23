@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LifeCircleController" customModule="GetBetter" customModuleProvider="target">
             <connections>
+                <outlet property="circleView" destination="Xlg-ch-PBS" id="ZVh-NQ-W2X"/>
+                <outlet property="detailsView" destination="fxn-qj-OtY" id="sy9-zX-BJZ"/>
+                <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +21,40 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="arR-df-p35">
+                    <rect key="frame" x="40" y="64" width="334" height="29"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentedActionDidSelected:" destination="-1" eventType="valueChanged" id="SFf-nL-h4V"/>
+                    </connections>
+                </segmentedControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY">
+                    <rect key="frame" x="0.0" y="112" width="414" height="750"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xlg-ch-PBS">
+                    <rect key="frame" x="0.0" y="112" width="414" height="750"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Xlg-ch-PBS" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="4gg-XU-qjl"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="arR-df-p35" secondAttribute="trailing" constant="40" id="4uJ-R1-dfY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Xlg-ch-PBS" secondAttribute="trailing" id="9Po-lV-Swj"/>
+                <constraint firstItem="Xlg-ch-PBS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Anl-br-Zce"/>
+                <constraint firstItem="fxn-qj-OtY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CvN-U0-HcC"/>
+                <constraint firstItem="arR-df-p35" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="KZ5-Cy-BE3"/>
+                <constraint firstItem="fxn-qj-OtY" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="KbC-ox-cql"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fxn-qj-OtY" secondAttribute="bottom" id="Ny7-ch-Sy6"/>
+                <constraint firstItem="arR-df-p35" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="YGd-5u-T7W"/>
+                <constraint firstItem="fxn-qj-OtY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="fUO-TL-V7V"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Xlg-ch-PBS" secondAttribute="bottom" id="qKm-zv-Tzy"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
