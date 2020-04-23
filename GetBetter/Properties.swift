@@ -78,6 +78,7 @@ struct Properties {
         static let loadAvatar = "Загрузить аватар"
         static let avatarsDirectory = "avatars"
         static let warning = "При смене Email необходимо заново войти в приложение"
+        static let nameDefault = "Неизвестный Кот"
     }
     
     struct Post {

@@ -19,46 +19,57 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileInfo), name: .updateProfile, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadProfileInfoAndReloadView), name: .updateProfile, object: nil)
         customizeView()
         customizeBarButton()
-        loadProfileInfo()
+        loadProfileInfoAndReloadView()
     }
     
     @IBAction func signOutButtonDidPressed(_ sender: UIButton) {
         NotificationCenter.default.post(name: .logout, object: nil)
     }
     
-    @objc func updateProfileInfo() {
-        loadProfileInfo()
+    @objc func loadProfileInfoAndReloadView() {
+        loadProfileInfo(completion: { [weak self] (name, email, avatar) in
+            self?.nameLabel.text = name
+            self?.emailLabel.text = email
+            self?.avatarImageView.image = avatar
+        })
     }
     
-    func loadProfileInfo() {
+    func loadProfileInfo(completion: @escaping ((_ name: String, _ mail: String, _ avatar: UIImage?) -> Void)) {
         guard let user = Auth.auth().currentUser else {
             return
         }
-        if let userName = user.displayName {
-            nameLabel.text = userName
-        } else {
-            nameLabel.text = "Неизвестный Кот"
-        }
-        if let userEmail = user.email {
-            emailLabel.text = userEmail
-        }
-        if let photoURL = user.photoURL,
-            let imageData = try? Data(contentsOf: photoURL) {
-            avatarImageView.image = UIImage(data: imageData)
+        var name = ""
+        var email = ""
+        var avatar: UIImage?
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let userName = user.displayName {
+                name = userName
+            }
+            if let userEmail = user.email {
+                email = userEmail
+            }
+            if let photoURL = user.photoURL,
+                let imageData = try? Data(contentsOf: photoURL),
+                let loadedAvatar = UIImage(data: imageData) {
+                avatar = loadedAvatar
+            }
+            DispatchQueue.main.async {
+                completion(name, email, avatar)
+            }
         }
     }
     
     func customizeView() {
         self.title = Properties.TabBar.profileTitle
-        
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.backgroundColor = .grayEvent
-        
+        nameLabel.text = Properties.Profile.nameDefault
+        emailLabel.text = ""
+        avatarImageView.image = UIImage(named: "defaultAvatar")
         nameLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 26)
-        
         signOutButton.setTitle(Properties.Profile.signOut, for: .normal)
         signOutButton.setTitleColor(.sky, for: .normal)
         signOutButton.titleLabel?.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
