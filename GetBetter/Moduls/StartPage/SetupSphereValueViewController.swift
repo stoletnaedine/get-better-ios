@@ -17,7 +17,6 @@ class SetupSphereValueViewController: UIViewController {
     
     var sphereValue: Int?
     var sphere: Sphere?
-    var sphereSetupPage: SphereSetupPage?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
     override func viewDidLoad() {
@@ -25,16 +24,15 @@ class SetupSphereValueViewController: UIViewController {
         setupView()
         self.hideKeyboardWhenTappedAround()
         
-        if let sphere = sphereSetupPage {
+        if let sphere = sphere {
             fillView(from: sphere)
         }
         registerTapForSelectedSphereLabel()
     }
     
-    func fillView(from sphereSetupPage: SphereSetupPage) {
-        self.sphereNameLabel.text = sphereSetupPage.sphere.string
-        self.sphereDescriptionLabel.text = sphereSetupPage.description
-        self.sphere = sphereSetupPage.sphere
+    func fillView(from sphere: Sphere) {
+        self.sphereNameLabel.text = sphere.name
+        self.sphereDescriptionLabel.text = sphere.description
     }
     
     func registerTapForSelectedSphereLabel() {

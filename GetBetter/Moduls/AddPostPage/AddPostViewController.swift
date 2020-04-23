@@ -100,8 +100,8 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let sphere = Sphere.allCases[row]
-        selectedSphereLabel.text = sphere.string
-        return sphere.string
+        selectedSphereLabel.text = sphere.name
+        return sphere.name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

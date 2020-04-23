@@ -31,7 +31,7 @@ struct Properties {
     
     struct TabBar {
         static let lifeCircleTitle = "Круг жизни"
-        static let journalTitle = "Дневник"
+        static let journalTitle = "События"
         static let profileTitle = "Профиль"
     }
     
