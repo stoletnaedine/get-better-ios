@@ -24,6 +24,11 @@ class RootManager {
         setupNavigationBar()
         configToaster()
         
+        if true {
+            window?.rootViewController = UINavigationController(rootViewController: PageViewController())
+            return
+        }
+        
         if Auth.auth().currentUser == nil {
             showAuthController()
         } else {
@@ -53,10 +58,8 @@ class RootManager {
     func setupNavigationBar() {
         UINavigationBar.appearance().barTintColor = .sky
         UINavigationBar.appearance().tintColor = .white
-        let navigationBarFont = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 21)
-            ?? UIFont(name: Properties.Font.OfficinaSansExtraBoldSCC, size: 21)
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,
-                                                            NSAttributedString.Key.font: navigationBarFont as Any]
+                                                            NSAttributedString.Key.font: UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 21) as Any]
     }
     
     func configToaster() {

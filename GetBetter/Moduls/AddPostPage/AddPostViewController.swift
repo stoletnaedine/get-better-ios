@@ -84,7 +84,7 @@ class AddPostViewController: UIViewController {
         sphereLabel.text = Properties.Post.sphere
         sphereLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
         selectedSphereLabel.text = Properties.Post.sphereDefault
-        selectedSphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 30)
+        selectedSphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 30)
     }
 }
 

@@ -36,7 +36,7 @@ class PostDetailViewController: UIViewController {
     
     func customizeView() {
         textLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
-        sphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 24)
+        sphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 24)
         timestampLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
     }
 }

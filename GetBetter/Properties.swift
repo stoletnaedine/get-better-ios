@@ -23,8 +23,7 @@ struct Properties {
     }
     
     struct Font {
-        static let OfficinaSansExtraBoldC = "OfficinaSansExtraBoldC"
-        static let OfficinaSansExtraBoldSCC = "OfficinaSansExtraBoldSCC"
+        static let OfficinaSansExtraBold = "OfficinaSansExtraBoldC"
         static let SFUITextRegular = "SFUIText-Regular"
         static let SFUITextMedium = "SFUIText-Medium"
         static let Ubuntu = "Ubuntu"
