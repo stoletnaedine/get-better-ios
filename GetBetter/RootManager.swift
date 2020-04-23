@@ -61,6 +61,7 @@ class RootManager {
     
     func configToaster() {
         ToastView.appearance().backgroundColor = .sky
-        ToastView.appearance().bottomOffsetPortrait = CGFloat(90)
+        let screenHeight = UIScreen.main.bounds.height
+        ToastView.appearance().bottomOffsetPortrait = CGFloat(screenHeight / 2)
     }
 }

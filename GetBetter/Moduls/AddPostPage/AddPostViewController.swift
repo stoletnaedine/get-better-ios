@@ -23,6 +23,7 @@ class AddPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.Post.postTitle
+        self.hideKeyboardWhenTappedAround()
         registerTapForSelectedSphereLabel()
         customizeView()
         customizeBarButton()
@@ -68,12 +69,15 @@ class AddPostViewController: UIViewController {
             let sphere = selectedSphere {
                 let ref = Database.database().reference()
             
-            ref.child("post").child(user.uid).childByAutoId().setValue([
-                    "post": post,
-                    "sphere": sphere,
-                    "timestamp": String(Date.currentTimeStamp)
-                ])
-            Toast(text: "Пост сохранен!").show()
+                ref.child(Properties.Post.Field.post).child(user.uid).childByAutoId().setValue([
+                        Properties.Post.Field.post: post,
+                        Properties.Post.Field.sphere: sphere,
+                        Properties.Post.Field.timestamp: Date.currentTimestampString
+                    ])
+                Toast(text: Properties.Post.postSavedSuccess).show()
+        } else {
+            Toast(text: Properties.Post.emptyFieldsWarning).show()
+            return
         }
         
         navigationController?.popViewController(animated: true)

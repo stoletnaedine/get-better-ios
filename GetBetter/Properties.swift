@@ -103,5 +103,14 @@ struct Properties {
         static let sphere = "Выберите сферу для события"
         static let addPost = "Опишите событие, которое сегодня сделало вас лучше"
         static let sphereDefault = "Нажмите здесь"
+        static let titleDefault = "Событие"
+        static let postSavedSuccess = "Пост сохранен!"
+        static let emptyFieldsWarning = "Заполните все поля"
+        
+        struct Field {
+            static let post = "post"
+            static let sphere = "sphere"
+            static let timestamp = "timestamp"
+        }
     }
 }
