@@ -40,7 +40,7 @@ class AddPostViewController: UIViewController {
         picker.dataSource = self
         picker.delegate = self
         
-        let customtTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 0))
+        let customtTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.addSubview(customtTextField)
         
         customtTextField.inputView = picker
