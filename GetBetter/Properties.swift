@@ -77,7 +77,7 @@ struct Properties {
         static let loadAvatar = "Загрузить аватар"
         static let avatarsDirectory = "avatars"
         static let warning = "При смене Email необходимо заново войти в приложение"
-        static let nameDefault = "Неизвестный Кот"
+        static let nameDefault = "..."
     }
     
     struct Post {
@@ -98,6 +98,11 @@ struct Properties {
     
     struct SetupSphere {
         static let question = "На сколько баллов (0-10) вы бы оценили эту сферу в своей жизни?"
-        static let setupTitle = "Welcome to GetBetter"
+        static let setupTitle = "Welcome"
+    }
+    
+    struct Welcome {
+        static let title = "Что такое GetBetter?"
+        static let description = "Это приложение, которое поможет тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии и счастья. \n\nПриготовься, перемены начинаются сегодня! \n\nДля начала давай определим твой текущий уровень."
     }
 }

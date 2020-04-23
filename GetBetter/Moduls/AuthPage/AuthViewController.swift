@@ -78,14 +78,14 @@ class AuthViewController: UIViewController {
         self.title = Properties.Auth.authTitleVC
         description1Label.text = Properties.Auth.description1
         description1Label.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
-        description1Label.textColor = .charcoalGrey
+        description1Label.textColor = .darkGrey
         
         icon1ImageView.image = UIImage(named: "vk")
         icon2ImageView.image = UIImage(named: "fb")
         icon3ImageView.image = UIImage(named: "ok")
         description2Label.text = Properties.Auth.description2
         description2Label.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
-        description2Label.textColor = .charcoalGrey
+        description2Label.textColor = .darkGrey
         
         emailLabel.text = Properties.Auth.email
         emailLabel.textColor = .grayEvent

@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "journal-2.png",
+      "filename" : "always-moving-forward-in-this-direction.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "journal.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "journal-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

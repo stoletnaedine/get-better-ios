@@ -22,6 +22,8 @@ class PageViewController: UIViewController {
     }
     
     func fillViewControllers() {
+        viewControllers.append(WelcomeViewController())
+        
         for sphere in Sphere.allCases {
             let viewController = SetupSphereValueViewController()
             viewController.sphere = sphere
