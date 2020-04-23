@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E5684102451AB1F009FBE13 /* SetupSphereValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */; };
+		6E5684112451AB1F009FBE13 /* SetupSphereValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */; };
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
 		6EA85199244F7E8F00D40E14 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85198244F7E8F00D40E14 /* Date.swift */; };
 		6EA8519B244F827A00D40E14 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8519A244F827A00D40E14 /* Post.swift */; };
@@ -22,8 +24,6 @@
 		C32D4CDE23D0EF9700AD9863 /* SFUIText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */; };
 		C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Properties.swift */; };
 		C32E419B242E4A8300A9C98B /* URLSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32E419A242E4A8300A9C98B /* URLSessionService.swift */; };
-		C33AD1DC245191BC00A08006 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD1DA245191BC00A08006 /* StartViewController.swift */; };
-		C33AD1DD245191BC00A08006 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33AD1DB245191BC00A08006 /* StartViewController.xib */; };
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
 		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
@@ -59,6 +59,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
+		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		6EA85198244F7E8F00D40E14 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		6EA8519A244F827A00D40E14 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -78,8 +80,6 @@
 		C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Medium.otf"; sourceTree = "<group>"; };
 		C32D4CE023D0F3FC00AD9863 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		C32E419A242E4A8300A9C98B /* URLSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionService.swift; sourceTree = "<group>"; };
-		C33AD1DA245191BC00A08006 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		C33AD1DB245191BC00A08006 /* StartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
@@ -229,8 +229,8 @@
 		C33AD1D9245191A500A08006 /* StartPage */ = {
 			isa = PBXGroup;
 			children = (
-				C33AD1DA245191BC00A08006 /* StartViewController.swift */,
-				C33AD1DB245191BC00A08006 /* StartViewController.xib */,
+				6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */,
+				6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */,
 			);
 			path = StartPage;
 			sourceTree = "<group>";
@@ -424,12 +424,12 @@
 				C36F664B244A02EE00293246 /* OfficinaSansExtraBold.otf in Resources */,
 				9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */,
 				C328EE062447294100445704 /* RegisterViewController.xib in Resources */,
+				6E5684112451AB1F009FBE13 /* SetupSphereValueViewController.xib in Resources */,
 				9277D38F238C725300B3AECA /* Assets.xcassets in Resources */,
 				C32D4CDE23D0EF9700AD9863 /* SFUIText-Medium.otf in Resources */,
 				C36D8451239BDD9B004FEFD5 /* SFUIText-Regular.otf in Resources */,
 				C3ED5A2F23AFBF3E00C7A492 /* ProfileViewController.xib in Resources */,
 				C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */,
-				C33AD1DD245191BC00A08006 /* StartViewController.xib in Resources */,
 				C3ED5A2B23AFBF1300C7A492 /* LifeCircleController.xib in Resources */,
 				C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */,
 				C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */,
@@ -490,7 +490,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C33AD1DC245191BC00A08006 /* StartViewController.swift in Sources */,
 				C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */,
 				C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
@@ -517,6 +516,7 @@
 				6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */,
 				C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */,
 				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
+				6E5684102451AB1F009FBE13 /* SetupSphereValueViewController.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
