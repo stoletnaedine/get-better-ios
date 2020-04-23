@@ -9,29 +9,34 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import Toaster
 
 class JournalViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var posts: [Post] = []
     let cellIdentifier = "JournalCell"
+    let cellXibName = "JournalTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.TabBar.journalTitle
-        
+        setupRefreshControl()
+        registerCell()
+        customizeBarButton()
+        updatePosts()
+    }
+    
+    func setupRefreshControl() {
         let refresh = UIRefreshControl()
-        refresh.attributedTitle = NSAttributedString(string: "Загрузка")
         refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         self.tableView.refreshControl = refresh
-        
+    }
+    
+    func registerCell() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        tableView.register(UINib(nibName: "JournalTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        
-        customizeBarButton()
-        
-        updatePosts()
+        tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
     @objc func refreshTableView() {
@@ -53,28 +58,30 @@ class JournalViewController: UIViewController {
     func loadUserPosts(completion: @escaping ([Post]) -> Void) {
         guard let user = Auth.auth().currentUser else { return }
         
-        let ref = Database.database().reference()
-        
-        ref.child("post").child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
+        Database.database().reference()
+            .child(Properties.Post.Field.post)
+            .child(user.uid)
+            .observeSingleEvent(of: .value, with: { snapshot in
             
             let value = snapshot.value as? NSDictionary
             let keys = value?.allKeys
             
             if let keys = keys {
                 var postArray: [Post] = []
+    
                 for key in keys.enumerated() {
-                    print("key = \(key.element)")
-                    
                     let entity = value?[key.element] as? NSDictionary
-                    let post = Post(text: entity?["post"] as? String ?? "",
-                                    sphere: entity?["sphere"] as? String ?? "",
-                                    timestamp: entity?["timestamp"] as? String ?? "")
-                    print("post = \(post)")
+                    
+                    let post = Post(text: entity?[Properties.Post.Field.post] as? String ?? "",
+                                    sphere: entity?[Properties.Post.Field.sphere] as? String ?? "",
+                                    timestamp: entity?[Properties.Post.Field.timestamp] as? String ?? "")
+                    
                     postArray.append(post)
                 }
                 completion(postArray)
             }
-        }) { (error) in
+        }) { error in
+            Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
             print(error.localizedDescription)
         }
     }
@@ -97,7 +104,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         let post = posts[indexPath.row]
         cell.textLabel?.text = post.text ?? ""
@@ -109,6 +115,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         let postDetailViewController = PostDetailViewController()
         let post = self.posts[indexPath.row]
         postDetailViewController.post = post
+        
         navigationController?.pushViewController(postDetailViewController, animated: true)
     }
 }

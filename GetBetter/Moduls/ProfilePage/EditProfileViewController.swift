@@ -57,12 +57,12 @@ class EditProfileViewController: UIViewController {
                     changeRequest.commitChanges(completion: { error in
                         if let error = error {
                             print("changeRequest.commitChanges = \(error.localizedDescription)")
-                            Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
+                            Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                             return
                         }
                     })
                 case .failure(let error):
-                    Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
+                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
             })
@@ -73,7 +73,7 @@ class EditProfileViewController: UIViewController {
             changeRequest.displayName = name
             changeRequest.commitChanges(completion: { error in
                 if let error = error {
-                    Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
+                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
             })
@@ -84,7 +84,7 @@ class EditProfileViewController: UIViewController {
             password1 == password2 {
             user.updatePassword(to: password1, completion: { error in
                 if let error = error {
-                    Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
+                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
             })
@@ -94,7 +94,7 @@ class EditProfileViewController: UIViewController {
             user.updateEmail(to: email, completion: { error in
                 if let error = error {
                     print("\(error.localizedDescription)")
-                    Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
+                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
                 NotificationCenter.default.post(name: .logout, object: nil)
@@ -111,7 +111,7 @@ class EditProfileViewController: UIViewController {
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         
-        guard let imageData = avatarImageView.image?.jpegData(compressionQuality: 0.2) else {
+        guard let imageData = avatarImageView.image?.jpegData(compressionQuality: 0.1) else {
             return
         }
         

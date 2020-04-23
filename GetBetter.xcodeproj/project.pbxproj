@@ -27,7 +27,6 @@
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
 		C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35EBD92244DE870004593CC /* GoogleService-Info.plist */; };
 		C36D8451239BDD9B004FEFD5 /* SFUIText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C36D844F239BDD9B004FEFD5 /* SFUIText-Regular.otf */; };
-		C36D8452239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf in Resources */ = {isa = PBXBuildFile; fileRef = C36D8450239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf */; };
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
 		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
@@ -82,7 +81,6 @@
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
 		C35EBD92244DE870004593CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C36D844F239BDD9B004FEFD5 /* SFUIText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Regular.otf"; sourceTree = "<group>"; };
-		C36D8450239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OfficinaSansExtraBoldSCC.otf; sourceTree = "<group>"; };
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				C36F664A244A01B300293246 /* OfficinaSansExtraBold.otf */,
 				C303978C23D6DB9B003FE9D4 /* Ubuntu.ttf */,
 				C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */,
-				C36D8450239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf */,
 				C36D844F239BDD9B004FEFD5 /* SFUIText-Regular.otf */,
 			);
 			path = fonts;
@@ -424,7 +421,6 @@
 				C37AECC5244F002C0080CCAC /* EditProfileViewController.xib in Resources */,
 				6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */,
 				C303978D23D6DB9B003FE9D4 /* Ubuntu.ttf in Resources */,
-				C36D8452239BDD9B004FEFD5 /* OfficinaSansExtraBoldSCC.otf in Resources */,
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
 			);

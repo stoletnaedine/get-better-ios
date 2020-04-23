@@ -51,7 +51,7 @@ class AuthViewController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
 
                 if let error = error {
-                    Toast(text: "\(Properties.Error.firebaseError) \(error.localizedDescription)").show()
+                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
                 

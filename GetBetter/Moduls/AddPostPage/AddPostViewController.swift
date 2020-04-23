@@ -29,16 +29,6 @@ class AddPostViewController: UIViewController {
         customizeBarButton()
     }
     
-    func customizeView() {
-        addPostLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
-        addPostLabel.text = Properties.Post.addPost
-        postTextView.backgroundColor = .lightGrey
-        sphereLabel.text = Properties.Post.sphere
-        sphereLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
-        selectedSphereLabel.text = Properties.Post.sphereDefault
-        selectedSphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 30)
-    }
-    
     func registerTapForSelectedSphereLabel() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
         selectedSphereLabel.isUserInteractionEnabled = true
@@ -67,13 +57,17 @@ class AddPostViewController: UIViewController {
         
         if let post = postTextView.text, !post.isEmpty,
             let sphere = selectedSphere {
-                let ref = Database.database().reference()
             
-                ref.child(Properties.Post.Field.post).child(user.uid).childByAutoId().setValue([
+                Database.database().reference()
+                    .child(Properties.Post.Field.post)
+                    .child(user.uid)
+                    .childByAutoId()
+                    .setValue([
                         Properties.Post.Field.post: post,
                         Properties.Post.Field.sphere: sphere,
                         Properties.Post.Field.timestamp: Date.currentTimestampString
                     ])
+            
                 Toast(text: Properties.Post.postSavedSuccess).show()
         } else {
             Toast(text: Properties.Post.emptyFieldsWarning).show()
@@ -81,6 +75,16 @@ class AddPostViewController: UIViewController {
         }
         
         navigationController?.popViewController(animated: true)
+    }
+    
+    func customizeView() {
+        addPostLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
+        addPostLabel.text = Properties.Post.addPost
+        postTextView.backgroundColor = .lightGrey
+        sphereLabel.text = Properties.Post.sphere
+        sphereLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
+        selectedSphereLabel.text = Properties.Post.sphereDefault
+        selectedSphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBoldC, size: 30)
     }
 }
 

@@ -15,14 +15,11 @@ struct Properties {
         static let emailSuccessSaved = "Email успешно сохранен в Keychain"
     }
     
-    struct Json {
-        static let categoryFileName = "Categories"
-        static let eventFileName = "CharityEvents"
-    }
-    
-    struct SegmentedControl {
-        static let currentEvents = "Текущие"
-        static let completedEvents = "Завершённые"
+    struct LifeCircle {
+        struct SegmentedControl {
+            static let circle = "Круг"
+            static let values = "Подробнее"
+        }
     }
     
     struct Font {
@@ -39,27 +36,12 @@ struct Properties {
         static let profileTitle = "Профиль"
     }
     
-    struct CoreData {
-        static let category = "CategoryData"
-        static let event = "EventData"
-    }
-    
-    struct EventDetailVC {
-        static let hasQuestions = "У вас есть вопросы?"
-        static let writeUs = "Напишите нам"
-        static let goSite = "Перейти на сайт организации"
-        static let helpClothes = "Помочь вещами"
-        static let volunteer = "Стать волонтёром"
-        static let professionalHelp = "Проф. помощь"
-        static let moneyHelp = "Помочь деньгами"
-    }
-    
     struct Auth {
         static let authTitleVC = "Авторизация"
         static let description1 = "Войдите в приложение через социальные сети (пока не доступно)"
         static let description2 = "или авторизуйтесь ниже"
-        static let email = "E-mail"
-        static let enterEmail = "Введите e-mail"
+        static let email = "Email"
+        static let enterEmail = "Введите Email"
         static let password = "Пароль"
         static let password2 = "Еще раз"
         static let enterPassword = "Введите пароль"
@@ -76,8 +58,8 @@ struct Properties {
     }
     
     struct RegisterValidate {
-        static let emailIsEmpty = "Введите email"
-        static let emailIsNotValid = "Введите корректный email"
+        static let emailIsEmpty = "Введите Email"
+        static let emailIsNotValid = "Введите корректный Email"
         static let passwordIsEmpty = "Введите пароль"
         static let passwordsNotEquals = "Пароли не совпадают"
     }
@@ -87,15 +69,15 @@ struct Properties {
         static let signOut = "Выйти"
         static let name = "Имя"
         static let enterName = "Введите имя"
-        static let email = "E-mail"
-        static let enterEmail = "Введите новый e-mail"
+        static let email = "Email"
+        static let enterEmail = "Введите новый Email"
         static let password = "Пароль"
         static let password2 = "Еще раз"
         static let enterPassword = "Введите новый пароль"
         static let enterPassword2 = "Повторите новый пароль"
         static let loadAvatar = "Загрузить аватар"
         static let avatarsDirectory = "avatars"
-        static let warning = "При смене Email будет необходимо заново войти в приложение"
+        static let warning = "При смене Email необходимо заново войти в приложение"
     }
     
     struct Post {
