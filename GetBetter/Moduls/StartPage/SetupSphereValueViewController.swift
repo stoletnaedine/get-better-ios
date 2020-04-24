@@ -74,11 +74,14 @@ extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDe
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(values[row])
+        let value = values[row]
+        valueForSphereLabel.text = String(value)
+        return String(value)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        sphereValue = values[row]
-        valueForSphereLabel.text = String(values[row])
+        let value = values[row]
+        sphereValue = value
+        valueForSphereLabel.text = String(value)
     }
 }
