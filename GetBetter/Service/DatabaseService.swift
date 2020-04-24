@@ -21,7 +21,7 @@ class DatabaseService {
             return false
         }
         
-        Database.database().reference()
+        ref
             .child(Properties.Post.Field.post)
             .child(userId)
             .childByAutoId()
@@ -36,17 +36,17 @@ class DatabaseService {
     
     
     func getPosts(completion: @escaping (Result<[Post], Error>) -> Void) {
+        
         guard let user = Auth.auth().currentUser else { return }
         
-        Database.database().reference()
+        ref
             .child(Properties.Post.Field.post)
             .child(user.uid)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 let value = snapshot.value as? NSDictionary
-                let keys = value?.allKeys
                 
-                if let keys = keys {
+                if let keys = value?.allKeys {
                     var postArray: [Post] = []
                     
                     for key in keys.enumerated() {
@@ -57,7 +57,7 @@ class DatabaseService {
                             sphere = Sphere(rawValue: sphereRawValue) ?? Sphere.creation
                         }
                         
-                        let post = Post(text: entity?[Properties.Post.Field.text] as? String ?? "Не удалось загрузить",
+                        let post = Post(text: entity?[Properties.Post.Field.text] as? String ?? Properties.Error.loadingError,
                                         sphere: sphere,
                                         timestamp: entity?[Properties.Post.Field.timestamp] as? Int64 ?? 0)
                         

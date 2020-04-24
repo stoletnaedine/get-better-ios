@@ -17,6 +17,7 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var selectedSphereLabel: UILabel!
     
     var selectedSphere: Sphere?
+    let databaseService = DatabaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,8 @@ class AddPostViewController: UIViewController {
                 return
         }
         
-        if DatabaseService().savePost(Post(text: text, sphere: sphere, timestamp: Date.currentTimestamp)) {
+        let post = Post(text: text, sphere: sphere, timestamp: Date.currentTimestamp)
+        if databaseService.savePost(post) {
             Toast(text: Properties.Post.postSavedSuccess).show()
         }
         

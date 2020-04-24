@@ -15,6 +15,7 @@ class JournalViewController: UIViewController {
     var posts: [Post] = []
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
+    let databaseService = DatabaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class JournalViewController: UIViewController {
     }
     
     func updatePosts() {
-        DatabaseService().getPosts(completion: { [weak self] result in
+        databaseService.getPosts(completion: { [weak self] result in
             switch result {
                 
             case .failure(let error):

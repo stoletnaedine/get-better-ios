@@ -54,6 +54,7 @@ struct Properties {
     
     struct Error {
         static let firebaseError = "FirebaseError: "
+        static let loadingError = "Не удалось загрузить"
     }
     
     struct RegisterValidate {
