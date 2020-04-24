@@ -82,10 +82,17 @@ class ProfileViewController: UIViewController {
     func customizeBarButton() {
         let editBarButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editProfile))
         navigationItem.rightBarButtonItem = editBarButton
+        let aboutAppBarButton = UIBarButtonItem(title: "About", style: .plain, target: self, action: #selector(aboutApp))
+        navigationItem.leftBarButtonItem = aboutAppBarButton
     }
     
     @objc func editProfile() {
         let editProfileViewController = EditProfileViewController()
         navigationController?.pushViewController(editProfileViewController, animated: true)
+    }
+    
+    @objc func aboutApp() {
+        let aboutAppViewController = AboutAppViewController()
+        navigationController?.pushViewController(aboutAppViewController, animated: true)
     }
 }

@@ -20,6 +20,8 @@
 		9277D38F238C725300B3AECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9277D38E238C725300B3AECA /* Assets.xcassets */; };
 		9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9277D390238C725300B3AECA /* LaunchScreen.storyboard */; };
 		C303978D23D6DB9B003FE9D4 /* Ubuntu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C303978C23D6DB9B003FE9D4 /* Ubuntu.ttf */; };
+		C31FF9792452CC8D00642C7B /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31FF9782452CC8D00642C7B /* AboutAppViewController.swift */; };
+		C31FF97B2452CCA400642C7B /* AboutAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31FF97A2452CCA400642C7B /* AboutAppViewController.xib */; };
 		C3272ABA241D73270020F1A5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3272AB9241D73270020F1A5 /* CoreDataManager.swift */; };
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
 		C328EE062447294100445704 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328EE042447294100445704 /* RegisterViewController.xib */; };
@@ -79,6 +81,8 @@
 		9277D391238C725300B3AECA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9277D393238C725300B3AECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C303978C23D6DB9B003FE9D4 /* Ubuntu.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ubuntu.ttf; sourceTree = "<group>"; };
+		C31FF9782452CC8D00642C7B /* AboutAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
+		C31FF97A2452CCA400642C7B /* AboutAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutAppViewController.xib; sourceTree = "<group>"; };
 		C3272AB9241D73270020F1A5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C328EE042447294100445704 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
@@ -214,6 +218,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		C31FF9772452CBBE00642C7B /* AboutAppPage */ = {
+			isa = PBXGroup;
+			children = (
+				C31FF9782452CC8D00642C7B /* AboutAppViewController.swift */,
+				C31FF97A2452CCA400642C7B /* AboutAppViewController.xib */,
+			);
+			path = AboutAppPage;
+			sourceTree = "<group>";
+		};
 		C3272AB8241D73190020F1A5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +287,7 @@
 				6E5AFCD32450C06800F283C4 /* AddPostPage */,
 				C3724EC723AFAC2400D49AD6 /* PostDetailPage */,
 				C3724EC823AFAC4E00D49AD6 /* ProfilePage */,
+				C31FF9772452CBBE00642C7B /* AboutAppPage */,
 			);
 			path = Moduls;
 			sourceTree = "<group>";
@@ -447,6 +461,7 @@
 				6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */,
 				C303978D23D6DB9B003FE9D4 /* Ubuntu.ttf in Resources */,
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
+				C31FF97B2452CCA400642C7B /* AboutAppViewController.xib in Resources */,
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C31FF9792452CC8D00642C7B /* AboutAppViewController.swift in Sources */,
 				C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */,
 				C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,

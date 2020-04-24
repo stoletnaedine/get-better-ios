@@ -18,7 +18,7 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var selectedSphereLabel: UILabel!
     
-    var selectedSphere: String?
+    var selectedSphere: Sphere?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,7 @@ class AddPostViewController: UIViewController {
                     .childByAutoId()
                     .setValue([
                         Properties.Post.Field.post: post,
-                        Properties.Post.Field.sphere: sphere,
+                        Properties.Post.Field.sphere: sphere.rawValue,
                         Properties.Post.Field.timestamp: Date.currentTimestamp
                     ])
             
@@ -100,12 +100,14 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let sphere = Sphere.allCases[row]
+        selectedSphere = sphere
         selectedSphereLabel.text = sphere.name
         return sphere.name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let sphere = Sphere.allCases[row]
-        self.selectedSphere = sphere.rawValue
+        selectedSphere = sphere
+        selectedSphereLabel.text = sphere.name
     }
 }
