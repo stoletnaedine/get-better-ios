@@ -13,18 +13,20 @@ class LifeCircleController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
-    @IBOutlet weak var detailsView: UIView!
+    @IBOutlet weak var detailsView: PieChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.TabBar.lifeCircleTitle
         setupSegmentedControl()
         setupChartView()
+        
+        chartView.isHidden = false
+        detailsView.isHidden = true
     }
     
     func setupChartView() {
         
-        // 2
         chartView.webLineWidth = 1.5
         chartView.innerWebLineWidth = 1.5
         chartView.webColor = .lightGray
@@ -47,9 +49,11 @@ class LifeCircleController: UIViewController {
         
         let dataSet = RadarChartDataSet(entries: dataEntries, label: "Текущий уровень")
         let dataSet2 = RadarChartDataSet(entries: dataEntries2, label: "Текущий уровень")
+        
         let data = RadarChartData(dataSets: [dataSet, dataSet2])
         
-        dataSet.lineWidth = 3
+        dataSet.lineWidth = 4
+        dataSet2.lineWidth = 0
         
         let redColor = UIColor(red: 247/255, green: 67/255, blue: 115/255, alpha: 1)
         let redFillColor = UIColor(red: 247/255, green: 67/255, blue: 115/255, alpha: 0.6)
@@ -58,6 +62,7 @@ class LifeCircleController: UIViewController {
         dataSet.drawFilledEnabled = true
         
         chartView.data = data
+        chartView.webLineWidth = 0
     }
     
     func setupSegmentedControl() {

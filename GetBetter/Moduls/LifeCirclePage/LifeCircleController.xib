@@ -32,7 +32,7 @@
                         <action selector="segmentedActionDidSelected:" destination="-1" eventType="valueChanged" id="SFf-nL-h4V"/>
                     </connections>
                 </segmentedControl>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" customClass="PieChartView" customModule="Charts">
                     <rect key="frame" x="0.0" y="112" width="414" height="750"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
