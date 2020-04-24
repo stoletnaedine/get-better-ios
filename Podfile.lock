@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (5.0.5)
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
   - Firebase/Auth (6.22.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.5.1)
@@ -64,29 +67,23 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - RxCocoa (5.0.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.1.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.0.1)
   - SwiftKeychainWrapper (3.0.1)
   - Toaster (2.2.0)
 
 DEPENDENCIES:
   - Alamofire
+  - Charts (~> 3.3.0)
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
-  - RxCocoa (~> 5.0.1)
-  - RxSwift (~> 5.0.1)
   - SwiftKeychainWrapper (~> 3.0.1)
   - Toaster
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Charts
     - Firebase
     - FirebaseAuth
     - FirebaseAuthInterop
@@ -102,14 +99,12 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - leveldb-library
     - nanopb
-    - RxCocoa
-    - RxRelay
-    - RxSwift
     - SwiftKeychainWrapper
     - Toaster
 
 SPEC CHECKSUMS:
   Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
+  Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
   FirebaseAuth: a6da11d78dfd956b7f7af3222a0f0b1c93ef8fc9
   FirebaseAuthInterop: a0f37ae05833af156e72028f648d313f7e7592e9
@@ -125,12 +120,9 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
-  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: 27fc10ee44b8a0a6ae2256ec11f88db6763f96ff
+PODFILE CHECKSUM: cf358c5dc78def50851240b5f7c3bc693b340632
 
 COCOAPODS: 1.9.1

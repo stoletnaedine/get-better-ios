@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxSwift
 
 class AppError: Error {
     
