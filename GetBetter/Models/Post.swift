@@ -10,6 +10,6 @@ import Foundation
 
 struct Post {
     let text: String?
-    let sphere: String?
+    let sphere: Sphere?
     let timestamp: Int64?
 }

@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 import Toaster
 
 class AddPostViewController: UIViewController {
@@ -53,25 +51,16 @@ class AddPostViewController: UIViewController {
     }
     
     @objc func savePost() {
-        guard let user = Auth.auth().currentUser else { return }
         
-        if let post = postTextView.text, !post.isEmpty,
-            let sphere = selectedSphere {
-            
-                Database.database().reference()
-                    .child(Properties.Post.Field.post)
-                    .child(user.uid)
-                    .childByAutoId()
-                    .setValue([
-                        Properties.Post.Field.post: post,
-                        Properties.Post.Field.sphere: sphere.rawValue,
-                        Properties.Post.Field.timestamp: Date.currentTimestamp
-                    ])
-            
-                Toast(text: Properties.Post.postSavedSuccess).show()
-        } else {
-            Toast(text: Properties.Post.emptyFieldsWarning).show()
-            return
+        guard let text = postTextView.text,
+            !text.isEmpty,
+            let sphere = selectedSphere else {
+                Toast(text: Properties.Post.emptyFieldsWarning).show()
+                return
+        }
+        
+        if DatabaseService().savePost(Post(text: text, sphere: sphere, timestamp: Date.currentTimestamp)) {
+            Toast(text: Properties.Post.postSavedSuccess).show()
         }
         
         navigationController?.popViewController(animated: true)

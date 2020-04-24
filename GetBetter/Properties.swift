@@ -91,6 +91,7 @@ struct Properties {
         
         struct Field {
             static let post = "post"
+            static let text = "text"
             static let sphere = "sphere"
             static let timestamp = "timestamp"
         }

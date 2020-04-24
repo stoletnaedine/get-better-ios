@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 import Toaster
 
 class JournalViewController: UIViewController {
@@ -47,43 +45,20 @@ class JournalViewController: UIViewController {
     }
     
     func updatePosts() {
-        loadUserPosts(completion: { [weak self] postArray in
-            self?.posts = postArray
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+        DatabaseService().getPosts(completion: { [weak self] result in
+            switch result {
+                
+            case .failure(let error):
+                Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                print(error.localizedDescription)
+                
+            case .success(let postArray):
+                self?.posts = postArray
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             }
         })
-    }
-    
-    func loadUserPosts(completion: @escaping ([Post]) -> Void) {
-        guard let user = Auth.auth().currentUser else { return }
-        
-        Database.database().reference()
-            .child(Properties.Post.Field.post)
-            .child(user.uid)
-            .observeSingleEvent(of: .value, with: { snapshot in
-            
-            let value = snapshot.value as? NSDictionary
-            let keys = value?.allKeys
-            
-            if let keys = keys {
-                var postArray: [Post] = []
-    
-                for key in keys.enumerated() {
-                    let entity = value?[key.element] as? NSDictionary
-                    
-                    let post = Post(text: entity?[Properties.Post.Field.post] as? String ?? "",
-                                    sphere: entity?[Properties.Post.Field.sphere] as? String ?? "",
-                                    timestamp: entity?[Properties.Post.Field.timestamp] as? Int64 ?? 0)
-                    
-                    postArray.append(post)
-                }
-                completion(postArray)
-            }
-        }) { error in
-            Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
-            print(error.localizedDescription)
-        }
     }
     
     func customizeBarButton() {
