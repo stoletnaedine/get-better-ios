@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LifeCircleController" customModule="GetBetter" customModuleProvider="target">
             <connections>
-                <outlet property="circleView" destination="Xlg-ch-PBS" id="ZVh-NQ-W2X"/>
+                <outlet property="chartView" destination="Xlg-ch-PBS" id="8Eu-L2-Y9T"/>
                 <outlet property="detailsView" destination="fxn-qj-OtY" id="sy9-zX-BJZ"/>
                 <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -36,7 +36,7 @@
                     <rect key="frame" x="0.0" y="112" width="414" height="750"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xlg-ch-PBS">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xlg-ch-PBS" customClass="RadarChartView" customModule="Charts">
                     <rect key="frame" x="0.0" y="112" width="414" height="750"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
