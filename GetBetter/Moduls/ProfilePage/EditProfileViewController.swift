@@ -26,6 +26,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var warningLabel: UILabel!
     
     let user = Auth.auth().currentUser
+    let storageService = StorageService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +43,10 @@ class EditProfileViewController: UIViewController {
     }
     
     @objc func saveProfile() {
-        guard let user = user else {
-            return
-        }
+        guard let user = user else { return }
         
         if let avatar = avatarImageView.image {
-            upload(currentUserId: user.uid, photo: avatar, completion: { result in
+            storageService.upload(currentUserId: user.uid, photo: avatar, completion: { result in
                 switch result {
                 case .success(let url):
                     let changeRequest = user.createProfileChangeRequest()
@@ -101,31 +100,6 @@ class EditProfileViewController: UIViewController {
         
         navigationController?.popViewController(animated: true)
         Toast(text: Properties.Profile.editSuccess, delay: 1, duration: 2).show()
-    }
-    
-    func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
-        let ref = Storage.storage().reference().child(Properties.Profile.avatarsDirectory).child(currentUserId)
-        
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-        
-        guard let imageData = avatarImageView.image?.jpegData(compressionQuality: 0.1) else {
-            return
-        }
-        
-        ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
-            guard let _ = metadata else {
-                completion(.failure(error!))
-                return
-            }
-            ref.downloadURL(completion: { (url, error) in
-                guard let url = url else {
-                    completion(.failure(error!))
-                    return
-                }
-                completion(.success(url))
-            })
-        })
     }
     
     func customizeView() {

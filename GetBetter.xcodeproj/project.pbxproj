@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6E5684102451AB1F009FBE13 /* SetupSphereValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */; };
 		6E5684112451AB1F009FBE13 /* SetupSphereValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */; };
+		6E9E01BB24545A690083499E /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BA24545A690083499E /* StorageService.swift */; };
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
 		6EA85199244F7E8F00D40E14 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85198244F7E8F00D40E14 /* Date.swift */; };
 		6EA8519B244F827A00D40E14 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8519A244F827A00D40E14 /* Post.swift */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
+		6E9E01BA24545A690083499E /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		6EA85198244F7E8F00D40E14 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		6EA8519A244F827A00D40E14 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				C3C873CD2435F47700931E9B /* LocalDataService.swift */,
 				C3F0141923D080F8009D83AD /* ParsingService.swift */,
 				C31FF9832453341900642C7B /* DatabaseService.swift */,
+				6E9E01BA24545A690083499E /* StorageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */,
 				6EA8519B244F827A00D40E14 /* Post.swift in Sources */,
 				C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */,
+				6E9E01BB24545A690083499E /* StorageService.swift in Sources */,
 				C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */,
 				6ED5FF16245207AC00792B1F /* WelcomeViewController.swift in Sources */,
 				6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */,

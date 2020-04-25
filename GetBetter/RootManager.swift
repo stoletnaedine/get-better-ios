@@ -38,7 +38,6 @@ class RootManager {
     
     @objc func logout() {
         try! Auth.auth().signOut()
-        KeychainHelper.deleteCredentials()
         showAuthController()
     }
     

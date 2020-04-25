@@ -66,7 +66,7 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func forgotPasswordDidPressed(_ sender: UIButton) {
-        print("forgotPasswordDidPressed")
+        Toast(text: "TODO реализовать позже").show()
     }
     
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
@@ -95,6 +95,9 @@ class AuthViewController: UIViewController {
         emailTextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGrey,
                                                                                NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
+        if let email = KeychainHelper.getUserEmail() {
+            emailTextField.text = email
+        }
 
         passwordLabel.text = Properties.Auth.password
         passwordLabel.textColor = .grayEvent
