@@ -15,7 +15,7 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var sphereDescriptionLabel: UILabel!
     @IBOutlet weak var valueForSphereLabel: UILabel!
     
-    var sphereValue: Int?
+    var sphereValue: Double? = Properties.SetupSphere.notValidValue
     var sphere: Sphere?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
@@ -80,7 +80,7 @@ extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDe
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let value = values[row]
-        sphereValue = value
+        sphereValue = Double(value)
         valueForSphereLabel.text = String(value)
     }
 }

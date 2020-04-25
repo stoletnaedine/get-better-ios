@@ -17,6 +17,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        title = Properties.Welcome.title
     }
 
     func setupView() {

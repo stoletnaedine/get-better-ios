@@ -20,19 +20,16 @@ class RootManager {
         window?.makeKeyAndVisible()
         
         NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showTabBarController), name: .showTabBar, object: nil)
         
         setupNavigationBar()
         configToaster()
-        
-        if false {
-            window?.rootViewController = UINavigationController(rootViewController: PageViewController())
-            return
-        }
         
         if Auth.auth().currentUser == nil {
             showAuthController()
         } else {
             showTabBarController()
+//            showPageViewController()
         }
     }
     
@@ -41,9 +38,13 @@ class RootManager {
         showAuthController()
     }
     
-    func showTabBarController() {
+    @objc func showTabBarController() {
         let tabBarController = TabBarController()
         window?.rootViewController = tabBarController
+    }
+    
+    func showPageViewController() {
+        window?.rootViewController = UINavigationController(rootViewController: PageViewController())
     }
     
     func showAuthController() {

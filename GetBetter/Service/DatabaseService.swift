@@ -13,13 +13,11 @@ import FirebaseAuth
 class DatabaseService {
     
     let ref = Database.database().reference()
-    let userId = Auth.auth().currentUser?.uid
+    let user = Auth.auth().currentUser
     
     func savePost(_ post: Post) -> Bool {
         
-        guard let userId = userId else {
-            return false
-        }
+        guard let userId = user?.uid else { return false }
         
         ref
             .child(Properties.Post.Field.post)
@@ -37,7 +35,7 @@ class DatabaseService {
     
     func getPosts(completion: @escaping (Result<[Post], Error>) -> Void) {
         
-        guard let user = Auth.auth().currentUser else { return }
+        guard let user = user else { return }
         
         ref
             .child(Properties.Post.Field.post)
@@ -68,5 +66,35 @@ class DatabaseService {
             }) { error in
                 completion(.failure(error))
         }
+    }
+    
+    func saveSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool {
+        
+        guard let userId = user?.uid else { return false }
+        
+        ref
+            .child(Properties.SphereMetrics.Field.metrics)
+            .child(userId)
+            .setValue(sphereMetrics.values)
+        
+        return true
+    }
+    
+    func getSphereMetrics(completion: @escaping (Result<SphereMetrics, Error>) -> Void) {
+        
+        guard let userId = user?.uid else { return }
+        
+        ref
+            .child(Properties.SphereMetrics.Field.metrics)
+            .child(userId)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                
+                if let value = snapshot.value as? NSDictionary {
+                    let sphereMetrics = SphereMetrics(values: value as! [String : Double])
+                    completion(.success(sphereMetrics))
+                }
+            }) { error in
+                    completion(.failure(error))
+            }
     }
 }

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Toaster
 
 class PageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
+    let databaseService = DatabaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +50,27 @@ class PageViewController: UIViewController {
     }
     
     @objc func saveSphereValues() {
+        let viewControllersWithoutWelcome = viewControllers.filter {
+            $0.title != Properties.Welcome.title
+        }
+        let setupSphereValueViewControllers = viewControllersWithoutWelcome.map {
+            $0 as! SetupSphereValueViewController
+        }
         
+        let metricsArray = setupSphereValueViewControllers.reduce(into: [String: Double]()) {
+            $0[$1.sphere?.rawValue ?? ""] = $1.sphereValue
+        }
+        let sphereMetrics = SphereMetrics(values: metricsArray)
+        print(sphereMetrics)
+        
+        if !sphereMetrics.isValid() {
+            Toast(text: "Введите все значения").show()
+            return
+        }
+        if databaseService.saveSphereMetrics(sphereMetrics) {
+            Toast(text: "Сохранено!").show()
+            NotificationCenter.default.post(name: .showTabBar, object: nil)
+        }
     }
 }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Charts
+import Toaster
 
 class LifeCircleController: UIViewController {
 
@@ -15,11 +16,23 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var detailsView: PieChartView!
     
+    var sphereValues = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.TabBar.lifeCircleTitle
         setupSegmentedControl()
         setupChartView()
+        
+        DatabaseService().getSphereMetrics(completion: { [weak self] result in
+            switch result {
+            case .success(let sphereMetrics):
+                self?.sphereValues = sphereMetrics.values.map { $0.value }.sorted()
+                self?.setupChartView()
+            case .failure(let error):
+                Toast(text: error.localizedDescription).show()
+            }
+        })
         
         chartView.isHidden = false
         detailsView.isHidden = true
@@ -31,21 +44,16 @@ class LifeCircleController: UIViewController {
         chartView.innerWebLineWidth = 1.5
         chartView.webColor = .lightGray
         chartView.innerWebColor = .lightGray
-        
-        
         chartView.rotationEnabled = false
         chartView.legend.enabled = false
-        
-        let sphereValues = [6.0, 10.0, 4.0, 6.0, 9.0, 8.0, 6.0, 4.0]
-        let sphereValues2 = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         
         var dataEntries: [RadarChartDataEntry] = []
         var dataEntries2: [RadarChartDataEntry] = []
         
         for i in 0..<sphereValues.count {
             dataEntries.append(RadarChartDataEntry(value: sphereValues[i]))
-            dataEntries2.append(RadarChartDataEntry(value: sphereValues2[i]))
         }
+        dataEntries2.append(RadarChartDataEntry(value: 0.0))
         
         let dataSet = RadarChartDataSet(entries: dataEntries, label: "Текущий уровень")
         let dataSet2 = RadarChartDataSet(entries: dataEntries2, label: "Текущий уровень")
