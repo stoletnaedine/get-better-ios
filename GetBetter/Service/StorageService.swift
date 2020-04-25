@@ -2,7 +2,7 @@
 //  StorageService.swift
 //  GetBetter
 //
-//  Created by Исламгулова Лариса on 25.04.2020.
+//  Created by Artur Islamgulov on 25.04.2020.
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
@@ -22,10 +22,6 @@ class StorageService {
         metadata.contentType = "image/jpeg"
         
         guard let imageData = photo.jpegData(compressionQuality: 0.1) else { return }
-        
-//        guard let imageData = avatarImageView.image?.jpegData(compressionQuality: 0.1) else {
-//            return
-//        }
         
         ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {
