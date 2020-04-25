@@ -23,8 +23,6 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var password2Label: UILabel!
-    @IBOutlet weak var password2TextField: UITextField!
     @IBOutlet weak var warningLabel: UILabel!
     
     let user = Auth.auth().currentUser
@@ -68,7 +66,8 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let name = nameTextField.text, !name.isEmpty {
+        if let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !name.isEmpty, name != user.displayName {
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = name
             changeRequest.commitChanges(completion: { error in
@@ -79,10 +78,8 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let password1 = passwordTextField.text, !password1.isEmpty,
-            let password2 = password2TextField.text, !password2.isEmpty,
-            password1 == password2 {
-            user.updatePassword(to: password1, completion: { error in
+        if let password = passwordTextField.text, !password.isEmpty {
+            user.updatePassword(to: password, completion: { error in
                 if let error = error {
                     Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                     return
@@ -90,7 +87,8 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let email = emailTextField.text, !email.isEmpty {
+        if let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !email.isEmpty, email != user.email {
             user.updateEmail(to: email, completion: { error in
                 if let error = error {
                     print("\(error.localizedDescription)")
@@ -101,8 +99,8 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        NotificationCenter.default.post(name: .updateProfile, object: nil)
         navigationController?.popViewController(animated: true)
+        Toast(text: Properties.Profile.editSuccess, delay: 1, duration: 2).show()
     }
     
     func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
@@ -137,14 +135,24 @@ class EditProfileViewController: UIViewController {
         avatarButton.setTitle(Properties.Profile.loadAvatar, for: .normal)
         avatarButton.setTitleColor(.white, for: .normal)
         avatarButton.titleLabel?.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
+        
+        if let user = user {
+            if let name = user.displayName {
+                nameTextField.text = name
+            } else {
+                nameTextField.placeholder = Properties.Profile.enterName
+            }
+            
+            if let email = user.email {
+                emailTextField.text = email
+            } else {
+                emailTextField.placeholder = Properties.Profile.enterEmail
+            }
+        }
         nameLabel.text = Properties.Profile.name
-        nameTextField.placeholder = Properties.Profile.enterName
         emailLabel.text = Properties.Profile.email
-        emailTextField.placeholder = Properties.Profile.enterEmail
         passwordLabel.text = Properties.Profile.password
         passwordTextField.placeholder = Properties.Profile.enterPassword
-        password2Label.text = Properties.Profile.password2
-        password2TextField.placeholder = Properties.Profile.enterPassword2
         warningLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 14)
         warningLabel.text = Properties.Profile.warning
     }

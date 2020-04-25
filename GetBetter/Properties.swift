@@ -67,18 +67,18 @@ struct Properties {
     struct Profile {
         static let editTitle = "Редактировать профиль"
         static let signOut = "Выйти"
+        static let update = "Обновить"
         static let name = "Имя"
         static let enterName = "Введите имя"
         static let email = "Email"
         static let enterEmail = "Введите новый Email"
         static let password = "Пароль"
-        static let password2 = "Еще раз"
         static let enterPassword = "Введите новый пароль"
-        static let enterPassword2 = "Повторите новый пароль"
         static let loadAvatar = "Загрузить аватар"
         static let avatarsDirectory = "avatars"
         static let warning = "При смене Email необходимо заново войти в приложение"
         static let nameDefault = "..."
+        static let editSuccess = "Профиль успешно обновлен.\nЧтобы увидеть изменения, обновите профиль"
     }
     
     struct Post {
@@ -109,6 +109,7 @@ struct Properties {
     }
     
     struct AboutApp {
+        static let about = "About"
         static let title = "Что такое GetBetter?"
         static let description = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии. \n\nПриготовься, перемены начинаются сегодня! \n\nИдея и разработка приложения:\nИсламгулов Артур (github.com/stoletnaedine)\n\nИконки и изображения: icons8.com"
     }

@@ -16,15 +16,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var updateButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO не работает апдейт профиля после редактирования
-        NotificationCenter.default.addObserver(self, selector: #selector(loadProfileInfoAndReloadView), name: .updateProfile, object: nil)
-        
         customizeView()
         customizeBarButton()
+        loadProfileInfoAndReloadView()
+    }
+    
+    @IBAction func updateButtonDidPressed(_ sender: UIButton) {
         loadProfileInfoAndReloadView()
     }
     
@@ -77,12 +78,16 @@ class ProfileViewController: UIViewController {
         signOutButton.setTitleColor(.sky, for: .normal)
         signOutButton.titleLabel?.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
         signOutButton.titleLabel?.underline()
+        updateButton.setTitle(Properties.Profile.update, for: .normal)
+        updateButton.setTitleColor(.sky, for: .normal)
+        updateButton.titleLabel?.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
+        updateButton.titleLabel?.underline()
     }
     
     func customizeBarButton() {
         let editBarButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editProfile))
         navigationItem.rightBarButtonItem = editBarButton
-        let aboutAppBarButton = UIBarButtonItem(title: "About", style: .plain, target: self, action: #selector(aboutApp))
+        let aboutAppBarButton = UIBarButtonItem(title: Properties.AboutApp.about, style: .plain, target: self, action: #selector(aboutApp))
         navigationItem.leftBarButtonItem = aboutAppBarButton
     }
     
