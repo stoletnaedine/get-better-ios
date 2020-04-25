@@ -54,7 +54,8 @@ class LifeCircleController: UIViewController {
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 10
         if let sphereMetrics = sphereMetrics {
-            xAxis.valueFormatter = XAxisFormatter(sphereMetrics)
+            let titles = sphereMetrics.values.map { Sphere(rawValue: $0.key)?.name ?? "" }
+            xAxis.valueFormatter = XAxisFormatter(titles: titles)
         }
         
         let yAxis = chartView.yAxis
@@ -119,18 +120,14 @@ class LifeCircleController: UIViewController {
 
 class XAxisFormatter: IAxisValueFormatter {
     
-    let sphereMetrics: SphereMetrics?
+    let titles: [String]
     
-    init(_ sphereMetrics: SphereMetrics) {
-        self.sphereMetrics = sphereMetrics
+    init(titles: [String]) {
+        self.titles = titles
     }
     
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        if let sphereMetrics = sphereMetrics {
-            let titles = sphereMetrics.values.map { Sphere(rawValue: $0.key)?.name }
-            return titles[Int(value) % titles.count] ?? ""
-        }
-        return ""
+        return titles[Int(value) % titles.count]
     }
 }
 
