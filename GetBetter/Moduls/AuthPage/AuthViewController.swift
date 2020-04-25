@@ -78,14 +78,14 @@ class AuthViewController: UIViewController {
         self.title = Properties.Auth.authTitleVC
         description1Label.text = Properties.Auth.description1
         description1Label.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
-        description1Label.textColor = .darkGrey
+        description1Label.textColor = .darkGray
         
         icon1ImageView.image = UIImage(named: "vk")
         icon2ImageView.image = UIImage(named: "fb")
         icon3ImageView.image = UIImage(named: "ok")
         description2Label.text = Properties.Auth.description2
         description2Label.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
-        description2Label.textColor = .darkGrey
+        description2Label.textColor = .darkGray
         
         emailLabel.text = Properties.Auth.email
         emailLabel.textColor = .grayEvent
@@ -93,7 +93,7 @@ class AuthViewController: UIViewController {
         
         emailTextField.borderStyle = .none
         emailTextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterEmail,
-                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGrey,
+                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
         if let email = KeychainHelper.getUserEmail() {
             emailTextField.text = email
@@ -105,7 +105,7 @@ class AuthViewController: UIViewController {
         
         passwordTextField.borderStyle = .none
         passwordTextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterPassword,
-                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGrey,
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                   NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
         passwordTextField.isSecureTextEntry = true
         eyeImageView.image = UIImage(named: "combinedShape")

@@ -104,7 +104,7 @@ class EditProfileViewController: UIViewController {
     
     func customizeView() {
         avatarView.layer.cornerRadius = avatarView.frame.width / 2
-        avatarView.backgroundColor = .grey
+        avatarView.backgroundColor = .gray
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarButton.setTitle(Properties.Profile.loadAvatar, for: .normal)
         avatarButton.setTitleColor(.white, for: .normal)

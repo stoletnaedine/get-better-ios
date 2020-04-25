@@ -75,7 +75,6 @@ extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDe
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let value = values[row]
-        valueForSphereLabel.text = String(value)
         return String(value)
     }
     

@@ -19,7 +19,7 @@ class AboutAppViewController: UIViewController {
     }
 
     func setupView() {
-        view.backgroundColor = .lighterGrey
+        view.backgroundColor = .lighterGray
         titleLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 25)
         titleLabel.text = Properties.AboutApp.title
         descriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)

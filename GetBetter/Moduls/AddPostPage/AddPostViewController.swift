@@ -71,7 +71,7 @@ class AddPostViewController: UIViewController {
     func customizeView() {
         addPostLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
         addPostLabel.text = Properties.Post.addPost
-        postTextView.backgroundColor = .lightGrey
+        postTextView.backgroundColor = .lighterGray
         sphereLabel.text = Properties.Post.sphere
         sphereLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
         selectedSphereLabel.text = Properties.Post.sphereDefault
@@ -91,8 +91,6 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let sphere = Sphere.allCases[row]
-        selectedSphere = sphere
-        selectedSphereLabel.text = sphere.name
         return sphere.name
     }
     

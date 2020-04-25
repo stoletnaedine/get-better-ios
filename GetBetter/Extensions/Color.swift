@@ -18,7 +18,7 @@ extension UIColor {
         return UIColor(red: 254/255, green: 116/255, blue: 96/255, alpha: 1)
     }
     
-    static var grey: UIColor {
+    static var gray: UIColor {
         return UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1)
     }
     
@@ -26,11 +26,11 @@ extension UIColor {
         return UIColor(red: 148/255, green: 153/255, blue: 138/255, alpha: 1)
     }
     
-    static var lightGrey: UIColor {
+    static var lightGray: UIColor {
         return UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
     }
     
-    static var lighterGrey: UIColor {
+    static var lighterGray: UIColor {
         return UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1)
     }
     
@@ -38,11 +38,11 @@ extension UIColor {
         return UIColor(red: 232/255, green: 237/255, blue: 237/255, alpha: 1)
     }
     
-    static var darkGrey: UIColor {
+    static var darkGray: UIColor {
         return UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
     }
     
-    static var placeholderGrey: UIColor {
+    static var placeholderGray: UIColor {
         return UIColor(red: 174/255, green: 176/255, blue: 176/255, alpha: 1)
     }
 }

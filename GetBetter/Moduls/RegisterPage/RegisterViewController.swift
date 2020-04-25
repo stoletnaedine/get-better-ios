@@ -54,7 +54,7 @@ class RegisterViewController: UIViewController {
         emailLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 13)
         emailTextField.borderStyle = .none
         emailTextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterEmail,
-                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGrey,
+                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
         let passLabelArray = [password1Label, password2Label]
         for label in passLabelArray {
@@ -65,11 +65,11 @@ class RegisterViewController: UIViewController {
         password2Label.text = Properties.Auth.password2
         password1TextField.borderStyle = .none
         password1TextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterPassword,
-                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGrey,
+                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                    NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
         password2TextField.borderStyle = .none
         password2TextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterPassword2,
-                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGrey,
+                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                    NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
         registerView.backgroundColor = .sky
         registerView.layer.cornerRadius = 5
