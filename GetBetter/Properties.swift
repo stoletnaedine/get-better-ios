@@ -16,6 +16,8 @@ struct Properties {
     }
     
     struct LifeCircle {
+        static let loading = "Подождите, идет загрузка"
+        
         struct SegmentedControl {
             static let circle = "Круг"
             static let details = "Подробнее"

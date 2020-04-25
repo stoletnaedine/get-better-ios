@@ -14,7 +14,7 @@ class LifeCircleController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
-    @IBOutlet weak var detailsView: PieChartView!
+    @IBOutlet weak var detailsView: HorizontalBarChartView!
     
     var sphereValuesIdeal = [10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
     var sphereMetrics: SphereMetrics?
@@ -23,7 +23,10 @@ class LifeCircleController: UIViewController {
         super.viewDidLoad()
         self.title = Properties.TabBar.lifeCircleTitle
         setupSegmentedControl()
-        setupChartView()
+        
+        chartView.noDataText = Properties.LifeCircle.loading
+        
+        setDataCount(count: 8, range: 10)
         
         DatabaseService().getSphereMetrics(completion: { [weak self] result in
             switch result {
@@ -40,10 +43,9 @@ class LifeCircleController: UIViewController {
     }
     
     func setupChartView() {
-        
         chartView.webLineWidth = 1
         chartView.innerWebLineWidth = 0
-        chartView.webColor = .lighterGray
+        chartView.webColor = .darkGray
         chartView.rotationEnabled = true
         chartView.legend.enabled = true
         
@@ -75,22 +77,49 @@ class LifeCircleController: UIViewController {
             }
         }
         
-        let dataSet = RadarChartDataSet(entries: dataEntries, label: "Твой текущий уровень")
+        let dataSetUser = RadarChartDataSet(entries: dataEntries, label: "Твой текущий уровень")
         let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: "К чему можно стремиться")
         
-        let data = RadarChartData(dataSets: [dataSet, dataSetIdeal])
-        
-        dataSet.lineWidth = 2
-        dataSetIdeal.lineWidth = 2
-        
-        dataSet.colors = [.red]
-        dataSet.fillColor = .redFill
-        dataSet.drawFilledEnabled = true
-        
+        dataSetIdeal.lineWidth = 1
         dataSetIdeal.colors = [.sky]
+        dataSetIdeal.fillColor = .skyFill
+        dataSetIdeal.drawFilledEnabled = true
         dataSetIdeal.valueFormatter = DataSetValueFormatter()
         
-        chartView.data = data
+        dataSetUser.lineWidth = 2
+        dataSetUser.colors = [.red]
+        dataSetUser.fillColor = .redFill
+        dataSetUser.drawFilledEnabled = true
+        
+        
+        chartView.data = RadarChartData(dataSets: [dataSetUser, dataSetIdeal])
+    }
+    
+    func setDataCount(count: Int, range: Double){
+        
+        let barWidth = 9.0
+        let spaceForBar =  10.0;
+        
+        var yVals = [BarChartDataEntry]()
+        
+        for i in 0..<count{
+            let mult = (range + 1)
+            let val = (Double)(arc4random_uniform(UInt32(mult)))
+            
+            yVals.append(BarChartDataEntry(x: Double(i) * spaceForBar, y: val))
+        }
+        
+        var set1 : BarChartDataSet!
+        set1 = BarChartDataSet(entries: yVals, label: "DataSet")
+        
+        var dataSets = [BarChartDataSet]()
+        dataSets.append(set1)
+        
+        let data = BarChartData(dataSets: dataSets)
+        
+        data.barWidth =  barWidth;
+        
+        detailsView.data = data
     }
     
     func setupSegmentedControl() {

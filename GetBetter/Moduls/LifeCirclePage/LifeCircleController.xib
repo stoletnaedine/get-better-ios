@@ -31,7 +31,7 @@
                         <action selector="segmentedActionDidSelected:" destination="-1" eventType="valueChanged" id="SFf-nL-h4V"/>
                     </connections>
                 </segmentedControl>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" customClass="PieChartView" customModule="Charts">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" customClass="HorizontalBarChartView" customModule="Charts">
                     <rect key="frame" x="10" y="115" width="394" height="747"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
