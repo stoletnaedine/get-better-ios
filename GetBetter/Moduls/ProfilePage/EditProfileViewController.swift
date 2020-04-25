@@ -53,13 +53,13 @@ class EditProfileViewController: UIViewController {
                     changeRequest.photoURL = url
                     changeRequest.commitChanges(completion: { error in
                         if let error = error {
-                            print("changeRequest.commitChanges = \(error.localizedDescription)")
+                            print("Firebase commit changes error = \(error.localizedDescription)")
                             Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
                             return
                         }
                     })
                 case .failure(let error):
-                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(Properties.Error.firebaseError)\(String(describing: error.name))").show()
                     return
                 }
             })

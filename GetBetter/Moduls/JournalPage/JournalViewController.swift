@@ -23,7 +23,7 @@ class JournalViewController: UIViewController {
         setupRefreshControl()
         registerCell()
         customizeBarButton()
-        updatePosts()
+        getPosts()
     }
     
     func setupRefreshControl() {
@@ -39,18 +39,18 @@ class JournalViewController: UIViewController {
     }
     
     @objc func refreshTableView() {
-        updatePosts()
+        getPosts()
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
         }
     }
     
-    func updatePosts() {
+    func getPosts() {
         databaseService.getPosts(completion: { [weak self] result in
             switch result {
                 
             case .failure(let error):
-                Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                Toast(text: "\(Properties.Error.firebaseError)\(String(describing: error.name))").show()
                 print(error.localizedDescription)
                 
             case .success(let postArray):

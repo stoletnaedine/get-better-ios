@@ -12,7 +12,7 @@ import FirebaseStorage
 
 class StorageService {
     
-    func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
+    func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
         
         let ref = Storage.storage().reference()
             .child(Properties.Profile.avatarsDirectory)
@@ -25,12 +25,12 @@ class StorageService {
         
         ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {
-                completion(.failure(error!))
+                completion(.failure(AppError(error: error)!))
                 return
             }
             ref.downloadURL(completion: { (url, error) in
                 guard let url = url else {
-                    completion(.failure(error!))
+                    completion(.failure(AppError(error: error)!))
                     return
                 }
                 completion(.success(url))

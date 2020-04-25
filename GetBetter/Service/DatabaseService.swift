@@ -33,7 +33,7 @@ class DatabaseService {
     }
     
     
-    func getPosts(completion: @escaping (Result<[Post], Error>) -> Void) {
+    func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void) {
         
         guard let user = user else { return }
         
@@ -64,7 +64,7 @@ class DatabaseService {
                     completion(.success(postArray))
                 }
             }) { error in
-                completion(.failure(error))
+                completion(.failure(AppError(error: error)!))
         }
     }
     
