@@ -16,7 +16,6 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var detailsView: PieChartView!
     
-//    var sphereValues = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     var sphereValuesIdeal = [10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
     var sphereMetrics: SphereMetrics?
     
@@ -29,7 +28,6 @@ class LifeCircleController: UIViewController {
         DatabaseService().getSphereMetrics(completion: { [weak self] result in
             switch result {
             case .success(let sphereMetrics):
-//                self?.sphereValues = sphereMetrics.values.map { $0.value }
                 self?.sphereMetrics = sphereMetrics
                 self?.setupChartView()
             case .failure(_):
@@ -44,15 +42,14 @@ class LifeCircleController: UIViewController {
     func setupChartView() {
         
         chartView.webLineWidth = 1
-        chartView.innerWebLineWidth = 1
+        chartView.innerWebLineWidth = 0
         chartView.webColor = .lighterGray
-        chartView.innerWebColor = .lighterGray
         chartView.rotationEnabled = true
         chartView.legend.enabled = true
         
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
-        xAxis.axisMaximum = 10
+        xAxis.axisMaximum = 9
         if let sphereMetrics = sphereMetrics {
             let titles = sphereMetrics.values.map { Sphere(rawValue: $0.key)?.name ?? "" }
             xAxis.valueFormatter = XAxisFormatter(titles: titles)
@@ -60,7 +57,7 @@ class LifeCircleController: UIViewController {
         
         let yAxis = chartView.yAxis
         yAxis.axisMinimum = 0
-        yAxis.axisMaximum = 10
+        yAxis.axisMaximum = 9
         yAxis.drawTopYLabelEntryEnabled = false
         yAxis.enabled = false
         
@@ -83,13 +80,11 @@ class LifeCircleController: UIViewController {
         
         let data = RadarChartData(dataSets: [dataSet, dataSetIdeal])
         
-        dataSet.lineWidth = 4
+        dataSet.lineWidth = 2
         dataSetIdeal.lineWidth = 2
         
-        let redColor = UIColor(red: 247/255, green: 67/255, blue: 115/255, alpha: 1)
-        let redFillColor = UIColor(red: 247/255, green: 67/255, blue: 115/255, alpha: 0.6)
-        dataSet.colors = [redColor]
-        dataSet.fillColor = redFillColor
+        dataSet.colors = [.red]
+        dataSet.fillColor = .redFill
         dataSet.drawFilledEnabled = true
         
         dataSetIdeal.colors = [.sky]
