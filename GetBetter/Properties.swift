@@ -99,9 +99,7 @@ struct Properties {
     }
     
     struct SphereMetrics {
-        struct Field {
-            static let metrics = "metrics"
-        }
+        static let sphereLevel = "sphere_level"
     }
     
     struct SetupSphere {

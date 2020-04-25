@@ -47,62 +47,60 @@ class PageViewController: UIViewController {
     func setupSaveBarButton() {
         let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSphereValues))
         navigationItem.rightBarButtonItem = saveBarButton
+    
+        // TODO потом выпилить
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "RANDOM", style: .plain, target: self, action: #selector(randomValues))
+    }
+    
+    // TODO потом выпилить
+    @objc func randomValues() {
+        let metricsArray = Sphere.allCases.reduce(into: [String: Double]()) {
+            $0[$1.rawValue ] = Double(Int.random(in: 3...10))
+        }
+        let sphereMetrics = SphereMetrics(values: metricsArray)
+        let _ = databaseService.saveSphereMetrics(sphereMetrics)
+        NotificationCenter.default.post(name: .showTabBarController, object: nil)
     }
     
     @objc func saveSphereValues() {
-        let viewControllersWithoutWelcome = viewControllers.filter {
-            $0.title != Properties.Welcome.title
-        }
-        let setupSphereValueViewControllers = viewControllersWithoutWelcome.map {
-            $0 as! SetupSphereValueViewController
-        }
+        
+        let setupSphereValueViewControllers = viewControllers
+            .filter { !($0 is WelcomeViewController) }
+            .map { $0 as! SetupSphereValueViewController }
         
         let metricsArray = setupSphereValueViewControllers.reduce(into: [String: Double]()) {
-            $0[$1.sphere?.rawValue ?? ""] = $1.sphereValue
+            $0[$1.sphere?.rawValue ?? "Optional sphere couldn't be unwrapped"] = $1.sphereValue
         }
         let sphereMetrics = SphereMetrics(values: metricsArray)
-        print(sphereMetrics)
         
-        if !sphereMetrics.isValid() {
+        if sphereMetrics.notValid() {
             Toast(text: "Введите все значения").show()
             return
         }
         if databaseService.saveSphereMetrics(sphereMetrics) {
             Toast(text: "Сохранено!").show()
-            NotificationCenter.default.post(name: .showTabBar, object: nil)
+            NotificationCenter.default.post(name: .showTabBarController, object: nil)
         }
     }
 }
 
 extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return nil }
-        
         let previousIndex = currentIndex - 1
-        
-        guard previousIndex >= 0 else {
-            return viewControllers.last
-        }
-        
-        guard viewControllers.count > previousIndex else {
-            return nil
-        }
+        guard previousIndex >= 0 else { return nil }
+        guard viewControllers.count > previousIndex else { return nil }
         
         return viewControllers[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return nil }
-        
         let nextIndex = currentIndex + 1
-        
-        guard viewControllers.count != nextIndex else {
-            return viewControllers.first
-        }
-        
-        guard viewControllers.count > nextIndex else {
-            return nil
-        }
+        guard viewControllers.count > nextIndex else { return nil }
         
         return viewControllers[nextIndex]
     }

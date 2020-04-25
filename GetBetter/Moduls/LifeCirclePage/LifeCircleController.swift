@@ -27,10 +27,10 @@ class LifeCircleController: UIViewController {
         DatabaseService().getSphereMetrics(completion: { [weak self] result in
             switch result {
             case .success(let sphereMetrics):
-                self?.sphereValues = sphereMetrics.values.map { $0.value }.sorted()
+                self?.sphereValues = sphereMetrics.values.map { $0.value }
                 self?.setupChartView()
-            case .failure(let error):
-                Toast(text: error.localizedDescription).show()
+            case .failure(_):
+                NotificationCenter.default.post(name: .showPageViewController, object: nil)
             }
         })
         

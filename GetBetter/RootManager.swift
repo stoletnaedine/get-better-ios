@@ -20,7 +20,8 @@ class RootManager {
         window?.makeKeyAndVisible()
         
         NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showTabBarController), name: .showTabBar, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showTabBarController), name: .showTabBarController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPageViewController), name: .showPageViewController, object: nil)
         
         setupNavigationBar()
         configToaster()
@@ -43,7 +44,7 @@ class RootManager {
         window?.rootViewController = tabBarController
     }
     
-    func showPageViewController() {
+    @objc func showPageViewController() {
         window?.rootViewController = UINavigationController(rootViewController: PageViewController())
     }
     

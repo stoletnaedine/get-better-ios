@@ -12,13 +12,12 @@ struct SphereMetrics {
     
     let values: [String : Double]
     
-    func isValid() -> Bool {
-        
+    func notValid() -> Bool {
         let valuesSpheres = values.map { $0.key }.sorted()
         let spheres = Sphere.allCases.map { $0.rawValue }.sorted()
         let sphereValues = values.map { $0.value }
         
-        return spheres == valuesSpheres
-            && !sphereValues.contains(Properties.SetupSphere.notValidValue)
+        return spheres != valuesSpheres
+            || sphereValues.contains(Properties.SetupSphere.notValidValue)
     }
 }

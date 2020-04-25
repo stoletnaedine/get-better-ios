@@ -73,28 +73,30 @@ class DatabaseService {
         guard let userId = user?.uid else { return false }
         
         ref
-            .child(Properties.SphereMetrics.Field.metrics)
+            .child(Properties.SphereMetrics.sphereLevel)
             .child(userId)
             .setValue(sphereMetrics.values)
         
         return true
     }
     
-    func getSphereMetrics(completion: @escaping (Result<SphereMetrics, Error>) -> Void) {
+    func getSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
         
         guard let userId = user?.uid else { return }
         
         ref
-            .child(Properties.SphereMetrics.Field.metrics)
+            .child(Properties.SphereMetrics.sphereLevel)
             .child(userId)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 if let value = snapshot.value as? NSDictionary {
                     let sphereMetrics = SphereMetrics(values: value as! [String : Double])
                     completion(.success(sphereMetrics))
+                } else {
+                    completion(.failure(AppError(errorCode: .notFound)))
                 }
             }) { error in
-                    completion(.failure(error))
+                    completion(.failure(AppError(error: error)!))
             }
     }
 }
