@@ -99,7 +99,7 @@ class EditProfileViewController: UIViewController {
         }
         
         navigationController?.popViewController(animated: true)
-        Toast(text: Properties.Profile.editSuccess, delay: 1, duration: 2).show()
+        Toast(text: Properties.Profile.editSuccess, delay: 0.5, duration: 2).show()
     }
     
     func customizeView() {
@@ -123,9 +123,9 @@ class EditProfileViewController: UIViewController {
                 emailTextField.placeholder = Properties.Profile.enterEmail
             }
         }
-        nameLabel.text = Properties.Profile.name
-        emailLabel.text = Properties.Profile.email
-        passwordLabel.text = Properties.Profile.password
+        nameLabel.text = Properties.Profile.enterName
+        emailLabel.text = Properties.Profile.enterEmail
+        passwordLabel.text = Properties.Profile.enterPassword
         passwordTextField.placeholder = Properties.Profile.enterPassword
         warningLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 14)
         warningLabel.text = Properties.Profile.warning

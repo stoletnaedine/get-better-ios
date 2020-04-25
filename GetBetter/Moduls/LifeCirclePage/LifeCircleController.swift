@@ -16,7 +16,9 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var detailsView: PieChartView!
     
-    var sphereValues = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+//    var sphereValues = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    var sphereValuesIdeal = [10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
+    var sphereMetrics: SphereMetrics?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,8 @@ class LifeCircleController: UIViewController {
         DatabaseService().getSphereMetrics(completion: { [weak self] result in
             switch result {
             case .success(let sphereMetrics):
-                self?.sphereValues = sphereMetrics.values.map { $0.value }
+//                self?.sphereValues = sphereMetrics.values.map { $0.value }
+                self?.sphereMetrics = sphereMetrics
                 self?.setupChartView()
             case .failure(_):
                 NotificationCenter.default.post(name: .showPageViewController, object: nil)
@@ -40,28 +43,47 @@ class LifeCircleController: UIViewController {
     
     func setupChartView() {
         
-        chartView.webLineWidth = 1.5
-        chartView.innerWebLineWidth = 1.5
-        chartView.webColor = .lightGray
-        chartView.innerWebColor = .lightGray
-        chartView.rotationEnabled = false
-        chartView.legend.enabled = false
+        chartView.webLineWidth = 1
+        chartView.innerWebLineWidth = 1
+        chartView.webColor = .lighterGray
+        chartView.innerWebColor = .lighterGray
+        chartView.rotationEnabled = true
+        chartView.legend.enabled = true
+        
+        let xAxis = chartView.xAxis
+        xAxis.axisMinimum = 0
+        xAxis.axisMaximum = 10
+        if let sphereMetrics = sphereMetrics {
+            xAxis.valueFormatter = XAxisFormatter(sphereMetrics)
+        }
+        
+        let yAxis = chartView.yAxis
+        yAxis.axisMinimum = 0
+        yAxis.axisMaximum = 10
+        yAxis.drawTopYLabelEntryEnabled = false
+        yAxis.enabled = false
         
         var dataEntries: [RadarChartDataEntry] = []
-        var dataEntries2: [RadarChartDataEntry] = []
+        var dataEntriesIdeal: [RadarChartDataEntry] = []
         
-        for i in 0..<sphereValues.count {
-            dataEntries.append(RadarChartDataEntry(value: sphereValues[i]))
+        for i in 0..<sphereValuesIdeal.count {
+            dataEntriesIdeal.append(RadarChartDataEntry(value: sphereValuesIdeal[i]))
         }
-        dataEntries2.append(RadarChartDataEntry(value: 0.0))
         
-        let dataSet = RadarChartDataSet(entries: dataEntries, label: "Текущий уровень")
-        let dataSet2 = RadarChartDataSet(entries: dataEntries2, label: "Текущий уровень")
+        if let sphereMetrics = sphereMetrics {
+            let userSphereValues = sphereMetrics.values.map { $0.value }
+            for i in 0..<sphereValuesIdeal.count {
+                dataEntries.append(RadarChartDataEntry(value: userSphereValues[i]))
+            }
+        }
         
-        let data = RadarChartData(dataSets: [dataSet, dataSet2])
+        let dataSet = RadarChartDataSet(entries: dataEntries, label: "Твой текущий уровень")
+        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: "К чему можно стремиться")
+        
+        let data = RadarChartData(dataSets: [dataSet, dataSetIdeal])
         
         dataSet.lineWidth = 4
-        dataSet2.lineWidth = 0
+        dataSetIdeal.lineWidth = 2
         
         let redColor = UIColor(red: 247/255, green: 67/255, blue: 115/255, alpha: 1)
         let redFillColor = UIColor(red: 247/255, green: 67/255, blue: 115/255, alpha: 0.6)
@@ -69,8 +91,10 @@ class LifeCircleController: UIViewController {
         dataSet.fillColor = redFillColor
         dataSet.drawFilledEnabled = true
         
+        dataSetIdeal.colors = [.sky]
+        dataSetIdeal.valueFormatter = DataSetValueFormatter()
+        
         chartView.data = data
-        chartView.webLineWidth = 0
     }
     
     func setupSegmentedControl() {
@@ -90,5 +114,31 @@ class LifeCircleController: UIViewController {
         default:
             print("default")
         }
+    }
+}
+
+class XAxisFormatter: IAxisValueFormatter {
+    
+    let sphereMetrics: SphereMetrics?
+    
+    init(_ sphereMetrics: SphereMetrics) {
+        self.sphereMetrics = sphereMetrics
+    }
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        if let sphereMetrics = sphereMetrics {
+            let titles = sphereMetrics.values.map { Sphere(rawValue: $0.key)?.name }
+            return titles[Int(value) % titles.count] ?? ""
+        }
+        return ""
+    }
+}
+
+class DataSetValueFormatter: IValueFormatter {
+    func stringForValue(_ value: Double,
+                        entry: ChartDataEntry,
+                        dataSetIndex: Int,
+                        viewPortHandler: ViewPortHandler?) -> String {
+        return ""
     }
 }
