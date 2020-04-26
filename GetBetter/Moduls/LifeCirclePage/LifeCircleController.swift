@@ -14,32 +14,49 @@ class LifeCircleController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
-    @IBOutlet weak var detailsView: HorizontalBarChartView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    var sphereValuesIdeal = [10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0]
+    var sphereValuesIdeal = Array(repeating: 10.0, count: 8)
     var sphereMetrics: SphereMetrics?
+    let sphereMetricsXibName = String(describing: SphereMetricsCollectionViewCell.self)
+    let reuseCellIdentifier = "SphereMetricsCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.TabBar.lifeCircleTitle
         setupSegmentedControl()
+        setupCollectionView()
         
         chartView.noDataText = Properties.LifeCircle.loading
         
-        setDataCount(count: 8, range: 10)
-        
-        DatabaseService().getSphereMetrics(completion: { [weak self] result in
-            switch result {
-            case .success(let sphereMetrics):
-                self?.sphereMetrics = sphereMetrics
-                self?.setupChartView()
-            case .failure(_):
-                NotificationCenter.default.post(name: .showPageViewController, object: nil)
-            }
-        })
+        DispatchQueue.global(qos: .userInteractive).async {
+            DatabaseService().getSphereMetrics(completion: { [weak self] result in
+                switch result {
+                case .success(let sphereMetrics):
+                    DispatchQueue.main.async {
+                        self?.sphereMetrics = sphereMetrics
+                        self?.setupChartView()
+                        self?.collectionView.reloadData()
+                    }
+                case .failure(_):
+                    NotificationCenter.default.post(name: .showPageViewController, object: nil)
+                }
+            })
+        }
         
         chartView.isHidden = false
-        detailsView.isHidden = true
+        collectionView.isHidden = true
+    }
+    
+    func setupCollectionView() {
+        collectionView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellWithReuseIdentifier: reuseCellIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let width = UIScreen.main.bounds.width
+        layout.itemSize = CGSize(width: width, height: 150)
+        collectionView.collectionViewLayout = layout
     }
     
     func setupChartView() {
@@ -91,35 +108,7 @@ class LifeCircleController: UIViewController {
         dataSetUser.fillColor = .redFill
         dataSetUser.drawFilledEnabled = true
         
-        
         chartView.data = RadarChartData(dataSets: [dataSetUser, dataSetIdeal])
-    }
-    
-    func setDataCount(count: Int, range: Double){
-        
-        let barWidth = 9.0
-        let spaceForBar =  10.0;
-        
-        var yVals = [BarChartDataEntry]()
-        
-        for i in 0..<count{
-            let mult = (range + 1)
-            let val = (Double)(arc4random_uniform(UInt32(mult)))
-            
-            yVals.append(BarChartDataEntry(x: Double(i) * spaceForBar, y: val))
-        }
-        
-        var set1 : BarChartDataSet!
-        set1 = BarChartDataSet(entries: yVals, label: "DataSet")
-        
-        var dataSets = [BarChartDataSet]()
-        dataSets.append(set1)
-        
-        let data = BarChartData(dataSets: dataSets)
-        
-        data.barWidth =  barWidth;
-        
-        detailsView.data = data
     }
     
     func setupSegmentedControl() {
@@ -132,10 +121,10 @@ class LifeCircleController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             chartView.isHidden = false
-            detailsView.isHidden = true
+            collectionView.isHidden = true
         case 1:
             chartView.isHidden = true
-            detailsView.isHidden = false
+            collectionView.isHidden = false
         default:
             print("default")
         }
@@ -156,10 +145,25 @@ class XAxisFormatter: IAxisValueFormatter {
 }
 
 class DataSetValueFormatter: IValueFormatter {
-    func stringForValue(_ value: Double,
-                        entry: ChartDataEntry,
-                        dataSetIndex: Int,
-                        viewPortHandler: ViewPortHandler?) -> String {
+    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
         return ""
+    }
+}
+
+extension LifeCircleController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sphereMetrics?.values.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseCellIdentifier, for: indexPath) as! SphereMetricsCollectionViewCell
+        
+        let sphereRawValue = sphereMetrics?.values.map { $0.key }[indexPath.row] ?? ""
+        guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
+        guard let sphereValue = sphereMetrics?.values[sphereRawValue] else { return cell }
+        
+        cell.fillCell(sphere: sphere.name, value: sphereValue, description: sphere.description)
+        return cell
     }
 }

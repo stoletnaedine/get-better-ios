@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -10,19 +10,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LifeCircleController" customModule="GetBetter" customModuleProvider="target">
             <connections>
-                <outlet property="chartView" destination="Xlg-ch-PBS" id="8Eu-L2-Y9T"/>
-                <outlet property="detailsView" destination="fxn-qj-OtY" id="sy9-zX-BJZ"/>
+                <outlet property="chartView" destination="fxn-qj-OtY" id="jI9-FH-eve"/>
+                <outlet property="collectionView" destination="5X3-V7-lnF" id="tcQ-1S-GNr"/>
                 <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="arR-df-p35">
-                    <rect key="frame" x="40" y="64" width="334" height="32"/>
+                    <rect key="frame" x="40" y="20" width="334" height="32"/>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -31,28 +31,34 @@
                         <action selector="segmentedActionDidSelected:" destination="-1" eventType="valueChanged" id="SFf-nL-h4V"/>
                     </connections>
                 </segmentedControl>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" customClass="HorizontalBarChartView" customModule="Charts">
-                    <rect key="frame" x="10" y="115" width="394" height="747"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" customClass="RadarChartView" customModule="Charts">
+                    <rect key="frame" x="10" y="71" width="394" height="665"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xlg-ch-PBS" customClass="RadarChartView" customModule="Charts">
-                    <rect key="frame" x="10" y="115" width="394" height="747"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5X3-V7-lnF">
+                    <rect key="frame" x="0.0" y="71" width="414" height="665"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OZE-vm-VcM">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Xlg-ch-PBS" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="4gg-XU-qjl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="arR-df-p35" secondAttribute="trailing" constant="40" id="4uJ-R1-dfY"/>
                 <constraint firstItem="fxn-qj-OtY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="5oE-WE-063"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Xlg-ch-PBS" secondAttribute="trailing" constant="10" id="9Po-lV-Swj"/>
-                <constraint firstItem="Xlg-ch-PBS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Anl-br-Zce"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fxn-qj-OtY" secondAttribute="trailing" constant="10" id="Cww-VD-MD1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="5X3-V7-lnF" secondAttribute="bottom" id="GO9-RM-lKl"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="KZ5-Cy-BE3"/>
                 <constraint firstItem="fxn-qj-OtY" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="KbC-ox-cql"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fxn-qj-OtY" secondAttribute="bottom" id="Ny7-ch-Sy6"/>
+                <constraint firstItem="5X3-V7-lnF" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="U94-N1-17S"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="YGd-5u-T7W"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Xlg-ch-PBS" secondAttribute="bottom" id="qKm-zv-Tzy"/>
+                <constraint firstItem="5X3-V7-lnF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Zca-lW-Rld"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5X3-V7-lnF" secondAttribute="trailing" id="hrX-xT-81j"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="149"/>
