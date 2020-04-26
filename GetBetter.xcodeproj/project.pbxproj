@@ -11,6 +11,8 @@
 		6E5684112451AB1F009FBE13 /* SetupSphereValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */; };
 		6E5A984D245588CE001F8008 /* SphereMetricsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A984B245588CE001F8008 /* SphereMetricsCollectionViewCell.swift */; };
 		6E5A984E245588CE001F8008 /* SphereMetricsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5A984C245588CE001F8008 /* SphereMetricsCollectionViewCell.xib */; };
+		6E5A98502455FDDE001F8008 /* AboutCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */; };
+		6E5A98522455FDF5001F8008 /* AboutCircleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */; };
 		6E9E01BB24545A690083499E /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BA24545A690083499E /* StorageService.swift */; };
 		6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BC245464360083499E /* SphereMetrics.swift */; };
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
@@ -73,6 +75,8 @@
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
 		6E5A984B245588CE001F8008 /* SphereMetricsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetricsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E5A984C245588CE001F8008 /* SphereMetricsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SphereMetricsCollectionViewCell.xib; sourceTree = "<group>"; };
+		6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutCircleViewController.swift; path = GetBetter/Moduls/AboutAppPage/AboutCircleViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutCircleViewController.xib; path = GetBetter/Moduls/AboutAppPage/AboutCircleViewController.xib; sourceTree = SOURCE_ROOT; };
 		6E9E01BA24545A690083499E /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		6E9E01BC245464360083499E /* SphereMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetrics.swift; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 		C3724EC923AFAC5800D49AD6 /* LifeCirclePage */ = {
 			isa = PBXGroup;
 			children = (
+				6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */,
+				6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */,
 				C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */,
 				C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */,
 				6E5A984A2455888E001F8008 /* SphereMetricsCell */,
@@ -487,6 +493,7 @@
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
 				C31FF97B2452CCA400642C7B /* AboutAppViewController.xib in Resources */,
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
+				6E5A98522455FDF5001F8008 /* AboutCircleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5A98502455FDDE001F8008 /* AboutCircleViewController.swift in Sources */,
 				C31FF9792452CC8D00642C7B /* AboutAppViewController.swift in Sources */,
 				C31FF9842453341900642C7B /* DatabaseService.swift in Sources */,
 				C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */,

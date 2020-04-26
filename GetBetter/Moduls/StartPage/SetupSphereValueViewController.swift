@@ -18,6 +18,18 @@ class SetupSphereValueViewController: UIViewController {
     var sphereValue: Double? = Properties.SetupSphere.notValidValue
     var sphere: Sphere?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    let valuesTitle = ["10 — идеально",
+                       "9 — прекрасно",
+                       "8 — отлично",
+                       "7 — хорошо",
+                       "6 — неплохо",
+                       "5 — средне",
+                       "4 — так себе",
+                       "3 — могло быть и лучше",
+                       "2 — плохо",
+                       "1 — ужасно",
+                       "0 — у меня нет этого"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +86,7 @@ extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDe
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let value = values[row]
-        return String(value)
+        return valuesTitle[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

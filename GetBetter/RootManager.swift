@@ -29,8 +29,7 @@ class RootManager {
         if Auth.auth().currentUser == nil {
             showAuthController()
         } else {
-//            showTabBarController()
-            showPageViewController()
+            showTabBarController()
         }
     }
     

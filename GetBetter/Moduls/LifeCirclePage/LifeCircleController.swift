@@ -26,6 +26,7 @@ class LifeCircleController: UIViewController {
         self.title = Properties.TabBar.lifeCircleTitle
         setupSegmentedControl()
         setupCollectionView()
+        setupBarButton()
         
         chartView.noDataText = Properties.LifeCircle.loading
         
@@ -109,6 +110,16 @@ class LifeCircleController: UIViewController {
         dataSetUser.drawFilledEnabled = true
         
         chartView.data = RadarChartData(dataSets: [dataSetUser, dataSetIdeal])
+    }
+    
+    func setupBarButton() {
+        let aboutCircleBarButton = UIBarButtonItem(title: Properties.AboutCircle.button, style: .plain, target: self, action: #selector(showAboutCircleViewController))
+        navigationItem.leftBarButtonItem = aboutCircleBarButton
+    }
+    
+    @objc func showAboutCircleViewController() {
+        let aboutCircleViewController = AboutCircleViewController()
+        navigationController?.pushViewController(aboutCircleViewController, animated: true)
     }
     
     func setupSegmentedControl() {
