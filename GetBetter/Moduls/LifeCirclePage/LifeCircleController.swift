@@ -56,7 +56,7 @@ class LifeCircleController: UIViewController {
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width
-        layout.itemSize = CGSize(width: width, height: 100)
+        layout.itemSize = CGSize(width: width, height: 80)
         collectionView.collectionViewLayout = layout
     }
     
@@ -96,7 +96,7 @@ class LifeCircleController: UIViewController {
         }
         
         let dataSetUser = RadarChartDataSet(entries: dataEntries, label: "Твой текущий уровень")
-        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: "К чему можно стремиться")
+        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: "К чему нужно стремиться")
         
         dataSetIdeal.lineWidth = 1
         dataSetIdeal.colors = [.sky]

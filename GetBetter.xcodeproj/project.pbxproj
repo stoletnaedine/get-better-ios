@@ -13,6 +13,8 @@
 		6E5A984E245588CE001F8008 /* SphereMetricsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5A984C245588CE001F8008 /* SphereMetricsCollectionViewCell.xib */; };
 		6E5A98502455FDDE001F8008 /* AboutCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */; };
 		6E5A98522455FDF5001F8008 /* AboutCircleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */; };
+		6E5A985424560438001F8008 /* AboutJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A985324560438001F8008 /* AboutJournalViewController.swift */; };
+		6E5A985624560447001F8008 /* AboutJournalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5A985524560447001F8008 /* AboutJournalViewController.xib */; };
 		6E9E01BB24545A690083499E /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BA24545A690083499E /* StorageService.swift */; };
 		6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BC245464360083499E /* SphereMetrics.swift */; };
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
@@ -77,6 +79,8 @@
 		6E5A984C245588CE001F8008 /* SphereMetricsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SphereMetricsCollectionViewCell.xib; sourceTree = "<group>"; };
 		6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutCircleViewController.swift; path = GetBetter/Moduls/AboutAppPage/AboutCircleViewController.swift; sourceTree = SOURCE_ROOT; };
 		6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutCircleViewController.xib; path = GetBetter/Moduls/AboutAppPage/AboutCircleViewController.xib; sourceTree = SOURCE_ROOT; };
+		6E5A985324560438001F8008 /* AboutJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutJournalViewController.swift; path = GetBetter/Moduls/LifeCirclePage/AboutJournalViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5A985524560447001F8008 /* AboutJournalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutJournalViewController.xib; path = GetBetter/Moduls/AboutAppPage/AboutJournalViewController.xib; sourceTree = SOURCE_ROOT; };
 		6E9E01BA24545A690083499E /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		6E9E01BC245464360083499E /* SphereMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetrics.swift; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
@@ -350,6 +354,8 @@
 		C3724ECA23AFAC5D00D49AD6 /* JournalPage */ = {
 			isa = PBXGroup;
 			children = (
+				6E5A985324560438001F8008 /* AboutJournalViewController.swift */,
+				6E5A985524560447001F8008 /* AboutJournalViewController.xib */,
 				C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */,
 				C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */,
 				C35750D12450256700BA7006 /* JournalCell */,
@@ -493,6 +499,7 @@
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
 				C31FF97B2452CCA400642C7B /* AboutAppViewController.xib in Resources */,
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
+				6E5A985624560447001F8008 /* AboutJournalViewController.xib in Resources */,
 				6E5A98522455FDF5001F8008 /* AboutCircleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,6 +569,7 @@
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,
 				C3F0141A23D080F8009D83AD /* ParsingService.swift in Sources */,
+				6E5A985424560438001F8008 /* AboutJournalViewController.swift in Sources */,
 				6E5A984D245588CE001F8008 /* SphereMetricsCollectionViewCell.swift in Sources */,
 				C328EE052447294100445704 /* RegisterViewController.swift in Sources */,
 				C32E419B242E4A8300A9C98B /* URLSessionService.swift in Sources */,

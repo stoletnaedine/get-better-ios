@@ -69,10 +69,9 @@ class ProfileViewController: UIViewController {
     func customizeView() {
         self.title = Properties.TabBar.profileTitle
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
-        avatarImageView.backgroundColor = .grayEvent
-        nameLabel.text = Properties.Profile.nameDefault
-        emailLabel.text = ""
-        avatarImageView.image = UIImage(named: "defaultAvatar")
+        avatarImageView.backgroundColor = .lightGray
+        nameLabel.text = ""
+        emailLabel.text = Properties.Profile.loading
         nameLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 26)
         signOutButton.setTitle(Properties.Profile.signOut, for: .normal)
         signOutButton.setTitleColor(.sky, for: .normal)

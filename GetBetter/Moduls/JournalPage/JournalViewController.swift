@@ -21,6 +21,7 @@ class JournalViewController: UIViewController {
         super.viewDidLoad()
         self.title = Properties.TabBar.journalTitle
         setupRefreshControl()
+        setupBarButton()
         registerCell()
         customizeBarButton()
         getPosts()
@@ -71,27 +72,50 @@ class JournalViewController: UIViewController {
         let postViewController = AddPostViewController()
         navigationController?.pushViewController(postViewController, animated: true)
     }
+    
+    func setupBarButton() {
+        let aboutJournalBarButton = UIBarButtonItem(title: Properties.AboutJournal.button, style: .plain, target: self, action: #selector(showAboutJournalViewController))
+        navigationItem.leftBarButtonItem = aboutJournalBarButton
+    }
+    
+    @objc func showAboutJournalViewController() {
+        let aboutJournalViewController = AboutJournalViewController()
+        navigationController?.pushViewController(aboutJournalViewController, animated: true)
+    }
 }
 
 extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.posts.count
+        if posts.isEmpty {
+            return 1
+        }
+        
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
+        
+        if posts.isEmpty {
+            cell.textLabel?.text = "Чтобы добавить событие, нажмите +"
+            return cell
+        }
+        
         let post = posts[indexPath.row]
         cell.textLabel?.text = post.text ?? ""
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if posts.isEmpty {
+            return
+        }
+        
         let postDetailViewController = PostDetailViewController()
         let post = self.posts[indexPath.row]
         postDetailViewController.post = post
-        
         navigationController?.pushViewController(postDetailViewController, animated: true)
     }
 }

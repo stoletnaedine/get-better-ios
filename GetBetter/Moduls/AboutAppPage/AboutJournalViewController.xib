@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a-deserted-beach" translatesAutoresizingMaskIntoConstraints="NO" id="v1f-1N-8J6">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="road" translatesAutoresizingMaskIntoConstraints="NO" id="v1f-1N-8J6">
                     <rect key="frame" x="0.0" y="645" width="414" height="217"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="v1f-1N-8J6" secondAttribute="height" multiplier="414:217" id="4HF-p5-52I"/>
@@ -56,6 +56,6 @@
         </view>
     </objects>
     <resources>
-        <image name="a-deserted-beach" width="1013" height="530"/>
+        <image name="road" width="1502" height="755"/>
     </resources>
 </document>
