@@ -55,7 +55,7 @@ class LifeCircleController: UIViewController {
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width
-        layout.itemSize = CGSize(width: width, height: 150)
+        layout.itemSize = CGSize(width: width, height: 100)
         collectionView.collectionViewLayout = layout
     }
     

@@ -57,8 +57,8 @@ class SetupSphereValueViewController: UIViewController {
         questionLabel.text = Properties.SetupSphere.question
         questionLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 16)
         sphereNameLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 50)
-        sphereDescriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 14)
-        valueForSphereLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 40)
+        sphereDescriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 16)
+        valueForSphereLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 60)
         valueForSphereLabel.text = "0"
     }
 }

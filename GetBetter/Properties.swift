@@ -19,7 +19,7 @@ struct Properties {
         static let loading = "Подождите, идет загрузка"
         
         struct SegmentedControl {
-            static let circle = "Круг"
+            static let circle = "Колесо"
             static let details = "Подробнее"
         }
     }
@@ -32,7 +32,7 @@ struct Properties {
     }
     
     struct TabBar {
-        static let lifeCircleTitle = "Круг жизни"
+        static let lifeCircleTitle = "Колесо жизни"
         static let journalTitle = "События"
         static let profileTitle = "Профиль"
     }
