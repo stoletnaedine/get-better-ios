@@ -84,6 +84,9 @@ class JournalViewController: UIViewController {
     
     @objc func addPost() {
         let postViewController = AddPostViewController()
+        postViewController.completion = { [weak self] in
+            self?.getPosts()
+        }
         navigationController?.pushViewController(postViewController, animated: true)
     }
     

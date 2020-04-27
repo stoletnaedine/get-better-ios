@@ -19,6 +19,8 @@ class AddPostViewController: UIViewController {
     var selectedSphere: Sphere?
     let databaseService = DatabaseService()
     
+    var completion: () -> () = {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Properties.Post.postTitle
@@ -67,6 +69,7 @@ class AddPostViewController: UIViewController {
             Toast(text: Properties.Post.postSavedSuccess).show()
         }
         
+        completion()
         navigationController?.popViewController(animated: true)
     }
     
