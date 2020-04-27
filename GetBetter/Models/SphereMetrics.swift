@@ -12,6 +12,10 @@ struct SphereMetrics {
     
     let values: [String : Double]
     
+    func sortedValues() -> [(key: String, value: Double)] {
+        return values.sorted(by: { $0.key > $1.key })
+    }
+    
     func notValid() -> Bool {
         let valuesSpheres = values.map { $0.key }.sorted()
         let spheres = Sphere.allCases.map { $0.rawValue }.sorted()

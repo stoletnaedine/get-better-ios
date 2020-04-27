@@ -98,8 +98,7 @@ class LifeCircleController: UIViewController {
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 9
         if let sphereMetrics = startSphereMetrics {
-            let titles = sphereMetrics.values
-                .sorted(by: { $0.key > $1.key })
+            let titles = sphereMetrics.sortedValues()
                 .map { Sphere(rawValue: $0.key)?.name ?? "" }
             xAxis.valueFormatter = XAxisFormatter(titles: titles)
         }
@@ -117,11 +116,9 @@ class LifeCircleController: UIViewController {
         if let startSphereMetrics = startSphereMetrics,
             let currentSphereMetrics = currentSphereMetrics {
             
-            dataEntriesStart = startSphereMetrics.values
-                .sorted(by: { $0.key > $1.key })
+            dataEntriesStart = startSphereMetrics.sortedValues()
                 .map { RadarChartDataEntry(value: $0.value) }
-            dataEntriesCurrent = currentSphereMetrics.values
-                .sorted(by: { $0.key > $1.key })
+            dataEntriesCurrent = currentSphereMetrics.sortedValues()
                 .map { RadarChartDataEntry(value: $0.value) }
         }
         
@@ -141,12 +138,13 @@ class LifeCircleController: UIViewController {
         dataSetStart.drawFilledEnabled = true
         dataSetStart.valueFormatter = DataSetValueFormatter()
         
-        dataSetCurrent.lineWidth = 3
+        dataSetCurrent.lineWidth = 1
         dataSetCurrent.colors = [.red]
         dataSetCurrent.fillColor = .redFill
         dataSetCurrent.drawFilledEnabled = true
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent, dataSetIdeal])
+        chartView.animate(xAxisDuration: 2, easingOption: .easeOutQuart)
     }
     
     func setupBarButton() {
@@ -205,11 +203,15 @@ extension LifeCircleController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseCellIdentifier, for: indexPath) as! SphereMetricsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseCellIdentifier,
+                                                      for: indexPath) as! SphereMetricsCollectionViewCell
         
-        let sphereRawValue = currentSphereMetrics?.values.map { $0.key }[indexPath.row] ?? ""
-        guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
+        let sphereRawValue = currentSphereMetrics?
+            .sortedValues()
+            .map { $0.key }[indexPath.row] ?? ""
+        
         guard let sphereValue = currentSphereMetrics?.values[sphereRawValue] else { return cell }
+        guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
         
         cell.fillCell(sphere: sphere.name, value: sphereValue, description: sphere.description)
         return cell

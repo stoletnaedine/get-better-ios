@@ -55,7 +55,7 @@ class PageViewController: UIViewController {
     // TODO потом выпилить
     @objc func randomValues() {
         let metricsArray = Sphere.allCases.reduce(into: [String: Double]()) {
-            $0[$1.rawValue ] = Double(Int.random(in: 3...10))
+            $0[$1.rawValue] = Double(Int.random(in: 3...10))
         }
         let sphereMetrics = SphereMetrics(values: metricsArray)
         let _ = databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Properties.SphereMetrics.start)
