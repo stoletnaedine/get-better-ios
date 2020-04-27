@@ -12,7 +12,12 @@ import Toaster
 class JournalViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
     var posts: [Post] = []
+    var uniqueDates: [String] = []
+    var postsBySections: [String : [Post]]?
+    
+    let SectionHeaderHeight: CGFloat = 35
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
     let databaseService = DatabaseService()
@@ -52,10 +57,28 @@ class JournalViewController: UIViewController {
                 
             case .failure(let error):
                 Toast(text: "\(Properties.Error.firebaseError)\(String(describing: error.name))").show()
-                print(error.localizedDescription)
                 
             case .success(let postArray):
-                self?.posts = postArray.sorted(by: { $0.timestamp ?? 0 > $1.timestamp ?? 0 })
+                let sortedPosts = postArray.sorted(by: {
+                    $0.timestamp ?? 0 > $1.timestamp ?? 0
+                })
+                self?.posts = sortedPosts
+                
+                let allDates = sortedPosts.map {
+                    Date.convertToDate(from: $0.timestamp ?? 0)
+                }
+                
+                let uniqueDates = Array(Set(allDates)).sorted(by: { $0 > $1 })
+                print("uniqueDates = \(uniqueDates)")
+                self?.uniqueDates = uniqueDates
+                
+                var postsBySections = [String : [Post]]()
+                
+                for date in uniqueDates {
+                    postsBySections[date] = sortedPosts.filter { Date.convertToDate(from: $0.timestamp ?? 0) == date }
+                }
+                self?.postsBySections = postsBySections
+                
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
@@ -86,12 +109,40 @@ class JournalViewController: UIViewController {
 
 extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return uniqueDates.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if posts.isEmpty {
             return 1
         }
         
-        return posts.count
+        let date = uniqueDates[section]
+        if let postsBySections = postsBySections,
+            let postsByDate = postsBySections[date] {
+            return postsByDate.count
+        }
+        
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return SectionHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))
+        view.backgroundColor = .sky
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = UIColor.black
+        
+        let date = uniqueDates[section]
+        label.text = date
+        
+        view.addSubview(label)
+        return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,8 +153,12 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        let post = posts[indexPath.row]
-        cell.textLabel?.text = post.text ?? ""
+        let date = uniqueDates[indexPath.section]
+        if let postsBySections = postsBySections,
+            let posts = postsBySections[date] {
+            let post = posts[indexPath.row]
+            cell.textLabel?.text = post.text ?? ""
+        }
         return cell
     }
     

@@ -26,7 +26,7 @@ class JournalTableViewCell: UITableViewCell {
         self.sphereLabel.text = post.sphere?.name ?? ""
         self.postLabel.text = post.text ?? ""
         if let timestamp = post.timestamp {
-            self.timestampLabel.text = Date.convertToDate(from: timestamp)
+            self.timestampLabel.text = Date.convertToFullDate(from: timestamp)
         }
         
     }

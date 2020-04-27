@@ -9,15 +9,24 @@
 import Foundation
 
 extension Date {
+    
     static var currentTimestamp: Int64 {
         return Int64(Date().timeIntervalSince1970)
+    }
+    
+    static func convertToFullDate(from timestamp: Int64) -> String {
+        let timestampDouble = Double(timestamp)
+        let date = Date(timeIntervalSince1970: timestampDouble)
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "dd/MM/YY HH:mm"
+        return dayTimePeriodFormatter.string(from: date as Date)
     }
     
     static func convertToDate(from timestamp: Int64) -> String {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd/MM/YY HH:mm"
+        dayTimePeriodFormatter.dateFormat = "dd/MM/YY"
         return dayTimePeriodFormatter.string(from: date as Date)
     }
 }
