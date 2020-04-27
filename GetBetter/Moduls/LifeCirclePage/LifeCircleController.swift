@@ -36,6 +36,11 @@ class LifeCircleController: UIViewController {
         collectionView.isHidden = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadAndShowMetrics()
+    }
+    
     func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(loadAndShowMetrics), for: .valueChanged)
         collectionView.addSubview(refreshControl)
@@ -144,7 +149,7 @@ class LifeCircleController: UIViewController {
         dataSetCurrent.drawFilledEnabled = true
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent, dataSetIdeal])
-        chartView.animate(xAxisDuration: 2, easingOption: .easeOutQuart)
+        chartView.animate(xAxisDuration: 0.5, easingOption: .easeInExpo)
     }
     
     func setupBarButton() {
