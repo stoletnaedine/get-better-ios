@@ -47,7 +47,10 @@ class LifeCircleController: UIViewController {
     }
     
     @objc func loadAndShowMetrics() {
-        DispatchQueue.global(qos: .userInteractive).async {
+        let dispatchGroup = DispatchGroup()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            dispatchGroup.enter()
             DatabaseService().getSphereMetrics(from: Properties.SphereMetrics.start, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
@@ -55,15 +58,17 @@ class LifeCircleController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self?.setupChartView()
-                        self?.collectionView.reloadData()
+                        dispatchGroup.leave()
                     }
                 case .failure(_):
                     NotificationCenter.default.post(name: .showPageViewController, object: nil)
+                    dispatchGroup.leave()
                 }
             })
         }
         
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global(qos: .userInitiated).async {
+            dispatchGroup.enter()
             DatabaseService().getSphereMetrics(from: Properties.SphereMetrics.current, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
@@ -71,14 +76,18 @@ class LifeCircleController: UIViewController {
                     
                     DispatchQueue.main.async {
                         self?.setupChartView()
-                        self?.collectionView.reloadData()
+                        dispatchGroup.leave()
                     }
                 case .failure(_):
                     NotificationCenter.default.post(name: .showPageViewController, object: nil)
+                    dispatchGroup.leave()
                 }
             })
         }
-        refreshControl.endRefreshing()
+        dispatchGroup.notify(queue: .main, execute: { [weak self] in
+            self?.refreshControl.endRefreshing()
+            self?.collectionView.reloadData()
+        })
     }
     
     func setupCollectionView() {
