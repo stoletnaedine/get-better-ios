@@ -69,7 +69,6 @@ class JournalViewController: UIViewController {
                 }
                 
                 let uniqueDates = Array(Set(allDates)).sorted(by: { $0 > $1 })
-                print("uniqueDates = \(uniqueDates)")
                 self?.uniqueDates = uniqueDates
                 
                 var postsBySections = [String : [Post]]()
@@ -169,8 +168,12 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let postDetailViewController = PostDetailViewController()
-        let post = self.posts[indexPath.row]
-        postDetailViewController.post = post
-        navigationController?.pushViewController(postDetailViewController, animated: true)
+        let date = uniqueDates[indexPath.section]
+        if let postsBySections = postsBySections,
+            let posts = postsBySections[date] {
+            let post = posts[indexPath.row]
+            postDetailViewController.post = post
+            navigationController?.pushViewController(postDetailViewController, animated: true)
+        }
     }
 }
