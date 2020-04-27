@@ -17,7 +17,8 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var sphereValuesIdeal = Array(repeating: 10.0, count: 8)
-    var sphereMetrics: SphereMetrics?
+    var startSphereMetrics: SphereMetrics?
+    var currentSphereMetrics: SphereMetrics?
     let sphereMetricsXibName = String(describing: SphereMetricsCollectionViewCell.self)
     let reuseCellIdentifier = "SphereMetricsCell"
     
@@ -30,12 +31,20 @@ class LifeCircleController: UIViewController {
         
         chartView.noDataText = Properties.LifeCircle.loading
         
+        loadAndShowMetrics()
+        
+        chartView.isHidden = false
+        collectionView.isHidden = true
+    }
+    
+    func loadAndShowMetrics() {
         DispatchQueue.global(qos: .userInteractive).async {
-            DatabaseService().getSphereMetrics(completion: { [weak self] result in
+            DatabaseService().getSphereMetrics(from: Properties.SphereMetrics.start, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
+                    self?.startSphereMetrics = sphereMetrics
+                    
                     DispatchQueue.main.async {
-                        self?.sphereMetrics = sphereMetrics
                         self?.setupChartView()
                         self?.collectionView.reloadData()
                     }
@@ -45,8 +54,21 @@ class LifeCircleController: UIViewController {
             })
         }
         
-        chartView.isHidden = false
-        collectionView.isHidden = true
+        DispatchQueue.global(qos: .userInteractive).async {
+            DatabaseService().getSphereMetrics(from: Properties.SphereMetrics.current, completion: { [weak self] result in
+                switch result {
+                case .success(let sphereMetrics):
+                    self?.currentSphereMetrics = sphereMetrics
+                    
+                    DispatchQueue.main.async {
+                        self?.setupChartView()
+                        self?.collectionView.reloadData()
+                    }
+                case .failure(_):
+                    NotificationCenter.default.post(name: .showPageViewController, object: nil)
+                }
+            })
+        }
     }
     
     func setupCollectionView() {
@@ -70,8 +92,10 @@ class LifeCircleController: UIViewController {
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 9
-        if let sphereMetrics = sphereMetrics {
-            let titles = sphereMetrics.values.map { Sphere(rawValue: $0.key)?.name ?? "" }
+        if let sphereMetrics = startSphereMetrics {
+            let titles = sphereMetrics.values
+                .sorted(by: { $0.key > $1.key })
+                .map { Sphere(rawValue: $0.key)?.name ?? "" }
             xAxis.valueFormatter = XAxisFormatter(titles: titles)
         }
         
@@ -81,22 +105,28 @@ class LifeCircleController: UIViewController {
         yAxis.drawTopYLabelEntryEnabled = false
         yAxis.enabled = false
         
-        var dataEntries: [RadarChartDataEntry] = []
+        var dataEntriesStart: [RadarChartDataEntry] = []
+        var dataEntriesCurrent: [RadarChartDataEntry] = []
         var dataEntriesIdeal: [RadarChartDataEntry] = []
         
         for i in 0..<sphereValuesIdeal.count {
             dataEntriesIdeal.append(RadarChartDataEntry(value: sphereValuesIdeal[i]))
         }
         
-        if let sphereMetrics = sphereMetrics {
-            let userSphereValues = sphereMetrics.values.map { $0.value }
-            for i in 0..<sphereValuesIdeal.count {
-                dataEntries.append(RadarChartDataEntry(value: userSphereValues[i]))
-            }
+        if let startSphereMetrics = startSphereMetrics,
+            let currentSphereMetrics = currentSphereMetrics {
+            
+            dataEntriesStart = startSphereMetrics.values
+                .sorted(by: { $0.key > $1.key })
+                .map { RadarChartDataEntry(value: $0.value) }
+            dataEntriesCurrent = currentSphereMetrics.values
+                .sorted(by: { $0.key > $1.key })
+                .map { RadarChartDataEntry(value: $0.value) }
         }
         
-        let dataSetUser = RadarChartDataSet(entries: dataEntries, label: "Твой текущий уровень")
-        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: "К чему нужно стремиться")
+        let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: Properties.LifeCircle.startLevelLegend)
+        let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Properties.LifeCircle.currentLevelLegend)
+        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: Properties.LifeCircle.idealLeveleLegend)
         
         dataSetIdeal.lineWidth = 1
         dataSetIdeal.colors = [.sky]
@@ -104,12 +134,17 @@ class LifeCircleController: UIViewController {
         dataSetIdeal.drawFilledEnabled = true
         dataSetIdeal.valueFormatter = DataSetValueFormatter()
         
-        dataSetUser.lineWidth = 2
-        dataSetUser.colors = [.red]
-        dataSetUser.fillColor = .redFill
-        dataSetUser.drawFilledEnabled = true
+        dataSetStart.lineWidth = 1
+        dataSetStart.colors = [.green]
+        dataSetStart.fillColor = .green
+        dataSetStart.drawFilledEnabled = true
         
-        chartView.data = RadarChartData(dataSets: [dataSetUser, dataSetIdeal])
+        dataSetCurrent.lineWidth = 3
+        dataSetCurrent.colors = [.red]
+        dataSetCurrent.fillColor = .redFill
+        dataSetCurrent.drawFilledEnabled = true
+        
+        chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent, dataSetIdeal])
     }
     
     func setupBarButton() {
@@ -164,15 +199,15 @@ class DataSetValueFormatter: IValueFormatter {
 extension LifeCircleController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sphereMetrics?.values.count ?? 0
+        return currentSphereMetrics?.values.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseCellIdentifier, for: indexPath) as! SphereMetricsCollectionViewCell
         
-        let sphereRawValue = sphereMetrics?.values.map { $0.key }[indexPath.row] ?? ""
+        let sphereRawValue = currentSphereMetrics?.values.map { $0.key }[indexPath.row] ?? ""
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
-        guard let sphereValue = sphereMetrics?.values[sphereRawValue] else { return cell }
+        guard let sphereValue = currentSphereMetrics?.values[sphereRawValue] else { return cell }
         
         cell.fillCell(sphere: sphere.name, value: sphereValue, description: sphere.description)
         return cell

@@ -17,6 +17,9 @@ struct Properties {
     
     struct LifeCircle {
         static let loading = "Подождите, идет загрузка"
+        static let startLevelLegend = "Начальный уровень"
+        static let currentLevelLegend = "Текущий уровень"
+        static let idealLeveleLegend = "К чему нужно стремиться"
         
         struct SegmentedControl {
             static let circle = "Колесо"
@@ -101,7 +104,8 @@ struct Properties {
     }
     
     struct SphereMetrics {
-        static let sphereLevel = "sphere_level"
+        static let start = "start_sphere_level"
+        static let current = "current_sphere_level"
     }
     
     struct SetupSphere {

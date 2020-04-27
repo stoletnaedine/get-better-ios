@@ -15,6 +15,9 @@ class DatabaseService {
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
     
+    var sphereMetrics: SphereMetrics?
+    let incrementValue = 0.1
+    
     func savePost(_ post: Post) -> Bool {
         
         guard let userId = user?.uid else { return false }
@@ -68,24 +71,24 @@ class DatabaseService {
         }
     }
     
-    func saveSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool {
+    func saveSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
         
         guard let userId = user?.uid else { return false }
         
         ref
-            .child(Properties.SphereMetrics.sphereLevel)
+            .child(pathToSave)
             .child(userId)
             .setValue(sphereMetrics.values)
         
         return true
     }
     
-    func getSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
+    func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
         
         guard let userId = user?.uid else { return }
         
         ref
-            .child(Properties.SphereMetrics.sphereLevel)
+            .child(path)
             .child(userId)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
@@ -98,5 +101,27 @@ class DatabaseService {
             }) { error in
                     completion(.failure(AppError(error: error)!))
             }
+    }
+    
+    func incrementSphereMetrics(for sphere: Sphere) {
+        
+        getSphereMetrics(from: Properties.SphereMetrics.current, completion: { [weak self] result in
+                            
+            switch result {
+            case .success(let sphereMetrics):
+                
+                var newValues = sphereMetrics.values
+                let currentValue = newValues[sphere.rawValue] ?? 0.0
+                newValues[sphere.rawValue] = currentValue + self!.incrementValue
+                
+                print("new values = \(newValues)")
+                
+                let newSphereMetrics = SphereMetrics(values: newValues)
+                print("self?.saveSphereMetrics(newSphereMetrics) = \(self?.saveSphereMetrics(newSphereMetrics, pathToSave: Properties.SphereMetrics.current))")
+                
+            case .failure(_):
+                return
+            }
+        })
     }
 }

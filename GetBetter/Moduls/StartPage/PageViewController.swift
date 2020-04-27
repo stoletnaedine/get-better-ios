@@ -58,7 +58,8 @@ class PageViewController: UIViewController {
             $0[$1.rawValue ] = Double(Int.random(in: 3...10))
         }
         let sphereMetrics = SphereMetrics(values: metricsArray)
-        let _ = databaseService.saveSphereMetrics(sphereMetrics)
+        let _ = databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Properties.SphereMetrics.start)
+        let _ = databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Properties.SphereMetrics.current)
         NotificationCenter.default.post(name: .showTabBarController, object: nil)
     }
     
@@ -77,7 +78,7 @@ class PageViewController: UIViewController {
             Toast(text: "Введите все значения").show()
             return
         }
-        if databaseService.saveSphereMetrics(sphereMetrics) {
+        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Properties.SphereMetrics.start) {
             Toast(text: "Сохранено!").show()
             NotificationCenter.default.post(name: .showTabBarController, object: nil)
         }
