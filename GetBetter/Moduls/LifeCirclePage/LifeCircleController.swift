@@ -15,8 +15,8 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var collectionView: UICollectionView!
+    let refreshControl = UIRefreshControl()
     
-    var sphereValuesIdeal = Array(repeating: 10.0, count: 8)
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
     let sphereMetricsXibName = String(describing: SphereMetricsCollectionViewCell.self)
@@ -27,17 +27,21 @@ class LifeCircleController: UIViewController {
         self.title = Properties.TabBar.lifeCircleTitle
         setupSegmentedControl()
         setupCollectionView()
+        setupRefreshControl()
         setupBarButton()
-        
         chartView.noDataText = Properties.LifeCircle.loading
-        
         loadAndShowMetrics()
         
         chartView.isHidden = false
         collectionView.isHidden = true
     }
     
-    func loadAndShowMetrics() {
+    func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(loadAndShowMetrics), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+    }
+    
+    @objc func loadAndShowMetrics() {
         DispatchQueue.global(qos: .userInteractive).async {
             DatabaseService().getSphereMetrics(from: Properties.SphereMetrics.start, completion: { [weak self] result in
                 switch result {
@@ -69,6 +73,7 @@ class LifeCircleController: UIViewController {
                 }
             })
         }
+        refreshControl.endRefreshing()
     }
     
     func setupCollectionView() {
@@ -107,11 +112,7 @@ class LifeCircleController: UIViewController {
         
         var dataEntriesStart: [RadarChartDataEntry] = []
         var dataEntriesCurrent: [RadarChartDataEntry] = []
-        var dataEntriesIdeal: [RadarChartDataEntry] = []
-        
-        for i in 0..<sphereValuesIdeal.count {
-            dataEntriesIdeal.append(RadarChartDataEntry(value: sphereValuesIdeal[i]))
-        }
+        let dataEntriesIdeal = Array(repeating: 10.0, count: 8).map { RadarChartDataEntry(value: $0) }
         
         if let startSphereMetrics = startSphereMetrics,
             let currentSphereMetrics = currentSphereMetrics {
@@ -138,6 +139,7 @@ class LifeCircleController: UIViewController {
         dataSetStart.colors = [.green]
         dataSetStart.fillColor = .green
         dataSetStart.drawFilledEnabled = true
+        dataSetStart.valueFormatter = DataSetValueFormatter()
         
         dataSetCurrent.lineWidth = 3
         dataSetCurrent.colors = [.red]

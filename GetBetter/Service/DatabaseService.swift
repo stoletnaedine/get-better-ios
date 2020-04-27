@@ -15,9 +15,6 @@ class DatabaseService {
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
     
-    var sphereMetrics: SphereMetrics?
-    let incrementValue = 0.1
-    
     func savePost(_ post: Post) -> Bool {
         
         guard let userId = user?.uid else { return false }
@@ -106,19 +103,20 @@ class DatabaseService {
     func incrementSphereMetrics(for sphere: Sphere) {
         
         getSphereMetrics(from: Properties.SphereMetrics.current, completion: { [weak self] result in
+            
+            let incrementValue = 0.1
+            let maxValue = 10.0
                             
             switch result {
             case .success(let sphereMetrics):
                 
                 var newValues = sphereMetrics.values
-                let currentValue = newValues[sphere.rawValue] ?? 0.0
-                newValues[sphere.rawValue] = currentValue + self!.incrementValue
-                
-                print("new values = \(newValues)")
-                
-                let newSphereMetrics = SphereMetrics(values: newValues)
-                print("self?.saveSphereMetrics(newSphereMetrics) = \(self?.saveSphereMetrics(newSphereMetrics, pathToSave: Properties.SphereMetrics.current))")
-                
+                if let currentValue = newValues[sphere.rawValue],
+                    currentValue < maxValue {
+                    newValues[sphere.rawValue] = currentValue + incrementValue
+                    let newSphereMetrics = SphereMetrics(values: newValues)
+                    _ = self?.saveSphereMetrics(newSphereMetrics, pathToSave: Properties.SphereMetrics.current)
+                }
             case .failure(_):
                 return
             }

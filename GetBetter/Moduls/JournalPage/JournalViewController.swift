@@ -55,7 +55,7 @@ class JournalViewController: UIViewController {
                 print(error.localizedDescription)
                 
             case .success(let postArray):
-                self?.posts = postArray
+                self?.posts = postArray.sorted(by: { $0.timestamp ?? 0 > $1.timestamp ?? 0 })
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
