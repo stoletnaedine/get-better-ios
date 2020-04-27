@@ -17,7 +17,7 @@ class JournalViewController: UIViewController {
     var uniqueDates: [String] = []
     var postsBySections: [String : [Post]]?
     
-    let SectionHeaderHeight: CGFloat = 35
+    let SectionHeaderHeight: CGFloat = 40
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
     let databaseService = DatabaseService()
@@ -135,8 +135,8 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))
         view.backgroundColor = .sky
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = UIColor.black
+        label.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 20)
+        label.textColor = UIColor.white
         
         let date = uniqueDates[section]
         label.text = date
