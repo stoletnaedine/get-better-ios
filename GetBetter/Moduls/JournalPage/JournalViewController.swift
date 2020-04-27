@@ -13,7 +13,7 @@ class JournalViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var posts: [Post] = []
+    var postsCount = 0
     var uniqueDates: [String] = []
     var postsBySections: [String : [Post]]?
     
@@ -34,7 +34,7 @@ class JournalViewController: UIViewController {
     
     func setupRefreshControl() {
         let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(getPosts), for: .valueChanged)
         self.tableView.refreshControl = refresh
     }
     
@@ -44,14 +44,7 @@ class JournalViewController: UIViewController {
         tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
-    @objc func refreshTableView() {
-        getPosts()
-        DispatchQueue.main.async {
-            self.tableView.refreshControl?.endRefreshing()
-        }
-    }
-    
-    func getPosts() {
+    @objc func getPosts() {
         databaseService.getPosts(completion: { [weak self] result in
             switch result {
                 
@@ -59,12 +52,10 @@ class JournalViewController: UIViewController {
                 Toast(text: "\(Properties.Error.firebaseError)\(String(describing: error.name))").show()
                 
             case .success(let postArray):
-                let sortedPosts = postArray.sorted(by: {
-                    $0.timestamp ?? 0 > $1.timestamp ?? 0
-                })
-                self?.posts = sortedPosts
                 
-                let allDates = sortedPosts.map {
+                self?.postsCount = postArray.count
+                
+                let allDates = postArray.map {
                     Date.convertToDate(from: $0.timestamp ?? 0)
                 }
                 
@@ -74,12 +65,13 @@ class JournalViewController: UIViewController {
                 var postsBySections = [String : [Post]]()
                 
                 for date in uniqueDates {
-                    postsBySections[date] = sortedPosts.filter { Date.convertToDate(from: $0.timestamp ?? 0) == date }
+                    postsBySections[date] = postArray.filter { Date.convertToDate(from: $0.timestamp ?? 0) == date }
                 }
                 self?.postsBySections = postsBySections
                 
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
+                    self?.tableView.refreshControl?.endRefreshing()
                 }
             }
         })
@@ -113,7 +105,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if posts.isEmpty {
+        if postsCount == 0 {
             return 1
         }
         
@@ -147,7 +139,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         
-        if posts.isEmpty {
+        if postsCount == 0 {
             cell.textLabel?.text = "Чтобы добавить событие, нажмите +"
             return cell
         }
@@ -163,7 +155,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if posts.isEmpty {
+        if postsCount == 0 {
             return
         }
         
