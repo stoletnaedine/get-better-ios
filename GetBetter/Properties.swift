@@ -38,6 +38,7 @@ struct Properties {
         static let lifeCircleTitle = "Колесо жизни"
         static let journalTitle = "События"
         static let profileTitle = "Профиль"
+        static let settings = "Настройки"
     }
     
     struct Auth {

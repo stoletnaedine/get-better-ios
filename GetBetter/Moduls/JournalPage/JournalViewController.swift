@@ -26,9 +26,8 @@ class JournalViewController: UIViewController {
         super.viewDidLoad()
         self.title = Properties.TabBar.journalTitle
         setupRefreshControl()
-        setupBarButton()
         registerCell()
-        customizeBarButton()
+        setupBarButton()
         getPosts()
     }
     
@@ -77,7 +76,7 @@ class JournalViewController: UIViewController {
         })
     }
     
-    func customizeBarButton() {
+    func setupBarButton() {
         let addPostBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPost))
         navigationItem.rightBarButtonItem = addPostBarButton
     }
@@ -88,16 +87,6 @@ class JournalViewController: UIViewController {
             self?.getPosts()
         }
         navigationController?.pushViewController(postViewController, animated: true)
-    }
-    
-    func setupBarButton() {
-        let aboutJournalBarButton = UIBarButtonItem(title: Properties.AboutJournal.button, style: .plain, target: self, action: #selector(showAboutJournalViewController))
-        navigationItem.leftBarButtonItem = aboutJournalBarButton
-    }
-    
-    @objc func showAboutJournalViewController() {
-        let aboutJournalViewController = AboutJournalViewController()
-        navigationController?.pushViewController(aboutJournalViewController, animated: true)
     }
 }
 

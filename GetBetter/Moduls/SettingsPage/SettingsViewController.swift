@@ -49,9 +49,9 @@ class SettingsViewController: UIViewController {
          tableItems = [
             TableSection.profile : [SettingsCell(title: nil, viewController: EditProfileViewController())],
             TableSection.articles : [
-                SettingsCell(title: "Круг Жизненного Баланса", viewController: AboutCircleViewController()),
+                SettingsCell(title: "Колесо Жизненного Баланса", viewController: AboutCircleViewController()),
                 SettingsCell(title: "Зачем нужны События?", viewController: AboutJournalViewController()),
-                SettingsCell(title: "Что такое GetBetter?", viewController: AboutAppViewController())]
+                SettingsCell(title: "Что такое GetBetter", viewController: AboutAppViewController())]
         ]
     }
     
@@ -101,11 +101,11 @@ enum TableSection: Int {
     var title: String {
         switch self {
         case .profile:
-            return "Профиль"
+            return "ПРОФИЛЬ"
         case .articles:
-            return "Статьи"
+            return "КАК ПОЛЬЗОВАТЬСЯ"
         case .settings:
-            return "Настройки"
+            return "НАСТРОЙКИ"
         }
     }
 }
@@ -161,9 +161,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .profile:
             let cell = tableView.dequeueReusableCell(withIdentifier: profileCellIdentifier) as! ProfileTableViewCell
             return cell.frame.height
-        case .articles:
-            return defaultHeight
-        case .settings:
+        case .articles, .settings:
             return defaultHeight
         }
     }

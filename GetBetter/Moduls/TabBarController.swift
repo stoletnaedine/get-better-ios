@@ -25,15 +25,11 @@ class TabBarController: UITabBarController {
         let journalViewController = UINavigationController(rootViewController: JournalViewController())
         journalViewController.tabBarItem.image = UIImage(named: "journal")
         journalViewController.tabBarItem.title = Properties.TabBar.journalTitle
-        
-//        let profileViewController = UINavigationController(rootViewController: ProfileViewController())
-//        profileViewController.tabBarItem.image = UIImage(named: "profile")
-//        profileViewController.tabBarItem.title = Properties.TabBar.profileTitle
 
-        let profileViewController = UINavigationController(rootViewController: SettingsViewController())
-        profileViewController.tabBarItem.image = UIImage(named: "profile")
-        profileViewController.tabBarItem.title = Properties.TabBar.profileTitle
+        let settingsViewController = UINavigationController(rootViewController: SettingsViewController())
+        settingsViewController.tabBarItem.image = UIImage(named: "settings")
+        settingsViewController.tabBarItem.title = Properties.TabBar.settings
         
-        viewControllers = [circleViewController, journalViewController, profileViewController]
+        viewControllers = [circleViewController, journalViewController, settingsViewController]
     }
 }

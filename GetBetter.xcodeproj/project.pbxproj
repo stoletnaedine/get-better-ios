@@ -79,10 +79,10 @@
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
 		6E5A984B245588CE001F8008 /* SphereMetricsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetricsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E5A984C245588CE001F8008 /* SphereMetricsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SphereMetricsCollectionViewCell.xib; sourceTree = "<group>"; };
-		6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutCircleViewController.swift; path = GetBetter/Moduls/AboutAppPage/AboutCircleViewController.swift; sourceTree = SOURCE_ROOT; };
-		6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutCircleViewController.xib; path = GetBetter/Moduls/AboutAppPage/AboutCircleViewController.xib; sourceTree = SOURCE_ROOT; };
-		6E5A985324560438001F8008 /* AboutJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutJournalViewController.swift; path = GetBetter/Moduls/LifeCirclePage/AboutJournalViewController.swift; sourceTree = SOURCE_ROOT; };
-		6E5A985524560447001F8008 /* AboutJournalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutJournalViewController.xib; path = GetBetter/Moduls/AboutAppPage/AboutJournalViewController.xib; sourceTree = SOURCE_ROOT; };
+		6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutCircleViewController.swift; path = GetBetter/Moduls/SettingsPage/AboutCirclePage/AboutCircleViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutCircleViewController.xib; path = GetBetter/Moduls/SettingsPage/AboutCirclePage/AboutCircleViewController.xib; sourceTree = SOURCE_ROOT; };
+		6E5A985324560438001F8008 /* AboutJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutJournalViewController.swift; path = GetBetter/Moduls/SettingsPage/AboutJournalPage/AboutJournalViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5A985524560447001F8008 /* AboutJournalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutJournalViewController.xib; path = GetBetter/Moduls/SettingsPage/AboutJournalPage/AboutJournalViewController.xib; sourceTree = SOURCE_ROOT; };
 		6E9E01BA24545A690083499E /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		6E9E01BC245464360083499E /* SphereMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetrics.swift; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
@@ -252,8 +252,6 @@
 		C31FF9772452CBBE00642C7B /* AboutAppPage */ = {
 			isa = PBXGroup;
 			children = (
-				C31FF9782452CC8D00642C7B /* AboutAppViewController.swift */,
-				C31FF97A2452CCA400642C7B /* AboutAppViewController.xib */,
 			);
 			path = AboutAppPage;
 			sourceTree = "<group>";
@@ -309,16 +307,16 @@
 		C3724EC423AFABD000D49AD6 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
-				C39A321C2457109A005D2EDF /* SettingsPage */,
 				C36D8453239BF322004FEFD5 /* TabBarController.swift */,
+				C39A321C2457109A005D2EDF /* SettingsPage */,
 				C33AD1D9245191A500A08006 /* StartPage */,
 				C39423D524404E6F0060CF50 /* AuthPage */,
 				C328EE022447291200445704 /* RegisterPage */,
 				C3724EC923AFAC5800D49AD6 /* LifeCirclePage */,
+				C31FF9772452CBBE00642C7B /* AboutAppPage */,
 				C3724ECA23AFAC5D00D49AD6 /* JournalPage */,
 				6E5AFCD32450C06800F283C4 /* AddPostPage */,
 				C3724EC723AFAC2400D49AD6 /* PostDetailPage */,
-				C31FF9772452CBBE00642C7B /* AboutAppPage */,
 			);
 			path = Moduls;
 			sourceTree = "<group>";
@@ -344,8 +342,6 @@
 		C3724EC923AFAC5800D49AD6 /* LifeCirclePage */ = {
 			isa = PBXGroup;
 			children = (
-				6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */,
-				6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */,
 				C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */,
 				C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */,
 				6E5A984A2455888E001F8008 /* SphereMetricsCell */,
@@ -356,8 +352,6 @@
 		C3724ECA23AFAC5D00D49AD6 /* JournalPage */ = {
 			isa = PBXGroup;
 			children = (
-				6E5A985324560438001F8008 /* AboutJournalViewController.swift */,
-				6E5A985524560447001F8008 /* AboutJournalViewController.xib */,
 				C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */,
 				C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */,
 				C35750D12450256700BA7006 /* JournalCell */,
@@ -388,9 +382,12 @@
 		C39A321C2457109A005D2EDF /* SettingsPage */ = {
 			isa = PBXGroup;
 			children = (
-				C3A10078245859CB00E2D579 /* Profile */,
 				C39A321D245710BC005D2EDF /* SettingsViewController.swift */,
 				C39A321E245710BC005D2EDF /* SettingsViewController.xib */,
+				C3A1007E24585EFC00E2D579 /* AboutAppPage */,
+				C3A10078245859CB00E2D579 /* Profile */,
+				C3A1007A24585E4400E2D579 /* AboutJournalPage */,
+				C3A1007F24585F2B00E2D579 /* AboutCirclePage */,
 			);
 			path = SettingsPage;
 			sourceTree = "<group>";
@@ -402,6 +399,33 @@
 				C3724EC823AFAC4E00D49AD6 /* ProfilePage */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		C3A1007A24585E4400E2D579 /* AboutJournalPage */ = {
+			isa = PBXGroup;
+			children = (
+				6E5A985324560438001F8008 /* AboutJournalViewController.swift */,
+				6E5A985524560447001F8008 /* AboutJournalViewController.xib */,
+			);
+			path = AboutJournalPage;
+			sourceTree = "<group>";
+		};
+		C3A1007E24585EFC00E2D579 /* AboutAppPage */ = {
+			isa = PBXGroup;
+			children = (
+				C31FF9782452CC8D00642C7B /* AboutAppViewController.swift */,
+				C31FF97A2452CCA400642C7B /* AboutAppViewController.xib */,
+			);
+			path = AboutAppPage;
+			sourceTree = "<group>";
+		};
+		C3A1007F24585F2B00E2D579 /* AboutCirclePage */ = {
+			isa = PBXGroup;
+			children = (
+				6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */,
+				6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */,
+			);
+			path = AboutCirclePage;
 			sourceTree = "<group>";
 		};
 		C3C66AEF24582B2900D3964D /* ProfileCell */ = {
