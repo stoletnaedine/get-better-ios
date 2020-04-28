@@ -57,6 +57,8 @@
 		C39D4698243261F9002BD1D7 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D4697243261F9002BD1D7 /* ResponseData.swift */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
 		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
+		C3C66AF224582B5000D3964D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */; };
+		C3C66AF324582B5000D3964D /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */; };
 		C3C873CE2435F47700931E9B /* LocalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873CD2435F47700931E9B /* LocalDataService.swift */; };
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
 		C3D2D2442432139A005C8577 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D2D2432432139A005C8577 /* Api.swift */; };
@@ -129,6 +131,8 @@
 		C39D4697243261F9002BD1D7 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		C3C873CD2435F47700931E9B /* LocalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataService.swift; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		C3D2D2432432139A005C8577 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
@@ -318,7 +322,6 @@
 				C3724ECA23AFAC5D00D49AD6 /* JournalPage */,
 				6E5AFCD32450C06800F283C4 /* AddPostPage */,
 				C3724EC723AFAC2400D49AD6 /* PostDetailPage */,
-				C3724EC823AFAC4E00D49AD6 /* ProfilePage */,
 				C31FF9772452CBBE00642C7B /* AboutAppPage */,
 			);
 			path = Moduls;
@@ -393,8 +396,19 @@
 			children = (
 				C39A321D245710BC005D2EDF /* SettingsViewController.swift */,
 				C39A321E245710BC005D2EDF /* SettingsViewController.xib */,
+				C3C66AEF24582B2900D3964D /* Cell */,
+				C3724EC823AFAC4E00D49AD6 /* ProfilePage */,
 			);
 			path = SettingsPage;
+			sourceTree = "<group>";
+		};
+		C3C66AEF24582B2900D3964D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */,
+				C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		C3C873CF2436032400931E9B /* Error */ = {
@@ -498,6 +512,7 @@
 				9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */,
 				C328EE062447294100445704 /* RegisterViewController.xib in Resources */,
 				6E5684112451AB1F009FBE13 /* SetupSphereValueViewController.xib in Resources */,
+				C3C66AF324582B5000D3964D /* ProfileTableViewCell.xib in Resources */,
 				9277D38F238C725300B3AECA /* Assets.xcassets in Resources */,
 				C32D4CDE23D0EF9700AD9863 /* SFUIText-Medium.otf in Resources */,
 				C36D8451239BDD9B004FEFD5 /* SFUIText-Regular.otf in Resources */,
@@ -583,6 +598,7 @@
 				C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */,
 				C3D2D2442432139A005C8577 /* Api.swift in Sources */,
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
+				C3C66AF224582B5000D3964D /* ProfileTableViewCell.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,
 				C3F0141A23D080F8009D83AD /* ParsingService.swift in Sources */,
 				6E5A985424560438001F8008 /* AboutJournalViewController.swift in Sources */,

@@ -13,7 +13,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViewControllers()
-        selectedIndex = 0
+        selectedIndex = 2
         UITabBar.appearance().tintColor = .black
     }
     
@@ -26,7 +26,11 @@ class TabBarController: UITabBarController {
         journalViewController.tabBarItem.image = UIImage(named: "journal")
         journalViewController.tabBarItem.title = Properties.TabBar.journalTitle
         
-        let profileViewController = UINavigationController(rootViewController: ProfileViewController())
+//        let profileViewController = UINavigationController(rootViewController: ProfileViewController())
+//        profileViewController.tabBarItem.image = UIImage(named: "profile")
+//        profileViewController.tabBarItem.title = Properties.TabBar.profileTitle
+
+        let profileViewController = UINavigationController(rootViewController: SettingsViewController())
         profileViewController.tabBarItem.image = UIImage(named: "profile")
         profileViewController.tabBarItem.title = Properties.TabBar.profileTitle
         
