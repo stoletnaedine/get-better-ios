@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseStorage
 
 class SettingsViewController: UIViewController {
 
@@ -18,6 +17,7 @@ class SettingsViewController: UIViewController {
     
     let SectionHeaderHeight: CGFloat = 35
     var tableItems: [TableSection : [UIViewController]]?
+    let refreshControl = UIRefreshControl()
     
     let profileCellIdentifier = "ProfileCell"
     let profileNibName = "ProfileTableViewCell"
@@ -26,6 +26,9 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         title = "Настройки"
         fillTableItems()
+        customizeBarButton()
+        setupRefreshControl()
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
@@ -33,10 +36,12 @@ class SettingsViewController: UIViewController {
         loadProfileAndReloadTableView()
     }
     
-    func loadProfileAndReloadTableView() {
+    @objc func loadProfileAndReloadTableView() {
         loadProfileInfo(completion: { [weak self] name, email, avatar in
-            self?.profile = Profile(avatar: avatar, name: name, email: email)
+            let profile = Profile(avatar: avatar, name: name, email: email)
+            self?.profile = profile
             self?.tableView.reloadData()
+            self?.refreshControl.endRefreshing()
         })
     }
     
@@ -72,6 +77,19 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(loadProfileAndReloadTableView), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    func customizeBarButton() {
+        let signOutBarButton = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(signOut))
+        navigationItem.rightBarButtonItem = signOutBarButton
+    }
+    
+    @objc func signOut() {
+        NotificationCenter.default.post(name: .logout, object: nil)
+    }
 }
 
 enum TableSection: Int {
@@ -148,12 +166,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let tableSection = TableSection(rawValue: indexPath.section) else { return }
         guard let viewControllers = items[tableSection] else { return }
         let viewController = viewControllers[indexPath.row]
-        if tableSection == .profile {
-            let editProfileViewController = viewController as! EditProfileViewController
-            editProfileViewController.completion = { [weak self] in
-                self?.loadProfileAndReloadTableView()
-            }
-        }
+//        if tableSection == .profile {
+//            let editProfileViewController = viewController as! EditProfileViewController
+//            editProfileViewController.completion = { [weak self] in
+//                self?.loadProfileAndReloadTableView()
+//            }
+//        }
         navigationController?.pushViewController(viewController, animated: true)
     }
     
