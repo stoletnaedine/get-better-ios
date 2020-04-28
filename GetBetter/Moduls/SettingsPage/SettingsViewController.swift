@@ -30,6 +30,10 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
         
+        loadProfileAndReloadTableView()
+    }
+    
+    func loadProfileAndReloadTableView() {
         loadProfileInfo(completion: { [weak self] name, email, avatar in
             self?.profile = Profile(avatar: avatar, name: name, email: email)
             self?.tableView.reloadData()
@@ -72,6 +76,17 @@ class SettingsViewController: UIViewController {
 
 enum TableSection: Int {
     case profile = 0, articles, settings
+    
+    var title: String {
+        switch self {
+        case .profile:
+            return "Профиль"
+        case .articles:
+            return "Статьи"
+        case .settings:
+            return "Настройки"
+        }
+    }
 }
 
 struct Profile {
@@ -132,12 +147,23 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let items = tableItems else { return }
         guard let tableSection = TableSection(rawValue: indexPath.section) else { return }
         guard let viewControllers = items[tableSection] else { return }
-        let vc = viewControllers[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        let viewController = viewControllers[indexPath.row]
+        if tableSection == .profile {
+            let editProfileViewController = viewController as! EditProfileViewController
+            editProfileViewController.completion = { [weak self] in
+                self?.loadProfileAndReloadTableView()
+            }
+        }
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return SectionHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let tableSection = TableSection(rawValue: section) else { return "" }
+        return tableSection.title
     }
     
 }
