@@ -20,7 +20,7 @@ class JournalViewController: UIViewController {
     let SectionHeaderHeight: CGFloat = 40
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
-    let databaseService = DatabaseService()
+    let databaseService = FirebaseDatabaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

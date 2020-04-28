@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import FirebaseStorage
 
-class StorageService {
+class FirebaseStorageService {
     
     func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
         

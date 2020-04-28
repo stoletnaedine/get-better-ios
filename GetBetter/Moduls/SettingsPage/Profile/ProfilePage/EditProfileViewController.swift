@@ -26,7 +26,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var warningLabel: UILabel!
     
     let user = Auth.auth().currentUser
-    let storageService = StorageService()
+    let storageService = FirebaseStorageService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

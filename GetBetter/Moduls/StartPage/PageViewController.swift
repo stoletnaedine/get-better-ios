@@ -12,7 +12,7 @@ import Toaster
 class PageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
-    let databaseService = DatabaseService()
+    let databaseService = FirebaseDatabaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

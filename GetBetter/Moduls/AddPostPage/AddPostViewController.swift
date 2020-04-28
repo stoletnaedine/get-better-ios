@@ -17,7 +17,7 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var selectedSphereLabel: UILabel!
     
     var selectedSphere: Sphere?
-    let databaseService = DatabaseService()
+    let databaseService = FirebaseDatabaseService()
     
     var completion: () -> () = {}
     

@@ -10,7 +10,7 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 
-class DatabaseService {
+class FirebaseDatabaseService {
     
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
