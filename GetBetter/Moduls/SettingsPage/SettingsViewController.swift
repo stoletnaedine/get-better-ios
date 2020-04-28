@@ -15,8 +15,8 @@ class SettingsViewController: UIViewController {
     
     var profile: Profile?
     
-    let SectionHeaderHeight: CGFloat = 35
-    var tableItems: [TableSection : [UIViewController]]?
+    let SectionHeaderHeight: CGFloat = 45
+    var tableItems: [TableSection : [SettingsCell]]?
     let refreshControl = UIRefreshControl()
     
     let profileCellIdentifier = "ProfileCell"
@@ -47,8 +47,11 @@ class SettingsViewController: UIViewController {
     
     func fillTableItems() {
          tableItems = [
-            TableSection.profile : [EditProfileViewController()],
-            TableSection.articles : [AboutCircleViewController(), AboutJournalViewController(), AboutAppViewController()]
+            TableSection.profile : [SettingsCell(title: nil, viewController: EditProfileViewController())],
+            TableSection.articles : [
+                SettingsCell(title: "Круг Жизненного Баланса", viewController: AboutCircleViewController()),
+                SettingsCell(title: "Зачем нужны События?", viewController: AboutJournalViewController()),
+                SettingsCell(title: "Что такое GetBetter?", viewController: AboutAppViewController())]
         ]
     }
     
@@ -113,6 +116,11 @@ struct Profile {
     let email: String?
 }
 
+struct SettingsCell {
+    let title: String?
+    let viewController: UIViewController?
+}
+
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -139,8 +147,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .articles:
             let cell = UITableViewCell()
-            let viewController = items[tableSection]?[indexPath.row]
-            cell.textLabel?.text = "статья"
+            cell.textLabel?.text = items[tableSection]?[indexPath.row].title
             return cell
         case .settings:
             return UITableViewCell()
@@ -165,13 +172,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let items = tableItems else { return }
         guard let tableSection = TableSection(rawValue: indexPath.section) else { return }
         guard let viewControllers = items[tableSection] else { return }
-        let viewController = viewControllers[indexPath.row]
-//        if tableSection == .profile {
-//            let editProfileViewController = viewController as! EditProfileViewController
-//            editProfileViewController.completion = { [weak self] in
-//                self?.loadProfileAndReloadTableView()
-//            }
-//        }
+        guard let viewController = viewControllers[indexPath.row].viewController else { return }
         navigationController?.pushViewController(viewController, animated: true)
     }
     

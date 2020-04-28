@@ -25,8 +25,6 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var warningLabel: UILabel!
     
-    var completion: () -> () = {}
-    
     let user = Auth.auth().currentUser
     let storageService = StorageService()
     
@@ -100,7 +98,6 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        completion()
         navigationController?.popViewController(animated: true)
         Toast(text: Properties.Profile.editSuccess, delay: 0.5, duration: 1).show()
     }
