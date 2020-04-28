@@ -249,13 +249,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C31FF9772452CBBE00642C7B /* AboutAppPage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AboutAppPage;
-			sourceTree = "<group>";
-		};
 		C3272AB8241D73190020F1A5 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,7 +306,6 @@
 				C39423D524404E6F0060CF50 /* AuthPage */,
 				C328EE022447291200445704 /* RegisterPage */,
 				C3724EC923AFAC5800D49AD6 /* LifeCirclePage */,
-				C31FF9772452CBBE00642C7B /* AboutAppPage */,
 				C3724ECA23AFAC5D00D49AD6 /* JournalPage */,
 				6E5AFCD32450C06800F283C4 /* AddPostPage */,
 				C3724EC723AFAC2400D49AD6 /* PostDetailPage */,
@@ -384,8 +376,8 @@
 			children = (
 				C39A321D245710BC005D2EDF /* SettingsViewController.swift */,
 				C39A321E245710BC005D2EDF /* SettingsViewController.xib */,
-				C3A1007E24585EFC00E2D579 /* AboutAppPage */,
 				C3A10078245859CB00E2D579 /* Profile */,
+				C3A1007E24585EFC00E2D579 /* AboutAppPage */,
 				C3A1007A24585E4400E2D579 /* AboutJournalPage */,
 				C3A1007F24585F2B00E2D579 /* AboutCirclePage */,
 			);
