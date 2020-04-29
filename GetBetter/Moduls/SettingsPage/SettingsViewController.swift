@@ -110,17 +110,6 @@ enum TableSection: Int {
     }
 }
 
-struct Profile {
-    let avatar: UIImage?
-    let name: String?
-    let email: String?
-}
-
-struct SettingsCell {
-    let title: String?
-    let viewController: UIViewController?
-}
-
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

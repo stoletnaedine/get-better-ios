@@ -28,7 +28,7 @@ class TabBarController: UITabBarController {
 
         let settingsViewController = UINavigationController(rootViewController: SettingsViewController())
         settingsViewController.tabBarItem.image = UIImage(named: "settings")
-        settingsViewController.tabBarItem.title = Properties.TabBar.settings
+        settingsViewController.tabBarItem.title = Properties.TabBar.settingsTitle
         
         viewControllers = [circleViewController, journalViewController, settingsViewController]
     }
