@@ -23,7 +23,7 @@ class AddPostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Properties.Post.postTitle
+        self.title = Constants.Post.postTitle
         self.hideKeyboardWhenTappedAround()
         registerTapForSelectedSphereLabel()
         customizeView()
@@ -58,7 +58,7 @@ class AddPostViewController: UIViewController {
         guard let text = postTextView.text,
             !text.isEmpty,
             let sphere = selectedSphere else {
-                Toast(text: Properties.Post.emptyFieldsWarning).show()
+                Toast(text: Constants.Post.emptyFieldsWarning).show()
                 return
         }
         
@@ -66,7 +66,7 @@ class AddPostViewController: UIViewController {
         
         if databaseService.savePost(post) {
             databaseService.incrementSphereMetrics(for: sphere)
-            Toast(text: Properties.Post.postSavedSuccess).show()
+            Toast(text: Constants.Post.postSavedSuccess).show()
         }
         
         completion()
@@ -74,13 +74,13 @@ class AddPostViewController: UIViewController {
     }
     
     func customizeView() {
-        addPostLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
-        addPostLabel.text = Properties.Post.addPost
+        addPostLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
+        addPostLabel.text = Constants.Post.addPost
         postTextView.backgroundColor = .lighterGray
-        sphereLabel.text = Properties.Post.sphere
-        sphereLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
-        selectedSphereLabel.text = Properties.Post.sphereDefault
-        selectedSphereLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 30)
+        sphereLabel.text = Constants.Post.sphere
+        sphereLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
+        selectedSphereLabel.text = Constants.Post.sphereDefault
+        selectedSphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 30)
     }
 }
 

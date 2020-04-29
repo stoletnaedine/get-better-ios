@@ -21,10 +21,10 @@ class WelcomeViewController: UIViewController {
 
     func setupView() {
         view.backgroundColor = .lightGray
-        titleLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 25)
-        titleLabel.text = Properties.Welcome.title
-        descriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
-        descriptionLabel.text = Properties.Welcome.description
+        titleLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 25)
+        titleLabel.text = Constants.Welcome.title
+        descriptionLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        descriptionLabel.text = Constants.Welcome.description
     }
 
 }

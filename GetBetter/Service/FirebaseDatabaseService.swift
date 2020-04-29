@@ -20,13 +20,13 @@ class FirebaseDatabaseService {
         guard let userId = user?.uid else { return false }
         
         ref
-            .child(Properties.Post.Field.post)
+            .child(Constants.Post.Field.post)
             .child(userId)
             .childByAutoId()
             .setValue([
-                Properties.Post.Field.text: post.text ?? "" as Any,
-                Properties.Post.Field.sphere: post.sphere?.rawValue ?? "",
-                Properties.Post.Field.timestamp: post.timestamp ?? ""
+                Constants.Post.Field.text: post.text ?? "" as Any,
+                Constants.Post.Field.sphere: post.sphere?.rawValue ?? "",
+                Constants.Post.Field.timestamp: post.timestamp ?? ""
             ])
         
         return true
@@ -38,7 +38,7 @@ class FirebaseDatabaseService {
         guard let user = user else { return }
         
         ref
-            .child(Properties.Post.Field.post)
+            .child(Constants.Post.Field.post)
             .child(user.uid)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
@@ -51,13 +51,13 @@ class FirebaseDatabaseService {
                         let entity = value?[key.element] as? NSDictionary
                         
                         var sphere = Sphere.creation
-                        if let sphereRawValue = entity?[Properties.Post.Field.sphere] as? String {
+                        if let sphereRawValue = entity?[Constants.Post.Field.sphere] as? String {
                             sphere = Sphere(rawValue: sphereRawValue) ?? Sphere.creation
                         }
                         
-                        let post = Post(text: entity?[Properties.Post.Field.text] as? String ?? Properties.Error.loadingError,
+                        let post = Post(text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
                                         sphere: sphere,
-                                        timestamp: entity?[Properties.Post.Field.timestamp] as? Int64 ?? 0)
+                                        timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0)
                         
                         postArray.append(post)
                     }
@@ -102,7 +102,7 @@ class FirebaseDatabaseService {
     
     func incrementSphereMetrics(for sphere: Sphere) {
         
-        getSphereMetrics(from: Properties.SphereMetrics.current, completion: { [weak self] result in
+        getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
             
             let incrementValue = 0.1
             let maxValue = 10.0
@@ -115,7 +115,7 @@ class FirebaseDatabaseService {
                     currentValue < maxValue {
                     newValues[sphere.rawValue] = currentValue + incrementValue
                     let newSphereMetrics = SphereMetrics(values: newValues)
-                    _ = self?.saveSphereMetrics(newSphereMetrics, pathToSave: Properties.SphereMetrics.current)
+                    _ = self?.saveSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
                 }
             case .failure(_):
                 return

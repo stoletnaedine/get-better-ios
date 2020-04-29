@@ -26,8 +26,8 @@ class SphereMetricsCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        sphereNameLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 22)
-        sphereValueLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 25)
-        sphereDescriptionLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 13)
+        sphereNameLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 22)
+        sphereValueLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 25)
+        sphereDescriptionLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 13)
     }
 }

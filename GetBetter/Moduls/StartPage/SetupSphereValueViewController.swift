@@ -15,7 +15,7 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var sphereDescriptionLabel: UILabel!
     @IBOutlet weak var valueForSphereLabel: UILabel!
     
-    var sphereValue: Double? = Properties.SetupSphere.notValidValue
+    var sphereValue: Double? = Constants.SetupSphere.notValidValue
     var sphere: Sphere?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     let valuesTitle = ["10 — идеально",
@@ -66,11 +66,11 @@ class SetupSphereValueViewController: UIViewController {
     }
     
     func setupView() {
-        questionLabel.text = Properties.SetupSphere.question
-        questionLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 16)
-        sphereNameLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 50)
-        sphereDescriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 16)
-        valueForSphereLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 60)
+        questionLabel.text = Constants.SetupSphere.question
+        questionLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 16)
+        sphereNameLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 50)
+        sphereDescriptionLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 16)
+        valueForSphereLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 60)
         valueForSphereLabel.text = "0"
     }
 }

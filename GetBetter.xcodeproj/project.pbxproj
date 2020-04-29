@@ -35,7 +35,7 @@
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
 		C328EE062447294100445704 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328EE042447294100445704 /* RegisterViewController.xib */; };
 		C32D4CDE23D0EF9700AD9863 /* SFUIText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */; };
-		C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Properties.swift */; };
+		C32D4CE123D0F3FC00AD9863 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Constants.swift */; };
 		C32E419B242E4A8300A9C98B /* URLSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32E419A242E4A8300A9C98B /* URLSessionService.swift */; };
 		C33AD1DF2451AE9B00A08006 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD1DE2451AE9B00A08006 /* PageViewController.swift */; };
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
@@ -109,7 +109,7 @@
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C328EE042447294100445704 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Medium.otf"; sourceTree = "<group>"; };
-		C32D4CE023D0F3FC00AD9863 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
+		C32D4CE023D0F3FC00AD9863 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C32E419A242E4A8300A9C98B /* URLSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionService.swift; sourceTree = "<group>"; };
 		C33AD1DE2451AE9B00A08006 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 			children = (
 				9277D387238C725200B3AECA /* AppDelegate.swift */,
 				C3E7EB7323C710BB0045B70A /* RootManager.swift */,
-				C32D4CE023D0F3FC00AD9863 /* Properties.swift */,
+				C32D4CE023D0F3FC00AD9863 /* Constants.swift */,
 				C3C873CF2436032400931E9B /* Error */,
 				C34B14E724475EA700B58B18 /* Helper */,
 				C3D2D24224321383005C8577 /* ApiCore */,
@@ -609,7 +609,7 @@
 				6E5A98502455FDDE001F8008 /* AboutCircleViewController.swift in Sources */,
 				C31FF9792452CC8D00642C7B /* AboutAppViewController.swift in Sources */,
 				C31FF9842453341900642C7B /* FirebaseDatabaseService.swift in Sources */,
-				C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */,
+				C32D4CE123D0F3FC00AD9863 /* Constants.swift in Sources */,
 				C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
 				C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */,

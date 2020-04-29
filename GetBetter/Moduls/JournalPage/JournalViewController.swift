@@ -24,7 +24,7 @@ class JournalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Properties.TabBar.journalTitle
+        self.title = Constants.TabBar.journalTitle
         setupRefreshControl()
         registerCell()
         setupBarButton()
@@ -48,7 +48,7 @@ class JournalViewController: UIViewController {
             switch result {
                 
             case .failure(let error):
-                Toast(text: "\(Properties.Error.firebaseError)\(String(describing: error.name))").show()
+                Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
                 
             case .success(let postArray):
                 
@@ -118,7 +118,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))
         view.backgroundColor = .sky
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
-        label.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 20)
+        label.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
         label.textColor = UIColor.white
         
         let date = uniqueDates[section]

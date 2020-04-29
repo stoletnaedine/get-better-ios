@@ -30,7 +30,7 @@ class EditProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Properties.Profile.editTitle
+        self.title = Constants.Profile.editTitle
         customizeBarButon()
         customizeView()
     }
@@ -54,12 +54,12 @@ class EditProfileViewController: UIViewController {
                     changeRequest.commitChanges(completion: { error in
                         if let error = error {
                             print("Firebase commit changes error = \(error.localizedDescription)")
-                            Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                            Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                             return
                         }
                     })
                 case .failure(let error):
-                    Toast(text: "\(Properties.Error.firebaseError)\(String(describing: error.name))").show()
+                    Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
                     return
                 }
             })
@@ -71,7 +71,7 @@ class EditProfileViewController: UIViewController {
             changeRequest.displayName = name
             changeRequest.commitChanges(completion: { error in
                 if let error = error {
-                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
             })
@@ -80,7 +80,7 @@ class EditProfileViewController: UIViewController {
         if let password = passwordTextField.text, !password.isEmpty {
             user.updatePassword(to: password, completion: { error in
                 if let error = error {
-                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
             })
@@ -91,7 +91,7 @@ class EditProfileViewController: UIViewController {
             user.updateEmail(to: email, completion: { error in
                 if let error = error {
                     print("\(error.localizedDescription)")
-                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
                 NotificationCenter.default.post(name: .logout, object: nil)
@@ -99,36 +99,36 @@ class EditProfileViewController: UIViewController {
         }
         
         navigationController?.popViewController(animated: true)
-        Toast(text: Properties.Profile.editSuccess, delay: 0.5, duration: 1).show()
+        Toast(text: Constants.Profile.editSuccess, delay: 0.5, duration: 1).show()
     }
     
     func customizeView() {
         avatarView.layer.cornerRadius = avatarView.frame.width / 2
         avatarView.backgroundColor = .gray
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
-        avatarButton.setTitle(Properties.Profile.loadAvatar, for: .normal)
+        avatarButton.setTitle(Constants.Profile.loadAvatar, for: .normal)
         avatarButton.setTitleColor(.white, for: .normal)
-        avatarButton.titleLabel?.font = UIFont(name: Properties.Font.Ubuntu, size: 12)
+        avatarButton.titleLabel?.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
         
         if let user = user {
             if let name = user.displayName {
                 nameTextField.text = name
             } else {
-                nameTextField.placeholder = Properties.Profile.enterName
+                nameTextField.placeholder = Constants.Profile.enterName
             }
             
             if let email = user.email {
                 emailTextField.text = email
             } else {
-                emailTextField.placeholder = Properties.Profile.enterEmail
+                emailTextField.placeholder = Constants.Profile.enterEmail
             }
         }
-        nameLabel.text = Properties.Profile.enterName
-        emailLabel.text = Properties.Profile.enterEmail
-        passwordLabel.text = Properties.Profile.enterPassword
-        passwordTextField.placeholder = Properties.Profile.enterPassword
-        warningLabel.font = UIFont(name: Properties.Font.Ubuntu, size: 14)
-        warningLabel.text = Properties.Profile.warning
+        nameLabel.text = Constants.Profile.enterName
+        emailLabel.text = Constants.Profile.enterEmail
+        passwordLabel.text = Constants.Profile.enterPassword
+        passwordTextField.placeholder = Constants.Profile.enterPassword
+        warningLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
+        warningLabel.text = Constants.Profile.warning
     }
     
     func customizeBarButon() {

@@ -12,14 +12,14 @@ import SwiftKeychainWrapper
 class KeychainHelper {
     
     static func saveCredentials(email: String) -> Bool {
-        return KeychainWrapper.standard.set(email, forKey: Properties.Keychain.emailKey)
+        return KeychainWrapper.standard.set(email, forKey: Constants.Keychain.emailKey)
     }
     
     static func getUserEmail() -> String? {
-        return KeychainWrapper.standard.string(forKey: Properties.Keychain.emailKey)
+        return KeychainWrapper.standard.string(forKey: Constants.Keychain.emailKey)
     }
     
     static func deleteCredentials() {
-        KeychainWrapper.standard.removeObject(forKey: Properties.Keychain.emailKey)
+        KeychainWrapper.standard.removeObject(forKey: Constants.Keychain.emailKey)
     }
 }

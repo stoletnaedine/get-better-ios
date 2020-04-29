@@ -15,7 +15,7 @@ class FirebaseStorageService {
     func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
         
         let ref = Storage.storage().reference()
-            .child(Properties.Profile.avatarsDirectory)
+            .child(Constants.Profile.avatarsDirectory)
             .child(currentUserId)
         
         let metadata = StorageMetadata()

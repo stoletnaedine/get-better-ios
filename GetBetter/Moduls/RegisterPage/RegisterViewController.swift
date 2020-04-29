@@ -42,41 +42,41 @@ class RegisterViewController: UIViewController {
                 }
                 
                 self?.navigationController?.popViewController(animated: true)
-                Toast(text: Properties.Auth.successRegister, delay: 1, duration: 3).show()
+                Toast(text: Constants.Auth.successRegister, delay: 1, duration: 3).show()
             })
         }
     }
     
     func customizeView() {
-        self.title = Properties.Auth.register
-        emailLabel.text = Properties.Auth.email
+        self.title = Constants.Auth.register
+        emailLabel.text = Constants.Auth.email
         emailLabel.textColor = .grayEvent
-        emailLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 13)
+        emailLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         emailTextField.borderStyle = .none
-        emailTextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterEmail,
+        emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                               NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
+                                                                               NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
         let passLabelArray = [password1Label, password2Label]
         for label in passLabelArray {
             label!.textColor = .grayEvent
-            label!.font = UIFont(name: Properties.Font.SFUITextRegular, size: 13)
+            label!.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         }
-        password1Label.text = Properties.Auth.password
-        password2Label.text = Properties.Auth.password2
+        password1Label.text = Constants.Auth.password
+        password2Label.text = Constants.Auth.password2
         password1TextField.borderStyle = .none
-        password1TextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterPassword,
+        password1TextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword,
                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                                   NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
+                                                                                   NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
         password2TextField.borderStyle = .none
-        password2TextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterPassword2,
+        password2TextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword2,
                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                                   NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
+                                                                                   NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
         registerView.backgroundColor = .sky
         registerView.layer.cornerRadius = 5
         registerButton.clipsToBounds = true
         registerButton.setTitle("", for: .normal)
-        registerButtonLabel.text = Properties.Auth.doRegister.uppercased()
+        registerButtonLabel.text = Constants.Auth.doRegister.uppercased()
         registerButtonLabel.textColor = .white
-        registerButtonLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 15)
+        registerButtonLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
     }
 }

@@ -25,14 +25,14 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Настройки"
+        
+        tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         fillTableItems()
         customizeBarButton()
         setupRefreshControl()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
-        
         loadProfileAndReloadTableView()
     }
     

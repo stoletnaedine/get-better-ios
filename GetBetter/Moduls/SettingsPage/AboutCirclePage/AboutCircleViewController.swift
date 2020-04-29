@@ -19,12 +19,12 @@ class AboutCircleViewController: UIViewController {
     }
 
     func setupView() {
-        title = Properties.AboutCircle.viewTitle
+        title = Constants.AboutCircle.viewTitle
         view.backgroundColor = .lighterGray
-        titleLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 25)
-        titleLabel.text = Properties.AboutCircle.title
-        descriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 14)
-        descriptionLabel.text = Properties.AboutCircle.description
+        titleLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 25)
+        titleLabel.text = Constants.AboutCircle.title
+        descriptionLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 14)
+        descriptionLabel.text = Constants.AboutCircle.description
     }
 
 }

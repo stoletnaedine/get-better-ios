@@ -33,8 +33,8 @@ class ProfileTableViewCell: UITableViewCell {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.backgroundColor = .lightGray
         nameLabel.text = ""
-        emailLabel.text = Properties.Profile.loading
-        nameLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 20)
+        emailLabel.text = Constants.Profile.loading
+        nameLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 20)
     }
     
 }

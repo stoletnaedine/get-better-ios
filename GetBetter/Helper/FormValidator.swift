@@ -15,13 +15,13 @@ class FormValidator {
         
         switch true {
         case email.isEmpty:
-            Toast(text: Properties.RegisterValidate.emailIsEmpty).show()
+            Toast(text: Constants.RegisterValidate.emailIsEmpty).show()
             return false
         case !email.contains("@"):
-            Toast(text: Properties.RegisterValidate.emailIsNotValid).show()
+            Toast(text: Constants.RegisterValidate.emailIsNotValid).show()
             return false
         case password.isEmpty:
-            Toast(text: Properties.RegisterValidate.passwordIsEmpty).show()
+            Toast(text: Constants.RegisterValidate.passwordIsEmpty).show()
             return false
         default:
             return true
@@ -32,16 +32,16 @@ class FormValidator {
         
         switch true {
         case email.isEmpty:
-            Toast(text: Properties.RegisterValidate.emailIsEmpty).show()
+            Toast(text: Constants.RegisterValidate.emailIsEmpty).show()
             return false
         case !email.contains("@"):
-            Toast(text: Properties.RegisterValidate.emailIsNotValid).show()
+            Toast(text: Constants.RegisterValidate.emailIsNotValid).show()
             return false
         case password1.isEmpty || password2.isEmpty:
-            Toast(text: Properties.RegisterValidate.passwordIsEmpty).show()
+            Toast(text: Constants.RegisterValidate.passwordIsEmpty).show()
             return false
         case password1 != password2:
-            Toast(text: Properties.RegisterValidate.passwordsNotEquals).show()
+            Toast(text: Constants.RegisterValidate.passwordsNotEquals).show()
             return false
         default:
             return true

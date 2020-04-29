@@ -24,11 +24,11 @@ class LifeCircleController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Properties.TabBar.lifeCircleTitle
+        self.title = Constants.TabBar.lifeCircleTitle
         setupSegmentedControl()
         setupCollectionView()
         setupRefreshControl()
-        chartView.noDataText = Properties.LifeCircle.loading
+        chartView.noDataText = Constants.LifeCircle.loading
         loadAndShowMetrics()
         
         chartView.isHidden = false
@@ -50,7 +50,7 @@ class LifeCircleController: UIViewController {
         
         DispatchQueue.global(qos: .userInitiated).async {
             dispatchGroup.enter()
-            FirebaseDatabaseService().getSphereMetrics(from: Properties.SphereMetrics.start, completion: { [weak self] result in
+            FirebaseDatabaseService().getSphereMetrics(from: Constants.SphereMetrics.start, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.startSphereMetrics = sphereMetrics
@@ -68,7 +68,7 @@ class LifeCircleController: UIViewController {
         
         DispatchQueue.global(qos: .userInitiated).async {
             dispatchGroup.enter()
-            FirebaseDatabaseService().getSphereMetrics(from: Properties.SphereMetrics.current, completion: { [weak self] result in
+            FirebaseDatabaseService().getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.currentSphereMetrics = sphereMetrics
@@ -135,9 +135,9 @@ class LifeCircleController: UIViewController {
                 .map { RadarChartDataEntry(value: $0.value) }
         }
         
-        let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: Properties.LifeCircle.startLevelLegend)
-        let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Properties.LifeCircle.currentLevelLegend)
-        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: Properties.LifeCircle.idealLeveleLegend)
+        let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: Constants.LifeCircle.startLevelLegend)
+        let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Constants.LifeCircle.currentLevelLegend)
+        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: Constants.LifeCircle.idealLeveleLegend)
         
         dataSetIdeal.lineWidth = 1
         dataSetIdeal.colors = [.sky]
@@ -162,8 +162,8 @@ class LifeCircleController: UIViewController {
     
     func setupSegmentedControl() {
         segmentedControl.tintColor = .sky
-        segmentedControl.setTitle(Properties.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
-        segmentedControl.setTitle(Properties.LifeCircle.SegmentedControl.details, forSegmentAt: 1)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.details, forSegmentAt: 1)
     }
     
     @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {

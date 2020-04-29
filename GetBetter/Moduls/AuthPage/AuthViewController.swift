@@ -51,12 +51,12 @@ class AuthViewController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
 
                 if let error = error {
-                    Toast(text: "\(Properties.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
                 
                 if KeychainHelper.saveCredentials(email: email) {
-                    Toast(text: Properties.Keychain.emailSuccessSaved).show()
+                    Toast(text: Constants.Keychain.emailSuccessSaved).show()
                 }
                 
                 guard let self = self else { return }
@@ -75,38 +75,38 @@ class AuthViewController: UIViewController {
     }
     
     func customizeView() {
-        self.title = Properties.Auth.authTitleVC
-        description1Label.text = Properties.Auth.description1
-        description1Label.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
+        self.title = Constants.Auth.authTitleVC
+        description1Label.text = Constants.Auth.description1
+        description1Label.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         description1Label.textColor = .darkGray
         
         icon1ImageView.image = UIImage(named: "vk")
         icon2ImageView.image = UIImage(named: "fb")
         icon3ImageView.image = UIImage(named: "ok")
-        description2Label.text = Properties.Auth.description2
-        description2Label.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
+        description2Label.text = Constants.Auth.description2
+        description2Label.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         description2Label.textColor = .darkGray
         
-        emailLabel.text = Properties.Auth.email
+        emailLabel.text = Constants.Auth.email
         emailLabel.textColor = .grayEvent
-        emailLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 13)
+        emailLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         
         emailTextField.borderStyle = .none
-        emailTextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterEmail,
+        emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                               NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
+                                                                               NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
         if let email = KeychainHelper.getUserEmail() {
             emailTextField.text = email
         }
 
-        passwordLabel.text = Properties.Auth.password
+        passwordLabel.text = Constants.Auth.password
         passwordLabel.textColor = .grayEvent
-        passwordLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 13)
+        passwordLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         
         passwordTextField.borderStyle = .none
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: Properties.Auth.enterPassword,
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword,
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                                  NSAttributedString.Key.font: UIFont(name: Properties.Font.SFUITextRegular, size: 17)!])
+                                                                                  NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
         passwordTextField.isSecureTextEntry = true
         eyeImageView.image = UIImage(named: "combinedShape")
         eyeButton.setTitle("", for: .normal)
@@ -115,18 +115,18 @@ class AuthViewController: UIViewController {
         enterView.layer.cornerRadius = 5
         enterView.clipsToBounds = true
         enterButton.setTitle("", for: .normal)
-        enterLabel.text = Properties.Auth.enter.uppercased()
+        enterLabel.text = Constants.Auth.enter.uppercased()
         enterLabel.textColor = .white
-        enterLabel.font = UIFont(name: Properties.Font.SFUITextMedium, size: 15)
+        enterLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
         
-        forgotButton.setTitle(Properties.Auth.forgotPassword, for: .normal)
+        forgotButton.setTitle(Constants.Auth.forgotPassword, for: .normal)
         forgotButton.setTitleColor(.sky, for: .normal)
-        forgotButton.titleLabel?.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
+        forgotButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         forgotButton.titleLabel?.underline()
         
-        registrationButton.setTitle(Properties.Auth.register, for: .normal)
+        registrationButton.setTitle(Constants.Auth.register, for: .normal)
         registrationButton.setTitleColor(.sky, for: .normal)
-        registrationButton.titleLabel?.font = UIFont(name: Properties.Font.SFUITextRegular, size: 15)
+        registrationButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         registrationButton.titleLabel?.underline()
     }
 }

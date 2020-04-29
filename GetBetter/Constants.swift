@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Properties {
+struct Constants {
     
     struct Keychain {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"

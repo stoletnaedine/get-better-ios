@@ -19,11 +19,11 @@ class AboutJournalViewController: UIViewController {
     }
 
     func setupView() {
-        title = Properties.AboutJournal.viewTitle
+        title = Constants.AboutJournal.viewTitle
         view.backgroundColor = .lighterGray
-        titleLabel.font = UIFont(name: Properties.Font.OfficinaSansExtraBold, size: 25)
-        titleLabel.text = Properties.AboutJournal.title
-        descriptionLabel.font = UIFont(name: Properties.Font.SFUITextRegular, size: 14)
-        descriptionLabel.text = Properties.AboutJournal.description
+        titleLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 25)
+        titleLabel.text = Constants.AboutJournal.title
+        descriptionLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 14)
+        descriptionLabel.text = Constants.AboutJournal.description
     }
 }
