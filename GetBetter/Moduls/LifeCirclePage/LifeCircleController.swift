@@ -20,19 +20,15 @@ class LifeCircleController: UIViewController {
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
-    let sphereMetricsXibName = String(describing: SphereMetricsCollectionViewCell.self)
+    let sphereMetricsXibName = String(describing: SphereMetricsTableViewCell.self)
     let reuseCellIdentifier = "SphereMetricsCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Constants.TabBar.lifeCircleTitle
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        
         setupSegmentedControl()
-        setupCollectionView()
+        setupTableView()
         setupRefreshControl()
         chartView.noDataText = Constants.LifeCircle.loading
         loadAndShowMetrics()
@@ -88,19 +84,14 @@ class LifeCircleController: UIViewController {
         }
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
             self?.refreshControl.endRefreshing()
-            self?.collectionView.reloadData()
+            self?.tableView.reloadData()
         })
     }
     
-    func setupCollectionView() {
-        collectionView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellWithReuseIdentifier: reuseCellIdentifier)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        let width = UIScreen.main.bounds.width
-        layout.itemSize = CGSize(width: width, height: 80)
-        collectionView.collectionViewLayout = layout
+    func setupTableView() {
+        tableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: reuseCellIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func setupSegmentedControl() {
@@ -113,10 +104,10 @@ class LifeCircleController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             chartView.isHidden = false
-            collectionView.isHidden = true
+            tableView.isHidden = true
         case 1:
             chartView.isHidden = true
-            collectionView.isHidden = false
+            tableView.isHidden = false
         default:
             print("default")
         }
@@ -202,15 +193,15 @@ class DataSetValueFormatter: IValueFormatter {
     }
 }
 
-extension LifeCircleController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentSphereMetrics?.values.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseCellIdentifier,
-                                                      for: indexPath) as! SphereMetricsCollectionViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
         
         let sphereRawValue = currentSphereMetrics?
             .sortedValues()
@@ -219,7 +210,7 @@ extension LifeCircleController: UICollectionViewDataSource, UICollectionViewDele
         guard let sphereValue = currentSphereMetrics?.values[sphereRawValue] else { return cell }
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
         
-        cell.fillCell(sphere: sphere.name, value: sphereValue, description: sphere.description)
+        cell.fillCell(sphereName: sphere.name, value: sphereValue, description: sphere.description, icon: sphere.icon)
         return cell
     }
 }
