@@ -113,8 +113,9 @@ class FirebaseDatabaseService {
                 var newValues = sphereMetrics.values
                 if let currentValue = newValues[sphere.rawValue],
                     currentValue < maxValue {
-                    newValues[sphere.rawValue] = currentValue + incrementValue
+                    newValues[sphere.rawValue] = (currentValue * 10 + incrementValue * 10) / 10
                     let newSphereMetrics = SphereMetrics(values: newValues)
+                    
                     _ = self?.saveSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
                 }
             case .failure(_):
