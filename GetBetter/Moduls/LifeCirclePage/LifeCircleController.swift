@@ -16,6 +16,7 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var collectionView: UICollectionView!
     let refreshControl = UIRefreshControl()
+    let firebaseDatabaseService = FirebaseDatabaseService()
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
@@ -35,11 +36,6 @@ class LifeCircleController: UIViewController {
         collectionView.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadAndShowMetrics()
-    }
-    
     func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(loadAndShowMetrics), for: .valueChanged)
         collectionView.addSubview(refreshControl)
@@ -48,9 +44,10 @@ class LifeCircleController: UIViewController {
     @objc func loadAndShowMetrics() {
         let dispatchGroup = DispatchGroup()
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global().async { [weak self] in
             dispatchGroup.enter()
-            FirebaseDatabaseService().getSphereMetrics(from: Constants.SphereMetrics.start, completion: { [weak self] result in
+            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.start,
+                                                           completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.startSphereMetrics = sphereMetrics
@@ -66,9 +63,10 @@ class LifeCircleController: UIViewController {
             })
         }
         
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global().async { [weak self] in
             dispatchGroup.enter()
-            FirebaseDatabaseService().getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
+            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.current,
+                                                           completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.currentSphereMetrics = sphereMetrics
@@ -98,6 +96,25 @@ class LifeCircleController: UIViewController {
         let width = UIScreen.main.bounds.width
         layout.itemSize = CGSize(width: width, height: 80)
         collectionView.collectionViewLayout = layout
+    }
+    
+    func setupSegmentedControl() {
+        segmentedControl.tintColor = .sky
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.details, forSegmentAt: 1)
+    }
+    
+    @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            chartView.isHidden = false
+            collectionView.isHidden = true
+        case 1:
+            chartView.isHidden = true
+            collectionView.isHidden = false
+        default:
+            print("default")
+        }
     }
     
     func setupChartView() {
@@ -158,25 +175,6 @@ class LifeCircleController: UIViewController {
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent, dataSetIdeal])
         chartView.animate(xAxisDuration: 0.5, easingOption: .easeInExpo)
-    }
-    
-    func setupSegmentedControl() {
-        segmentedControl.tintColor = .sky
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.details, forSegmentAt: 1)
-    }
-    
-    @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            chartView.isHidden = false
-            collectionView.isHidden = true
-        case 1:
-            chartView.isHidden = true
-            collectionView.isHidden = false
-        default:
-            print("default")
-        }
     }
 }
 
