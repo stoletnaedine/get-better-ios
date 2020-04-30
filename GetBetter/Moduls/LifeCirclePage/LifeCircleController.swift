@@ -14,7 +14,7 @@ class LifeCircleController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     let refreshControl = UIRefreshControl()
     let firebaseDatabaseService = FirebaseDatabaseService()
     
@@ -26,6 +26,11 @@ class LifeCircleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Constants.TabBar.lifeCircleTitle
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        
         setupSegmentedControl()
         setupCollectionView()
         setupRefreshControl()
@@ -33,12 +38,12 @@ class LifeCircleController: UIViewController {
         loadAndShowMetrics()
         
         chartView.isHidden = false
-        collectionView.isHidden = true
+        tableView.isHidden = true
     }
     
     func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(loadAndShowMetrics), for: .valueChanged)
-        collectionView.addSubview(refreshControl)
+        tableView.addSubview(refreshControl)
     }
     
     @objc func loadAndShowMetrics() {
