@@ -96,7 +96,7 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let sphere = Sphere.allCases[row]
-        return sphere.name
+        return "\(sphere.icon) \(sphere.name)"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
