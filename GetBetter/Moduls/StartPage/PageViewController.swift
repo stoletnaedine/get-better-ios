@@ -78,7 +78,8 @@ class PageViewController: UIViewController {
             Toast(text: "Введите все значения").show()
             return
         }
-        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start) {
+        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start)
+            && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.current) {
             Toast(text: "Сохранено!").show()
             NotificationCenter.default.post(name: .showTabBarController, object: nil)
         }

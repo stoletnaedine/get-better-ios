@@ -14,10 +14,6 @@ extension UIColor {
         return UIColor(red: 24/255, green: 127/255, blue: 192/255, alpha: 1)
     }
     
-    static var skyFill: UIColor {
-        return UIColor(red: 24/255, green: 127/255, blue: 192/255, alpha: 0.3)
-    }
-    
     static var red: UIColor {
         return UIColor(red: 247/255, green: 67/255, blue: 115/255, alpha: 1)
     }

@@ -28,8 +28,7 @@ class SetupSphereValueViewController: UIViewController {
                        "3 — могло быть и лучше",
                        "2 — плохо",
                        "1 — ужасно",
-                       "0 — у меня нет этого"
-    ]
+                       "0 — у меня нет этого"]
 
     override func viewDidLoad() {
         super.viewDidLoad()

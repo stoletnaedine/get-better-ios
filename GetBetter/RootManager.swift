@@ -33,6 +33,17 @@ class RootManager {
         }
     }
     
+    func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
+        FirebaseDatabaseService().getSphereMetrics(from: Constants.SphereMetrics.start, completion: { result in
+            switch result {
+            case .failure(_):
+                completion(false)
+            case .success(_):
+                completion(true)
+            }
+        })
+    }
+    
     @objc func logout() {
         try! Auth.auth().signOut()
         showAuthController()
