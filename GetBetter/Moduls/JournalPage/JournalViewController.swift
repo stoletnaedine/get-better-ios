@@ -49,6 +49,7 @@ class JournalViewController: UIViewController {
                 
             case .failure(let error):
                 Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
+                self?.tableView.refreshControl?.endRefreshing()
                 
             case .success(let postArray):
                 
@@ -159,6 +160,23 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             let post = posts[indexPath.row]
             postDetailViewController.post = post
             navigationController?.pushViewController(postDetailViewController, animated: true)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let date = uniqueDates[indexPath.section]
+            if let postsBySections = postsBySections,
+                let posts = postsBySections[date] {
+                let post = posts[indexPath.row]
+                if databaseService.deletePost(post) {
+                    self.getPosts()
+                }
+            }
         }
     }
 }

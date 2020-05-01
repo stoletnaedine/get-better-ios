@@ -32,6 +32,19 @@ class FirebaseDatabaseService {
         return true
     }
     
+    func deletePost(_ post: Post) -> Bool {
+        
+        guard let userId = user?.uid else { return false }
+        
+        ref
+            .child(Constants.Post.Field.post)
+            .child(userId)
+            .child(post.id ?? "")
+            .removeValue()
+        
+        return true
+    }
+    
     
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void) {
         
@@ -48,20 +61,25 @@ class FirebaseDatabaseService {
                     var postArray: [Post] = []
                     
                     for key in keys.enumerated() {
-                        let entity = value?[key.element] as? NSDictionary
+                        let id = key.element
+                        let entity = value?[id] as? NSDictionary
                         
+                        // TODO need refactoring
                         var sphere = Sphere.creation
                         if let sphereRawValue = entity?[Constants.Post.Field.sphere] as? String {
                             sphere = Sphere(rawValue: sphereRawValue) ?? Sphere.creation
                         }
                         
-                        let post = Post(text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
+                        let post = Post(id: id as? String ?? "",
+                                        text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
                                         sphere: sphere,
                                         timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0)
                         
                         postArray.append(post)
                     }
                     completion(.success(postArray))
+                } else {
+                    completion(.success([]))
                 }
             }) { error in
                 completion(.failure(AppError(error: error)!))
