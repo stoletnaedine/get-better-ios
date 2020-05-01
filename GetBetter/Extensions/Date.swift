@@ -18,7 +18,7 @@ extension Date {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd/MM/YY HH:mm"
+        dayTimePeriodFormatter.dateFormat = "YYYY/MM/dd HH:mm"
         return dayTimePeriodFormatter.string(from: date as Date)
     }
     
@@ -26,7 +26,7 @@ extension Date {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd/MM/YY"
+        dayTimePeriodFormatter.dateFormat = "YYYY/MM/dd"
         return dayTimePeriodFormatter.string(from: date as Date)
     }
 }

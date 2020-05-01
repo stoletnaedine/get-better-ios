@@ -58,8 +58,9 @@ class JournalViewController: UIViewController {
                     Date.convertToDate(from: $0.timestamp ?? 0)
                 }
                 
-                let uniqueDates = Array(Set(allDates)).sorted(by: { $0 > $1 })
-                self?.uniqueDates = uniqueDates
+                let uniqueDates = Array(Set(allDates))
+                let sortedUniqueDates = uniqueDates.sorted(by: { $0 > $1 })
+                self?.uniqueDates = sortedUniqueDates
                 
                 var postsBySections = [String : [Post]]()
                 
@@ -141,7 +142,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             let posts = postsBySections[date] {
             let post = posts[indexPath.row]
             cell.fillCell(post)
-//            cell.textLabel?.text = post.text ?? ""
         }
         return cell
     }
