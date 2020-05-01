@@ -30,6 +30,7 @@ class JournalTableViewCell: UITableViewCell {
     }
     
     func setupView() {
+        sphereView.layer.cornerRadius = 8
         sphereNameLabel.textColor = .white
         sphereNameLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 12)
     }

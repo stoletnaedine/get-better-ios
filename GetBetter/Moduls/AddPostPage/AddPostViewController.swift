@@ -75,9 +75,12 @@ class AddPostViewController: UIViewController {
     
     func customizeView() {
         postTextView.becomeFirstResponder()
+        postTextView.font = postTextView.font?.withSize(20)
         addPostLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
+        addPostLabel.textColor = .gray
         addPostLabel.text = Constants.Post.addPost
         sphereLabel.text = Constants.Post.sphere
+        sphereLabel.textColor = .gray
         sphereLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
         selectedSphereLabel.text = Constants.Post.sphereDefault
         selectedSphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 30)

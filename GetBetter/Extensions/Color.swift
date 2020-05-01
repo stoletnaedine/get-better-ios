@@ -37,36 +37,4 @@ extension UIColor {
     static var placeholderGray: UIColor {
         return UIColor(red: 174/255, green: 176/255, blue: 176/255, alpha: 1)
     }
-    
-    static var relations: UIColor {
-        return UIColor(red: 238/255, green: 121/255, blue: 119/255, alpha: 1)
-    }
-    
-    static var health: UIColor {
-        return UIColor(red: 131/255, green: 109/255, blue: 239/255, alpha: 1)
-    }
-    
-    static var environment: UIColor {
-        return UIColor(red: 239/255, green: 163/255, blue: 115/255, alpha: 1)
-    }
-    
-    static var finance: UIColor {
-        return UIColor(red: 238/255, green: 230/255, blue: 152/255, alpha: 1)
-    }
-    
-    static var work: UIColor {
-        return UIColor(red: 164/255, green: 188/255, blue: 237/255, alpha: 1)
-    }
-    
-    static var relax: UIColor {
-        return UIColor(red: 239/255, green: 163/255, blue: 115/255, alpha: 1)
-    }
-    
-    static var creation: UIColor {
-        return UIColor(red: 238/255, green: 230/255, blue: 152/255, alpha: 1)
-    }
-    
-    static var spirit: UIColor {
-        return UIColor(red: 131/255, green: 109/255, blue: 182/255, alpha: 1)
-    }
 }

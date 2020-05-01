@@ -65,14 +65,14 @@ enum Sphere: String, CaseIterable {
     }
     
     static let colorMapper: [Sphere: UIColor] = [
-        .relations: .relations,
-        .health: .health,
-        .environment: .environment,
-        .finance: .finance,
-        .work: .work,
-        .relax: .relax,
-        .creation: .creation,
-        .spirit: .spirit
+        .relations: #colorLiteral(red: 0.8856292963, green: 0.3189524412, blue: 0.6729699969, alpha: 1),
+        .health: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1),
+        .environment: #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1),
+        .finance: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),
+        .work: #colorLiteral(red: 0, green: 0.5607146621, blue: 0.3763182163, alpha: 1),
+        .relax: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1),
+        .creation: #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1),
+        .spirit: #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
     ]
     
     var color: UIColor {
