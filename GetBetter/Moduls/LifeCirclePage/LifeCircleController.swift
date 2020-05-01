@@ -25,13 +25,14 @@ class LifeCircleController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Constants.TabBar.lifeCircleTitle
         
+        chartView.noDataText = Constants.LifeCircle.loading
+        loadAndShowMetrics()
+        
+        self.title = Constants.TabBar.lifeCircleTitle
         setupSegmentedControl()
         setupTableView()
         setupRefreshControl()
-        chartView.noDataText = Constants.LifeCircle.loading
-        loadAndShowMetrics()
         
         chartView.isHidden = false
         tableView.isHidden = true
@@ -45,18 +46,14 @@ class LifeCircleController: UIViewController {
     @objc func loadAndShowMetrics() {
         let dispatchGroup = DispatchGroup()
         
+        dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            dispatchGroup.enter()
-            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.start,
-                                                           completion: { [weak self] result in
+            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.start, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.startSphereMetrics = sphereMetrics
+                    dispatchGroup.leave()
                     
-                    DispatchQueue.main.async {
-                        self?.setupChartView()
-                        dispatchGroup.leave()
-                    }
                 case .failure(_):
                     NotificationCenter.default.post(name: .showPageViewController, object: nil)
                     dispatchGroup.leave()
@@ -64,27 +61,25 @@ class LifeCircleController: UIViewController {
             })
         }
         
+        dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            dispatchGroup.enter()
-            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.current,
-                                                           completion: { [weak self] result in
+            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.currentSphereMetrics = sphereMetrics
+                    dispatchGroup.leave()
                     
-                    DispatchQueue.main.async {
-                        self?.setupChartView()
-                        dispatchGroup.leave()
-                    }
                 case .failure(_):
                     NotificationCenter.default.post(name: .showPageViewController, object: nil)
                     dispatchGroup.leave()
                 }
             })
         }
+        
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
-            self?.refreshControl.endRefreshing()
+            self?.setupChartView()
             self?.tableView.reloadData()
+            self?.refreshControl.endRefreshing()
         })
     }
     

@@ -33,7 +33,7 @@ class SphereMetricsTableViewCell: UITableViewCell {
     
     func setupView() {
         nameLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 22)
-        valueLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 25)
+        valueLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 30)
         descriptionLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 13)
     }
     
