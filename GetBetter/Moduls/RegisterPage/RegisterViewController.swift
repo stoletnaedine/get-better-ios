@@ -50,7 +50,7 @@ class RegisterViewController: UIViewController {
     func customizeView() {
         self.title = Constants.Auth.register
         emailLabel.text = Constants.Auth.email
-        emailLabel.textColor = .grayEvent
+        emailLabel.textColor = .gray
         emailLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         emailTextField.borderStyle = .none
         emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
@@ -58,7 +58,7 @@ class RegisterViewController: UIViewController {
                                                                                NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
         let passLabelArray = [password1Label, password2Label]
         for label in passLabelArray {
-            label!.textColor = .grayEvent
+            label!.textColor = .gray
             label!.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         }
         password1Label.text = Constants.Auth.password

@@ -88,7 +88,7 @@ class AuthViewController: UIViewController {
         description2Label.textColor = .darkGray
         
         emailLabel.text = Constants.Auth.email
-        emailLabel.textColor = .grayEvent
+        emailLabel.textColor = .gray
         emailLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         
         emailTextField.borderStyle = .none
@@ -100,7 +100,7 @@ class AuthViewController: UIViewController {
         }
 
         passwordLabel.text = Constants.Auth.password
-        passwordLabel.textColor = .grayEvent
+        passwordLabel.textColor = .gray
         passwordLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
         
         passwordTextField.borderStyle = .none

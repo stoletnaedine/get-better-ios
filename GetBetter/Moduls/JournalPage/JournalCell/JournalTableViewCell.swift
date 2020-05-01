@@ -10,12 +10,13 @@ import UIKit
 
 class JournalTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var sphereLabel: UILabel!
-    @IBOutlet weak var postLabel: UILabel!
-    @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var sphereView: UIView!
+    @IBOutlet weak var sphereNameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,11 +24,13 @@ class JournalTableViewCell: UITableViewCell {
     }
     
     func fillCell(_ post: Post) {
-        self.sphereLabel.text = post.sphere?.name ?? ""
-        self.postLabel.text = post.text ?? ""
-        if let timestamp = post.timestamp {
-            self.timestampLabel.text = Date.convertToFullDate(from: timestamp)
-        }
-        
+        self.sphereView.backgroundColor = post.sphere?.color
+        self.sphereNameLabel.text = post.sphere?.name ?? ""
+        self.titleLabel.text = post.text ?? ""
+    }
+    
+    func setupView() {
+        sphereNameLabel.textColor = .white
+        sphereNameLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 12)
     }
 }

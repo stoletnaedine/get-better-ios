@@ -123,9 +123,10 @@ class LifeCircleController: UIViewController {
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 9
+        xAxis.labelFont = .systemFont(ofSize: 25)
         if let sphereMetrics = startSphereMetrics {
             let titles = sphereMetrics.sortedValues()
-                .map { Sphere(rawValue: $0.key)?.name ?? "" }
+                .map { Sphere(rawValue: $0.key)?.icon ?? "" }
             xAxis.valueFormatter = XAxisFormatter(titles: titles)
         }
         
@@ -152,7 +153,7 @@ class LifeCircleController: UIViewController {
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Constants.LifeCircle.currentLevelLegend)
         let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: Constants.LifeCircle.idealLeveleLegend)
         
-        dataSetIdeal.lineWidth = 1
+        dataSetIdeal.lineWidth = 0
         dataSetIdeal.colors = [.sky]
         dataSetIdeal.fillColor = .skyFill
         dataSetIdeal.drawFilledEnabled = true
@@ -166,11 +167,11 @@ class LifeCircleController: UIViewController {
         
         dataSetCurrent.lineWidth = 1
         dataSetCurrent.colors = [.red]
-        dataSetCurrent.fillColor = .redFill
+        dataSetCurrent.fillColor = .red
         dataSetCurrent.drawFilledEnabled = true
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent, dataSetIdeal])
-        chartView.animate(xAxisDuration: 0.5, easingOption: .easeInExpo)
+        chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
     }
 }
 
@@ -185,6 +186,8 @@ class XAxisFormatter: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return titles[Int(value) % titles.count]
     }
+    
+    
 }
 
 class DataSetValueFormatter: IValueFormatter {

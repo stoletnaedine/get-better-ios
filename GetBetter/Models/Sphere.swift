@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Sphere: String, CaseIterable {
     case relations
@@ -61,5 +62,20 @@ enum Sphere: String, CaseIterable {
     
     var icon: String {
         return Sphere.iconMapper[self]!
+    }
+    
+    static let colorMapper: [Sphere: UIColor] = [
+        .relations: .relations,
+        .health: .health,
+        .environment: .environment,
+        .finance: .finance,
+        .work: .work,
+        .relax: .relax,
+        .creation: .creation,
+        .spirit: .spirit
+    ]
+    
+    var color: UIColor {
+        return Sphere.colorMapper[self]!
     }
 }
