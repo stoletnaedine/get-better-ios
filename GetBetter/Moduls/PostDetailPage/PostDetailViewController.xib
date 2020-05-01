@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostDetailViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
-                <outlet property="iconLabel" destination="8xv-Y7-sN0" id="UU9-l3-bbo"/>
                 <outlet property="sphereLabel" destination="Nwm-Ht-GLd" id="zuc-5S-1fP"/>
                 <outlet property="textLabel" destination="yUo-ZQ-frE" id="RgP-hD-hzr"/>
                 <outlet property="timestampLabel" destination="xHi-Jy-d5y" id="wRh-CL-I9i"/>
@@ -40,12 +39,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-Y7-sN0">
-                    <rect key="frame" x="186" y="841" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -55,8 +48,6 @@
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="top" secondItem="Nwm-Ht-GLd" secondAttribute="bottom" constant="20" id="FFv-Ii-ReU"/>
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="If6-t2-FNM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xHi-Jy-d5y" secondAttribute="trailing" constant="20" id="VcJ-hc-0If"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8xv-Y7-sN0" secondAttribute="bottom" id="c7m-mM-aXg"/>
-                <constraint firstItem="8xv-Y7-sN0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="fdf-gp-hYS"/>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="gwJ-y8-Czy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUo-ZQ-frE" secondAttribute="trailing" constant="20" id="qqD-pO-tUD"/>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="uL8-yq-1g8"/>

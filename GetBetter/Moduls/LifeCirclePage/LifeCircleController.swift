@@ -14,6 +14,7 @@ class LifeCircleController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
+    @IBOutlet weak var fakeChartView: RadarChartView!
     @IBOutlet weak var tableView: UITableView!
     let refreshControl = UIRefreshControl()
     let firebaseDatabaseService = FirebaseDatabaseService()
@@ -22,12 +23,14 @@ class LifeCircleController: UIViewController {
     var currentSphereMetrics: SphereMetrics?
     let sphereMetricsXibName = String(describing: SphereMetricsTableViewCell.self)
     let reuseCellIdentifier = "SphereMetricsCell"
+    let sphereIconSize: CGFloat = 30
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         chartView.noDataText = Constants.LifeCircle.loading
         loadAndShowMetrics()
+        setupFakeChartView()
         
         self.title = Constants.TabBar.lifeCircleTitle
         setupSegmentedControl()
@@ -99,13 +102,48 @@ class LifeCircleController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             chartView.isHidden = false
+            fakeChartView.isHidden = false
             tableView.isHidden = true
         case 1:
             chartView.isHidden = true
+            fakeChartView.isHidden = true
             tableView.isHidden = false
         default:
             print("default")
         }
+    }
+    
+    func setupFakeChartView() {
+        
+        let dataEntriesFake = Array(repeating: 10.0, count: 64).map { RadarChartDataEntry(value: $0) }
+        
+        let dataSetFake = RadarChartDataSet(entries: dataEntriesFake, label: "")
+        dataSetFake.lineWidth = 0
+        dataSetFake.fillColor = .sky
+        dataSetFake.drawFilledEnabled = true
+        dataSetFake.valueFormatter = DataSetValueFormatter()
+        dataSetFake.colors = [.sky]
+        dataSetFake.fillAlpha = 0.1
+        
+        fakeChartView.data = RadarChartData(dataSets: [dataSetFake])
+        
+        fakeChartView.noDataText = ""
+        fakeChartView.webLineWidth = 0
+        fakeChartView.innerWebLineWidth = 0
+        fakeChartView.legend.enabled = true
+        
+        let xAxis = fakeChartView.xAxis
+        xAxis.axisMinimum = 0
+        xAxis.axisMaximum = 9
+        xAxis.labelFont = .systemFont(ofSize: sphereIconSize)
+        xAxis.labelTextColor = .clear
+        xAxis.valueFormatter = XAxisFormatter(titles: Array(repeating: "⬜️", count: 64))
+        
+        let yAxis = fakeChartView.yAxis
+        yAxis.axisMinimum = 0
+        yAxis.axisMaximum = 9
+        yAxis.drawTopYLabelEntryEnabled = false
+        yAxis.enabled = false
     }
     
     func setupChartView() {
@@ -118,7 +156,7 @@ class LifeCircleController: UIViewController {
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 9
-        xAxis.labelFont = .systemFont(ofSize: 30)
+        xAxis.labelFont = .systemFont(ofSize: sphereIconSize)
         if let sphereMetrics = startSphereMetrics {
             let titles = sphereMetrics.sortedValues()
                 .map { Sphere(rawValue: $0.key)?.icon ?? "" }
@@ -133,7 +171,6 @@ class LifeCircleController: UIViewController {
         
         var dataEntriesStart: [RadarChartDataEntry] = []
         var dataEntriesCurrent: [RadarChartDataEntry] = []
-        let dataEntriesIdeal = Array(repeating: 10.0, count: 8).map { RadarChartDataEntry(value: $0) }
         
         if let startSphereMetrics = startSphereMetrics,
             let currentSphereMetrics = currentSphereMetrics {
@@ -146,14 +183,6 @@ class LifeCircleController: UIViewController {
         
         let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: Constants.LifeCircle.startLevelLegend)
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Constants.LifeCircle.currentLevelLegend)
-        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: Constants.LifeCircle.idealLevelLegend)
-        
-        dataSetIdeal.lineWidth = 0
-        dataSetIdeal.colors = [.sky]
-        dataSetIdeal.fillColor = .sky
-        dataSetIdeal.fillAlpha = 0.1
-        dataSetIdeal.drawFilledEnabled = true
-        dataSetIdeal.valueFormatter = DataSetValueFormatter()
         
         dataSetStart.lineWidth = 1
         dataSetStart.colors = [.green]
@@ -162,14 +191,14 @@ class LifeCircleController: UIViewController {
         dataSetStart.drawFilledEnabled = true
         dataSetStart.valueFormatter = DataSetValueFormatter()
         
-        dataSetCurrent.lineWidth = 1
+        dataSetCurrent.lineWidth = 2
         dataSetCurrent.colors = [.red]
         dataSetCurrent.fillColor = .systemOrange
-        dataSetCurrent.fillAlpha = 0.1
+        dataSetCurrent.fillAlpha = 0.2
         dataSetCurrent.drawFilledEnabled = true
         dataSetCurrent.valueFormatter = DataSetValueFormatter()
         
-        chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent, dataSetIdeal])
+        chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
         chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
     }
 }

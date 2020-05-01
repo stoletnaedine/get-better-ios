@@ -13,7 +13,6 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var iconLabel: UILabel!
     
     var post: Post?
     
@@ -29,7 +28,6 @@ class PostDetailViewController: UIViewController {
         self.title = post.text ?? Constants.Post.titleDefault
         self.textLabel.text = post.text ?? ""
         self.sphereLabel.text = post.sphere?.name
-        self.iconLabel.text = post.sphere?.icon
         self.timestampLabel.text = ""
         if let timestamp = post.timestamp {
             self.timestampLabel.text = Date.convertToFullDate(from: timestamp)
@@ -37,10 +35,8 @@ class PostDetailViewController: UIViewController {
     }
     
     func customizeView() {
-        textLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        textLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 20)
         sphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 24)
-        timestampLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
-        iconLabel.font = UIFont.systemFont(ofSize: 200)
-        iconLabel.alpha = 0.3
+        timestampLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
     }
 }
