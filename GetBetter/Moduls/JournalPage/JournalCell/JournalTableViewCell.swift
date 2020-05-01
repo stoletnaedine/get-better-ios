@@ -23,7 +23,7 @@ class JournalTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func fillCell(_ post: Post) {
+    func fillCell(from post: Post) {
         self.sphereView.backgroundColor = post.sphere?.color
         self.sphereNameLabel.text = post.sphere?.name ?? ""
         self.titleLabel.text = post.text ?? ""

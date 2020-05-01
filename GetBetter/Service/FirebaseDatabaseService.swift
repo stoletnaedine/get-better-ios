@@ -64,15 +64,15 @@ class FirebaseDatabaseService {
                         let id = key.element
                         let entity = value?[id] as? NSDictionary
                         
-                        // TODO need refactoring
-                        var sphere = Sphere.creation
-                        if let sphereRawValue = entity?[Constants.Post.Field.sphere] as? String {
-                            sphere = Sphere(rawValue: sphereRawValue) ?? Sphere.creation
+                        var maybeSphere: Sphere?
+                        if let sphereRawValue = entity?[Constants.Post.Field.sphere] as? String,
+                            let sphere = Sphere(rawValue: sphereRawValue) {
+                             maybeSphere = sphere
                         }
                         
                         let post = Post(id: id as? String ?? "",
                                         text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
-                                        sphere: sphere,
+                                        sphere: maybeSphere,
                                         timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0)
                         
                         postArray.append(post)

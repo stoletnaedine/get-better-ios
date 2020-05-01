@@ -211,10 +211,12 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             .sortedValues()
             .map { $0.key }[indexPath.row] ?? ""
         
-        guard let sphereValue = currentSphereMetrics?.values[sphereRawValue] else { return cell }
+        guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
         
-        cell.fillCell(sphereName: sphere.name, value: sphereValue, description: sphere.description, icon: sphere.icon)
+        let sphereValue = SphereValue(sphere: sphere, value: value)
+        cell.fillCell(from: sphereValue)
+        
         return cell
     }
 }

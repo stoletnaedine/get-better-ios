@@ -24,11 +24,11 @@ class SphereMetricsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func fillCell(sphereName: String, value: Double, description: String, icon: String) {
-        self.iconLabel.text = icon
-        self.nameLabel.text = sphereName
-        self.valueLabel.text = "\(value)"
-        self.descriptionLabel.text = description
+    func fillCell(from sphereValue: SphereValue) {
+        self.iconLabel.text = sphereValue.sphere?.icon
+        self.nameLabel.text = sphereValue.sphere?.name
+        self.valueLabel.text = "\(sphereValue.value ?? 0.0)"
+        self.descriptionLabel.text = sphereValue.sphere?.description
     }
     
     func setupView() {

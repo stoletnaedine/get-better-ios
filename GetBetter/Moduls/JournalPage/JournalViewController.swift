@@ -142,7 +142,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         if let postsBySections = postsBySections,
             let posts = postsBySections[date] {
             let post = posts[indexPath.row]
-            cell.fillCell(post)
+            cell.fillCell(from: post)
         }
         return cell
     }
