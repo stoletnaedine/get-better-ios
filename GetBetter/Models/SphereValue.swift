@@ -2,7 +2,7 @@
 //  SphereValue.swift
 //  GetBetter
 //
-//  Created by Исламгулова Лариса on 01.05.2020.
+//  Created by Artur Islamgulov on 01.05.2020.
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
