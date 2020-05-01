@@ -118,7 +118,7 @@ class LifeCircleController: UIViewController {
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 9
-        xAxis.labelFont = .systemFont(ofSize: 40)
+        xAxis.labelFont = .systemFont(ofSize: 30)
         if let sphereMetrics = startSphereMetrics {
             let titles = sphereMetrics.sortedValues()
                 .map { Sphere(rawValue: $0.key)?.icon ?? "" }
@@ -146,7 +146,7 @@ class LifeCircleController: UIViewController {
         
         let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: Constants.LifeCircle.startLevelLegend)
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Constants.LifeCircle.currentLevelLegend)
-        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: Constants.LifeCircle.idealLeveleLegend)
+        let dataSetIdeal = RadarChartDataSet(entries: dataEntriesIdeal, label: Constants.LifeCircle.idealLevelLegend)
         
         dataSetIdeal.lineWidth = 0
         dataSetIdeal.colors = [.sky]
@@ -167,6 +167,7 @@ class LifeCircleController: UIViewController {
         dataSetCurrent.fillColor = .systemOrange
         dataSetCurrent.fillAlpha = 0.1
         dataSetCurrent.drawFilledEnabled = true
+        dataSetCurrent.valueFormatter = DataSetValueFormatter()
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent, dataSetIdeal])
         chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
@@ -184,12 +185,14 @@ class XAxisFormatter: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return titles[Int(value) % titles.count]
     }
-    
-    
 }
 
 class DataSetValueFormatter: IValueFormatter {
     func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+        let dataSetCurrentIndex = 1
+        if dataSetIndex == dataSetCurrentIndex {
+            return "\(value)"
+        }
         return ""
     }
 }

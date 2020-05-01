@@ -19,7 +19,7 @@ struct Constants {
         static let loading = "Подождите, идет загрузка"
         static let startLevelLegend = "Начальный уровень"
         static let currentLevelLegend = "Текущий уровень"
-        static let idealLeveleLegend = "К чему стремиться"
+        static let idealLevelLegend = "К чему стремиться"
         
         struct SegmentedControl {
             static let circle = "Колесо"
