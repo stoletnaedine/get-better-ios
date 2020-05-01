@@ -65,7 +65,7 @@ class AddPostViewController: UIViewController {
         let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp)
         
         if databaseService.savePost(post) {
-            databaseService.incrementSphereMetrics(for: sphere)
+            databaseService.incrementSphereValue(for: sphere)
             Toast(text: Constants.Post.postSavedSuccess).show()
         }
         

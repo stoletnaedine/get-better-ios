@@ -42,6 +42,10 @@ class FirebaseDatabaseService {
             .child(post.id ?? "")
             .removeValue()
         
+        if let sphere = post.sphere {
+            decrementSphereValue(for: sphere)
+        }
+        
         return true
     }
     
@@ -91,17 +95,24 @@ class FirebaseDatabaseService {
         guard let userId = user?.uid else { return false }
         
         ref
-        .child(pathToSave)
-        .child(userId)
-            .removeValue()
-        
-        ref
             .child(pathToSave)
             .child(userId)
             .setValue(sphereMetrics.values)
         
         return true
     }
+    
+    func updateSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
+            
+            guard let userId = user?.uid else { return false }
+            
+            ref
+                .child(pathToSave)
+                .child(userId)
+                .updateChildValues(sphereMetrics.values)
+            
+            return true
+        }
     
     func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
         
@@ -123,11 +134,11 @@ class FirebaseDatabaseService {
             }
     }
     
-    func incrementSphereMetrics(for sphere: Sphere) {
+    func incrementSphereValue(for sphere: Sphere) {
         
         getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
             
-            let incrementValue = 0.1
+            let diffValue = 0.1
             let maxValue = 10.0
                             
             switch result {
@@ -137,12 +148,41 @@ class FirebaseDatabaseService {
                 
                 if let currentValue = newValues[sphere.rawValue],
                     currentValue < maxValue {
-                    newValues[sphere.rawValue] = (currentValue * 10 + incrementValue * 10) / 10
+                    newValues[sphere.rawValue] = (currentValue * 10 + diffValue * 10) / 10
                     let newSphereMetrics = SphereMetrics(values: newValues)
                     
-                    let saveResult = self?.saveSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                    let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
                     print("saveResult for \(sphere.rawValue)=\(String(describing: saveResult))")
                 }
+                
+            case .failure(let error):
+                print("error=\(error)")
+                return
+            }
+        })
+    }
+    
+    func decrementSphereValue(for sphere: Sphere) {
+        
+        getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
+            
+            let diffValue = 0.1
+            let minValue = 0.0
+                            
+            switch result {
+            case .success(let sphereMetrics):
+                
+                var newValues = sphereMetrics.values
+                
+                if let currentValue = newValues[sphere.rawValue],
+                    currentValue > minValue {
+                    newValues[sphere.rawValue] = (currentValue * 10 - diffValue * 10) / 10
+                    let newSphereMetrics = SphereMetrics(values: newValues)
+                    
+                    let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                    print("saveResult for \(sphere.rawValue)=\(String(describing: saveResult))")
+                }
+                
             case .failure(let error):
                 print("error=\(error)")
                 return
