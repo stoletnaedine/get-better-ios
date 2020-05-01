@@ -73,6 +73,11 @@ class FirebaseDatabaseService {
         guard let userId = user?.uid else { return false }
         
         ref
+        .child(pathToSave)
+        .child(userId)
+            .removeValue()
+        
+        ref
             .child(pathToSave)
             .child(userId)
             .setValue(sphereMetrics.values)
@@ -111,14 +116,17 @@ class FirebaseDatabaseService {
             case .success(let sphereMetrics):
                 
                 var newValues = sphereMetrics.values
+                
                 if let currentValue = newValues[sphere.rawValue],
                     currentValue < maxValue {
                     newValues[sphere.rawValue] = (currentValue * 10 + incrementValue * 10) / 10
                     let newSphereMetrics = SphereMetrics(values: newValues)
                     
-                    _ = self?.saveSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                    let saveResult = self?.saveSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                    print("saveResult for \(sphere.rawValue)=\(String(describing: saveResult))")
                 }
-            case .failure(_):
+            case .failure(let error):
+                print("error=\(error)")
                 return
             }
         })
