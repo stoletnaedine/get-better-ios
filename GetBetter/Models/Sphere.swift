@@ -51,7 +51,7 @@ enum Sphere: String, CaseIterable {
     
     static let iconMapper: [Sphere: String] = [
         .relations: "😍",
-        .health: "🧘‍♀️",
+        .health: "💪",
         .environment: "👨‍👩‍👧‍👦",
         .finance: "💵",
         .work: "👨‍💻",

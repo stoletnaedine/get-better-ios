@@ -193,7 +193,7 @@ class LifeCircleController: UIViewController {
         
         dataSetCurrent.lineWidth = 2
         dataSetCurrent.colors = [.red]
-        dataSetCurrent.fillColor = .systemOrange
+        dataSetCurrent.fillColor = .orange
         dataSetCurrent.fillAlpha = 0.2
         dataSetCurrent.drawFilledEnabled = true
         dataSetCurrent.valueFormatter = DataSetValueFormatter()
