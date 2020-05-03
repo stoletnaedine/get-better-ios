@@ -29,7 +29,10 @@ class JournalViewController: UIViewController {
         setupRefreshControl()
         registerCell()
         setupBarButton()
-        getPosts {}
+        self.showActivityIndicator(onView: self.view)
+        getPosts { [weak self] in
+            self?.removeActivityIndicator()
+        }
     }
     
     func setupRefreshControl() {

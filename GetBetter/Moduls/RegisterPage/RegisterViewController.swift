@@ -35,7 +35,10 @@ class RegisterViewController: UIViewController {
         guard let password2 = password2TextField.text else { return }
         
         if FormValidator.isFormValid(email: email, password1: password1, password2: password2) {
+            self.showActivityIndicator(onView: self.view)
             Auth.auth().createUser(withEmail: email, password: password1, completion: { [weak self] authResult, error in
+                
+                self?.removeActivityIndicator()
                 if let error = error {
                     Toast(text: "Firebase: \(error.localizedDescription)").show()
                     return
