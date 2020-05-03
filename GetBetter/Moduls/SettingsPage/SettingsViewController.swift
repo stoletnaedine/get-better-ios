@@ -97,17 +97,6 @@ class SettingsViewController: UIViewController {
 
 enum TableSection: Int {
     case profile = 0, articles, settings
-    
-    var title: String {
-        switch self {
-        case .profile:
-            return "ПРОФИЛЬ"
-        case .articles:
-            return "КАК ПОЛЬЗОВАТЬСЯ"
-        case .settings:
-            return "НАСТРОЙКИ"
-        }
-    }
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -165,6 +154,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return SectionHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .lighterGray
+        return view
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
