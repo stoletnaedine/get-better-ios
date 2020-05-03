@@ -12,7 +12,6 @@ struct Constants {
     
     struct Keychain {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
-        static let emailSuccessSaved = "Email успешно сохранен в Keychain"
     }
     
     struct LifeCircle {

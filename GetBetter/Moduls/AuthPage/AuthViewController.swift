@@ -42,25 +42,26 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func enterButtonDidPressed(_ sender: UIButton) {
-        
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
         if FormValidator.isFormValid(email: email, password: password) {
+            
+            self.showActivityIndicator(onView: self.view)
 
             Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
+
+                self?.removeActivityIndicator()
 
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                     return
                 }
                 
-                if KeychainHelper.saveCredentials(email: email) {
-                    Toast(text: Constants.Keychain.emailSuccessSaved).show()
-                }
+                print("authResult = \(authResult)")
+                let _ = KeychainHelper.saveCredentials(email: email)
                 
-                guard let self = self else { return }
-                self.completion()
+                self?.completion()
             })
         }
     }

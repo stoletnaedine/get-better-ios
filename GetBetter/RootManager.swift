@@ -74,7 +74,7 @@ class RootManager {
     }
     
     func configToaster() {
-        ToastView.appearance().backgroundColor = .sky
+        ToastView.appearance().backgroundColor = .darkGray
         ToastView.appearance().font = UIFont(name: Constants.Font.SFUITextRegular, size: 14)
         let screenHeight = UIScreen.main.bounds.height
         ToastView.appearance().bottomOffsetPortrait = CGFloat(screenHeight / 2)

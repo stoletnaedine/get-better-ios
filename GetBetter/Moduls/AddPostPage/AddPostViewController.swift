@@ -43,7 +43,7 @@ class AddPostViewController: UIViewController {
         
         if databaseService.savePost(post) {
             databaseService.incrementSphereValue(for: sphere)
-            Toast(text: "\(Constants.Post.postSavedSuccess) Сфера \(sphere.icon) \(sphere.name) увеличилась на 0,1 балла!", delay: 0, duration: 3).show()
+            Toast(text: "\(Constants.Post.postSavedSuccess)\nСфера \(sphere.icon) \(sphere.name) увеличилась на 0,1 балла!", delay: 0, duration: 3).show()
         }
         
         completion()

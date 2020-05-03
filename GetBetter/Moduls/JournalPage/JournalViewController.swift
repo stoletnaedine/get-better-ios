@@ -21,6 +21,7 @@ class JournalViewController: UIViewController {
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
     let databaseService = FirebaseDatabaseService()
+    let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +29,12 @@ class JournalViewController: UIViewController {
         setupRefreshControl()
         registerCell()
         setupBarButton()
-        getPosts()
+        getPosts {}
     }
     
     func setupRefreshControl() {
         let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(getPosts), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(updatePostsInTableView), for: .valueChanged)
         self.tableView.refreshControl = refresh
     }
     
@@ -43,13 +44,20 @@ class JournalViewController: UIViewController {
         tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
-    @objc func getPosts() {
+    @objc func updatePostsInTableView() {
+        getPosts { [weak self] in
+            self?.tableView.refreshControl?.endRefreshing()
+        }
+    }
+    
+    @objc func getPosts(completion: @escaping () -> Void) {
+        
         databaseService.getPosts(completion: { [weak self] result in
             switch result {
                 
             case .failure(let error):
                 Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
-                self?.tableView.refreshControl?.endRefreshing()
+                completion()
                 
             case .success(let postArray):
                 
@@ -72,7 +80,7 @@ class JournalViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
-                    self?.tableView.refreshControl?.endRefreshing()
+                    completion()
                 }
             }
         })
@@ -86,7 +94,7 @@ class JournalViewController: UIViewController {
     @objc func addPost() {
         let postViewController = AddPostViewController()
         postViewController.completion = { [weak self] in
-            self?.getPosts()
+            self?.updatePostsInTableView()
         }
         present(postViewController, animated: true, completion: nil)
     }
@@ -174,7 +182,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                 let posts = postsBySections[date] {
                 let post = posts[indexPath.row]
                 if databaseService.deletePost(post) {
-                    self.getPosts()
+                    self.updatePostsInTableView()
                 }
             }
         }
