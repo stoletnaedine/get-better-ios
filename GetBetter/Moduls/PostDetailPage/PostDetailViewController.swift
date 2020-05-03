@@ -40,8 +40,8 @@ class PostDetailViewController: UIViewController {
     }
     
     func customizeView() {
-        textLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 20)
-        sphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 24)
+        textLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 18)
+        sphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
         timestampLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
         cancelButton.setTitle("✖️", for: .normal)
         cancelButton.setTitleColor(.white, for: .normal)

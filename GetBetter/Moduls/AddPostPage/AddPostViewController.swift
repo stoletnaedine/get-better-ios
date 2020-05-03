@@ -29,7 +29,6 @@ class AddPostViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         registerTapForSelectedSphereLabel()
         customizeView()
-        postTextView.delegate = self
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
@@ -74,11 +73,9 @@ class AddPostViewController: UIViewController {
     }
     
     func customizeView() {
-        postTextView.text = "Например: сделал зарядку, прочитал несколько глаз книги, выучил несколько иностранных слов..."
-        postTextView.textColor = .lightGray
         postTextView.becomeFirstResponder()
-        postTextView.font = postTextView.font?.withSize(20)
-        postTextView.selectedTextRange = postTextView.textRange(from: postTextView.beginningOfDocument, to: postTextView.beginningOfDocument)
+        postTextView.font = postTextView.font?.withSize(18)
+        postTextView.placeholder = "Например: сделал зарядку, прочитал несколько глаз книги, выучил несколько иностранных слов..."
         
         addPostLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
         addPostLabel.textColor = .gray
@@ -114,35 +111,5 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let sphere = Sphere.allCases[row]
         selectedSphere = sphere
         selectedSphereLabel.text = sphere.name
-    }
-}
-
-extension AddPostViewController: UITextViewDelegate {
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText:String = postTextView.text
-        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
-        
-        if updatedText.isEmpty {
-            postTextView.text = "Например: сделал зарядку, прочитал несколько глаз книги, выучил несколько иностранных слов..."
-            postTextView.textColor = .lightGray
-            
-            postTextView.selectedTextRange = postTextView.textRange(from: postTextView.beginningOfDocument, to: postTextView.beginningOfDocument)
-        } else if postTextView.textColor == .lightGray && !text.isEmpty {
-            postTextView.textColor = .black
-            postTextView.text = text
-        } else {
-            return true
-        }
-        
-        return false
-    }
-    
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        if self.view.window != nil {
-            if postTextView.textColor == UIColor.lightGray {
-                postTextView.selectedTextRange = postTextView.textRange(from: postTextView.beginningOfDocument, to: postTextView.beginningOfDocument)
-            }
-        }
     }
 }
