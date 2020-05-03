@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController {
     
     var profile: Profile?
     
-    let SectionHeaderHeight: CGFloat = 45
+    let SectionHeaderHeight: CGFloat = 35
     var tableItems: [TableSection : [SettingsCell]]?
     let refreshControl = UIRefreshControl()
     
@@ -168,8 +168,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let tableSection = TableSection(rawValue: section) else { return "" }
-        return tableSection.title
+        return ""
     }
     
 }

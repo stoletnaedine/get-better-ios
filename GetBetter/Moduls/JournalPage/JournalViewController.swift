@@ -88,7 +88,7 @@ class JournalViewController: UIViewController {
         postViewController.completion = { [weak self] in
             self?.getPosts()
         }
-        navigationController?.pushViewController(postViewController, animated: true)
+        present(postViewController, animated: true, completion: nil)
     }
 }
 
@@ -159,7 +159,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             let posts = postsBySections[date] {
             let post = posts[indexPath.row]
             postDetailViewController.post = post
-            navigationController?.pushViewController(postDetailViewController, animated: true)
+            present(postDetailViewController, animated: true, completion: nil)
         }
     }
     

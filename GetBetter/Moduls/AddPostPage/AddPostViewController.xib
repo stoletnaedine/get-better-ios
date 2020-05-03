@@ -11,9 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddPostViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="addPostLabel" destination="0zm-59-9QV" id="Dst-ou-iyS"/>
+                <outlet property="cancelButton" destination="QdY-07-83M" id="ToA-Tw-H1K"/>
                 <outlet property="postTextView" destination="sLD-WP-KS7" id="pAl-6V-DAG"/>
+                <outlet property="saveButton" destination="G4Y-RJ-AVC" id="PCU-mk-02P"/>
+                <outlet property="saveButtonView" destination="g7W-yF-nBF" id="PFd-fQ-4I7"/>
                 <outlet property="selectedSphereLabel" destination="Sgf-FI-Pt4" id="Scb-NI-XuZ"/>
-                <outlet property="sphereLabel" destination="2oY-KO-BtC" id="tF1-Rs-iir"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sLD-WP-KS7">
-                    <rect key="frame" x="20" y="71" width="374" height="80"/>
+                    <rect key="frame" x="20" y="70.333333333333329" width="374" height="79.999999999999986"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="y4Y-yR-OOI"/>
@@ -32,39 +34,62 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oY-KO-BtC">
-                    <rect key="frame" x="20" y="191" width="374" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-FI-Pt4">
-                    <rect key="frame" x="20" y="222" width="374" height="21"/>
+                    <rect key="frame" x="20" y="180.33333333333334" width="374" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zm-59-9QV">
-                    <rect key="frame" x="20" y="40" width="374" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zm-59-9QV">
+                    <rect key="frame" x="20" y="40" width="354" height="20.333333333333329"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7W-yF-nBF">
+                    <rect key="frame" x="80" y="231.33333333333334" width="254" height="40.000000000000028"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4Y-RJ-AVC">
+                            <rect key="frame" x="0.0" y="0.0" width="254" height="40"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="saveButtonDidTap:" destination="-1" eventType="touchUpInside" id="YN4-6S-Bws"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="0hg-S6-nRY"/>
+                        <constraint firstAttribute="bottom" secondItem="G4Y-RJ-AVC" secondAttribute="bottom" id="1f6-sF-G3j"/>
+                        <constraint firstItem="G4Y-RJ-AVC" firstAttribute="leading" secondItem="g7W-yF-nBF" secondAttribute="leading" id="Aow-pC-ksg"/>
+                        <constraint firstAttribute="trailing" secondItem="G4Y-RJ-AVC" secondAttribute="trailing" id="Bxg-Nk-2aq"/>
+                        <constraint firstItem="G4Y-RJ-AVC" firstAttribute="top" secondItem="g7W-yF-nBF" secondAttribute="top" id="YVY-QO-eVi"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdY-07-83M">
+                    <rect key="frame" x="358" y="10" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="7u6-SN-8mZ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Sgf-FI-Pt4" firstAttribute="top" secondItem="2oY-KO-BtC" secondAttribute="bottom" constant="10" id="75c-tc-LWa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QdY-07-83M" secondAttribute="trailing" constant="10" id="46l-bb-vIE"/>
+                <constraint firstItem="g7W-yF-nBF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="7qM-Ye-ma7"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="g7W-yF-nBF" secondAttribute="trailing" constant="80" id="EC5-DI-dsR"/>
                 <constraint firstItem="sLD-WP-KS7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="HjA-im-nPX"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2oY-KO-BtC" secondAttribute="trailing" constant="20" id="JNR-WO-6hV"/>
+                <constraint firstItem="g7W-yF-nBF" firstAttribute="top" secondItem="Sgf-FI-Pt4" secondAttribute="bottom" constant="30" id="MLA-Ce-zG4"/>
+                <constraint firstItem="QdY-07-83M" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="PX0-mq-AtK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sLD-WP-KS7" secondAttribute="trailing" constant="20" id="UDw-UJ-iRB"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0zm-59-9QV" secondAttribute="trailing" constant="20" id="VAD-9R-MFs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0zm-59-9QV" secondAttribute="trailing" constant="40" id="VAD-9R-MFs"/>
+                <constraint firstItem="Sgf-FI-Pt4" firstAttribute="top" secondItem="sLD-WP-KS7" secondAttribute="bottom" constant="30" id="kDs-4z-L3n"/>
                 <constraint firstItem="0zm-59-9QV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="kZP-6d-7Gz"/>
                 <constraint firstItem="sLD-WP-KS7" firstAttribute="top" secondItem="0zm-59-9QV" secondAttribute="bottom" constant="10" id="nBh-O1-YgP"/>
                 <constraint firstItem="0zm-59-9QV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="nJb-eB-EKd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Sgf-FI-Pt4" secondAttribute="trailing" constant="20" id="thX-KL-H2Z"/>
                 <constraint firstItem="Sgf-FI-Pt4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="v0B-3z-tfB"/>
-                <constraint firstItem="2oY-KO-BtC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="wgY-1r-X5d"/>
-                <constraint firstItem="2oY-KO-BtC" firstAttribute="top" secondItem="sLD-WP-KS7" secondAttribute="bottom" constant="40" id="wig-Sg-GEK"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>

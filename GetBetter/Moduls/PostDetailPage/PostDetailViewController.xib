@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostDetailViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="0pZ-gy-gVy" id="FQB-mr-3Z9"/>
                 <outlet property="sphereLabel" destination="Nwm-Ht-GLd" id="zuc-5S-1fP"/>
                 <outlet property="textLabel" destination="yUo-ZQ-frE" id="RgP-hD-hzr"/>
                 <outlet property="timestampLabel" destination="xHi-Jy-d5y" id="wRh-CL-I9i"/>
@@ -21,20 +22,27 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUo-ZQ-frE">
-                    <rect key="frame" x="20" y="84" width="374" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwm-Ht-GLd">
-                    <rect key="frame" x="20" y="144.5" width="374" height="20.5"/>
+                    <rect key="frame" x="20" y="74" width="374" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHi-Jy-d5y">
-                    <rect key="frame" x="20" y="185" width="374" height="20.5"/>
+                    <rect key="frame" x="20" y="114.5" width="374" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pZ-gy-gVy">
+                    <rect key="frame" x="358" y="54" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="4az-1o-KCM"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUo-ZQ-frE">
+                    <rect key="frame" x="20" y="155" width="374" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -43,12 +51,14 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Nwm-Ht-GLd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="3BP-Ae-zby"/>
-                <constraint firstItem="Nwm-Ht-GLd" firstAttribute="top" secondItem="yUo-ZQ-frE" secondAttribute="bottom" constant="40" id="Etc-V2-Dnf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Nwm-Ht-GLd" secondAttribute="trailing" constant="20" id="EzK-bM-MV6"/>
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="top" secondItem="Nwm-Ht-GLd" secondAttribute="bottom" constant="20" id="FFv-Ii-ReU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0pZ-gy-gVy" secondAttribute="trailing" constant="10" id="GvV-rz-ieP"/>
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="If6-t2-FNM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xHi-Jy-d5y" secondAttribute="trailing" constant="20" id="VcJ-hc-0If"/>
-                <constraint firstItem="yUo-ZQ-frE" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="gwJ-y8-Czy"/>
+                <constraint firstItem="0pZ-gy-gVy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Vg3-8e-qYS"/>
+                <constraint firstItem="Nwm-Ht-GLd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="clf-P0-VKv"/>
+                <constraint firstItem="yUo-ZQ-frE" firstAttribute="top" secondItem="xHi-Jy-d5y" secondAttribute="bottom" constant="20" id="f58-lP-WXD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUo-ZQ-frE" secondAttribute="trailing" constant="20" id="qqD-pO-tUD"/>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="uL8-yq-1g8"/>
             </constraints>

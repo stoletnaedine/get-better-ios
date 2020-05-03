@@ -90,7 +90,7 @@ struct Constants {
         static let postTitle = "Добавить событие"
         static let sphere = "Выберите сферу для события"
         static let addPost = "Опишите событие, которое сегодня сделало вас лучше"
-        static let sphereDefault = "Нажмите здесь"
+        static let sphereDefault = "Выберите сферу"
         static let titleDefault = "Событие"
         static let postSavedSuccess = "Пост сохранен!"
         static let emptyFieldsWarning = "Заполните все поля"

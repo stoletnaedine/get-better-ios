@@ -15,8 +15,6 @@ class SphereMetricsTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
-    let lowValue = 5.0
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -37,8 +35,13 @@ class SphereMetricsTableViewCell: UITableViewCell {
     }
     
     private func changeValueLabelColorIfValueIsLow(for value: Double) {
-        if value < lowValue {
+        switch value {
+        case 0...3.0:
             self.valueLabel.textColor = .red
+        case 3.1...7.0:
+            self.valueLabel.textColor = .black
+        default:
+            self.valueLabel.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         }
     }
     

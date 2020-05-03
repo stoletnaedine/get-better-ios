@@ -116,13 +116,11 @@ class LifeCircleController: UIViewController {
     func setupFakeChartView() {
         
         let dataEntriesFake = Array(repeating: 10.0, count: 64).map { RadarChartDataEntry(value: $0) }
-        
         let dataSetFake = RadarChartDataSet(entries: dataEntriesFake, label: "")
         dataSetFake.lineWidth = 0
-        dataSetFake.fillColor = .sky
+        dataSetFake.fillColor = .lightGray
         dataSetFake.drawFilledEnabled = true
         dataSetFake.valueFormatter = DataSetValueFormatter()
-        dataSetFake.colors = [.sky]
         dataSetFake.fillAlpha = 0.1
         
         fakeChartView.data = RadarChartData(dataSets: [dataSetFake])
@@ -217,6 +215,7 @@ class XAxisFormatter: IAxisValueFormatter {
 }
 
 class DataSetValueFormatter: IValueFormatter {
+    
     func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
         let dataSetCurrentIndex = 1
         if dataSetIndex == dataSetCurrentIndex {

@@ -13,8 +13,10 @@ class AddPostViewController: UIViewController {
     
     @IBOutlet weak var addPostLabel: UILabel!
     @IBOutlet weak var postTextView: UITextView!
-    @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var selectedSphereLabel: UILabel!
+    @IBOutlet weak var saveButtonView: UIView!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var selectedSphere: Sphere?
     let databaseService = FirebaseDatabaseService()
@@ -27,7 +29,29 @@ class AddPostViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         registerTapForSelectedSphereLabel()
         customizeView()
-        customizeBarButton()
+    }
+    
+    @IBAction func saveButtonDidTap(_ sender: UIButton) {
+        guard let text = postTextView.text,
+            !text.isEmpty,
+            let sphere = selectedSphere else {
+                Toast(text: Constants.Post.emptyFieldsWarning).show()
+                return
+        }
+        
+        let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp)
+        
+        if databaseService.savePost(post) {
+            databaseService.incrementSphereValue(for: sphere)
+            Toast(text: Constants.Post.postSavedSuccess).show()
+        }
+        
+        completion()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func registerTapForSelectedSphereLabel() {
@@ -48,42 +72,21 @@ class AddPostViewController: UIViewController {
         customtTextField.becomeFirstResponder()
     }
     
-    func customizeBarButton() {
-        let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePost))
-        navigationItem.rightBarButtonItem = saveBarButton
-    }
-    
-    @objc func savePost() {
-        
-        guard let text = postTextView.text,
-            !text.isEmpty,
-            let sphere = selectedSphere else {
-                Toast(text: Constants.Post.emptyFieldsWarning).show()
-                return
-        }
-        
-        let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp)
-        
-        if databaseService.savePost(post) {
-            databaseService.incrementSphereValue(for: sphere)
-            Toast(text: Constants.Post.postSavedSuccess).show()
-        }
-        
-        completion()
-        navigationController?.popViewController(animated: true)
-    }
-    
     func customizeView() {
         postTextView.becomeFirstResponder()
         postTextView.font = postTextView.font?.withSize(20)
         addPostLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
         addPostLabel.textColor = .gray
         addPostLabel.text = Constants.Post.addPost
-        sphereLabel.text = Constants.Post.sphere
-        sphereLabel.textColor = .gray
-        sphereLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
         selectedSphereLabel.text = Constants.Post.sphereDefault
-        selectedSphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 30)
+        selectedSphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
+        saveButtonView.backgroundColor = .sky
+        saveButtonView.layer.cornerRadius = 10
+        saveButton.setTitle("Сохранить", for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.titleLabel?.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
+        cancelButton.setTitle("✖️", for: .normal)
+        cancelButton.setTitleColor(.white, for: .normal)
     }
 }
 
