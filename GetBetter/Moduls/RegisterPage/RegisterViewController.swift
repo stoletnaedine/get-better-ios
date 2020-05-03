@@ -74,7 +74,7 @@ class RegisterViewController: UIViewController {
         password2TextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword2,
                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                    NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
-        registerView.backgroundColor = .sky
+        registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
         registerButton.clipsToBounds = true
         registerButton.setTitle("", for: .normal)

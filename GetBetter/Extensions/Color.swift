@@ -10,8 +10,8 @@ import UIKit
 
 extension UIColor {
     
-    static var sky: UIColor {
-        return UIColor(red: 24/255, green: 127/255, blue: 192/255, alpha: 1)
+    static var violet: UIColor {
+        return #colorLiteral(red: 0.6156862745, green: 0.5098039216, blue: 0.9882352941, alpha: 1)
     }
     
     static var red: UIColor {

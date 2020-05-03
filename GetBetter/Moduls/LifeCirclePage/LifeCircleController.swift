@@ -93,7 +93,7 @@ class LifeCircleController: UIViewController {
     }
     
     func setupSegmentedControl() {
-        segmentedControl.tintColor = .sky
+        segmentedControl.backgroundColor = .violet        
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.details, forSegmentAt: 1)
     }
@@ -118,10 +118,10 @@ class LifeCircleController: UIViewController {
         let dataEntriesFake = Array(repeating: 10.0, count: 64).map { RadarChartDataEntry(value: $0) }
         let dataSetFake = RadarChartDataSet(entries: dataEntriesFake, label: "")
         dataSetFake.lineWidth = 0
-        dataSetFake.fillColor = .lightGray
+        dataSetFake.fillColor = .violet
+        dataSetFake.fillAlpha = 0.1
         dataSetFake.drawFilledEnabled = true
         dataSetFake.valueFormatter = DataSetValueFormatter()
-        dataSetFake.fillAlpha = 0.1
         
         fakeChartView.data = RadarChartData(dataSets: [dataSetFake])
         
@@ -182,21 +182,21 @@ class LifeCircleController: UIViewController {
         let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: Constants.LifeCircle.startLevelLegend)
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Constants.LifeCircle.currentLevelLegend)
         
-        dataSetStart.lineWidth = 1
-        dataSetStart.colors = [.green]
-        dataSetStart.fillColor = .green
-        dataSetStart.fillAlpha = 0.6
+        dataSetStart.lineWidth = 2
+        dataSetStart.colors = [.white]
+        dataSetStart.fillColor = .white
+        dataSetStart.fillAlpha = 0.3
         dataSetStart.drawFilledEnabled = true
         dataSetStart.valueFormatter = DataSetValueFormatter()
         
         dataSetCurrent.lineWidth = 2
-        dataSetCurrent.colors = [.red]
-        dataSetCurrent.fillColor = .orange
-        dataSetCurrent.fillAlpha = 0.2
+        dataSetCurrent.colors = [.violet]
+        dataSetCurrent.fillColor = .violet
+        dataSetCurrent.fillAlpha = 0.5
         dataSetCurrent.drawFilledEnabled = true
         dataSetCurrent.valueFormatter = DataSetValueFormatter()
         
-        chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
+        chartView.data = RadarChartData(dataSets: [dataSetCurrent, dataSetStart])
         chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
     }
 }

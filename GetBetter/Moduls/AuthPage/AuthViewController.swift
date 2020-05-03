@@ -112,7 +112,7 @@ class AuthViewController: UIViewController {
         eyeImageView.image = UIImage(named: "combinedShape")
         eyeButton.setTitle("", for: .normal)
         
-        enterView.backgroundColor = .sky
+        enterView.backgroundColor = .violet
         enterView.layer.cornerRadius = 5
         enterView.clipsToBounds = true
         enterButton.setTitle("", for: .normal)
@@ -121,12 +121,12 @@ class AuthViewController: UIViewController {
         enterLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
         
         forgotButton.setTitle(Constants.Auth.forgotPassword, for: .normal)
-        forgotButton.setTitleColor(.sky, for: .normal)
+        forgotButton.setTitleColor(.violet, for: .normal)
         forgotButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         forgotButton.titleLabel?.underline()
         
         registrationButton.setTitle(Constants.Auth.register, for: .normal)
-        registrationButton.setTitleColor(.sky, for: .normal)
+        registrationButton.setTitleColor(.violet, for: .normal)
         registrationButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         registrationButton.titleLabel?.underline()
     }

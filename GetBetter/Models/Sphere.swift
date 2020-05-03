@@ -72,7 +72,7 @@ enum Sphere: String, CaseIterable {
         .work: #colorLiteral(red: 0, green: 0.5607146621, blue: 0.3763182163, alpha: 1),
         .relax: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1),
         .creation: #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1),
-        .spirit: #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        .spirit: #colorLiteral(red: 0.6156862745, green: 0.5098039216, blue: 0.9882352941, alpha: 1)
     ]
     
     var color: UIColor {

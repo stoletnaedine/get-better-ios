@@ -75,14 +75,14 @@ class AddPostViewController: UIViewController {
     func customizeView() {
         postTextView.becomeFirstResponder()
         postTextView.font = postTextView.font?.withSize(18)
-        postTextView.placeholder = "Например: сделал зарядку, прочитал несколько глаз книги, выучил несколько иностранных слов..."
+        postTextView.placeholder = "Например: сделал зарядку, прочитал несколько глав книги, выучил несколько иностранных слов..."
         
         addPostLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
         addPostLabel.textColor = .gray
         addPostLabel.text = Constants.Post.addPost
         selectedSphereLabel.text = Constants.Post.sphereDefault
         selectedSphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
-        saveButtonView.backgroundColor = .sky
+        saveButtonView.backgroundColor = .violet
         saveButtonView.layer.cornerRadius = 10
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
