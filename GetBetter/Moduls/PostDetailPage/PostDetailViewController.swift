@@ -44,6 +44,5 @@ class PostDetailViewController: UIViewController {
         sphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
         timestampLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
         cancelButton.setTitle("✖️", for: .normal)
-        cancelButton.setTitleColor(.white, for: .normal)
     }
 }

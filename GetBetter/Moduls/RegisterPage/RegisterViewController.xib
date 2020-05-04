@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="llU-Vu-TxH" id="0xZ-MV-uWz"/>
                 <outlet property="emailLabel" destination="mL2-UJ-v9r" id="VO8-8M-zSd"/>
                 <outlet property="emailTextField" destination="OMc-X0-HHv" id="s8U-55-kYj"/>
                 <outlet property="password1Label" destination="B5w-kM-T9C" id="ZaZ-sd-q4I"/>
@@ -112,13 +113,22 @@
                         <constraint firstAttribute="trailing" secondItem="B7w-fg-S8h" secondAttribute="trailing" id="ytb-1q-9SV"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llU-Vu-TxH">
+                    <rect key="frame" x="358" y="10" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="XWa-0e-MYJ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="mL2-UJ-v9r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="01M-fA-vpf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="40E-f6-kqr" secondAttribute="trailing" constant="20" id="2Lq-5I-g97"/>
                 <constraint firstItem="Db5-qy-t0q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="7dJ-3q-wWx"/>
+                <constraint firstItem="llU-Vu-TxH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="9JJ-QS-r8A"/>
                 <constraint firstItem="hHt-Zh-945" firstAttribute="top" secondItem="40E-f6-kqr" secondAttribute="bottom" constant="10" id="APY-UF-lyg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="llU-Vu-TxH" secondAttribute="trailing" constant="10" id="AXG-h9-Toi"/>
                 <constraint firstItem="40E-f6-kqr" firstAttribute="top" secondItem="Db5-qy-t0q" secondAttribute="bottom" constant="6" id="AdE-8B-cqk"/>
                 <constraint firstAttribute="trailing" secondItem="hHt-Zh-945" secondAttribute="trailing" constant="20" id="Ffb-tP-vGd"/>
                 <constraint firstAttribute="trailing" secondItem="Vde-9X-gie" secondAttribute="trailing" constant="20" id="Jkt-S8-uSi"/>

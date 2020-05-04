@@ -21,6 +21,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerView: UIView!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var registerButtonLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +45,16 @@ class RegisterViewController: UIViewController {
                     return
                 }
                 
-                self?.navigationController?.popViewController(animated: true)
+                self?.dismiss(animated: true, completion: nil)
                 Toast(text: Constants.Auth.successRegister, delay: 1, duration: 3).show()
             })
             
             
         }
+    }
+    
+    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func customizeView() {
@@ -83,5 +88,6 @@ class RegisterViewController: UIViewController {
         registerButtonLabel.text = Constants.Auth.doRegister.uppercased()
         registerButtonLabel.textColor = .white
         registerButtonLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
+        cancelButton.setTitle("✖️", for: .normal)
     }
 }

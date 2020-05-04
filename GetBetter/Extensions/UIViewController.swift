@@ -41,10 +41,8 @@ extension UIViewController {
     
     func removeActivityIndicator() {
         DispatchQueue.main.async {
-            print("activityIndicatoriView = \(activityIndicatoriView)")
             activityIndicatoriView?.removeFromSuperview()
             activityIndicatoriView = nil
-            print("activityIndicatoriView = \(activityIndicatoriView)")
         }
     }
 }

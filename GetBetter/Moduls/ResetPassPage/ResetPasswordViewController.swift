@@ -18,6 +18,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var resetPasswordButtonLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +28,8 @@ class ResetPasswordViewController: UIViewController {
 
     @IBAction func resetPasswordButtonDidPressed(_ sender: UIButton) {
         
-        guard let email = emailTextField.text,
-            !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+        guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !email.isEmpty else {
                 Toast(text: "Введите email").show()
                 return
         }
@@ -45,6 +46,10 @@ class ResetPasswordViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         })
+    }
+    
+    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func customizeView() {
@@ -66,5 +71,6 @@ class ResetPasswordViewController: UIViewController {
         resetPasswordButtonLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
         descriptionLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
         descriptionLabel.text = "На указанный email придёт ссылка, пройдя по которой вы сможете изменить пароль."
+        cancelButton.setTitle("✖️", for: .normal)
     }
 }

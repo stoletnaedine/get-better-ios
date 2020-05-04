@@ -67,12 +67,14 @@ class AuthViewController: UIViewController {
     
     @IBAction func forgotPasswordDidPressed(_ sender: UIButton) {
         let resetPasswordViewController = ResetPasswordViewController()
+        resetPasswordViewController.modalPresentationStyle = .formSheet
         present(resetPasswordViewController, animated: true, completion: nil)
     }
     
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
         let registerViewController = RegisterViewController()
-        self.navigationController?.pushViewController(registerViewController, animated: true)
+        registerViewController.modalPresentationStyle = .formSheet
+        present(registerViewController, animated: true, completion: nil)
     }
     
     func customizeView() {
