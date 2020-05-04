@@ -14,14 +14,22 @@ class FirebaseDatabaseService {
     
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
+    let usersPath = "users"
+    
+    func currentUserPath() -> DatabaseReference? {
+        guard let userId = user?.uid else { return nil }
+        
+        return ref
+            .child(usersPath)
+            .child(userId)
+    }
     
     func savePost(_ post: Post) -> Bool {
         
-        guard let userId = user?.uid else { return false }
+        guard let ref = currentUserPath() else { return false }
         
         ref
             .child(Constants.Post.Field.post)
-            .child(userId)
             .childByAutoId()
             .setValue([
                 Constants.Post.Field.text: post.text ?? "" as Any,
@@ -34,11 +42,10 @@ class FirebaseDatabaseService {
     
     func deletePost(_ post: Post) -> Bool {
         
-        guard let userId = user?.uid else { return false }
+        guard let ref = currentUserPath() else { return false }
         
         ref
             .child(Constants.Post.Field.post)
-            .child(userId)
             .child(post.id ?? "")
             .removeValue()
         
@@ -52,11 +59,10 @@ class FirebaseDatabaseService {
     
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void) {
         
-        guard let user = user else { return }
+        guard let ref = currentUserPath() else { return }
         
         ref
             .child(Constants.Post.Field.post)
-            .child(user.uid)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 let value = snapshot.value as? NSDictionary
@@ -92,11 +98,10 @@ class FirebaseDatabaseService {
     
     func saveSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
         
-        guard let userId = user?.uid else { return false }
+        guard let ref = currentUserPath() else { return false }
         
         ref
             .child(pathToSave)
-            .child(userId)
             .setValue(sphereMetrics.values)
         
         return true
@@ -104,11 +109,10 @@ class FirebaseDatabaseService {
     
     func updateSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
             
-            guard let userId = user?.uid else { return false }
+            guard let ref = currentUserPath() else { return false }
             
             ref
                 .child(pathToSave)
-                .child(userId)
                 .updateChildValues(sphereMetrics.values)
             
             return true
@@ -116,11 +120,10 @@ class FirebaseDatabaseService {
     
     func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
         
-        guard let userId = user?.uid else { return }
+        guard let ref = currentUserPath() else { return }
         
         ref
             .child(path)
-            .child(userId)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 if let value = snapshot.value as? NSDictionary {
