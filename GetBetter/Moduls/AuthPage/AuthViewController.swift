@@ -35,6 +35,13 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         customizeView()
+        
+        // Пока не реализован вход через соцсети
+        description1Label.isHidden = true
+        description2Label.isHidden = true
+        icon1ImageView.isHidden = true
+        icon2ImageView.isHidden = true
+        icon3ImageView.isHidden = true
     }
     
     @IBAction func eyeButtonDidPressed(_ sender: UIButton) {

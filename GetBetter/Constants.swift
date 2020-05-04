@@ -41,7 +41,7 @@ struct Constants {
     
     struct Auth {
         static let authTitleVC = "Авторизация"
-        static let description1 = "Войдите в приложение через социальные сети (пока не доступно)"
+        static let description1 = "Войдите в приложение через социальные сети"
         static let description2 = "или авторизуйтесь ниже"
         static let email = "Email"
         static let enterEmail = "Введите Email"
