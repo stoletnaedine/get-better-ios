@@ -87,8 +87,8 @@
 		6E5A98512455FDF5001F8008 /* AboutCircleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutCircleViewController.xib; path = GetBetter/Moduls/SettingsPage/AboutCirclePage/AboutCircleViewController.xib; sourceTree = SOURCE_ROOT; };
 		6E5A985324560438001F8008 /* AboutJournalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutJournalViewController.swift; path = GetBetter/Moduls/SettingsPage/AboutJournalPage/AboutJournalViewController.swift; sourceTree = SOURCE_ROOT; };
 		6E5A985524560447001F8008 /* AboutJournalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutJournalViewController.xib; path = GetBetter/Moduls/SettingsPage/AboutJournalPage/AboutJournalViewController.xib; sourceTree = SOURCE_ROOT; };
-		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = GetBetter/Moduls/RegisterPage/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
-		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = GetBetter/Moduls/RegisterPage/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = GetBetter/Moduls/ResetPassPage/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
+		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = GetBetter/Moduls/ResetPassPage/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
 		6E5BE1F8245F078400964C99 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		6E7071F2245C474D00ED7D08 /* SphereValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereValue.swift; sourceTree = "<group>"; };
 		6E9E01BA24545A690083499E /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
@@ -179,13 +179,13 @@
 			path = SphereMetricsCell;
 			sourceTree = "<group>";
 		};
-		6E5AE64224601D8700418B23 /* ResetPasswordPage */ = {
+		6E5AE648246028E100418B23 /* ResetPassPage */ = {
 			isa = PBXGroup;
 			children = (
 				6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */,
 				6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */,
 			);
-			path = ResetPasswordPage;
+			path = ResetPassPage;
 			sourceTree = "<group>";
 		};
 		6E5AFCD32450C06800F283C4 /* AddPostPage */ = {
@@ -326,7 +326,7 @@
 				C39A321C2457109A005D2EDF /* SettingsPage */,
 				C33AD1D9245191A500A08006 /* StartPage */,
 				C39423D524404E6F0060CF50 /* AuthPage */,
-				6E5AE64224601D8700418B23 /* ResetPasswordPage */,
+				6E5AE648246028E100418B23 /* ResetPassPage */,
 				C328EE022447291200445704 /* RegisterPage */,
 				C3724EC923AFAC5800D49AD6 /* LifeCirclePage */,
 				C3724ECA23AFAC5D00D49AD6 /* JournalPage */,
