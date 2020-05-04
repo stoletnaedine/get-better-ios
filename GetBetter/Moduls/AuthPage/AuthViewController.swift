@@ -63,12 +63,10 @@ class AuthViewController: UIViewController {
 
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
-                    return
+                } else {
+                    let _ = KeychainHelper.saveCredentials(email: email)
+                    self?.completion()
                 }
-                
-                let _ = KeychainHelper.saveCredentials(email: email)
-                
-                self?.completion()
             })
         }
     }
@@ -87,18 +85,13 @@ class AuthViewController: UIViewController {
     
     @IBAction func anonymButtonDidTap(_ sender: UIButton) {
         
-        self.showActivityIndicator(onView: self.view)
-        
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
-            
-            self?.removeActivityIndicator()
             
             if let error = error {
                 Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
-                return
+            } else {
+                self?.completion()
             }
-            
-            self?.completion()
         })
     }
     

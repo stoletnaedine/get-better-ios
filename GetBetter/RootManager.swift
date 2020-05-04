@@ -50,8 +50,7 @@ class RootManager {
     }
     
     @objc func showTabBarController() {
-        let tabBarController = TabBarController()
-        window?.rootViewController = tabBarController
+        window?.rootViewController = TabBarController()
     }
     
     @objc func showPageViewController() {

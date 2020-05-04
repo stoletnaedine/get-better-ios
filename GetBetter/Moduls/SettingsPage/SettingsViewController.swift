@@ -37,8 +37,7 @@ class SettingsViewController: UIViewController {
     }
     
     @objc func loadProfileAndReloadTableView() {
-        loadProfileInfo(completion: { [weak self] name, email, avatar in
-            let profile = Profile(avatar: avatar, name: name, email: email)
+        loadProfileInfo(completion: { [weak self] profile in
             self?.profile = profile
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
@@ -55,20 +54,15 @@ class SettingsViewController: UIViewController {
         ]
     }
     
-    func loadProfileInfo(completion: @escaping ((_ name: String, _ mail: String, _ avatar: UIImage?) -> Void)) {
+    func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
         
         guard let user = Auth.auth().currentUser else { return }
         
-        var name = ""
-        var email = ""
-        var avatar: UIImage?
-        
-        if user.isAnonymous {
-            name = "Аноним"
-            email = "Без email"
-        }
-        
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global().async {
+            var name = "Анонимный пользователь"
+            var email = "Email не указан"
+            var avatar: UIImage?
+            
             if let userName = user.displayName {
                 name = userName
             }
@@ -81,7 +75,7 @@ class SettingsViewController: UIViewController {
                 avatar = loadedAvatar
             }
             DispatchQueue.main.async {
-                completion(name, email, avatar)
+                completion(Profile(avatar: avatar, name: name, email: email))
             }
         }
     }

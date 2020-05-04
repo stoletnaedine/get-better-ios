@@ -13,6 +13,7 @@
                 <outlet property="avatarButton" destination="DoZ-n2-aox" id="DdU-T9-VpY"/>
                 <outlet property="avatarImageView" destination="lcV-6R-raK" id="d8A-2Q-Vlt"/>
                 <outlet property="avatarView" destination="RxO-6g-uQ5" id="HTm-zl-qbn"/>
+                <outlet property="deleteAccountButton" destination="ldU-h1-AoD" id="5nX-K8-8tT"/>
                 <outlet property="emailLabel" destination="nuf-To-UEE" id="B0w-cW-SMT"/>
                 <outlet property="emailTextField" destination="GLo-Tj-2Os" id="aGl-Vk-1IY"/>
                 <outlet property="nameLabel" destination="ewl-u8-E0N" id="iie-kJ-fZy"/>
@@ -62,7 +63,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="piE-pJ-i4P">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="piE-pJ-i4P">
                     <rect key="frame" x="20" y="263" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -73,10 +74,10 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLo-Tj-2Os">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GLo-Tj-2Os">
                     <rect key="frame" x="20" y="353" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" textContentType="email"/>
+                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdL-2z-tYD">
                     <rect key="frame" x="20" y="442.5" width="374" height="21"/>
@@ -84,7 +85,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="glj-Pf-xBa">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="glj-Pf-xBa">
                     <rect key="frame" x="20" y="473.5" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" textContentType="password"/>
@@ -95,6 +96,13 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldU-h1-AoD">
+                    <rect key="frame" x="184" y="527.5" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="deleteAccountButtonDidTap:" destination="-1" eventType="touchUpInside" id="UOe-Ah-qf2"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -104,6 +112,7 @@
                 <constraint firstItem="GLo-Tj-2Os" firstAttribute="top" secondItem="nuf-To-UEE" secondAttribute="bottom" constant="10" id="2vD-Dy-SON"/>
                 <constraint firstItem="glj-Pf-xBa" firstAttribute="top" secondItem="mdL-2z-tYD" secondAttribute="bottom" constant="10" id="CdD-Qp-f2z"/>
                 <constraint firstItem="Br0-BS-dIh" firstAttribute="top" secondItem="GLo-Tj-2Os" secondAttribute="bottom" constant="10" id="Gbf-Fr-mYa"/>
+                <constraint firstItem="ldU-h1-AoD" firstAttribute="top" secondItem="glj-Pf-xBa" secondAttribute="bottom" constant="20" id="HaE-9J-9Co"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Br0-BS-dIh" secondAttribute="trailing" constant="20" id="IaY-I4-QGA"/>
                 <constraint firstItem="ewl-u8-E0N" firstAttribute="top" secondItem="RxO-6g-uQ5" secondAttribute="bottom" constant="30" id="NXk-RN-5mc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nuf-To-UEE" secondAttribute="trailing" constant="20" id="RVK-Mh-gNv"/>
@@ -117,6 +126,7 @@
                 <constraint firstItem="nuf-To-UEE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="g8I-LZ-qlc"/>
                 <constraint firstItem="Br0-BS-dIh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="gJW-pr-4NC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="glj-Pf-xBa" secondAttribute="trailing" constant="20" id="haf-tc-SGU"/>
+                <constraint firstItem="ldU-h1-AoD" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="hgf-iP-bVN"/>
                 <constraint firstItem="piE-pJ-i4P" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jtQ-Xf-U4Y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GLo-Tj-2Os" secondAttribute="trailing" constant="20" id="jx3-Nz-rlk"/>
                 <constraint firstItem="piE-pJ-i4P" firstAttribute="top" secondItem="ewl-u8-E0N" secondAttribute="bottom" constant="10" id="mbC-F7-WzN"/>

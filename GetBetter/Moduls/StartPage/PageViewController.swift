@@ -14,6 +14,8 @@ class PageViewController: UIViewController {
     var viewControllers: [UIViewController] = []
     let databaseService = FirebaseDatabaseService()
     
+    let completion: () -> () = {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Constants.SetupSphere.setupTitle
@@ -80,7 +82,8 @@ class PageViewController: UIViewController {
         }
         if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start)
             && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.current) {
-            Toast(text: "Сохранено!").show()
+            
+            self.completion()
             NotificationCenter.default.post(name: .showTabBarController, object: nil)
         }
     }

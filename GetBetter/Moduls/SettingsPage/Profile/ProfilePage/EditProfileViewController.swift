@@ -24,12 +24,14 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet weak var deleteAccountButton: UIButton!
     
     let user = Auth.auth().currentUser
     let storageService = FirebaseStorageService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         self.title = Constants.Profile.editTitle
         customizeBarButon()
         customizeView()
@@ -55,51 +57,65 @@ class EditProfileViewController: UIViewController {
                         if let error = error {
                             print("Firebase commit changes error = \(error.localizedDescription)")
                             Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
-                            return
                         }
                     })
                 case .failure(let error):
                     Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
-                    return
                 }
             })
         }
         
         if let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            !name.isEmpty, name != user.displayName {
+            !name.isEmpty,
+            name != user.displayName {
+            
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = name
             changeRequest.commitChanges(completion: { error in
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
-                    return
                 }
             })
         }
         
-        if let password = passwordTextField.text, !password.isEmpty {
+        if let password = passwordTextField.text,
+            !password.isEmpty {
+            
             user.updatePassword(to: password, completion: { error in
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
-                    return
                 }
             })
         }
         
         if let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            !email.isEmpty, email != user.email {
+            !email.isEmpty,
+            email != user.email {
+            
             user.updateEmail(to: email, completion: { error in
                 if let error = error {
-                    print("\(error.localizedDescription)")
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
-                    return
+                } else {
+                    NotificationCenter.default.post(name: .logout, object: nil)
                 }
-                NotificationCenter.default.post(name: .logout, object: nil)
             })
         }
         
-        navigationController?.popViewController(animated: true)
         Toast(text: Constants.Profile.editSuccess, delay: 0.5, duration: 1).show()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func deleteAccountButtonDidTap(_ sender: UIButton) {
+        guard let user = user else { return }
+        
+        user.delete(completion: { error in
+            if let error = error {
+                Toast(text: error.localizedDescription, delay: 0, duration: 5).show()
+            } else {
+                Toast(text: "Аккаунт успешно удалён. До новых встреч!", delay: 0, duration: 5).show()
+                NotificationCenter.default.post(name: .logout, object: nil)
+            }
+        })
     }
     
     func customizeView() {
@@ -129,6 +145,10 @@ class EditProfileViewController: UIViewController {
         passwordTextField.placeholder = Constants.Profile.enterPassword
         warningLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
         warningLabel.text = Constants.Profile.warning
+        deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
+        deleteAccountButton.setTitleColor(.red, for: .normal)
+        deleteAccountButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        deleteAccountButton.titleLabel?.underline()
     }
     
     func customizeBarButon() {
