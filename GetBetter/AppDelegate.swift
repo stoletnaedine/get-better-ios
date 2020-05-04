@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let rootManager = RootManager()
     
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         FirebaseApp.configure()
+        Auth.auth().languageCode = "ru"
+        
         IQKeyboardManager.shared.enable = true
         rootManager.start()
         return true

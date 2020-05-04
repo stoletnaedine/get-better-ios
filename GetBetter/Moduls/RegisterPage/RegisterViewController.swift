@@ -47,6 +47,8 @@ class RegisterViewController: UIViewController {
                 self?.navigationController?.popViewController(animated: true)
                 Toast(text: Constants.Auth.successRegister, delay: 1, duration: 3).show()
             })
+            
+            
         }
     }
     

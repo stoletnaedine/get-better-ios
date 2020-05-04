@@ -58,7 +58,6 @@ class AuthViewController: UIViewController {
                     return
                 }
                 
-                print("authResult = \(authResult)")
                 let _ = KeychainHelper.saveCredentials(email: email)
                 
                 self?.completion()
@@ -67,7 +66,8 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func forgotPasswordDidPressed(_ sender: UIButton) {
-        Toast(text: "TODO реализовать позже").show()
+        let resetPasswordViewController = ResetPasswordViewController()
+        present(resetPasswordViewController, animated: true, completion: nil)
     }
     
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
