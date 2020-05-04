@@ -56,12 +56,18 @@ class SettingsViewController: UIViewController {
     }
     
     func loadProfileInfo(completion: @escaping ((_ name: String, _ mail: String, _ avatar: UIImage?) -> Void)) {
-        guard let user = Auth.auth().currentUser else {
-            return
-        }
+        
+        guard let user = Auth.auth().currentUser else { return }
+        
         var name = ""
         var email = ""
         var avatar: UIImage?
+        
+        if user.isAnonymous {
+            name = "Аноним"
+            email = "Без email"
+        }
+        
         DispatchQueue.global(qos: .userInteractive).async {
             if let userName = user.displayName {
                 name = userName

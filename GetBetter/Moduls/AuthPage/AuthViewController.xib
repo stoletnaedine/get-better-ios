@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
+                <outlet property="anonymButton" destination="Ljx-Yx-3Ve" id="7X9-5M-Hqm"/>
                 <outlet property="description1Label" destination="TUk-vB-wc6" id="BpW-Q2-FD8"/>
                 <outlet property="description2Label" destination="T3j-tz-cgR" id="zXM-7u-bds"/>
                 <outlet property="emailLabel" destination="63r-mi-DNe" id="xbD-Ri-WBi"/>
@@ -165,6 +166,14 @@
                         <action selector="registerButtonDidPressed:" destination="-1" eventType="touchUpInside" id="b52-SB-vxg"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-Yx-3Ve">
+                    <rect key="frame" x="164.5" y="617" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="anonymButtonDidTap:" destination="-1" eventType="touchUpInside" id="cTp-ux-GFS"/>
+                        <action selector="forgotPasswordDidPressed:" destination="-1" eventType="touchUpInside" id="Vse-y2-NQ8"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -184,6 +193,7 @@
                 <constraint firstItem="Gfm-7J-n5v" firstAttribute="top" secondItem="SSa-m3-k8D" secondAttribute="bottom" constant="20" id="MkH-Oz-0W6"/>
                 <constraint firstItem="AKX-OO-QJt" firstAttribute="bottom" secondItem="Fhy-F2-hxh" secondAttribute="bottom" id="MlI-2q-MOZ"/>
                 <constraint firstItem="5F3-Be-xeX" firstAttribute="top" secondItem="2aT-Op-CA6" secondAttribute="bottom" constant="30" id="Mlh-fG-jqF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ljx-Yx-3Ve" secondAttribute="bottom" constant="20" id="MyZ-k4-9dy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fhy-F2-hxh" secondAttribute="trailing" constant="40" id="N73-nz-5zv"/>
                 <constraint firstItem="kAj-D3-X9B" firstAttribute="leading" secondItem="o9D-Lq-Gxi" secondAttribute="trailing" constant="40" id="NXp-I0-Cr0"/>
                 <constraint firstItem="00U-eu-FlQ" firstAttribute="leading" secondItem="Fhy-F2-hxh" secondAttribute="trailing" id="PCF-Nw-e0D"/>
@@ -191,6 +201,7 @@
                 <constraint firstItem="AKX-OO-QJt" firstAttribute="leading" secondItem="Fhy-F2-hxh" secondAttribute="trailing" id="RmU-7v-ysP"/>
                 <constraint firstItem="T3j-tz-cgR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="TqK-RM-Uqc"/>
                 <constraint firstItem="SSa-m3-k8D" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Ugm-tg-8xw"/>
+                <constraint firstItem="Ljx-Yx-3Ve" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="WzI-yN-JAF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TUk-vB-wc6" secondAttribute="trailing" constant="20" id="Xui-Hm-hHt"/>
                 <constraint firstItem="x1Y-p6-RA7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aZP-Td-1zY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5F3-Be-xeX" secondAttribute="trailing" constant="20" id="bQe-8t-SIS"/>

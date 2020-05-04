@@ -28,6 +28,7 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var enterLabel: UILabel!
     @IBOutlet weak var forgotButton: UIButton!
     @IBOutlet weak var registrationButton: UIButton!
+    @IBOutlet weak var anonymButton: UIButton!
     
     var completion: (() -> ()) = {}
     
@@ -57,7 +58,7 @@ class AuthViewController: UIViewController {
             self.showActivityIndicator(onView: self.view)
 
             Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
-
+                
                 self?.removeActivityIndicator()
 
                 if let error = error {
@@ -82,6 +83,23 @@ class AuthViewController: UIViewController {
         let registerViewController = RegisterViewController()
         registerViewController.modalPresentationStyle = .formSheet
         present(registerViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func anonymButtonDidTap(_ sender: UIButton) {
+        
+        self.showActivityIndicator(onView: self.view)
+        
+        Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
+            
+            self?.removeActivityIndicator()
+            
+            if let error = error {
+                Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                return
+            }
+            
+            self?.completion()
+        })
     }
     
     func customizeView() {
@@ -122,7 +140,6 @@ class AuthViewController: UIViewController {
         eyeButton.setTitle("", for: .normal)
         
         enterView.backgroundColor = .violet
-        enterView.layer.cornerRadius = 5
         enterView.clipsToBounds = true
         enterButton.setTitle("", for: .normal)
         enterLabel.text = Constants.Auth.enter.uppercased()
@@ -138,5 +155,10 @@ class AuthViewController: UIViewController {
         registrationButton.setTitleColor(.violet, for: .normal)
         registrationButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         registrationButton.titleLabel?.underline()
+        
+        anonymButton.setTitle("Продолжить без регистрации", for: .normal)
+        anonymButton.setTitleColor(.violet, for: .normal)
+        anonymButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        anonymButton.titleLabel?.underline()
     }
 }
