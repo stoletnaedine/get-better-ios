@@ -25,13 +25,14 @@ class JournalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Constants.TabBar.journalTitle
+        
         setupRefreshControl()
         registerCell()
         setupBarButton()
-        self.showActivityIndicator(onView: self.view)
+        
+        self.title = "Загрузка"
         getPosts { [weak self] in
-            self?.removeActivityIndicator()
+            self?.title = Constants.TabBar.journalTitle
         }
     }
     
