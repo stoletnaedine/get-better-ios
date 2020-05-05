@@ -1,16 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "journal-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "journal.png",
+      "filename" : "getbetter-ui-tab-bar-icon-journal-46.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "getbetter-ui-tab-bar-icon-journal-69.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

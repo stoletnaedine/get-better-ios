@@ -1,16 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "circle-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "circle.png",
+      "filename" : "getbetter-ui-tab-bar-icon-wheel-50.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "getbetter-ui-tab-bar-icon-wheel-75.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

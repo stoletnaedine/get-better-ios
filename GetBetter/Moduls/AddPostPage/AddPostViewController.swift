@@ -11,7 +11,7 @@ import Toaster
 
 class AddPostViewController: UIViewController {
     
-    @IBOutlet weak var addPostLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var selectedSphereLabel: UILabel!
     @IBOutlet weak var saveButtonView: UIView!
@@ -39,7 +39,7 @@ class AddPostViewController: UIViewController {
                 return
         }
         
-        let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp)
+        let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, picUrl: nil)
         
         if databaseService.savePost(post) {
             databaseService.incrementSphereValue(for: sphere)
@@ -75,11 +75,11 @@ class AddPostViewController: UIViewController {
     func customizeView() {
         postTextView.becomeFirstResponder()
         postTextView.font = postTextView.font?.withSize(18)
-        postTextView.placeholder = "Например: сделал зарядку, прочитал несколько глав книги, выучил несколько иностранных слов..."
+        postTextView.placeholder = "Опишите событие, которое сегодня сделало вас лучше. Например: сделал зарядку, прочитал несколько глав книги, выучил несколько иностранных слов..."
         
-        addPostLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
-        addPostLabel.textColor = .gray
-        addPostLabel.text = Constants.Post.addPost
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        titleLabel.textColor = .violet
+        titleLabel.text = "Дневник"
         selectedSphereLabel.text = Constants.Post.sphereDefault
         selectedSphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
         saveButtonView.backgroundColor = .violet

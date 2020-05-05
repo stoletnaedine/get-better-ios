@@ -83,7 +83,8 @@ class FirebaseDatabaseService {
                         let post = Post(id: id as? String ?? "",
                                         text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
                                         sphere: maybeSphere,
-                                        timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0)
+                                        timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0,
+                                        picUrl: entity?["picUrl"] as? String ?? "")
                         
                         postArray.append(post)
                     }

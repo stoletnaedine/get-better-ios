@@ -2,21 +2,21 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icons8-settings-50.png",
       "scale" : "1x"
     },
     {
+      "filename" : "getbetter-ui-tab-bar-icon-settings-50.png",
       "idiom" : "universal",
-      "filename" : "icons8-settings-51.png",
       "scale" : "2x"
     },
     {
+      "filename" : "getbetter-ui-tab-bar-icon-settings-75.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
