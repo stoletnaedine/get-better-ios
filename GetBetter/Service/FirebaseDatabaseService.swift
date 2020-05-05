@@ -159,37 +159,60 @@ class FirebaseDatabaseService {
                 }
                 
             case .failure(let error):
-                print("error=\(error)")
-                return
+                print("incrementSphereValue error=\(error)")
             }
         })
     }
     
     func decrementSphereValue(for sphere: Sphere) {
         
-        getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
-            
-            let diffValue = 0.1
-            let minValue = 0.0
+        let dispatchGroup = DispatchGroup()
+        var startSphereMetrics: SphereMetrics?
+        
+        dispatchGroup.enter()
+        getSphereMetrics(from: Constants.SphereMetrics.start, completion: { result in
                             
             switch result {
             case .success(let sphereMetrics):
                 
-                var newValues = sphereMetrics.values
-                
-                if let currentValue = newValues[sphere.rawValue],
-                    currentValue > minValue {
-                    newValues[sphere.rawValue] = (currentValue * 10 - diffValue * 10) / 10
-                    let newSphereMetrics = SphereMetrics(values: newValues)
-                    
-                    let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
-                    print("saveResult for \(sphere.rawValue)=\(String(describing: saveResult))")
-                }
+                startSphereMetrics = sphereMetrics
+                dispatchGroup.leave()
                 
             case .failure(let error):
-                print("error=\(error)")
-                return
+                print("Get start metrics error=\(error)")
+                dispatchGroup.leave()
             }
+        })
+        
+        dispatchGroup.notify(queue: .global(), execute: { [weak self] in
+            
+            self?.getSphereMetrics(from: Constants.SphereMetrics.current, completion: { result in
+                
+                let diffValue = 0.1
+                let minValue = 0.0
+                                
+                switch result {
+                case .success(let sphereMetrics):
+                    
+                    var newValues = sphereMetrics.values
+                    
+                    guard let startSphereMetrics = startSphereMetrics else { return }
+                    guard let startValue = startSphereMetrics.values[sphere.rawValue] else { return }
+                    
+                    if let currentValue = newValues[sphere.rawValue],
+                        currentValue > minValue,
+                        currentValue > startValue {
+                        newValues[sphere.rawValue] = (currentValue * 10 - diffValue * 10) / 10
+                        let newSphereMetrics = SphereMetrics(values: newValues)
+                        
+                        let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                        print("saveResult for \(sphere.rawValue)=\(String(describing: saveResult))")
+                    }
+                    
+                case .failure(let error):
+                    print("decrementSphereValue error=\(error)")
+                }
+            })
         })
     }
 }
