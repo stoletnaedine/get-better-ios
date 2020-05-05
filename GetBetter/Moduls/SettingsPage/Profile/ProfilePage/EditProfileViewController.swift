@@ -48,7 +48,7 @@ class EditProfileViewController: UIViewController {
         guard let user = user else { return }
         
         if let avatar = avatarImageView.image {
-            storageService.upload(currentUserId: user.uid, photo: avatar, completion: { result in
+            storageService.upload(photo: avatar, completion: { result in
                 switch result {
                 case .success(let url):
                     let changeRequest = user.createProfileChangeRequest()

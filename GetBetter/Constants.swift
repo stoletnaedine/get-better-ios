@@ -35,7 +35,7 @@ struct Constants {
     
     struct TabBar {
         static let lifeCircleTitle = "Колесо жизни"
-        static let journalTitle = "События"
+        static let journalTitle = "Дневник"
         static let settingsTitle = "Настройки"
     }
     
@@ -79,7 +79,6 @@ struct Constants {
         static let password = "Пароль"
         static let enterPassword = "Введите новый пароль"
         static let loadAvatar = "Загрузить аватар"
-        static let avatarsDirectory = "avatars"
         static let warning = "При смене Email необходимо заново войти в приложение"
         static let editSuccess = "Профиль успешно обновлен.\nЧтобы увидеть изменения, обновите профиль"
         static let loading = "Подождите, идет загрузка"

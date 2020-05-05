@@ -9,17 +9,53 @@
 import Foundation
 import UIKit
 import FirebaseStorage
+import FirebaseAuth
 
 class FirebaseStorageService {
     
-    func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
+    let metadata = StorageMetadata()
+    let contentType = "image/jpeg"
+    let avatarsPath = "avatars"
+    let picsPath = "pics"
+    let uuidString: String = UUID().uuidString
+    
+    func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
+        
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         
         let ref = Storage.storage().reference()
-            .child(Constants.Profile.avatarsDirectory)
-            .child(currentUserId)
+            .child(avatarsPath)
+            .child(userId)
         
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
+        metadata.contentType = contentType
+        
+        guard let imageData = photo.jpegData(compressionQuality: 0.1) else { return }
+        
+        ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
+            guard let _ = metadata else {
+                completion(.failure(AppError(error: error)!))
+                return
+            }
+            ref.downloadURL(completion: { (url, error) in
+                guard let url = url else {
+                    completion(.failure(AppError(error: error)!))
+                    return
+                }
+                completion(.success(url))
+            })
+        })
+    }
+    
+    func upload(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
+        
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        
+        let ref = Storage.storage().reference()
+            .child(picsPath)
+            .child(userId)
+            .child(uuidString)
+        
+        metadata.contentType = contentType
         
         guard let imageData = photo.jpegData(compressionQuality: 0.1) else { return }
         
