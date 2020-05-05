@@ -17,6 +17,10 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var saveButtonView: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var attachButton: UIButton!
+    @IBOutlet weak var symbolsCountLabel: UILabel!
+    @IBOutlet weak var sphereView: UIView!
     
     var selectedSphere: Sphere?
     let databaseService = FirebaseDatabaseService()
@@ -54,6 +58,9 @@ class AddPostViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func attachButtonDidTapped(_ sender: UIButton) {
+    }
+    
     func registerTapForSelectedSphereLabel() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
         selectedSphereLabel.isUserInteractionEnabled = true
@@ -80,14 +87,19 @@ class AddPostViewController: UIViewController {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textColor = .violet
         titleLabel.text = "Дневник"
+        selectedSphereLabel.textColor = .violet
         selectedSphereLabel.text = Constants.Post.sphereDefault
-        selectedSphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
+        selectedSphereLabel.font = UIFont.boldSystemFont(ofSize: 18)
         saveButtonView.backgroundColor = .violet
-        saveButtonView.layer.cornerRadius = 10
+        saveButtonView.layer.cornerRadius = 20
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
-        saveButton.titleLabel?.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
+        saveButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         cancelButton.setTitle("", for: .normal)
+        sphereView.layer.cornerRadius = 20
+        sphereView.layer.borderWidth = 3
+        sphereView.layer.borderColor = UIColor.violet.cgColor
+        
     }
 }
 
