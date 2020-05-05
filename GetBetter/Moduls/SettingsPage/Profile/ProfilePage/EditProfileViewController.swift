@@ -107,15 +107,23 @@ class EditProfileViewController: UIViewController {
     
     @IBAction func deleteAccountButtonDidTap(_ sender: UIButton) {
         guard let user = user else { return }
+    
+        let alert = UIAlertController(title: "Удаление аккаунта", message: "Аккаунт и все связанные с ним данные будут безвозвратно удалены. Вы хотите удалить свой аккаунт?", preferredStyle: .alert)
         
-        user.delete(completion: { error in
-            if let error = error {
-                Toast(text: error.localizedDescription, delay: 0, duration: 5).show()
-            } else {
-                Toast(text: "Аккаунт успешно удалён. До новых встреч!", delay: 0, duration: 5).show()
-                NotificationCenter.default.post(name: .logout, object: nil)
-            }
-        })
+        alert.addAction(UIAlertAction(title: "Да, удалить", style: .destructive, handler: { _ in
+            user.delete(completion: { error in
+                if let error = error {
+                    Toast(text: error.localizedDescription, delay: 0, duration: 5).show()
+                } else {
+                    Toast(text: "Аккаунт успешно удалён. До новых встреч!", delay: 0, duration: 5).show()
+                    NotificationCenter.default.post(name: .logout, object: nil)
+                }
+            })
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Нет", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func customizeView() {

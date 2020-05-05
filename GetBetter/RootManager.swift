@@ -69,7 +69,7 @@ class RootManager {
         UINavigationBar.appearance().barTintColor = .violet
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,
-                                                            NSAttributedString.Key.font: UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 21) as Any]
+                                                            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
     }
     
     func configToaster() {
