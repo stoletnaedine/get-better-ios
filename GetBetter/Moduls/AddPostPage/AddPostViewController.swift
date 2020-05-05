@@ -96,6 +96,12 @@ class AddPostViewController: UIViewController {
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         cancelButton.setTitle("", for: .normal)
+        attachButton.setTitle("", for: .normal)
+        dateLabel.font = UIFont.systemFont(ofSize: 14)
+        dateLabel.textColor = .gray
+        dateLabel.text = Date.currentDateWithRusWeekday()
+        symbolsCountLabel.font = UIFont.systemFont(ofSize: 14)
+        symbolsCountLabel.textColor = .gray
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
