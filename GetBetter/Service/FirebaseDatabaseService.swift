@@ -155,7 +155,7 @@ class FirebaseDatabaseService {
                     let newSphereMetrics = SphereMetrics(values: newValues)
                     
                     let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
-                    print("saveResult for \(sphere.rawValue)=\(String(describing: saveResult))")
+                    print("incrementSphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                 }
                 
             case .failure(let error):
@@ -206,7 +206,7 @@ class FirebaseDatabaseService {
                         let newSphereMetrics = SphereMetrics(values: newValues)
                         
                         let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
-                        print("saveResult for \(sphere.rawValue)=\(String(describing: saveResult))")
+                        print("decrementSphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                     }
                     
                 case .failure(let error):
