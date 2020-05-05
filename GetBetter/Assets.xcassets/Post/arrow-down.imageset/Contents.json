@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "getbetter-ui-arrow-down.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "getbetter-ui-arrow-down.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

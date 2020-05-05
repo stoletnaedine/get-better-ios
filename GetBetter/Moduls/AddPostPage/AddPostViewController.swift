@@ -19,11 +19,13 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var attachButton: UIButton!
+    @IBOutlet weak var attachImageView: UIImageView!
     @IBOutlet weak var symbolsCountLabel: UILabel!
     @IBOutlet weak var sphereView: UIView!
     
     var selectedSphere: Sphere?
     let databaseService = FirebaseDatabaseService()
+    let maxSymbolsCount: Int = 300
     
     var completion: () -> () = {}
     
@@ -47,7 +49,7 @@ class AddPostViewController: UIViewController {
         
         if databaseService.savePost(post) {
             databaseService.incrementSphereValue(for: sphere)
-            Toast(text: "\(Constants.Post.postSavedSuccess)\nСфера \(sphere.icon) \(sphere.name) увеличилась на 0,1 балла!", delay: 0, duration: 3).show()
+            Toast(text: "\(Constants.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
         }
         
         completion()
@@ -80,9 +82,10 @@ class AddPostViewController: UIViewController {
     }
     
     func customizeView() {
+        postTextView.delegate = self
         postTextView.becomeFirstResponder()
         postTextView.font = postTextView.font?.withSize(18)
-        postTextView.placeholder = "Опишите событие, которое сегодня сделало вас лучше. Например: сделал зарядку, прочитал несколько глав книги, выучил несколько иностранных слов..."
+        //postTextView.placeholder = "Опишите событие, которое сегодня сделало вас лучше. Например: сделал зарядку, прочитал несколько глав книги, выучил несколько иностранных слов..."
         
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textColor = .violet
@@ -102,10 +105,12 @@ class AddPostViewController: UIViewController {
         dateLabel.text = Date.currentDateWithRusWeekday()
         symbolsCountLabel.font = UIFont.systemFont(ofSize: 14)
         symbolsCountLabel.textColor = .gray
+        symbolsCountLabel.text = "\(postTextView.text.count)/\(maxSymbolsCount)"
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
-        
+//        attachImageView.image = attachImageView.image?.withRenderingMode(.alwaysTemplate)
+//        attachImageView.tintColor = .violet
     }
 }
 
@@ -128,5 +133,23 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let sphere = Sphere.allCases[row]
         selectedSphere = sphere
         selectedSphereLabel.text = sphere.name
+    }
+}
+
+extension AddPostViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let currentTextCount = postTextView.text.count
+        symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        if text.count > maxSymbolsCount {
+            Toast(text: "Не более \(maxSymbolsCount) символов").show()
+        }
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+        return updatedText.count <= maxSymbolsCount
     }
 }

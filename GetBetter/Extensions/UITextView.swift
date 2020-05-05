@@ -47,7 +47,7 @@ extension UITextView: UITextViewDelegate {
             let labelX = self.textContainer.lineFragmentPadding
             let labelY = self.textContainerInset.top - 10
             let labelWidth = self.frame.width - (labelX * 2)
-            let labelHeight = placeholderLabel.frame.height * 4
+            let labelHeight = placeholderLabel.frame.height * 5
             
             placeholderLabel.numberOfLines = 0
             placeholderLabel.frame = CGRect(x: labelX, y: labelY, width: labelWidth, height: labelHeight)

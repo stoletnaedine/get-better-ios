@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddPostViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="attachButton" destination="kDR-MY-RhO" id="Jji-vQ-wGh"/>
+                <outlet property="attachImageView" destination="QFF-em-lVD" id="so6-tS-l5l"/>
                 <outlet property="cancelButton" destination="QdY-07-83M" id="ToA-Tw-H1K"/>
                 <outlet property="dateLabel" destination="EdK-CD-Y8S" id="9kl-0w-jNK"/>
                 <outlet property="postTextView" destination="sLD-WP-KS7" id="pAl-6V-DAG"/>
@@ -73,23 +74,23 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eP-dz-X34" userLabel="DateAttachView">
-                    <rect key="frame" x="15" y="211" width="384" height="35"/>
+                    <rect key="frame" x="15" y="211" width="384" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jt-fo-bWH" userLabel="BottomLineView">
-                            <rect key="frame" x="0.0" y="34" width="384" height="1"/>
+                            <rect key="frame" x="0.0" y="39" width="384" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="uqA-Zk-AGr"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdK-CD-Y8S" userLabel="DateLabel">
-                            <rect key="frame" x="10" y="7" width="42" height="21"/>
+                            <rect key="frame" x="10" y="9.6666666666666572" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Al-Gr6" userLabel="AttachView">
-                            <rect key="frame" x="297" y="7.6666666666666572" width="20" height="20"/>
+                            <rect key="frame" x="294" y="10" width="20" height="20"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attach" translatesAutoresizingMaskIntoConstraints="NO" id="QFF-em-lVD">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -117,7 +118,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIe-nL-Fw3">
-                            <rect key="frame" x="332" y="7" width="42" height="21"/>
+                            <rect key="frame" x="332" y="9.6666666666666572" width="42" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -127,18 +128,18 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="1jt-fo-bWH" secondAttribute="bottom" id="DAr-aA-T2Y"/>
                         <constraint firstItem="mIe-nL-Fw3" firstAttribute="centerY" secondItem="0eP-dz-X34" secondAttribute="centerY" id="EMV-Wo-Pxf"/>
-                        <constraint firstAttribute="height" constant="35" id="GDM-dY-YeO"/>
+                        <constraint firstAttribute="height" constant="40" id="GDM-dY-YeO"/>
                         <constraint firstItem="4Tm-Al-Gr6" firstAttribute="centerY" secondItem="0eP-dz-X34" secondAttribute="centerY" id="NeL-2U-UPP"/>
+                        <constraint firstAttribute="trailing" secondItem="4Tm-Al-Gr6" secondAttribute="trailing" constant="70" id="SNN-NU-nv9"/>
                         <constraint firstItem="1jt-fo-bWH" firstAttribute="leading" secondItem="0eP-dz-X34" secondAttribute="leading" id="bcT-bV-LOa"/>
                         <constraint firstItem="EdK-CD-Y8S" firstAttribute="centerY" secondItem="0eP-dz-X34" secondAttribute="centerY" id="bqL-DO-Qob"/>
                         <constraint firstAttribute="trailing" secondItem="mIe-nL-Fw3" secondAttribute="trailing" constant="10" id="gw0-Yv-FWK"/>
                         <constraint firstItem="EdK-CD-Y8S" firstAttribute="leading" secondItem="0eP-dz-X34" secondAttribute="leading" constant="10" id="qb8-CC-11g"/>
-                        <constraint firstItem="mIe-nL-Fw3" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="trailing" constant="15" id="seq-wg-utb"/>
                         <constraint firstAttribute="trailing" secondItem="1jt-fo-bWH" secondAttribute="trailing" id="wuh-Op-UXG"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-Zb-BWf" userLabel="SphereView">
-                    <rect key="frame" x="80" y="278" width="254" height="40"/>
+                    <rect key="frame" x="80" y="283" width="254" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WtA-Yu-iAq" userLabel="NameArrowView">
                             <rect key="frame" x="96.333333333333343" y="9.9999999999999982" width="61.666666666666657" height="20.333333333333329"/>
@@ -176,7 +177,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7W-yF-nBF" userLabel="SaveView">
-                    <rect key="frame" x="80" y="348" width="254" height="40"/>
+                    <rect key="frame" x="80" y="353" width="254" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4Y-RJ-AVC">
                             <rect key="frame" x="0.0" y="0.0" width="254" height="40"/>

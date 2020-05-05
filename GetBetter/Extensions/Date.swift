@@ -34,7 +34,7 @@ extension Date {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd MMM YYYY"
+        dayTimePeriodFormatter.dateFormat = "dd MMM"
         let dateFormat = dayTimePeriodFormatter.string(from: date as Date)
         let calendar = Calendar(identifier: .gregorian)
         let weekdayIndex = calendar.component(.weekday, from: date)
