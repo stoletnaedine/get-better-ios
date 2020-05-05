@@ -88,6 +88,6 @@ class RegisterViewController: UIViewController {
         registerButtonLabel.text = Constants.Auth.doRegister.uppercased()
         registerButtonLabel.textColor = .white
         registerButtonLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
-        cancelButton.setTitle("✖️", for: .normal)
+        cancelButton.setTitle("", for: .normal)
     }
 }

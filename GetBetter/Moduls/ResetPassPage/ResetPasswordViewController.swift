@@ -71,6 +71,6 @@ class ResetPasswordViewController: UIViewController {
         resetPasswordButtonLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
         descriptionLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
         descriptionLabel.text = "На указанный email придёт ссылка, пройдя по которой вы сможете изменить пароль."
-        cancelButton.setTitle("✖️", for: .normal)
+        cancelButton.setTitle("", for: .normal)
     }
 }

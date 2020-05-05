@@ -87,7 +87,7 @@ class AddPostViewController: UIViewController {
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
-        cancelButton.setTitle("✖️", for: .normal)
+        cancelButton.setTitle("", for: .normal)
     }
 }
 
