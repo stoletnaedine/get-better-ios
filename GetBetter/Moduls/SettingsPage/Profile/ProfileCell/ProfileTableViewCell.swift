@@ -36,7 +36,6 @@ class ProfileTableViewCell: UITableViewCell {
         nameLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 20)
         emailLabel.text = Constants.Profile.loading
         emailLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
-        
     }
     
 }

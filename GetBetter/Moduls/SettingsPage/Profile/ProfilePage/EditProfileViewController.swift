@@ -48,7 +48,7 @@ class EditProfileViewController: UIViewController {
         guard let user = user else { return }
         
         if let avatar = avatarImageView.image {
-            storageService.upload(photo: avatar, completion: { result in
+            storageService.uploadAvatar(photo: avatar, completion: { result in
                 switch result {
                 case .success(let url):
                     let changeRequest = user.createProfileChangeRequest()
@@ -167,8 +167,7 @@ class EditProfileViewController: UIViewController {
 
 extension EditProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         avatarImageView.image = image

@@ -14,6 +14,7 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var photoImageView: UIImageView!
     
     var post: Post?
     
@@ -37,6 +38,17 @@ class PostDetailViewController: UIViewController {
         if let timestamp = post.timestamp {
             self.timestampLabel.text = Date.convertToFullDate(from: timestamp)
         }
+        DispatchQueue.global().async { [weak self] in
+            if let urlString = post.picUrl,
+                let url = URL(string: urlString),
+                let imageData = try? Data(contentsOf: url),
+                let image = UIImage(data: imageData) {
+                DispatchQueue.main.async {
+                    self?.photoImageView.image = image
+                    self?.photoImageView.isHidden = false
+                }
+            }
+        }
     }
     
     func customizeView() {
@@ -44,5 +56,6 @@ class PostDetailViewController: UIViewController {
         sphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
         timestampLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
         cancelButton.setTitle("", for: .normal)
+        photoImageView.isHidden = true
     }
 }

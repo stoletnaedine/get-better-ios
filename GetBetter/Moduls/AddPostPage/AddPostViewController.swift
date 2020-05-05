@@ -22,9 +22,9 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var attachImageView: UIImageView!
     @IBOutlet weak var symbolsCountLabel: UILabel!
     @IBOutlet weak var sphereView: UIView!
+    @IBOutlet weak var photoImageView: UIImageView!
     
     var selectedSphere: Sphere?
-    let databaseService = FirebaseDatabaseService()
     let maxSymbolsCount: Int = 300
     
     var completion: () -> () = {}
@@ -37,6 +37,17 @@ class AddPostViewController: UIViewController {
         customizeView()
     }
     
+    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func attachButtonDidTapped(_ sender: UIButton) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         guard let text = postTextView.text,
             !text.isEmpty,
@@ -45,22 +56,35 @@ class AddPostViewController: UIViewController {
                 return
         }
         
-        let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, picUrl: nil)
+        var photoUrl: String?
+        let dispatchGroup = DispatchGroup()
         
-        if databaseService.savePost(post) {
-            databaseService.incrementSphereValue(for: sphere)
-            Toast(text: "\(Constants.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
+        dispatchGroup.enter()
+        if let photo = photoImageView.image {
+            FirebaseStorageService().upload(photo: photo, completion: { result in
+                switch result {
+                case .success(let url):
+                    photoUrl = "\(url)"
+                    dispatchGroup.leave()
+                default:
+                    dispatchGroup.leave()
+                }
+            })
+        } else {
+            dispatchGroup.leave()
         }
         
-        completion()
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func attachButtonDidTapped(_ sender: UIButton) {
+        dispatchGroup.notify(queue: .global(), execute: {
+            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, picUrl: photoUrl)
+            let _ = FirebaseDatabaseService().savePost(post)
+            FirebaseDatabaseService().incrementSphereValue(for: sphere)
+            
+            DispatchQueue.main.async { [weak self] in
+                Toast(text: "\(Constants.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
+                self?.completion()
+                self?.dismiss(animated: true, completion: nil)
+            }
+        })
     }
     
     func registerTapForSelectedSphereLabel() {
@@ -87,6 +111,7 @@ class AddPostViewController: UIViewController {
         postTextView.font = postTextView.font?.withSize(18)
         //postTextView.placeholder = "Опишите событие, которое сегодня сделало вас лучше. Например: сделал зарядку, прочитал несколько глав книги, выучил несколько иностранных слов..."
         
+        photoImageView.isHidden = true
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textColor = .violet
         titleLabel.text = "Дневник"
@@ -109,8 +134,6 @@ class AddPostViewController: UIViewController {
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
-//        attachImageView.image = attachImageView.image?.withRenderingMode(.alwaysTemplate)
-//        attachImageView.tintColor = .violet
     }
 }
 
@@ -151,5 +174,16 @@ extension AddPostViewController: UITextViewDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
         return updatedText.count <= maxSymbolsCount
+    }
+}
+
+extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        photoImageView.image = image
+        photoImageView.isHidden = false
+        attachImageView.isHidden = true
     }
 }

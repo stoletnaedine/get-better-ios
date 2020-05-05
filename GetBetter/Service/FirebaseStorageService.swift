@@ -18,6 +18,7 @@ class FirebaseStorageService {
     let avatarsPath = "avatars"
     let picsPath = "pics"
     let uuidString: String = UUID().uuidString
+    let photoQuality: CGFloat = 0.1
     
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
         
@@ -29,7 +30,7 @@ class FirebaseStorageService {
         
         metadata.contentType = contentType
         
-        guard let imageData = photo.jpegData(compressionQuality: 0.1) else { return }
+        guard let imageData = photo.jpegData(compressionQuality: photoQuality) else { return }
         
         ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {
@@ -57,7 +58,7 @@ class FirebaseStorageService {
         
         metadata.contentType = contentType
         
-        guard let imageData = photo.jpegData(compressionQuality: 0.1) else { return }
+        guard let imageData = photo.jpegData(compressionQuality: photoQuality) else { return }
         
         ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {

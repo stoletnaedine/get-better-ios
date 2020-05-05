@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostDetailViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="NaE-zu-ejL" id="iYc-6y-2wP"/>
+                <outlet property="photoImageView" destination="bi8-Sd-74i" id="3Bs-ue-OBB"/>
                 <outlet property="sphereLabel" destination="Nwm-Ht-GLd" id="zuc-5S-1fP"/>
                 <outlet property="textLabel" destination="yUo-ZQ-frE" id="RgP-hD-hzr"/>
                 <outlet property="timestampLabel" destination="xHi-Jy-d5y" id="wRh-CL-I9i"/>
@@ -68,6 +69,9 @@
                         <constraint firstAttribute="width" constant="32" id="yOQ-Ix-qgR"/>
                     </constraints>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bi8-Sd-74i">
+                    <rect key="frame" x="0.0" y="205.5" width="414" height="656.5"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -76,15 +80,19 @@
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="top" secondItem="Nwm-Ht-GLd" secondAttribute="bottom" constant="20" id="FFv-Ii-ReU"/>
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="If6-t2-FNM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xHi-Jy-d5y" secondAttribute="trailing" constant="20" id="VcJ-hc-0If"/>
+                <constraint firstItem="bi8-Sd-74i" firstAttribute="top" secondItem="yUo-ZQ-frE" secondAttribute="bottom" constant="30" id="bzE-Xj-Uuu"/>
                 <constraint firstItem="Nwm-Ht-GLd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="clf-P0-VKv"/>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="top" secondItem="xHi-Jy-d5y" secondAttribute="bottom" constant="20" id="f58-lP-WXD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bi8-Sd-74i" secondAttribute="bottom" id="mKg-N6-Nma"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUo-ZQ-frE" secondAttribute="trailing" constant="20" id="qqD-pO-tUD"/>
                 <constraint firstItem="L75-po-3ZB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="rIA-1D-GBs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bi8-Sd-74i" secondAttribute="trailing" id="rYp-ZF-nxQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="L75-po-3ZB" secondAttribute="trailing" constant="20" id="sza-kM-LPH"/>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="uL8-yq-1g8"/>
+                <constraint firstItem="bi8-Sd-74i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yZM-tp-hEe"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="139" y="153"/>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
     </objects>
     <resources>

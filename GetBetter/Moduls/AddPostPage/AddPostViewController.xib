@@ -14,6 +14,7 @@
                 <outlet property="attachImageView" destination="QFF-em-lVD" id="so6-tS-l5l"/>
                 <outlet property="cancelButton" destination="QdY-07-83M" id="ToA-Tw-H1K"/>
                 <outlet property="dateLabel" destination="EdK-CD-Y8S" id="9kl-0w-jNK"/>
+                <outlet property="photoImageView" destination="mM1-1j-B6b" id="7pQ-Ce-GOx"/>
                 <outlet property="postTextView" destination="sLD-WP-KS7" id="pAl-6V-DAG"/>
                 <outlet property="saveButton" destination="G4Y-RJ-AVC" id="PCU-mk-02P"/>
                 <outlet property="saveButtonView" destination="g7W-yF-nBF" id="PFd-fQ-4I7"/>
@@ -30,7 +31,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sLD-WP-KS7">
-                    <rect key="frame" x="20" y="71" width="374" height="120"/>
+                    <rect key="frame" x="20" y="61" width="374" height="120"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="y4Y-yR-OOI"/>
@@ -74,7 +75,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eP-dz-X34" userLabel="DateAttachView">
-                    <rect key="frame" x="15" y="211" width="384" height="40"/>
+                    <rect key="frame" x="15" y="201" width="384" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jt-fo-bWH" userLabel="BottomLineView">
                             <rect key="frame" x="0.0" y="39" width="384" height="1"/>
@@ -92,6 +93,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Al-Gr6" userLabel="AttachView">
                             <rect key="frame" x="294" y="10" width="20" height="20"/>
                             <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mM1-1j-B6b" userLabel="Photo Image View">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                </imageView>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attach" translatesAutoresizingMaskIntoConstraints="NO" id="QFF-em-lVD">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 </imageView>
@@ -108,8 +112,12 @@
                                 <constraint firstItem="kDR-MY-RhO" firstAttribute="top" secondItem="4Tm-Al-Gr6" secondAttribute="top" id="33F-QD-otA"/>
                                 <constraint firstAttribute="bottom" secondItem="kDR-MY-RhO" secondAttribute="bottom" id="HaA-2E-3JD"/>
                                 <constraint firstAttribute="width" constant="20" id="IRo-Lv-uyB"/>
+                                <constraint firstAttribute="trailing" secondItem="mM1-1j-B6b" secondAttribute="trailing" id="K5a-o1-oQy"/>
                                 <constraint firstAttribute="bottom" secondItem="QFF-em-lVD" secondAttribute="bottom" id="YxO-IT-i2G"/>
                                 <constraint firstItem="kDR-MY-RhO" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="leading" id="cCR-qg-7xv"/>
+                                <constraint firstItem="mM1-1j-B6b" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="leading" id="evf-WS-RmU"/>
+                                <constraint firstItem="mM1-1j-B6b" firstAttribute="top" secondItem="4Tm-Al-Gr6" secondAttribute="top" id="hNf-vZ-G9W"/>
+                                <constraint firstAttribute="bottom" secondItem="mM1-1j-B6b" secondAttribute="bottom" id="hyx-jS-Ry6"/>
                                 <constraint firstItem="QFF-em-lVD" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="leading" id="ltA-Xn-gHy"/>
                                 <constraint firstAttribute="trailing" secondItem="QFF-em-lVD" secondAttribute="trailing" id="m8R-fd-oxL"/>
                                 <constraint firstItem="QFF-em-lVD" firstAttribute="top" secondItem="4Tm-Al-Gr6" secondAttribute="top" id="oGY-T0-wvn"/>
@@ -139,7 +147,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-Zb-BWf" userLabel="SphereView">
-                    <rect key="frame" x="80" y="283" width="254" height="40"/>
+                    <rect key="frame" x="80" y="273" width="254" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WtA-Yu-iAq" userLabel="NameArrowView">
                             <rect key="frame" x="96.333333333333343" y="9.9999999999999982" width="61.666666666666657" height="20.333333333333329"/>
@@ -177,7 +185,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7W-yF-nBF" userLabel="SaveView">
-                    <rect key="frame" x="80" y="353" width="254" height="40"/>
+                    <rect key="frame" x="80" y="333" width="254" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4Y-RJ-AVC">
                             <rect key="frame" x="0.0" y="0.0" width="254" height="40"/>
@@ -209,10 +217,10 @@
                 <constraint firstItem="g7W-yF-nBF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="SXU-ZN-PJQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0eP-dz-X34" secondAttribute="trailing" constant="15" id="Sgo-lj-m11"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sLD-WP-KS7" secondAttribute="trailing" constant="20" id="UDw-UJ-iRB"/>
-                <constraint firstItem="g7W-yF-nBF" firstAttribute="top" secondItem="UYD-Zb-BWf" secondAttribute="bottom" constant="30" id="bkD-IK-e2z"/>
+                <constraint firstItem="g7W-yF-nBF" firstAttribute="top" secondItem="UYD-Zb-BWf" secondAttribute="bottom" constant="20" id="bkD-IK-e2z"/>
                 <constraint firstItem="0eP-dz-X34" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="hls-eI-jih"/>
                 <constraint firstItem="dYj-7l-EGR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="mDT-Ws-kqe"/>
-                <constraint firstItem="sLD-WP-KS7" firstAttribute="top" secondItem="DvL-Jo-K4r" secondAttribute="bottom" constant="30" id="sQx-iz-xK9"/>
+                <constraint firstItem="sLD-WP-KS7" firstAttribute="top" secondItem="DvL-Jo-K4r" secondAttribute="bottom" constant="20" id="sQx-iz-xK9"/>
                 <constraint firstItem="0eP-dz-X34" firstAttribute="top" secondItem="sLD-WP-KS7" secondAttribute="bottom" constant="20" id="vfT-Ov-bb8"/>
                 <constraint firstItem="DvL-Jo-K4r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="wnZ-AM-rcd"/>
             </constraints>
@@ -221,8 +229,8 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow-down" width="48" height="48"/>
-        <image name="attach" width="17.333333969116211" height="17.333333969116211"/>
+        <image name="arrow-down" width="24" height="24"/>
+        <image name="attach" width="24" height="24"/>
         <image name="cancel" width="21.333333969116211" height="21.333333969116211"/>
     </resources>
 </document>

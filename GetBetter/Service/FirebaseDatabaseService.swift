@@ -34,7 +34,8 @@ class FirebaseDatabaseService {
             .setValue([
                 Constants.Post.Field.text: post.text ?? "" as Any,
                 Constants.Post.Field.sphere: post.sphere?.rawValue ?? "",
-                Constants.Post.Field.timestamp: post.timestamp ?? ""
+                Constants.Post.Field.timestamp: post.timestamp ?? "",
+                Constants.Post.Field.picUrl: post.picUrl ?? ""
             ])
         
         return true
@@ -84,7 +85,7 @@ class FirebaseDatabaseService {
                                         text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
                                         sphere: maybeSphere,
                                         timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0,
-                                        picUrl: entity?["picUrl"] as? String ?? "")
+                                        picUrl: entity?[Constants.Post.Field.picUrl] as? String ?? "")
                         
                         postArray.append(post)
                     }
