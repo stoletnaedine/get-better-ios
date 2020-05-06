@@ -47,7 +47,7 @@ class FirebaseStorageService {
         })
     }
     
-    func upload(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
+    func upload(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
         
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
@@ -70,8 +70,27 @@ class FirebaseStorageService {
                     completion(.failure(AppError(error: error)!))
                     return
                 }
-                completion(.success(url))
+                let name = ref.name
+                completion(.success(Photo(name: name, url: url)))
             })
         })
+    }
+    
+    func delete(photoName: String) {
+        
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        
+        let photoRef = Storage.storage().reference()
+            .child(picsPath)
+            .child(userId)
+            .child(photoName)
+            
+        photoRef.delete { error in
+                if let error = error {
+                    print("Error delete file = \(photoName): \(error.localizedDescription)")
+                } else {
+                    print("File = \(photoName) successfully deleted")
+                }
+        }
     }
 }

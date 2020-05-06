@@ -50,14 +50,17 @@ class AddPostViewController: UIViewController {
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
-        guard let text = postTextView.text,
-            !text.isEmpty,
-            let sphere = selectedSphere else {
-                Toast(text: Constants.Post.emptyFieldsWarning).show()
-                return
+        guard let text = postTextView.text, !text.isEmpty else {
+            Toast(text: "Поле текста пустое").show()
+            return
+        }
+        guard let sphere = selectedSphere else {
+            Toast(text: "Выберите сферу").show()
+            return
         }
         
         var photoUrl: String?
+        var photoName: String?
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -67,8 +70,9 @@ class AddPostViewController: UIViewController {
             
             FirebaseStorageService().upload(photo: photo, completion: { result in
                 switch result {
-                case .success(let url):
-                    photoUrl = "\(url)"
+                case .success(let photo):
+                    photoUrl = "\(photo.url)"
+                    photoName = photo.name
                     dispatchGroup.leave()
                 default:
                     dispatchGroup.leave()
@@ -80,7 +84,7 @@ class AddPostViewController: UIViewController {
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
             
-            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, picUrl: photoUrl)
+            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, photoUrl: photoUrl, photoName: photoName)
             _ = self?.firebaseDataBaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in

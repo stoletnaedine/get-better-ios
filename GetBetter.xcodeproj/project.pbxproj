@@ -45,6 +45,7 @@
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
 		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
+		C35B38AF2462D57500E0C416 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38AE2462D57500E0C416 /* Photo.swift */; };
 		C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35EBD92244DE870004593CC /* GoogleService-Info.plist */; };
 		C36D8451239BDD9B004FEFD5 /* SFUIText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C36D844F239BDD9B004FEFD5 /* SFUIText-Regular.otf */; };
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
@@ -123,6 +124,7 @@
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
+		C35B38AE2462D57500E0C416 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		C35EBD92244DE870004593CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C36D844F239BDD9B004FEFD5 /* SFUIText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Regular.otf"; sourceTree = "<group>"; };
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				C3B4760224596BAD0067A3C0 /* SettingsCell.swift */,
 				C3B4760424596BCB0067A3C0 /* Profile.swift */,
 				6E7071F2245C474D00ED7D08 /* SphereValue.swift */,
+				C35B38AE2462D57500E0C416 /* Photo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				C3087ADA245AD36C00DDE7A7 /* SphereMetricsTableViewCell.swift in Sources */,
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
 				C33AD1DF2451AE9B00A08006 /* PageViewController.swift in Sources */,
+				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
 				C3D8B03F24432FAC003E968E /* ConvertableProtocols.swift in Sources */,
 				C3272ABA241D73270020F1A5 /* CoreDataManager.swift in Sources */,
 				C3C873CE2435F47700931E9B /* LocalDataService.swift in Sources */,

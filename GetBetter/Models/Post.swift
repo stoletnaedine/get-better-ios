@@ -13,5 +13,6 @@ struct Post {
     let text: String?
     let sphere: Sphere?
     let timestamp: Int64?
-    let picUrl: String?
+    let photoUrl: String?
+    let photoName: String?
 }

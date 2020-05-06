@@ -13,6 +13,7 @@ import FirebaseAuth
 class FirebaseDatabaseService {
     
     let ref = Database.database().reference()
+    let storageService = FirebaseStorageService()
     let user = Auth.auth().currentUser
     let usersPath = "users"
     
@@ -37,7 +38,8 @@ class FirebaseDatabaseService {
                 Constants.Post.Field.text: post.text ?? "" as Any,
                 Constants.Post.Field.sphere: post.sphere?.rawValue ?? "",
                 Constants.Post.Field.timestamp: post.timestamp ?? "",
-                Constants.Post.Field.picUrl: post.picUrl ?? ""
+                Constants.Post.Field.photoUrl: post.photoUrl ?? "",
+                Constants.Post.Field.photoName: post.photoName ?? ""
             ])
         
         print("Firebase saved post \(post)")
@@ -59,6 +61,10 @@ class FirebaseDatabaseService {
         
         guard let sphere = post.sphere else { return false }
         decrementSphereValue(for: sphere)
+        
+        if let photoName = post.photoName, !photoName.isEmpty {
+            storageService.delete(photoName: photoName)
+        }
         
         print("Firebase deleted post \(post)")
         
@@ -93,7 +99,8 @@ class FirebaseDatabaseService {
                                         text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
                                         sphere: maybeSphere,
                                         timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0,
-                                        picUrl: entity?[Constants.Post.Field.picUrl] as? String ?? "")
+                                        photoUrl: entity?[Constants.Post.Field.photoUrl] as? String ?? "",
+                                        photoName: entity?[Constants.Post.Field.photoName] as? String ?? "")
                         
                         postArray.append(post)
                     }

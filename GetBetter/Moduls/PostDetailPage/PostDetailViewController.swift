@@ -39,7 +39,7 @@ class PostDetailViewController: UIViewController {
             self.timestampLabel.text = Date.convertToFullDate(from: timestamp)
         }
         DispatchQueue.global().async { [weak self] in
-            if let urlString = post.picUrl,
+            if let urlString = post.photoUrl,
                 let url = URL(string: urlString) {
                 
                 DispatchQueue.main.async {

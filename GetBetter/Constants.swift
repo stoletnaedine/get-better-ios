@@ -98,7 +98,8 @@ struct Constants {
             static let text = "text"
             static let sphere = "sphere"
             static let timestamp = "timestamp"
-            static let picUrl = "picUrl"
+            static let photoUrl = "photoUrl"
+            static let photoName = "photoName"
         }
     }
     
