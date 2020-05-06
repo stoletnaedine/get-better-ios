@@ -78,7 +78,9 @@ class JournalViewController: UIViewController {
                 var postsBySections = [String : [Post]]()
                 
                 for date in uniqueDates {
-                    postsBySections[date] = postArray.filter { Date.convertToDate(from: $0.timestamp ?? 0) == date }
+                    postsBySections[date] = postArray
+                        .filter { Date.convertToDate(from: $0.timestamp ?? 0) == date }
+                        .sorted(by: { $0.timestamp ?? 0 > $1.timestamp ?? 0 })
                 }
                 self?.postsBySections = postsBySections
                 
