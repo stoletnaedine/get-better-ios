@@ -20,7 +20,7 @@ class JournalViewController: UIViewController {
     let SectionHeaderHeight: CGFloat = 40
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
-    let databaseService = FirebaseDatabaseService()
+    let firebaseDataBaseService = FirebaseDatabaseService()
     let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class JournalViewController: UIViewController {
     
     @objc func getPosts(completion: @escaping () -> Void) {
         
-        databaseService.getPosts(completion: { [weak self] result in
+        firebaseDataBaseService.getPosts(completion: { [weak self] result in
             switch result {
                 
             case .failure(let error):
@@ -185,7 +185,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             if let postsBySections = postsBySections,
                 let posts = postsBySections[date] {
                 let post = posts[indexPath.row]
-                if databaseService.deletePost(post) {
+                if firebaseDataBaseService.deletePost(post) {
                     self.updatePostsInTableView()
                 }
             }

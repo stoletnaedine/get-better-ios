@@ -19,6 +19,8 @@ class FirebaseDatabaseService {
     func currentUserPath() -> DatabaseReference? {
         guard let userId = user?.uid else { return nil }
         
+        print("userId=\(userId)")
+        
         return ref
             .child(usersPath)
             .child(userId)
@@ -40,6 +42,9 @@ class FirebaseDatabaseService {
         
         print("Firebase saved post \(post)")
         
+        guard let sphere = post.sphere else { return false }
+        incrementSphereValue(for: sphere)
+        
         return true
     }
     
@@ -52,9 +57,8 @@ class FirebaseDatabaseService {
             .child(post.id ?? "")
             .removeValue()
         
-        if let sphere = post.sphere {
-            decrementSphereValue(for: sphere)
-        }
+        guard let sphere = post.sphere else { return false }
+        decrementSphereValue(for: sphere)
         
         print("Firebase deleted post \(post)")
         
@@ -114,15 +118,15 @@ class FirebaseDatabaseService {
     }
     
     func updateSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
-            
-            guard let ref = currentUserPath() else { return false }
-            
-            ref
-                .child(pathToSave)
-                .updateChildValues(sphereMetrics.values)
-            
-            return true
-        }
+        
+        guard let ref = currentUserPath() else { return false }
+        
+        ref
+            .child(pathToSave)
+            .updateChildValues(sphereMetrics.values)
+        
+        return true
+    }
     
     func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
         
@@ -145,49 +149,42 @@ class FirebaseDatabaseService {
     
     func incrementSphereValue(for sphere: Sphere) {
         
-        getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
+        var currentSphereMetrics: SphereMetrics?
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        getSphereMetrics(from: Constants.SphereMetrics.current, dispatchGroup: dispatchGroup, completion: { sphereMetrics in
+            currentSphereMetrics = sphereMetrics
+        })
+        
+        dispatchGroup.notify(queue: .global(), execute: { [weak self] in
             
             let diffValue = 0.1
             let maxValue = 10.0
-                            
-            switch result {
-            case .success(let sphereMetrics):
+            
+            guard let currentSphereMetrics = currentSphereMetrics else { return }
+            
+            var newValues = currentSphereMetrics.values
+            
+            if let currentValue = newValues[sphere.rawValue],
+                currentValue < maxValue {
+                newValues[sphere.rawValue] = (currentValue * 10 + diffValue * 10) / 10
+                let newSphereMetrics = SphereMetrics(values: newValues)
                 
-                var newValues = sphereMetrics.values
-                
-                if let currentValue = newValues[sphere.rawValue],
-                    currentValue < maxValue {
-                    newValues[sphere.rawValue] = (currentValue * 10 + diffValue * 10) / 10
-                    let newSphereMetrics = SphereMetrics(values: newValues)
-                    
-                    let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
-                    print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
-                }
-                
-            case .failure(let error):
-                print("Increment SphereValue error=\(error)")
+                let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
             }
         })
     }
     
     func decrementSphereValue(for sphere: Sphere) {
         
-        let dispatchGroup = DispatchGroup()
         var startSphereMetrics: SphereMetrics?
+        let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getSphereMetrics(from: Constants.SphereMetrics.start, completion: { result in
-                            
-            switch result {
-            case .success(let sphereMetrics):
-                
-                startSphereMetrics = sphereMetrics
-                dispatchGroup.leave()
-                
-            case .failure(let error):
-                print("Getting start metrics error=\(error)")
-                dispatchGroup.leave()
-            }
+        getSphereMetrics(from: Constants.SphereMetrics.start, dispatchGroup: dispatchGroup, completion: { sphereMetrics in
+            startSphereMetrics = sphereMetrics
         })
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
@@ -208,6 +205,7 @@ class FirebaseDatabaseService {
                     if let currentValue = newValues[sphere.rawValue],
                         currentValue > minValue,
                         currentValue > startValue {
+                        
                         newValues[sphere.rawValue] = (currentValue * 10 - diffValue * 10) / 10
                         let newSphereMetrics = SphereMetrics(values: newValues)
                         
@@ -219,6 +217,21 @@ class FirebaseDatabaseService {
                     print("Decrement SphereValue error=\(error)")
                 }
             })
+        })
+    }
+    
+    private func getSphereMetrics(from path: String, dispatchGroup: DispatchGroup, completion: @escaping (SphereMetrics) -> Void) {
+        getSphereMetrics(from: path, completion: { result in
+            
+            switch result {
+            case .success(let sphereMetrics):
+                completion(sphereMetrics)
+                dispatchGroup.leave()
+                
+            case .failure(let error):
+                print("Getting start metrics error=\(error)")
+                dispatchGroup.leave()
+            }
         })
     }
 }

@@ -26,6 +26,7 @@ class AddPostViewController: UIViewController {
     
     var selectedSphere: Sphere?
     let maxSymbolsCount: Int = 300
+    let firebaseDataBaseService = FirebaseDatabaseService()
     
     var completion: () -> () = {}
     
@@ -74,10 +75,10 @@ class AddPostViewController: UIViewController {
             dispatchGroup.leave()
         }
         
-        dispatchGroup.notify(queue: .global(), execute: {
+        dispatchGroup.notify(queue: .global(), execute: { [weak self] in
+            
             let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, picUrl: photoUrl)
-            let _ = FirebaseDatabaseService().savePost(post)
-            FirebaseDatabaseService().incrementSphereValue(for: sphere)
+            _ = self?.firebaseDataBaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in
                 Toast(text: "\(Constants.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
