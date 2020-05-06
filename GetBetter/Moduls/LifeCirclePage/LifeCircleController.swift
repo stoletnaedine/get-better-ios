@@ -93,7 +93,7 @@ class LifeCircleController: UIViewController {
     }
     
     func setupSegmentedControl() {
-        segmentedControl.backgroundColor = .violet
+        segmentedControl.tintColor = .violet
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                                                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)

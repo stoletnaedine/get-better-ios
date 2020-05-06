@@ -121,7 +121,7 @@ struct Constants {
     
     struct AboutApp {
         static let title = "Что такое GetBetter?"
-        static let description = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии. \n\nПриготовься, перемены начинаются сегодня! \n\nИдея и разработка приложения:\nИсламгулов Артур (github.com/stoletnaedine)\n\nИконки и изображения: icons8.com"
+        static let description = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nНад приложением работали:\n\nИдея и разработка:\nИсламгулов Артур (github.com/stoletnaedine)\n\nИконки и визуальный стиль:\nАлексей Бусыгин (alekseybusygin.com)\n\nИзображения: icons8.com"
     }
     
     struct AboutCircle {

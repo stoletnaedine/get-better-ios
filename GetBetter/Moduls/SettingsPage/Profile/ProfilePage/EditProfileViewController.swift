@@ -51,12 +51,12 @@ class EditProfileViewController: UIViewController {
         
         let dispatchGroup = DispatchGroup()
         
-        if let avatar = avatarImageView.image {
+        if let newAvatar = avatarImageView.image {
             
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
-            storageService.uploadAvatar(photo: avatar, completion: { result in
+            storageService.uploadAvatar(photo: newAvatar, completion: { result in
                 switch result {
                 case .success(let url):
                     let changeRequest = user.createProfileChangeRequest()
@@ -75,14 +75,14 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            !name.isEmpty,
-            name != user.displayName {
+        if let newName = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !newName.isEmpty,
+            newName != user.displayName {
             
             dispatchGroup.enter()
             
             let changeRequest = user.createProfileChangeRequest()
-            changeRequest.displayName = name
+            changeRequest.displayName = newName
             changeRequest.commitChanges(completion: { error in
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
@@ -91,12 +91,12 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let password = passwordTextField.text,
-            !password.isEmpty {
+        if let newPassword = passwordTextField.text,
+            !newPassword.isEmpty {
             
             dispatchGroup.enter()
             
-            user.updatePassword(to: password, completion: { error in
+            user.updatePassword(to: newPassword, completion: { error in
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                 }
@@ -104,13 +104,13 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            !email.isEmpty,
-            email != user.email {
+        if let newEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !newEmail.isEmpty,
+            newEmail != user.email {
             
             dispatchGroup.enter()
             
-            user.updateEmail(to: email, completion: { error in
+            user.updateEmail(to: newEmail, completion: { error in
                 
                 dispatchGroup.leave()
                 

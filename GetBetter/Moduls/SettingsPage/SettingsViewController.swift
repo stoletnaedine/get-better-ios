@@ -56,7 +56,7 @@ class SettingsViewController: UIViewController {
             TableSection.articles : [
                 SettingsCell(title: "Колесо Жизненного Баланса", viewController: AboutCircleViewController()),
                 SettingsCell(title: "Зачем нужны События?", viewController: AboutJournalViewController()),
-                SettingsCell(title: "Что такое GetBetter", viewController: AboutAppViewController())]
+                SettingsCell(title: "О приложении", viewController: AboutAppViewController())]
         ]
     }
     
