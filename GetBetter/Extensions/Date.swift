@@ -18,7 +18,8 @@ extension Date {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "YYYY/MM/dd HH:mm"
+        dayTimePeriodFormatter.locale = Locale(identifier: "ru_RU")
+        dayTimePeriodFormatter.dateFormat = "dd MMM YYYY HH:mm"
         return dayTimePeriodFormatter.string(from: date as Date)
     }
     
@@ -35,6 +36,7 @@ extension Date {
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.dateFormat = "dd MMM"
+        dayTimePeriodFormatter.locale = Locale(identifier: "ru_RU")
         let dateFormat = dayTimePeriodFormatter.string(from: date as Date)
         let calendar = Calendar(identifier: .gregorian)
         let weekdayIndex = calendar.component(.weekday, from: date)
@@ -48,19 +50,19 @@ extension Date {
     private static func weekdayRus(dayIndex: Int) -> String {
         switch dayIndex {
         case 1:
-            return "Воскресенье"
+            return "воскресенье"
         case 2:
-            return "Понедельник"
+            return "понедельник"
         case 3:
-            return "Вторник"
+            return "вторник"
         case 4:
-            return "Среда"
+            return "среда"
         case 5:
-            return "Четверг"
+            return "четверг"
         case 6:
-            return "Пятница"
+            return "пятница"
         default:
-            return "Суббота"
+            return "суббота"
         }
     }
 }
