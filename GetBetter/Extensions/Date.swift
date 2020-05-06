@@ -42,7 +42,7 @@ extension Date {
     }
     
     static func currentDateWithRusWeekday() -> String {
-        convertToDateWithRusWeekday(from: Int64(Date().timeIntervalSince1970))
+        return convertToDateWithRusWeekday(from: Int64(Date().timeIntervalSince1970))
     }
     
     private static func weekdayRus(dayIndex: Int) -> String {

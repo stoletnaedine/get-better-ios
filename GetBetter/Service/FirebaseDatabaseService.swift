@@ -38,6 +38,8 @@ class FirebaseDatabaseService {
                 Constants.Post.Field.picUrl: post.picUrl ?? ""
             ])
         
+        print("Firebase saved post \(post)")
+        
         return true
     }
     
@@ -53,6 +55,8 @@ class FirebaseDatabaseService {
         if let sphere = post.sphere {
             decrementSphereValue(for: sphere)
         }
+        
+        print("Firebase deleted post \(post)")
         
         return true
     }
@@ -157,11 +161,11 @@ class FirebaseDatabaseService {
                     let newSphereMetrics = SphereMetrics(values: newValues)
                     
                     let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
-                    print("incrementSphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
+                    print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                 }
                 
             case .failure(let error):
-                print("incrementSphereValue error=\(error)")
+                print("Increment SphereValue error=\(error)")
             }
         })
     }
@@ -181,7 +185,7 @@ class FirebaseDatabaseService {
                 dispatchGroup.leave()
                 
             case .failure(let error):
-                print("Get start metrics error=\(error)")
+                print("Getting start metrics error=\(error)")
                 dispatchGroup.leave()
             }
         })
@@ -208,11 +212,11 @@ class FirebaseDatabaseService {
                         let newSphereMetrics = SphereMetrics(values: newValues)
                         
                         let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
-                        print("decrementSphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
+                        print("Decrement SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                     }
                     
                 case .failure(let error):
-                    print("decrementSphereValue error=\(error)")
+                    print("Decrement SphereValue error=\(error)")
                 }
             })
         })
