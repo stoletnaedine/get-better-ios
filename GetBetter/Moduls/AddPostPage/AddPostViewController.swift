@@ -24,9 +24,10 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var photoImageView: UIImageView!
     
+    let firebaseDataBaseService = FirebaseDatabaseService()
+    
     var selectedSphere: Sphere?
     let maxSymbolsCount: Int = 300
-    let firebaseDataBaseService = FirebaseDatabaseService()
     
     var completion: () -> () = {}
     
@@ -59,7 +60,7 @@ class AddPostViewController: UIViewController {
             return
         }
         
-        var photoUrl: String?
+        var photoUrlString: String?
         var photoName: String?
         let dispatchGroup = DispatchGroup()
         
@@ -71,7 +72,7 @@ class AddPostViewController: UIViewController {
             FirebaseStorageService().upload(photo: photo, completion: { result in
                 switch result {
                 case .success(let photo):
-                    photoUrl = "\(photo.url)"
+                    photoUrlString = photo.url
                     photoName = photo.name
                     dispatchGroup.leave()
                 default:
@@ -84,7 +85,7 @@ class AddPostViewController: UIViewController {
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
             
-            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, photoUrl: photoUrl, photoName: photoName)
+            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, photoUrl: photoUrlString, photoName: photoName)
             _ = self?.firebaseDataBaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in

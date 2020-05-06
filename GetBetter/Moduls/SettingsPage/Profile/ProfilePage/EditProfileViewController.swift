@@ -29,6 +29,8 @@ class EditProfileViewController: UIViewController {
     let user = Auth.auth().currentUser
     let storageService = FirebaseStorageService()
     
+    var completion: () -> () = {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -47,7 +49,13 @@ class EditProfileViewController: UIViewController {
     @objc func saveProfile() {
         guard let user = user else { return }
         
+        let dispatchGroup = DispatchGroup()
+        
         if let avatar = avatarImageView.image {
+            
+            dispatchGroup.enter()
+            self.showActivityIndicator(onView: self.view)
+            
             storageService.uploadAvatar(photo: avatar, completion: { result in
                 switch result {
                 case .success(let url):
@@ -58,9 +66,11 @@ class EditProfileViewController: UIViewController {
                             print("Firebase commit changes error = \(error.localizedDescription)")
                             Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                         }
+                        dispatchGroup.leave()
                     })
                 case .failure(let error):
                     Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
+                    dispatchGroup.leave()
                 }
             })
         }
@@ -69,22 +79,28 @@ class EditProfileViewController: UIViewController {
             !name.isEmpty,
             name != user.displayName {
             
+            dispatchGroup.enter()
+            
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = name
             changeRequest.commitChanges(completion: { error in
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                 }
+                dispatchGroup.leave()
             })
         }
         
         if let password = passwordTextField.text,
             !password.isEmpty {
             
+            dispatchGroup.enter()
+            
             user.updatePassword(to: password, completion: { error in
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                 }
+                dispatchGroup.leave()
             })
         }
         
@@ -92,7 +108,12 @@ class EditProfileViewController: UIViewController {
             !email.isEmpty,
             email != user.email {
             
+            dispatchGroup.enter()
+            
             user.updateEmail(to: email, completion: { error in
+                
+                dispatchGroup.leave()
+                
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                 } else {
@@ -101,8 +122,11 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        Toast(text: Constants.Profile.editSuccess, delay: 0.5, duration: 1).show()
-        navigationController?.popViewController(animated: true)
+        dispatchGroup.notify(queue: .main, execute: { [weak self] in
+            self?.removeActivityIndicator()
+            self?.navigationController?.popViewController(animated: true)
+            self?.completion()
+        })
     }
     
     @IBAction func deleteAccountButtonDidTap(_ sender: UIButton) {

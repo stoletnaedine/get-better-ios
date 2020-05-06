@@ -54,6 +54,10 @@ class PostDetailViewController: UIViewController {
                         self?.photoImageView.image = image
                         self?.photoImageView.isHidden = false
                     }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.removeActivityIndicator()
+                    }
                 }
             }
         }

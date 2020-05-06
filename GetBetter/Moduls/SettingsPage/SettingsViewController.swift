@@ -45,8 +45,14 @@ class SettingsViewController: UIViewController {
     }
     
     func fillTableItems() {
+        
+        let editProfileViewController = EditProfileViewController()
+        editProfileViewController.completion = { [weak self] in
+            self?.loadProfileAndReloadTableView()
+        }
+        
          tableItems = [
-            TableSection.profile : [SettingsCell(title: nil, viewController: EditProfileViewController())],
+            TableSection.profile : [SettingsCell(title: nil, viewController: editProfileViewController)],
             TableSection.articles : [
                 SettingsCell(title: "Колесо Жизненного Баланса", viewController: AboutCircleViewController()),
                 SettingsCell(title: "Зачем нужны События?", viewController: AboutJournalViewController()),

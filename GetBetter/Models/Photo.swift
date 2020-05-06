@@ -10,5 +10,5 @@ import Foundation
 
 struct Photo {
     let name: String?
-    let url: URL?
+    let url: String?
 }
