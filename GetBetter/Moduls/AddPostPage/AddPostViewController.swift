@@ -62,6 +62,9 @@ class AddPostViewController: UIViewController {
         
         dispatchGroup.enter()
         if let photo = photoImageView.image {
+            
+            self.showActivityIndicator(onView: self.view)
+            
             FirebaseStorageService().upload(photo: photo, completion: { result in
                 switch result {
                 case .success(let url):
@@ -81,6 +84,7 @@ class AddPostViewController: UIViewController {
             _ = self?.firebaseDataBaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in
+                self?.removeActivityIndicator()
                 Toast(text: "\(Constants.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)

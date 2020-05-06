@@ -40,12 +40,20 @@ class PostDetailViewController: UIViewController {
         }
         DispatchQueue.global().async { [weak self] in
             if let urlString = post.picUrl,
-                let url = URL(string: urlString),
-                let imageData = try? Data(contentsOf: url),
-                let image = UIImage(data: imageData) {
+                let url = URL(string: urlString) {
+                
                 DispatchQueue.main.async {
-                    self?.photoImageView.image = image
-                    self?.photoImageView.isHidden = false
+                    guard let selfView = self?.view else { return }
+                    self?.showActivityIndicator(onView: selfView)
+                }
+                
+                if let imageData = try? Data(contentsOf: url),
+                let image = UIImage(data: imageData) {
+                    DispatchQueue.main.async {
+                        self?.removeActivityIndicator()
+                        self?.photoImageView.image = image
+                        self?.photoImageView.isHidden = false
+                    }
                 }
             }
         }
