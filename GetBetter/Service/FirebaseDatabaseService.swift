@@ -16,6 +16,8 @@ class FirebaseDatabaseService {
     let storageService = FirebaseStorageService()
     let user = Auth.auth().currentUser
     let usersPath = "users"
+    let postsPath = "post"
+    let achievemenetsPath = "achievement"
     
     func currentUserPath() -> DatabaseReference? {
         guard let userId = user?.uid else { return nil }
@@ -32,7 +34,7 @@ class FirebaseDatabaseService {
         guard let ref = currentUserPath() else { return false }
         
         ref
-            .child(Constants.Post.Field.post)
+            .child(postsPath)
             .childByAutoId()
             .setValue([
                 Constants.Post.Field.text: post.text ?? "" as Any,
@@ -55,7 +57,7 @@ class FirebaseDatabaseService {
         guard let ref = currentUserPath() else { return false }
         
         ref
-            .child(Constants.Post.Field.post)
+            .child(postsPath)
             .child(post.id ?? "")
             .removeValue()
         
@@ -77,7 +79,7 @@ class FirebaseDatabaseService {
         guard let ref = currentUserPath() else { return }
         
         ref
-            .child(Constants.Post.Field.post)
+            .child(postsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 let value = snapshot.value as? NSDictionary
@@ -247,7 +249,7 @@ class FirebaseDatabaseService {
         guard let ref = currentUserPath() else { return }
         
         ref
-            .child(Constants.Achievement.Field.path)
+            .child(achievemenetsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 let value = snapshot.value as? NSDictionary
@@ -259,7 +261,8 @@ class FirebaseDatabaseService {
                         let id = key.element
                         let entity = value?[id] as? NSDictionary
                         
-                        let post = Achievement(title: entity?[Constants.Achievement.Field.title] as? String ?? "",
+                        let post = Achievement(icon: entity?[Constants.Achievement.Field.icon] as? String ?? "",
+                                               title: entity?[Constants.Achievement.Field.title] as? String ?? "",
                                                description: entity?[Constants.Achievement.Field.description] as? String ?? "")
                         array.append(post)
                     }
@@ -270,5 +273,21 @@ class FirebaseDatabaseService {
             }) { error in
                 completion(.failure(AppError(error: error)!))
         }
+    }
+    
+    func saveAchievement(_ achievement: Achievement) {
+        
+        guard let ref = currentUserPath() else { return }
+        
+        ref
+            .child(achievemenetsPath)
+            .childByAutoId()
+            .setValue([
+                Constants.Achievement.Field.icon: achievement.icon ?? "",
+                Constants.Achievement.Field.title: achievement.title ?? "",
+                Constants.Achievement.Field.description: achievement.description ?? ""
+            ])
+        
+        print("Firebase saved achievement \(achievement)")
     }
 }

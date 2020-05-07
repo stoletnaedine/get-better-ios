@@ -9,6 +9,7 @@
 import Foundation
 
 struct Achievement {
+    let icon: String?
     let title: String?
     let description: String?
 }

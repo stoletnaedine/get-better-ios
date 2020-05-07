@@ -95,7 +95,6 @@ struct Constants {
         static let emptyFieldsWarning = "Заполните все поля"
         
         struct Field {
-            static let post = "post"
             static let text = "text"
             static let sphere = "sphere"
             static let timestamp = "timestamp"
@@ -106,7 +105,7 @@ struct Constants {
     
     struct Achievement {
         struct Field {
-            static let path = "achievement"
+            static let icon = "icon"
             static let title = "title"
             static let description = "description"
         }
