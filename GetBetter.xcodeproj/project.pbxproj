@@ -85,8 +85,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = GetBetter/Moduls/LifeCirclePage/SphereMetricsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
-		6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementsTableViewCell.swift; path = GetBetter/Moduls/LifeCirclePage/SphereMetricsCell/AchievementsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = GetBetter/Moduls/LifeCirclePage/AchievementsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewCell.swift; sourceTree = "<group>"; };
 		6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
 		6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutCircleViewController.swift; path = GetBetter/Moduls/SettingsPage/AboutCirclePage/AboutCircleViewController.swift; sourceTree = SOURCE_ROOT; };
