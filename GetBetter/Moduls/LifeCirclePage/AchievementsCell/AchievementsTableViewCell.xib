@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,13 +14,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="70.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cg2-29-89Q" userLabel="Icon View">
                         <rect key="frame" x="15" y="15" width="25" height="25"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="⚽️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8G-cj-AgB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚽️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8G-cj-AgB">
                                 <rect key="frame" x="1" y="2" width="23" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -33,6 +32,7 @@
                             <constraint firstAttribute="height" constant="25" id="FZ3-9T-I38"/>
                             <constraint firstAttribute="width" constant="25" id="Isi-TI-AMV"/>
                             <constraint firstItem="k8G-cj-AgB" firstAttribute="centerX" secondItem="cg2-29-89Q" secondAttribute="centerX" id="jGt-97-Bgd"/>
+                            <constraint firstItem="k8G-cj-AgB" firstAttribute="centerY" secondItem="cg2-29-89Q" secondAttribute="centerY" id="y2h-EQ-RIS"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Отношения" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-wh-NN5">
@@ -42,7 +42,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOO-Nv-MCp">
-                        <rect key="frame" x="55" y="40.5" width="250" height="14.5"/>
+                        <rect key="frame" x="55" y="40.5" width="250" height="15.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -55,10 +55,9 @@
                     <constraint firstItem="MOO-Nv-MCp" firstAttribute="leading" secondItem="cg2-29-89Q" secondAttribute="trailing" constant="15" id="LJH-vz-e0F"/>
                     <constraint firstItem="cg2-29-89Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="MBj-oZ-PLS"/>
                     <constraint firstAttribute="trailing" secondItem="MOO-Nv-MCp" secondAttribute="trailing" constant="15" id="ZVp-MA-oi7"/>
-                    <constraint firstItem="cg2-29-89Q" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cTG-yO-HKr"/>
                     <constraint firstItem="GcY-wh-NN5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="egr-dA-39k"/>
+                    <constraint firstItem="cg2-29-89Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="fxP-zJ-0uW"/>
                     <constraint firstItem="GcY-wh-NN5" firstAttribute="leading" secondItem="cg2-29-89Q" secondAttribute="trailing" constant="15" id="guh-NV-RFE"/>
-                    <constraint firstItem="cg2-29-89Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="uz5-O8-KdI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

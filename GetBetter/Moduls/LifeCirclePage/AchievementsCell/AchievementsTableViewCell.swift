@@ -24,6 +24,7 @@ class AchievementsTableViewCell: UITableViewCell {
     }
     
     func fillCell(from achievement: Achievement) {
+        print(achievement)
         self.iconLabel.text = achievement.icon
         self.titleLabel.text = achievement.title
         self.descriptionLabel.text = achievement.description
