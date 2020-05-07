@@ -22,6 +22,7 @@ class LifeCircleController: UIViewController {
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
+    var achievements: [Achievement] = []
     let sphereMetricsXibName = String(describing: SphereMetricsTableViewCell.self)
     let sphereMetricsReuseCellIdentifier = "SphereMetricsCell"
     let achievementsXibName = String(describing: AchievementsTableViewCell.self)
@@ -32,7 +33,7 @@ class LifeCircleController: UIViewController {
         super.viewDidLoad()
         
         chartView.noDataText = Constants.LifeCircle.loading
-        loadAndShowMetrics()
+        loadAndShowData()
         setupFakeChartView()
         
         self.title = Constants.TabBar.lifeCircleTitle
@@ -46,11 +47,11 @@ class LifeCircleController: UIViewController {
     }
     
     func setupRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(loadAndShowMetrics), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(loadAndShowData), for: .valueChanged)
         metricsTableView.addSubview(refreshControl)
     }
     
-    @objc func loadAndShowMetrics() {
+    @objc func loadAndShowData() {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -83,6 +84,20 @@ class LifeCircleController: UIViewController {
             })
         }
         
+        dispatchGroup.enter()
+        DispatchQueue.global().async { [weak self] in
+            self?.firebaseDatabaseService.getAchievements(completion: { [weak self] result in
+                switch result {
+                case .success(let achievements):
+                    self?.achievements = achievements
+                    dispatchGroup.leave()
+                    
+                default:
+                    dispatchGroup.leave()
+                }
+            })
+        }
+        
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
             self?.setupChartView()
             self?.metricsTableView.reloadData()
@@ -105,7 +120,7 @@ class LifeCircleController: UIViewController {
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                                                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.details, forSegmentAt: 1)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.metrics, forSegmentAt: 1)
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.achievments, forSegmentAt: 2)
     }
     
@@ -121,7 +136,7 @@ class LifeCircleController: UIViewController {
             fakeChartView.isHidden = true
             metricsTableView.isHidden = false
             achievementsTableView.isHidden = true
-        default: //case 2
+        default:
             chartView.isHidden = true
             fakeChartView.isHidden = true
             metricsTableView.isHidden = true
@@ -243,12 +258,16 @@ class DataSetValueFormatter: IValueFormatter {
 
 extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentSphereMetrics?.values.count ?? 0
+        switch tableView {
+        case metricsTableView:
+            return currentSphereMetrics?.values.count ?? 0
+        case achievementsTableView:
+            return achievements.count
+        default:
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -274,15 +293,8 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier, for: indexPath) as! AchievementsTableViewCell
 
-            let sphereRawValue = currentSphereMetrics?
-                .sortedValues()
-                .map { $0.key }[indexPath.row] ?? ""
-
-            guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
-            guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
-
-            let sphereValue = SphereValue(sphere: sphere, value: value)
-            cell.fillCell(from: sphereValue)
+            let achievement = achievements[indexPath.row]
+            cell.fillCell(from: achievement)
             
             return cell
             

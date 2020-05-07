@@ -23,10 +23,9 @@ class AchievementsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func fillCell(from sphereValue: SphereValue) {
-        self.iconLabel.text = sphereValue.sphere?.icon
-        self.nameLabel.text = sphereValue.sphere?.name
-        self.descriptionLabel.text = sphereValue.sphere?.description
+    func fillCell(from achievement: Achievement) {
+        self.nameLabel.text = achievement.title
+        self.descriptionLabel.text = achievement.description
         
     }
     

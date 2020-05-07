@@ -22,7 +22,7 @@ struct Constants {
         
         struct SegmentedControl {
             static let circle = "Колесо"
-            static let details = "Подробнее"
+            static let metrics = "Метрики"
             static let achievments = "Достижения"
         }
     }
@@ -101,6 +101,14 @@ struct Constants {
             static let timestamp = "timestamp"
             static let photoUrl = "photoUrl"
             static let photoName = "photoName"
+        }
+    }
+    
+    struct Achievement {
+        struct Field {
+            static let path = "achievement"
+            static let title = "title"
+            static let description = "description"
         }
     }
     

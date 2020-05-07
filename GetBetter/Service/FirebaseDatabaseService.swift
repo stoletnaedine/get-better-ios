@@ -241,4 +241,34 @@ class FirebaseDatabaseService {
             }
         })
     }
+    
+    func getAchievements(completion: @escaping (Result<[Achievement], AppError>) -> Void) {
+        
+        guard let ref = currentUserPath() else { return }
+        
+        ref
+            .child(Constants.Achievement.Field.path)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                
+                let value = snapshot.value as? NSDictionary
+                var array: [Achievement] = []
+                
+                if let keys = value?.allKeys {
+                    
+                    for key in keys.enumerated() {
+                        let id = key.element
+                        let entity = value?[id] as? NSDictionary
+                        
+                        let post = Achievement(title: entity?[Constants.Achievement.Field.title] as? String ?? "",
+                                               description: entity?[Constants.Achievement.Field.description] as? String ?? "")
+                        array.append(post)
+                    }
+                    completion(.success(array))
+                } else {
+                    completion(.success(array))
+                }
+            }) { error in
+                completion(.failure(AppError(error: error)!))
+        }
+    }
 }
