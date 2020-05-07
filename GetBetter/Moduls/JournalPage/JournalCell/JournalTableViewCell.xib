@@ -10,18 +10,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="JournalCell" rowHeight="44" id="KGk-i7-Jjw" customClass="JournalTableViewCell" customModule="GetBetter" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="JournalCell" rowHeight="30" id="KGk-i7-Jjw" customClass="JournalTableViewCell" customModule="GetBetter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2020-05-07 at 13.51.06" translatesAutoresizingMaskIntoConstraints="NO" id="lja-ep-GYl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
+                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rs3-HD-TzC">
-                        <rect key="frame" x="258" y="10" width="52" height="24"/>
+                        <rect key="frame" x="258" y="10" width="52" height="41"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTi-2s-BGw">
-                                <rect key="frame" x="5" y="5" width="42" height="14"/>
+                                <rect key="frame" x="5" y="5" width="42" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -36,18 +39,22 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7S-XP-xAA">
-                        <rect key="frame" x="10" y="11.5" width="224" height="21"/>
+                        <rect key="frame" x="10" y="20" width="224" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="lja-ep-GYl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="43X-tR-7c5"/>
                     <constraint firstItem="e7S-XP-xAA" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="4sa-cz-oih"/>
                     <constraint firstItem="e7S-XP-xAA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="8dB-c9-sps"/>
                     <constraint firstAttribute="trailing" secondItem="rs3-HD-TzC" secondAttribute="trailing" constant="10" id="ASw-um-sHv"/>
                     <constraint firstItem="e7S-XP-xAA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lrw-mv-ocr"/>
                     <constraint firstItem="rs3-HD-TzC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Nrh-EX-OU1"/>
+                    <constraint firstAttribute="bottom" secondItem="lja-ep-GYl" secondAttribute="bottom" id="eqQ-8t-Ey1"/>
+                    <constraint firstAttribute="trailing" secondItem="lja-ep-GYl" secondAttribute="trailing" id="hu6-pL-G8R"/>
+                    <constraint firstItem="lja-ep-GYl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="s2N-dF-iqY"/>
                     <constraint firstAttribute="bottom" secondItem="rs3-HD-TzC" secondAttribute="bottom" constant="10" id="xJp-uF-l50"/>
                 </constraints>
             </tableViewCellContentView>
@@ -58,7 +65,10 @@
                 <outlet property="sphereView" destination="rs3-HD-TzC" id="PE9-2k-uhI"/>
                 <outlet property="titleLabel" destination="e7S-XP-xAA" id="uj3-XG-Dic"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="159.375"/>
+            <point key="canvasLocation" x="137.68115942028987" y="165.06696428571428"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Screenshot 2020-05-07 at 13.51.06" width="1350" height="250"/>
+    </resources>
 </document>
