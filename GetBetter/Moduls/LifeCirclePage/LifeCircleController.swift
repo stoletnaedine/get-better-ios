@@ -32,9 +32,10 @@ class LifeCircleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        chartView.noDataText = Constants.LifeCircle.loading
+//        chartView.noDataText = Constants.LifeCircle.loading
         loadAndShowData()
-        setupFakeChartView()
+        fakeChartView.isHidden = true
+//        setupFakeChartView()
         
         self.title = Constants.TabBar.lifeCircleTitle
         setupSegmentedControl()
@@ -110,10 +111,12 @@ class LifeCircleController: UIViewController {
         achievementsTableView.dataSource = self
         achievementsTableView.delegate = self
         achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
+        achievementsTableView.backgroundColor = .appBackground
         
         metricsTableView.dataSource = self
         metricsTableView.delegate = self
         metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
+        metricsTableView.backgroundColor = .appBackground
     }
     
     func setupSegmentedControl() {
@@ -176,9 +179,10 @@ class LifeCircleController: UIViewController {
     }
     
     func setupChartView() {
-        chartView.webLineWidth = 1
-        chartView.innerWebLineWidth = 0
-        chartView.webColor = .lightGray
+        chartView.webLineWidth = 2
+        chartView.innerWebLineWidth = 2
+        chartView.webColor = .lifeCircleLineBack
+        chartView.innerWebColor = .lifeCircleLineBack
         chartView.rotationEnabled = true
         chartView.legend.enabled = true
         
@@ -214,21 +218,22 @@ class LifeCircleController: UIViewController {
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Constants.LifeCircle.currentLevelLegend)
         
         dataSetStart.lineWidth = 2
-        dataSetStart.colors = [.white]
-        dataSetStart.fillColor = .white
-        dataSetStart.fillAlpha = 0.3
-        dataSetStart.drawFilledEnabled = true
+        dataSetStart.colors = [.lifeCircleLineStart]
+        //dataSetStart.fillColor = .white
+        //dataSetStart.fillAlpha = 0.3
+        //dataSetStart.drawFilledEnabled = true
         dataSetStart.valueFormatter = DataSetValueFormatter()
         
         dataSetCurrent.lineWidth = 2
-        dataSetCurrent.colors = [.violet]
-        dataSetCurrent.fillColor = .violet
-        dataSetCurrent.fillAlpha = 0.5
+        dataSetCurrent.colors = [.lifeCircleLineCurrent]
+        dataSetCurrent.fillColor = .lifeCircleFillCurrent
+        dataSetCurrent.fillAlpha = 0.75
         dataSetCurrent.drawFilledEnabled = true
         dataSetCurrent.valueFormatter = DataSetValueFormatter()
         
-        chartView.data = RadarChartData(dataSets: [dataSetCurrent, dataSetStart])
+        chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
         chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
+        chartView.backgroundColor = .appBackground
     }
 }
 

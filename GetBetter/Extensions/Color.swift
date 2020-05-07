@@ -11,15 +11,35 @@ import UIKit
 extension UIColor {
     
     static var violet: UIColor {
-        return #colorLiteral(red: 0.5254901961, green: 0.4509803922, blue: 0.8980392157, alpha: 1)
+        return #colorLiteral(red: 0.4509803922, green: 0.1411764706, blue: 0.9803921569, alpha: 1)
     }
     
-    static var shrimp: UIColor {
+    static var coral: UIColor {
         return #colorLiteral(red: 1, green: 0.4, blue: 0.4, alpha: 1)
     }
     
     static var salad: UIColor {
         return #colorLiteral(red: 0.2, green: 0.8784313725, blue: 0.631372549, alpha: 1)
+    }
+    
+    static var tableViewSectionColor: UIColor {
+        return #colorLiteral(red: 0.8470588235, green: 0.8274509804, blue: 0.8784313725, alpha: 1)
+    }
+    
+    static var lifeCircleLineBack: UIColor {
+        return #colorLiteral(red: 0.9764705882, green: 0.9725490196, blue: 0.9960784314, alpha: 1)
+    }
+    
+    static var lifeCircleLineStart: UIColor {
+        return #colorLiteral(red: 0.831372549, green: 0.7960784314, blue: 0.9529411765, alpha: 1)
+    }
+    
+    static var lifeCircleLineCurrent: UIColor {
+        return .violet
+    }
+    
+    static var lifeCircleFillCurrent: UIColor {
+        return #colorLiteral(red: 0.9058823529, green: 0.8823529412, blue: 0.9960784314, alpha: 1)
     }
     
     static var red: UIColor {
@@ -39,6 +59,10 @@ extension UIColor {
     }
     
     static var placeholderGray: UIColor {
-        return UIColor(red: 174/255, green: 176/255, blue: 176/255, alpha: 1)
+        return UIColor(red: 174/255, green: 174/255, blue: 174/255, alpha: 1)
+    }
+    
+    static var appBackground: UIColor {
+        return #colorLiteral(red: 0.9921568627, green: 0.9921568627, blue: 1, alpha: 1)
     }
 }

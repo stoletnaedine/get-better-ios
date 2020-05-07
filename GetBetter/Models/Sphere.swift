@@ -57,7 +57,7 @@ enum Sphere: String, CaseIterable {
         .work: "👨‍💻",
         .relax: "🏖",
         .creation: "👨‍🎨",
-        .spirit: "🌀"
+        .spirit: "🧘‍♀️"
     ]
     
     var icon: String {
@@ -65,17 +65,32 @@ enum Sphere: String, CaseIterable {
     }
     
     static let colorMapper: [Sphere: UIColor] = [
-        .relations: #colorLiteral(red: 0.8856292963, green: 0.3189524412, blue: 0.6729699969, alpha: 1),
-        .health: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1),
-        .environment: #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1),
-        .finance: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),
-        .work: #colorLiteral(red: 0, green: 0.5607146621, blue: 0.3763182163, alpha: 1),
-        .relax: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1),
-        .creation: #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1),
-        .spirit: #colorLiteral(red: 0.6156862745, green: 0.5098039216, blue: 0.9882352941, alpha: 1)
+        .relations: #colorLiteral(red: 1, green: 0.7960784314, blue: 0.7960784314, alpha: 1),
+        .health: #colorLiteral(red: 0.7137254902, green: 0.9450980392, blue: 1, alpha: 1),
+        .environment: #colorLiteral(red: 0.7607843137, green: 1, blue: 0.9529411765, alpha: 1),
+        .finance: #colorLiteral(red: 1, green: 0.9607843137, blue: 0.2235294118, alpha: 1),
+        .work: #colorLiteral(red: 1, green: 0.4, blue: 0.4, alpha: 1),
+        .relax: #colorLiteral(red: 0.2, green: 0.8784313725, blue: 0.631372549, alpha: 1),
+        .creation: #colorLiteral(red: 0.5137254902, green: 0.1725490196, blue: 1, alpha: 1),
+        .spirit: #colorLiteral(red: 0.8039215686, green: 0.5333333333, blue: 0.9490196078, alpha: 1)
     ]
     
     var color: UIColor {
         return Sphere.colorMapper[self]!
+    }
+    
+    static let titleColorMapper: [Sphere: UIColor] = [
+        .relations: #colorLiteral(red: 0.4862745098, green: 0, blue: 0.4509803922, alpha: 1),
+        .health: #colorLiteral(red: 0, green: 0.4549019608, blue: 0.5764705882, alpha: 1),
+        .environment: #colorLiteral(red: 0, green: 0.5176470588, blue: 0.3568627451, alpha: 1),
+        .finance: #colorLiteral(red: 0.3450980392, green: 0, blue: 0.8862745098, alpha: 1),
+        .work: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+        .relax: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+        .creation: #colorLiteral(red: 1, green: 0.8666666667, blue: 0.8235294118, alpha: 1),
+        .spirit: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    ]
+    
+    var titleColor: UIColor {
+        return Sphere.titleColorMapper[self]!
     }
 }

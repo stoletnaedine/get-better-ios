@@ -39,7 +39,7 @@ class SphereMetricsTableViewCell: UITableViewCell {
     private func changeValueLabelColorIfValueIsLow(for value: Double) {
         switch value {
         case 0...3.0:
-            valueView.backgroundColor = .shrimp
+            valueView.backgroundColor = .coral
         case 3.1...4.0:
             valueView.backgroundColor = .lightGray
         case 4.1...6.0:

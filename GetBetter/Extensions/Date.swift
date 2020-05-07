@@ -31,7 +31,7 @@ extension Date {
         return dayTimePeriodFormatter.string(from: date as Date)
     }
     
-    static func convertToDateWithRusWeekday(from timestamp: Int64) -> String {
+    static func convertToDateWithWeekday(from timestamp: Int64) -> String {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
@@ -43,8 +43,8 @@ extension Date {
         return "\(dateFormat), \(weekdayRus(dayIndex: weekdayIndex))"
     }
     
-    static func currentDateWithRusWeekday() -> String {
-        return convertToDateWithRusWeekday(from: Int64(Date().timeIntervalSince1970))
+    static func currentDateWithWeekday() -> String {
+        return convertToDateWithWeekday(from: Int64(Date().timeIntervalSince1970))
     }
     
     private static func weekdayRus(dayIndex: Int) -> String {

@@ -30,10 +30,11 @@ class JournalTableViewCell: UITableViewCell {
     func fillCell(from post: Post) {
         sphereView.backgroundColor = post.sphere?.color
         sphereNameLabel.text = post.sphere?.name ?? ""
+        sphereNameLabel.textColor = post.sphere?.titleColor
         titleLabel.text = post.text ?? ""
         titleLabelNoImage.text = post.text ?? ""
-        dateLabel.text = Date.convertToDateWithRusWeekday(from: post.timestamp ?? 0)
-        dateLabelNoImage.text = Date.convertToDateWithRusWeekday(from: post.timestamp ?? 0)
+        dateLabel.text = Date.convertToDateWithWeekday(from: post.timestamp ?? 0)
+        dateLabelNoImage.text = Date.convertToDateWithWeekday(from: post.timestamp ?? 0)
         
         DispatchQueue.global().async { [weak self] in
             if let urlString = post.photoUrl,
@@ -55,13 +56,12 @@ class JournalTableViewCell: UITableViewCell {
     func setupView() {
         switchImage(show: false)
         sphereView.layer.cornerRadius = 10
-        sphereNameLabel.textColor = .white
         sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 10)
-        titleLabel.font = UIFont.systemFont(ofSize: 22)
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textColor = .darkGray
         dateLabel.font = UIFont.systemFont(ofSize: 12)
         dateLabel.textColor = .gray
-        titleLabelNoImage.font = UIFont.systemFont(ofSize: 22)
+        titleLabelNoImage.font = UIFont.systemFont(ofSize: 16)
         titleLabelNoImage.textColor = .darkGray
         dateLabelNoImage.font = UIFont.systemFont(ofSize: 12)
         dateLabelNoImage.textColor = .gray

@@ -137,7 +137,7 @@ class AddPostViewController: UIViewController {
         attachButton.setTitle("", for: .normal)
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .gray
-        dateLabel.text = Date.currentDateWithRusWeekday()
+        dateLabel.text = Date.currentDateWithWeekday()
         symbolsCountLabel.font = UIFont.systemFont(ofSize: 14)
         symbolsCountLabel.textColor = .gray
         symbolsCountLabel.text = "\(postTextView.text.count)/\(maxSymbolsCount)"

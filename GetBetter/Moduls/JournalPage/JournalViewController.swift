@@ -17,7 +17,7 @@ class JournalViewController: UIViewController {
     var uniqueDates: [String] = []
     var postsBySections: [String : [Post]]?
     
-    let SectionHeaderHeight: CGFloat = 40
+    let SectionHeaderHeight: CGFloat = 30
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
     let firebaseDataBaseService = FirebaseDatabaseService()
@@ -29,6 +29,8 @@ class JournalViewController: UIViewController {
         setupRefreshControl()
         registerCell()
         setupBarButton()
+        
+        tableView.backgroundColor = .appBackground
         
         self.title = "Загрузка"
         getPosts { [weak self] in
@@ -113,6 +115,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if postsCount == 0 {
             return 1
         }
@@ -132,25 +135,27 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
-        label.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
         
         let date = uniqueDates[section]
         label.text = date
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))
-        view.backgroundColor = .gray
+        view.backgroundColor = .tableViewSectionColor
         view.addSubview(label)
         return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         
         if postsCount == 0 {
+            let cell = UITableViewCell()
             cell.textLabel?.text = "Чтобы добавить событие, нажмите +"
             return cell
         }
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         
         let date = uniqueDates[indexPath.section]
         if let postsBySections = postsBySections,
