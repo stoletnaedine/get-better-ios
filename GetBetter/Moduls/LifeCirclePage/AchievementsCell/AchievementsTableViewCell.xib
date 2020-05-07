@@ -35,14 +35,14 @@
                             <constraint firstItem="k8G-cj-AgB" firstAttribute="centerX" secondItem="cg2-29-89Q" secondAttribute="centerX" id="jGt-97-Bgd"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Отношения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-wh-NN5">
-                        <rect key="frame" x="55" y="15" width="92" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Отношения" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-wh-NN5">
+                        <rect key="frame" x="55" y="15" width="250" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOO-Nv-MCp">
-                        <rect key="frame" x="55" y="41" width="31" height="15"/>
+                        <rect key="frame" x="55" y="40.5" width="250" height="15.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -50,9 +50,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="MOO-Nv-MCp" firstAttribute="top" secondItem="GcY-wh-NN5" secondAttribute="bottom" constant="5" id="3kk-AO-xZA"/>
+                    <constraint firstAttribute="trailing" secondItem="GcY-wh-NN5" secondAttribute="trailing" constant="15" id="58y-5G-xSC"/>
                     <constraint firstAttribute="bottom" secondItem="MOO-Nv-MCp" secondAttribute="bottom" constant="15" id="7vk-iN-fu4"/>
                     <constraint firstItem="MOO-Nv-MCp" firstAttribute="leading" secondItem="cg2-29-89Q" secondAttribute="trailing" constant="15" id="LJH-vz-e0F"/>
                     <constraint firstItem="cg2-29-89Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="MBj-oZ-PLS"/>
+                    <constraint firstAttribute="trailing" secondItem="MOO-Nv-MCp" secondAttribute="trailing" constant="15" id="ZVp-MA-oi7"/>
                     <constraint firstItem="cg2-29-89Q" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cTG-yO-HKr"/>
                     <constraint firstItem="GcY-wh-NN5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="egr-dA-39k"/>
                     <constraint firstItem="GcY-wh-NN5" firstAttribute="leading" secondItem="cg2-29-89Q" secondAttribute="trailing" constant="15" id="guh-NV-RFE"/>
@@ -62,7 +64,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="MOO-Nv-MCp" id="lJx-BW-aTu"/>
                 <outlet property="iconLabel" destination="k8G-cj-AgB" id="Gqk-4B-amv"/>
-                <outlet property="nameLabel" destination="GcY-wh-NN5" id="SOl-J3-I9H"/>
+                <outlet property="titleLabel" destination="GcY-wh-NN5" id="SOl-J3-I9H"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="161.71875"/>
         </tableViewCell>
