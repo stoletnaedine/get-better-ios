@@ -46,7 +46,7 @@ class AddPostViewController: UIViewController {
     @IBAction func attachButtonDidTapped(_ sender: UIButton) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = .photoLibrary // TODO уточнить
         present(imagePickerController, animated: true, completion: nil)
     }
     
@@ -124,7 +124,7 @@ class AddPostViewController: UIViewController {
         photoImageView.isHidden = true
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textColor = .violet
-        titleLabel.text = "Дневник"
+        titleLabel.text = "Добавить запись"
         selectedSphereLabel.textColor = .violet
         selectedSphereLabel.text = Constants.Post.sphereDefault
         selectedSphereLabel.font = UIFont.boldSystemFont(ofSize: 18)

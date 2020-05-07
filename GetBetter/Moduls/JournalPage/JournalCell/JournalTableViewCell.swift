@@ -57,11 +57,11 @@ class JournalTableViewCell: UITableViewCell {
         switchImage(show: false)
         sphereView.layer.cornerRadius = 10
         sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 10)
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         titleLabel.textColor = .darkGray
         dateLabel.font = UIFont.systemFont(ofSize: 12)
         dateLabel.textColor = .gray
-        titleLabelNoImage.font = UIFont.systemFont(ofSize: 16)
+        titleLabelNoImage.font = UIFont.boldSystemFont(ofSize: 16)
         titleLabelNoImage.textColor = .darkGray
         dateLabelNoImage.font = UIFont.systemFont(ofSize: 12)
         dateLabelNoImage.textColor = .gray

@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Снимок экрана 2020-05-07 в 14.48.32.png",
+      "filename" : "getbetter-ui-avatar.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "getbetter-ui-avatar-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "getbetter-ui-avatar-2.png",
       "scale" : "3x"
     }
   ],

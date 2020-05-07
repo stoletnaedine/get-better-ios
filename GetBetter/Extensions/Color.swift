@@ -58,6 +58,10 @@ extension UIColor {
         return UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1)
     }
     
+    static var thirtyGray: UIColor {
+        return #colorLiteral(red: 0.737254902, green: 0.7568627451, blue: 0.7607843137, alpha: 1)
+    }
+    
     static var placeholderGray: UIColor {
         return UIColor(red: 174/255, green: 174/255, blue: 174/255, alpha: 1)
     }
