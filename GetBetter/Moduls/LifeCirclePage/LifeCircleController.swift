@@ -86,18 +86,19 @@ class LifeCircleController: UIViewController {
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
             self?.setupChartView()
             self?.metricsTableView.reloadData()
+            self?.achievementsTableView.reloadData()
             self?.refreshControl.endRefreshing()
         })
     }
     
     func setupTableView() {
-        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
-        metricsTableView.delegate = self
-        metricsTableView.dataSource = self
-        
-        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
-        achievementsTableView.delegate = self
         achievementsTableView.dataSource = self
+        achievementsTableView.delegate = self
+        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
+        
+        metricsTableView.dataSource = self
+        metricsTableView.delegate = self
+        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
     }
     
     func setupSegmentedControl() {
@@ -242,6 +243,10 @@ class DataSetValueFormatter: IValueFormatter {
 
 extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentSphereMetrics?.values.count ?? 0
     }
@@ -249,6 +254,7 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch tableView {
+            
         case metricsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
             
@@ -263,24 +269,26 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             cell.fillCell(from: sphereValue)
             
             return cell
+            
         case achievementsTableView:
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier, for: indexPath) as! AchievementsTableViewCell
-            
-            print("cell=\(cell)")
-            
+
             let sphereRawValue = currentSphereMetrics?
                 .sortedValues()
                 .map { $0.key }[indexPath.row] ?? ""
-            
+
             guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
             guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
-            
+
             let sphereValue = SphereValue(sphere: sphere, value: value)
             cell.fillCell(from: sphereValue)
             
             return cell
+            
         default:
             return UITableViewCell()
         }
+        
     }
 }
