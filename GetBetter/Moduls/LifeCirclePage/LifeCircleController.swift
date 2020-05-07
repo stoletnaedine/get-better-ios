@@ -15,7 +15,8 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var fakeChartView: RadarChartView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var metricsTableView: UITableView!
+    @IBOutlet weak var achievmentsTableView: UITableView!
     let refreshControl = UIRefreshControl()
     let firebaseDatabaseService = FirebaseDatabaseService()
     
@@ -38,12 +39,13 @@ class LifeCircleController: UIViewController {
         setupRefreshControl()
         
         chartView.isHidden = false
-        tableView.isHidden = true
+        metricsTableView.isHidden = true
+        achievmentsTableView.isHidden = true
     }
     
     func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(loadAndShowMetrics), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        metricsTableView.addSubview(refreshControl)
     }
     
     @objc func loadAndShowMetrics() {
@@ -81,23 +83,26 @@ class LifeCircleController: UIViewController {
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
             self?.setupChartView()
-            self?.tableView.reloadData()
+            self?.metricsTableView.reloadData()
             self?.refreshControl.endRefreshing()
         })
     }
     
     func setupTableView() {
-        tableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: reuseCellIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
+        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: reuseCellIdentifier)
+        metricsTableView.delegate = self
+        metricsTableView.dataSource = self
+        
+        // register achievment table??
+        achievmentsTableView.backgroundColor = .violet
     }
     
     func setupSegmentedControl() {
-        segmentedControl.tintColor = .violet
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                                                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.details, forSegmentAt: 1)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.achievments, forSegmentAt: 2)
     }
     
     @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {
@@ -105,13 +110,18 @@ class LifeCircleController: UIViewController {
         case 0:
             chartView.isHidden = false
             fakeChartView.isHidden = false
-            tableView.isHidden = true
+            metricsTableView.isHidden = true
+            achievmentsTableView.isHidden = true
         case 1:
             chartView.isHidden = true
             fakeChartView.isHidden = true
-            tableView.isHidden = false
-        default:
-            print("default")
+            metricsTableView.isHidden = false
+            achievmentsTableView.isHidden = true
+        default: //case 2
+            chartView.isHidden = true
+            fakeChartView.isHidden = true
+            metricsTableView.isHidden = true
+            achievmentsTableView.isHidden = false
         }
     }
     

@@ -10,10 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LifeCircleController" customModule="GetBetter" customModuleProvider="target">
             <connections>
+                <outlet property="achievmentsTableView" destination="Uam-k0-6uc" id="3b3-iu-c6L"/>
                 <outlet property="chartView" destination="fxn-qj-OtY" id="jI9-FH-eve"/>
                 <outlet property="fakeChartView" destination="yMV-0z-MZf" id="KyU-gR-1BO"/>
+                <outlet property="metricsTableView" destination="vic-bJ-U3q" id="t8j-i0-E2B"/>
                 <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
-                <outlet property="tableView" destination="vic-bJ-U3q" id="gwF-qg-E9Z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,26 +28,32 @@
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
+                        <segment title=""/>
                     </segments>
                     <connections>
                         <action selector="segmentedActionDidSelected:" destination="-1" eventType="valueChanged" id="SFf-nL-h4V"/>
                     </connections>
                 </segmentedControl>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vic-bJ-U3q">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vic-bJ-U3q" userLabel="Metrics Table View">
                     <rect key="frame" x="0.0" y="71" width="414" height="665"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMV-0z-MZf" customClass="RadarChartView" customModule="Charts">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-k0-6uc" userLabel="Achievments Table View">
+                    <rect key="frame" x="0.0" y="71" width="414" height="665"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMV-0z-MZf" userLabel="Fake Chart View" customClass="RadarChartView" customModule="Charts">
                     <rect key="frame" x="10" y="71" width="394" height="665"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" customClass="RadarChartView" customModule="Charts">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="User Chart View" customClass="RadarChartView" customModule="Charts">
                     <rect key="frame" x="10" y="71" width="394" height="665"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Uam-k0-6uc" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="3eP-Uc-6Hg"/>
                 <constraint firstItem="vic-bJ-U3q" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="3qQ-ec-p2e"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="arR-df-p35" secondAttribute="trailing" constant="40" id="4uJ-R1-dfY"/>
                 <constraint firstItem="fxn-qj-OtY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="5oE-WE-063"/>
@@ -56,11 +63,14 @@
                 <constraint firstItem="fxn-qj-OtY" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="KbC-ox-cql"/>
                 <constraint firstItem="yMV-0z-MZf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="M8U-AI-fDc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fxn-qj-OtY" secondAttribute="bottom" id="Ny7-ch-Sy6"/>
+                <constraint firstItem="Uam-k0-6uc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="O17-Io-QQt"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="YGd-5u-T7W"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vic-bJ-U3q" secondAttribute="bottom" id="as5-GM-r5m"/>
+                <constraint firstItem="Uam-k0-6uc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="cbk-09-DlL"/>
                 <constraint firstItem="yMV-0z-MZf" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="dwc-ke-7lm"/>
                 <constraint firstItem="yMV-0z-MZf" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="iaJ-cb-C0d"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vic-bJ-U3q" secondAttribute="trailing" id="luZ-Sa-XBG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Uam-k0-6uc" secondAttribute="bottom" id="mWk-KG-H1t"/>
                 <constraint firstItem="vic-bJ-U3q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mpn-JD-N7g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
