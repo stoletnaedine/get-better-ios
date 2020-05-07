@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E045E972463E8150001E378 /* AchievementsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */; };
+		6E045E992463E8B40001E378 /* AchievementsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */; };
 		6E5684102451AB1F009FBE13 /* SetupSphereValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */; };
 		6E5684112451AB1F009FBE13 /* SetupSphereValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */; };
 		6E5A98502455FDDE001F8008 /* AboutCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */; };
@@ -83,6 +85,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = GetBetter/Moduls/LifeCirclePage/SphereMetricsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementsTableViewCell.swift; path = GetBetter/Moduls/LifeCirclePage/SphereMetricsCell/AchievementsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
 		6E5A984F2455FDDE001F8008 /* AboutCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutCircleViewController.swift; path = GetBetter/Moduls/SettingsPage/AboutCirclePage/AboutCircleViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -174,6 +178,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E045E952463E7800001E378 /* AchievementsCell */ = {
+			isa = PBXGroup;
+			children = (
+				6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */,
+				6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */,
+			);
+			path = AchievementsCell;
+			sourceTree = "<group>";
+		};
 		6E5A984A2455888E001F8008 /* SphereMetricsCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +378,7 @@
 				C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */,
 				C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */,
 				6E5A984A2455888E001F8008 /* SphereMetricsCell */,
+				6E045E952463E7800001E378 /* AchievementsCell */,
 			);
 			path = LifeCirclePage;
 			sourceTree = "<group>";
@@ -577,6 +591,7 @@
 				6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */,
 				C303978D23D6DB9B003FE9D4 /* Ubuntu.ttf in Resources */,
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
+				6E045E972463E8150001E378 /* AchievementsTableViewCell.xib in Resources */,
 				C31FF97B2452CCA400642C7B /* AboutAppViewController.xib in Resources */,
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
 				6E5A985624560447001F8008 /* AboutJournalViewController.xib in Resources */,
@@ -652,6 +667,7 @@
 				C3D2D2442432139A005C8577 /* Api.swift in Sources */,
 				C3B4760324596BAD0067A3C0 /* SettingsCell.swift in Sources */,
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
+				6E045E992463E8B40001E378 /* AchievementsTableViewCell.swift in Sources */,
 				C3C66AF224582B5000D3964D /* ProfileTableViewCell.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,
 				C3F0141A23D080F8009D83AD /* ParsingService.swift in Sources */,

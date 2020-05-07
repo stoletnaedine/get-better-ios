@@ -16,14 +16,16 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var fakeChartView: RadarChartView!
     @IBOutlet weak var metricsTableView: UITableView!
-    @IBOutlet weak var achievmentsTableView: UITableView!
+    @IBOutlet weak var achievementsTableView: UITableView!
     let refreshControl = UIRefreshControl()
     let firebaseDatabaseService = FirebaseDatabaseService()
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
     let sphereMetricsXibName = String(describing: SphereMetricsTableViewCell.self)
-    let reuseCellIdentifier = "SphereMetricsCell"
+    let sphereMetricsReuseCellIdentifier = "SphereMetricsCell"
+    let achievementsXibName = String(describing: AchievementsTableViewCell.self)
+    let achievementsReuseCellIdentifier = "AchievementsCell"
     let sphereIconSize: CGFloat = 30
     
     override func viewDidLoad() {
@@ -40,7 +42,7 @@ class LifeCircleController: UIViewController {
         
         chartView.isHidden = false
         metricsTableView.isHidden = true
-        achievmentsTableView.isHidden = true
+        achievementsTableView.isHidden = true
     }
     
     func setupRefreshControl() {
@@ -89,12 +91,13 @@ class LifeCircleController: UIViewController {
     }
     
     func setupTableView() {
-        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: reuseCellIdentifier)
+        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
         metricsTableView.delegate = self
         metricsTableView.dataSource = self
         
-        // register achievment table??
-        achievmentsTableView.backgroundColor = .violet
+        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
+        achievementsTableView.delegate = self
+        achievementsTableView.dataSource = self
     }
     
     func setupSegmentedControl() {
@@ -111,17 +114,17 @@ class LifeCircleController: UIViewController {
             chartView.isHidden = false
             fakeChartView.isHidden = false
             metricsTableView.isHidden = true
-            achievmentsTableView.isHidden = true
+            achievementsTableView.isHidden = true
         case 1:
             chartView.isHidden = true
             fakeChartView.isHidden = true
             metricsTableView.isHidden = false
-            achievmentsTableView.isHidden = true
+            achievementsTableView.isHidden = true
         default: //case 2
             chartView.isHidden = true
             fakeChartView.isHidden = true
             metricsTableView.isHidden = true
-            achievmentsTableView.isHidden = false
+            achievementsTableView.isHidden = false
         }
     }
     
@@ -245,18 +248,39 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
-        
-        let sphereRawValue = currentSphereMetrics?
-            .sortedValues()
-            .map { $0.key }[indexPath.row] ?? ""
-        
-        guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
-        guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
-        
-        let sphereValue = SphereValue(sphere: sphere, value: value)
-        cell.fillCell(from: sphereValue)
-        
-        return cell
+        switch tableView {
+        case metricsTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
+            
+            let sphereRawValue = currentSphereMetrics?
+                .sortedValues()
+                .map { $0.key }[indexPath.row] ?? ""
+            
+            guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
+            guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
+            
+            let sphereValue = SphereValue(sphere: sphere, value: value)
+            cell.fillCell(from: sphereValue)
+            
+            return cell
+        case achievementsTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier, for: indexPath) as! AchievementsTableViewCell
+            
+            print("cell=\(cell)")
+            
+            let sphereRawValue = currentSphereMetrics?
+                .sortedValues()
+                .map { $0.key }[indexPath.row] ?? ""
+            
+            guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
+            guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
+            
+            let sphereValue = SphereValue(sphere: sphere, value: value)
+            cell.fillCell(from: sphereValue)
+            
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
 }
