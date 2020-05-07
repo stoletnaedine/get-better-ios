@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
     
     static var violet: UIColor {
-        return #colorLiteral(red: 0.6156862745, green: 0.5098039216, blue: 0.9882352941, alpha: 1)
+        return #colorLiteral(red: 0.5254901961, green: 0.4509803922, blue: 0.8980392157, alpha: 1)
     }
     
     static var shrimp: UIColor {

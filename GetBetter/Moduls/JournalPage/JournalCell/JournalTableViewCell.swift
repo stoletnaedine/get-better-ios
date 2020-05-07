@@ -12,7 +12,11 @@ class JournalTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var sphereNameLabel: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var titleLabelNoImage: UILabel!
+    @IBOutlet weak var dateLabelNoImage: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,14 +28,58 @@ class JournalTableViewCell: UITableViewCell {
     }
     
     func fillCell(from post: Post) {
-        self.sphereView.backgroundColor = post.sphere?.color
-        self.sphereNameLabel.text = post.sphere?.name ?? ""
-        self.titleLabel.text = post.text ?? ""
+        sphereView.backgroundColor = post.sphere?.color
+        sphereNameLabel.text = post.sphere?.name ?? ""
+        titleLabel.text = post.text ?? ""
+        titleLabelNoImage.text = post.text ?? ""
+        dateLabel.text = Date.convertToDateWithRusWeekday(from: post.timestamp ?? 0)
+        dateLabelNoImage.text = Date.convertToDateWithRusWeekday(from: post.timestamp ?? 0)
+        
+        DispatchQueue.global().async { [weak self] in
+            if let urlString = post.photoUrl,
+                let url = URL(string: urlString) {
+                
+                if let imageData = try? Data(contentsOf: url),
+                    let image = UIImage(data: imageData) {
+                    
+                    DispatchQueue.main.async {
+                        self?.switchImage(show: true)
+                        self?.photoImageView.image = image
+                    }
+                    
+                }
+            }
+        }
     }
     
     func setupView() {
-        sphereView.layer.cornerRadius = 8
+        switchImage(show: false)
+        sphereView.layer.cornerRadius = 10
         sphereNameLabel.textColor = .white
-        sphereNameLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 12)
+        sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 10)
+        titleLabel.font = UIFont.systemFont(ofSize: 22)
+        titleLabel.textColor = .darkGray
+        dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.textColor = .gray
+        titleLabelNoImage.font = UIFont.systemFont(ofSize: 22)
+        titleLabelNoImage.textColor = .darkGray
+        dateLabelNoImage.font = UIFont.systemFont(ofSize: 12)
+        dateLabelNoImage.textColor = .gray
+    }
+    
+    private func switchImage(show: Bool) {
+        if show {
+            photoImageView?.isHidden = false
+            titleLabel.isHidden = false
+            dateLabel.isHidden = false
+            titleLabelNoImage.isHidden = true
+            dateLabelNoImage.isHidden = true
+        } else {
+            photoImageView?.isHidden = true
+            titleLabel.isHidden = true
+            dateLabel.isHidden = true
+            titleLabelNoImage.isHidden = false
+            dateLabelNoImage.isHidden = false
+        }
     }
 }
