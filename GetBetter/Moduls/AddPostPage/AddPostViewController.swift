@@ -60,8 +60,7 @@ class AddPostViewController: UIViewController {
             return
         }
         
-        var photoUrlString: String?
-        var photoName: String?
+        var photoResult: Photo?
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -69,11 +68,10 @@ class AddPostViewController: UIViewController {
             
             self.showActivityIndicator(onView: self.view)
             
-            FirebaseStorageService().upload(photo: photo, completion: { result in
+            FirebaseStorageService().uploadPhotoAndPreview(photo: photo, completion: { result in
                 switch result {
                 case .success(let photo):
-                    photoUrlString = photo.url
-                    photoName = photo.name
+                    photoResult = photo
                     dispatchGroup.leave()
                 default:
                     dispatchGroup.leave()
@@ -85,8 +83,12 @@ class AddPostViewController: UIViewController {
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
             
-            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp, photoUrl: photoUrlString, photoName: photoName)
-            _ = self?.firebaseDataBaseService.savePost(post)
+            if let photoResult = photoResult {
+                let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp,
+                                photoUrl: photoResult.photoUrl, photoName: photoResult.photoName,
+                                previewUrl: photoResult.previewUrl, previewName: photoResult.previewName)
+                _ = self?.firebaseDataBaseService.savePost(post)
+            }
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()

@@ -41,7 +41,9 @@ class FirebaseDatabaseService {
                 Constants.Post.Field.sphere: post.sphere?.rawValue ?? "",
                 Constants.Post.Field.timestamp: post.timestamp ?? "",
                 Constants.Post.Field.photoUrl: post.photoUrl ?? "",
-                Constants.Post.Field.photoName: post.photoName ?? ""
+                Constants.Post.Field.photoName: post.photoName ?? "",
+                Constants.Post.Field.previewUrl: post.previewUrl ?? "",
+                Constants.Post.Field.previewName: post.previewName ?? ""
             ])
         
         print("Firebase saved post \(post)")
@@ -65,7 +67,10 @@ class FirebaseDatabaseService {
         decrementSphereValue(for: sphere)
         
         if let photoName = post.photoName, !photoName.isEmpty {
-            storageService.delete(photoName: photoName)
+            storageService.deletePhoto(name: photoName)
+        }
+        if let previewName = post.previewName, !previewName.isEmpty {
+            storageService.deletePreview(name: previewName)
         }
         
         print("Firebase deleted post \(post)")
@@ -102,7 +107,9 @@ class FirebaseDatabaseService {
                                         sphere: maybeSphere,
                                         timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0,
                                         photoUrl: entity?[Constants.Post.Field.photoUrl] as? String ?? "",
-                                        photoName: entity?[Constants.Post.Field.photoName] as? String ?? "")
+                                        photoName: entity?[Constants.Post.Field.photoName] as? String ?? "",
+                                        previewUrl: entity?[Constants.Post.Field.photoName] as? String ?? "",
+                                        previewName: entity?[Constants.Post.Field.photoName] as? String ?? "")
                         
                         postArray.append(post)
                     }

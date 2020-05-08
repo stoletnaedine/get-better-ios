@@ -59,6 +59,7 @@ class EditProfileViewController: UIViewController {
             storageService.uploadAvatar(photo: newAvatar, completion: { result in
                 switch result {
                 case .success(let url):
+                    print("url=\(url)")
                     let changeRequest = user.createProfileChangeRequest()
                     changeRequest.photoURL = url
                     changeRequest.commitChanges(completion: { error in

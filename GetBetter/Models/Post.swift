@@ -15,4 +15,6 @@ struct Post {
     let timestamp: Int64?
     let photoUrl: String?
     let photoName: String?
+    let previewUrl: String?
+    let previewName: String?
 }

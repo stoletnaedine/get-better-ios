@@ -14,32 +14,41 @@ class FirebaseStorageService {
     
     let metadata = StorageMetadata()
     let contentType = "image/jpeg"
-    let avatarsPath = "avatars"
-    let picsPath = "photos"
+    let avatarFileName = "avatar"
+    let photosPath = "photos"
+    let previewsPath = "previews"
+    let usersPath = "users"
     let uuidString: String = UUID().uuidString
     let photoQuality: CGFloat = 0.5
     let resizeWidthPhoto: CGFloat = 750
+    let resizeWidthPreview: CGFloat = 200
     let resizeWidthAvatar: CGFloat = 300
+    
+    func currentUserPath() -> StorageReference? {
+        
+        guard let userId = Auth.auth().currentUser?.uid else { return nil }
+        
+        return Storage.storage().reference()
+            .child(usersPath)
+            .child(userId)
+    }
     
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
         
-        guard let userId = Auth.auth().currentUser?.uid else { return }
-        
-        let ref = Storage.storage().reference()
-            .child(avatarsPath)
-            .child(userId)
-        
-        metadata.contentType = contentType
-        
+        guard let currentUserRef = currentUserPath() else { return }
         guard let resizeImage = photo.resized(toWidth: resizeWidthAvatar) else { return }
         guard let imageData = resizeImage.jpegData(compressionQuality: photoQuality) else { return }
+        metadata.contentType = contentType
         
-        ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
+        let avatarRef = currentUserRef.child(avatarFileName)
+        
+        avatarRef
+            .putData(imageData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {
                 completion(.failure(AppError(error: error)!))
                 return
             }
-            ref.downloadURL(completion: { (url, error) in
+            avatarRef.downloadURL(completion: { (url, error) in
                 guard let url = url else {
                     completion(.failure(AppError(error: error)!))
                     return
@@ -49,51 +58,97 @@ class FirebaseStorageService {
         })
     }
     
-    func upload(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
+    func uploadPhotoAndPreview(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
         
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+        var photoName: String?
+        var photoUrl: String?
+        var previewName: String?
+        var previewUrl: String?
         
-        let ref = Storage.storage().reference()
-            .child(picsPath)
-            .child(userId)
-            .child(uuidString)
-        
+        guard let photoRef = currentUserPath() else { return }
+        guard let resizePhoto = photo.resized(toWidth: resizeWidthPhoto) else { return }
+        guard let photoData = resizePhoto.jpegData(compressionQuality: photoQuality) else { return }
         metadata.contentType = contentType
         
-        guard let resizeImage = photo.resized(toWidth: resizeWidthPhoto) else { return }
-        guard let imageData = resizeImage.jpegData(compressionQuality: photoQuality) else { return }
+        let dispatchGroup = DispatchGroup()
         
-        ref.putData(imageData, metadata: metadata, completion: { (metadata, error) in
+        dispatchGroup.enter()
+        photoRef
+            .child(photosPath)
+            .child(uuidString)
+            .putData(photoData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {
                 completion(.failure(AppError(error: error)!))
+                dispatchGroup.leave()
                 return
             }
-            ref.downloadURL(completion: { (url, error) in
+            photoRef.downloadURL(completion: { (url, error) in
                 guard let url = url else {
                     completion(.failure(AppError(error: error)!))
+                    dispatchGroup.leave()
                     return
                 }
-                let name = ref.name
-                let urlString = "\(url)"
-                completion(.success(Photo(name: name, url: urlString)))
+                photoUrl = "\(url)"
+                photoName = photoRef.name
+                dispatchGroup.leave()
             })
+        })
+        
+        guard let previewRef = currentUserPath() else { return }
+        guard let resizePreview = photo.resized(toWidth: resizeWidthPreview) else { return }
+        guard let previewData = resizePreview.jpegData(compressionQuality: photoQuality) else { return }
+        
+        dispatchGroup.enter()
+        previewRef
+            .child(previewsPath)
+            .child(uuidString)
+            .putData(previewData, metadata: metadata, completion: { (metadata, error) in
+            guard let _ = metadata else {
+                completion(.failure(AppError(error: error)!))
+                dispatchGroup.leave()
+                return
+            }
+            previewRef.downloadURL(completion: { (url, error) in
+                guard let url = url else {
+                    completion(.failure(AppError(error: error)!))
+                    dispatchGroup.leave()
+                    return
+                }
+                previewUrl = "\(url)"
+                previewName = previewRef.name
+                dispatchGroup.leave()
+            })
+        })
+        
+        dispatchGroup.notify(queue: .global(), execute: {
+            completion(.success(Photo(photoUrl: photoUrl, photoName: photoName, previewUrl: previewUrl, previewName: previewName)))
         })
     }
     
-    func delete(photoName: String) {
+    func deletePreview(name: String) {
         
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+        guard let ref = currentUserPath() else { return }
         
-        let photoRef = Storage.storage().reference()
-            .child(picsPath)
-            .child(userId)
-            .child(photoName)
-            
-        photoRef.delete { error in
+        delete(imageName: name, imagePath: previewsPath, reference: ref)
+    }
+    
+    func deletePhoto(name: String) {
+        
+        guard let ref = currentUserPath() else { return }
+        
+        delete(imageName: name, imagePath: photosPath, reference: ref)
+    }
+    
+    private func delete(imageName: String, imagePath: String, reference: StorageReference) {
+        
+        reference
+            .child(imagePath)
+            .child(imageName)
+            .delete { error in
                 if let error = error {
-                    print("Error delete file = \(photoName): \(error.localizedDescription)")
+                    print("Error delete file = \(imageName): \(error.localizedDescription)")
                 } else {
-                    print("File = \(photoName) successfully deleted")
+                    print("File = \(imageName) successfully deleted")
                 }
         }
     }

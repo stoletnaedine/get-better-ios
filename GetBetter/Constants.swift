@@ -100,6 +100,8 @@ struct Constants {
             static let timestamp = "timestamp"
             static let photoUrl = "photoUrl"
             static let photoName = "photoName"
+            static let previewUrl = "previewUrl"
+            static let previewName = "previewName"
         }
     }
     

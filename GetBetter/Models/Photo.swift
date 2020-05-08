@@ -9,6 +9,8 @@
 import Foundation
 
 struct Photo {
-    let name: String?
-    let url: String?
+    let photoUrl: String?
+    let photoName: String?
+    let previewUrl: String?
+    let previewName: String?
 }

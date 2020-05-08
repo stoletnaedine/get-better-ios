@@ -37,18 +37,15 @@ class JournalTableViewCell: UITableViewCell {
         dateLabelNoImage.text = Date.convertToDateWithWeekday(from: post.timestamp ?? 0)
         
         DispatchQueue.global().async { [weak self] in
-            if let urlString = post.photoUrl,
-                let url = URL(string: urlString) {
-                
-                if let imageData = try? Data(contentsOf: url),
-                    let image = UIImage(data: imageData) {
+            if let urlString = post.previewUrl,
+                let url = URL(string: urlString),
+                let imageData = try? Data(contentsOf: url),
+                let image = UIImage(data: imageData) {
                     
                     DispatchQueue.main.async {
                         self?.switchImage(show: true)
                         self?.photoImageView.image = image
                     }
-                    
-                }
             }
         }
     }
