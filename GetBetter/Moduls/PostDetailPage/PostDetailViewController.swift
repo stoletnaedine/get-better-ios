@@ -12,9 +12,9 @@ class PostDetailViewController: UIViewController {
     
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var sphereLabel: UILabel!
-    @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var post: Post?
     
@@ -33,10 +33,10 @@ class PostDetailViewController: UIViewController {
     func fillViewController(_ post: Post) {
         self.title = post.text ?? Constants.Post.titleDefault
         self.textLabel.text = post.text ?? ""
-        self.sphereLabel.text = "\(post.sphere?.icon ?? "") \(post.sphere?.name ?? "")"
-        self.timestampLabel.text = ""
+        self.sphereLabel.text = post.sphere?.name ?? ""
+        self.dateLabel.text = ""
         if let timestamp = post.timestamp {
-            self.timestampLabel.text = Date.convertToFullDate(from: timestamp)
+            self.dateLabel.text = Date.convertToFullDate(from: timestamp)
         }
         DispatchQueue.global().async { [weak self] in
             if let urlString = post.photoUrl,
@@ -64,9 +64,11 @@ class PostDetailViewController: UIViewController {
     }
     
     func customizeView() {
-        textLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 18)
-        sphereLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 20)
-        timestampLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
+        textLabel.font = UIFont.systemFont(ofSize: 18)
+        sphereLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        sphereLabel.textColor = .violet
+        dateLabel.font = UIFont.systemFont(ofSize: 14)
+        dateLabel.textColor = .gray
         cancelButton.setTitle("", for: .normal)
         photoImageView.isHidden = true
     }
