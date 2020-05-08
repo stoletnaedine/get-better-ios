@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-WI-oNU">
-                        <rect key="frame" x="15" y="14" width="52" height="40"/>
+                        <rect key="frame" x="15" y="15" width="52" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="52" id="ea5-jg-ZE6"/>
                             <constraint firstAttribute="height" constant="40" id="kgU-uX-VUv"/>
@@ -84,7 +84,7 @@
                     <constraint firstAttribute="bottom" secondItem="Aka-vv-pMf" secondAttribute="bottom" constant="12" id="s4F-f5-XNg"/>
                     <constraint firstItem="Aka-vv-pMf" firstAttribute="top" secondItem="e7S-XP-xAA" secondAttribute="bottom" constant="10" id="uJQ-wP-9gE"/>
                     <constraint firstItem="e7S-XP-xAA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="uJt-bd-apI"/>
-                    <constraint firstItem="Le4-WI-oNU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="wnb-tD-ACE"/>
+                    <constraint firstItem="Le4-WI-oNU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="wnb-tD-ACE"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aka-vv-pMf" secondAttribute="trailing" constant="50" id="zfm-kc-yPL"/>
                 </constraints>
             </tableViewCellContentView>
