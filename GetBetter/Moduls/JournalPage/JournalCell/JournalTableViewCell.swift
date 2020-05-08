@@ -28,9 +28,9 @@ class JournalTableViewCell: UITableViewCell {
     }
     
     func fillCell(from post: Post) {
-        sphereView.backgroundColor = post.sphere?.color
         sphereNameLabel.text = post.sphere?.name ?? ""
         sphereNameLabel.textColor = post.sphere?.titleColor
+        sphereView.backgroundColor = post.sphere?.color
         titleLabel.text = post.text ?? ""
         titleLabelNoImage.text = post.text ?? ""
         dateLabel.text = Date.convertToDateWithWeekday(from: post.timestamp ?? 0)
