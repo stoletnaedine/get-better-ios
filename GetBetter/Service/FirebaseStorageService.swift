@@ -64,18 +64,19 @@ class FirebaseStorageService {
         var photoUrl: String?
         var previewName: String?
         var previewUrl: String?
+        let dispatchGroup = DispatchGroup()
         
-        guard let photoRef = currentUserPath() else { return }
+        guard let currentUserRef = currentUserPath() else { return }
         guard let resizePhoto = photo.resized(toWidth: resizeWidthPhoto) else { return }
         guard let photoData = resizePhoto.jpegData(compressionQuality: photoQuality) else { return }
         metadata.contentType = contentType
         
-        let dispatchGroup = DispatchGroup()
+        let photoRef = currentUserRef
+            .child(photosPath)
+            .child(uuidString)
         
         dispatchGroup.enter()
         photoRef
-            .child(photosPath)
-            .child(uuidString)
             .putData(photoData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {
                 completion(.failure(AppError(error: error)!))
@@ -90,18 +91,20 @@ class FirebaseStorageService {
                 }
                 photoUrl = "\(url)"
                 photoName = photoRef.name
+                print("Firebase saved photo \(String(describing: photoName))")
                 dispatchGroup.leave()
             })
         })
         
-        guard let previewRef = currentUserPath() else { return }
         guard let resizePreview = photo.resized(toWidth: resizeWidthPreview) else { return }
         guard let previewData = resizePreview.jpegData(compressionQuality: photoQuality) else { return }
         
-        dispatchGroup.enter()
-        previewRef
+        let previewRef = currentUserRef
             .child(previewsPath)
             .child(uuidString)
+        
+        dispatchGroup.enter()
+        previewRef
             .putData(previewData, metadata: metadata, completion: { (metadata, error) in
             guard let _ = metadata else {
                 completion(.failure(AppError(error: error)!))
@@ -116,6 +119,7 @@ class FirebaseStorageService {
                 }
                 previewUrl = "\(url)"
                 previewName = previewRef.name
+                print("Firebase saved preview \(String(describing: previewName))")
                 dispatchGroup.leave()
             })
         })

@@ -108,8 +108,8 @@ class FirebaseDatabaseService {
                                         timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0,
                                         photoUrl: entity?[Constants.Post.Field.photoUrl] as? String ?? "",
                                         photoName: entity?[Constants.Post.Field.photoName] as? String ?? "",
-                                        previewUrl: entity?[Constants.Post.Field.photoName] as? String ?? "",
-                                        previewName: entity?[Constants.Post.Field.photoName] as? String ?? "")
+                                        previewUrl: entity?[Constants.Post.Field.previewUrl] as? String ?? "",
+                                        previewName: entity?[Constants.Post.Field.previewName] as? String ?? "")
                         
                         postArray.append(post)
                     }

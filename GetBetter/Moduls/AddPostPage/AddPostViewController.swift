@@ -63,22 +63,22 @@ class AddPostViewController: UIViewController {
         var photoResult: Photo?
         let dispatchGroup = DispatchGroup()
         
-        dispatchGroup.enter()
         if let photo = photoImageView.image {
             
+            dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
             FirebaseStorageService().uploadPhotoAndPreview(photo: photo, completion: { result in
                 switch result {
                 case .success(let photo):
+                    print("Photo upload result=\(photo)")
                     photoResult = photo
                     dispatchGroup.leave()
-                default:
+                case .failure(let error):
+                    print("Photo upload error=\(String(describing: error.name))")
                     dispatchGroup.leave()
                 }
             })
-        } else {
-            dispatchGroup.leave()
         }
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
