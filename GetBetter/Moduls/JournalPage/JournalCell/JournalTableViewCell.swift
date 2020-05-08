@@ -51,6 +51,8 @@ class JournalTableViewCell: UITableViewCell {
                     }
                 }
             }
+        } else {
+            switchImage(show: false)
         }
     }
     
