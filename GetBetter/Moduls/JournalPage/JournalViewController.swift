@@ -24,16 +24,20 @@ class JournalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = .appBackground
         
         setupRefreshControl()
         registerCell()
         setupBarButton()
-        
-        tableView.backgroundColor = .appBackground
-        
+        updatePostsInTableView()
+    }
+    
+    @objc func updatePostsInTableView() {
         self.title = "Загрузка"
         getPosts { [weak self] in
             self?.title = Constants.TabBar.journalTitle
+            self?.tableView.refreshControl?.endRefreshing()
+            self?.tableView.reloadData()
         }
     }
     
@@ -47,12 +51,6 @@ class JournalViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
-    }
-    
-    @objc func updatePostsInTableView() {
-        getPosts { [weak self] in
-            self?.tableView.refreshControl?.endRefreshing()
-        }
     }
     
     @objc func getPosts(completion: @escaping () -> Void) {
@@ -71,14 +69,12 @@ class JournalViewController: UIViewController {
                     return
                 }
                 
-                self?.postsDateSection = []
-                self?.uniqueDates = []
-                
                 let allDates = postArray.map {
                     Date.convertToMonthYear(from: $0.timestamp ?? 0)
                 }
-                
                 let uniqueDates = Array(Set(allDates))
+                
+                var postsDateSection: [PostsDateSection] = []
                 
                 for date in uniqueDates {
                     let postsByDate = postArray
@@ -91,8 +87,9 @@ class JournalViewController: UIViewController {
                     }
                     
                     let section = PostsDateSection(sectionTimestamp: timestamp, sectionName: date, posts: postsByDate)
-                    self?.postsDateSection.append(section)
+                    postsDateSection.append(section)
                 }
+                self?.postsDateSection = postsDateSection
                 
                 let sortedUniqueDates = self?.postsDateSection
                     .sorted(by: { $0.sectionTimestamp ?? 0 > $1.sectionTimestamp ?? 0 })
@@ -101,7 +98,6 @@ class JournalViewController: UIViewController {
                 self?.uniqueDates = sortedUniqueDates ?? []
                 
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
                     completion()
                 }
             }
@@ -123,10 +119,11 @@ class JournalViewController: UIViewController {
     
     fileprivate func getPost(indexPath: IndexPath) -> Post? {
         let date = self.uniqueDates[indexPath.section]
-        let postDateSection = self.postsDateSection.filter { $0.sectionName == date }
-        if postDateSection.isEmpty { return nil }
+        let postsDateInSection = self.postsDateSection.filter { $0.sectionName == date }
         
-        let posts = postDateSection[0].posts
+        if postsDateInSection.isEmpty { return nil }
+        
+        let posts = postsDateInSection[0].posts
         let post = posts[indexPath.row]
         return post
     }
@@ -140,16 +137,14 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if uniqueDates.isEmpty {
-            return 1
+        let date = uniqueDates[section]
+        let postsInSectionByDate = postsDateSection.filter { $0.sectionName == date }
+        
+        if postsInSectionByDate.isEmpty || postsInSectionByDate.count != 1 {
+            return 0
         }
         
-        let date = uniqueDates[section]
-        
-        return postsDateSection
-            .filter { $0.sectionName == date }[0]
-            .posts
-            .count
+        return postsInSectionByDate[0].posts.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
