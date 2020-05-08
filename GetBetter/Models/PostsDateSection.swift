@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct PostDateSection {
+struct PostsDateSection {
     let sectionTimestamp: Int?
     let sectionName: String?
     let posts: [Post]

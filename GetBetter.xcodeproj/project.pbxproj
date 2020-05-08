@@ -35,7 +35,7 @@
 		C303978D23D6DB9B003FE9D4 /* Ubuntu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C303978C23D6DB9B003FE9D4 /* Ubuntu.ttf */; };
 		C3087ADA245AD36C00DDE7A7 /* SphereMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3087AD8245AD36C00DDE7A7 /* SphereMetricsTableViewCell.swift */; };
 		C3087ADB245AD36C00DDE7A7 /* SphereMetricsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3087AD9245AD36C00DDE7A7 /* SphereMetricsTableViewCell.xib */; };
-		C309ACB124655CE3007DF0DC /* PostDateSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C309ACB024655CE3007DF0DC /* PostDateSection.swift */; };
+		C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C309ACB024655CE3007DF0DC /* PostsDateSection.swift */; };
 		C31FF9792452CC8D00642C7B /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31FF9782452CC8D00642C7B /* AboutAppViewController.swift */; };
 		C31FF97B2452CCA400642C7B /* AboutAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31FF97A2452CCA400642C7B /* AboutAppViewController.xib */; };
 		C31FF9842453341900642C7B /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31FF9832453341900642C7B /* FirebaseDatabaseService.swift */; };
@@ -119,7 +119,7 @@
 		C303978C23D6DB9B003FE9D4 /* Ubuntu.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ubuntu.ttf; sourceTree = "<group>"; };
 		C3087AD8245AD36C00DDE7A7 /* SphereMetricsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetricsTableViewCell.swift; sourceTree = "<group>"; };
 		C3087AD9245AD36C00DDE7A7 /* SphereMetricsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SphereMetricsTableViewCell.xib; sourceTree = "<group>"; };
-		C309ACB024655CE3007DF0DC /* PostDateSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDateSection.swift; sourceTree = "<group>"; };
+		C309ACB024655CE3007DF0DC /* PostsDateSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDateSection.swift; sourceTree = "<group>"; };
 		C31FF9782452CC8D00642C7B /* AboutAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		C31FF97A2452CCA400642C7B /* AboutAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutAppViewController.xib; sourceTree = "<group>"; };
 		C31FF9832453341900642C7B /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 				6E7071F2245C474D00ED7D08 /* SphereValue.swift */,
 				C35B38AE2462D57500E0C416 /* Photo.swift */,
 				6E045E9A24640A6A0001E378 /* Achievement.swift */,
-				C309ACB024655CE3007DF0DC /* PostDateSection.swift */,
+				C309ACB024655CE3007DF0DC /* PostsDateSection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -703,7 +703,7 @@
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
-				C309ACB124655CE3007DF0DC /* PostDateSection.swift in Sources */,
+				C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */,
 				C3ED5A2A23AFBF1300C7A492 /* LifeCircleController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
