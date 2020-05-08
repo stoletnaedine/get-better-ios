@@ -13,7 +13,6 @@ class JournalViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var postsCount = 0
     var uniqueDates: [String] = []
     var postsBySections: [String : [Post]]?
     
@@ -67,10 +66,8 @@ class JournalViewController: UIViewController {
                 
             case .success(let postArray):
                 
-                self?.postsCount = postArray.count
-                
                 let allDates = postArray.map {
-                    Date.convertToDate(from: $0.timestamp ?? 0)
+                    Date.convertToMonthYear(from: $0.timestamp ?? 0)
                 }
                 
                 let uniqueDates = Array(Set(allDates))
@@ -81,7 +78,7 @@ class JournalViewController: UIViewController {
                 
                 for date in uniqueDates {
                     postsBySections[date] = postArray
-                        .filter { Date.convertToDate(from: $0.timestamp ?? 0) == date }
+                        .filter { Date.convertToMonthYear(from: $0.timestamp ?? 0) == date }
                         .sorted(by: { $0.timestamp ?? 0 > $1.timestamp ?? 0 })
                 }
                 self?.postsBySections = postsBySections
@@ -116,10 +113,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if postsCount == 0 {
-            return 1
-        }
-        
         let date = uniqueDates[section]
         if let postsBySections = postsBySections,
             let postsByDate = postsBySections[date] {
@@ -149,11 +142,11 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if postsCount == 0 {
-            let cell = UITableViewCell()
-            cell.textLabel?.text = "Чтобы добавить событие, нажмите +"
-            return cell
-        }
+//        if postsCount == 0 {
+//            let cell = UITableViewCell()
+//            cell.textLabel?.text = "Чтобы добавить событие, нажмите +"
+//            return cell
+//        }
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         
@@ -168,9 +161,9 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if postsCount == 0 {
-            return
-        }
+//        if postsCount == 0 {
+//            return
+//        }
         
         let postDetailViewController = PostDetailViewController()
         let date = uniqueDates[indexPath.section]

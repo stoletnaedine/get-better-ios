@@ -23,46 +23,52 @@ extension Date {
         return dayTimePeriodFormatter.string(from: date as Date)
     }
     
-    static func convertToDate(from timestamp: Int64) -> String {
+    static func convertToMonthYear(from timestamp: Int64) -> String {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
-        let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "YYYY/MM/dd"
-        return dayTimePeriodFormatter.string(from: date as Date)
+        let calendar = Calendar(identifier: .gregorian)
+        let month = calendar.component(.month, from: date)
+        let year = calendar.component(.year, from: date)
+        return "\(monthRus(monthIndex: month)) \(year)"
     }
     
     static func convertToDateWithWeekday(from timestamp: Int64) -> String {
         let timestampDouble = Double(timestamp)
         let date = Date(timeIntervalSince1970: timestampDouble)
         let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = "dd MMM"
+        dayTimePeriodFormatter.dateFormat = "dd MMMM, EEEE"
         dayTimePeriodFormatter.locale = Locale(identifier: "ru_RU")
-        let dateFormat = dayTimePeriodFormatter.string(from: date as Date)
-        let calendar = Calendar(identifier: .gregorian)
-        let weekdayIndex = calendar.component(.weekday, from: date)
-        return "\(dateFormat), \(weekdayRus(dayIndex: weekdayIndex))"
+        return dayTimePeriodFormatter.string(from: date as Date)
     }
     
     static func currentDateWithWeekday() -> String {
         return convertToDateWithWeekday(from: Int64(Date().timeIntervalSince1970))
     }
     
-    private static func weekdayRus(dayIndex: Int) -> String {
-        switch dayIndex {
+    private static func monthRus(monthIndex: Int) -> String {
+        switch monthIndex {
         case 1:
-            return "воскресенье"
+            return "Январь"
         case 2:
-            return "понедельник"
+            return "Февраль"
         case 3:
-            return "вторник"
+            return "Март"
         case 4:
-            return "среда"
+            return "Апрель"
         case 5:
-            return "четверг"
-        case 6:
-            return "пятница"
+            return "Май"
+        case 7:
+            return "Июнь"
+        case 8:
+            return "Август"
+        case 9:
+            return "Сентябрь"
+        case 10:
+            return "Октябрь"
+        case 11:
+            return "Ноябрь"
         default:
-            return "суббота"
+            return "Декабрь"
         }
     }
 }

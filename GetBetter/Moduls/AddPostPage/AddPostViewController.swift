@@ -60,7 +60,7 @@ class AddPostViewController: UIViewController {
             return
         }
         
-        var photoResult: Photo?
+        var photoResult: Photo = Photo(photoUrl: nil, photoName: nil, previewUrl: nil, previewName: nil)
         let dispatchGroup = DispatchGroup()
         
         if let photo = photoImageView.image {
@@ -83,12 +83,10 @@ class AddPostViewController: UIViewController {
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
             
-            if let photoResult = photoResult {
-                let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp,
-                                photoUrl: photoResult.photoUrl, photoName: photoResult.photoName,
-                                previewUrl: photoResult.previewUrl, previewName: photoResult.previewName)
-                _ = self?.firebaseDataBaseService.savePost(post)
-            }
+            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp,
+                            photoUrl: photoResult.photoUrl, photoName: photoResult.photoName,
+                            previewUrl: photoResult.previewUrl, previewName: photoResult.previewName)
+            _ = self?.firebaseDataBaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
