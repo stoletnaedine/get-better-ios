@@ -128,7 +128,7 @@ class AddPostViewController: UIViewController {
         selectedSphereLabel.textColor = .violet
         selectedSphereLabel.text = Constants.Post.sphereDefault
         selectedSphereLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        saveButtonView.backgroundColor = .violet
+        saveButtonView.backgroundColor = .gray
         saveButtonView.layer.cornerRadius = 20
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
@@ -166,6 +166,7 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         let sphere = Sphere.allCases[row]
         selectedSphere = sphere
         selectedSphereLabel.text = sphere.name
+        saveButtonView.backgroundColor = .violet
     }
 }
 
