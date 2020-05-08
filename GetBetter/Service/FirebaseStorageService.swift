@@ -21,8 +21,8 @@ class FirebaseStorageService {
     let uuidString: String = UUID().uuidString
     let photoQuality: CGFloat = 0.5
     let resizeWidthPhoto: CGFloat = 750
-    let resizeWidthPreview: CGFloat = 200
-    let resizeWidthAvatar: CGFloat = 300
+    let resizeWidthPreview: CGFloat = 150
+    let resizeWidthAvatar: CGFloat = 200
     
     func currentUserPath() -> StorageReference? {
         

@@ -14,7 +14,6 @@ class LifeCircleController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
-    @IBOutlet weak var fakeChartView: RadarChartView!
     @IBOutlet weak var metricsTableView: UITableView!
     @IBOutlet weak var achievementsTableView: UITableView!
     let refreshControl = UIRefreshControl()
@@ -32,12 +31,11 @@ class LifeCircleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        chartView.noDataText = Constants.LifeCircle.loading
+        chartView.noDataText = Constants.LifeCircle.loading
         loadAndShowData()
-        fakeChartView.isHidden = true
-//        setupFakeChartView()
         
         self.title = Constants.TabBar.lifeCircleTitle
+        view.backgroundColor = .appBackground
         setupSegmentedControl()
         setupTableView()
         setupRefreshControl()
@@ -131,51 +129,17 @@ class LifeCircleController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             chartView.isHidden = false
-            fakeChartView.isHidden = false
             metricsTableView.isHidden = true
             achievementsTableView.isHidden = true
         case 1:
             chartView.isHidden = true
-            fakeChartView.isHidden = true
             metricsTableView.isHidden = false
             achievementsTableView.isHidden = true
         default:
             chartView.isHidden = true
-            fakeChartView.isHidden = true
             metricsTableView.isHidden = true
             achievementsTableView.isHidden = false
         }
-    }
-    
-    func setupFakeChartView() {
-        
-        let dataEntriesFake = Array(repeating: 10.0, count: 64).map { RadarChartDataEntry(value: $0) }
-        let dataSetFake = RadarChartDataSet(entries: dataEntriesFake, label: "")
-        dataSetFake.lineWidth = 0
-        dataSetFake.fillColor = .violet
-        dataSetFake.fillAlpha = 0.1
-        dataSetFake.drawFilledEnabled = true
-        dataSetFake.valueFormatter = DataSetValueFormatter()
-        
-        fakeChartView.data = RadarChartData(dataSets: [dataSetFake])
-        
-        fakeChartView.noDataText = ""
-        fakeChartView.webLineWidth = 0
-        fakeChartView.innerWebLineWidth = 0
-        fakeChartView.legend.enabled = true
-        
-        let xAxis = fakeChartView.xAxis
-        xAxis.axisMinimum = 0
-        xAxis.axisMaximum = 9
-        xAxis.labelFont = .systemFont(ofSize: sphereIconSize)
-        xAxis.labelTextColor = .clear
-        xAxis.valueFormatter = XAxisFormatter(titles: Array(repeating: "⬜️", count: 64))
-        
-        let yAxis = fakeChartView.yAxis
-        yAxis.axisMinimum = 0
-        yAxis.axisMaximum = 9
-        yAxis.drawTopYLabelEntryEnabled = false
-        yAxis.enabled = false
     }
     
     func setupChartView() {
@@ -219,9 +183,6 @@ class LifeCircleController: UIViewController {
         
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
-        //dataSetStart.fillColor = .white
-        //dataSetStart.fillAlpha = 0.3
-        //dataSetStart.drawFilledEnabled = true
         dataSetStart.valueFormatter = DataSetValueFormatter()
         
         dataSetCurrent.lineWidth = 2

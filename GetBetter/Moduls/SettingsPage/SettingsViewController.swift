@@ -26,10 +26,9 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         title = "Настройки"
         
-        tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableView.backgroundColor = .appBackground
         
+        registerTableCell()
         fillTableItems()
         customizeBarButton()
         setupRefreshControl()
@@ -42,6 +41,12 @@ class SettingsViewController: UIViewController {
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
         })
+    }
+    
+    func registerTableCell() {
+        tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     func fillTableItems() {

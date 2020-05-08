@@ -204,5 +204,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
     }
+    
 
 }
