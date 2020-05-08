@@ -30,7 +30,6 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     func customizeView() {
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.backgroundColor = .lightGray
         nameLabel.text = ""
         nameLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 20)
