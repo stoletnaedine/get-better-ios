@@ -56,6 +56,8 @@ class JournalViewController: UIViewController {
     
     @objc func getPosts(completion: @escaping () -> Void) {
         
+        postsDateSection = []
+        
         firebaseDataBaseService.getPosts(completion: { [weak self] result in
             switch result {
                 
