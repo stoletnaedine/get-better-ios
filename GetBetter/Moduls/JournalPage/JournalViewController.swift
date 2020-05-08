@@ -25,6 +25,7 @@ class JournalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = .appBackground
+        tableView.separatorInset = UIEdgeInsets.zero
         
         setupRefreshControl()
         registerCell()

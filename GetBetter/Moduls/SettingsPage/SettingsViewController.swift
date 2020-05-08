@@ -27,6 +27,7 @@ class SettingsViewController: UIViewController {
         title = "Настройки"
         
         tableView.backgroundColor = .appBackground
+        tableView.separatorInset = UIEdgeInsets.zero
         
         registerTableCell()
         fillTableItems()

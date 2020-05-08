@@ -110,11 +110,13 @@ class LifeCircleController: UIViewController {
         achievementsTableView.delegate = self
         achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
         achievementsTableView.backgroundColor = .appBackground
+        achievementsTableView.separatorInset = UIEdgeInsets.zero
         
         metricsTableView.dataSource = self
         metricsTableView.delegate = self
         metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
         metricsTableView.backgroundColor = .appBackground
+        metricsTableView.separatorInset = UIEdgeInsets.zero
     }
     
     func setupSegmentedControl() {

@@ -24,13 +24,15 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     func fillCell(profile: Profile) {
-        self.avatarImageView.image = profile.avatar ?? UIImage(named: "defaultAvatar")
+        if let avatar = profile.avatar {
+            self.avatarImageView.image = avatar
+        }
         self.nameLabel.text = profile.name ?? ""
         self.emailLabel.text = profile.email ?? ""
     }
     
     func customizeView() {
-        avatarImageView.backgroundColor = .lightGray
+        avatarImageView.backgroundColor = .tableViewSectionColor
         nameLabel.text = ""
         nameLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 20)
         emailLabel.text = Constants.Profile.loading
