@@ -56,11 +56,11 @@ class ResetPasswordViewController: UIViewController {
         self.title = "Сбросить пароль"
         emailLabel.text = Constants.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
+        emailLabel.font = UIFont.systemFont(ofSize: 13)
         emailTextField.borderStyle = .none
         emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                               NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
+                                                                               NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)])
         
         resetPasswordView.backgroundColor = .violet
         resetPasswordView.layer.cornerRadius = 5
@@ -68,8 +68,8 @@ class ResetPasswordViewController: UIViewController {
         resetPasswordButton.setTitle("", for: .normal)
         resetPasswordButtonLabel.text = "Сбросить пароль".uppercased()
         resetPasswordButtonLabel.textColor = .white
-        resetPasswordButtonLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
-        descriptionLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
+        resetPasswordButtonLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.text = "На указанный email придёт ссылка, пройдя по которой вы сможете изменить пароль."
         cancelButton.setTitle("", for: .normal)
     }

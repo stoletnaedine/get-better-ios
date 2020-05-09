@@ -27,21 +27,18 @@ class RootManager {
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window?.makeKeyAndVisible()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [weak self] in
-            
-            if Auth.auth().currentUser == nil {
-                self?.showAuthController()
-            } else {
-                self?.checkUserHasSetupSphere(completion: { [weak self] userHasSetupSphere in
-                    switch userHasSetupSphere {
-                    case true:
-                        self?.showTabBarController()
-                    default:
-                        self?.showSetupSpherePageViewController()
-                    }
-                })
-            }
-        })
+        if Auth.auth().currentUser == nil {
+            showAuthController()
+        } else {
+            checkUserHasSetupSphere(completion: { [weak self] userHasSetupSphere in
+                switch userHasSetupSphere {
+                case true:
+                    self?.showTabBarController()
+                default:
+                    self?.showSetupSpherePageViewController()
+                }
+            })
+        }
     }
     
     func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {

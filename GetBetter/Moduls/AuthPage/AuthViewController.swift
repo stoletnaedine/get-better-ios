@@ -113,6 +113,7 @@ class AuthViewController: UIViewController {
         eyeButton.setTitle("", for: .normal)
         
         enterView.backgroundColor = .violet
+        enterView.layer.cornerRadius = 5
         enterView.clipsToBounds = true
         enterButton.setTitle("", for: .normal)
         enterLabel.text = Constants.Auth.enter.uppercased()

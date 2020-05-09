@@ -18,7 +18,6 @@ struct Constants {
         static let loading = "Подождите, идет загрузка"
         static let startLevelLegend = "Начальный уровень"
         static let currentLevelLegend = "Текущий уровень"
-        static let idealLevelLegend = "К чему стремиться"
         
         struct SegmentedControl {
             static let circle = "Колесо"
@@ -80,8 +79,7 @@ struct Constants {
         static let password = "Пароль"
         static let enterPassword = "Изменить пароль"
         static let loadAvatar = "Загрузить аватар"
-        static let warning = "При смене Email необходимо заново войти в приложение"
-        static let editSuccess = "Профиль успешно обновлен.\nЧтобы увидеть изменения, обновите профиль"
+        static let warning = "После смены Email необходимо заново войти в приложение"
         static let loading = "Подождите, идет загрузка"
     }
     

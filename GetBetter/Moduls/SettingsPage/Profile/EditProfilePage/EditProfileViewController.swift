@@ -152,12 +152,10 @@ class EditProfileViewController: UIViewController {
     }
     
     func customizeView() {
-        avatarView.layer.cornerRadius = avatarView.frame.width / 2
-        avatarView.backgroundColor = .gray
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+        avatarView.backgroundColor = .tableViewSectionColor
         avatarButton.setTitle(Constants.Profile.loadAvatar, for: .normal)
         avatarButton.setTitleColor(.white, for: .normal)
-        avatarButton.titleLabel?.font = UIFont(name: Constants.Font.Ubuntu, size: 12)
+        avatarButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         
         if let user = user {
             if let name = user.displayName {

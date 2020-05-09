@@ -42,14 +42,21 @@
                                 <action selector="avatarButtonDidTap:" destination="-1" eventType="touchUpInside" id="jfg-7S-pad"/>
                             </connections>
                         </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="getbetter-ui-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="pQx-77-wiw" userLabel="Octo Image View">
+                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="pQx-77-wiw" secondAttribute="trailing" id="0eJ-bd-Nnc"/>
                         <constraint firstAttribute="bottom" secondItem="lcV-6R-raK" secondAttribute="bottom" id="MDX-Av-9Xz"/>
                         <constraint firstAttribute="trailing" secondItem="lcV-6R-raK" secondAttribute="trailing" id="OCH-oy-XN9"/>
                         <constraint firstAttribute="trailing" secondItem="DoZ-n2-aox" secondAttribute="trailing" id="Xp1-QR-dwm"/>
                         <constraint firstItem="DoZ-n2-aox" firstAttribute="top" secondItem="RxO-6g-uQ5" secondAttribute="top" id="Xwa-p0-2gG"/>
                         <constraint firstItem="lcV-6R-raK" firstAttribute="top" secondItem="RxO-6g-uQ5" secondAttribute="top" id="YV4-t0-URe"/>
+                        <constraint firstItem="pQx-77-wiw" firstAttribute="top" secondItem="RxO-6g-uQ5" secondAttribute="top" id="bhI-5d-hCq"/>
+                        <constraint firstItem="pQx-77-wiw" firstAttribute="leading" secondItem="RxO-6g-uQ5" secondAttribute="leading" id="fIp-fe-fZ4"/>
+                        <constraint firstAttribute="bottom" secondItem="pQx-77-wiw" secondAttribute="bottom" id="fzB-0f-lTP"/>
                         <constraint firstAttribute="height" constant="128" id="nRL-tm-unc"/>
                         <constraint firstItem="lcV-6R-raK" firstAttribute="leading" secondItem="RxO-6g-uQ5" secondAttribute="leading" id="oF7-Mn-4yn"/>
                         <constraint firstItem="DoZ-n2-aox" firstAttribute="leading" secondItem="RxO-6g-uQ5" secondAttribute="leading" id="tcj-OF-K7W"/>
@@ -136,4 +143,7 @@
             <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
+    <resources>
+        <image name="getbetter-ui-avatar" width="175" height="175"/>
+    </resources>
 </document>
