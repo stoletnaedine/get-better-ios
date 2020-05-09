@@ -107,11 +107,11 @@ class SettingsViewController: UIViewController {
     }
     
     func customizeBarButton() {
-        let signOutBarButton = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(signOut))
+        let signOutBarButton = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(logout))
         navigationItem.rightBarButtonItem = signOutBarButton
     }
     
-    @objc func signOut() {
+    @objc func logout() {
         NotificationCenter.default.post(name: .logout, object: nil)
     }
 }
@@ -143,10 +143,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             if let profile = profile {
                 cell.fillCell(profile: profile)
             }
+            cell.selectionStyle = .none
+            cell.accessoryType = .disclosureIndicator
             return cell
         case .articles:
             let cell = UITableViewCell()
             cell.textLabel?.text = items[tableSection]?[indexPath.row].title
+            cell.selectionStyle = .none
+            cell.accessoryType = .disclosureIndicator
             return cell
         case .settings:
             return UITableViewCell()
@@ -181,10 +185,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let view = UIView()
         view.backgroundColor = .tableViewSectionColor
         return view
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
     }
     
 }
