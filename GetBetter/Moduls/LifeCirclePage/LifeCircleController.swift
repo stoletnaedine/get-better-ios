@@ -62,7 +62,6 @@ class LifeCircleController: UIViewController {
                     dispatchGroup.leave()
                     
                 case .failure(_):
-                    NotificationCenter.default.post(name: .showPageViewController, object: nil)
                     dispatchGroup.leave()
                 }
             })
@@ -77,7 +76,6 @@ class LifeCircleController: UIViewController {
                     dispatchGroup.leave()
                     
                 case .failure(_):
-                    NotificationCenter.default.post(name: .showPageViewController, object: nil)
                     dispatchGroup.leave()
                 }
             })

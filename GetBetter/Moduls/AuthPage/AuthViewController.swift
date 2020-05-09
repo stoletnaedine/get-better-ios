@@ -31,6 +31,7 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var anonymButton: UIButton!
     
     var completion: (() -> ()) = {}
+    let rootManager = RootManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,14 +84,14 @@ class AuthViewController: UIViewController {
         present(registerViewController, animated: true, completion: nil)
     }
     
-    @IBAction func anonymButtonDidTap(_ sender: UIButton) {
+    @IBAction func anonymousButtonDidTapped(_ sender: UIButton) {
         
-        Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
+        Auth.auth().signInAnonymously(completion: { authResult, error in
             
             if let error = error {
                 Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
             } else {
-                self?.completion()
+                NotificationCenter.default.post(name: .showPageViewController, object: nil)
             }
         })
     }

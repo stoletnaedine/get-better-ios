@@ -9,7 +9,7 @@
 import UIKit
 import Toaster
 
-class PageViewController: UIViewController {
+class SetupSpherePageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
     let databaseService = FirebaseDatabaseService()
@@ -49,20 +49,6 @@ class PageViewController: UIViewController {
     func setupSaveBarButton() {
         let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSphereValues))
         navigationItem.rightBarButtonItem = saveBarButton
-    
-        // TODO потом выпилить
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "RANDOM", style: .plain, target: self, action: #selector(randomValues))
-    }
-    
-    // TODO потом выпилить
-    @objc func randomValues() {
-        let metricsArray = Sphere.allCases.reduce(into: [String: Double]()) {
-            $0[$1.rawValue] = Double(Int.random(in: 3...10))
-        }
-        let sphereMetrics = SphereMetrics(values: metricsArray)
-        let _ = databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start)
-        let _ = databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.current)
-        NotificationCenter.default.post(name: .showTabBarController, object: nil)
     }
     
     @objc func saveSphereValues() {
@@ -89,7 +75,7 @@ class PageViewController: UIViewController {
     }
 }
 
-extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension SetupSpherePageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         

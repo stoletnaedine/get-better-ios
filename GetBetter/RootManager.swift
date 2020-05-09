@@ -16,21 +16,32 @@ class RootManager {
     var window: UIWindow?
     
     func start() {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showTabBarController), name: .showTabBarController, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showPageViewController), name: .showPageViewController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showSetupSpherePageViewController), name: .showPageViewController, object: nil)
         
         setupNavigationBar()
         configToaster()
         
-        if Auth.auth().currentUser == nil {
-            showAuthController()
-        } else {
-            showTabBarController()
-        }
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+        window?.makeKeyAndVisible()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [weak self] in
+            
+            if Auth.auth().currentUser == nil {
+                self?.showAuthController()
+            } else {
+                self?.checkUserHasSetupSphere(completion: { [weak self] userHasSetupSphere in
+                    switch userHasSetupSphere {
+                    case true:
+                        self?.showTabBarController()
+                    default:
+                        self?.showSetupSpherePageViewController()
+                    }
+                })
+            }
+        })
     }
     
     func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
@@ -53,8 +64,8 @@ class RootManager {
         window?.rootViewController = TabBarController()
     }
     
-    @objc func showPageViewController() {
-        window?.rootViewController = UINavigationController(rootViewController: PageViewController())
+    @objc func showSetupSpherePageViewController() {
+        window?.rootViewController = UINavigationController(rootViewController: SetupSpherePageViewController())
     }
     
     func showAuthController() {
@@ -74,7 +85,7 @@ class RootManager {
     
     func configToaster() {
         ToastView.appearance().backgroundColor = .darkGray
-        ToastView.appearance().font = UIFont(name: Constants.Font.SFUITextRegular, size: 14)
+        ToastView.appearance().font = UIFont.systemFont(ofSize: 16)
         let screenHeight = UIScreen.main.bounds.height
         ToastView.appearance().bottomOffsetPortrait = CGFloat(screenHeight / 2)
     }

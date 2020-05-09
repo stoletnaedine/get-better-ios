@@ -46,17 +46,17 @@ class AddPostViewController: UIViewController {
     @IBAction func attachButtonDidTapped(_ sender: UIButton) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary // TODO уточнить
+        imagePickerController.sourceType = .photoLibrary // TODO уточнить, может .savedPhotosAlbum
         present(imagePickerController, animated: true, completion: nil)
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         guard let text = postTextView.text, !text.isEmpty else {
-            Toast(text: "Поле текста пустое").show()
+            Toast(text: "Поле текста пустое", delay: 0, duration: 0.3).show()
             return
         }
         guard let sphere = selectedSphere else {
-            Toast(text: "Выберите сферу").show()
+            Toast(text: "Выберите сферу", delay: 0, duration: 0.3).show()
             return
         }
         
@@ -119,8 +119,6 @@ class AddPostViewController: UIViewController {
         postTextView.delegate = self
         postTextView.becomeFirstResponder()
         postTextView.font = postTextView.font?.withSize(18)
-        //postTextView.placeholder = "Опишите событие, которое сегодня сделало вас лучше. Например: сделал зарядку, прочитал несколько глав книги, выучил несколько иностранных слов..."
-        
         photoImageView.isHidden = true
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textColor = .violet

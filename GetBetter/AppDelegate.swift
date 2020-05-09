@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         Auth.auth().languageCode = "ru"
-        
         IQKeyboardManager.shared.enable = true
         rootManager.start()
         return true
