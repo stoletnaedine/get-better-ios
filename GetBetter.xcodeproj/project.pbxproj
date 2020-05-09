@@ -44,7 +44,7 @@
 		C32D4CDE23D0EF9700AD9863 /* SFUIText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */; };
 		C32D4CE123D0F3FC00AD9863 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Constants.swift */; };
 		C32E419B242E4A8300A9C98B /* URLSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32E419A242E4A8300A9C98B /* URLSessionService.swift */; };
-		C33AD1DF2451AE9B00A08006 /* SetupSpherePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD1DE2451AE9B00A08006 /* SetupSpherePageViewController.swift */; };
+		C33AD1DF2451AE9B00A08006 /* SetupPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD1DE2451AE9B00A08006 /* SetupPageViewController.swift */; };
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
 		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
@@ -127,7 +127,7 @@
 		C32D4CDD23D0EF9700AD9863 /* SFUIText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Medium.otf"; sourceTree = "<group>"; };
 		C32D4CE023D0F3FC00AD9863 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C32E419A242E4A8300A9C98B /* URLSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionService.swift; sourceTree = "<group>"; };
-		C33AD1DE2451AE9B00A08006 /* SetupSpherePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSpherePageViewController.swift; sourceTree = "<group>"; };
+		C33AD1DE2451AE9B00A08006 /* SetupPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPageViewController.swift; sourceTree = "<group>"; };
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 			children = (
 				6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */,
 				6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */,
-				C33AD1DE2451AE9B00A08006 /* SetupSpherePageViewController.swift */,
+				C33AD1DE2451AE9B00A08006 /* SetupPageViewController.swift */,
 				6ED5FF14245207AC00792B1F /* WelcomeViewController.swift */,
 				6ED5FF15245207AC00792B1F /* WelcomeViewController.xib */,
 			);
@@ -364,13 +364,13 @@
 			path = PostDetailPage;
 			sourceTree = "<group>";
 		};
-		C3724EC823AFAC4E00D49AD6 /* ProfilePage */ = {
+		C3724EC823AFAC4E00D49AD6 /* EditProfilePage */ = {
 			isa = PBXGroup;
 			children = (
 				C37AECC2244F002C0080CCAC /* EditProfileViewController.swift */,
 				C37AECC3244F002C0080CCAC /* EditProfileViewController.xib */,
 			);
-			path = ProfilePage;
+			path = EditProfilePage;
 			sourceTree = "<group>";
 		};
 		C3724EC923AFAC5800D49AD6 /* LifeCirclePage */ = {
@@ -437,7 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				C3C66AEF24582B2900D3964D /* ProfileCell */,
-				C3724EC823AFAC4E00D49AD6 /* ProfilePage */,
+				C3724EC823AFAC4E00D49AD6 /* EditProfilePage */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -681,7 +681,7 @@
 				C3087ADA245AD36C00DDE7A7 /* SphereMetricsTableViewCell.swift in Sources */,
 				6E045E9B24640A6B0001E378 /* Achievement.swift in Sources */,
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
-				C33AD1DF2451AE9B00A08006 /* SetupSpherePageViewController.swift in Sources */,
+				C33AD1DF2451AE9B00A08006 /* SetupPageViewController.swift in Sources */,
 				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
 				C3D8B03F24432FAC003E968E /* ConvertableProtocols.swift in Sources */,
 				C3272ABA241D73270020F1A5 /* CoreDataManager.swift in Sources */,

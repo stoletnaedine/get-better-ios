@@ -12,11 +12,6 @@ import Toaster
 
 class AuthViewController: UIViewController {
     
-    @IBOutlet weak var description1Label: UILabel!
-    @IBOutlet weak var icon1ImageView: UIImageView!
-    @IBOutlet weak var icon2ImageView: UIImageView!
-    @IBOutlet weak var icon3ImageView: UIImageView!
-    @IBOutlet weak var description2Label: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordLabel: UILabel!
@@ -29,6 +24,7 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var forgotButton: UIButton!
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var anonymButton: UIButton!
+    @IBOutlet weak var logoImageView: UIImageView!
     
     var completion: (() -> ()) = {}
     let rootManager = RootManager()
@@ -37,13 +33,6 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         customizeView()
-        
-        // Пока не реализован вход через соцсети
-        description1Label.isHidden = true
-        description2Label.isHidden = true
-        icon1ImageView.isHidden = true
-        icon2ImageView.isHidden = true
-        icon3ImageView.isHidden = true
     }
     
     @IBAction func eyeButtonDidPressed(_ sender: UIButton) {
@@ -98,16 +87,6 @@ class AuthViewController: UIViewController {
     
     func customizeView() {
         self.title = Constants.Auth.authTitleVC
-        description1Label.text = Constants.Auth.description1
-        description1Label.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
-        description1Label.textColor = .darkGray
-        
-        icon1ImageView.image = UIImage(named: "vk")
-        icon2ImageView.image = UIImage(named: "fb")
-        icon3ImageView.image = UIImage(named: "ok")
-        description2Label.text = Constants.Auth.description2
-        description2Label.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
-        description2Label.textColor = .darkGray
         
         emailLabel.text = Constants.Auth.email
         emailLabel.textColor = .gray
@@ -154,5 +133,8 @@ class AuthViewController: UIViewController {
         anonymButton.setTitleColor(.violet, for: .normal)
         anonymButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
         anonymButton.titleLabel?.underline()
+        
+        logoImageView.image = logoImageView.image?.withRenderingMode(.alwaysTemplate)
+        logoImageView.tintColor = .violet
     }
 }

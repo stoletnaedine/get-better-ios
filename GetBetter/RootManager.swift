@@ -65,7 +65,7 @@ class RootManager {
     }
     
     @objc func showSetupSpherePageViewController() {
-        window?.rootViewController = UINavigationController(rootViewController: SetupSpherePageViewController())
+        window?.rootViewController = UINavigationController(rootViewController: SetupPageViewController())
     }
     
     func showAuthController() {

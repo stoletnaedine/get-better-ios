@@ -9,7 +9,7 @@
 import UIKit
 import Toaster
 
-class SetupSpherePageViewController: UIViewController {
+class SetupPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
     let databaseService = FirebaseDatabaseService()
@@ -22,7 +22,7 @@ class SetupSpherePageViewController: UIViewController {
 
         fillViewControllers()
         setupPageControl()
-        setupSaveBarButton()
+        setupBarButton()
     }
     
     func fillViewControllers() {
@@ -46,9 +46,16 @@ class SetupSpherePageViewController: UIViewController {
         view.addSubview(pageViewController.view)
     }
     
-    func setupSaveBarButton() {
+    func setupBarButton() {
         let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSphereValues))
         navigationItem.rightBarButtonItem = saveBarButton
+        
+        let exitBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(exit))
+        navigationItem.leftBarButtonItem = exitBarButton
+    }
+    
+    @objc func exit() {
+        NotificationCenter.default.post(name: .logout, object: nil)
     }
     
     @objc func saveSphereValues() {
@@ -75,7 +82,7 @@ class SetupSpherePageViewController: UIViewController {
     }
 }
 
-extension SetupSpherePageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension SetupPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         

@@ -66,10 +66,10 @@ class SetupSphereValueViewController: UIViewController {
     
     func setupView() {
         questionLabel.text = Constants.SetupSphere.question
-        questionLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 16)
-        sphereNameLabel.font = UIFont(name: Constants.Font.OfficinaSansExtraBold, size: 50)
-        sphereDescriptionLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 16)
-        valueForSphereLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 60)
+        questionLabel.font = UIFont.systemFont(ofSize: 16)
+        sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        sphereDescriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        valueForSphereLabel.font = UIFont.systemFont(ofSize: 60)
         valueForSphereLabel.text = "0"
     }
 }

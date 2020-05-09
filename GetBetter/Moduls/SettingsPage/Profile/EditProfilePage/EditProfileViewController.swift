@@ -100,6 +100,8 @@ class EditProfileViewController: UIViewController {
             user.updatePassword(to: newPassword, completion: { error in
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                } else {
+                    Toast(text: "Пароль успешно изменён").show()
                 }
                 dispatchGroup.leave()
             })
@@ -117,8 +119,6 @@ class EditProfileViewController: UIViewController {
                 
                 if let error = error {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
-                } else {
-                    NotificationCenter.default.post(name: .logout, object: nil)
                 }
             })
         }
@@ -176,11 +176,11 @@ class EditProfileViewController: UIViewController {
         emailLabel.text = Constants.Profile.enterEmail
         passwordLabel.text = Constants.Profile.enterPassword
         passwordTextField.placeholder = Constants.Profile.enterPassword
-        warningLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
+        warningLabel.font = UIFont.systemFont(ofSize: 14)
         warningLabel.text = Constants.Profile.warning
         deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
         deleteAccountButton.setTitleColor(.red, for: .normal)
-        deleteAccountButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        deleteAccountButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         deleteAccountButton.titleLabel?.underline()
     }
     
