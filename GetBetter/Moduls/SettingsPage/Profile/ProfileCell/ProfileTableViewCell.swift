@@ -34,9 +34,9 @@ class ProfileTableViewCell: UITableViewCell {
     func customizeView() {
         avatarImageView.backgroundColor = .tableViewSectionColor
         nameLabel.text = ""
-        nameLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 20)
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
         emailLabel.text = Constants.Profile.loading
-        emailLabel.font = UIFont(name: Constants.Font.Ubuntu, size: 14)
+        emailLabel.font = UIFont.systemFont(ofSize: 14)
     }
     
 }

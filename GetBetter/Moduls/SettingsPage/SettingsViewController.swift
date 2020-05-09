@@ -57,12 +57,21 @@ class SettingsViewController: UIViewController {
             self?.loadProfileAndReloadTableView()
         }
         
-         tableItems = [
+        let aboutCircleViewController = ArticleViewController()
+        aboutCircleViewController.article = Article(title: Constants.AboutCircle.title, text: Constants.AboutCircle.description, image: UIImage(named: "a-deserted-beach"))
+        
+        let aboutJournalViewController = ArticleViewController()
+        aboutJournalViewController.article = Article(title: Constants.AboutJournal.title, text: Constants.AboutJournal.description, image: UIImage(named: "road"))
+        
+        let aboutAppViewController = ArticleViewController()
+        aboutAppViewController.article = Article(title: Constants.AboutApp.title, text: Constants.AboutApp.description, image: UIImage(named: "picture-of-beach-background"))
+        
+        tableItems = [
             TableSection.profile : [SettingsCell(title: nil, viewController: editProfileViewController)],
             TableSection.articles : [
-                SettingsCell(title: "Колесо Жизненного Баланса", viewController: AboutCircleViewController()),
-                SettingsCell(title: "Зачем нужны События?", viewController: AboutJournalViewController()),
-                SettingsCell(title: "О приложении", viewController: AboutAppViewController())]
+                SettingsCell(title: "Колесо Жизненного Баланса", viewController: aboutCircleViewController),
+                SettingsCell(title: "Зачем нужны События?", viewController: aboutJournalViewController),
+                SettingsCell(title: "О приложении", viewController: aboutAppViewController)]
         ]
     }
     
