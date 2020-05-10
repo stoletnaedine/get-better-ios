@@ -22,7 +22,7 @@ class PostDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let post = self.post {
+        if let post = post {
             fillViewController(post)
         }
         registerGestureCopyLabelText()

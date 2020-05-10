@@ -119,8 +119,11 @@ class JournalViewController: UIViewController {
         }
         present(postViewController, animated: true, completion: nil)
     }
+}
+
+extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
-    fileprivate func getPost(indexPath: IndexPath) -> Post? {
+    private func getPost(by indexPath: IndexPath) -> Post? {
         let date = self.uniqueDates[indexPath.section]
         let postsDateInSection = self.postsDateSection.filter { $0.sectionName == date }
         
@@ -128,11 +131,9 @@ class JournalViewController: UIViewController {
         
         let posts = postsDateInSection[0].posts
         let post = posts[indexPath.row]
+        
         return post
     }
-}
-
-extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return uniqueDates.count
@@ -171,7 +172,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let post = getPost(indexPath: indexPath) else { return UITableViewCell() }
+        guard let post = getPost(by: indexPath) else { return UITableViewCell() }
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
         cell.selectionStyle = .none
@@ -182,7 +183,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let post = getPost(indexPath: indexPath) else { return }
+        guard let post = getPost(by: indexPath) else { return }
         
         let postDetailViewController = PostDetailViewController()
         postDetailViewController.post = post
@@ -196,7 +197,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            guard let post = getPost(indexPath: indexPath) else { return }
+            guard let post = getPost(by: indexPath) else { return }
             
                 if firebaseDataBaseService.deletePost(post) {
                     self.updatePostsInTableView()

@@ -16,6 +16,8 @@
 		6E5AE64624601DD200418B23 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */; };
 		6E6A217A2466C6FB00D8AC68 /* Atricle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6A21792466C6FB00D8AC68 /* Atricle.swift */; };
 		6E7071F3245C474D00ED7D08 /* SphereValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7071F2245C474D00ED7D08 /* SphereValue.swift */; };
+		6E711E88246857720068FD8C /* SphereDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E711E87246857720068FD8C /* SphereDetailViewController.xib */; };
+		6E711E8C24685BE00068FD8C /* SphereDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E711E8B24685BE00068FD8C /* SphereDetailViewController.swift */; };
 		6E9E01BB24545A690083499E /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BA24545A690083499E /* FirebaseStorageService.swift */; };
 		6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BC245464360083499E /* SphereMetrics.swift */; };
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
@@ -87,6 +89,8 @@
 		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = GetBetter/Moduls/ResetPassPage/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
 		6E6A21792466C6FB00D8AC68 /* Atricle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atricle.swift; sourceTree = "<group>"; };
 		6E7071F2245C474D00ED7D08 /* SphereValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereValue.swift; sourceTree = "<group>"; };
+		6E711E87246857720068FD8C /* SphereDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SphereDetailViewController.xib; sourceTree = "<group>"; };
+		6E711E8B24685BE00068FD8C /* SphereDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereDetailViewController.swift; sourceTree = "<group>"; };
 		6E9E01BA24545A690083499E /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		6E9E01BC245464360083499E /* SphereMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetrics.swift; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
@@ -198,6 +202,15 @@
 				C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */,
 			);
 			path = AddPostPage;
+			sourceTree = "<group>";
+		};
+		6E711E84246856730068FD8C /* SphereDetailPage */ = {
+			isa = PBXGroup;
+			children = (
+				6E711E8B24685BE00068FD8C /* SphereDetailViewController.swift */,
+				6E711E87246857720068FD8C /* SphereDetailViewController.xib */,
+			);
+			path = SphereDetailPage;
 			sourceTree = "<group>";
 		};
 		9277D37B238C725200B3AECA = {
@@ -352,6 +365,7 @@
 				C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */,
 				C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */,
 				6E5A984A2455888E001F8008 /* SphereMetricsCell */,
+				6E711E84246856730068FD8C /* SphereDetailPage */,
 				6E045E952463E7800001E378 /* AchievementsCell */,
 			);
 			path = LifeCirclePage;
@@ -518,6 +532,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E711E88246857720068FD8C /* SphereDetailViewController.xib in Resources */,
 				6E5AE64424601DBC00418B23 /* ResetPasswordViewController.xib in Resources */,
 				C3087ADB245AD36C00DDE7A7 /* SphereMetricsTableViewCell.xib in Resources */,
 				C36F664B244A02EE00293246 /* OfficinaSansExtraBold.otf in Resources */,
@@ -613,6 +628,7 @@
 				6E045E992463E8B40001E378 /* AchievementsTableViewCell.swift in Sources */,
 				C3C66AF224582B5000D3964D /* ProfileTableViewCell.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,
+				6E711E8C24685BE00068FD8C /* SphereDetailViewController.swift in Sources */,
 				C328EE052447294100445704 /* RegisterViewController.swift in Sources */,
 				6E5AE64624601DD200418B23 /* ResetPasswordViewController.swift in Sources */,
 				C3087ADA245AD36C00DDE7A7 /* SphereMetricsTableViewCell.swift in Sources */,

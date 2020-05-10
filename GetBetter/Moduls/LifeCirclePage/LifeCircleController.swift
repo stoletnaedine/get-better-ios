@@ -228,10 +228,24 @@ class DataSetValueFormatter: IValueFormatter {
 
 extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
     
+    private func getSphereValue(by indexPath: IndexPath) -> SphereValue? {
+        let sphereRawValue = currentSphereMetrics?
+            .sortedValues()
+            .map { $0.key }[indexPath.row] ?? ""
+        
+        guard let value = currentSphereMetrics?.values[sphereRawValue] else { return nil }
+        guard let sphere = Sphere(rawValue: sphereRawValue) else { return nil }
+        let sphereValue = SphereValue(sphere: sphere, value: value)
+        
+        return sphereValue
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
+        
         case metricsTableView:
             return currentSphereMetrics?.values.count ?? 0
+            
         case achievementsTableView:
             return achievements.count
         default:
@@ -245,17 +259,9 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             
         case metricsTableView:
             
-            let sphereRawValue = currentSphereMetrics?
-                .sortedValues()
-                .map { $0.key }[indexPath.row] ?? ""
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .none
-            
-            guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
-            guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
-            
-            let sphereValue = SphereValue(sphere: sphere, value: value)
+            guard let sphereValue = getSphereValue(by: indexPath) else { return cell }
             cell.fillCell(from: sphereValue)
             
             return cell
@@ -273,6 +279,23 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        switch tableView {
+            
+        case metricsTableView:
+            guard let sphereValue = getSphereValue(by: indexPath) else { return }
+            let sphereDetailViewController = SphereDetailViewController()
+            sphereDetailViewController.sphereValue = sphereValue
+            present(sphereDetailViewController, animated: true, completion: nil)
+            
+        case achievementsTableView:
+            print("!")
+            
+        default:
+            print("!")
+        }
     }
 }
