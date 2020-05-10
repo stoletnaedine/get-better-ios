@@ -67,8 +67,11 @@ class RootManager {
     
     func showAuthController() {
         let authViewController = AuthViewController()
-        authViewController.completion = { [weak self] in
+        authViewController.signInCompletion = { [weak self] in
             self?.showTabBarController()
+        }
+        authViewController.registerCompletion = { [weak self] in
+            self?.showSetupSpherePageViewController()
         }
         window?.rootViewController = UINavigationController(rootViewController: authViewController)
     }

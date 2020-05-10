@@ -26,7 +26,8 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var anonymButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     
-    var completion: (() -> ()) = {}
+    var signInCompletion: (() -> ()) = {}
+    var registerCompletion: (() -> ()) = {}
     let rootManager = RootManager()
     
     override func viewDidLoad() {
@@ -55,7 +56,7 @@ class AuthViewController: UIViewController {
                     Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
                 } else {
                     let _ = KeychainHelper.saveCredentials(email: email)
-                    self?.completion()
+                    self?.signInCompletion()
                 }
             })
         }
@@ -63,13 +64,14 @@ class AuthViewController: UIViewController {
     
     @IBAction func forgotPasswordDidPressed(_ sender: UIButton) {
         let resetPasswordViewController = ResetPasswordViewController()
-        resetPasswordViewController.modalPresentationStyle = .formSheet
         present(resetPasswordViewController, animated: true, completion: nil)
     }
     
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
         let registerViewController = RegisterViewController()
-        registerViewController.modalPresentationStyle = .formSheet
+        registerViewController.completion = { [weak self] in
+            self?.registerCompletion()
+        }
         present(registerViewController, animated: true, completion: nil)
     }
     

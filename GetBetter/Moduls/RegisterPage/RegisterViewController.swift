@@ -23,6 +23,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerButtonLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     
+    var completion: () -> () = {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -40,16 +42,16 @@ class RegisterViewController: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password1, completion: { [weak self] authResult, error in
                 
                 self?.removeActivityIndicator()
+                
                 if let error = error {
                     Toast(text: "Firebase: \(error.localizedDescription)").show()
                     return
                 }
                 
-                self?.dismiss(animated: true, completion: nil)
-                Toast(text: Constants.Auth.successRegister, delay: 1, duration: 3).show()
+                if Auth.auth().currentUser != nil {
+                    self?.completion()
+                }
             })
-            
-            
         }
     }
     
