@@ -237,7 +237,6 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
         default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -245,11 +244,13 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
             
         case metricsTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
             
             let sphereRawValue = currentSphereMetrics?
                 .sortedValues()
                 .map { $0.key }[indexPath.row] ?? ""
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
+            cell.selectionStyle = .none
             
             guard let value = currentSphereMetrics?.values[sphereRawValue] else { return cell }
             guard let sphere = Sphere(rawValue: sphereRawValue) else { return cell }
@@ -261,9 +262,10 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             
         case achievementsTableView:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier, for: indexPath) as! AchievementsTableViewCell
-
             let achievement = achievements[indexPath.row]
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier, for: indexPath) as! AchievementsTableViewCell
+            cell.selectionStyle = .none
             cell.fillCell(from: achievement)
             
             return cell
