@@ -38,6 +38,11 @@ class AuthViewController: UIViewController {
     
     @IBAction func eyeButtonDidPressed(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+        if eyeImageView.tintColor == .gray {
+            eyeImageView.tintColor = .violet
+        } else {
+            eyeImageView.tintColor = .gray
+        }
     }
     
     @IBAction func enterButtonDidPressed(_ sender: UIButton) {
@@ -139,5 +144,8 @@ class AuthViewController: UIViewController {
         
         logoImageView.image = logoImageView.image?.withRenderingMode(.alwaysTemplate)
         logoImageView.tintColor = .violet
+        
+        eyeImageView.image = eyeImageView.image?.withRenderingMode(.alwaysTemplate)
+        eyeImageView.tintColor = .gray
     }
 }
