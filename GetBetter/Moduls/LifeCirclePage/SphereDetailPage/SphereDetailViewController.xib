@@ -11,7 +11,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SphereDetailViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="NaE-zu-ejL" id="iYc-6y-2wP"/>
-                <outlet property="dateLabel" destination="xHi-Jy-d5y" id="wRh-CL-I9i"/>
                 <outlet property="photoImageView" destination="bi8-Sd-74i" id="3Bs-ue-OBB"/>
                 <outlet property="sphereLabel" destination="Nwm-Ht-GLd" id="zuc-5S-1fP"/>
                 <outlet property="textLabel" destination="yUo-ZQ-frE" id="RgP-hD-hzr"/>
@@ -64,27 +63,18 @@
                     </constraints>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bi8-Sd-74i">
-                    <rect key="frame" x="0.0" y="187" width="414" height="675"/>
+                    <rect key="frame" x="0.0" y="196.5" width="414" height="665.5"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHi-Jy-d5y" userLabel="Date Label">
-                    <rect key="frame" x="20" y="136.5" width="374" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="top" secondItem="L75-po-3ZB" secondAttribute="bottom" constant="20" id="0Ky-J4-2qP"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUo-ZQ-frE" secondAttribute="trailing" constant="20" id="2K6-pp-el7"/>
-                <constraint firstItem="bi8-Sd-74i" firstAttribute="top" secondItem="xHi-Jy-d5y" secondAttribute="bottom" constant="30" id="67f-sz-49z"/>
-                <constraint firstItem="xHi-Jy-d5y" firstAttribute="top" secondItem="yUo-ZQ-frE" secondAttribute="bottom" constant="10" id="F4Q-Og-OhW"/>
-                <constraint firstItem="xHi-Jy-d5y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="UzG-mE-Axr"/>
+                <constraint firstItem="bi8-Sd-74i" firstAttribute="top" secondItem="yUo-ZQ-frE" secondAttribute="bottom" constant="70" id="U4h-dQ-nsj"/>
                 <constraint firstItem="Nwm-Ht-GLd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="YYP-KV-B6z"/>
                 <constraint firstItem="Nwm-Ht-GLd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="clf-P0-VKv"/>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dDx-RP-owH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bi8-Sd-74i" secondAttribute="bottom" id="mKg-N6-Nma"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xHi-Jy-d5y" secondAttribute="trailing" constant="20" id="o9V-oI-prZ"/>
                 <constraint firstItem="L75-po-3ZB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="rIA-1D-GBs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bi8-Sd-74i" secondAttribute="trailing" id="rYp-ZF-nxQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="L75-po-3ZB" secondAttribute="trailing" constant="10" id="sza-kM-LPH"/>
