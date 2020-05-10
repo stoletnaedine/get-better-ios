@@ -174,6 +174,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         guard let post = getPost(indexPath: indexPath) else { return UITableViewCell() }
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
+        cell.selectionStyle = .none
         cell.fillCell(from: post)
         
         return cell

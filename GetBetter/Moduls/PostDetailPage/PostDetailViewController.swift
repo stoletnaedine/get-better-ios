@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toaster
 
 class PostDetailViewController: UIViewController {
     
@@ -20,14 +21,29 @@ class PostDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let post = self.post {
             fillViewController(post)
         }
+        registerGestureCopyLabelText()
         customizeView()
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func registerGestureCopyLabelText() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(copyLabelText))
+        textLabel.isUserInteractionEnabled = true
+        textLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc func copyLabelText(_ sender: UITapGestureRecognizer) {
+        if let text = textLabel.text {
+            UIPasteboard.general.string = text
+            Toast(text: "Скопировано").show()
+        }
     }
 
     func fillViewController(_ post: Post) {

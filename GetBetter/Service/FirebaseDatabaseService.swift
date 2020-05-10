@@ -22,7 +22,7 @@ class FirebaseDatabaseService {
     func currentUserPath() -> DatabaseReference? {
         guard let userId = user?.uid else { return nil }
         
-        print("userId=\(userId)")
+        print("Current userId = \(userId)")
         
         return ref
             .child(usersPath)
