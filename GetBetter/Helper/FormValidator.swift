@@ -27,24 +27,4 @@ class FormValidator {
             return true
         }
     }
-    
-    static func isFormValid(email: String, password1: String, password2: String) -> Bool {
-        
-        switch true {
-        case email.isEmpty:
-            Toast(text: Constants.RegisterValidate.emailIsEmpty).show()
-            return false
-        case !email.contains("@"):
-            Toast(text: Constants.RegisterValidate.emailIsNotValid).show()
-            return false
-        case password1.isEmpty || password2.isEmpty:
-            Toast(text: Constants.RegisterValidate.passwordIsEmpty).show()
-            return false
-        case password1 != password2:
-            Toast(text: Constants.RegisterValidate.passwordsNotEquals).show()
-            return false
-        default:
-            return true
-        }
-    }
 }

@@ -58,7 +58,11 @@ class RootManager {
     }
     
     @objc func showTabBarController() {
-        window?.rootViewController = TabBarController()
+        let tabBarController = TabBarController()
+        tabBarController.setupSphereCompletion = { [weak self] in
+            self?.showSetupSpherePageViewController()
+        }
+        window?.rootViewController = tabBarController
     }
     
     @objc func showSetupSpherePageViewController() {

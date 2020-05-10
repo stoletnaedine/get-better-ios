@@ -13,10 +13,8 @@
                 <outlet property="cancelButton" destination="M18-Zq-MPI" id="VSJ-VK-1r5"/>
                 <outlet property="emailLabel" destination="mL2-UJ-v9r" id="VO8-8M-zSd"/>
                 <outlet property="emailTextField" destination="OMc-X0-HHv" id="s8U-55-kYj"/>
-                <outlet property="password1Label" destination="B5w-kM-T9C" id="ZaZ-sd-q4I"/>
-                <outlet property="password1TextField" destination="ucb-gn-GaY" id="3Ds-hJ-OOs"/>
-                <outlet property="password2Label" destination="Db5-qy-t0q" id="vjJ-hb-pOL"/>
-                <outlet property="password2TextField" destination="40E-f6-kqr" id="tU2-nD-xPG"/>
+                <outlet property="passwordLabel" destination="B5w-kM-T9C" id="ZaZ-sd-q4I"/>
+                <outlet property="passwordTextField" destination="ucb-gn-GaY" id="3Ds-hJ-OOs"/>
                 <outlet property="registerButton" destination="B7w-fg-S8h" id="WMX-7v-MQz"/>
                 <outlet property="registerButtonLabel" destination="LKN-LO-oXq" id="bet-3s-Msm"/>
                 <outlet property="registerView" destination="c6k-Aj-A4O" id="9AV-c4-UF1"/>
@@ -66,27 +64,8 @@
                         <constraint firstAttribute="height" constant="1" id="abG-Nz-xuE"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="40E-f6-kqr">
-                    <rect key="frame" x="20" y="311" width="374" height="34"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
-                </textField>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHt-Zh-945" userLabel="Line">
-                    <rect key="frame" x="20" y="355" width="374" height="1"/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="OM5-0Q-ooI"/>
-                    </constraints>
-                </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db5-qy-t0q">
-                    <rect key="frame" x="20" y="284" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-Aj-A4O" userLabel="RegisterView">
-                    <rect key="frame" x="20" y="386" width="374" height="50"/>
+                    <rect key="frame" x="20" y="304" width="374" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-fg-S8h">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
@@ -145,14 +124,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="mL2-UJ-v9r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="01M-fA-vpf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="40E-f6-kqr" secondAttribute="trailing" constant="20" id="2Lq-5I-g97"/>
-                <constraint firstItem="Db5-qy-t0q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="7dJ-3q-wWx"/>
-                <constraint firstItem="hHt-Zh-945" firstAttribute="top" secondItem="40E-f6-kqr" secondAttribute="bottom" constant="10" id="APY-UF-lyg"/>
-                <constraint firstItem="40E-f6-kqr" firstAttribute="top" secondItem="Db5-qy-t0q" secondAttribute="bottom" constant="6" id="AdE-8B-cqk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FDg-8i-sZg" secondAttribute="trailing" constant="10" id="BbZ-8g-VnO"/>
-                <constraint firstAttribute="trailing" secondItem="hHt-Zh-945" secondAttribute="trailing" constant="20" id="Ffb-tP-vGd"/>
                 <constraint firstAttribute="trailing" secondItem="Vde-9X-gie" secondAttribute="trailing" constant="20" id="Jkt-S8-uSi"/>
-                <constraint firstItem="40E-f6-kqr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="KPK-bx-tTl"/>
                 <constraint firstItem="B5w-kM-T9C" firstAttribute="top" secondItem="xmY-s0-m7Y" secondAttribute="bottom" constant="20" id="KRk-UC-IYU"/>
                 <constraint firstItem="xmY-s0-m7Y" firstAttribute="top" secondItem="OMc-X0-HHv" secondAttribute="bottom" constant="10" id="LHc-6m-hnS"/>
                 <constraint firstAttribute="trailing" secondItem="xmY-s0-m7Y" secondAttribute="trailing" constant="20" id="MRM-cI-xOP"/>
@@ -160,13 +133,11 @@
                 <constraint firstItem="ucb-gn-GaY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="OPn-bV-YUb"/>
                 <constraint firstItem="B5w-kM-T9C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QOF-ET-qRB"/>
                 <constraint firstItem="c6k-Aj-A4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QSb-Lc-FMd"/>
+                <constraint firstItem="c6k-Aj-A4O" firstAttribute="top" secondItem="Vde-9X-gie" secondAttribute="bottom" constant="40" id="T6l-Jy-dLZ"/>
                 <constraint firstItem="FDg-8i-sZg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="aCg-Qx-FZL"/>
-                <constraint firstItem="Db5-qy-t0q" firstAttribute="top" secondItem="Vde-9X-gie" secondAttribute="bottom" constant="20" id="at4-4M-Olx"/>
                 <constraint firstItem="Vde-9X-gie" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="bBZ-a2-ZvZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c6k-Aj-A4O" secondAttribute="trailing" constant="20" id="d89-g5-OFz"/>
-                <constraint firstItem="hHt-Zh-945" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="eWR-k4-pKd"/>
                 <constraint firstItem="ucb-gn-GaY" firstAttribute="top" secondItem="B5w-kM-T9C" secondAttribute="bottom" constant="6" id="ffn-Kb-cEy"/>
-                <constraint firstItem="c6k-Aj-A4O" firstAttribute="top" secondItem="hHt-Zh-945" secondAttribute="bottom" constant="30" id="h0A-v3-VCO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ucb-gn-GaY" secondAttribute="trailing" constant="20" id="hrQ-8t-6cf"/>
                 <constraint firstItem="mL2-UJ-v9r" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="i7B-KD-0JA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OMc-X0-HHv" secondAttribute="trailing" constant="20" id="l9l-lx-An0"/>

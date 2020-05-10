@@ -92,24 +92,24 @@ class AuthViewController: UIViewController {
         
         emailLabel.text = Constants.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
+        emailLabel.font = UIFont.systemFont(ofSize: 13)
         
         emailTextField.borderStyle = .none
         emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                               NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
+                                                                               NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
         if let email = KeychainHelper.getUserEmail() {
             emailTextField.text = email
         }
 
         passwordLabel.text = Constants.Auth.password
         passwordLabel.textColor = .gray
-        passwordLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
+        passwordLabel.font = UIFont.systemFont(ofSize: 13)
         
         passwordTextField.borderStyle = .none
         passwordTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword,
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                                  NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
+                                                                                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
         passwordTextField.isSecureTextEntry = true
         eyeImageView.image = UIImage(named: "combinedShape")
         eyeButton.setTitle("", for: .normal)
@@ -120,21 +120,21 @@ class AuthViewController: UIViewController {
         enterButton.setTitle("", for: .normal)
         enterLabel.text = Constants.Auth.enter.uppercased()
         enterLabel.textColor = .white
-        enterLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
+        enterLabel.font = UIFont.systemFont(ofSize: 15)
         
         forgotButton.setTitle(Constants.Auth.forgotPassword, for: .normal)
         forgotButton.setTitleColor(.violet, for: .normal)
-        forgotButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        forgotButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         forgotButton.titleLabel?.underline()
         
         registrationButton.setTitle(Constants.Auth.register, for: .normal)
         registrationButton.setTitleColor(.violet, for: .normal)
-        registrationButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        registrationButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         registrationButton.titleLabel?.underline()
         
         anonymButton.setTitle("Продолжить без регистрации", for: .normal)
         anonymButton.setTitleColor(.violet, for: .normal)
-        anonymButton.titleLabel?.font = UIFont(name: Constants.Font.SFUITextRegular, size: 15)
+        anonymButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         anonymButton.titleLabel?.underline()
         
         logoImageView.image = logoImageView.image?.withRenderingMode(.alwaysTemplate)

@@ -26,13 +26,6 @@ struct Constants {
         }
     }
     
-    struct Font {
-        static let OfficinaSansExtraBold = "OfficinaSansExtraBoldC"
-        static let SFUITextRegular = "SFUIText-Regular"
-        static let SFUITextMedium = "SFUIText-Medium"
-        static let Ubuntu = "Ubuntu"
-    }
-    
     struct TabBar {
         static let lifeCircleTitle = "Колесо жизни"
         static let journalTitle = "Дневник"
@@ -46,9 +39,7 @@ struct Constants {
         static let email = "Email"
         static let enterEmail = "Введите Email"
         static let password = "Пароль"
-        static let password2 = "Еще раз"
         static let enterPassword = "Введите пароль"
-        static let enterPassword2 = "Повторите пароль"
         static let enter = "Войти"
         static let doRegister = "Зарегистрироваться"
         static let forgotPassword = "Забыли пароль?"
@@ -65,7 +56,6 @@ struct Constants {
         static let emailIsEmpty = "Введите Email"
         static let emailIsNotValid = "Введите корректный Email"
         static let passwordIsEmpty = "Введите пароль"
-        static let passwordsNotEquals = "Пароли не совпадают"
     }
     
     struct Profile {

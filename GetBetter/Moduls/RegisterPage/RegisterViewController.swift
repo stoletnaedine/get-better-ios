@@ -14,10 +14,8 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var password1Label: UILabel!
-    @IBOutlet weak var password1TextField: UITextField!
-    @IBOutlet weak var password2Label: UILabel!
-    @IBOutlet weak var password2TextField: UITextField!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registerView: UIView!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var registerButtonLabel: UILabel!
@@ -34,13 +32,12 @@ class RegisterViewController: UIViewController {
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
         
         guard let email = emailTextField.text else { return }
-        guard let password1 = password1TextField.text else { return }
-        guard let password2 = password2TextField.text else { return }
+        guard let password = passwordTextField.text else { return }
         
-        if FormValidator.isFormValid(email: email, password1: password1, password2: password2) {
+        if FormValidator.isFormValid(email: email, password: password) {
             self.showActivityIndicator(onView: self.view)
-            Auth.auth().createUser(withEmail: email, password: password1, completion: { [weak self] authResult, error in
-                
+            
+            Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] authResult, error in
                 self?.removeActivityIndicator()
                 
                 if let error = error {
@@ -48,8 +45,11 @@ class RegisterViewController: UIViewController {
                     return
                 }
                 
-                if Auth.auth().currentUser != nil {
+                if let _ = Auth.auth().currentUser {
+                    Toast(text: "Вы успешно зарегистрировались", delay: 0, duration: 3).show()
                     self?.completion()
+                } else {
+                    self?.dismiss(animated: true, completion: nil)
                 }
             })
         }
@@ -63,33 +63,27 @@ class RegisterViewController: UIViewController {
         self.title = Constants.Auth.register
         emailLabel.text = Constants.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
+        emailLabel.font = UIFont.systemFont(ofSize: 13)
         emailTextField.borderStyle = .none
-        emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
-                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                               NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
-        let passLabelArray = [password1Label, password2Label]
-        for label in passLabelArray {
-            label!.textColor = .gray
-            label!.font = UIFont(name: Constants.Font.SFUITextRegular, size: 13)
-        }
-        password1Label.text = Constants.Auth.password
-        password2Label.text = Constants.Auth.password2
-        password1TextField.borderStyle = .none
-        password1TextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword,
-                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                                   NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
-        password2TextField.borderStyle = .none
-        password2TextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword2,
-                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                                   NSAttributedString.Key.font: UIFont(name: Constants.Font.SFUITextRegular, size: 17)!])
+        
+        let stringAttributes = [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
+        
+        emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail, attributes: stringAttributes)
+        
+        passwordLabel.textColor = .gray
+        passwordLabel.font = UIFont.systemFont(ofSize: 13)
+        passwordLabel.text = Constants.Auth.password
+        
+        passwordTextField.borderStyle = .none
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword, attributes: stringAttributes)
+        
         registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
         registerButton.clipsToBounds = true
         registerButton.setTitle("", for: .normal)
         registerButtonLabel.text = Constants.Auth.doRegister.uppercased()
         registerButtonLabel.textColor = .white
-        registerButtonLabel.font = UIFont(name: Constants.Font.SFUITextMedium, size: 15)
+        registerButtonLabel.font = UIFont.systemFont(ofSize: 15)
         cancelButton.setTitle("", for: .normal)
     }
 }

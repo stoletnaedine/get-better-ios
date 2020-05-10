@@ -28,6 +28,8 @@ class LifeCircleController: UIViewController {
     let achievementsReuseCellIdentifier = "AchievementsCell"
     let sphereIconSize: CGFloat = 30
     
+    var setupSphereCompletion: () -> () = {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,6 +64,7 @@ class LifeCircleController: UIViewController {
                     dispatchGroup.leave()
                     
                 case .failure(_):
+                    self?.setupSphereCompletion()
                     dispatchGroup.leave()
                 }
             })
@@ -76,6 +79,7 @@ class LifeCircleController: UIViewController {
                     dispatchGroup.leave()
                     
                 case .failure(_):
+                    self?.setupSphereCompletion()
                     dispatchGroup.leave()
                 }
             })

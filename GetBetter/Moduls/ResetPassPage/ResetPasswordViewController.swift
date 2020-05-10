@@ -58,9 +58,10 @@ class ResetPasswordViewController: UIViewController {
         emailLabel.textColor = .gray
         emailLabel.font = UIFont.systemFont(ofSize: 13)
         emailTextField.borderStyle = .none
+        
         emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                               NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)])
+                                                                               NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
         
         resetPasswordView.backgroundColor = .violet
         resetPasswordView.layer.cornerRadius = 5

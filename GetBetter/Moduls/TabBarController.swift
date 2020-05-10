@@ -9,6 +9,8 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+    
+    var setupSphereCompletion: () -> () = {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +20,11 @@ class TabBarController: UITabBarController {
     }
     
     func initViewControllers() {
-        let circleViewController = UINavigationController(rootViewController: LifeCircleController())
+        let circleVC = LifeCircleController()
+        circleVC.setupSphereCompletion = { [weak self] in
+            self?.setupSphereCompletion()
+        }
+        let circleViewController = UINavigationController(rootViewController: circleVC)
         circleViewController.tabBarItem.image = UIImage(named: "circle")
         circleViewController.tabBarItem.title = Constants.TabBar.lifeCircleTitle
         
