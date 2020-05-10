@@ -16,8 +16,6 @@ struct Constants {
     
     struct LifeCircle {
         static let loading = "Подождите, идет загрузка"
-        static let startLevelLegend = "Начальный уровень"
-        static let currentLevelLegend = "Текущий уровень"
         
         struct SegmentedControl {
             static let circle = "Колесо"

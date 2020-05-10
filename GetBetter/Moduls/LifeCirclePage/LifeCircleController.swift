@@ -16,6 +16,9 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var metricsTableView: UITableView!
     @IBOutlet weak var achievementsTableView: UITableView!
+    @IBOutlet weak var startDataButton: UIButton!
+    @IBOutlet weak var currentDataButton: UIButton!
+    
     let refreshControl = UIRefreshControl()
     let firebaseDatabaseService = FirebaseDatabaseService()
     
@@ -27,6 +30,8 @@ class LifeCircleController: UIViewController {
     let achievementsXibName = String(describing: AchievementsTableViewCell.self)
     let achievementsReuseCellIdentifier = "AchievementsCell"
     let sphereIconSize: CGFloat = 30
+    var startDataIsVisible = true
+    var currentDataIsVisible = true
     
     var setupSphereCompletion: () -> () = {}
     
@@ -39,12 +44,22 @@ class LifeCircleController: UIViewController {
         self.title = Constants.TabBar.lifeCircleTitle
         view.backgroundColor = .appBackground
         setupSegmentedControl()
-        setupTableView()
+        setupTableViews()
         setupRefreshControl()
         
         chartView.isHidden = false
         metricsTableView.isHidden = true
         achievementsTableView.isHidden = true
+    }
+    
+    @IBAction func startDataButtonDidTapped(_ sender: UIButton) {
+        startDataIsVisible = !startDataIsVisible
+        setupChartView(showStartData: startDataIsVisible, showCurrentData: currentDataIsVisible, animate: false)
+    }
+    
+    @IBAction func currentDataDidTapped(_ sender: UIButton) {
+        currentDataIsVisible = !currentDataIsVisible
+        setupChartView(showStartData: startDataIsVisible, showCurrentData: currentDataIsVisible, animate: false)
     }
     
     func setupRefreshControl() {
@@ -100,14 +115,14 @@ class LifeCircleController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
-            self?.setupChartView()
+            self?.setupChartView(showStartData: true, showCurrentData: true, animate: true)
             self?.metricsTableView.reloadData()
             self?.achievementsTableView.reloadData()
             self?.refreshControl.endRefreshing()
         })
     }
     
-    func setupTableView() {
+    func setupTableViews() {
         achievementsTableView.dataSource = self
         achievementsTableView.delegate = self
         achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
@@ -146,7 +161,16 @@ class LifeCircleController: UIViewController {
         }
     }
     
-    func setupChartView() {
+    func setupChartView(showStartData: Bool, showCurrentData: Bool, animate: Bool) {
+        
+        startDataButton.setTitle("Начальный уровень", for: .normal)
+        startDataButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        startDataButton.tintColor = .lifeCircleLineStart
+        currentDataButton.setTitle("Текущий уровень", for: .normal)
+        currentDataButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        currentDataButton.tintColor = .lifeCircleLineCurrent
+        
+        chartView.backgroundColor = .appBackground
         chartView.webLineWidth = 2
         chartView.innerWebLineWidth = 2
         chartView.webColor = .lifeCircleLineBack
@@ -182,12 +206,13 @@ class LifeCircleController: UIViewController {
                 .map { RadarChartDataEntry(value: $0.value) }
         }
         
-        let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: Constants.LifeCircle.startLevelLegend)
-        let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: Constants.LifeCircle.currentLevelLegend)
+        let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: "")
+        let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: "")
         
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
         dataSetStart.valueFormatter = DataSetValueFormatter()
+        dataSetStart.visible = showStartData
         
         dataSetCurrent.lineWidth = 2
         dataSetCurrent.colors = [.lifeCircleLineCurrent]
@@ -195,10 +220,12 @@ class LifeCircleController: UIViewController {
         dataSetCurrent.fillAlpha = 0.75
         dataSetCurrent.drawFilledEnabled = true
         dataSetCurrent.valueFormatter = DataSetValueFormatter()
+        dataSetCurrent.visible = showCurrentData
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
-        chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
-        chartView.backgroundColor = .appBackground
+        if animate {
+            chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
+        }
     }
 }
 
