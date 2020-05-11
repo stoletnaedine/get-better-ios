@@ -39,7 +39,7 @@ class AddPostViewController: UIViewController {
         customizeView()
     }
     
-    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+    @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -50,7 +50,7 @@ class AddPostViewController: UIViewController {
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    @IBAction func saveButtonDidTap(_ sender: UIButton) {
+    @IBAction func saveButtonDidTapped(_ sender: UIButton) {
         guard let text = postTextView.text, !text.isEmpty else {
             Toast(text: "Поле текста пустое", delay: 0, duration: 0.3).show()
             return

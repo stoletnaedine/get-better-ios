@@ -17,8 +17,6 @@ class RootManager {
     
     func start() {
         NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showTabBarController), name: .showTabBarController, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showSetupSpherePageViewController), name: .showPageViewController, object: nil)
         
         setupNavigationBar()
         configToaster()
@@ -66,7 +64,11 @@ class RootManager {
     }
     
     @objc func showSetupSpherePageViewController() {
-        window?.rootViewController = UINavigationController(rootViewController: SetupPageViewController())
+        let setupPageViewController = SetupPageViewController()
+        setupPageViewController.completion = { [weak self] in
+            self?.showTabBarController()
+        }
+        window?.rootViewController = UINavigationController(rootViewController: setupPageViewController)
     }
     
     func showAuthController() {

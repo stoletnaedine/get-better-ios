@@ -242,11 +242,10 @@ class DataSetValueFormatter: IValueFormatter {
 extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
     
     private func getSphereValue(by indexPath: IndexPath) -> SphereValue? {
-        let sphereRawValue = currentSphereMetrics?
-            .sortedValues()
-            .map { $0.key }[indexPath.row] ?? ""
         
-        guard let value = currentSphereMetrics?.values[sphereRawValue] else { return nil }
+        let sphereValueDict = currentSphereMetrics?.sortedValues()[indexPath.row]
+        let value = sphereValueDict?.value ?? 0
+        let sphereRawValue = sphereValueDict?.key ?? ""
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return nil }
         let sphereValue = SphereValue(sphere: sphere, value: value)
         

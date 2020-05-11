@@ -81,12 +81,12 @@ class AuthViewController: UIViewController {
     
     @IBAction func anonymousButtonDidTapped(_ sender: UIButton) {
         
-        Auth.auth().signInAnonymously(completion: { authResult, error in
+        Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
             
             if let error = error {
                 Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
             } else {
-                NotificationCenter.default.post(name: .showPageViewController, object: nil)
+                self?.registerCompletion()
             }
         })
     }

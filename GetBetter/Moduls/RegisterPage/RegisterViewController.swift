@@ -55,7 +55,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
+    @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     

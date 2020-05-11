@@ -16,8 +16,8 @@ class JournalViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView()
     let firebaseDataBaseService = FirebaseDatabaseService()
     
-    var uniqueDates: [String] = []
-    var postsDateSection: [PostsDateSection] = []
+    var sectionMonthYear: [String] = []
+    var sectionPosts: [PostsDateSection] = []
     let SectionHeaderHeight: CGFloat = 30
     let cellIdentifier = "JournalCell"
     let cellXibName = "JournalTableViewCell"
@@ -56,7 +56,7 @@ class JournalViewController: UIViewController {
     
     @objc func getPosts(completion: @escaping () -> Void) {
         
-        postsDateSection = []
+        sectionPosts = []
         
         firebaseDataBaseService.getPosts(completion: { [weak self] result in
             switch result {
@@ -92,13 +92,13 @@ class JournalViewController: UIViewController {
                     let section = PostsDateSection(sectionTimestamp: timestamp, sectionName: date, posts: postsByDate)
                     postsDateSection.append(section)
                 }
-                self?.postsDateSection = postsDateSection
+                self?.sectionPosts = postsDateSection
                 
-                let sortedUniqueDates = self?.postsDateSection
+                let sortedUniqueDates = self?.sectionPosts
                     .sorted(by: { $0.sectionTimestamp ?? 0 > $1.sectionTimestamp ?? 0 })
                     .map { $0.sectionName ?? "" }
                 
-                self?.uniqueDates = sortedUniqueDates ?? []
+                self?.sectionMonthYear = sortedUniqueDates ?? []
                 
                 DispatchQueue.main.async {
                     completion()
@@ -124,8 +124,9 @@ class JournalViewController: UIViewController {
 extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func getPost(by indexPath: IndexPath) -> Post? {
-        let date = self.uniqueDates[indexPath.section]
-        let postsDateInSection = self.postsDateSection.filter { $0.sectionName == date }
+        
+        let date = self.sectionMonthYear[indexPath.section]
+        let postsDateInSection = self.sectionPosts.filter { $0.sectionName == date }
         
         if postsDateInSection.isEmpty { return nil }
         
@@ -136,13 +137,13 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return uniqueDates.count
+        return sectionMonthYear.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let date = uniqueDates[section]
-        let postsInSectionByDate = postsDateSection.filter { $0.sectionName == date }
+        let date = sectionMonthYear[section]
+        let postsInSectionByDate = sectionPosts.filter { $0.sectionName == date }
         
         if postsInSectionByDate.isEmpty || postsInSectionByDate.count != 1 {
             return 0
@@ -161,7 +162,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
         
-        let date = uniqueDates[section]
+        let date = sectionMonthYear[section]
         label.text = date
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))

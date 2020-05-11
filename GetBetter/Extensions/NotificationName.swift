@@ -10,6 +10,4 @@ import Foundation
 
 extension Notification.Name {
     static let logout = Notification.Name("logout")
-    static let showTabBarController = Notification.Name("showTabBarController")
-    static let showPageViewController = Notification.Name("showSetupPageViewController")
 }

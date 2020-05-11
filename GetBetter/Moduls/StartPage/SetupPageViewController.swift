@@ -14,7 +14,7 @@ class SetupPageViewController: UIViewController {
     var viewControllers: [UIViewController] = []
     let databaseService = FirebaseDatabaseService()
     
-    let completion: () -> () = {}
+    var completion: () -> () = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,14 +70,13 @@ class SetupPageViewController: UIViewController {
         let sphereMetrics = SphereMetrics(values: metricsArray)
         
         if sphereMetrics.notValid() {
-            Toast(text: "Введите все значения").show()
+            Toast(text: "Выберите все значения").show()
             return
         }
         if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start)
             && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.current) {
             
             self.completion()
-            NotificationCenter.default.post(name: .showTabBarController, object: nil)
         }
     }
 }
