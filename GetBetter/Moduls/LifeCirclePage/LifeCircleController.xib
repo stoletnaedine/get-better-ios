@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="arR-df-p35">
-                    <rect key="frame" x="40" y="64" width="334" height="29"/>
+                    <rect key="frame" x="40" y="64" width="334" height="32"/>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -37,18 +36,18 @@
                     </connections>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vic-bJ-U3q" userLabel="Metrics Table View">
-                    <rect key="frame" x="0.0" y="112" width="414" height="750"/>
+                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-k0-6uc" userLabel="Achievments Table View">
-                    <rect key="frame" x="0.0" y="112" width="414" height="750"/>
+                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="Circle Chart View" customClass="RadarChartView" customModule="Charts">
-                    <rect key="frame" x="10" y="112" width="394" height="750"/>
+                    <rect key="frame" x="10" y="115" width="394" height="707"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Legend View">
-                            <rect key="frame" x="115" y="689" width="164" height="21"/>
+                            <rect key="frame" x="115" y="686" width="164" height="21"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-IX-58a" userLabel="Current Label">
                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
@@ -78,7 +77,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="tZe-0q-jOl" firstAttribute="centerX" secondItem="fxn-qj-OtY" secondAttribute="centerX" id="3Mo-Dl-arU"/>
-                        <constraint firstAttribute="bottom" secondItem="tZe-0q-jOl" secondAttribute="bottom" constant="40" id="sQO-LV-CEH"/>
+                        <constraint firstAttribute="bottom" secondItem="tZe-0q-jOl" secondAttribute="bottom" id="sQO-LV-CEH"/>
                     </constraints>
                 </view>
             </subviews>
@@ -91,7 +90,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fxn-qj-OtY" secondAttribute="trailing" constant="10" id="Cww-VD-MD1"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="KZ5-Cy-BE3"/>
                 <constraint firstItem="fxn-qj-OtY" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="KbC-ox-cql"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fxn-qj-OtY" secondAttribute="bottom" id="Ny7-ch-Sy6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fxn-qj-OtY" secondAttribute="bottom" constant="40" id="Ny7-ch-Sy6"/>
                 <constraint firstItem="Uam-k0-6uc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="O17-Io-QQt"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="YGd-5u-T7W"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vic-bJ-U3q" secondAttribute="bottom" id="as5-GM-r5m"/>
