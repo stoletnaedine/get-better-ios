@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,10 +13,10 @@
             <connections>
                 <outlet property="achievementsTableView" destination="Uam-k0-6uc" id="3b3-iu-c6L"/>
                 <outlet property="chartView" destination="fxn-qj-OtY" id="jI9-FH-eve"/>
-                <outlet property="currentDataButton" destination="cJw-Rz-N07" id="8MP-ah-P8P"/>
+                <outlet property="currentLabel" destination="ZA7-IX-58a" id="Gc2-OX-fHz"/>
                 <outlet property="metricsTableView" destination="vic-bJ-U3q" id="t8j-i0-E2B"/>
                 <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
-                <outlet property="startDataButton" destination="RuI-Qt-gmP" id="VQT-hJ-sMg"/>
+                <outlet property="startLabel" destination="t70-0U-DqJ" id="vZw-fT-ZKz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="arR-df-p35">
-                    <rect key="frame" x="40" y="64" width="334" height="32"/>
+                    <rect key="frame" x="40" y="64" width="334" height="29"/>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -36,35 +37,48 @@
                     </connections>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vic-bJ-U3q" userLabel="Metrics Table View">
-                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
+                    <rect key="frame" x="0.0" y="112" width="414" height="750"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-k0-6uc" userLabel="Achievments Table View">
-                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
+                    <rect key="frame" x="0.0" y="112" width="414" height="750"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="Circle Chart View" customClass="RadarChartView" customModule="Charts">
-                    <rect key="frame" x="10" y="115" width="394" height="747"/>
+                    <rect key="frame" x="10" y="112" width="394" height="750"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RuI-Qt-gmP" userLabel="Start Data Button">
-                            <rect key="frame" x="182" y="662" width="30" height="30"/>
-                            <connections>
-                                <action selector="startDataButtonDidTapped:" destination="-1" eventType="touchUpInside" id="l3Z-yQ-tNS"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJw-Rz-N07" userLabel="Current Data Button">
-                            <rect key="frame" x="182" y="697" width="30" height="30"/>
-                            <connections>
-                                <action selector="currentDataDidTapped:" destination="-1" eventType="touchUpInside" id="bsc-YZ-ZVA"/>
-                            </connections>
-                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Legend View">
+                            <rect key="frame" x="115" y="689" width="164" height="21"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-IX-58a" userLabel="Current Label">
+                                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t70-0U-DqJ" userLabel="Start Label">
+                                    <rect key="frame" x="122" y="0.0" width="42" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="t70-0U-DqJ" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="Fmo-3r-kbI"/>
+                                <constraint firstAttribute="bottom" secondItem="ZA7-IX-58a" secondAttribute="bottom" id="W51-v1-Qjn"/>
+                                <constraint firstItem="t70-0U-DqJ" firstAttribute="leading" secondItem="ZA7-IX-58a" secondAttribute="trailing" constant="80" id="bac-d0-b8z"/>
+                                <constraint firstItem="ZA7-IX-58a" firstAttribute="leading" secondItem="tZe-0q-jOl" secondAttribute="leading" id="gVU-lB-wy5"/>
+                                <constraint firstItem="ZA7-IX-58a" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="gun-kV-KPD"/>
+                                <constraint firstAttribute="bottom" secondItem="t70-0U-DqJ" secondAttribute="bottom" id="ie6-jJ-XZx"/>
+                                <constraint firstAttribute="trailing" secondItem="t70-0U-DqJ" secondAttribute="trailing" id="vba-xR-2oO"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="cJw-Rz-N07" secondAttribute="bottom" constant="20" id="4pI-bD-huH"/>
-                        <constraint firstItem="RuI-Qt-gmP" firstAttribute="centerX" secondItem="fxn-qj-OtY" secondAttribute="centerX" id="EBv-im-1Hh"/>
-                        <constraint firstItem="cJw-Rz-N07" firstAttribute="top" secondItem="RuI-Qt-gmP" secondAttribute="bottom" constant="5" id="aqo-BC-9wh"/>
-                        <constraint firstItem="cJw-Rz-N07" firstAttribute="centerX" secondItem="fxn-qj-OtY" secondAttribute="centerX" id="gth-hK-HcH"/>
+                        <constraint firstItem="tZe-0q-jOl" firstAttribute="centerX" secondItem="fxn-qj-OtY" secondAttribute="centerX" id="3Mo-Dl-arU"/>
+                        <constraint firstAttribute="bottom" secondItem="tZe-0q-jOl" secondAttribute="bottom" constant="40" id="sQO-LV-CEH"/>
                     </constraints>
                 </view>
             </subviews>

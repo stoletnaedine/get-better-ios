@@ -16,8 +16,8 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var metricsTableView: UITableView!
     @IBOutlet weak var achievementsTableView: UITableView!
-    @IBOutlet weak var startDataButton: UIButton!
-    @IBOutlet weak var currentDataButton: UIButton!
+    @IBOutlet weak var currentLabel: UILabel!
+    @IBOutlet weak var startLabel: UILabel!
     
     let refreshControl = UIRefreshControl()
     let firebaseDatabaseService = FirebaseDatabaseService()
@@ -50,16 +50,6 @@ class LifeCircleController: UIViewController {
         chartView.isHidden = false
         metricsTableView.isHidden = true
         achievementsTableView.isHidden = true
-    }
-    
-    @IBAction func startDataButtonDidTapped(_ sender: UIButton) {
-        startDataIsVisible = !startDataIsVisible
-        setupChartView(showStartData: startDataIsVisible, showCurrentData: currentDataIsVisible, animate: false)
-    }
-    
-    @IBAction func currentDataDidTapped(_ sender: UIButton) {
-        currentDataIsVisible = !currentDataIsVisible
-        setupChartView(showStartData: startDataIsVisible, showCurrentData: currentDataIsVisible, animate: false)
     }
     
     func setupRefreshControl() {
@@ -115,60 +105,20 @@ class LifeCircleController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
-            self?.setupChartView(showStartData: true, showCurrentData: true, animate: true)
+            self?.setupChartView()
             self?.metricsTableView.reloadData()
             self?.achievementsTableView.reloadData()
             self?.refreshControl.endRefreshing()
         })
     }
     
-    func setupTableViews() {
-        achievementsTableView.dataSource = self
-        achievementsTableView.delegate = self
-        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
-        achievementsTableView.backgroundColor = .appBackground
-        achievementsTableView.separatorInset = UIEdgeInsets.zero
-        
-        metricsTableView.dataSource = self
-        metricsTableView.delegate = self
-        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
-        metricsTableView.backgroundColor = .appBackground
-        metricsTableView.separatorInset = UIEdgeInsets.zero
-    }
-    
-    func setupSegmentedControl() {
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
-                                                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.metrics, forSegmentAt: 1)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.achievments, forSegmentAt: 2)
-    }
-    
-    @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            chartView.isHidden = false
-            metricsTableView.isHidden = true
-            achievementsTableView.isHidden = true
-        case 1:
-            chartView.isHidden = true
-            metricsTableView.isHidden = false
-            achievementsTableView.isHidden = true
-        default:
-            chartView.isHidden = true
-            metricsTableView.isHidden = true
-            achievementsTableView.isHidden = false
-        }
-    }
-    
-    func setupChartView(showStartData: Bool, showCurrentData: Bool, animate: Bool) {
-        
-        startDataButton.setTitle("Начальный уровень", for: .normal)
-        startDataButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        startDataButton.tintColor = .lifeCircleLineStart
-        currentDataButton.setTitle("Текущий уровень", for: .normal)
-        currentDataButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        currentDataButton.tintColor = .lifeCircleLineCurrent
+    func setupChartView() {
+        currentLabel.text = "Текущее"
+        currentLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        currentLabel.textColor = .lifeCircleLineCurrent
+        startLabel.text = "Начальное"
+        startLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        startLabel.textColor = .lifeCircleLineStart
         
         chartView.backgroundColor = .appBackground
         chartView.webLineWidth = 2
@@ -212,7 +162,6 @@ class LifeCircleController: UIViewController {
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
         dataSetStart.valueFormatter = DataSetValueFormatter()
-        dataSetStart.visible = showStartData
         
         dataSetCurrent.lineWidth = 2
         dataSetCurrent.colors = [.lifeCircleLineCurrent]
@@ -220,11 +169,47 @@ class LifeCircleController: UIViewController {
         dataSetCurrent.fillAlpha = 0.75
         dataSetCurrent.drawFilledEnabled = true
         dataSetCurrent.valueFormatter = DataSetValueFormatter()
-        dataSetCurrent.visible = showCurrentData
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
-        if animate {
-            chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
+        chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
+    }
+    
+    func setupTableViews() {
+        achievementsTableView.dataSource = self
+        achievementsTableView.delegate = self
+        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
+        achievementsTableView.backgroundColor = .appBackground
+        achievementsTableView.separatorInset = UIEdgeInsets.zero
+        
+        metricsTableView.dataSource = self
+        metricsTableView.delegate = self
+        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
+        metricsTableView.backgroundColor = .appBackground
+        metricsTableView.separatorInset = UIEdgeInsets.zero
+    }
+    
+    func setupSegmentedControl() {
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
+                                                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.metrics, forSegmentAt: 1)
+        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.achievments, forSegmentAt: 2)
+    }
+    
+    @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            chartView.isHidden = false
+            metricsTableView.isHidden = true
+            achievementsTableView.isHidden = true
+        case 1:
+            chartView.isHidden = true
+            metricsTableView.isHidden = false
+            achievementsTableView.isHidden = true
+        default:
+            chartView.isHidden = true
+            metricsTableView.isHidden = true
+            achievementsTableView.isHidden = false
         }
     }
 }

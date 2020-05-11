@@ -26,9 +26,8 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var anonymButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     
-    var signInCompletion: (() -> ()) = {}
-    var registerCompletion: (() -> ()) = {}
-    let rootManager = RootManager()
+    var signInCompletion: () -> () = {}
+    var registerCompletion: () -> () = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
