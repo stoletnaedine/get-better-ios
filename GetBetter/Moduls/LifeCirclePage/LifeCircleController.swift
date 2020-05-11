@@ -172,6 +172,7 @@ class LifeCircleController: UIViewController {
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
         chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
+        chartView.legend.enabled = false
     }
     
     func setupTableViews() {
