@@ -284,6 +284,9 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier, for: indexPath) as! AchievementsTableViewCell
             cell.selectionStyle = .none
+            if !achievement.unlocked {
+                cell.backgroundColor = .lighterGray
+            }
             cell.fillCell(from: achievement)
             
             return cell

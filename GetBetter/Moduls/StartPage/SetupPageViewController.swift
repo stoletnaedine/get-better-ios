@@ -13,6 +13,7 @@ class SetupPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
     let databaseService = FirebaseDatabaseService()
+    let achievementService = AchievementService()
     
     var completion: () -> () = {}
     
@@ -73,9 +74,11 @@ class SetupPageViewController: UIViewController {
             Toast(text: "Выберите все значения").show()
             return
         }
+        
+        achievementService.saveStartAchievements()
+        
         if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start)
             && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.current) {
-            
             self.completion()
         }
     }

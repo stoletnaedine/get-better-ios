@@ -24,16 +24,26 @@ class AchievementsTableViewCell: UITableViewCell {
     }
     
     func fillCell(from achievement: Achievement) {
-        self.iconLabel.text = achievement.icon
         self.titleLabel.text = achievement.title
         self.descriptionLabel.text = achievement.description
+        
+        if achievement.unlocked {
+            self.iconLabel.text = achievement.icon
+            setupUnlockedView()
+        }
+    }
+    
+    private func setupUnlockedView() {
+        titleLabel.textColor = .darkGray
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        descriptionLabel.textColor = .gray
+        iconLabel.font = iconLabel.font.withSize(30)
     }
     
     private func setupView() {
-        iconLabel.font = iconLabel.font.withSize(30)
-        iconLabel.text = "🏆"
+        iconLabel.text = "◉"
+        titleLabel.textColor = .gray
         titleLabel.font = UIFont.systemFont(ofSize: 22)
-        titleLabel.textColor = .darkGray
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
         descriptionLabel.textColor = .gray
     }

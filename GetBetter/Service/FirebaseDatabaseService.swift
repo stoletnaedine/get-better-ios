@@ -268,9 +268,11 @@ class FirebaseDatabaseService {
                         let id = key.element
                         let entity = value?[id] as? NSDictionary
                         
-                        let post = Achievement(icon: entity?[Constants.Achievement.Field.icon] as? String ?? "",
+                        let post = Achievement(id: entity?[Constants.Achievement.Field.id] as? String ?? "",
+                                               icon: entity?[Constants.Achievement.Field.icon] as? String ?? "",
                                                title: entity?[Constants.Achievement.Field.title] as? String ?? "",
-                                               description: entity?[Constants.Achievement.Field.description] as? String ?? "")
+                                               description: entity?[Constants.Achievement.Field.description] as? String ?? "",
+                                               unlocked: entity?[Constants.Achievement.Field.unlocked] as? Bool ?? false)
                         array.append(post)
                     }
                     completion(.success(array))
@@ -288,11 +290,13 @@ class FirebaseDatabaseService {
         
         ref
             .child(achievemenetsPath)
-            .childByAutoId()
+            .child(achievement.id)
             .setValue([
-                Constants.Achievement.Field.icon: achievement.icon ?? "",
-                Constants.Achievement.Field.title: achievement.title ?? "",
-                Constants.Achievement.Field.description: achievement.description ?? ""
+                Constants.Achievement.Field.id: achievement.id,
+                Constants.Achievement.Field.icon: achievement.icon,
+                Constants.Achievement.Field.title: achievement.title,
+                Constants.Achievement.Field.description: achievement.description,
+                Constants.Achievement.Field.unlocked: achievement.unlocked
             ])
         
         print("Firebase saved achievement \(achievement)")

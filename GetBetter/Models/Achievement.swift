@@ -9,7 +9,9 @@
 import Foundation
 
 struct Achievement {
-    let icon: String?
-    let title: String?
-    let description: String?
+    let id: String
+    let icon: String
+    let title: String
+    let description: String
+    var unlocked: Bool
 }

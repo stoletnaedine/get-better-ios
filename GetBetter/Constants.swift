@@ -92,9 +92,11 @@ struct Constants {
     
     struct Achievement {
         struct Field {
+            static let id = "id"
             static let icon = "icon"
             static let title = "title"
             static let description = "description"
+            static let unlocked = "unlocked"
         }
     }
     
