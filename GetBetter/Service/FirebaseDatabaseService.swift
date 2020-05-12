@@ -133,17 +133,6 @@ class FirebaseDatabaseService {
         return true
     }
     
-    func updateSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
-        
-        guard let ref = currentUserPath() else { return false }
-        
-        ref
-            .child(pathToSave)
-            .updateChildValues(sphereMetrics.values)
-        
-        return true
-    }
-    
     func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
         
         guard let ref = currentUserPath() else { return }
@@ -159,8 +148,21 @@ class FirebaseDatabaseService {
                     completion(.failure(AppError(errorCode: .notFound)))
                 }
             }) { error in
-                    completion(.failure(AppError(error: error)!))
-            }
+                completion(.failure(AppError(error: error)!))
+        }
+    }
+    
+    func updateSphereValue(_ sphereValue: SphereValue, pathToSave: String) -> Bool {
+        
+        guard let ref = currentUserPath() else { return false }
+        guard let sphereField = sphereValue.sphere?.rawValue else { return false }
+        guard let value = sphereValue.value else { return false }
+        
+        ref
+            .child(pathToSave)
+            .updateChildValues([sphereField: value])
+        
+        return true
     }
     
     func incrementSphereValue(for sphere: Sphere) {
@@ -180,14 +182,11 @@ class FirebaseDatabaseService {
             
             guard let currentSphereMetrics = currentSphereMetrics else { return }
             
-            var newValues = currentSphereMetrics.values
-            
-            if let currentValue = newValues[sphere.rawValue],
+            if let currentValue = currentSphereMetrics.values[sphere.rawValue],
                 currentValue < maxValue {
-                newValues[sphere.rawValue] = (currentValue * 10 + diffValue * 10) / 10
-                let newSphereMetrics = SphereMetrics(values: newValues)
-                
-                let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                let newValue = (currentValue * 10 + diffValue * 10) / 10
+                let saveResult = self?.updateSphereValue(SphereValue(sphere: sphere, value: newValue),
+                                                         pathToSave: Constants.SphereMetrics.current)
                 print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
             }
         })
@@ -222,10 +221,9 @@ class FirebaseDatabaseService {
                         currentValue > minValue,
                         currentValue > startValue {
                         
-                        newValues[sphere.rawValue] = (currentValue * 10 - diffValue * 10) / 10
-                        let newSphereMetrics = SphereMetrics(values: newValues)
-                        
-                        let saveResult = self?.updateSphereMetrics(newSphereMetrics, pathToSave: Constants.SphereMetrics.current)
+                        let newValue = (currentValue * 10 - diffValue * 10) / 10
+                        let saveResult = self?.updateSphereValue(SphereValue(sphere: sphere, value: newValue),
+                                                                 pathToSave: Constants.SphereMetrics.current)
                         print("Decrement SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                     }
                     
