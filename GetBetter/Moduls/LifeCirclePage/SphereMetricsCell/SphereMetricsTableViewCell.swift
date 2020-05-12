@@ -29,7 +29,8 @@ class SphereMetricsTableViewCell: UITableViewCell {
         self.iconLabel.text = sphereValue.sphere?.icon
         self.nameLabel.text = sphereValue.sphere?.name
         if let value = sphereValue.value {
-            self.valueLabel.text = "\(value)"
+            self.valueLabel.text = value.convertToRusString()
+            
             changeValueLabelColorIfValueIsLow(for: value)
         }
         self.descriptionLabel.text = sphereValue.sphere?.description
