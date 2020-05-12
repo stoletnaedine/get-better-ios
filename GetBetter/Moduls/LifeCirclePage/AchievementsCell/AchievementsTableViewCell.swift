@@ -35,13 +35,14 @@ class AchievementsTableViewCell: UITableViewCell {
     
     private func setupUnlockedView() {
         titleLabel.textColor = .darkGray
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        titleLabel.font = UIFont.systemFont(ofSize: 22)
+        titleLabel.textColor = .violet
         descriptionLabel.textColor = .gray
         iconLabel.font = iconLabel.font.withSize(30)
     }
     
     private func setupView() {
-        iconLabel.text = "◉"
+        iconLabel.text = "•"
         titleLabel.textColor = .gray
         titleLabel.font = UIFont.systemFont(ofSize: 22)
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
