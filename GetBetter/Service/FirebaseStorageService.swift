@@ -76,24 +76,14 @@ class FirebaseStorageService {
             .child(uuidString)
         
         dispatchGroup.enter()
-        photoRef
-            .putData(photoData, metadata: metadata, completion: { (metadata, error) in
-            guard let _ = metadata else {
-                completion(.failure(AppError(error: error)!))
-                dispatchGroup.leave()
-                return
+        uploadPhoto(ref: photoRef, data: photoData, dispatchGroup: dispatchGroup, completion: { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let photo):
+                photoName = photo.name
+                photoUrl = photo.urlString
             }
-            photoRef.downloadURL(completion: { (url, error) in
-                guard let url = url else {
-                    completion(.failure(AppError(error: error)!))
-                    dispatchGroup.leave()
-                    return
-                }
-                photoUrl = "\(url)"
-                photoName = photoRef.name
-                print("Firebase saved photo \(String(describing: photoName))")
-                dispatchGroup.leave()
-            })
         })
         
         guard let resizePreview = photo.resized(toWidth: resizeWidthPreview) else { return }
@@ -104,47 +94,58 @@ class FirebaseStorageService {
             .child(uuidString)
         
         dispatchGroup.enter()
-        previewRef
-            .putData(previewData, metadata: metadata, completion: { (metadata, error) in
-            guard let _ = metadata else {
-                completion(.failure(AppError(error: error)!))
-                dispatchGroup.leave()
-                return
+        uploadPhoto(ref: previewRef, data: previewData, dispatchGroup: dispatchGroup, completion: { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let photo):
+                previewName = photo.name
+                previewUrl = photo.urlString
             }
-            previewRef.downloadURL(completion: { (url, error) in
-                guard let url = url else {
+        })
+        
+        dispatchGroup.notify(queue: .global(), execute: {
+            let photo = Photo(photoUrl: photoUrl, photoName: photoName, previewUrl: previewUrl, previewName: previewName)
+            completion(.success(photo))
+        })
+    }
+    
+    private func uploadPhoto(ref: StorageReference, data: Data, dispatchGroup: DispatchGroup,
+                             completion: @escaping (Result<(name: String, urlString: String), AppError>) -> Void) {
+        ref
+            .putData(data, metadata: metadata, completion: { (metadata, error) in
+                guard let _ = metadata else {
                     completion(.failure(AppError(error: error)!))
                     dispatchGroup.leave()
                     return
                 }
-                previewUrl = "\(url)"
-                previewName = previewRef.name
-                print("Firebase saved preview \(String(describing: previewName))")
-                dispatchGroup.leave()
+                ref.downloadURL(completion: { (url, error) in
+                    guard let url = url else {
+                        completion(.failure(AppError(error: error)!))
+                        dispatchGroup.leave()
+                        return
+                    }
+                    let name = ref.name
+                    let urlString = "\(url)"
+                    let result = (name: name, urlString: urlString)
+                    completion(.success(result))
+                    print("Firebase saved file \(String(describing: name))")
+                    dispatchGroup.leave()
+                })
             })
-        })
-        
-        dispatchGroup.notify(queue: .global(), execute: {
-            completion(.success(Photo(photoUrl: photoUrl, photoName: photoName, previewUrl: previewUrl, previewName: previewName)))
-        })
     }
     
     func deletePreview(name: String) {
-        
         guard let ref = currentUserPath() else { return }
-        
         delete(imageName: name, imagePath: previewsPath, reference: ref)
     }
     
     func deletePhoto(name: String) {
-        
         guard let ref = currentUserPath() else { return }
-        
         delete(imageName: name, imagePath: photosPath, reference: ref)
     }
     
     private func delete(imageName: String, imagePath: String, reference: StorageReference) {
-        
         reference
             .child(imagePath)
             .child(imageName)
@@ -156,4 +157,5 @@ class FirebaseStorageService {
                 }
         }
     }
+    
 }

@@ -185,7 +185,8 @@ class FirebaseDatabaseService {
             if let currentValue = currentSphereMetrics.values[sphere.rawValue],
                 currentValue < maxValue {
                 let newValue = (currentValue * 10 + diffValue * 10) / 10
-                let saveResult = self?.updateSphereValue(SphereValue(sphere: sphere, value: newValue),
+                let sphereValue = SphereValue(sphere: sphere, value: newValue)
+                let saveResult = self?.updateSphereValue(sphereValue,
                                                          pathToSave: Constants.SphereMetrics.current)
                 print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
             }
@@ -222,7 +223,8 @@ class FirebaseDatabaseService {
                         currentValue > startValue {
                         
                         let newValue = (currentValue * 10 - diffValue * 10) / 10
-                        let saveResult = self?.updateSphereValue(SphereValue(sphere: sphere, value: newValue),
+                        let sphereValue = SphereValue(sphere: sphere, value: newValue)
+                        let saveResult = self?.updateSphereValue(sphereValue,
                                                                  pathToSave: Constants.SphereMetrics.current)
                         print("Decrement SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                     }
@@ -243,7 +245,7 @@ class FirebaseDatabaseService {
                 dispatchGroup.leave()
                 
             case .failure(let error):
-                print("Getting start metrics error=\(error)")
+                print("Getting sphere metrics error=\(error)")
                 dispatchGroup.leave()
             }
         })
