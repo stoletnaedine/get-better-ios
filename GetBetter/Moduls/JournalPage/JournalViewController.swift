@@ -72,6 +72,10 @@ class JournalViewController: UIViewController {
                     return
                 }
                 
+                let achievementService = AchievementService()
+                achievementService.posts = postArray
+                let _ = achievementService.getAchievements()
+                
                 let allDates = postArray.map {
                     Date.convertToMonthYear(from: $0.timestamp ?? 0)
                 }
