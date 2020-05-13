@@ -59,8 +59,6 @@ class LifeCircleController: UIViewController {
     
     @objc func loadAndShowData() {
         
-        achievements = AchievementService().getAchievements()
-        
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -88,6 +86,21 @@ class LifeCircleController: UIViewController {
                     
                 case .failure(_):
                     self?.setupSphereCompletion()
+                    dispatchGroup.leave()
+                }
+            })
+        }
+        
+        dispatchGroup.enter()
+        DispatchQueue.global().async { [weak self] in
+            self?.firebaseDatabaseService.getPosts(completion: { [weak self] result in
+                switch result {
+                case .success(let posts):
+                    let data = AchievementData()
+                    self?.achievements = data.getAchievements(from: posts)
+                    dispatchGroup.leave()
+                    
+                case .failure(_):
                     dispatchGroup.leave()
                 }
             })

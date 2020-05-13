@@ -13,7 +13,7 @@ class SetupPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
     let databaseService = FirebaseDatabaseService()
-    let achievementService = AchievementService()
+    let achievementService = AchievementData()
     
     var completion: () -> () = {}
     
