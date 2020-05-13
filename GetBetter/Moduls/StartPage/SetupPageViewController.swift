@@ -75,7 +75,7 @@ class SetupPageViewController: UIViewController {
             return
         }
         
-        achievementService.saveStartAchievements()
+        achievementService.getAchievements()
         
         if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start)
             && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.current) {

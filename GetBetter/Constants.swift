@@ -90,16 +90,6 @@ struct Constants {
         }
     }
     
-    struct Achievement {
-        struct Field {
-            static let id = "id"
-            static let icon = "icon"
-            static let title = "title"
-            static let description = "description"
-            static let unlocked = "unlocked"
-        }
-    }
-    
     struct SphereMetrics {
         static let start = "start_sphere_level"
         static let current = "current_sphere_level"
