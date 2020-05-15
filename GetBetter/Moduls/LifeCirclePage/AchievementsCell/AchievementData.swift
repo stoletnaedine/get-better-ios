@@ -11,35 +11,39 @@ import Foundation
 class AchievementData {
     
     var sphereMetrics: SphereMetrics?
-    var maxCountDaysInRow = 0
     
-    func getAchievements(from posts: [Post]) -> [Achievement] {
-        
-        calcMaxCountDaysInRow(from: posts)
+    func getAchievements(posts: [Post], startSphereMetrics: SphereMetrics, currentSphereMetrics: SphereMetrics) -> [Achievement] {
         
         let three = 3
         let five = 5
         let seven = 7
         let ten = 10
+        let maxCountDaysInRow = calcMaxCountDaysInRow(from: posts)
         
-        let regularThree = Achievement(icon: "⚡️", title: "Хороший старт", description: "Добавлять события \(three) дня подряд (\(maxCountDaysInRow)/\(three))", unlocked: isAchievementUnlocked(daysInRowCondition: three))
-        let regularFive = Achievement(icon: "🖐", title: "Дай пять!", description: "Добавлять события \(five) дней подряд (\(maxCountDaysInRow)/\(five))", unlocked: isAchievementUnlocked(daysInRowCondition: five))
-        let regularSeven = Achievement(icon: "🤘", title: "Эта неделя была ок", description: "Добавлять события \(seven) дней подряд (\(maxCountDaysInRow)/\(seven))", unlocked: isAchievementUnlocked(daysInRowCondition: seven))
-        let regularTen = Achievement(icon: "😎", title: "Более лучше стал ты", description: "Добавлять события \(ten) дней подряд (\(maxCountDaysInRow)/\(ten))", unlocked: isAchievementUnlocked(daysInRowCondition: ten))
+        let regularThree = Achievement(icon: "⚡️", title: "Хороший старт", description: "Добавлять события \(three) дня подряд (\(maxCountDaysInRow)/\(three))", unlocked: maxCountDaysInRow >= three)
+        let regularFive = Achievement(icon: "🖐", title: "Дай пять!", description: "Добавлять события \(five) дней подряд (\(maxCountDaysInRow)/\(five))", unlocked: maxCountDaysInRow >= five)
+        let regularSeven = Achievement(icon: "🤘", title: "Эта неделя была ок", description: "Добавлять события \(seven) дней подряд (\(maxCountDaysInRow)/\(seven))", unlocked: maxCountDaysInRow >= seven)
+        let regularTen = Achievement(icon: "😎", title: "Более лучше стал ты", description: "Добавлять события \(ten) дней подряд (\(maxCountDaysInRow)/\(ten))", unlocked: maxCountDaysInRow >= ten)
+        
+        let spheres = getSphereWhereUserHasMaxValue(currentSphereMetrics: currentSphereMetrics)
+        var spheresAchievements: [Achievement] = []
+        if spheres.isEmpty {
+            spheresAchievements = [Achievement(icon: "🏆", title: "Прокачано", description: "Прокачать любую Сферу до 10 баллов", unlocked: false)]
+        } else {
+            for sphere in spheres {
+                spheresAchievements.append(Achievement(icon: "🏆", title: "Прокачано: \(sphere)", description: "Отличная работа! Сфера \(sphere) прокачена до 10 баллов", unlocked: true))
+            }
+        }
         
         let plusOne = Achievement(icon: "🌠", title: "Скоростной", description: "Набрать 1 балл в любой Сфере меньше, чем за 10 дней", unlocked: false)
-        let finishTen = Achievement(icon: "🏆", title: "Прокачано", description: "Прокачать любую Сферу до 10 баллов", unlocked: false)
         let byeLooser = Achievement(icon: "👻", title: "Прощай, лузер", description: "Выйти в любой Сфере из красной зоны", unlocked: false)
         
-        return [regularThree, regularFive, regularSeven, regularTen, plusOne, finishTen, byeLooser]
+        let array = [regularThree, regularFive, regularSeven, regularTen, plusOne, byeLooser]
+        let second = array + spheresAchievements
+        return second
     }
     
-    private func isAchievementUnlocked(daysInRowCondition: Int) -> Bool {
-        return maxCountDaysInRow >= daysInRowCondition
-    }
-    
-    private func calcMaxCountDaysInRow(from posts: [Post]) {
-        if posts.isEmpty { return }
+    private func calcMaxCountDaysInRow(from posts: [Post]) -> Int {
         
         let days = posts
             .map { Date(timeIntervalSince1970: Double($0.timestamp ?? 0)) }
@@ -69,6 +73,18 @@ class AchievementData {
                 prevDay = day
             }
         }
-        maxCountDaysInRow = countDaysInRowArray.max() ?? 0
+        return countDaysInRowArray.max() ?? 0
+    }
+    
+    private func getSphereWhereUserHasMaxValue(currentSphereMetrics: SphereMetrics) -> [String] {
+        let sphereRawValues = currentSphereMetrics.values
+            .filter { $0.value == 10.0 }
+            .map { $0.key }
+        
+        if sphereRawValues.isEmpty {
+            return []
+        }
+        
+        return sphereRawValues.map { Sphere(rawValue: $0)?.name ?? "" }
     }
 }

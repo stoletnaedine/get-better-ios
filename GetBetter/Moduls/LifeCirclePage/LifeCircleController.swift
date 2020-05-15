@@ -24,6 +24,7 @@ class LifeCircleController: UIViewController {
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
+    var posts: [Post] = []
     var achievements: [Achievement] = []
     let sphereMetricsXibName = String(describing: SphereMetricsTableViewCell.self)
     let sphereMetricsReuseCellIdentifier = "SphereMetricsCell"
@@ -96,8 +97,7 @@ class LifeCircleController: UIViewController {
             self?.firebaseDatabaseService.getPosts(completion: { [weak self] result in
                 switch result {
                 case .success(let posts):
-                    let data = AchievementData()
-                    self?.achievements = data.getAchievements(from: posts)
+                    self?.posts = posts
                     dispatchGroup.leave()
                     
                 case .failure(_):
@@ -107,6 +107,15 @@ class LifeCircleController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
+            
+            if let startSphereMetrics = self?.startSphereMetrics,
+                let currentSphereMetrics = self?.currentSphereMetrics,
+                let posts = self?.posts, !posts.isEmpty {
+                self?.achievements = AchievementData().getAchievements(posts: posts,
+                                                                       startSphereMetrics: startSphereMetrics,
+                                                                       currentSphereMetrics: currentSphereMetrics)
+            }
+            
             self?.setupChartView()
             self?.metricsTableView.reloadData()
             self?.achievementsTableView.reloadData()
