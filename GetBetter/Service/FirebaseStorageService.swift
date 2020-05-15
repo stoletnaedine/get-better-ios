@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseAuth
 
-class FirebaseStorageService {
+class FirebaseStorageService: StorageService {
     
     let metadata = StorageMetadata()
     let contentType = "image/jpeg"
@@ -23,15 +23,6 @@ class FirebaseStorageService {
     let resizeWidthPhoto: CGFloat = 750
     let resizeWidthPreview: CGFloat = 150
     let resizeWidthAvatar: CGFloat = 200
-    
-    func currentUserPath() -> StorageReference? {
-        
-        guard let userId = Auth.auth().currentUser?.uid else { return nil }
-        
-        return Storage.storage().reference()
-            .child(usersPath)
-            .child(userId)
-    }
     
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
         
@@ -58,7 +49,7 @@ class FirebaseStorageService {
         })
     }
     
-    func uploadPhotoAndPreview(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
+    func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
         
         var photoName: String?
         var photoUrl: String?
@@ -110,6 +101,16 @@ class FirebaseStorageService {
         })
     }
     
+    func deletePreview(name: String) {
+        guard let ref = currentUserPath() else { return }
+        delete(imageName: name, imagePath: previewsPath, reference: ref)
+    }
+    
+    func deletePhoto(name: String) {
+        guard let ref = currentUserPath() else { return }
+        delete(imageName: name, imagePath: photosPath, reference: ref)
+    }
+    
     private func uploadPhoto(ref: StorageReference, data: Data, dispatchGroup: DispatchGroup,
                              completion: @escaping (Result<(name: String, urlString: String), AppError>) -> Void) {
         ref
@@ -135,16 +136,6 @@ class FirebaseStorageService {
             })
     }
     
-    func deletePreview(name: String) {
-        guard let ref = currentUserPath() else { return }
-        delete(imageName: name, imagePath: previewsPath, reference: ref)
-    }
-    
-    func deletePhoto(name: String) {
-        guard let ref = currentUserPath() else { return }
-        delete(imageName: name, imagePath: photosPath, reference: ref)
-    }
-    
     private func delete(imageName: String, imagePath: String, reference: StorageReference) {
         reference
             .child(imagePath)
@@ -156,6 +147,14 @@ class FirebaseStorageService {
                     print("File = \(imageName) successfully deleted")
                 }
         }
+    }
+    
+    private func currentUserPath() -> StorageReference? {
+        guard let userId = Auth.auth().currentUser?.uid else { return nil }
+        
+        return Storage.storage().reference()
+            .child(usersPath)
+            .child(userId)
     }
     
 }

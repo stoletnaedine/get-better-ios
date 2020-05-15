@@ -7,7 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol StorageService {
-    
+    func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void)
+    func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void)
+    func deletePreview(name: String)
+    func deletePhoto(name: String)
 }

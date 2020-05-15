@@ -14,7 +14,7 @@ class JournalViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let activityIndicator = UIActivityIndicatorView()
-    let firebaseDataBaseService = FirebaseDatabaseService()
+    let databaseService: DatabaseService = FirebaseDatabaseService()
     
     var sectionMonthYear: [String] = []
     var sectionPosts: [PostsDateSection] = []
@@ -58,7 +58,7 @@ class JournalViewController: UIViewController {
         
         sectionPosts = []
         
-        firebaseDataBaseService.getPosts(completion: { [weak self] result in
+        databaseService.getPosts(completion: { [weak self] result in
             switch result {
                 
             case .failure(let error):
@@ -200,7 +200,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             guard let post = getPost(by: indexPath) else { return }
             
-                if firebaseDataBaseService.deletePost(post) {
+                if databaseService.deletePost(post) {
                     self.updatePostsInTableView()
                 }
             }

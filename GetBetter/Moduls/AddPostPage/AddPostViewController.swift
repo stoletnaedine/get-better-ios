@@ -24,7 +24,8 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var photoImageView: UIImageView!
     
-    let firebaseDataBaseService = FirebaseDatabaseService()
+    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let storageService: StorageService = FirebaseStorageService()
     
     var selectedSphere: Sphere?
     let maxSymbolsCount: Int = 300
@@ -68,7 +69,7 @@ class AddPostViewController: UIViewController {
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
-            FirebaseStorageService().uploadPhotoAndPreview(photo: photo, completion: { result in
+            storageService.uploadPhoto(photo: photo, completion: { result in
                 switch result {
                 case .success(let photo):
                     print("Photo upload result=\(photo)")
@@ -86,7 +87,7 @@ class AddPostViewController: UIViewController {
             let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp,
                             photoUrl: photoResult.photoUrl, photoName: photoResult.photoName,
                             previewUrl: photoResult.previewUrl, previewName: photoResult.previewName)
-            _ = self?.firebaseDataBaseService.savePost(post)
+            _ = self?.databaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
