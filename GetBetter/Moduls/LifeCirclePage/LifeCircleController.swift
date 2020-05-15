@@ -20,7 +20,8 @@ class LifeCircleController: UIViewController {
     @IBOutlet weak var startLabel: UILabel!
     
     let refreshControl = UIRefreshControl()
-    let firebaseDatabaseService = FirebaseDatabaseService()
+    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let achievementViewModel = AchievementViewModel()
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
@@ -64,7 +65,7 @@ class LifeCircleController: UIViewController {
         
         dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.start, completion: { [weak self] result in
+            self?.databaseService.getSphereMetrics(from: Constants.SphereMetrics.start, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.startSphereMetrics = sphereMetrics
@@ -79,7 +80,7 @@ class LifeCircleController: UIViewController {
         
         dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            self?.firebaseDatabaseService.getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
+            self?.databaseService.getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.currentSphereMetrics = sphereMetrics
@@ -94,7 +95,7 @@ class LifeCircleController: UIViewController {
         
         dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            self?.firebaseDatabaseService.getPosts(completion: { [weak self] result in
+            self?.databaseService.getPosts(completion: { [weak self] result in
                 switch result {
                 case .success(let posts):
                     self?.posts = posts
@@ -110,10 +111,11 @@ class LifeCircleController: UIViewController {
             
             if let startSphereMetrics = self?.startSphereMetrics,
                 let currentSphereMetrics = self?.currentSphereMetrics,
-                let posts = self?.posts, !posts.isEmpty {
-                self?.achievements = AchievementData().getAchievements(posts: posts,
-                                                                       startSphereMetrics: startSphereMetrics,
-                                                                       currentSphereMetrics: currentSphereMetrics)
+                let posts = self?.posts, !posts.isEmpty,
+                let achievements = self?.achievementViewModel.getAchievements(posts: posts,
+                                                                              startSphereMetrics: startSphereMetrics,
+                                                                              currentSphereMetrics: currentSphereMetrics) {
+                self?.achievements = achievements
             }
             
             self?.setupChartView()

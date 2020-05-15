@@ -8,12 +8,11 @@
 
 import Foundation
 
-class AchievementData {
+class AchievementViewModel {
     
     var sphereMetrics: SphereMetrics?
     
     func getAchievements(posts: [Post], startSphereMetrics: SphereMetrics, currentSphereMetrics: SphereMetrics) -> [Achievement] {
-        
         let three = 3
         let five = 5
         let seven = 7
@@ -44,7 +43,6 @@ class AchievementData {
     }
     
     private func calcMaxCountDaysInRow(from posts: [Post]) -> Int {
-        
         let days = posts
             .map { Date(timeIntervalSince1970: Double($0.timestamp ?? 0)) }
             .map { $0.diffInDays() }

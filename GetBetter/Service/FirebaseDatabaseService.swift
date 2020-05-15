@@ -10,7 +10,7 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 
-class FirebaseDatabaseService {
+class FirebaseDatabaseService: DatabaseService {
     
     let ref = Database.database().reference()
     let storageService = FirebaseStorageService()
@@ -19,18 +19,7 @@ class FirebaseDatabaseService {
     let postsPath = "post"
     let achievemenetsPath = "achievement"
     
-    func currentUserPath() -> DatabaseReference? {
-        guard let userId = user?.uid else { return nil }
-        
-        print("Current userId = \(userId)")
-        
-        return ref
-            .child(usersPath)
-            .child(userId)
-    }
-    
     func savePost(_ post: Post) -> Bool {
-        
         guard let ref = currentUserPath() else { return false }
         
         ref
@@ -55,7 +44,6 @@ class FirebaseDatabaseService {
     }
     
     func deletePost(_ post: Post) -> Bool {
-        
         guard let ref = currentUserPath() else { return false }
         
         ref
@@ -80,7 +68,6 @@ class FirebaseDatabaseService {
     
     
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void) {
-        
         guard let ref = currentUserPath() else { return }
         
         ref
@@ -123,7 +110,6 @@ class FirebaseDatabaseService {
     }
     
     func saveSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
-        
         guard let ref = currentUserPath() else { return false }
         
         ref
@@ -134,7 +120,6 @@ class FirebaseDatabaseService {
     }
     
     func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
-        
         guard let ref = currentUserPath() else { return }
         
         ref
@@ -152,8 +137,17 @@ class FirebaseDatabaseService {
         }
     }
     
-    func updateSphereValue(_ sphereValue: SphereValue, pathToSave: String) -> Bool {
+    private func currentUserPath() -> DatabaseReference? {
+        guard let userId = user?.uid else { return nil }
         
+        print("Current userId = \(userId)")
+        
+        return ref
+            .child(usersPath)
+            .child(userId)
+    }
+    
+    private func updateSphereValue(_ sphereValue: SphereValue, pathToSave: String) -> Bool {
         guard let ref = currentUserPath() else { return false }
         guard let sphereField = sphereValue.sphere?.rawValue else { return false }
         guard let value = sphereValue.value else { return false }
@@ -165,8 +159,7 @@ class FirebaseDatabaseService {
         return true
     }
     
-    func incrementSphereValue(for sphere: Sphere) {
-        
+    private func incrementSphereValue(for sphere: Sphere) {
         var currentSphereMetrics: SphereMetrics?
         let dispatchGroup = DispatchGroup()
         
@@ -193,8 +186,7 @@ class FirebaseDatabaseService {
         })
     }
     
-    func decrementSphereValue(for sphere: Sphere) {
-        
+    private func decrementSphereValue(for sphere: Sphere) {
         var startSphereMetrics: SphereMetrics?
         let dispatchGroup = DispatchGroup()
         
@@ -236,7 +228,9 @@ class FirebaseDatabaseService {
         })
     }
     
-    private func getSphereMetrics(from path: String, dispatchGroup: DispatchGroup, completion: @escaping (SphereMetrics) -> Void) {
+    private func getSphereMetrics(from path: String,
+                                  dispatchGroup: DispatchGroup,
+                                  completion: @escaping (SphereMetrics) -> Void) {
         getSphereMetrics(from: path, completion: { result in
             
             switch result {
