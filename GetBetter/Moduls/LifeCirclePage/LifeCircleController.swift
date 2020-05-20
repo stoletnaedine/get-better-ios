@@ -40,18 +40,15 @@ class LifeCircleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        chartView.noDataText = Constants.LifeCircle.loading
-        loadAndShowData()
-        
         self.title = Constants.TabBar.lifeCircleTitle
         view.backgroundColor = .appBackground
+        chartView.noDataText = Constants.LifeCircle.loading
+        setupCircleLabels()
         setupSegmentedControl()
         setupTableViews()
         setupRefreshControl()
         
-        chartView.isHidden = false
-        metricsTableView.isHidden = true
-        achievementsTableView.isHidden = true
+        loadAndShowData()
     }
     
     func setupRefreshControl() {
@@ -125,14 +122,16 @@ class LifeCircleController: UIViewController {
         })
     }
     
-    func setupChartView() {
+    func setupCircleLabels() {
         currentLabel.text = "Текущее"
         currentLabel.font = UIFont.boldSystemFont(ofSize: 14)
         currentLabel.textColor = .lifeCircleLineCurrent
         startLabel.text = "Начальное"
         startLabel.font = UIFont.boldSystemFont(ofSize: 14)
         startLabel.textColor = .lifeCircleLineStart
-        
+    }
+    
+    func setupChartView() {
         chartView.backgroundColor = .appBackground
         chartView.webLineWidth = 2
         chartView.innerWebLineWidth = 2
@@ -203,6 +202,9 @@ class LifeCircleController: UIViewController {
     }
     
     func setupSegmentedControl() {
+        chartView.isHidden = false
+        metricsTableView.isHidden = true
+        achievementsTableView.isHidden = true
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                                                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
         segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
