@@ -112,8 +112,7 @@ class LifeCircleController: UIViewController {
                 let achievements = self?.achievementViewModel.getAchievements(posts: posts,
                                                                               startSphereMetrics: startSphereMetrics,
                                                                               currentSphereMetrics: currentSphereMetrics) {
-                let sortedAchievement = achievements.sorted(by: { $0.unlocked && !$1.unlocked })
-                self?.achievements = sortedAchievement
+                self?.achievements = achievements
             }
             
             self?.setupChartView()
