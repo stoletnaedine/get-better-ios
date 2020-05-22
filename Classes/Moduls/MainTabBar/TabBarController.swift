@@ -25,15 +25,15 @@ class TabBarController: UITabBarController {
             self?.setupSphereCompletion()
         }
         let circleViewController = UINavigationController(rootViewController: circleVC)
-        circleViewController.tabBarItem.image = UIImage(named: "circle")
+        circleViewController.tabBarItem.image = R.image.circle()
         circleViewController.tabBarItem.title = Constants.TabBar.lifeCircleTitle
         
         let journalViewController = UINavigationController(rootViewController: JournalViewController())
-        journalViewController.tabBarItem.image = UIImage(named: "journal")
+        journalViewController.tabBarItem.image = R.image.journal()
         journalViewController.tabBarItem.title = Constants.TabBar.journalTitle
 
         let settingsViewController = UINavigationController(rootViewController: SettingsViewController())
-        settingsViewController.tabBarItem.image = UIImage(named: "settings")
+        settingsViewController.tabBarItem.image = R.image.settings()
         settingsViewController.tabBarItem.title = Constants.TabBar.settingsTitle
         
         viewControllers = [circleViewController, journalViewController, settingsViewController]

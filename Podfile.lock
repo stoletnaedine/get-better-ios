@@ -70,6 +70,9 @@ PODS:
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.8)
   - QuickLayout (3.0.0)
+  - R.swift (5.2.2):
+    - R.swift.Library (~> 5.2.0)
+  - R.swift.Library (5.2.0)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - SwiftKeychainWrapper (3.4.0)
@@ -82,6 +85,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
+  - R.swift
   - SwiftEntryKit (= 1.2.3)
   - SwiftKeychainWrapper
   - Toaster
@@ -107,6 +111,8 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - QuickLayout
+    - R.swift
+    - R.swift.Library
     - SwiftEntryKit
     - SwiftKeychainWrapper
     - Toaster
@@ -131,10 +137,12 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  R.swift: 7c52cdc57a66840ffe6cbd8a823d732059d42a32
+  R.swift.Library: 5ba4f1631300caf9a4d890186930da85d540769d
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
   Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: feb9e2f5f96837469912f34be1c56a1563a43ac2
+PODFILE CHECKSUM: 9d328327d7ff5a589b097e0c9d81be3a87f892f7
 
 COCOAPODS: 1.9.1

@@ -61,17 +61,17 @@ class SettingsViewController: UIViewController {
         let aboutCircleViewController = ArticleViewController()
         aboutCircleViewController.article = Article(title: Constants.AboutCircle.title,
                                                     text: Constants.AboutCircle.description,
-                                                    image: UIImage(named: "a-deserted-beach"))
+                                                    image: R.image.beach())
         
         let aboutJournalViewController = ArticleViewController()
         aboutJournalViewController.article = Article(title: Constants.AboutJournal.title,
                                                      text: Constants.AboutJournal.description,
-                                                     image: UIImage(named: "road"))
+                                                     image: R.image.road())
         
         let aboutAppViewController = ArticleViewController()
         aboutAppViewController.article = Article(title: Constants.AboutApp.title,
                                                  text: Constants.AboutApp.description,
-                                                 image: UIImage(named: "picture-of-beach-background"))
+                                                 image: R.image.aboutApp())
         
         tableItems = [
             TableSection.profile : [SettingsCell(title: "", viewController: editProfileViewController)],

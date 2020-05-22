@@ -10,4 +10,5 @@ target 'GetBetter' do
   pod 'SwiftKeychainWrapper'
   pod 'Charts'
   pod 'SwiftEntryKit', '1.2.3'
+  pod 'R.swift'
 end
