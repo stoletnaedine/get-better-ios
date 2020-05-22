@@ -13,6 +13,7 @@ class SphereDetailViewController: UIViewController {
     
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var sphereLabel: UILabel!
+    @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
     
@@ -46,17 +47,20 @@ class SphereDetailViewController: UIViewController {
     }
 
     func fillViewController(_ sphereValue: SphereValue) {
-        sphereLabel.text = sphereValue.sphere?.name
-        if let value = sphereValue.value {
-            self.textLabel.text = "В этой сфере жизни вы прокачены на \(value) баллов."
-        }
+        guard let sphere = sphereValue.sphere else { return }
+        guard let value = sphereValue.value else { return }
+        sphereLabel.text = sphere.name
+        valueLabel.text = String(value)
+        photoImageView.image = sphere.image
+        textLabel.text = sphere.description
     }
     
     func customizeView() {
-        textLabel.font = UIFont.systemFont(ofSize: 18)
+        textLabel.font = UIFont.systemFont(ofSize: 16)
         sphereLabel.font = UIFont.boldSystemFont(ofSize: 24)
         sphereLabel.textColor = .violet
+        valueLabel.textColor = .violet
+        valueLabel.font = UIFont.systemFont(ofSize: 80)
         cancelButton.setTitle("", for: .normal)
-        photoImageView.isHidden = true
     }
 }
