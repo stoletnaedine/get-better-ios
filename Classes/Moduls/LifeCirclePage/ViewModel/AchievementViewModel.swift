@@ -14,9 +14,9 @@ class AchievementViewModel {
         let daysAchievements = getDaysAchievements(posts: posts)
         let maxValueAchievements = getMaxValueAchievements(currentSphereMetrics: currentSphereMetrics)
         let fromRedZoneAchievements = getFromRedZoneAchievements(startSphereMetrics: startSphereMetrics, currentSphereMetrics: currentSphereMetrics)
-        let plusOne = Achievement(icon: "🌠", title: "Скоростной", description: "Набрать 1 балл в любой Сфере меньше, чем за 10 дней", unlocked: false)
+        let plusOneAchievements = getPlusOneAchievements(posts: posts)
         
-        let achievements = daysAchievements + maxValueAchievements + fromRedZoneAchievements + [plusOne]
+        let achievements = daysAchievements + maxValueAchievements + fromRedZoneAchievements + plusOneAchievements
         let sortedAchievemenets = achievements.sorted(by: { $0.unlocked && !$1.unlocked })
         return sortedAchievemenets
     }
@@ -113,12 +113,48 @@ class AchievementViewModel {
         }
         
         let fromRedZoneSpheres = resultSpheres.map { Sphere(rawValue: $0)?.name ?? "" }
-        var byeLooser = Achievement(icon: "👻", title: "Прощай, лузер", description: "Выйти в любой Сфере из красной зоны", unlocked: false)
+        var byeLooser = Achievement(icon: "👻", title: "Прощай, лузер", description: "Выйти в любой сфере из красной зоны", unlocked: false)
         if !fromRedZoneSpheres.isEmpty {
             let spheresString = fromRedZoneSpheres.joined(separator: ", ")
-            byeLooser = Achievement(icon: "👻", title: "Прощай, лузер", description: "\(spheresString) теперь не в красной зоне (а вначале были)", unlocked: true)
+            byeLooser = Achievement(icon: "👻", title: "Прощай, лузер", description: "\(spheresString): теперь не в красной зоне", unlocked: true)
         }
         
         return [byeLooser]
+    }
+    
+    private func getPlusOneAchievements(posts: [Post]) -> [Achievement] {
+        let daysLimit = 5
+        let postsCountCondition = 10
+        var achievement = Achievement(icon: "🚀", title: "Rocketman", description: "Набрать 1 балл в любой сфере меньше, чем за \(daysLimit) дней", unlocked: false)
+        
+        var fastSphereNames: [String] = []
+        for sphere in Sphere.allCases {
+            let postDays = posts
+                .filter { $0.sphere == sphere }
+                .map { Date(timeIntervalSince1970: Double($0.timestamp ?? 0)) }
+                .map { $0.diffInDays() }
+                .sorted()
+            
+            let daysCount = postDays.count
+            if daysCount >= postsCountCondition {
+                var firstDayPos = 0
+                var lastDayPos = postsCountCondition - 1
+                repeat {
+                    if postDays[lastDayPos] - postDays[firstDayPos] <= postsCountCondition {
+                        fastSphereNames.append(sphere.name)
+                        break
+                    }
+                    lastDayPos += 1
+                    firstDayPos += 1
+                } while lastDayPos < daysCount
+            }
+        }
+        
+        if !fastSphereNames.isEmpty {
+            let spheresString = fastSphereNames.joined(separator: ", ")
+            achievement = Achievement(icon: "🚀", title: "Rocketman", description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней", unlocked: true)
+        }
+        
+        return [achievement]
     }
 }

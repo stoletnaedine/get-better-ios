@@ -125,7 +125,7 @@ class FirebaseDatabaseService: DatabaseService {
         ref
             .child(path)
             .observeSingleEvent(of: .value, with: { snapshot in
-                
+
                 if let value = snapshot.value as? NSDictionary {
                     let sphereMetrics = SphereMetrics(values: value as! [String : Double])
                     completion(.success(sphereMetrics))
@@ -164,7 +164,9 @@ class FirebaseDatabaseService: DatabaseService {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getSphereMetrics(from: Constants.SphereMetrics.current, dispatchGroup: dispatchGroup, completion: { sphereMetrics in
+        getSphereMetrics(from: Constants.SphereMetrics.current,
+                         dispatchGroup: dispatchGroup,
+                         completion: { sphereMetrics in
             currentSphereMetrics = sphereMetrics
         })
         
@@ -191,7 +193,9 @@ class FirebaseDatabaseService: DatabaseService {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getSphereMetrics(from: Constants.SphereMetrics.start, dispatchGroup: dispatchGroup, completion: { sphereMetrics in
+        getSphereMetrics(from: Constants.SphereMetrics.start,
+                         dispatchGroup: dispatchGroup,
+                         completion: { sphereMetrics in
             startSphereMetrics = sphereMetrics
         })
         
@@ -206,8 +210,7 @@ class FirebaseDatabaseService: DatabaseService {
                     guard let startSphereMetrics = startSphereMetrics else { return }
                     guard let startValue = startSphereMetrics.values[sphere.rawValue] else { return }
                     
-                    let newValues = sphereMetrics.values
-                    if let currentValue = newValues[sphere.rawValue],
+                    if let currentValue = sphereMetrics.values[sphere.rawValue],
                         currentValue > minValue,
                         currentValue > startValue {
                         
