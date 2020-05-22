@@ -33,7 +33,7 @@ class ArticleViewController: UIViewController {
     
     func customizeView() {
         view.backgroundColor = .lighterGray
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        titleLabel.font = UIFont(name: GlobalDefiitions.Font.mabryProRegular, size: 35)
         textLabel.font = UIFont.systemFont(ofSize: 15)
     }
 

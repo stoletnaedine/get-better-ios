@@ -14,15 +14,9 @@ struct GlobalDefiitions {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
     }
     
-//    struct LifeCircle {
-//        static let loading = "Подождите, идет загрузка"
-//        
-//        struct SegmentedControl {
-//            static let circle = "Колесо"
-//            static let metrics = "Метрики"
-//            static let achievments = "Достижения"
-//        }
-//    }
+    struct Font {
+        static let mabryProRegular = "MabryPro-Regular"
+    }
     
     struct TabBar {
         static let lifeCircleTitle = "Колесо жизни"
