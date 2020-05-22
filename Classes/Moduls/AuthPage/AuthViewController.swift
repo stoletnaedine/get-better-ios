@@ -57,7 +57,7 @@ class AuthViewController: UIViewController {
                 self?.removeActivityIndicator()
 
                 if let error = error {
-                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
                 } else {
                     let _ = KeychainHelper.saveCredentials(email: email)
                     self?.signInCompletion()
@@ -84,7 +84,7 @@ class AuthViewController: UIViewController {
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
             
             if let error = error {
-                Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
             } else {
                 self?.registerCompletion()
             }
@@ -92,26 +92,26 @@ class AuthViewController: UIViewController {
     }
     
     func customizeView() {
-        self.title = Constants.Auth.authTitleVC
+        self.title = GlobalDefiitions.Auth.authTitleVC
         
-        emailLabel.text = Constants.Auth.email
+        emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
         emailLabel.font = UIFont.systemFont(ofSize: 13)
         
         emailTextField.borderStyle = .none
-        emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
+        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
         if let email = KeychainHelper.getUserEmail() {
             emailTextField.text = email
         }
 
-        passwordLabel.text = Constants.Auth.password
+        passwordLabel.text = GlobalDefiitions.Auth.password
         passwordLabel.textColor = .gray
         passwordLabel.font = UIFont.systemFont(ofSize: 13)
         
         passwordTextField.borderStyle = .none
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword,
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword,
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                   NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
         passwordTextField.isSecureTextEntry = true
@@ -122,16 +122,16 @@ class AuthViewController: UIViewController {
         enterView.layer.cornerRadius = 5
         enterView.clipsToBounds = true
         enterButton.setTitle("", for: .normal)
-        enterLabel.text = Constants.Auth.enter.uppercased()
+        enterLabel.text = GlobalDefiitions.Auth.enter.uppercased()
         enterLabel.textColor = .white
         enterLabel.font = UIFont.systemFont(ofSize: 15)
         
-        forgotButton.setTitle(Constants.Auth.forgotPassword, for: .normal)
+        forgotButton.setTitle(GlobalDefiitions.Auth.forgotPassword, for: .normal)
         forgotButton.setTitleColor(.violet, for: .normal)
         forgotButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         forgotButton.titleLabel?.underline()
         
-        registrationButton.setTitle(Constants.Auth.register, for: .normal)
+        registrationButton.setTitle(GlobalDefiitions.Auth.register, for: .normal)
         registrationButton.setTitleColor(.violet, for: .normal)
         registrationButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         registrationButton.titleLabel?.underline()

@@ -36,7 +36,7 @@ class JournalViewController: UIViewController {
     @objc func updatePostsInTableView() {
         self.title = "Загрузка"
         getPosts { [weak self] in
-            self?.title = Constants.TabBar.journalTitle
+            self?.title = GlobalDefiitions.TabBar.journalTitle
             self?.tableView.refreshControl?.endRefreshing()
             self?.tableView.reloadData()
         }
@@ -62,7 +62,7 @@ class JournalViewController: UIViewController {
             switch result {
                 
             case .failure(let error):
-                Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
+                Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(String(describing: error.name))").show()
                 completion()
                 
             case .success(let postArray):

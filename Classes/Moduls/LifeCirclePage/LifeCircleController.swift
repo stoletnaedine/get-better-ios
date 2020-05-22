@@ -48,9 +48,9 @@ class LifeCircleController: UIViewController {
     }
     
     private func setupView() {
-        title = Constants.TabBar.lifeCircleTitle
+        title = GlobalDefiitions.TabBar.lifeCircleTitle
         view.backgroundColor = .appBackground
-        chartView.noDataText = Constants.LifeCircle.loading
+        chartView.noDataText = R.string.localizable.loading()
     }
     
     private func setupRefreshControl() {
@@ -63,7 +63,7 @@ class LifeCircleController: UIViewController {
         
         dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            self?.databaseService.getSphereMetrics(from: Constants.SphereMetrics.start, completion: { [weak self] result in
+            self?.databaseService.getSphereMetrics(from: GlobalDefiitions.SphereMetrics.start, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.startSphereMetrics = sphereMetrics
@@ -77,7 +77,7 @@ class LifeCircleController: UIViewController {
         
         dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            self?.databaseService.getSphereMetrics(from: Constants.SphereMetrics.current, completion: { [weak self] result in
+            self?.databaseService.getSphereMetrics(from: GlobalDefiitions.SphereMetrics.current, completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
                     self?.currentSphereMetrics = sphereMetrics
@@ -203,9 +203,9 @@ class LifeCircleController: UIViewController {
         achievementsTableView.isHidden = true
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                                                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.circle, forSegmentAt: 0)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.metrics, forSegmentAt: 1)
-        segmentedControl.setTitle(Constants.LifeCircle.SegmentedControl.achievments, forSegmentAt: 2)
+        segmentedControl.setTitle(R.string.localizable.circle(), forSegmentAt: 0)
+        segmentedControl.setTitle(R.string.localizable.metrics(), forSegmentAt: 1)
+        segmentedControl.setTitle(R.string.localizable.achievements(), forSegmentAt: 2)
     }
     
     @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {

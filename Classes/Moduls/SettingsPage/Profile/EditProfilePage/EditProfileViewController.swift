@@ -34,7 +34,7 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        self.title = Constants.Profile.editTitle
+        self.title = GlobalDefiitions.Profile.editTitle
         customizeBarButon()
         customizeView()
     }
@@ -65,12 +65,12 @@ class EditProfileViewController: UIViewController {
                     changeRequest.commitChanges(completion: { error in
                         if let error = error {
                             print("Firebase commit changes error = \(error.localizedDescription)")
-                            Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                            Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
                         }
                         dispatchGroup.leave()
                     })
                 case .failure(let error):
-                    Toast(text: "\(Constants.Error.firebaseError)\(String(describing: error.name))").show()
+                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(String(describing: error.name))").show()
                     dispatchGroup.leave()
                 }
             })
@@ -86,7 +86,7 @@ class EditProfileViewController: UIViewController {
             changeRequest.displayName = newName
             changeRequest.commitChanges(completion: { error in
                 if let error = error {
-                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
                 }
                 dispatchGroup.leave()
             })
@@ -99,7 +99,7 @@ class EditProfileViewController: UIViewController {
             
             user.updatePassword(to: newPassword, completion: { error in
                 if let error = error {
-                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
                 } else {
                     Toast(text: "Пароль успешно изменён").show()
                 }
@@ -118,7 +118,7 @@ class EditProfileViewController: UIViewController {
                 dispatchGroup.leave()
                 
                 if let error = error {
-                    Toast(text: "\(Constants.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
                 }
             })
         }
@@ -155,7 +155,7 @@ class EditProfileViewController: UIViewController {
     
     func customizeView() {
         avatarView.backgroundColor = .tableViewSectionColor
-        avatarButton.setTitle(Constants.Profile.loadAvatar, for: .normal)
+        avatarButton.setTitle(GlobalDefiitions.Profile.loadAvatar, for: .normal)
         avatarButton.setTitleColor(.white, for: .normal)
         avatarButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         
@@ -163,21 +163,21 @@ class EditProfileViewController: UIViewController {
             if let name = user.displayName {
                 nameTextField.text = name
             } else {
-                nameTextField.placeholder = Constants.Profile.enterName
+                nameTextField.placeholder = GlobalDefiitions.Profile.enterName
             }
             
             if let email = user.email {
                 emailTextField.text = email
             } else {
-                emailTextField.placeholder = Constants.Profile.enterEmail
+                emailTextField.placeholder = GlobalDefiitions.Profile.enterEmail
             }
         }
-        nameLabel.text = Constants.Profile.enterName
-        emailLabel.text = Constants.Profile.enterEmail
-        passwordLabel.text = Constants.Profile.enterPassword
-        passwordTextField.placeholder = Constants.Profile.enterPassword
+        nameLabel.text = GlobalDefiitions.Profile.enterName
+        emailLabel.text = GlobalDefiitions.Profile.enterEmail
+        passwordLabel.text = GlobalDefiitions.Profile.enterPassword
+        passwordTextField.placeholder = GlobalDefiitions.Profile.enterPassword
         warningLabel.font = UIFont.systemFont(ofSize: 14)
-        warningLabel.text = Constants.Profile.warning
+        warningLabel.text = GlobalDefiitions.Profile.warning
         deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
         deleteAccountButton.setTitleColor(.red, for: .normal)
         deleteAccountButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)

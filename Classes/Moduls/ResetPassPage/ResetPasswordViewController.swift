@@ -54,12 +54,12 @@ class ResetPasswordViewController: UIViewController {
     
     func customizeView() {
         self.title = "Сбросить пароль"
-        emailLabel.text = Constants.Auth.email
+        emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
         emailLabel.font = UIFont.systemFont(ofSize: 13)
         emailTextField.borderStyle = .none
         
-        emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail,
+        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
         

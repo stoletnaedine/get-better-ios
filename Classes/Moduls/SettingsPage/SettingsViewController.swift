@@ -59,18 +59,18 @@ class SettingsViewController: UIViewController {
         }
         
         let aboutCircleViewController = ArticleViewController()
-        aboutCircleViewController.article = Article(title: Constants.AboutCircle.title,
-                                                    text: Constants.AboutCircle.description,
+        aboutCircleViewController.article = Article(title: GlobalDefiitions.AboutCircle.title,
+                                                    text: GlobalDefiitions.AboutCircle.description,
                                                     image: R.image.beach())
         
         let aboutJournalViewController = ArticleViewController()
-        aboutJournalViewController.article = Article(title: Constants.AboutJournal.title,
-                                                     text: Constants.AboutJournal.description,
+        aboutJournalViewController.article = Article(title: GlobalDefiitions.AboutJournal.title,
+                                                     text: GlobalDefiitions.AboutJournal.description,
                                                      image: R.image.road())
         
         let aboutAppViewController = ArticleViewController()
-        aboutAppViewController.article = Article(title: Constants.AboutApp.title,
-                                                 text: Constants.AboutApp.description,
+        aboutAppViewController.article = Article(title: GlobalDefiitions.AboutApp.title,
+                                                 text: GlobalDefiitions.AboutApp.description,
                                                  image: R.image.aboutApp())
         
         tableItems = [

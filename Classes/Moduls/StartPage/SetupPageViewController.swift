@@ -18,7 +18,7 @@ class SetupPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Constants.SetupSphere.setupTitle
+        title = GlobalDefiitions.SetupSphere.setupTitle
 
         fillViewControllers()
         setupPageControl()
@@ -74,8 +74,8 @@ class SetupPageViewController: UIViewController {
             return
         }
         
-        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.start)
-            && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: Constants.SphereMetrics.current) {
+        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefiitions.SphereMetrics.start)
+            && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefiitions.SphereMetrics.current) {
             self.completion()
         }
     }

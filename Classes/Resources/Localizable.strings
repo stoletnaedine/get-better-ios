@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  GetBetter
+
+  Created by Artur Islamgulov on 22.05.2020.
+  Copyright © 2020 Artur Islamgulov. All rights reserved.
+*/
+
+// MARK: LifeCircle
+
+"loading" = "Подождите, идет загрузка";
+"circle" = "Колесо";
+"metrics" = "Метрики";
+"achievements" = "Достижения";

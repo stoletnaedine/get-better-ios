@@ -15,13 +15,13 @@ class FormValidator {
         
         switch true {
         case email.isEmpty:
-            Toast(text: Constants.RegisterValidate.emailIsEmpty).show()
+            Toast(text: GlobalDefiitions.RegisterValidate.emailIsEmpty).show()
             return false
         case !email.contains("@"):
-            Toast(text: Constants.RegisterValidate.emailIsNotValid).show()
+            Toast(text: GlobalDefiitions.RegisterValidate.emailIsNotValid).show()
             return false
         case password.isEmpty:
-            Toast(text: Constants.RegisterValidate.passwordIsEmpty).show()
+            Toast(text: GlobalDefiitions.RegisterValidate.passwordIsEmpty).show()
             return false
         default:
             return true

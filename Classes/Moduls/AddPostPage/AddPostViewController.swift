@@ -34,7 +34,7 @@ class AddPostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = Constants.Post.postTitle
+        self.title = GlobalDefiitions.Post.postTitle
         self.hideKeyboardWhenTappedAround()
         registerTapForSelectedSphereLabel()
         customizeView()
@@ -91,7 +91,7 @@ class AddPostViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
-                Toast(text: "\(Constants.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
+                Toast(text: "\(GlobalDefiitions.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)
             }
@@ -125,7 +125,7 @@ class AddPostViewController: UIViewController {
         titleLabel.textColor = .violet
         titleLabel.text = "Добавить запись"
         selectedSphereLabel.textColor = .violet
-        selectedSphereLabel.text = Constants.Post.sphereDefault
+        selectedSphereLabel.text = GlobalDefiitions.Post.sphereDefault
         selectedSphereLabel.font = UIFont.boldSystemFont(ofSize: 18)
         saveButtonView.backgroundColor = .gray
         saveButtonView.layer.cornerRadius = 20

@@ -26,13 +26,13 @@ class FirebaseDatabaseService: DatabaseService {
             .child(postsPath)
             .childByAutoId()
             .setValue([
-                Constants.Post.Field.text: post.text ?? "" as Any,
-                Constants.Post.Field.sphere: post.sphere?.rawValue ?? "",
-                Constants.Post.Field.timestamp: post.timestamp ?? "",
-                Constants.Post.Field.photoUrl: post.photoUrl ?? "",
-                Constants.Post.Field.photoName: post.photoName ?? "",
-                Constants.Post.Field.previewUrl: post.previewUrl ?? "",
-                Constants.Post.Field.previewName: post.previewName ?? ""
+                GlobalDefiitions.Post.Field.text: post.text ?? "" as Any,
+                GlobalDefiitions.Post.Field.sphere: post.sphere?.rawValue ?? "",
+                GlobalDefiitions.Post.Field.timestamp: post.timestamp ?? "",
+                GlobalDefiitions.Post.Field.photoUrl: post.photoUrl ?? "",
+                GlobalDefiitions.Post.Field.photoName: post.photoName ?? "",
+                GlobalDefiitions.Post.Field.previewUrl: post.previewUrl ?? "",
+                GlobalDefiitions.Post.Field.previewName: post.previewName ?? ""
             ])
         
         print("Firebase saved post \(post)")
@@ -84,19 +84,19 @@ class FirebaseDatabaseService: DatabaseService {
                         let entity = value?[id] as? NSDictionary
                         
                         var maybeSphere: Sphere?
-                        if let sphereRawValue = entity?[Constants.Post.Field.sphere] as? String,
+                        if let sphereRawValue = entity?[GlobalDefiitions.Post.Field.sphere] as? String,
                             let sphere = Sphere(rawValue: sphereRawValue) {
                              maybeSphere = sphere
                         }
                         
                         let post = Post(id: id as? String ?? "",
-                                        text: entity?[Constants.Post.Field.text] as? String ?? Constants.Error.loadingError,
+                                        text: entity?[GlobalDefiitions.Post.Field.text] as? String ?? GlobalDefiitions.Error.loadingError,
                                         sphere: maybeSphere,
-                                        timestamp: entity?[Constants.Post.Field.timestamp] as? Int64 ?? 0,
-                                        photoUrl: entity?[Constants.Post.Field.photoUrl] as? String ?? "",
-                                        photoName: entity?[Constants.Post.Field.photoName] as? String ?? "",
-                                        previewUrl: entity?[Constants.Post.Field.previewUrl] as? String ?? "",
-                                        previewName: entity?[Constants.Post.Field.previewName] as? String ?? "")
+                                        timestamp: entity?[GlobalDefiitions.Post.Field.timestamp] as? Int64 ?? 0,
+                                        photoUrl: entity?[GlobalDefiitions.Post.Field.photoUrl] as? String ?? "",
+                                        photoName: entity?[GlobalDefiitions.Post.Field.photoName] as? String ?? "",
+                                        previewUrl: entity?[GlobalDefiitions.Post.Field.previewUrl] as? String ?? "",
+                                        previewName: entity?[GlobalDefiitions.Post.Field.previewName] as? String ?? "")
                         
                         postArray.append(post)
                     }
@@ -164,7 +164,7 @@ class FirebaseDatabaseService: DatabaseService {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getSphereMetrics(from: Constants.SphereMetrics.current,
+        getSphereMetrics(from: GlobalDefiitions.SphereMetrics.current,
                          dispatchGroup: dispatchGroup,
                          completion: { sphereMetrics in
             currentSphereMetrics = sphereMetrics
@@ -182,7 +182,7 @@ class FirebaseDatabaseService: DatabaseService {
                 let newValue = (currentValue * 10 + diffValue * 10) / 10
                 let sphereValue = SphereValue(sphere: sphere, value: newValue)
                 let saveResult = self?.updateSphereValue(sphereValue,
-                                                         pathToSave: Constants.SphereMetrics.current)
+                                                         pathToSave: GlobalDefiitions.SphereMetrics.current)
                 print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
             }
         })
@@ -193,14 +193,14 @@ class FirebaseDatabaseService: DatabaseService {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getSphereMetrics(from: Constants.SphereMetrics.start,
+        getSphereMetrics(from: GlobalDefiitions.SphereMetrics.start,
                          dispatchGroup: dispatchGroup,
                          completion: { sphereMetrics in
             startSphereMetrics = sphereMetrics
         })
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            self?.getSphereMetrics(from: Constants.SphereMetrics.current, completion: { result in
+            self?.getSphereMetrics(from: GlobalDefiitions.SphereMetrics.current, completion: { result in
                 
                 let diffValue = 0.1
                 let minValue = 0.0
@@ -217,7 +217,7 @@ class FirebaseDatabaseService: DatabaseService {
                         let newValue = (currentValue * 10 - diffValue * 10) / 10
                         let sphereValue = SphereValue(sphere: sphere, value: newValue)
                         let saveResult = self?.updateSphereValue(sphereValue,
-                                                                 pathToSave: Constants.SphereMetrics.current)
+                                                                 pathToSave: GlobalDefiitions.SphereMetrics.current)
                         print("Decrement SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                     }
                 case .failure(let error):

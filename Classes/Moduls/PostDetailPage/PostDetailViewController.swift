@@ -47,7 +47,7 @@ class PostDetailViewController: UIViewController {
     }
 
     func fillViewController(_ post: Post) {
-        self.title = post.text ?? Constants.Post.titleDefault
+        self.title = post.text ?? GlobalDefiitions.Post.titleDefault
         self.textLabel.text = post.text ?? ""
         self.sphereLabel.text = post.sphere?.name ?? ""
         self.dateLabel.text = ""

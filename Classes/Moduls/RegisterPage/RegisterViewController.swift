@@ -60,28 +60,28 @@ class RegisterViewController: UIViewController {
     }
     
     func customizeView() {
-        self.title = Constants.Auth.register
-        emailLabel.text = Constants.Auth.email
+        self.title = GlobalDefiitions.Auth.register
+        emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
         emailLabel.font = UIFont.systemFont(ofSize: 13)
         emailTextField.borderStyle = .none
         
         let stringAttributes = [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
         
-        emailTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterEmail, attributes: stringAttributes)
+        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail, attributes: stringAttributes)
         
         passwordLabel.textColor = .gray
         passwordLabel.font = UIFont.systemFont(ofSize: 13)
-        passwordLabel.text = Constants.Auth.password
+        passwordLabel.text = GlobalDefiitions.Auth.password
         
         passwordTextField.borderStyle = .none
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: Constants.Auth.enterPassword, attributes: stringAttributes)
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword, attributes: stringAttributes)
         
         registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
         registerButton.clipsToBounds = true
         registerButton.setTitle("", for: .normal)
-        registerButtonLabel.text = Constants.Auth.doRegister.uppercased()
+        registerButtonLabel.text = GlobalDefiitions.Auth.doRegister.uppercased()
         registerButtonLabel.textColor = .white
         registerButtonLabel.font = UIFont.systemFont(ofSize: 15)
         cancelButton.setTitle("", for: .normal)

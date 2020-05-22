@@ -8,21 +8,21 @@
 
 import Foundation
 
-struct Constants {
+struct GlobalDefiitions {
     
     struct Keychain {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
     }
     
-    struct LifeCircle {
-        static let loading = "Подождите, идет загрузка"
-        
-        struct SegmentedControl {
-            static let circle = "Колесо"
-            static let metrics = "Метрики"
-            static let achievments = "Достижения"
-        }
-    }
+//    struct LifeCircle {
+//        static let loading = "Подождите, идет загрузка"
+//        
+//        struct SegmentedControl {
+//            static let circle = "Колесо"
+//            static let metrics = "Метрики"
+//            static let achievments = "Достижения"
+//        }
+//    }
     
     struct TabBar {
         static let lifeCircleTitle = "Колесо жизни"
