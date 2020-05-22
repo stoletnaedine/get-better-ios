@@ -79,13 +79,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = GetBetter/Moduls/LifeCirclePage/AchievementsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = Classes/Moduls/LifeCirclePage/AchievementsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewCell.swift; sourceTree = "<group>"; };
 		6E045E9A24640A6A0001E378 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
-		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = GetBetter/Moduls/ResetPassPage/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
-		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = GetBetter/Moduls/ResetPassPage/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = Classes/Moduls/ResetPassPage/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
+		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = Classes/Moduls/ResetPassPage/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
 		6E6A21792466C6FB00D8AC68 /* Atricle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atricle.swift; sourceTree = "<group>"; };
 		6E7071F2245C474D00ED7D08 /* SphereValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereValue.swift; sourceTree = "<group>"; };
 		6E711E87246857720068FD8C /* SphereDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SphereDetailViewController.xib; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		9277D37B238C725200B3AECA = {
 			isa = PBXGroup;
 			children = (
-				9277D386238C725200B3AECA /* GetBetter */,
+				9277D386238C725200B3AECA /* Classes */,
 				9277D385238C725200B3AECA /* Products */,
 				A6B2429419AF3A5996472DBD /* Pods */,
 				CD58C7CE61B72210D8D8F88B /* Frameworks */,
@@ -229,7 +229,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9277D386238C725200B3AECA /* GetBetter */ = {
+		9277D386238C725200B3AECA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				9277D387238C725200B3AECA /* AppDelegate.swift */,
@@ -246,7 +246,7 @@
 				C35EBD92244DE870004593CC /* GoogleService-Info.plist */,
 				9277D393238C725300B3AECA /* Info.plist */,
 			);
-			path = GetBetter;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		A6B2429419AF3A5996472DBD /* Pods */ = {
@@ -331,7 +331,7 @@
 		C3724EC423AFABD000D49AD6 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
-				C36D8453239BF322004FEFD5 /* TabBarController.swift */,
+				C3BFEBC12477A291000B5B41 /* MainTabBar */,
 				C39A321C2457109A005D2EDF /* SettingsPage */,
 				C33AD1D9245191A500A08006 /* StartPage */,
 				C39423D524404E6F0060CF50 /* AuthPage */,
@@ -440,6 +440,14 @@
 				C31FF97A2452CCA400642C7B /* ArticleViewController.xib */,
 			);
 			path = ArticlePage;
+			sourceTree = "<group>";
+		};
+		C3BFEBC12477A291000B5B41 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				C36D8453239BF322004FEFD5 /* TabBarController.swift */,
+			);
+			path = MainTabBar;
 			sourceTree = "<group>";
 		};
 		C3C66AEF24582B2900D3964D /* ProfileCell */ = {
@@ -798,7 +806,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
-				INFOPLIST_FILE = "$(SRCROOT)/GetBetter/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -820,7 +828,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
-				INFOPLIST_FILE = "$(SRCROOT)/GetBetter/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Classes/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

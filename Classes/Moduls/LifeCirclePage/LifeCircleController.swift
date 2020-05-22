@@ -40,14 +40,12 @@ class LifeCircleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = Constants.TabBar.lifeCircleTitle
         view.backgroundColor = .appBackground
         chartView.noDataText = Constants.LifeCircle.loading
         setupCircleLabels()
         setupSegmentedControl()
         setupTableViews()
         setupRefreshControl()
-        
         loadAndShowData()
     }
     
@@ -57,7 +55,6 @@ class LifeCircleController: UIViewController {
     }
     
     @objc func loadAndShowData() {
-        
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -67,7 +64,6 @@ class LifeCircleController: UIViewController {
                 case .success(let sphereMetrics):
                     self?.startSphereMetrics = sphereMetrics
                     dispatchGroup.leave()
-                    
                 case .failure(_):
                     self?.setupSphereCompletion()
                     dispatchGroup.leave()
@@ -82,7 +78,6 @@ class LifeCircleController: UIViewController {
                 case .success(let sphereMetrics):
                     self?.currentSphereMetrics = sphereMetrics
                     dispatchGroup.leave()
-                    
                 case .failure(_):
                     self?.setupSphereCompletion()
                     dispatchGroup.leave()
@@ -97,7 +92,6 @@ class LifeCircleController: UIViewController {
                 case .success(let posts):
                     self?.posts = posts
                     dispatchGroup.leave()
-                    
                 case .failure(_):
                     dispatchGroup.leave()
                 }
@@ -105,7 +99,6 @@ class LifeCircleController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
-            
             if let startSphereMetrics = self?.startSphereMetrics,
                 let currentSphereMetrics = self?.currentSphereMetrics,
                 let posts = self?.posts, !posts.isEmpty,
@@ -114,7 +107,6 @@ class LifeCircleController: UIViewController {
                                                                               currentSphereMetrics: currentSphereMetrics) {
                 self?.achievements = achievements
             }
-            
             self?.setupChartView()
             self?.metricsTableView.reloadData()
             self?.achievementsTableView.reloadData()
