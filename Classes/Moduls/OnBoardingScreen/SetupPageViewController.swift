@@ -47,10 +47,16 @@ class SetupPageViewController: UIViewController {
     }
     
     func setupBarButton() {
-        let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSphereValues))
+        let saveBarButton = UIBarButtonItem(title: "Сохранить",
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(saveSphereValues))
         navigationItem.rightBarButtonItem = saveBarButton
         
-        let exitBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(exit))
+        let exitBarButton = UIBarButtonItem(title: "Выйти",
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(exit))
         navigationItem.leftBarButtonItem = exitBarButton
     }
     

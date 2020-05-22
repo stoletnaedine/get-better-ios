@@ -14,6 +14,7 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var sphereNameLabel: UILabel!
     @IBOutlet weak var sphereDescriptionLabel: UILabel!
     @IBOutlet weak var valueForSphereLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     var sphereValue: Double? = GlobalDefiitions.SetupSphere.notValidValue
     var sphere: Sphere?
@@ -44,6 +45,7 @@ class SetupSphereValueViewController: UIViewController {
     func fillView(from sphere: Sphere) {
         self.sphereNameLabel.text = sphere.name
         self.sphereDescriptionLabel.text = sphere.description
+        self.imageView.image = sphere.image
     }
     
     func registerTapForSelectedSphereLabel() {
@@ -68,8 +70,10 @@ class SetupSphereValueViewController: UIViewController {
         questionLabel.text = GlobalDefiitions.SetupSphere.question
         questionLabel.font = UIFont.systemFont(ofSize: 16)
         sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        sphereNameLabel.textColor = .violet
         sphereDescriptionLabel.font = UIFont.systemFont(ofSize: 16)
         valueForSphereLabel.font = UIFont.systemFont(ofSize: 60)
+        valueForSphereLabel.textColor = .violet
         valueForSphereLabel.text = "0"
     }
 }

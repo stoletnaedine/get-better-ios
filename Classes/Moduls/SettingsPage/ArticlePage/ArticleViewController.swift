@@ -32,7 +32,7 @@ class ArticleViewController: UIViewController {
     }
     
     func customizeView() {
-        titleLabel.font = UIFont(name: GlobalDefiitions.Font.mabryProRegular, size: 30)
+        titleLabel.font = UIFont(name: GlobalDefiitions.Font.mabryProRegular, size: 30) // TODO можно ли юзать шрифт?
         textLabel.font = UIFont.systemFont(ofSize: 15)
     }
 

@@ -20,7 +20,7 @@ class WelcomeViewController: UIViewController {
     }
 
     func setupView() {
-        view.backgroundColor = .lightGray
+        imageView.image = R.image.welcomeSetup()
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
         titleLabel.text = GlobalDefiitions.Welcome.title
         descriptionLabel.font = UIFont.systemFont(ofSize: 15)

@@ -64,6 +64,21 @@ enum Sphere: String, CaseIterable {
         return Sphere.iconMapper[self]!
     }
     
+    static let imageMapper: [Sphere: UIImage?] = [
+        .relations: R.image.sphereRelations(),
+        .health: R.image.sphereHealth(),
+        .environment: R.image.sphereEnvironment(),
+        .finance: R.image.sphereFinance(),
+        .work: R.image.sphereWork(),
+        .relax: R.image.sphereRelax(),
+        .creation: R.image.sphereCreation(),
+        .spirit: R.image.sphereSpirit()
+    ]
+    
+    var image: UIImage? {
+        return Sphere.imageMapper[self]!
+    }
+    
     static let colorMapper: [Sphere: UIColor] = [
         .relations: #colorLiteral(red: 1, green: 0.7960784314, blue: 0.7960784314, alpha: 1),
         .health: #colorLiteral(red: 0.7137254902, green: 0.9450980392, blue: 1, alpha: 1),
