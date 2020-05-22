@@ -40,10 +40,15 @@ class SetupPageViewController: UIViewController {
         let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.delegate = self
         
+        let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
+        appearance.pageIndicatorTintColor = .thirtyGray
+        appearance.currentPageIndicatorTintColor = .violet
+        
         pageViewController.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         pageViewController.dataSource = self
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
+        view.backgroundColor = .lighterGray
     }
     
     func setupBarButton() {

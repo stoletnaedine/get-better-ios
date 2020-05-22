@@ -91,7 +91,7 @@ struct GlobalDefiitions {
     
     struct SetupSphere {
         static let question = "На сколько баллов (0-10) вы удовлетворены этой сферой в своей жизни?"
-        static let setupTitle = "Welcome"
+        static let setupTitle = "Привет"
         static let notValidValue = -1.0
     }
     

@@ -68,7 +68,6 @@
 		C3BFEBC52477E85F000B5B41 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* SettingsViewModel.swift */; };
 		C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC72477F5A3000B5B41 /* R.generated.swift */; };
 		C3BFEBCC2477F93E000B5B41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3BFEBCB2477F93E000B5B41 /* Localizable.strings */; };
-		C3BFEBD024780FC6000B5B41 /* Mabry Pro.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3BFEBCF24780FC6000B5B41 /* Mabry Pro.otf */; };
 		C3C66AF224582B5000D3964D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */; };
 		C3C66AF324582B5000D3964D /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */; };
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
@@ -148,7 +147,6 @@
 		C3BFEBC42477E85F000B5B41 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		C3BFEBC72477F5A3000B5B41 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C3BFEBCB2477F93E000B5B41 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		C3BFEBCF24780FC6000B5B41 /* Mabry Pro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mabry Pro.otf"; sourceTree = "<group>"; };
 		C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
@@ -468,7 +466,6 @@
 		C3BFEBC92477F8F3000B5B41 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C3BFEBCE24780E5F000B5B41 /* Fonts */,
 				9277D38E238C725300B3AECA /* Assets.xcassets */,
 				9277D390238C725300B3AECA /* LaunchScreen.storyboard */,
 				C35EBD92244DE870004593CC /* GoogleService-Info.plist */,
@@ -476,14 +473,6 @@
 				C3BFEBCB2477F93E000B5B41 /* Localizable.strings */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		C3BFEBCE24780E5F000B5B41 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				C3BFEBCF24780FC6000B5B41 /* Mabry Pro.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		C3C66AEF24582B2900D3964D /* ProfileCell */ = {
@@ -584,7 +573,6 @@
 			files = (
 				6E711E88246857720068FD8C /* SphereDetailViewController.xib in Resources */,
 				6E5AE64424601DBC00418B23 /* ResetPasswordViewController.xib in Resources */,
-				C3BFEBD024780FC6000B5B41 /* Mabry Pro.otf in Resources */,
 				C3087ADB245AD36C00DDE7A7 /* SphereMetricsTableViewCell.xib in Resources */,
 				9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */,
 				C328EE062447294100445704 /* RegisterViewController.xib in Resources */,
