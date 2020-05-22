@@ -40,18 +40,18 @@ class AddPostViewController: UIViewController {
         customizeView()
     }
     
-    @IBAction func cancelButtonDidTapped(_ sender: UIButton) {
+    @IBAction func cancelButtonDidTap(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func attachButtonDidTapped(_ sender: UIButton) {
+    @IBAction func attachButtonDidTap(_ sender: UIButton) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary // TODO уточнить, может .savedPhotosAlbum
+        imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    @IBAction func saveButtonDidTapped(_ sender: UIButton) {
+    @IBAction func saveButtonDidTap(_ sender: UIButton) {
         guard let text = postTextView.text, !text.isEmpty else {
             Toast(text: "Поле текста пустое", delay: 0, duration: 0.3).show()
             return

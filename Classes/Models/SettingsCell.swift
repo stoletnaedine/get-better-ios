@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 struct SettingsCell {
-    let title: String?
-    let viewController: UIViewController?
+    let title: String
+    let viewController: UIViewController
+}
+
+enum TableSection: Int {
+    case profile = 0, articles, settings
 }

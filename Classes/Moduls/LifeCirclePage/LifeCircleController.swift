@@ -39,9 +39,7 @@ class LifeCircleController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .appBackground
-        chartView.noDataText = Constants.LifeCircle.loading
+        setupView()
         setupCircleLabels()
         setupSegmentedControl()
         setupTableViews()
@@ -49,7 +47,13 @@ class LifeCircleController: UIViewController {
         loadAndShowData()
     }
     
-    func setupRefreshControl() {
+    private func setupView() {
+        title = Constants.TabBar.lifeCircleTitle
+        view.backgroundColor = .appBackground
+        chartView.noDataText = Constants.LifeCircle.loading
+    }
+    
+    private func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(loadAndShowData), for: .valueChanged)
         metricsTableView.addSubview(refreshControl)
     }

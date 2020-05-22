@@ -79,7 +79,7 @@ class AuthViewController: UIViewController {
         present(registerViewController, animated: true, completion: nil)
     }
     
-    @IBAction func anonymRegisterButtonDidTapped(_ sender: UIButton) {
+    @IBAction func anonymousRegisterButtonDidTap(_ sender: UIButton) {
         
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
             

@@ -39,7 +39,7 @@ class EditProfileViewController: UIViewController {
         customizeView()
     }
 
-    @IBAction func avatarButtonDidTapped(_ sender: UIButton) {
+    @IBAction func avatarButtonDidTap(_ sender: UIButton) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
@@ -130,10 +130,12 @@ class EditProfileViewController: UIViewController {
         })
     }
     
-    @IBAction func deleteAccountButtonDidTapped(_ sender: UIButton) {
+    @IBAction func deleteAccountButtonDidTap(_ sender: UIButton) {
         guard let user = user else { return }
     
-        let alert = UIAlertController(title: "Удалить аккаунт?", message: "Ваш аккаунт и все связанные с ним данные будут безвозвратно удалены", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Удалить аккаунт?",
+                                      message: "Ваш аккаунт и все связанные с ним данные будут безвозвратно удалены",
+                                      preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Да, удалить", style: .destructive, handler: { _ in
             user.delete(completion: { error in

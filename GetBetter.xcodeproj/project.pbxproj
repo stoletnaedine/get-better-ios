@@ -65,6 +65,7 @@
 		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
 		C3B4760324596BAD0067A3C0 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsCell.swift */; };
 		C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760424596BCB0067A3C0 /* Profile.swift */; };
+		C3BFEBC52477E85F000B5B41 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* SettingsViewModel.swift */; };
 		C3C66AF224582B5000D3964D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */; };
 		C3C66AF324582B5000D3964D /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */; };
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
@@ -141,6 +142,7 @@
 		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C3B4760224596BAD0067A3C0 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		C3B4760424596BCB0067A3C0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		C3BFEBC42477E85F000B5B41 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		C39A321C2457109A005D2EDF /* SettingsPage */ = {
 			isa = PBXGroup;
 			children = (
+				C3BFEBC32477E844000B5B41 /* ViewModel */,
 				C39A321D245710BC005D2EDF /* SettingsViewController.swift */,
 				C39A321E245710BC005D2EDF /* SettingsViewController.xib */,
 				C3A10078245859CB00E2D579 /* Profile */,
@@ -448,6 +451,14 @@
 				C36D8453239BF322004FEFD5 /* TabBarController.swift */,
 			);
 			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		C3BFEBC32477E844000B5B41 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C3BFEBC42477E85F000B5B41 /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C3C66AEF24582B2900D3964D /* ProfileCell */ = {
@@ -644,6 +655,7 @@
 				C3087ADA245AD36C00DDE7A7 /* SphereMetricsTableViewCell.swift in Sources */,
 				6E045E9B24640A6B0001E378 /* Achievement.swift in Sources */,
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
+				C3BFEBC52477E85F000B5B41 /* SettingsViewModel.swift in Sources */,
 				C33AD1DF2451AE9B00A08006 /* SetupPageViewController.swift in Sources */,
 				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
 				6E6A217A2466C6FB00D8AC68 /* Atricle.swift in Sources */,

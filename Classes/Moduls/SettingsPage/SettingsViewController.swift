@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import Firebase
 
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let viewModel = SettingsViewModel()
     var profile: Profile?
     
     let SectionHeaderHeight: CGFloat = 35
@@ -24,11 +24,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Настройки"
-        
-        tableView.backgroundColor = .appBackground
-        tableView.separatorInset = UIEdgeInsets.zero
-        
+        setupView()
         registerTableCell()
         fillTableItems()
         customizeBarButton()
@@ -37,68 +33,53 @@ class SettingsViewController: UIViewController {
     }
     
     @objc func loadProfileAndReloadTableView() {
-        loadProfileInfo(completion: { [weak self] profile in
+        viewModel.loadProfileInfo(completion: { [weak self] profile in
             self?.profile = profile
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
         })
     }
     
-    func registerTableCell() {
+    private func setupView() {
+        title = "Настройки"
+        tableView.backgroundColor = .appBackground
+        tableView.separatorInset = UIEdgeInsets.zero
+    }
+    
+    private func registerTableCell() {
         tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
     
-    func fillTableItems() {
-        
+    private func fillTableItems() {
         let editProfileViewController = EditProfileViewController()
         editProfileViewController.completion = { [weak self] in
             self?.loadProfileAndReloadTableView()
         }
         
         let aboutCircleViewController = ArticleViewController()
-        aboutCircleViewController.article = Article(title: Constants.AboutCircle.title, text: Constants.AboutCircle.description, image: UIImage(named: "a-deserted-beach"))
+        aboutCircleViewController.article = Article(title: Constants.AboutCircle.title,
+                                                    text: Constants.AboutCircle.description,
+                                                    image: UIImage(named: "a-deserted-beach"))
         
         let aboutJournalViewController = ArticleViewController()
-        aboutJournalViewController.article = Article(title: Constants.AboutJournal.title, text: Constants.AboutJournal.description, image: UIImage(named: "road"))
+        aboutJournalViewController.article = Article(title: Constants.AboutJournal.title,
+                                                     text: Constants.AboutJournal.description,
+                                                     image: UIImage(named: "road"))
         
         let aboutAppViewController = ArticleViewController()
-        aboutAppViewController.article = Article(title: Constants.AboutApp.title, text: Constants.AboutApp.description, image: UIImage(named: "picture-of-beach-background"))
+        aboutAppViewController.article = Article(title: Constants.AboutApp.title,
+                                                 text: Constants.AboutApp.description,
+                                                 image: UIImage(named: "picture-of-beach-background"))
         
         tableItems = [
-            TableSection.profile : [SettingsCell(title: nil, viewController: editProfileViewController)],
+            TableSection.profile : [SettingsCell(title: "", viewController: editProfileViewController)],
             TableSection.articles : [
                 SettingsCell(title: "Колесо Жизненного Баланса", viewController: aboutCircleViewController),
                 SettingsCell(title: "Зачем нужны События?", viewController: aboutJournalViewController),
                 SettingsCell(title: "О приложении", viewController: aboutAppViewController)]
         ]
-    }
-    
-    func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
-        
-        guard let user = Auth.auth().currentUser else { return }
-        
-        DispatchQueue.global().async {
-            var name = "Анонимный пользователь"
-            var email = "Email не указан"
-            var avatar: UIImage?
-            
-            if let userName = user.displayName {
-                name = userName
-            }
-            if let userEmail = user.email {
-                email = userEmail
-            }
-            if let photoURL = user.photoURL,
-                let imageData = try? Data(contentsOf: photoURL),
-                let loadedAvatar = UIImage(data: imageData) {
-                avatar = loadedAvatar
-            }
-            DispatchQueue.main.async {
-                completion(Profile(avatar: avatar, name: name, email: email))
-            }
-        }
     }
     
     func setupRefreshControl() {
@@ -114,10 +95,6 @@ class SettingsViewController: UIViewController {
     @objc func logout() {
         NotificationCenter.default.post(name: .logout, object: nil)
     }
-}
-
-enum TableSection: Int {
-    case profile = 0, articles, settings
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -173,7 +150,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let items = tableItems else { return }
         guard let tableSection = TableSection(rawValue: indexPath.section) else { return }
         guard let viewControllers = items[tableSection] else { return }
-        guard let viewController = viewControllers[indexPath.row].viewController else { return }
+        let viewController = viewControllers[indexPath.row].viewController
         navigationController?.pushViewController(viewController, animated: true)
     }
     
