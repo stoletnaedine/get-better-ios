@@ -196,7 +196,6 @@ class FirebaseDatabaseService: DatabaseService {
         })
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            
             self?.getSphereMetrics(from: Constants.SphereMetrics.current, completion: { result in
                 
                 let diffValue = 0.1
@@ -204,12 +203,10 @@ class FirebaseDatabaseService: DatabaseService {
                                 
                 switch result {
                 case .success(let sphereMetrics):
-                    
-                    var newValues = sphereMetrics.values
-                    
                     guard let startSphereMetrics = startSphereMetrics else { return }
                     guard let startValue = startSphereMetrics.values[sphere.rawValue] else { return }
                     
+                    let newValues = sphereMetrics.values
                     if let currentValue = newValues[sphere.rawValue],
                         currentValue > minValue,
                         currentValue > startValue {
@@ -220,7 +217,6 @@ class FirebaseDatabaseService: DatabaseService {
                                                                  pathToSave: Constants.SphereMetrics.current)
                         print("Decrement SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                     }
-                    
                 case .failure(let error):
                     print("Decrement SphereValue error=\(error)")
                 }
@@ -237,7 +233,7 @@ class FirebaseDatabaseService: DatabaseService {
             case .success(let sphereMetrics):
                 completion(sphereMetrics)
                 dispatchGroup.leave()
-                
+
             case .failure(let error):
                 print("Getting sphere metrics error=\(error)")
                 dispatchGroup.leave()

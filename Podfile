@@ -7,6 +7,7 @@ target 'GetBetter' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'IQKeyboardManagerSwift'
-  pod 'SwiftKeychainWrapper', '~>3.0.1'
-  pod 'Charts', '~>3.3.0'
+  pod 'SwiftKeychainWrapper'
+  pod 'Charts'
+  pod 'SwiftEntryKit', '1.2.3'
 end
