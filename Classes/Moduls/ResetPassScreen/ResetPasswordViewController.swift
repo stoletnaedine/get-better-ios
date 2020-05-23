@@ -19,6 +19,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var resetPasswordButtonLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var cancelImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,5 +74,7 @@ class ResetPasswordViewController: UIViewController {
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
         descriptionLabel.text = "На указанный email придёт ссылка, пройдя по которой вы сможете изменить пароль."
         cancelButton.setTitle("", for: .normal)
+        cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
+        cancelImageView.tintColor = .violet
     }
 }

@@ -15,6 +15,7 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var cancelImageView: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
     
     var post: Post?
@@ -89,5 +90,7 @@ class PostDetailViewController: UIViewController {
         dateLabel.textColor = .gray
         cancelButton.setTitle("", for: .normal)
         photoImageView.alpha = 0.15
+        cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
+        cancelImageView.tintColor = .violet
     }
 }

@@ -20,6 +20,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var registerButtonLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var cancelImageView: UIImageView!
     
     var completion: () -> () = {}
     
@@ -85,5 +86,7 @@ class RegisterViewController: UIViewController {
         registerButtonLabel.textColor = .white
         registerButtonLabel.font = UIFont.systemFont(ofSize: 15)
         cancelButton.setTitle("", for: .normal)
+        cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
+        cancelImageView.tintColor = .violet
     }
 }

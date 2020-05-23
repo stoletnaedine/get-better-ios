@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -9,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="M18-Zq-MPI" id="VSJ-VK-1r5"/>
+                <outlet property="cancelImageView" destination="I1B-ZA-et8" id="fYz-ZN-xfU"/>
                 <outlet property="emailLabel" destination="mL2-UJ-v9r" id="VO8-8M-zSd"/>
                 <outlet property="emailTextField" destination="OMc-X0-HHv" id="s8U-55-kYj"/>
                 <outlet property="passwordLabel" destination="B5w-kM-T9C" id="ZaZ-sd-q4I"/>
@@ -21,21 +23,21 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-gn-GaY">
-                    <rect key="frame" x="20" y="219" width="374" height="34"/>
+                    <rect key="frame" x="20" y="263" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OMc-X0-HHv">
-                    <rect key="frame" x="20" y="127" width="374" height="34"/>
+                    <rect key="frame" x="20" y="171" width="374" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vde-9X-gie" userLabel="Line">
-                    <rect key="frame" x="20" y="263" width="374" height="1"/>
+                    <rect key="frame" x="20" y="307" width="374" height="1"/>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -43,19 +45,19 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mL2-UJ-v9r">
-                    <rect key="frame" x="20" y="100" width="42" height="21"/>
+                    <rect key="frame" x="20" y="144" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5w-kM-T9C">
-                    <rect key="frame" x="20" y="192" width="42" height="21"/>
+                    <rect key="frame" x="20" y="236" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xmY-s0-m7Y" userLabel="Line">
-                    <rect key="frame" x="20" y="171" width="374" height="1"/>
+                    <rect key="frame" x="20" y="215" width="374" height="1"/>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -63,7 +65,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-Aj-A4O" userLabel="RegisterView">
-                    <rect key="frame" x="20" y="304" width="374" height="50"/>
+                    <rect key="frame" x="20" y="348" width="374" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-fg-S8h">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
@@ -91,7 +93,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDg-8i-sZg" userLabel="CancelView">
-                    <rect key="frame" x="372" y="10" width="32" height="32"/>
+                    <rect key="frame" x="362" y="64" width="32" height="32"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="I1B-ZA-et8">
                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -122,7 +124,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="mL2-UJ-v9r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="01M-fA-vpf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FDg-8i-sZg" secondAttribute="trailing" constant="10" id="BbZ-8g-VnO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FDg-8i-sZg" secondAttribute="trailing" constant="20" id="BbZ-8g-VnO"/>
                 <constraint firstAttribute="trailing" secondItem="Vde-9X-gie" secondAttribute="trailing" constant="20" id="Jkt-S8-uSi"/>
                 <constraint firstItem="B5w-kM-T9C" firstAttribute="top" secondItem="xmY-s0-m7Y" secondAttribute="bottom" constant="20" id="KRk-UC-IYU"/>
                 <constraint firstItem="xmY-s0-m7Y" firstAttribute="top" secondItem="OMc-X0-HHv" secondAttribute="bottom" constant="10" id="LHc-6m-hnS"/>
@@ -132,7 +134,7 @@
                 <constraint firstItem="B5w-kM-T9C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QOF-ET-qRB"/>
                 <constraint firstItem="c6k-Aj-A4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QSb-Lc-FMd"/>
                 <constraint firstItem="c6k-Aj-A4O" firstAttribute="top" secondItem="Vde-9X-gie" secondAttribute="bottom" constant="40" id="T6l-Jy-dLZ"/>
-                <constraint firstItem="FDg-8i-sZg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="aCg-Qx-FZL"/>
+                <constraint firstItem="FDg-8i-sZg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="aCg-Qx-FZL"/>
                 <constraint firstItem="Vde-9X-gie" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="bBZ-a2-ZvZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c6k-Aj-A4O" secondAttribute="trailing" constant="20" id="d89-g5-OFz"/>
                 <constraint firstItem="ucb-gn-GaY" firstAttribute="top" secondItem="B5w-kM-T9C" secondAttribute="bottom" constant="6" id="ffn-Kb-cEy"/>
@@ -148,6 +150,6 @@
         </view>
     </objects>
     <resources>
-        <image name="cancel" width="21.333333969116211" height="21.333333969116211"/>
+        <image name="cancel" width="16" height="16"/>
     </resources>
 </document>

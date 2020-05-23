@@ -242,10 +242,10 @@ class XAxisFormatter: IAxisValueFormatter {
 class DataSetValueFormatter: IValueFormatter {
     
     func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
-        let dataSetCurrentIndex = 1
-        if dataSetIndex == dataSetCurrentIndex {
-            return value.convertToRusString()
-        }
+//        let dataSetCurrentIndex = 1
+//        if dataSetIndex == dataSetCurrentIndex {
+//            return value.convertToRusString()
+//        }
         return ""
     }
 }

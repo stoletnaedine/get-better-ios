@@ -82,13 +82,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = Classes/Moduls/LifeCirclePage/AchievementsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = Classes/Moduls/LifeCircleScreen/AchievementsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewCell.swift; sourceTree = "<group>"; };
 		6E045E9A24640A6A0001E378 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
-		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = Classes/Moduls/ResetPassPage/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
-		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = Classes/Moduls/ResetPassPage/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = Classes/Moduls/ResetPassScreen/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
+		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = Classes/Moduls/ResetPassScreen/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
 		6E6A21792466C6FB00D8AC68 /* Atricle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atricle.swift; sourceTree = "<group>"; };
 		6E7071F2245C474D00ED7D08 /* SphereValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereValue.swift; sourceTree = "<group>"; };
 		6E711E87246857720068FD8C /* SphereDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SphereDetailViewController.xib; sourceTree = "<group>"; };
@@ -190,31 +190,31 @@
 			path = SphereMetricsCell;
 			sourceTree = "<group>";
 		};
-		6E5AE648246028E100418B23 /* ResetPassPage */ = {
+		6E5AE648246028E100418B23 /* ResetPassScreen */ = {
 			isa = PBXGroup;
 			children = (
 				6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */,
 				6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */,
 			);
-			path = ResetPassPage;
+			path = ResetPassScreen;
 			sourceTree = "<group>";
 		};
-		6E5AFCD32450C06800F283C4 /* AddPostPage */ = {
+		6E5AFCD32450C06800F283C4 /* AddPostScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */,
 				C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */,
 			);
-			path = AddPostPage;
+			path = AddPostScreen;
 			sourceTree = "<group>";
 		};
-		6E711E84246856730068FD8C /* SphereDetailPage */ = {
+		6E711E84246856730068FD8C /* SphereDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
 				6E711E8B24685BE00068FD8C /* SphereDetailViewController.swift */,
 				6E711E87246857720068FD8C /* SphereDetailViewController.xib */,
 			);
-			path = SphereDetailPage;
+			path = SphereDetailScreen;
 			sourceTree = "<group>";
 		};
 		9277D37B238C725200B3AECA = {
@@ -276,13 +276,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C328EE022447291200445704 /* RegisterPage */ = {
+		C328EE022447291200445704 /* RegisterScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C328EE032447294100445704 /* RegisterViewController.swift */,
 				C328EE042447294100445704 /* RegisterViewController.xib */,
 			);
-			path = RegisterPage;
+			path = RegisterScreen;
 			sourceTree = "<group>";
 		};
 		C33AD1D9245191A500A08006 /* OnBoardingScreen */ = {
@@ -336,58 +336,58 @@
 			isa = PBXGroup;
 			children = (
 				C3BFEBC12477A291000B5B41 /* MainTabBar */,
-				C39A321C2457109A005D2EDF /* SettingsPage */,
+				C39A321C2457109A005D2EDF /* SettingsScreen */,
 				C33AD1D9245191A500A08006 /* OnBoardingScreen */,
-				C39423D524404E6F0060CF50 /* AuthPage */,
-				6E5AE648246028E100418B23 /* ResetPassPage */,
-				C328EE022447291200445704 /* RegisterPage */,
-				C3724EC923AFAC5800D49AD6 /* LifeCirclePage */,
-				C3724ECA23AFAC5D00D49AD6 /* JournalPage */,
-				6E5AFCD32450C06800F283C4 /* AddPostPage */,
-				C3724EC723AFAC2400D49AD6 /* PostDetailPage */,
+				C39423D524404E6F0060CF50 /* AuthScreen */,
+				6E5AE648246028E100418B23 /* ResetPassScreen */,
+				C328EE022447291200445704 /* RegisterScreen */,
+				C3724EC923AFAC5800D49AD6 /* LifeCircleScreen */,
+				C3724ECA23AFAC5D00D49AD6 /* JournalScreen */,
+				6E5AFCD32450C06800F283C4 /* AddPostScreen */,
+				C3724EC723AFAC2400D49AD6 /* PostDetailScreen */,
 			);
 			path = Moduls;
 			sourceTree = "<group>";
 		};
-		C3724EC723AFAC2400D49AD6 /* PostDetailPage */ = {
+		C3724EC723AFAC2400D49AD6 /* PostDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C35750D224507E7B00BA7006 /* PostDetailViewController.swift */,
 				C35750D324507E7B00BA7006 /* PostDetailViewController.xib */,
 			);
-			path = PostDetailPage;
+			path = PostDetailScreen;
 			sourceTree = "<group>";
 		};
-		C3724EC823AFAC4E00D49AD6 /* EditProfilePage */ = {
+		C3724EC823AFAC4E00D49AD6 /* EditProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C37AECC2244F002C0080CCAC /* EditProfileViewController.swift */,
 				C37AECC3244F002C0080CCAC /* EditProfileViewController.xib */,
 			);
-			path = EditProfilePage;
+			path = EditProfileScreen;
 			sourceTree = "<group>";
 		};
-		C3724EC923AFAC5800D49AD6 /* LifeCirclePage */ = {
+		C3724EC923AFAC5800D49AD6 /* LifeCircleScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C36DE9C4246E84BB005635E4 /* ViewModel */,
 				C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */,
 				C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */,
 				6E5A984A2455888E001F8008 /* SphereMetricsCell */,
-				6E711E84246856730068FD8C /* SphereDetailPage */,
+				6E711E84246856730068FD8C /* SphereDetailScreen */,
 				6E045E952463E7800001E378 /* AchievementsCell */,
 			);
-			path = LifeCirclePage;
+			path = LifeCircleScreen;
 			sourceTree = "<group>";
 		};
-		C3724ECA23AFAC5D00D49AD6 /* JournalPage */ = {
+		C3724ECA23AFAC5D00D49AD6 /* JournalScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */,
 				C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */,
 				C35750D12450256700BA7006 /* JournalCell */,
 			);
-			path = JournalPage;
+			path = JournalScreen;
 			sourceTree = "<group>";
 		};
 		C3724ECC23AFAD6E00D49AD6 /* Models */ = {
@@ -408,43 +408,43 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C39423D524404E6F0060CF50 /* AuthPage */ = {
+		C39423D524404E6F0060CF50 /* AuthScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C39423D624404E8E0060CF50 /* AuthViewController.swift */,
 				C39423D724404E8E0060CF50 /* AuthViewController.xib */,
 			);
-			path = AuthPage;
+			path = AuthScreen;
 			sourceTree = "<group>";
 		};
-		C39A321C2457109A005D2EDF /* SettingsPage */ = {
+		C39A321C2457109A005D2EDF /* SettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C3BFEBC32477E844000B5B41 /* ViewModel */,
 				C39A321D245710BC005D2EDF /* SettingsViewController.swift */,
 				C39A321E245710BC005D2EDF /* SettingsViewController.xib */,
-				C3A10078245859CB00E2D579 /* Profile */,
-				C3A1007E24585EFC00E2D579 /* ArticlePage */,
+				C3A10078245859CB00E2D579 /* ProfileScreen */,
+				C3A1007E24585EFC00E2D579 /* ArticleScreen */,
 			);
-			path = SettingsPage;
+			path = SettingsScreen;
 			sourceTree = "<group>";
 		};
-		C3A10078245859CB00E2D579 /* Profile */ = {
+		C3A10078245859CB00E2D579 /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C3C66AEF24582B2900D3964D /* ProfileCell */,
-				C3724EC823AFAC4E00D49AD6 /* EditProfilePage */,
+				C3724EC823AFAC4E00D49AD6 /* EditProfileScreen */,
 			);
-			path = Profile;
+			path = ProfileScreen;
 			sourceTree = "<group>";
 		};
-		C3A1007E24585EFC00E2D579 /* ArticlePage */ = {
+		C3A1007E24585EFC00E2D579 /* ArticleScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C31FF9782452CC8D00642C7B /* ArticleViewController.swift */,
 				C31FF97A2452CCA400642C7B /* ArticleViewController.xib */,
 			);
-			path = ArticlePage;
+			path = ArticleScreen;
 			sourceTree = "<group>";
 		};
 		C3BFEBC12477A291000B5B41 /* MainTabBar */ = {

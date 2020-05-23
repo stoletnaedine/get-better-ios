@@ -15,6 +15,7 @@ class SphereDetailViewController: UIViewController {
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var cancelImageView: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
     
     var sphereValue: SphereValue?
@@ -62,5 +63,7 @@ class SphereDetailViewController: UIViewController {
         valueLabel.textColor = .violet
         valueLabel.font = UIFont.systemFont(ofSize: 80)
         cancelButton.setTitle("", for: .normal)
+        cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
+        cancelImageView.tintColor = .violet
     }
 }
