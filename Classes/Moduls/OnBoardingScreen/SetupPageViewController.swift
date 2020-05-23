@@ -48,7 +48,7 @@ class SetupPageViewController: UIViewController {
         pageViewController.dataSource = self
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
-        view.backgroundColor = .lighterGray
+        view.backgroundColor = .white
     }
     
     func setupBarButton() {

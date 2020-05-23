@@ -40,7 +40,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="E9S-b4-duR">
-                    <rect key="frame" x="10" y="226.5" width="394" height="635.5"/>
+                    <rect key="frame" x="10" y="226.5" width="394" height="625.5"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,7 +52,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SZL-ic-fjL" secondAttribute="trailing" constant="30" id="Cor-wM-305"/>
                 <constraint firstItem="E9S-b4-duR" firstAttribute="top" secondItem="sG4-hH-NfL" secondAttribute="bottom" constant="30" id="DS3-kA-qzV"/>
                 <constraint firstItem="I8I-HG-oR5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="E7l-P5-KuM"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="E9S-b4-duR" secondAttribute="bottom" id="GxR-cl-Lkn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="E9S-b4-duR" secondAttribute="bottom" constant="10" id="GxR-cl-Lkn"/>
                 <constraint firstItem="SZL-ic-fjL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="JQB-Hn-Mso"/>
                 <constraint firstItem="I8I-HG-oR5" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="OBu-nc-hwc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="E9S-b4-duR" secondAttribute="trailing" constant="10" id="afr-Z9-Za4"/>
