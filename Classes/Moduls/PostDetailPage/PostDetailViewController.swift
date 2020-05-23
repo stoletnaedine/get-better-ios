@@ -51,6 +51,7 @@ class PostDetailViewController: UIViewController {
         self.textLabel.text = post.text ?? ""
         self.sphereLabel.text = post.sphere?.name ?? ""
         self.dateLabel.text = ""
+        self.photoImageView.image = post.sphere?.image
         if let timestamp = post.timestamp {
             self.dateLabel.text = Date.convertToFullDate(from: timestamp)
         }
@@ -68,7 +69,8 @@ class PostDetailViewController: UIViewController {
                     DispatchQueue.main.async {
                         self?.removeActivityIndicator()
                         self?.photoImageView.image = image
-                        self?.photoImageView.isHidden = false
+                        self?.photoImageView.alpha = 1
+                        self?.photoImageView.contentMode = .scaleAspectFill
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -86,6 +88,6 @@ class PostDetailViewController: UIViewController {
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .gray
         cancelButton.setTitle("", for: .normal)
-        photoImageView.isHidden = true
+        photoImageView.alpha = 0.15
     }
 }

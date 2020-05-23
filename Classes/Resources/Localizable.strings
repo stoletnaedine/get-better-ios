@@ -8,7 +8,11 @@
 
 // MARK: LifeCircle
 
-"loading" = "Подождите, идет загрузка";
-"circle" = "Колесо";
-"metrics" = "Метрики";
-"achievements" = "Достижения";
+"LifeCircle.loading" = "Подождите, идет загрузка";
+"LifeCircle.circle" = "Колесо";
+"LifeCircle.metrics" = "Метрики";
+"LifeCircle.achievements" = "Достижения";
+
+// MARK: Journal
+
+"Journal.loading" = "Загрузка";

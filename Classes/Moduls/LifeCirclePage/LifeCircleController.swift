@@ -50,7 +50,7 @@ class LifeCircleController: UIViewController {
     private func setupView() {
         title = GlobalDefiitions.TabBar.lifeCircleTitle
         view.backgroundColor = .appBackground
-        chartView.noDataText = R.string.localizable.loading()
+        chartView.noDataText = R.string.localizable.lifeCircleLoading()
     }
     
     private func setupRefreshControl() {
@@ -203,9 +203,9 @@ class LifeCircleController: UIViewController {
         achievementsTableView.isHidden = true
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                                                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: .normal)
-        segmentedControl.setTitle(R.string.localizable.circle(), forSegmentAt: 0)
-        segmentedControl.setTitle(R.string.localizable.metrics(), forSegmentAt: 1)
-        segmentedControl.setTitle(R.string.localizable.achievements(), forSegmentAt: 2)
+        segmentedControl.setTitle(R.string.localizable.lifeCircleCircle(), forSegmentAt: 0)
+        segmentedControl.setTitle(R.string.localizable.lifeCircleMetrics(), forSegmentAt: 1)
+        segmentedControl.setTitle(R.string.localizable.lifeCircleAchievements(), forSegmentAt: 2)
     }
     
     @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {

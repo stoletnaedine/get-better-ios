@@ -24,17 +24,14 @@ class JournalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = .appBackground
-        tableView.separatorInset = UIEdgeInsets.zero
-        
         setupRefreshControl()
-        registerCell()
+        setupTableView()
         setupBarButton()
         updatePostsInTableView()
     }
     
     @objc func updatePostsInTableView() {
-        self.title = "Загрузка"
+        title = R.string.localizable.journalLoading()
         getPosts { [weak self] in
             self?.title = GlobalDefiitions.TabBar.journalTitle
             self?.tableView.refreshControl?.endRefreshing()
@@ -45,17 +42,18 @@ class JournalViewController: UIViewController {
     func setupRefreshControl() {
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(updatePostsInTableView), for: .valueChanged)
-        self.tableView.refreshControl = refresh
+        tableView.refreshControl = refresh
     }
     
-    func registerCell() {
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+    func setupTableView() {
+        tableView.backgroundColor = .appBackground
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
     @objc func getPosts(completion: @escaping () -> Void) {
-        
         sectionPosts = []
         
         databaseService.getPosts(completion: { [weak self] result in
