@@ -286,6 +286,7 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             guard let sphereValue = getSphereValue(by: indexPath) else { return cell }
             cell.fillCell(from: sphereValue)
+            cell.accessoryType = .disclosureIndicator
             
             return cell
             
@@ -317,11 +318,8 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
             sphereDetailViewController.sphereValue = sphereValue
             present(sphereDetailViewController, animated: true, completion: nil)
             
-        case achievementsTableView:
-            print("!")
-            
         default:
-            print("!")
+            print("Error: Default case in didSelectRowAt method!")
         }
     }
 }
