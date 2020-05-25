@@ -64,19 +64,20 @@ class RegisterViewController: UIViewController {
         self.title = GlobalDefiitions.Auth.register
         emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = UIFont.systemFont(ofSize: 13)
+        emailLabel.font = .formTitleFont
+        
         emailTextField.borderStyle = .none
-        
-        let stringAttributes = [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
-        
-        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail, attributes: stringAttributes)
-        
+        emailTextField.font = .formFieldFont
+        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
+                                                                  attributes: NSAttributedString.formPlaceholder())
         passwordLabel.textColor = .gray
-        passwordLabel.font = UIFont.systemFont(ofSize: 13)
+        passwordLabel.font = .formTitleFont
         passwordLabel.text = GlobalDefiitions.Auth.password
         
         passwordTextField.borderStyle = .none
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword, attributes: stringAttributes)
+        passwordTextField.font = .formFieldFont
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword,
+                                                                     attributes: NSAttributedString.formPlaceholder())
         
         registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
@@ -84,7 +85,7 @@ class RegisterViewController: UIViewController {
         registerButton.setTitle("", for: .normal)
         registerButtonLabel.text = GlobalDefiitions.Auth.doRegister.uppercased()
         registerButtonLabel.textColor = .white
-        registerButtonLabel.font = UIFont.systemFont(ofSize: 15)
+        registerButtonLabel.font = .formButtonFont
         cancelButton.setTitle("", for: .normal)
         cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
         cancelImageView.tintColor = .violet

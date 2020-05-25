@@ -21,7 +21,7 @@ class LifeCircleController: UIViewController {
     
     let refreshControl = UIRefreshControl()
     let databaseService: DatabaseService = FirebaseDatabaseService()
-    let achievementViewModel = AchievementViewModel()
+    let viewModel = AchievementViewModel()
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
@@ -105,10 +105,11 @@ class LifeCircleController: UIViewController {
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
             if let startSphereMetrics = self?.startSphereMetrics,
                 let currentSphereMetrics = self?.currentSphereMetrics,
-                let posts = self?.posts, !posts.isEmpty,
-                let achievements = self?.achievementViewModel.getAchievements(posts: posts,
-                                                                              startSphereMetrics: startSphereMetrics,
-                                                                              currentSphereMetrics: currentSphereMetrics) {
+                let posts = self?.posts,
+                let achievements = self?.viewModel.getAchievements(posts: posts,
+                                                                   startSphereMetrics: startSphereMetrics,
+                                                                   currentSphereMetrics: currentSphereMetrics) {
+                
                 self?.achievements = achievements
             }
             self?.setupChartView()

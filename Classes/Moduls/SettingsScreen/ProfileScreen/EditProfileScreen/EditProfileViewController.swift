@@ -172,18 +172,41 @@ class EditProfileViewController: UIViewController {
                 emailTextField.placeholder = GlobalDefiitions.Profile.enterEmail
             }
         }
+        
         nameLabel.text = GlobalDefiitions.Profile.name
-        nameTextField.placeholder = GlobalDefiitions.Profile.enterName
+        nameLabel.textColor = .gray
+        nameLabel.font = .formTitleFont
+        
+        nameTextField.borderStyle = .none
+        nameTextField.font = .formFieldFont
+        nameTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterName,
+                                                                 attributes: NSAttributedString.formPlaceholder())
         emailLabel.text = GlobalDefiitions.Profile.email
-        emailTextField.placeholder = GlobalDefiitions.Profile.enterEmail
+        emailLabel.textColor = .gray
+        emailLabel.font = .formTitleFont
+        
+        emailTextField.borderStyle = .none
+        emailTextField.font = .formFieldFont
+        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterEmail,
+                                                                  attributes: NSAttributedString.formPlaceholder())
+        
         passwordLabel.text = GlobalDefiitions.Profile.password
+        passwordLabel.textColor = .gray
+        passwordLabel.font = .formTitleFont
+        
         passwordTextField.placeholder = GlobalDefiitions.Profile.enterPassword
-        warningLabel.font = UIFont.systemFont(ofSize: 12)
+        passwordTextField.borderStyle = .none
+        passwordTextField.font = .formFieldFont
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterPassword,
+                                                                     attributes: NSAttributedString.formPlaceholder())
+        
+        warningLabel.font = .formTitleFont
         warningLabel.textColor = .gray
         warningLabel.text = GlobalDefiitions.Profile.warning
+        
         deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
         deleteAccountButton.setTitleColor(.red, for: .normal)
-        deleteAccountButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        deleteAccountButton.titleLabel?.font = .formButtonFont
         deleteAccountButton.titleLabel?.underline()
     }
     

@@ -31,7 +31,7 @@ class ResetPasswordViewController: UIViewController {
         
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             !email.isEmpty else {
-                Toast(text: "Введите email").show()
+                Toast(text: "Введите E-mail").show()
                 return
         }
         
@@ -43,7 +43,7 @@ class ResetPasswordViewController: UIViewController {
             if let error = error {
                 Toast(text: error.localizedDescription).show()
             } else {
-                Toast(text: "Письмо отправлено на ваш email. Проверьте почту", delay: 1, duration: 5).show()
+                Toast(text: "Письмо отправлено на ваш E-mail. Проверьте почту", delay: 1, duration: 5).show()
                 self.dismiss(animated: true, completion: nil)
             }
         })
@@ -57,22 +57,20 @@ class ResetPasswordViewController: UIViewController {
         self.title = "Сбросить пароль"
         emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = UIFont.systemFont(ofSize: 13)
+        emailLabel.font = .formTitleFont
         emailTextField.borderStyle = .none
-        
+        emailTextField.font = .formFieldFont
         emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
-                                                                  attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
-                                                                               NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
-        
+                                                                  attributes: NSAttributedString.formPlaceholder())
         resetPasswordView.backgroundColor = .violet
         resetPasswordView.layer.cornerRadius = 5
         resetPasswordButton.clipsToBounds = true
         resetPasswordButton.setTitle("", for: .normal)
         resetPasswordButtonLabel.text = "Сбросить пароль".uppercased()
         resetPasswordButtonLabel.textColor = .white
-        resetPasswordButtonLabel.font = UIFont.systemFont(ofSize: 14)
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
-        descriptionLabel.text = "На указанный email придёт ссылка, пройдя по которой вы сможете изменить пароль."
+        resetPasswordButtonLabel.font = .formButtonFont
+        descriptionLabel.font = .formButtonFont
+        descriptionLabel.text = "На указанный E-mail придёт ссылка, пройдя по которой вы сможете изменить пароль."
         cancelButton.setTitle("", for: .normal)
         cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
         cancelImageView.tintColor = .violet

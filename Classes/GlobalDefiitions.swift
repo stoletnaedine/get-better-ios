@@ -14,10 +14,6 @@ struct GlobalDefiitions {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
     }
     
-    struct Font {
-        static let mabryProRegular = "MabryPro-Regular"
-    }
-    
     struct TabBar {
         static let lifeCircleTitle = "Колесо жизни"
         static let journalTitle = "Дневник"
@@ -26,7 +22,7 @@ struct GlobalDefiitions {
     
     struct Auth {
         static let authTitleVC = "Авторизация"
-        static let email = "Email"
+        static let email = "E-mail"
         static let enterEmail = "Введите E-mail"
         static let password = "Пароль"
         static let enterPassword = "Введите пароль"
@@ -100,13 +96,13 @@ struct GlobalDefiitions {
     
     struct AboutApp {
         static let title = "Что такое GetBetter?"
-        static let description = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nНад приложением работали:\n\nИдея и разработка:\nИсламгулов Артур\ngithub.com/stoletnaedine\n\nВизуальный стиль:\nАлексей Бусыгин\nalekseybusygin.com"
+        static let description = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nНаша команда:\n\nИдея и разработка\nИсламгулов Артур\ngithub.com/stoletnaedine\n\nВизуальный стиль\nАлексей Бусыгин\nalekseybusygin.com"
     }
     
     struct AboutCircle {
         static let title = "Колесо Жизненного Баланса"
         static let viewTitle = "Это твоё колесо жизненного баланса"
-        static let description = "Смысл в том, что колесо должно катиться.\nЧтобы колесо стало круглым, нужно выровнять значения — уменьшить важность одного или сделать что-то в других сферах. Регулярно веди записи в разделе Дневник. Так ты наглядно увидишь результаты."
+        static let description = "Смысл в том, что колесо должно катиться.\nЧтобы колесо стало круглым, нужно выровнить значения — уменьшить важность одного или сделать что-то в других сферах. Регулярно веди записи в разделе Дневник. Так ты наглядно увидишь результаты."
     }
     
     struct AboutJournal {
