@@ -51,7 +51,7 @@ class SphereDetailViewController: UIViewController {
         guard let sphere = sphereValue.sphere else { return }
         guard let value = sphereValue.value else { return }
         sphereLabel.text = sphere.name
-        valueLabel.text = String(value)
+        valueLabel.text = value.convertToRusString()
         photoImageView.image = sphere.image
         textLabel.text = sphere.description
     }

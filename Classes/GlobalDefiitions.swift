@@ -56,10 +56,10 @@ struct GlobalDefiitions {
         static let update = "Обновить"
         static let name = "Имя"
         static let enterName = "Введите имя"
-        static let email = "Email"
-        static let enterEmail = "Изменить Email"
+        static let email = "E-mail"
+        static let enterEmail = "Введите E-mail"
         static let password = "Пароль"
-        static let enterPassword = "Изменить пароль"
+        static let enterPassword = "Введите новый пароль"
         static let loadAvatar = "Загрузить аватар"
         static let warning = "После смены Email необходимо заново войти в приложение"
         static let loading = "Подождите, идет загрузка"
@@ -102,7 +102,7 @@ struct GlobalDefiitions {
     
     struct AboutApp {
         static let title = "Что такое GetBetter?"
-        static let description = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nНад приложением работали:\n\nИдея и разработка:\nИсламгулов Артур github.com/stoletnaedine\n\nИконки и визуальный стиль:\nАлексей Бусыгин alekseybusygin.com"
+        static let description = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nНад приложением работали:\n\nИдея и разработка:\nИсламгулов Артур\ngithub.com/stoletnaedine\n\nВизуальный стиль:\nАлексей Бусыгин\nalekseybusygin.com"
     }
     
     struct AboutCircle {

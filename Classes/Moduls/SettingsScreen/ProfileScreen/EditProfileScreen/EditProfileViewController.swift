@@ -172,11 +172,14 @@ class EditProfileViewController: UIViewController {
                 emailTextField.placeholder = GlobalDefiitions.Profile.enterEmail
             }
         }
-        nameLabel.text = GlobalDefiitions.Profile.enterName
-        emailLabel.text = GlobalDefiitions.Profile.enterEmail
-        passwordLabel.text = GlobalDefiitions.Profile.enterPassword
+        nameLabel.text = GlobalDefiitions.Profile.name
+        nameTextField.placeholder = GlobalDefiitions.Profile.enterName
+        emailLabel.text = GlobalDefiitions.Profile.email
+        emailTextField.placeholder = GlobalDefiitions.Profile.enterEmail
+        passwordLabel.text = GlobalDefiitions.Profile.password
         passwordTextField.placeholder = GlobalDefiitions.Profile.enterPassword
-        warningLabel.font = UIFont.systemFont(ofSize: 14)
+        warningLabel.font = UIFont.systemFont(ofSize: 12)
+        warningLabel.textColor = .gray
         warningLabel.text = GlobalDefiitions.Profile.warning
         deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
         deleteAccountButton.setTitleColor(.red, for: .normal)
