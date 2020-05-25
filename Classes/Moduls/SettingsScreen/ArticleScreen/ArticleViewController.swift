@@ -27,6 +27,9 @@ class ArticleViewController: UIViewController {
 
     func fillViewController(from article: Article) {
         titleLabel.text = article.title ?? ""
+        if let titleView = article.titleView {
+            navigationItem.titleView = titleView
+        }
         textView.text = article.text ?? ""
         imageView.image = article.image ?? UIImage()
     }

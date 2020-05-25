@@ -10,6 +10,7 @@ import UIKit
 
 struct Article {
     let title: String?
+    let titleView: UIView?
     let text: String?
     let image: UIImage?
 }

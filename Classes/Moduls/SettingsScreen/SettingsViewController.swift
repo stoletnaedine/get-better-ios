@@ -58,28 +58,10 @@ class SettingsViewController: UIViewController {
             self?.loadProfileAndReloadTableView()
         }
         
-        let aboutCircleViewController = ArticleViewController()
-        aboutCircleViewController.article = Article(title: GlobalDefiitions.AboutCircle.title,
-                                                    text: GlobalDefiitions.AboutCircle.description,
-                                                    image: R.image.aboutCircle())
+        let articles = viewModel.fillArticles()
         
-        let aboutJournalViewController = ArticleViewController()
-        aboutJournalViewController.article = Article(title: GlobalDefiitions.AboutJournal.title,
-                                                     text: GlobalDefiitions.AboutJournal.description,
-                                                     image: R.image.aboutEvents())
-        
-        let aboutAppViewController = ArticleViewController()
-        aboutAppViewController.article = Article(title: GlobalDefiitions.AboutApp.title,
-                                                 text: GlobalDefiitions.AboutApp.description,
-                                                 image: R.image.aboutTeam())
-        
-        tableItems = [
-            TableSection.profile : [SettingsCell(title: "", viewController: editProfileViewController)],
-            TableSection.articles : [
-                SettingsCell(title: "Колесо Жизненного Баланса", viewController: aboutCircleViewController),
-                SettingsCell(title: "Зачем нужны События?", viewController: aboutJournalViewController),
-                SettingsCell(title: "О приложении", viewController: aboutAppViewController)]
-        ]
+        tableItems = [TableSection.profile : [SettingsCell(title: "", viewController: editProfileViewController)],
+            TableSection.articles : articles]
     }
     
     func setupRefreshControl() {
