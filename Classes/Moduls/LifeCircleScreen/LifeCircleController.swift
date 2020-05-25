@@ -283,10 +283,9 @@ extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
         case metricsTableView:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
-            cell.selectionStyle = .none
+            cell.selectionStyle = .default
             guard let sphereValue = getSphereValue(by: indexPath) else { return cell }
             cell.fillCell(from: sphereValue)
-            cell.accessoryType = .disclosureIndicator
             
             return cell
             

@@ -11,7 +11,7 @@ import UIKit
 class ArticleViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
     
     var article: Article?
@@ -27,13 +27,15 @@ class ArticleViewController: UIViewController {
 
     func fillViewController(from article: Article) {
         titleLabel.text = article.title ?? ""
-        textLabel.text = article.text ?? ""
+        textView.text = article.text ?? ""
         imageView.image = article.image ?? UIImage()
     }
     
     func customizeView() {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        textLabel.font = UIFont.systemFont(ofSize: 15)
+        textView.font = UIFont.systemFont(ofSize: 16)
+        
+        textView.resizeByContent()
     }
-
+    
 }
