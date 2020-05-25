@@ -37,7 +37,6 @@ class ArticleViewController: UIViewController {
     func customizeView() {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
         textView.font = UIFont.systemFont(ofSize: 16)
-        
         textView.resizeByContent()
     }
     

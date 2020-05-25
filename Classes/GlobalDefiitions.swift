@@ -26,10 +26,8 @@ struct GlobalDefiitions {
     
     struct Auth {
         static let authTitleVC = "Авторизация"
-        static let description1 = "Войдите в приложение через социальные сети"
-        static let description2 = "или авторизуйтесь ниже"
         static let email = "Email"
-        static let enterEmail = "Введите Email"
+        static let enterEmail = "Введите E-mail"
         static let password = "Пароль"
         static let enterPassword = "Введите пароль"
         static let enter = "Войти"
@@ -61,7 +59,7 @@ struct GlobalDefiitions {
         static let password = "Пароль"
         static let enterPassword = "Введите новый пароль"
         static let loadAvatar = "Загрузить аватар"
-        static let warning = "После смены Email необходимо заново войти в приложение"
+        static let warning = "После смены E-mail необходимо заново войти в приложение"
         static let loading = "Подождите, идет загрузка"
     }
     

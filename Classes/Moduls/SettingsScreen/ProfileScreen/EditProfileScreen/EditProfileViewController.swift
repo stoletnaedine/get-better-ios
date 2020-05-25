@@ -188,7 +188,7 @@ class EditProfileViewController: UIViewController {
     }
     
     func customizeBarButon() {
-        let saveBarButtom = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveProfile))
+        let saveBarButtom = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveProfile))
         navigationItem.rightBarButtonItem = saveBarButtom
     }
 }

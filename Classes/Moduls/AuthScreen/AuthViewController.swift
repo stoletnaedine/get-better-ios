@@ -99,6 +99,7 @@ class AuthViewController: UIViewController {
         emailLabel.font = UIFont.systemFont(ofSize: 13)
         
         emailTextField.borderStyle = .none
+        emailTextField.font = UIFont.systemFont(ofSize: 18)
         emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])
@@ -111,6 +112,7 @@ class AuthViewController: UIViewController {
         passwordLabel.font = UIFont.systemFont(ofSize: 13)
         
         passwordTextField.borderStyle = .none
+        passwordTextField.font = UIFont.systemFont(ofSize: 18)
         passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword,
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                                                                                   NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)])

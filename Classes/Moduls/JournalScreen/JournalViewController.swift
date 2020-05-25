@@ -157,8 +157,8 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .white
         
         let date = sectionMonthYear[section]
         label.text = date
