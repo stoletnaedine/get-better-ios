@@ -17,10 +17,10 @@
                 <outlet property="emailTextField" destination="GLo-Tj-2Os" id="aGl-Vk-1IY"/>
                 <outlet property="nameLabel" destination="ewl-u8-E0N" id="iie-kJ-fZy"/>
                 <outlet property="nameTextField" destination="piE-pJ-i4P" id="Ilp-xI-gun"/>
+                <outlet property="noticeLabel" destination="Br0-BS-dIh" id="y9Z-1R-9gh"/>
                 <outlet property="passwordLabel" destination="mdL-2z-tYD" id="sqT-o0-ZDK"/>
                 <outlet property="passwordTextField" destination="glj-Pf-xBa" id="XZp-iS-l1Q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="warningLabel" destination="Br0-BS-dIh" id="y9Z-1R-9gh"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -103,7 +103,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldU-h1-AoD">
-                    <rect key="frame" x="184" y="536.5" width="46" height="30"/>
+                    <rect key="frame" x="184" y="546.5" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="deleteAccountButtonDidTap:" destination="-1" eventType="touchUpInside" id="UOe-Ah-qf2"/>
@@ -146,7 +146,7 @@
                 <constraint firstItem="WKp-po-cuw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="EBo-iN-Yb2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Br0-BS-dIh" secondAttribute="trailing" constant="20" id="IaY-I4-QGA"/>
                 <constraint firstItem="ewl-u8-E0N" firstAttribute="top" secondItem="RxO-6g-uQ5" secondAttribute="bottom" constant="30" id="NXk-RN-5mc"/>
-                <constraint firstItem="ldU-h1-AoD" firstAttribute="top" secondItem="fsS-wq-HxJ" secondAttribute="bottom" constant="15" id="PUz-rz-vIx"/>
+                <constraint firstItem="ldU-h1-AoD" firstAttribute="top" secondItem="fsS-wq-HxJ" secondAttribute="bottom" constant="25" id="PUz-rz-vIx"/>
                 <constraint firstItem="nuf-To-UEE" firstAttribute="top" secondItem="WKp-po-cuw" secondAttribute="bottom" constant="20" id="PwM-it-CF4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nuf-To-UEE" secondAttribute="trailing" constant="20" id="RVK-Mh-gNv"/>
                 <constraint firstItem="mdL-2z-tYD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="RWG-QE-A77"/>

@@ -64,21 +64,20 @@ class RegisterViewController: UIViewController {
         self.title = GlobalDefiitions.Auth.register
         emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = .formTitleFont
+        emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
         emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
-                                                                  attributes: NSAttributedString.formPlaceholder())
+                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
         passwordLabel.textColor = .gray
-        passwordLabel.font = .formTitleFont
+        passwordLabel.font = .formLabelFieldFont
         passwordLabel.text = GlobalDefiitions.Auth.password
         
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
         passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword,
-                                                                     attributes: NSAttributedString.formPlaceholder())
-        
+                                                                     attributes: NSAttributedString.formFieldPlaceholderAttributes)
         registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
         registerButton.clipsToBounds = true

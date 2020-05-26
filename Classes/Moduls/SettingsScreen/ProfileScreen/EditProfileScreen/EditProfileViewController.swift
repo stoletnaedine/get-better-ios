@@ -23,7 +23,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var deleteAccountButton: UIButton!
     
     let user = Auth.auth().currentUser
@@ -134,7 +134,7 @@ class EditProfileViewController: UIViewController {
         guard let user = user else { return }
     
         let alert = UIAlertController(title: "Удалить аккаунт?",
-                                      message: "Ваш аккаунт и все связанные с ним данные будут безвозвратно удалены",
+                                      message: "Ваш аккаунт и данные будут безвозвратно удалены",
                                       preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Да, удалить", style: .destructive, handler: { _ in
@@ -175,34 +175,33 @@ class EditProfileViewController: UIViewController {
         
         nameLabel.text = GlobalDefiitions.Profile.name
         nameLabel.textColor = .gray
-        nameLabel.font = .formTitleFont
+        nameLabel.font = .formLabelFieldFont
         
         nameTextField.borderStyle = .none
         nameTextField.font = .formFieldFont
         nameTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterName,
-                                                                 attributes: NSAttributedString.formPlaceholder())
+                                                                 attributes: NSAttributedString.formFieldPlaceholderAttributes)
         emailLabel.text = GlobalDefiitions.Profile.email
         emailLabel.textColor = .gray
-        emailLabel.font = .formTitleFont
+        emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
         emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterEmail,
-                                                                  attributes: NSAttributedString.formPlaceholder())
+                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
         
         passwordLabel.text = GlobalDefiitions.Profile.password
         passwordLabel.textColor = .gray
-        passwordLabel.font = .formTitleFont
+        passwordLabel.font = .formLabelFieldFont
         
         passwordTextField.placeholder = GlobalDefiitions.Profile.enterPassword
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
         passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterPassword,
-                                                                     attributes: NSAttributedString.formPlaceholder())
-        
-        warningLabel.font = .formTitleFont
-        warningLabel.textColor = .gray
-        warningLabel.text = GlobalDefiitions.Profile.warning
+                                                                     attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        noticeLabel.font = .formNoticeFont
+        noticeLabel.textColor = .gray
+        noticeLabel.text = GlobalDefiitions.Profile.warning
         
         deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
         deleteAccountButton.setTitleColor(.red, for: .normal)

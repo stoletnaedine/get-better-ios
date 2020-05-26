@@ -10,7 +10,7 @@ import UIKit
 
 extension NSAttributedString {
     
-    static func formPlaceholder() -> [NSAttributedString.Key : NSObject] {
+    static var formFieldPlaceholderAttributes: [NSAttributedString.Key : NSObject] {
         return [NSAttributedString.Key.foregroundColor: UIColor.placeholderGray,
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)]
     }

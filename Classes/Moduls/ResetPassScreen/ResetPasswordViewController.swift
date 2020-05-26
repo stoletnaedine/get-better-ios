@@ -17,7 +17,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var resetPasswordView: UIView!
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var resetPasswordButtonLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var cancelImageView: UIImageView!
     
@@ -57,11 +57,11 @@ class ResetPasswordViewController: UIViewController {
         self.title = "Сбросить пароль"
         emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = .formTitleFont
+        emailLabel.font = .formLabelFieldFont
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
         emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
-                                                                  attributes: NSAttributedString.formPlaceholder())
+                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
         resetPasswordView.backgroundColor = .violet
         resetPasswordView.layer.cornerRadius = 5
         resetPasswordButton.clipsToBounds = true
@@ -69,8 +69,10 @@ class ResetPasswordViewController: UIViewController {
         resetPasswordButtonLabel.text = "Сбросить пароль".uppercased()
         resetPasswordButtonLabel.textColor = .white
         resetPasswordButtonLabel.font = .formButtonFont
-        descriptionLabel.font = .formButtonFont
-        descriptionLabel.text = "На указанный E-mail придёт ссылка, пройдя по которой вы сможете изменить пароль."
+        
+        noticeLabel.font = .formNoticeFont
+        noticeLabel.text = "На указанный E-mail придёт ссылка, пройдя по которой вы сможете изменить пароль."
+        
         cancelButton.setTitle("", for: .normal)
         cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
         cancelImageView.tintColor = .violet

@@ -96,24 +96,24 @@ class AuthViewController: UIViewController {
         
         emailLabel.text = GlobalDefiitions.Auth.email
         emailLabel.textColor = .gray
-        emailLabel.font = .formTitleFont
+        emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
         emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
-                                                                  attributes: NSAttributedString.formPlaceholder())
+                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
         if let email = KeychainHelper.getUserEmail() {
             emailTextField.text = email
         }
 
         passwordLabel.text = GlobalDefiitions.Auth.password
         passwordLabel.textColor = .gray
-        passwordLabel.font = .formTitleFont
+        passwordLabel.font = .formLabelFieldFont
         
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
         passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword,
-                                                                     attributes: NSAttributedString.formPlaceholder())
+                                                                     attributes: NSAttributedString.formFieldPlaceholderAttributes)
         passwordTextField.isSecureTextEntry = true
         eyeImageView.image = UIImage(named: "combinedShape")
         eyeButton.setTitle("", for: .normal)

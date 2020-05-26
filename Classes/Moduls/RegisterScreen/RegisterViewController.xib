@@ -65,7 +65,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-Aj-A4O" userLabel="RegisterView">
-                    <rect key="frame" x="20" y="348" width="374" height="50"/>
+                    <rect key="frame" x="20" y="338" width="374" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-fg-S8h">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
@@ -133,7 +133,7 @@
                 <constraint firstItem="ucb-gn-GaY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="OPn-bV-YUb"/>
                 <constraint firstItem="B5w-kM-T9C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QOF-ET-qRB"/>
                 <constraint firstItem="c6k-Aj-A4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QSb-Lc-FMd"/>
-                <constraint firstItem="c6k-Aj-A4O" firstAttribute="top" secondItem="Vde-9X-gie" secondAttribute="bottom" constant="40" id="T6l-Jy-dLZ"/>
+                <constraint firstItem="c6k-Aj-A4O" firstAttribute="top" secondItem="Vde-9X-gie" secondAttribute="bottom" constant="30" id="T6l-Jy-dLZ"/>
                 <constraint firstItem="FDg-8i-sZg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="aCg-Qx-FZL"/>
                 <constraint firstItem="Vde-9X-gie" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="bBZ-a2-ZvZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c6k-Aj-A4O" secondAttribute="trailing" constant="20" id="d89-g5-OFz"/>

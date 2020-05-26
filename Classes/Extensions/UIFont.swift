@@ -10,8 +10,12 @@ import UIKit
 
 extension UIFont {
     
-    static var formTitleFont: UIFont {
+    static var formLabelFieldFont: UIFont {
         return UIFont.systemFont(ofSize: 13)
+    }
+    
+    static var formNoticeFont: UIFont {
+        return formLabelFieldFont
     }
     
     static var formFieldFont: UIFont {
