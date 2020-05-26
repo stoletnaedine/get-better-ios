@@ -20,6 +20,7 @@ class JournalTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        hideAllElements()
         setupView()
     }
 
@@ -40,37 +41,35 @@ class JournalTableViewCell: UITableViewCell {
             !urlString.isEmpty {
         
             DispatchQueue.global().async { [weak self] in
-                
                 if let url = URL(string: urlString),
                     let imageData = try? Data(contentsOf: url),
                     let image = UIImage(data: imageData) {
                 
                     DispatchQueue.main.async {
-                        self?.switchImage(show: true)
+                        self?.showImageInCell(true)
                         self?.photoImageView.image = image
                     }
                 }
             }
         } else {
-            switchImage(show: false)
+            showImageInCell(false)
         }
     }
     
     func setupView() {
-        switchImage(show: false)
         sphereView.layer.cornerRadius = 10
-        sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 10)
-        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        sphereNameLabel.font = .sphereLabelFont
+        titleLabel.font = .journalTableTitleFont
         titleLabel.textColor = .darkGray
-        dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.font = .journalTableDateFont
         dateLabel.textColor = .gray
-        titleLabelNoImage.font = UIFont.systemFont(ofSize: 18)
+        titleLabelNoImage.font = .journalTableTitleFont
         titleLabelNoImage.textColor = .darkGray
-        dateLabelNoImage.font = UIFont.systemFont(ofSize: 12)
+        dateLabelNoImage.font = .journalTableDateFont
         dateLabelNoImage.textColor = .gray
     }
     
-    private func switchImage(show: Bool) {
+    private func showImageInCell(_ show: Bool) {
         if show {
             photoImageView?.isHidden = false
             titleLabel.isHidden = false
@@ -84,5 +83,13 @@ class JournalTableViewCell: UITableViewCell {
             titleLabelNoImage.isHidden = false
             dateLabelNoImage.isHidden = false
         }
+    }
+    
+    private func hideAllElements() {
+        photoImageView?.isHidden = true
+        titleLabel.isHidden = true
+        dateLabel.isHidden = true
+        titleLabelNoImage.isHidden = true
+        dateLabelNoImage.isHidden = true
     }
 }

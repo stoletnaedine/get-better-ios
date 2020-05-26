@@ -10,6 +10,7 @@ import UIKit
 
 extension UIFont {
     
+    // MARK: Form
     static var formLabelFieldFont: UIFont {
         return UIFont.systemFont(ofSize: 13)
     }
@@ -24,5 +25,18 @@ extension UIFont {
     
     static var formButtonFont: UIFont {
         return UIFont.systemFont(ofSize: 15)
+    }
+    
+    // MARK: Journal
+    static var sphereLabelFont: UIFont {
+        return UIFont.boldSystemFont(ofSize: 10)
+    }
+    
+    static var journalTableTitleFont: UIFont {
+        return UIFont.systemFont(ofSize: 18)
+    }
+    
+    static var journalTableDateFont: UIFont {
+        return UIFont.systemFont(ofSize: 12)
     }
 }
