@@ -59,7 +59,7 @@ class AuthViewController: UIViewController {
                 if let error = error {
                     Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
                 } else {
-                    let _ = KeychainHelper.saveCredentials(email: email)
+                    KeychainHelper.saveUserEmail(email)
                     self?.signInCompletion()
                 }
             })

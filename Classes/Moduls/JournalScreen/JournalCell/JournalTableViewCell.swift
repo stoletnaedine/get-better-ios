@@ -20,7 +20,6 @@ class JournalTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        hideAllElements()
         setupView()
     }
 
@@ -57,6 +56,8 @@ class JournalTableViewCell: UITableViewCell {
     }
     
     func setupView() {
+        showImageInCell(false)
+        photoImageView.image = nil
         sphereView.layer.cornerRadius = 10
         sphereNameLabel.font = .sphereLabelFont
         titleLabel.font = .journalTableTitleFont
@@ -83,13 +84,5 @@ class JournalTableViewCell: UITableViewCell {
             titleLabelNoImage.isHidden = false
             dateLabelNoImage.isHidden = false
         }
-    }
-    
-    private func hideAllElements() {
-        photoImageView?.isHidden = true
-        titleLabel.isHidden = true
-        dateLabel.isHidden = true
-        titleLabelNoImage.isHidden = true
-        dateLabelNoImage.isHidden = true
     }
 }

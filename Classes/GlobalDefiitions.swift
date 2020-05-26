@@ -12,6 +12,7 @@ struct GlobalDefiitions {
     
     struct Keychain {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
+        static let isShowedTutorialKey = "com.stoletnaedine.GetBetter.isShowedTutorialKey"
     }
     
     struct TabBar {
@@ -45,7 +46,7 @@ struct GlobalDefiitions {
     }
     
     struct Profile {
-        static let editTitle = "Редактировать профиль"
+        static let editTitle = "Редактировать"
         static let signOut = "Выйти"
         static let update = "Обновить"
         static let name = "Имя"

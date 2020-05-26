@@ -17,7 +17,7 @@ class SettingsViewModel {
         
         DispatchQueue.global().async {
             var name = "Анонимный пользователь"
-            var email = "Email не указан"
+            var email = "E-mail не указан"
             var avatar: UIImage?
             
             if let userName = user.displayName {

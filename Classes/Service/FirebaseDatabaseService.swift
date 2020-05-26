@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseAuth
+import Toaster
 
 class FirebaseDatabaseService: DatabaseService {
     
@@ -137,16 +138,6 @@ class FirebaseDatabaseService: DatabaseService {
         }
     }
     
-    private func currentUserPath() -> DatabaseReference? {
-        guard let userId = user?.uid else { return nil }
-        
-        print("Current userId = \(userId)")
-        
-        return ref
-            .child(usersPath)
-            .child(userId)
-    }
-    
     private func updateSphereValue(_ sphereValue: SphereValue, pathToSave: String) -> Bool {
         guard let ref = currentUserPath() else { return false }
         guard let sphereField = sphereValue.sphere?.rawValue else { return false }
@@ -241,6 +232,30 @@ class FirebaseDatabaseService: DatabaseService {
                 print("Getting sphere metrics error=\(error)")
                 dispatchGroup.leave()
             }
+        })
+    }
+    
+    private func currentUserPath() -> DatabaseReference? {
+        guard let userId = user?.uid else { return nil }
+        
+        checkInternetConnection()
+        
+        print("Current userId = \(userId)")
+        
+        return ref
+            .child(usersPath)
+            .child(userId)
+    }
+    
+    private func checkInternetConnection() {
+        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+          if let _ = snapshot.value as? Bool {
+            print("Database Connected")
+          } else {
+            // Toast(text: "Отсутствует интернет", delay: 0, duration: 3).show()
+            print("Database Not connected")
+          }
         })
     }
 }

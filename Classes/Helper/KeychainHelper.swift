@@ -11,7 +11,8 @@ import SwiftKeychainWrapper
 
 class KeychainHelper {
     
-    static func saveCredentials(email: String) -> Bool {
+    @discardableResult
+    static func saveUserEmail(_ email: String) -> Bool {
         return KeychainWrapper.standard.set(email, forKey: GlobalDefiitions.Keychain.emailKey)
     }
     
