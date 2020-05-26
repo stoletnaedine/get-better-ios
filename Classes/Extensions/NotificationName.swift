@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let logout = Notification.Name("logout")
+    static let noInternet = Notification.Name("noInternet")
 }

@@ -32,6 +32,12 @@ class NoInternetViewController: UIViewController {
     }
     
     private func setupView() {
-        
+        imageView.image = R.image.noInternet()
+        titleLabel.text = R.string.localizable.noInternetTitle()
+        titleLabel.font = .journalTitleFont
+        titleLabel.textColor = .violet
+        noticeLabel.text = R.string.localizable.noInternetNotice()
+        retryButton.setTitle(R.string.localizable.noInternetButton(), for: .normal)
+        retryButton.setTitleColor(.violet, for: .normal)
     }
 }

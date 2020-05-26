@@ -16,3 +16,9 @@
 // MARK: Journal
 
 "Journal.loading" = "Загрузка";
+
+// MARK: NoInternet
+
+"NoInternet.Title" = "Упс, а где интернет?";
+"NoInternet.Notice" = "Без интернета приложение не сможет работать.";
+"NoInternet.Button" = "Повторить";

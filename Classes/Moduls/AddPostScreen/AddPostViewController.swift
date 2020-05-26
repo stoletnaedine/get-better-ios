@@ -118,27 +118,27 @@ class AddPostViewController: UIViewController {
     }
     
     func customizeView() {
+        photoImageView.isHidden = true
         postTextView.delegate = self
         postTextView.becomeFirstResponder()
         postTextView.font = postTextView.font?.withSize(18)
-        photoImageView.isHidden = true
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        titleLabel.font = .journalTitleFont
         titleLabel.textColor = .violet
         titleLabel.text = "Добавить запись"
         selectedSphereLabel.textColor = .violet
         selectedSphereLabel.text = GlobalDefiitions.Post.sphereDefault
-        selectedSphereLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        selectedSphereLabel.font = .journalButtonFont
         saveButtonView.backgroundColor = .gray
         saveButtonView.layer.cornerRadius = 20
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
-        saveButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        saveButton.titleLabel?.font = .journalButtonFont
         cancelButton.setTitle("", for: .normal)
         attachButton.setTitle("", for: .normal)
-        dateLabel.font = UIFont.systemFont(ofSize: 14)
+        dateLabel.font = .journalDateFont
         dateLabel.textColor = .gray
         dateLabel.text = Date.currentDateWithWeekday()
-        symbolsCountLabel.font = UIFont.systemFont(ofSize: 14)
+        symbolsCountLabel.font = .journalDateFont
         symbolsCountLabel.textColor = .gray
         symbolsCountLabel.text = "\(postTextView.text.count)/\(maxSymbolsCount)"
         sphereView.layer.cornerRadius = 20

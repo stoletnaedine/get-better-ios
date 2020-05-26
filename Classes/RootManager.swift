@@ -9,13 +9,21 @@
 import Toaster
 import Firebase
 import Reachability
+import UIKit
 
 class RootManager {
     
     var window: UIWindow?
     
     func start() {
-        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(logout),
+                                               name: .logout,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showNoInternetViewController),
+                                               name: .logout,
+                                               object: nil)
         
         setupNavigationBar()
         configToaster()
@@ -60,7 +68,7 @@ class RootManager {
         showAuthController()
     }
     
-    func showNoInternetViewController() {
+    @objc func showNoInternetViewController() {
         let noInternetViewController = NoInternetViewController()
         window?.rootViewController = noInternetViewController
     }

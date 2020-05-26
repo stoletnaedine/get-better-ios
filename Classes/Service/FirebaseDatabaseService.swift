@@ -9,7 +9,6 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseAuth
-import Toaster
 
 class FirebaseDatabaseService: DatabaseService {
     

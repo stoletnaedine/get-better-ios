@@ -39,4 +39,16 @@ extension UIFont {
     static var journalTableDateFont: UIFont {
         return UIFont.systemFont(ofSize: 12)
     }
+    
+    static var journalTitleFont: UIFont {
+        return UIFont.boldSystemFont(ofSize: 24)
+    }
+    
+    static var journalButtonFont: UIFont {
+        return UIFont.boldSystemFont(ofSize: 18)
+    }
+    
+    static var journalDateFont: UIFont {
+        return UIFont.systemFont(ofSize: 14)
+    }
 }
