@@ -57,7 +57,7 @@ class AddPostViewController: UIViewController {
             return
         }
         guard let sphere = selectedSphere else {
-            Toast(text: "Выберите сферу", delay: 0, duration: 0.3).show()
+            Toast(text: "Выбери сферу", delay: 0, duration: 0.3).show()
             return
         }
         
@@ -87,11 +87,12 @@ class AddPostViewController: UIViewController {
             let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp,
                             photoUrl: photoResult.photoUrl, photoName: photoResult.photoName,
                             previewUrl: photoResult.previewUrl, previewName: photoResult.previewName)
-            _ = self?.databaseService.savePost(post)
+            
+            self?.databaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
-                Toast(text: "\(GlobalDefiitions.Post.postSavedSuccess)\n\(sphere.icon) \(sphere.name) +0,1 балла!", delay: 0, duration: 5).show()
+                Toast(text: "\(sphere.icon) \(sphere.name) +0,1 балла", delay: 0, duration: 5).show()
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)
             }

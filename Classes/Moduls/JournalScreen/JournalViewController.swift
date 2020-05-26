@@ -111,18 +111,17 @@ class JournalViewController: UIViewController {
     }
     
     @objc func addPost() {
-        let postViewController = AddPostViewController()
-        postViewController.completion = { [weak self] in
+        let addPostViewController = AddPostViewController()
+        addPostViewController.completion = { [weak self] in
             self?.updatePostsInTableView()
         }
-        present(postViewController, animated: true, completion: nil)
+        present(addPostViewController, animated: true, completion: nil)
     }
 }
 
 extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func getPost(by indexPath: IndexPath) -> Post? {
-        
         let date = self.sectionMonthYear[indexPath.section]
         let postsDateInSection = self.sectionPosts.filter { $0.sectionName == date }
         
@@ -139,7 +138,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         let date = sectionMonthYear[section]
         let postsInSectionByDate = sectionPosts.filter { $0.sectionName == date }
         
@@ -155,7 +153,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .white
@@ -170,7 +167,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let post = getPost(by: indexPath) else { return UITableViewCell() }
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
@@ -181,7 +177,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         guard let post = getPost(by: indexPath) else { return }
         
         let postDetailViewController = PostDetailViewController()
@@ -194,7 +189,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
             guard let post = getPost(by: indexPath) else { return }
             
@@ -204,5 +198,4 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             }
     }
     
-
 }

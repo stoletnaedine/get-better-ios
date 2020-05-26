@@ -39,7 +39,7 @@
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
 		C328EE062447294100445704 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328EE042447294100445704 /* RegisterViewController.xib */; };
 		C32D4CE123D0F3FC00AD9863 /* GlobalDefiitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* GlobalDefiitions.swift */; };
-		C33AD1DF2451AE9B00A08006 /* SetupPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD1DE2451AE9B00A08006 /* SetupPageViewController.swift */; };
+		C33AD1DF2451AE9B00A08006 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD1DE2451AE9B00A08006 /* OnboardingPageViewController.swift */; };
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
@@ -77,8 +77,8 @@
 		C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EB7323C710BB0045B70A /* RootManager.swift */; };
 		C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */; };
 		C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */; };
-		C3ED5A2A23AFBF1300C7A492 /* LifeCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */; };
-		C3ED5A2B23AFBF1300C7A492 /* LifeCircleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */; };
+		C3ED5A2A23AFBF1300C7A492 /* LifeCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A2823AFBF1300C7A492 /* LifeCircleViewController.swift */; };
+		C3ED5A2B23AFBF1300C7A492 /* LifeCircleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A2923AFBF1300C7A492 /* LifeCircleViewController.xib */; };
 		C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */; };
 		C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */; };
 		C9446CAB022057A4B4E41A5C /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */; };
@@ -121,7 +121,7 @@
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C328EE042447294100445704 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		C32D4CE023D0F3FC00AD9863 /* GlobalDefiitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDefiitions.swift; sourceTree = "<group>"; };
-		C33AD1DE2451AE9B00A08006 /* SetupPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPageViewController.swift; sourceTree = "<group>"; };
+		C33AD1DE2451AE9B00A08006 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -159,8 +159,8 @@
 		C3E7EB7323C710BB0045B70A /* RootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootManager.swift; sourceTree = "<group>"; };
 		C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalViewController.xib; sourceTree = "<group>"; };
-		C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCircleController.swift; sourceTree = "<group>"; };
-		C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LifeCircleController.xib; sourceTree = "<group>"; };
+		C3ED5A2823AFBF1300C7A492 /* LifeCircleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCircleViewController.swift; sourceTree = "<group>"; };
+		C3ED5A2923AFBF1300C7A492 /* LifeCircleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LifeCircleViewController.xib; sourceTree = "<group>"; };
 		C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPostViewController.xib; sourceTree = "<group>"; };
 		E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -297,11 +297,11 @@
 		C33AD1D9245191A500A08006 /* OnBoardingScreen */ = {
 			isa = PBXGroup;
 			children = (
-				6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */,
-				6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */,
-				C33AD1DE2451AE9B00A08006 /* SetupPageViewController.swift */,
+				C33AD1DE2451AE9B00A08006 /* OnboardingPageViewController.swift */,
 				6ED5FF14245207AC00792B1F /* WelcomeViewController.swift */,
 				6ED5FF15245207AC00792B1F /* WelcomeViewController.xib */,
+				6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */,
+				6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */,
 			);
 			path = OnBoardingScreen;
 			sourceTree = "<group>";
@@ -380,8 +380,8 @@
 			isa = PBXGroup;
 			children = (
 				C36DE9C4246E84BB005635E4 /* ViewModel */,
-				C3ED5A2823AFBF1300C7A492 /* LifeCircleController.swift */,
-				C3ED5A2923AFBF1300C7A492 /* LifeCircleController.xib */,
+				C3ED5A2823AFBF1300C7A492 /* LifeCircleViewController.swift */,
+				C3ED5A2923AFBF1300C7A492 /* LifeCircleViewController.xib */,
 				6E5A984A2455888E001F8008 /* SphereMetricsCell */,
 				6E711E84246856730068FD8C /* SphereDetailScreen */,
 				6E045E952463E7800001E378 /* AchievementsCell */,
@@ -589,7 +589,7 @@
 				C3C66AF324582B5000D3964D /* ProfileTableViewCell.xib in Resources */,
 				9277D38F238C725300B3AECA /* Assets.xcassets in Resources */,
 				C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */,
-				C3ED5A2B23AFBF1300C7A492 /* LifeCircleController.xib in Resources */,
+				C3ED5A2B23AFBF1300C7A492 /* LifeCircleViewController.xib in Resources */,
 				C3BFEBCC2477F93E000B5B41 /* Localizable.strings in Resources */,
 				C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */,
 				6ED5FF17245207AC00792B1F /* WelcomeViewController.xib in Resources */,
@@ -704,7 +704,7 @@
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
 				C3BFEBC52477E85F000B5B41 /* SettingsViewModel.swift in Sources */,
-				C33AD1DF2451AE9B00A08006 /* SetupPageViewController.swift in Sources */,
+				C33AD1DF2451AE9B00A08006 /* OnboardingPageViewController.swift in Sources */,
 				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
 				6E6A217A2466C6FB00D8AC68 /* Atricle.swift in Sources */,
 				C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */,
@@ -724,7 +724,7 @@
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
 				C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */,
-				C3ED5A2A23AFBF1300C7A492 /* LifeCircleController.swift in Sources */,
+				C3ED5A2A23AFBF1300C7A492 /* LifeCircleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

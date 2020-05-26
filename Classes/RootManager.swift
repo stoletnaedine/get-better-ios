@@ -64,11 +64,11 @@ class RootManager {
     }
     
     @objc func showSetupSpherePageViewController() {
-        let setupPageViewController = SetupPageViewController()
-        setupPageViewController.completion = { [weak self] in
+        let onboardingPageViewController = OnboardingPageViewController()
+        onboardingPageViewController.completion = { [weak self] in
             self?.showTabBarController()
         }
-        window?.rootViewController = UINavigationController(rootViewController: setupPageViewController)
+        window?.rootViewController = UINavigationController(rootViewController: onboardingPageViewController)
     }
     
     func showAuthController() {

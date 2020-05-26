@@ -9,7 +9,10 @@
 import Foundation
 
 protocol DatabaseService {
+    
+    @discardableResult
     func savePost(_ post: Post) -> Bool
+    
     func deletePost(_ post: Post) -> Bool
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
     func saveSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool

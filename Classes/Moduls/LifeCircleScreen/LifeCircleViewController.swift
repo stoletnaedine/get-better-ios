@@ -1,5 +1,5 @@
 //
-//  CircleController.swift
+//  LifeCircleViewController.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 22.03.2020.
@@ -10,7 +10,7 @@ import UIKit
 import Charts
 import Toaster
 
-class LifeCircleController: UIViewController {
+class LifeCircleViewController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
@@ -44,6 +44,11 @@ class LifeCircleController: UIViewController {
         setupSegmentedControl()
         setupTableViews()
         setupRefreshControl()
+        loadAndShowData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadAndShowData()
     }
     
@@ -251,7 +256,7 @@ class DataSetValueFormatter: IValueFormatter {
     }
 }
 
-extension LifeCircleController: UITableViewDelegate, UITableViewDataSource {
+extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func getSphereValue(by indexPath: IndexPath) -> SphereValue? {
         

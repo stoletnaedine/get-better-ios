@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LifeCircleController" customModule="GetBetter" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LifeCircleViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="achievementsTableView" destination="Uam-k0-6uc" id="3b3-iu-c6L"/>
                 <outlet property="chartView" destination="fxn-qj-OtY" id="jI9-FH-eve"/>
@@ -25,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="arR-df-p35">
-                    <rect key="frame" x="40" y="64" width="334" height="32"/>
+                    <rect key="frame" x="40" y="20" width="334" height="32"/>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -36,18 +34,18 @@
                     </connections>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vic-bJ-U3q" userLabel="Metrics Table View">
-                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
+                    <rect key="frame" x="0.0" y="71" width="414" height="825"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uam-k0-6uc" userLabel="Achievments Table View">
-                    <rect key="frame" x="0.0" y="115" width="414" height="747"/>
+                    <rect key="frame" x="0.0" y="71" width="414" height="825"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="Circle Chart View" customClass="RadarChartView" customModule="Charts">
-                    <rect key="frame" x="10" y="115" width="394" height="707"/>
+                    <rect key="frame" x="10" y="71" width="394" height="785"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Legend View">
-                            <rect key="frame" x="115" y="686" width="164" height="21"/>
+                            <rect key="frame" x="115" y="764" width="164" height="21"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-IX-58a" userLabel="Current Label">
                                     <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>

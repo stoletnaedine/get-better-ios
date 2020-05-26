@@ -1,5 +1,5 @@
 //
-//  PageViewController.swift
+//  OnboardingPageViewController.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 23.04.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import Toaster
 
-class SetupPageViewController: UIViewController {
+class OnboardingPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
     let databaseService = FirebaseDatabaseService()
@@ -92,7 +92,7 @@ class SetupPageViewController: UIViewController {
     }
 }
 
-extension SetupPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension OnboardingPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         

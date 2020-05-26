@@ -20,22 +20,22 @@ class TabBarController: UITabBarController {
     }
     
     func initViewControllers() {
-        let circleVC = LifeCircleController()
-        circleVC.setupSphereCompletion = { [weak self] in
+        let lifeCircleVC = LifeCircleViewController()
+        lifeCircleVC.setupSphereCompletion = { [weak self] in
             self?.setupSphereCompletion()
         }
-        let circleViewController = UINavigationController(rootViewController: circleVC)
-        circleViewController.tabBarItem.image = R.image.circle()
-        circleViewController.tabBarItem.title = GlobalDefiitions.TabBar.lifeCircleTitle
+        let lifeCircleNC = UINavigationController(rootViewController: lifeCircleVC)
+        lifeCircleNC.tabBarItem.image = R.image.circle()
+        lifeCircleNC.tabBarItem.title = GlobalDefiitions.TabBar.lifeCircleTitle
         
-        let journalViewController = UINavigationController(rootViewController: JournalViewController())
-        journalViewController.tabBarItem.image = R.image.journal()
-        journalViewController.tabBarItem.title = GlobalDefiitions.TabBar.journalTitle
+        let journalNC = UINavigationController(rootViewController: JournalViewController())
+        journalNC.tabBarItem.image = R.image.journal()
+        journalNC.tabBarItem.title = GlobalDefiitions.TabBar.journalTitle
 
-        let settingsViewController = UINavigationController(rootViewController: SettingsViewController())
-        settingsViewController.tabBarItem.image = R.image.settings()
-        settingsViewController.tabBarItem.title = GlobalDefiitions.TabBar.settingsTitle
+        let settingsNC = UINavigationController(rootViewController: SettingsViewController())
+        settingsNC.tabBarItem.image = R.image.settings()
+        settingsNC.tabBarItem.title = GlobalDefiitions.TabBar.settingsTitle
         
-        viewControllers = [circleViewController, journalViewController, settingsViewController]
+        viewControllers = [lifeCircleNC, journalNC, settingsNC]
     }
 }
