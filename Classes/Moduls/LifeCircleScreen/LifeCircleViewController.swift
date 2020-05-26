@@ -27,13 +27,11 @@ class LifeCircleViewController: UIViewController {
     var currentSphereMetrics: SphereMetrics?
     var posts: [Post] = []
     var achievements: [Achievement] = []
-    let sphereMetricsXibName = String(describing: SphereMetricsTableViewCell.self)
-    let sphereMetricsReuseCellIdentifier = "SphereMetricsCell"
-    let achievementsXibName = String(describing: AchievementsTableViewCell.self)
-    let achievementsReuseCellIdentifier = "AchievementsCell"
+    let sphereMetricsXibName = R.nib.sphereMetricsTableViewCell.name
+    let sphereMetricsReuseCellIdentifier = R.reuseIdentifier.sphereMetricsCell.identifier
+    let achievementsXibName = R.nib.achievementsTableViewCell.name
+    let achievementsReuseCellIdentifier = R.reuseIdentifier.achievementsCell.identifier
     let sphereIconSize: CGFloat = 30
-    var startDataIsVisible = true
-    var currentDataIsVisible = true
     
     var setupSphereCompletion: () -> () = {}
     

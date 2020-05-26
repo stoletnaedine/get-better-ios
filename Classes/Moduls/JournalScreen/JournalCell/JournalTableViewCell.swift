@@ -56,8 +56,10 @@ class JournalTableViewCell: UITableViewCell {
     }
     
     func setupView() {
-        showImageInCell(false)
         photoImageView.image = nil
+        showImageInCell(false)
+        photoImageView.layer.cornerRadius = 5
+        photoImageView.layer.masksToBounds = true
         sphereView.layer.cornerRadius = 10
         sphereNameLabel.font = .sphereLabelFont
         titleLabel.font = .journalTableTitleFont

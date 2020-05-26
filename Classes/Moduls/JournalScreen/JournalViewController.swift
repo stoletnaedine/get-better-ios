@@ -19,8 +19,8 @@ class JournalViewController: UIViewController {
     var sectionMonthYear: [String] = []
     var sectionPosts: [PostsDateSection] = []
     let SectionHeaderHeight: CGFloat = 30
-    let cellIdentifier = "JournalCell"
-    let cellXibName = "JournalTableViewCell"
+    let cellIdentifier = R.reuseIdentifier.journalCell.identifier
+    let cellXibName = R.nib.journalTableViewCell.name
     
     override func viewDidLoad() {
         super.viewDidLoad()
