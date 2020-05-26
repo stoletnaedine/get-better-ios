@@ -1,7 +1,6 @@
 target 'GetBetter' do
   use_frameworks!
 
-  pod 'Alamofire'
   pod 'Toaster'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
@@ -11,4 +10,5 @@ target 'GetBetter' do
   pod 'Charts'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'R.swift'
+  pod 'ReachabilitySwift'
 end

@@ -6,10 +6,9 @@
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import UIKit
-import CoreData
 import Toaster
 import Firebase
+import Reachability
 
 class RootManager {
     
@@ -24,6 +23,12 @@ class RootManager {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window?.makeKeyAndVisible()
+        
+        let reachability = try! Reachability()
+        if reachability.connection == .unavailable {
+            showNoInternetViewController()
+            return
+        }
         
         if Auth.auth().currentUser == nil {
             showAuthController()
@@ -53,6 +58,11 @@ class RootManager {
     @objc func logout() {
         try! Auth.auth().signOut()
         showAuthController()
+    }
+    
+    func showNoInternetViewController() {
+        let noInternetViewController = NoInternetViewController()
+        window?.rootViewController = noInternetViewController
     }
     
     @objc func showTabBarController() {

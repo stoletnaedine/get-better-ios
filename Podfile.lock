@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.2.0)
   - Charts (3.5.0):
     - Charts/Core (= 3.5.0)
   - Charts/Core (3.5.0)
@@ -73,26 +72,26 @@ PODS:
   - R.swift (5.2.2):
     - R.swift.Library (~> 5.2.0)
   - R.swift.Library (5.2.0)
+  - ReachabilitySwift (5.0.0)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - SwiftKeychainWrapper (3.4.0)
   - Toaster (2.2.0)
 
 DEPENDENCIES:
-  - Alamofire
   - Charts
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
   - R.swift
+  - ReachabilitySwift
   - SwiftEntryKit (= 1.2.3)
   - SwiftKeychainWrapper
   - Toaster
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - Charts
     - Firebase
     - FirebaseAuth
@@ -113,12 +112,12 @@ SPEC REPOS:
     - QuickLayout
     - R.swift
     - R.swift.Library
+    - ReachabilitySwift
     - SwiftEntryKit
     - SwiftKeychainWrapper
     - Toaster
 
 SPEC CHECKSUMS:
-  Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
   Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   Firebase: 5719b4f965f76643241a1bb8244483ff6117db39
   FirebaseAuth: 7047aec89c0b17ecd924a550c853f0c27ac6015e
@@ -139,10 +138,11 @@ SPEC CHECKSUMS:
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   R.swift: 7c52cdc57a66840ffe6cbd8a823d732059d42a32
   R.swift.Library: 5ba4f1631300caf9a4d890186930da85d540769d
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
   Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: 9d328327d7ff5a589b097e0c9d81be3a87f892f7
+PODFILE CHECKSUM: be807034d646285b7dfe29e98a148a03e21d0f81
 
 COCOAPODS: 1.9.1

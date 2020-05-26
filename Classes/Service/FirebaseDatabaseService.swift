@@ -238,24 +238,10 @@ class FirebaseDatabaseService: DatabaseService {
     private func currentUserPath() -> DatabaseReference? {
         guard let userId = user?.uid else { return nil }
         
-        checkInternetConnection()
-        
         print("Current userId = \(userId)")
         
         return ref
             .child(usersPath)
             .child(userId)
-    }
-    
-    private func checkInternetConnection() {
-        let connectedRef = Database.database().reference(withPath: ".info/connected")
-        connectedRef.observe(.value, with: { snapshot in
-          if let _ = snapshot.value as? Bool {
-            print("Database Connected")
-          } else {
-            // Toast(text: "Отсутствует интернет", delay: 0, duration: 3).show()
-            print("Database Not connected")
-          }
-        })
     }
 }
