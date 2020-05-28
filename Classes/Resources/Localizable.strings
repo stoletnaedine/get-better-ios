@@ -156,3 +156,4 @@
 // MARK: AddPost
 "AddPost.title" = "Добавить запись";
 "AddPost.save" = "Сохранить";
+"AddPost.maxSymbolAlert" = "Не более %@ символов";

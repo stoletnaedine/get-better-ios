@@ -183,7 +183,7 @@ extension AddPostViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         if text.count > maxSymbolsCount {
-            Toast(text: "Не более \(maxSymbolsCount) символов").show()
+            Toast(text: R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))).show()
         }
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)

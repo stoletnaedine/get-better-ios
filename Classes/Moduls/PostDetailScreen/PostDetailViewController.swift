@@ -43,7 +43,7 @@ class PostDetailViewController: UIViewController {
     @objc func copyLabelText(_ sender: UITapGestureRecognizer) {
         if let copyText = textLabel.text {
             UIPasteboard.general.string = copyText
-            Toast(text: "Скопировано", delay: 0, duration: 0.5).show()
+            Toast(text: R.string.localizable.textCopyAlert(), delay: 0, duration: 0.5).show()
         }
     }
 
