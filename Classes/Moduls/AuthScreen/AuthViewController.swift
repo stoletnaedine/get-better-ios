@@ -115,7 +115,7 @@ class AuthViewController: UIViewController {
         passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterPassword(),
                                                                      attributes: NSAttributedString.formFieldPlaceholderAttributes)
         passwordTextField.isSecureTextEntry = true
-        eyeImageView.image = UIImage(named: "combinedShape")
+        eyeImageView.image = R.image.combinedShape()
         eyeButton.setTitle("", for: .normal)
         
         enterView.backgroundColor = .violet
@@ -136,7 +136,7 @@ class AuthViewController: UIViewController {
         registrationButton.titleLabel?.font = .formButtonFont
         registrationButton.titleLabel?.underline()
         
-        anonymButton.setTitle("Продолжить без регистрации", for: .normal)
+        anonymButton.setTitle(R.string.localizable.authAnonymButton(), for: .normal)
         anonymButton.setTitleColor(.violet, for: .normal)
         anonymButton.titleLabel?.font = .formButtonFont
         anonymButton.titleLabel?.underline()

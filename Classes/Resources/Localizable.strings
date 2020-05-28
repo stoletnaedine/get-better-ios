@@ -41,6 +41,7 @@
 "Auth.forgotPassword" = "Забыли пароль?";
 "Auth.register" = "Регистрация";
 "Auth.successRegister" = "Вы успешно зарегистрировались";
+"Auth.anonymButton" = "Продолжить без регистрации";
 
 // MARK: RegisterValidate
 
@@ -70,6 +71,20 @@
 // MARK: Onboarding
 
 "Onboarding.title" = "Привет";
+"Onboarding.save" = "Сохранить";
+"Onboarding.exit" = "Выйти";
+"Onboarding.emptyValuesWarning" = "Нужно выбрать все значения";
+"Onboarding.10" = "10 — идеально";
+"Onboarding.9" = "9 — отлично";
+"Onboarding.8" = "8 — хорошо";
+"Onboarding.7" = "7 — неплохо";
+"Onboarding.6" = "6 — выше среднего";
+"Onboarding.5" = "5 — средне";
+"Onboarding.4" = "4 — ниже среднего";
+"Onboarding.3" = "3 — так себе";
+"Onboarding.2" = "2 — плохо";
+"Onboarding.1" = "1 — ужасно";
+"Onboarding.0" = "0 — у меня нет этого";
 
 // MARK: Post
 
@@ -109,3 +124,14 @@
 "Settings.exit" = "Выйти";
 "Settings.defaultName" = "Анонимный пользователь";
 "Settings.defaultEmail" = "E-mail не указан";
+
+// MARK: EditProfile
+
+"EditProfile.successPassChanged" = "Пароль успешно изменён";
+"EditProfile.delAccountAlertTitle" = "Удалить аккаунт?";
+"EditProfile.delAccountAlertMessage" = "Ваш аккаунт и данные будут безвозвратно удалены";
+"EditProfile.delAccountAlertYesButton" = "Да, удалить";
+"EditProfile.delAccountAlertNoButton" = "Нет";
+"EditProfile.delAccountSuccessMessage" = "Аккаунт успешно удалён. До новых встреч!";
+"EditProfile.delAccount" = "Удалить аккаунт";
+"EditProfile.save" = "Сохранить";

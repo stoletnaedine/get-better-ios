@@ -18,17 +18,17 @@ class SetupSphereValueViewController: UIViewController {
     var sphereValue: Double? = GlobalDefiitions.notValidSphereValue
     var sphere: Sphere?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-    let valuesTitle = ["10 — идеально",
-                       "9 — отлично",
-                       "8 — хорошо",
-                       "7 — неплохо",
-                       "6 — выше среднего",
-                       "5 — средне",
-                       "4 — ниже среднего",
-                       "3 — так себе",
-                       "2 — плохо",
-                       "1 — ужасно",
-                       "0 — у меня нет этого"]
+    let valuesTitle = [R.string.localizable.onboarding10(),
+                       R.string.localizable.onboarding9(),
+                       R.string.localizable.onboarding8(),
+                       R.string.localizable.onboarding7(),
+                       R.string.localizable.onboarding6(),
+                       R.string.localizable.onboarding5(),
+                       R.string.localizable.onboarding4(),
+                       R.string.localizable.onboarding3(),
+                       R.string.localizable.onboarding2(),
+                       R.string.localizable.onboarding1(),
+                       R.string.localizable.onboarding0()]
 
     override func viewDidLoad() {
         super.viewDidLoad()

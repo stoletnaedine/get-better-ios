@@ -37,14 +37,19 @@ class OnboardingPageViewController: UIViewController {
     
     func setupPageControl() {
         guard let firstViewController = viewControllers.first else { return }
-        let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        let pageViewController = UIPageViewController(transitionStyle: .scroll,
+                                                      navigationOrientation: .horizontal,
+                                                      options: nil)
         pageViewController.delegate = self
         
         let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
         appearance.pageIndicatorTintColor = .thirtyGray
         appearance.currentPageIndicatorTintColor = .violet
         
-        pageViewController.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
+        pageViewController.setViewControllers([firstViewController],
+                                              direction: .forward,
+                                              animated: true,
+                                              completion: nil)
         pageViewController.dataSource = self
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
@@ -52,13 +57,13 @@ class OnboardingPageViewController: UIViewController {
     }
     
     func setupBarButton() {
-        let saveBarButton = UIBarButtonItem(title: "Сохранить",
+        let saveBarButton = UIBarButtonItem(title: R.string.localizable.onboardingSave(),
                                             style: .plain,
                                             target: self,
                                             action: #selector(saveSphereValues))
         navigationItem.rightBarButtonItem = saveBarButton
         
-        let exitBarButton = UIBarButtonItem(title: "Выйти",
+        let exitBarButton = UIBarButtonItem(title: R.string.localizable.onboardingExit(),
                                             style: .plain,
                                             target: self,
                                             action: #selector(exit))
@@ -81,7 +86,7 @@ class OnboardingPageViewController: UIViewController {
         let sphereMetrics = SphereMetrics(values: metricsArray)
         
         if sphereMetrics.notValid() {
-            Toast(text: "Выберите все значения").show()
+            Toast(text: R.string.localizable.onboardingEmptyValuesWarning()).show()
             return
         }
         
@@ -94,7 +99,8 @@ class OnboardingPageViewController: UIViewController {
 
 extension OnboardingPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return nil }
         let previousIndex = currentIndex - 1
@@ -104,7 +110,8 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource, UIPageVi
         return viewControllers[previousIndex]
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return nil }
         let nextIndex = currentIndex + 1

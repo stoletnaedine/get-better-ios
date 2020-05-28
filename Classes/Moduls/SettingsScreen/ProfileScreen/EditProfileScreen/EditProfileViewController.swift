@@ -59,7 +59,6 @@ class EditProfileViewController: UIViewController {
             storageService.uploadAvatar(photo: newAvatar, completion: { result in
                 switch result {
                 case .success(let url):
-                    print("url=\(url)")
                     let changeRequest = user.createProfileChangeRequest()
                     changeRequest.photoURL = url
                     changeRequest.commitChanges(completion: { error in
@@ -101,7 +100,7 @@ class EditProfileViewController: UIViewController {
                 if let error = error {
                     Toast(text: "\(error.localizedDescription)").show()
                 } else {
-                    Toast(text: "Пароль успешно изменён").show()
+                    Toast(text: R.string.localizable.editProfileSuccessPassChanged()).show()
                 }
                 dispatchGroup.leave()
             })
@@ -133,22 +132,31 @@ class EditProfileViewController: UIViewController {
     @IBAction func deleteAccountButtonDidTap(_ sender: UIButton) {
         guard let user = user else { return }
     
-        let alert = UIAlertController(title: "Удалить аккаунт?",
-                                      message: "Ваш аккаунт и данные будут безвозвратно удалены",
+        let alert = UIAlertController(title: R.string.localizable.editProfileDelAccountAlertTitle(),
+                                      message: R.string.localizable.editProfileDelAccountAlertMessage(),
                                       preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Да, удалить", style: .destructive, handler: { _ in
+        alert.addAction(UIAlertAction(title: R.string.localizable.editProfileDelAccountAlertYesButton(),
+                                      style: .destructive, handler: { _ in
             user.delete(completion: { error in
                 if let error = error {
-                    Toast(text: error.localizedDescription, delay: 0, duration: 5).show()
+                    Toast(text: error.localizedDescription,
+                          delay: 0,
+                          duration: 5)
+                        .show()
                 } else {
-                    Toast(text: "Аккаунт успешно удалён. До новых встреч!", delay: 0, duration: 5).show()
+                    Toast(text: R.string.localizable.editProfileDelAccountSuccessMessage(),
+                          delay: 0,
+                          duration: 5)
+                        .show()
                     NotificationCenter.default.post(name: .logout, object: nil)
                 }
             })
         }))
         
-        alert.addAction(UIAlertAction(title: "Нет", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: R.string.localizable.editProfileDelAccountAlertNoButton(),
+                                      style: .default,
+                                      handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -203,21 +211,25 @@ class EditProfileViewController: UIViewController {
         noticeLabel.textColor = .gray
         noticeLabel.text = R.string.localizable.profileWarning()
         
-        deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
+        deleteAccountButton.setTitle(R.string.localizable.editProfileDelAccount(), for: .normal)
         deleteAccountButton.setTitleColor(.red, for: .normal)
         deleteAccountButton.titleLabel?.font = .formButtonFont
         deleteAccountButton.titleLabel?.underline()
     }
     
     func customizeBarButon() {
-        let saveBarButtom = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveProfile))
+        let saveBarButtom = UIBarButtonItem(title: R.string.localizable.editProfileSave(),
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(saveProfile))
         navigationItem.rightBarButtonItem = saveBarButtom
     }
 }
 
 extension EditProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         avatarImageView.image = image
