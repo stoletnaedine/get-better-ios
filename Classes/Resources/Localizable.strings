@@ -12,6 +12,8 @@
 "LifeCircle.circle" = "Колесо";
 "LifeCircle.metrics" = "Метрики";
 "LifeCircle.achievements" = "Достижения";
+"LifeCircle.current" = "Текущее";
+"LifeCircle.start" = "Начальное";
 
 // MARK: Journal
 
@@ -45,9 +47,20 @@
 
 // MARK: RegisterValidate
 
-"emailIsEmpty" = "Введите Email";
-"emailIsNotValid" = "Введите корректный Email";
+"emailIsEmpty" = "Введите E-mail";
+"emailIsNotValid" = "Введите корректный E-mail";
 "passwordIsEmpty" = "Введите пароль";
+
+// MARK: ResetPassword
+
+"ResetPassword.alertEmail" = "Письмо отправлено на ваш E-mail. Проверьте почту";
+"ResetPassword.title" = "Сбросить пароль";
+"ResetPassword.button" = "Сбросить пароль";
+"ResetPassword.noticeLabel" = "На указанный E-mail придёт ссылка, пройдя по которой вы сможете изменить пароль.";
+
+// MARK: Register
+
+"Register.sucessAlert" = "Вы успешно зарегистрировались";
 
 // MARK: Error
 
@@ -135,3 +148,7 @@
 "EditProfile.delAccountSuccessMessage" = "Аккаунт успешно удалён. До новых встреч!";
 "EditProfile.delAccount" = "Удалить аккаунт";
 "EditProfile.save" = "Сохранить";
+
+// MARK: Text
+
+"Text.copyAlert" = "Скопировано";

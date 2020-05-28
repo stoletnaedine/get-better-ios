@@ -41,7 +41,9 @@ class JournalViewController: UIViewController {
     
     func setupRefreshControl() {
         let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(updatePostsInTableView), for: .valueChanged)
+        refresh.addTarget(self,
+                          action: #selector(updatePostsInTableView),
+                          for: .valueChanged)
         tableView.refreshControl = refresh
     }
     
@@ -50,7 +52,8 @@ class JournalViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        tableView.register(UINib(nibName: cellXibName, bundle: nil),
+                           forCellReuseIdentifier: cellIdentifier)
     }
     
     @objc func getPosts(completion: @escaping () -> Void) {

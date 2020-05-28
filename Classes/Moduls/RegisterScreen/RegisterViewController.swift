@@ -42,12 +42,15 @@ class RegisterViewController: UIViewController {
                 self?.removeActivityIndicator()
                 
                 if let error = error {
-                    Toast(text: "Firebase: \(error.localizedDescription)").show()
+                    Toast(text: "\(error.localizedDescription)").show()
                     return
                 }
                 
                 if let _ = Auth.auth().currentUser {
-                    Toast(text: "Вы успешно зарегистрировались", delay: 0, duration: 3).show()
+                    Toast(text: R.string.localizable.registerSucessAlert(),
+                          delay: 0,
+                          duration: 3)
+                        .show()
                     self?.completion()
                 } else {
                     self?.dismiss(animated: true, completion: nil)
@@ -61,7 +64,7 @@ class RegisterViewController: UIViewController {
     }
     
     func customizeView() {
-        self.title = R.string.localizable.authRegister()
+        title = R.string.localizable.authRegister()
         emailLabel.text = R.string.localizable.authEmail()
         emailLabel.textColor = .gray
         emailLabel.font = .formLabelFieldFont
@@ -80,11 +83,13 @@ class RegisterViewController: UIViewController {
                                                                      attributes: NSAttributedString.formFieldPlaceholderAttributes)
         registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
+        
         registerButton.clipsToBounds = true
         registerButton.setTitle("", for: .normal)
         registerButtonLabel.text = R.string.localizable.authDoRegister().uppercased()
         registerButtonLabel.textColor = .white
         registerButtonLabel.font = .formButtonFont
+        
         cancelButton.setTitle("", for: .normal)
         cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
         cancelImageView.tintColor = .violet

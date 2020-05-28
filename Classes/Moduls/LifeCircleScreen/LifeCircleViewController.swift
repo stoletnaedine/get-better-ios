@@ -114,7 +114,6 @@ class LifeCircleViewController: UIViewController {
                 let achievements = self?.viewModel.getAchievements(posts: posts,
                                                                    startSphereMetrics: startSphereMetrics,
                                                                    currentSphereMetrics: currentSphereMetrics) {
-                
                 self?.achievements = achievements
             }
             self?.setupChartView()
@@ -125,10 +124,10 @@ class LifeCircleViewController: UIViewController {
     }
     
     func setupCircleLabels() {
-        currentLabel.text = "Текущее"
+        currentLabel.text = R.string.localizable.lifeCircleCurrent()
         currentLabel.font = UIFont.boldSystemFont(ofSize: 14)
         currentLabel.textColor = .lifeCircleLineCurrent
-        startLabel.text = "Начальное"
+        startLabel.text = R.string.localizable.lifeCircleStart()
         startLabel.font = UIFont.boldSystemFont(ofSize: 14)
         startLabel.textColor = .lifeCircleLineStart
     }
@@ -192,13 +191,15 @@ class LifeCircleViewController: UIViewController {
     func setupTableViews() {
         achievementsTableView.dataSource = self
         achievementsTableView.delegate = self
-        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil), forCellReuseIdentifier: achievementsReuseCellIdentifier)
+        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil),
+                                       forCellReuseIdentifier: achievementsReuseCellIdentifier)
         achievementsTableView.backgroundColor = .appBackground
         achievementsTableView.separatorInset = UIEdgeInsets.zero
         
         metricsTableView.dataSource = self
         metricsTableView.delegate = self
-        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil), forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
+        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil),
+                                  forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
         metricsTableView.backgroundColor = .appBackground
         metricsTableView.separatorInset = UIEdgeInsets.zero
     }
@@ -247,7 +248,10 @@ class XAxisFormatter: IAxisValueFormatter {
 
 class DataSetValueFormatter: IValueFormatter {
     
-    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+    func stringForValue(_ value: Double,
+                        entry: ChartDataEntry,
+                        dataSetIndex: Int,
+                        viewPortHandler: ViewPortHandler?) -> String {
 //        let dataSetCurrentIndex = 1
 //        if dataSetIndex == dataSetCurrentIndex {
 //            return value.convertToRusString()
@@ -288,7 +292,8 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             
         case metricsTableView:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier, for: indexPath) as! SphereMetricsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
+                                                     for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .default
             guard let sphereValue = getSphereValue(by: indexPath) else { return cell }
             cell.fillCell(from: sphereValue)
@@ -299,7 +304,8 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             
             let achievement = achievements[indexPath.row]
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier, for: indexPath) as! AchievementsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier,
+                                                     for: indexPath) as! AchievementsTableViewCell
             cell.selectionStyle = .none
             if !achievement.unlocked {
                 cell.backgroundColor = .lighterGray

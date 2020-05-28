@@ -26,14 +26,13 @@ class SphereMetricsTableViewCell: UITableViewCell {
     }
     
     func fillCell(from sphereValue: SphereValue) {
-        self.iconLabel.text = sphereValue.sphere?.icon
-        self.nameLabel.text = sphereValue.sphere?.name
+        iconLabel.text = sphereValue.sphere?.icon
+        nameLabel.text = sphereValue.sphere?.name
         if let value = sphereValue.value {
-            self.valueLabel.text = value.convertToRusString()
-            
+            valueLabel.text = value.convertToRusString()
             changeValueLabelColorIfValueIsLow(for: value)
         }
-        self.descriptionLabel.text = sphereValue.sphere?.description
+        descriptionLabel.text = sphereValue.sphere?.description
         
     }
     

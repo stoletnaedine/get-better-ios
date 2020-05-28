@@ -31,7 +31,7 @@ class ResetPasswordViewController: UIViewController {
         
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             !email.isEmpty else {
-                Toast(text: "Введите E-mail").show()
+                Toast(text: R.string.localizable.emailIsEmpty()).show()
                 return
         }
         
@@ -43,18 +43,21 @@ class ResetPasswordViewController: UIViewController {
             if let error = error {
                 Toast(text: error.localizedDescription).show()
             } else {
-                Toast(text: "Письмо отправлено на ваш E-mail. Проверьте почту", delay: 1, duration: 5).show()
+                Toast(text: R.string.localizable.resetPasswordAlertEmail(),
+                      delay: 1,
+                      duration: 5)
+                    .show()
                 self.dismiss(animated: true, completion: nil)
             }
         })
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func customizeView() {
-        self.title = "Сбросить пароль"
+        title = R.string.localizable.resetPasswordTitle()
         emailLabel.text = R.string.localizable.authEmail()
         emailLabel.textColor = .gray
         emailLabel.font = .formLabelFieldFont
@@ -66,12 +69,12 @@ class ResetPasswordViewController: UIViewController {
         resetPasswordView.layer.cornerRadius = 5
         resetPasswordButton.clipsToBounds = true
         resetPasswordButton.setTitle("", for: .normal)
-        resetPasswordButtonLabel.text = "Сбросить пароль".uppercased()
+        resetPasswordButtonLabel.text = R.string.localizable.resetPasswordButton().uppercased()
         resetPasswordButtonLabel.textColor = .white
         resetPasswordButtonLabel.font = .formButtonFont
         
         noticeLabel.font = .formNoticeFont
-        noticeLabel.text = "На указанный E-mail придёт ссылка, пройдя по которой вы сможете изменить пароль."
+        noticeLabel.text = R.string.localizable.resetPasswordNoticeLabel()
         
         cancelButton.setTitle("", for: .normal)
         cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
