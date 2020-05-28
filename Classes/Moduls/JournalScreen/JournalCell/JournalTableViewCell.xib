@@ -17,26 +17,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-WI-oNU">
-                        <rect key="frame" x="15" y="15" width="50" height="50"/>
+                        <rect key="frame" x="10" y="15" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="ea5-jg-ZE6"/>
                             <constraint firstAttribute="height" constant="50" id="kgU-uX-VUv"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7S-XP-xAA">
-                        <rect key="frame" x="75" y="12" width="35.5" height="17"/>
+                        <rect key="frame" x="70" y="15" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aka-vv-pMf" userLabel="Date Label">
-                        <rect key="frame" x="75" y="39" width="26.5" height="12"/>
+                        <rect key="frame" x="70" y="42" width="26.5" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rs3-HD-TzC">
-                        <rect key="frame" x="264" y="15" width="41" height="24.5"/>
+                        <rect key="frame" x="269" y="15" width="41" height="24.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTi-2s-BGw">
                                 <rect key="frame" x="5" y="5" width="31" height="14.5"/>
@@ -54,13 +54,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7is-wV-SAS" userLabel="Title Label No Image">
-                        <rect key="frame" x="15" y="12" width="35.5" height="17"/>
+                        <rect key="frame" x="10" y="15" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3F-1y-p7w" userLabel="Date Label No Image">
-                        <rect key="frame" x="15" y="39" width="26.5" height="12"/>
+                        <rect key="frame" x="10" y="42" width="26.5" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -69,19 +69,19 @@
                 <constraints>
                     <constraint firstItem="rs3-HD-TzC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7is-wV-SAS" secondAttribute="trailing" constant="15" id="1ST-cE-p2j"/>
                     <constraint firstItem="e7S-XP-xAA" firstAttribute="leading" secondItem="Le4-WI-oNU" secondAttribute="trailing" constant="10" id="9sI-dB-OU5"/>
-                    <constraint firstAttribute="trailing" secondItem="rs3-HD-TzC" secondAttribute="trailing" constant="15" id="ASw-um-sHv"/>
-                    <constraint firstItem="L3F-1y-p7w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="EVe-Ij-JSF"/>
-                    <constraint firstItem="7is-wV-SAS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Lse-2E-pHr"/>
+                    <constraint firstAttribute="trailing" secondItem="rs3-HD-TzC" secondAttribute="trailing" constant="10" id="ASw-um-sHv"/>
+                    <constraint firstItem="L3F-1y-p7w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="EVe-Ij-JSF"/>
+                    <constraint firstItem="7is-wV-SAS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Lse-2E-pHr"/>
                     <constraint firstItem="rs3-HD-TzC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Nrh-EX-OU1"/>
-                    <constraint firstItem="Le4-WI-oNU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Qyc-ph-6y2"/>
+                    <constraint firstItem="Le4-WI-oNU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Qyc-ph-6y2"/>
                     <constraint firstItem="Aka-vv-pMf" firstAttribute="leading" secondItem="Le4-WI-oNU" secondAttribute="trailing" constant="10" id="XUQ-D4-ic9"/>
                     <constraint firstItem="rs3-HD-TzC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="e7S-XP-xAA" secondAttribute="trailing" constant="15" id="Ylv-oF-mQF"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L3F-1y-p7w" secondAttribute="trailing" constant="40" id="c5f-tq-bIh"/>
                     <constraint firstItem="L3F-1y-p7w" firstAttribute="top" secondItem="7is-wV-SAS" secondAttribute="bottom" constant="10" id="nTW-Uc-dMi"/>
-                    <constraint firstItem="7is-wV-SAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="pEu-c7-xYY"/>
+                    <constraint firstItem="7is-wV-SAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="pEu-c7-xYY"/>
                     <constraint firstAttribute="bottom" secondItem="Le4-WI-oNU" secondAttribute="bottom" constant="15" id="uCm-ig-8Pc"/>
                     <constraint firstItem="Aka-vv-pMf" firstAttribute="top" secondItem="e7S-XP-xAA" secondAttribute="bottom" constant="10" id="uJQ-wP-9gE"/>
-                    <constraint firstItem="e7S-XP-xAA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="uJt-bd-apI"/>
+                    <constraint firstItem="e7S-XP-xAA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="uJt-bd-apI"/>
                     <constraint firstItem="Le4-WI-oNU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="wnb-tD-ACE"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aka-vv-pMf" secondAttribute="trailing" constant="50" id="zfm-kc-yPL"/>
                 </constraints>

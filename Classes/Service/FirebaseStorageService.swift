@@ -21,8 +21,8 @@ class FirebaseStorageService: StorageService {
     let uuidString: String = UUID().uuidString
     let photoQuality: CGFloat = 0.5
     let resizeWidthPhoto: CGFloat = 750
-    let resizeWidthPreview: CGFloat = 150
-    let resizeWidthAvatar: CGFloat = 200
+    let resizeWidthPreview: CGFloat = 100
+    let resizeWidthAvatar: CGFloat = 250
     
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
         
