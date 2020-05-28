@@ -152,3 +152,7 @@
 // MARK: Text
 
 "Text.copyAlert" = "Скопировано";
+
+// MARK: AddPost
+"AddPost.title" = "Добавить запись";
+"AddPost.save" = "Сохранить";

@@ -12,15 +12,16 @@ import Toaster
 class JournalViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
     let activityIndicator = UIActivityIndicatorView()
-    let databaseService: DatabaseService = FirebaseDatabaseService()
     
     var sectionMonthYear: [String] = []
     var sectionPosts: [PostsDateSection] = []
     let SectionHeaderHeight: CGFloat = 30
+    
     let cellIdentifier = R.reuseIdentifier.journalCell.identifier
     let cellXibName = R.nib.journalTableViewCell.name
+    
+    let databaseService: DatabaseService = FirebaseDatabaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,46 +67,48 @@ class JournalViewController: UIViewController {
                 Toast(text: "\(String(describing: error.name))").show()
                 completion()
                 
-            case .success(let postArray):
-                
-                if postArray.isEmpty {
+            case .success(let posts):
+                if posts.isEmpty {
                     completion()
                     return
                 }
                 
-                let allDates = postArray.map {
-                    Date.convertToMonthYear(from: $0.timestamp ?? 0)
-                }
-                let uniqueDates = Array(Set(allDates))
-                
-                var postsDateSection: [PostsDateSection] = []
-                
-                for date in uniqueDates {
-                    let postsByDate = postArray
-                        .filter { Date.convertToMonthYear(from: $0.timestamp ?? 0) == date }
-                        .sorted(by: { $0.timestamp ?? 0 > $1.timestamp ?? 0 })
-                    
-                    var timestamp = 0
-                    if !postsByDate.isEmpty{
-                        timestamp = Int(postsByDate[0].timestamp ?? 0)
-                    }
-                    
-                    let section = PostsDateSection(sectionTimestamp: timestamp, sectionName: date, posts: postsByDate)
-                    postsDateSection.append(section)
-                }
-                self?.sectionPosts = postsDateSection
-                
-                let sortedUniqueDates = self?.sectionPosts
-                    .sorted(by: { $0.sectionTimestamp ?? 0 > $1.sectionTimestamp ?? 0 })
-                    .map { $0.sectionName ?? "" }
-                
-                self?.sectionMonthYear = sortedUniqueDates ?? []
+                self?.calcPostDatesToSections(posts: posts)
                 
                 DispatchQueue.main.async {
                     completion()
                 }
             }
         })
+    }
+    
+    private func calcPostDatesToSections(posts: [Post]) {
+        let allDates = posts
+            .map { Date.convertToMonthYear(from: $0.timestamp ?? 0) }
+                       
+        let uniqueDates = Array(Set(allDates))
+        var postsDateSection: [PostsDateSection] = []
+
+        for date in uniqueDates {
+            let postsByDate = posts
+                .filter { Date.convertToMonthYear(from: $0.timestamp ?? 0) == date }
+                .sorted(by: { $0.timestamp ?? 0 > $1.timestamp ?? 0 })
+            
+            var timestamp = 0
+            if !postsByDate.isEmpty{
+                timestamp = Int(postsByDate[0].timestamp ?? 0)
+            }
+            
+            let section = PostsDateSection(sectionTimestamp: timestamp, sectionName: date, posts: postsByDate)
+            postsDateSection.append(section)
+        }
+                       
+        let sortedUniqueDates = postsDateSection
+            .sorted(by: { $0.sectionTimestamp ?? 0 > $1.sectionTimestamp ?? 0 })
+            .map { $0.sectionName ?? "" }
+                       
+        sectionPosts = postsDateSection
+        sectionMonthYear = sortedUniqueDates
     }
     
     func setupBarButton() {
@@ -172,7 +175,8 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let post = getPost(by: indexPath) else { return UITableViewCell() }
         
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! JournalTableViewCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                      for: indexPath) as! JournalTableViewCell
         cell.selectionStyle = .none
         cell.fillCell(from: post)
         
@@ -191,14 +195,15 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let post = getPost(by: indexPath) else { return }
-            
-                if databaseService.deletePost(post) {
-                    self.updatePostsInTableView()
-                }
+            if databaseService.deletePost(post) {
+                updatePostsInTableView()
             }
+        }
     }
     
 }

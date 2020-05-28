@@ -92,7 +92,10 @@ class AddPostViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
-                Toast(text: "\(sphere.icon) \(sphere.name) \(R.string.localizable.postSuccessValue())", delay: 0, duration: 5).show()
+                Toast(text: "\(sphere.icon) \(sphere.name) \(R.string.localizable.postSuccessValue())",
+                    delay: 0,
+                    duration: 5)
+                    .show()
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)
             }
@@ -124,13 +127,13 @@ class AddPostViewController: UIViewController {
         postTextView.font = postTextView.font?.withSize(18)
         titleLabel.font = .journalTitleFont
         titleLabel.textColor = .violet
-        titleLabel.text = "Добавить запись"
+        titleLabel.text = R.string.localizable.addPostTitle()
         selectedSphereLabel.textColor = .violet
         selectedSphereLabel.text = R.string.localizable.postChooseSphere()
         selectedSphereLabel.font = .journalButtonFont
         saveButtonView.backgroundColor = .gray
         saveButtonView.layer.cornerRadius = 20
-        saveButton.setTitle("Сохранить", for: .normal)
+        saveButton.setTitle(R.string.localizable.addPostSave(), for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = .journalButtonFont
         cancelButton.setTitle("", for: .normal)
