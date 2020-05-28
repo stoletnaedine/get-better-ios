@@ -15,21 +15,6 @@ struct GlobalDefiitions {
         static let isShowedTutorialKey = "com.stoletnaedine.GetBetter.isShowedTutorialKey"
     }
     
-    struct Profile {
-        static let editTitle = "Редактировать"
-        static let signOut = "Выйти"
-        static let update = "Обновить"
-        static let name = "Имя"
-        static let enterName = "Введите имя"
-        static let email = "E-mail"
-        static let enterEmail = "Введите E-mail"
-        static let password = "Пароль"
-        static let enterPassword = "Введите новый пароль"
-        static let loadAvatar = "Загрузить аватар"
-        static let warning = "После смены E-mail необходимо заново войти в приложение"
-        static let loading = "Подождите, идет загрузка"
-    }
-    
     struct Post {
         static let postTitle = "Добавить событие"
         static let sphere = "Выберите сферу для события"
@@ -37,16 +22,6 @@ struct GlobalDefiitions {
         static let titleDefault = "Событие"
         static let postSavedSuccess = "Отлично!"
         static let emptyFieldsWarning = "Заполните все поля"
-        
-        struct Field {
-            static let text = "text"
-            static let sphere = "sphere"
-            static let timestamp = "timestamp"
-            static let photoUrl = "photoUrl"
-            static let photoName = "photoName"
-            static let previewUrl = "previewUrl"
-            static let previewName = "previewName"
-        }
     }
     
     struct SphereMetrics {
@@ -55,8 +30,6 @@ struct GlobalDefiitions {
     }
     
     struct SetupSphere {
-        static let question = "На сколько баллов (0-10) вы удовлетворены этой сферой в своей жизни?"
-        static let setupTitle = "Привет"
         static let notValidValue = -1.0
     }
     

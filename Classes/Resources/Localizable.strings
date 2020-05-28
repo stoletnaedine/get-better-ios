@@ -50,4 +50,23 @@
 
 // MARK: Error
 
-"loadingError" = "Не удалось загрузить";
+"Error.notLoading" = "Не удалось загрузить";
+
+// MARK: Profile
+
+"Profile.editTitle" = "Редактировать";
+"Profile.signOut" = "Выйти";
+"Profile.update" = "Обновить";
+"Profile.name" = "Имя";
+"Profile.enterName" = "Введите имя";
+"Profile.email" = "E-mail";
+"Profile.enterEmail" = "Введите E-mail";
+"Profile.password" = "Пароль";
+"Profile.enterPassword" = "Введите новый пароль";
+"Profile.loadAvatar" = "Загрузить аватар";
+"Profile.warning" = "После смены E-mail необходимо заново войти в приложение";
+"Profile.loading" = "Подождите, идет загрузка";
+
+// MARK: Onboarding
+
+"Onboarding.title" = "Привет";

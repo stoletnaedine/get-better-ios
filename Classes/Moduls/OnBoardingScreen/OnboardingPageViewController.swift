@@ -18,7 +18,7 @@ class OnboardingPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = GlobalDefiitions.SetupSphere.setupTitle
+        title = R.string.localizable.onboardingTitle()
 
         fillViewControllers()
         setupPageControl()

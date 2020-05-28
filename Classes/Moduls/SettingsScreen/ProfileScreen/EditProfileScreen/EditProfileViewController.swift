@@ -34,7 +34,7 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        self.title = GlobalDefiitions.Profile.editTitle
+        self.title = R.string.localizable.profileEditTitle()
         customizeBarButon()
         customizeView()
     }
@@ -155,7 +155,7 @@ class EditProfileViewController: UIViewController {
     
     func customizeView() {
         avatarView.backgroundColor = .tableViewSectionColor
-        avatarButton.setTitle(GlobalDefiitions.Profile.loadAvatar, for: .normal)
+        avatarButton.setTitle(R.string.localizable.profileLoadAvatar(), for: .normal)
         avatarButton.setTitleColor(.white, for: .normal)
         avatarButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         
@@ -163,45 +163,45 @@ class EditProfileViewController: UIViewController {
             if let name = user.displayName {
                 nameTextField.text = name
             } else {
-                nameTextField.placeholder = GlobalDefiitions.Profile.enterName
+                nameTextField.placeholder = R.string.localizable.profileEnterName()
             }
             
             if let email = user.email {
                 emailTextField.text = email
             } else {
-                emailTextField.placeholder = GlobalDefiitions.Profile.enterEmail
+                emailTextField.placeholder = R.string.localizable.profileEnterEmail()
             }
         }
         
-        nameLabel.text = GlobalDefiitions.Profile.name
+        nameLabel.text = R.string.localizable.profileName()
         nameLabel.textColor = .gray
         nameLabel.font = .formLabelFieldFont
         
         nameTextField.borderStyle = .none
         nameTextField.font = .formFieldFont
-        nameTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterName,
+        nameTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterName(),
                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
-        emailLabel.text = GlobalDefiitions.Profile.email
+        emailLabel.text = R.string.localizable.profileEmail()
         emailLabel.textColor = .gray
         emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
-        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterEmail,
+        emailTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterEmail(),
                                                                   attributes: NSAttributedString.formFieldPlaceholderAttributes)
         
-        passwordLabel.text = GlobalDefiitions.Profile.password
+        passwordLabel.text = R.string.localizable.profilePassword()
         passwordLabel.textColor = .gray
         passwordLabel.font = .formLabelFieldFont
         
-        passwordTextField.placeholder = GlobalDefiitions.Profile.enterPassword
+        passwordTextField.placeholder = R.string.localizable.profileEnterPassword()
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Profile.enterPassword,
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterPassword(),
                                                                      attributes: NSAttributedString.formFieldPlaceholderAttributes)
         noticeLabel.font = .formNoticeFont
         noticeLabel.textColor = .gray
-        noticeLabel.text = GlobalDefiitions.Profile.warning
+        noticeLabel.text = R.string.localizable.profileWarning()
         
         deleteAccountButton.setTitle("Удалить аккаунт", for: .normal)
         deleteAccountButton.setTitleColor(.red, for: .normal)

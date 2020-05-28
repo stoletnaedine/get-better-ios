@@ -35,7 +35,7 @@ class ProfileTableViewCell: UITableViewCell {
         avatarImageView.backgroundColor = .tableViewSectionColor
         nameLabel.text = ""
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        emailLabel.text = GlobalDefiitions.Profile.loading
+        emailLabel.text = R.string.localizable.profileLoading()
         emailLabel.font = UIFont.systemFont(ofSize: 14)
     }
     
