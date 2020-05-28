@@ -22,9 +22,9 @@ class WelcomeViewController: UIViewController {
     func setupView() {
         imageView.image = R.image.welcomeSetup()
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        titleLabel.text = GlobalDefiitions.Welcome.title
+        titleLabel.text = R.string.localizable.welcomeTitle()
         descriptionLabel.font = UIFont.systemFont(ofSize: 16)
-        descriptionLabel.text = GlobalDefiitions.Welcome.description
+        descriptionLabel.text = R.string.localizable.welcomeDescription()
     }
 
 }

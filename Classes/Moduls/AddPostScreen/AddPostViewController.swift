@@ -34,7 +34,7 @@ class AddPostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = GlobalDefiitions.Post.postTitle
+        self.title = R.string.localizable.postTitle()
         self.hideKeyboardWhenTappedAround()
         registerTapForSelectedSphereLabel()
         customizeView()
@@ -53,11 +53,11 @@ class AddPostViewController: UIViewController {
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         guard let text = postTextView.text, !text.isEmpty else {
-            Toast(text: "Поле текста пустое", delay: 0, duration: 0.3).show()
+            Toast(text: R.string.localizable.postEmptyTextWarning(), delay: 0, duration: 0.3).show()
             return
         }
         guard let sphere = selectedSphere else {
-            Toast(text: "Выбери сферу", delay: 0, duration: 0.3).show()
+            Toast(text: R.string.localizable.postEmptySphereWarning(), delay: 0, duration: 0.3).show()
             return
         }
         
@@ -92,7 +92,7 @@ class AddPostViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
-                Toast(text: "\(sphere.icon) \(sphere.name) +0,1 балла", delay: 0, duration: 5).show()
+                Toast(text: "\(sphere.icon) \(sphere.name) \(R.string.localizable.postSuccessValue())", delay: 0, duration: 5).show()
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)
             }
@@ -126,7 +126,7 @@ class AddPostViewController: UIViewController {
         titleLabel.textColor = .violet
         titleLabel.text = "Добавить запись"
         selectedSphereLabel.textColor = .violet
-        selectedSphereLabel.text = GlobalDefiitions.Post.sphereDefault
+        selectedSphereLabel.text = R.string.localizable.postChooseSphere()
         selectedSphereLabel.font = .journalButtonFont
         saveButtonView.backgroundColor = .gray
         saveButtonView.layer.cornerRadius = 20

@@ -19,8 +19,8 @@ class SettingsViewController: UIViewController {
     var tableItems: [TableSection : [SettingsCell]]?
     let refreshControl = UIRefreshControl()
     
-    let profileCellIdentifier = "ProfileCell"
-    let profileNibName = "ProfileTableViewCell"
+    let profileCellIdentifier = R.reuseIdentifier.profileCell.identifier
+    let profileNibName = R.nib.profileTableViewCell.name
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +41,14 @@ class SettingsViewController: UIViewController {
     }
     
     private func setupView() {
-        title = "Настройки"
+        title = R.string.localizable.settingsTitle()
         tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
     }
     
     private func registerTableCell() {
-        tableView.register(UINib(nibName: profileNibName, bundle: nil), forCellReuseIdentifier: profileCellIdentifier)
+        tableView.register(UINib(nibName: profileNibName, bundle: nil),
+                           forCellReuseIdentifier: profileCellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -61,16 +62,20 @@ class SettingsViewController: UIViewController {
         let articles = viewModel.fillArticles()
         
         tableItems = [TableSection.profile : [SettingsCell(title: "", viewController: editProfileViewController)],
-            TableSection.articles : articles]
+                      TableSection.articles : articles]
     }
     
     func setupRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(loadProfileAndReloadTableView), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(loadProfileAndReloadTableView),
+                                 for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
     
     func customizeBarButton() {
-        let signOutBarButton = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(logout))
+        let signOutBarButton = UIBarButtonItem(title: R.string.localizable.settingsExit(),
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(logout))
         navigationItem.rightBarButtonItem = signOutBarButton
     }
     
