@@ -14,30 +14,41 @@ import UIKit
 class RootManager {
     
     var window: UIWindow?
+    let connectionHelper = ConnectionHelper()
     
     func start() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        window?.rootViewController = R.storyboard.launchScreen().instantiateInitialViewController()
+        
+        addObservers()
+        setupNavigationBar()
+        configToaster()
+        
+        if connectionHelper.isConnectionAvailable() {
+            enterApp()
+        } else {
+            showNoInternetViewController()
+        }
+    }
+    
+    func addObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(logout),
                                                name: .logout,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showNoInternetViewController),
-                                               name: .logout,
+                                               name: .showNoInternetScreen,
                                                object: nil)
-        
-        setupNavigationBar()
-        configToaster()
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
-        window?.makeKeyAndVisible()
-        
-        let reachability = try! Reachability()
-        if reachability.connection == .unavailable {
-            showNoInternetViewController()
-            return
-        }
-        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enterApp),
+                                               name: .enterApp,
+                                               object: nil)
+    }
+    
+    @objc func enterApp() {
         if Auth.auth().currentUser == nil {
             showAuthController()
         } else {
@@ -46,7 +57,7 @@ class RootManager {
                 case true:
                     self?.showTabBarController()
                 default:
-                    self?.showSetupSpherePageViewController()
+                    self?.showOnboardingPageViewController()
                 }
             })
         }
@@ -76,12 +87,12 @@ class RootManager {
     @objc func showTabBarController() {
         let tabBarController = TabBarController()
         tabBarController.setupSphereCompletion = { [weak self] in
-            self?.showSetupSpherePageViewController()
+            self?.showOnboardingPageViewController()
         }
         window?.rootViewController = tabBarController
     }
     
-    @objc func showSetupSpherePageViewController() {
+    @objc func showOnboardingPageViewController() {
         let onboardingPageViewController = OnboardingPageViewController()
         onboardingPageViewController.completion = { [weak self] in
             self?.showTabBarController()
@@ -95,7 +106,7 @@ class RootManager {
             self?.showTabBarController()
         }
         authViewController.registerCompletion = { [weak self] in
-            self?.showSetupSpherePageViewController()
+            self?.showOnboardingPageViewController()
         }
         window?.rootViewController = UINavigationController(rootViewController: authViewController)
     }

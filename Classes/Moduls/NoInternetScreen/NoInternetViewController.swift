@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Reachability
 
 class NoInternetViewController: UIViewController {
 
@@ -16,7 +15,7 @@ class NoInternetViewController: UIViewController {
     @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var retryButton: UIButton!
     
-    let rootManager = RootManager()
+    let connectionHelper = ConnectionHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +23,8 @@ class NoInternetViewController: UIViewController {
     }
 
     @IBAction func retryButtonDidTap(_ sender: UIButton) {
-        let reachability = try! Reachability()
-        if reachability.connection != .unavailable {
-            rootManager.start()
-            dismiss(animated: true, completion: nil)
+        if connectionHelper.isConnectionAvailable() {
+            NotificationCenter.default.post(name: .enterApp, object: nil)
         }
     }
     
