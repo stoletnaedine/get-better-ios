@@ -15,36 +15,6 @@ struct GlobalDefiitions {
         static let isShowedTutorialKey = "com.stoletnaedine.GetBetter.isShowedTutorialKey"
     }
     
-    struct TabBar {
-        static let lifeCircleTitle = "Колесо жизни"
-        static let journalTitle = "Дневник"
-        static let settingsTitle = "Настройки"
-    }
-    
-    struct Auth {
-        static let authTitleVC = "Авторизация"
-        static let email = "E-mail"
-        static let enterEmail = "Введите E-mail"
-        static let password = "Пароль"
-        static let enterPassword = "Введите пароль"
-        static let enter = "Войти"
-        static let doRegister = "Зарегистрироваться"
-        static let forgotPassword = "Забыли пароль?"
-        static let register = "Регистрация"
-        static let successRegister = "Вы успешно зарегистрировались"
-    }
-    
-    struct Error {
-        static let firebaseError = "FirebaseError: "
-        static let loadingError = "Не удалось загрузить"
-    }
-    
-    struct RegisterValidate {
-        static let emailIsEmpty = "Введите Email"
-        static let emailIsNotValid = "Введите корректный Email"
-        static let passwordIsEmpty = "Введите пароль"
-    }
-    
     struct Profile {
         static let editTitle = "Редактировать"
         static let signOut = "Выйти"

@@ -61,28 +61,28 @@ class RegisterViewController: UIViewController {
     }
     
     func customizeView() {
-        self.title = GlobalDefiitions.Auth.register
-        emailLabel.text = GlobalDefiitions.Auth.email
+        self.title = R.string.localizable.authRegister()
+        emailLabel.text = R.string.localizable.authEmail()
         emailLabel.textColor = .gray
         emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
-        emailTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterEmail,
+        emailTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterEmail(),
                                                                   attributes: NSAttributedString.formFieldPlaceholderAttributes)
         passwordLabel.textColor = .gray
         passwordLabel.font = .formLabelFieldFont
-        passwordLabel.text = GlobalDefiitions.Auth.password
+        passwordLabel.text = R.string.localizable.authPassword()
         
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: GlobalDefiitions.Auth.enterPassword,
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterPassword(),
                                                                      attributes: NSAttributedString.formFieldPlaceholderAttributes)
         registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
         registerButton.clipsToBounds = true
         registerButton.setTitle("", for: .normal)
-        registerButtonLabel.text = GlobalDefiitions.Auth.doRegister.uppercased()
+        registerButtonLabel.text = R.string.localizable.authDoRegister().uppercased()
         registerButtonLabel.textColor = .white
         registerButtonLabel.font = .formButtonFont
         cancelButton.setTitle("", for: .normal)

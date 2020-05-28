@@ -65,12 +65,12 @@ class EditProfileViewController: UIViewController {
                     changeRequest.commitChanges(completion: { error in
                         if let error = error {
                             print("Firebase commit changes error = \(error.localizedDescription)")
-                            Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
+                            Toast(text: "\(error.localizedDescription)").show()
                         }
                         dispatchGroup.leave()
                     })
                 case .failure(let error):
-                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(String(describing: error.name))").show()
+                    Toast(text: "\(String(describing: error.name))").show()
                     dispatchGroup.leave()
                 }
             })
@@ -86,7 +86,7 @@ class EditProfileViewController: UIViewController {
             changeRequest.displayName = newName
             changeRequest.commitChanges(completion: { error in
                 if let error = error {
-                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(error.localizedDescription)").show()
                 }
                 dispatchGroup.leave()
             })
@@ -99,7 +99,7 @@ class EditProfileViewController: UIViewController {
             
             user.updatePassword(to: newPassword, completion: { error in
                 if let error = error {
-                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(error.localizedDescription)").show()
                 } else {
                     Toast(text: "Пароль успешно изменён").show()
                 }
@@ -118,7 +118,7 @@ class EditProfileViewController: UIViewController {
                 dispatchGroup.leave()
                 
                 if let error = error {
-                    Toast(text: "\(GlobalDefiitions.Error.firebaseError)\(error.localizedDescription)").show()
+                    Toast(text: "\(error.localizedDescription)").show()
                 }
             })
         }

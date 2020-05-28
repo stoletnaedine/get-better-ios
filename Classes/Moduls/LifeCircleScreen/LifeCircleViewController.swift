@@ -51,7 +51,7 @@ class LifeCircleViewController: UIViewController {
     }
     
     private func setupView() {
-        title = GlobalDefiitions.TabBar.lifeCircleTitle
+        title = R.string.localizable.tabBarLifeCircle()
         view.backgroundColor = .appBackground
         chartView.noDataText = R.string.localizable.lifeCircleLoading()
     }

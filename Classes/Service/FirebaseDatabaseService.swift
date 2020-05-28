@@ -90,7 +90,7 @@ class FirebaseDatabaseService: DatabaseService {
                         }
                         
                         let post = Post(id: id as? String ?? "",
-                                        text: entity?[GlobalDefiitions.Post.Field.text] as? String ?? GlobalDefiitions.Error.loadingError,
+                                        text: entity?[GlobalDefiitions.Post.Field.text] as? String ?? R.string.localizable.loadingError(),
                                         sphere: maybeSphere,
                                         timestamp: entity?[GlobalDefiitions.Post.Field.timestamp] as? Int64 ?? 0,
                                         photoUrl: entity?[GlobalDefiitions.Post.Field.photoUrl] as? String ?? "",

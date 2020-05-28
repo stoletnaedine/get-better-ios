@@ -22,3 +22,32 @@
 "NoInternet.Title" = "Упс, а где интернет?";
 "NoInternet.Notice" = "Без интернета приложение не сможет работать.";
 "NoInternet.Button" = "Повторить";
+
+// Mark: TabBar
+
+"TabBar.lifeCircle" = "Колесо жизни";
+"TabBar.journal" = "Дневник";
+"TabBar.settings" = "Настройки";
+
+// MARK: Auth
+
+"Auth.title" = "Авторизация";
+"Auth.email" = "E-mail";
+"Auth.enterEmail" = "Введите E-mail";
+"Auth.password" = "Пароль";
+"Auth.enterPassword" = "Введите пароль";
+"Auth.enter" = "Войти";
+"Auth.doRegister" = "Зарегистрироваться";
+"Auth.forgotPassword" = "Забыли пароль?";
+"Auth.register" = "Регистрация";
+"Auth.successRegister" = "Вы успешно зарегистрировались";
+
+// MARK: RegisterValidate
+
+"emailIsEmpty" = "Введите Email";
+"emailIsNotValid" = "Введите корректный Email";
+"passwordIsEmpty" = "Введите пароль";
+
+// MARK: Error
+
+"loadingError" = "Не удалось загрузить";
