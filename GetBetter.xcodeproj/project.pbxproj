@@ -60,6 +60,7 @@
 		C37AECC4244F002C0080CCAC /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37AECC2244F002C0080CCAC /* EditProfileViewController.swift */; };
 		C37AECC5244F002C0080CCAC /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37AECC3244F002C0080CCAC /* EditProfileViewController.xib */; };
 		C37D0B3E23D79088005A1BCF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* Label.swift */; };
+		C392971F247FAE04000340DC /* PostMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C392971E247FAE04000340DC /* PostMapper.swift */; };
 		C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39423D624404E8E0060CF50 /* AuthViewController.swift */; };
 		C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39423D724404E8E0060CF50 /* AuthViewController.xib */; };
 		C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23B246AC71E00DBF0E4 /* Double.swift */; };
@@ -145,6 +146,7 @@
 		C37AECC2244F002C0080CCAC /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		C37AECC3244F002C0080CCAC /* EditProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
 		C37D0B3D23D79088005A1BCF /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		C392971E247FAE04000340DC /* PostMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMapper.swift; sourceTree = "<group>"; };
 		C39423D624404E8E0060CF50 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		C39423D724404E8E0060CF50 /* AuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
 		C396E23B246AC71E00DBF0E4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				C34B14E724475EA700B58B18 /* Helper */,
 				C3F0141723D080CE009D83AD /* Service */,
 				C3724EC423AFABD000D49AD6 /* Moduls */,
+				C392971D247FADF2000340DC /* Mapper */,
 				C3724ECC23AFAD6E00D49AD6 /* Models */,
 				C306790C23AC990500B6E105 /* Extensions */,
 				C3BFEBC92477F8F3000B5B41 /* Resources */,
@@ -432,6 +435,14 @@
 				6E6A21792466C6FB00D8AC68 /* Atricle.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C392971D247FADF2000340DC /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				C392971E247FAE04000340DC /* PostMapper.swift */,
+			);
+			path = Mapper;
 			sourceTree = "<group>";
 		};
 		C39423D524404E6F0060CF50 /* AuthScreen */ = {
@@ -696,6 +707,7 @@
 				6E7071F3245C474D00ED7D08 /* SphereValue.swift in Sources */,
 				C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */,
 				C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */,
+				C392971F247FAE04000340DC /* PostMapper.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
 				C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */,
 				C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */,

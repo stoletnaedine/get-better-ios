@@ -21,19 +21,14 @@ class FirebaseDatabaseService: DatabaseService {
     
     func savePost(_ post: Post) -> Bool {
         guard let ref = currentUserPath() else { return false }
+        let mapper = PostMapper()
         
         ref
             .child(postsPath)
             .childByAutoId()
-            .setValue([
-                GlobalDefiitions.Post.Field.text: post.text ?? "" as Any,
-                GlobalDefiitions.Post.Field.sphere: post.sphere?.rawValue ?? "",
-                GlobalDefiitions.Post.Field.timestamp: post.timestamp ?? "",
-                GlobalDefiitions.Post.Field.photoUrl: post.photoUrl ?? "",
-                GlobalDefiitions.Post.Field.photoName: post.photoName ?? "",
-                GlobalDefiitions.Post.Field.previewUrl: post.previewUrl ?? "",
-                GlobalDefiitions.Post.Field.previewName: post.previewName ?? ""
-            ])
+            .setValue(
+                mapper.map(post: post)
+        )
         
         print("Firebase saved post \(post)")
         
@@ -83,21 +78,8 @@ class FirebaseDatabaseService: DatabaseService {
                         let id = key.element
                         let entity = value?[id] as? NSDictionary
                         
-                        var maybeSphere: Sphere?
-                        if let sphereRawValue = entity?[GlobalDefiitions.Post.Field.sphere] as? String,
-                            let sphere = Sphere(rawValue: sphereRawValue) {
-                             maybeSphere = sphere
-                        }
-                        
-                        let post = Post(id: id as? String ?? "",
-                                        text: entity?[GlobalDefiitions.Post.Field.text] as? String ?? R.string.localizable.loadingError(),
-                                        sphere: maybeSphere,
-                                        timestamp: entity?[GlobalDefiitions.Post.Field.timestamp] as? Int64 ?? 0,
-                                        photoUrl: entity?[GlobalDefiitions.Post.Field.photoUrl] as? String ?? "",
-                                        photoName: entity?[GlobalDefiitions.Post.Field.photoName] as? String ?? "",
-                                        previewUrl: entity?[GlobalDefiitions.Post.Field.previewUrl] as? String ?? "",
-                                        previewName: entity?[GlobalDefiitions.Post.Field.previewName] as? String ?? "")
-                        
+                        let mapper = PostMapper()
+                        let post = mapper.map(id: id, entity: entity)
                         postArray.append(post)
                     }
                     completion(.success(postArray))
