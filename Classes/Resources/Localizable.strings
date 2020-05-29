@@ -24,6 +24,7 @@
 "NoInternet.Title" = "Упс, а где интернет?";
 "NoInternet.Notice" = "Без интернета приложение не сможет работать.";
 "NoInternet.Button" = "Повторить";
+"NoInternet.tryConnectAlert" = "Пробую подключиться";
 
 // Mark: TabBar
 
@@ -60,7 +61,7 @@
 
 // MARK: Register
 
-"Register.sucessAlert" = "Вы успешно зарегистрировались";
+"Register.successAlert" = "Вы успешно зарегистрировались";
 
 // MARK: Error
 
@@ -154,6 +155,12 @@
 "Text.copyAlert" = "Скопировано";
 
 // MARK: AddPost
+
 "AddPost.title" = "Добавить запись";
 "AddPost.save" = "Сохранить";
 "AddPost.maxSymbolAlert" = "Не более %@ символов";
+
+// Mark: Achievements
+
+"Achievements.regularThree.icon" = "⚡️";
+"Achievements.regularThree.title" = "Not bad";

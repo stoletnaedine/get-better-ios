@@ -47,7 +47,7 @@ class RegisterViewController: UIViewController {
                 }
                 
                 if let _ = Auth.auth().currentUser {
-                    Toast(text: R.string.localizable.registerSucessAlert(),
+                    Toast(text: R.string.localizable.registerSuccessAlert(),
                           delay: 0,
                           duration: 3)
                         .show()

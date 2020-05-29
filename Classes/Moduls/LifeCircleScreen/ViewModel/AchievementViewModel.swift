@@ -10,7 +10,9 @@ import Foundation
 
 class AchievementViewModel {
     
-    func getAchievements(posts: [Post], startSphereMetrics: SphereMetrics, currentSphereMetrics: SphereMetrics) -> [Achievement] {
+    func getAchievements(posts: [Post],
+                         startSphereMetrics: SphereMetrics,
+                         currentSphereMetrics: SphereMetrics) -> [Achievement] {
         let daysAchievements = getDaysAchievements(posts: posts)
         let maxValueAchievements = getMaxValueAchievements(currentSphereMetrics: currentSphereMetrics)
         let fromRedZoneAchievements = getFromRedZoneAchievements(startSphereMetrics: startSphereMetrics,
@@ -18,8 +20,8 @@ class AchievementViewModel {
         let plusOneAchievements = getPlusOneAchievements(posts: posts)
         
         let achievements = daysAchievements + maxValueAchievements + fromRedZoneAchievements + plusOneAchievements
-        let sortedAchievemenets = achievements.sorted(by: { $0.unlocked && !$1.unlocked })
-        return sortedAchievemenets
+        let sortedAchievements = achievements.sorted(by: { $0.unlocked && !$1.unlocked })
+        return sortedAchievements
     }
     
     private func getDaysAchievements(posts: [Post]) -> [Achievement] {
@@ -115,7 +117,8 @@ class AchievementViewModel {
         return spheresAchievements
     }
     
-    private func getFromRedZoneAchievements(startSphereMetrics: SphereMetrics, currentSphereMetrics: SphereMetrics) -> [Achievement] {
+    private func getFromRedZoneAchievements(startSphereMetrics: SphereMetrics,
+                                            currentSphereMetrics: SphereMetrics) -> [Achievement] {
         let redZoneValue = 3.5
         let redZoneSpheresStart = startSphereMetrics.values
             .filter { $0.value < redZoneValue }
@@ -188,8 +191,8 @@ class AchievementViewModel {
             let spheresString = fastSphereNames.joined(separator: ", ")
             achievement = Achievement(icon: "🚀",
                                       title: "Rocketman",
-                                      description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней",
-                unlocked: true)
+                                      description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней", 
+                    unlocked: true)
         }
         
         return [achievement]

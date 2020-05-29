@@ -8,7 +8,6 @@
 
 import Toaster
 import Firebase
-import Reachability
 import UIKit
 
 class RootManager {

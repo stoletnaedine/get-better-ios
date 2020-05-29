@@ -1,5 +1,5 @@
 //
-//  DatabaseService.swift
+//  FirebaseDatabaseService.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 24.04.2020.
@@ -13,11 +13,10 @@ import FirebaseAuth
 class FirebaseDatabaseService: DatabaseService {
     
     let ref = Database.database().reference()
-    let storageService = FirebaseStorageService()
+    let storageService: StorageService = FirebaseStorageService()
     let user = Auth.auth().currentUser
     let usersPath = "users"
     let postsPath = "post"
-    let achievemenetsPath = "achievement"
     
     func savePost(_ post: Post) -> Bool {
         guard let ref = currentUserPath() else { return false }

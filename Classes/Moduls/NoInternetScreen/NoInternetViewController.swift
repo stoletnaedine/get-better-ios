@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toaster
 
 class NoInternetViewController: UIViewController {
 
@@ -24,6 +25,7 @@ class NoInternetViewController: UIViewController {
 
     @IBAction func retryButtonDidTap(_ sender: UIButton) {
         if connectionHelper.isConnectionAvailable() {
+            Toast(text: R.string.localizable.noInternetTryConnectAlert(), duration: 5).show()
             NotificationCenter.default.post(name: .enterApp, object: nil)
         }
     }

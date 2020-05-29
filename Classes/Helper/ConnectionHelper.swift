@@ -1,5 +1,5 @@
 //
-//  NoInternetHandler.swift
+//  ConnectionHelper.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 27.05.2020.
