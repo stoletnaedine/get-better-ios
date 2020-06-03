@@ -61,8 +61,10 @@ extension Date {
             return "Апрель"
         case 5:
             return "Май"
-        case 7:
+        case 6:
             return "Июнь"
+        case 7:
+            return "Июль"
         case 8:
             return "Август"
         case 9:

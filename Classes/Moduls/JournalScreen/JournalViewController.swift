@@ -85,7 +85,7 @@ class JournalViewController: UIViewController {
     private func calcPostDatesToSections(posts: [Post]) {
         let allDates = posts
             .map { Date.convertToMonthYear(from: $0.timestamp ?? 0) }
-                       
+        
         let uniqueDates = Array(Set(allDates))
         var postsDateSection: [PostsDateSection] = []
 
@@ -99,14 +99,18 @@ class JournalViewController: UIViewController {
                 timestamp = Int(postsByDate[0].timestamp ?? 0)
             }
             
-            let section = PostsDateSection(sectionTimestamp: timestamp, sectionName: date, posts: postsByDate)
+            let section = PostsDateSection(
+                sectionTimestamp: timestamp,
+                sectionName: date,
+                posts: postsByDate
+            )
             postsDateSection.append(section)
         }
                        
         let sortedUniqueDates = postsDateSection
             .sorted(by: { $0.sectionTimestamp ?? 0 > $1.sectionTimestamp ?? 0 })
             .map { $0.sectionName ?? "" }
-                       
+        
         sectionPosts = postsDateSection
         sectionMonthYear = sortedUniqueDates
     }
