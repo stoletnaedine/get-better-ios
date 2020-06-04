@@ -73,8 +73,10 @@ extension Date {
             return "Октябрь"
         case 11:
             return "Ноябрь"
-        default:
+        case 12:
             return "Декабрь"
+        default:
+            return "Хм, какой это месяц?"
         }
     }
 }
