@@ -26,6 +26,7 @@ class AddPostViewController: UIViewController {
     
     let databaseService: DatabaseService = FirebaseDatabaseService()
     let storageService: StorageService = FirebaseStorageService()
+    let alertService: AppAlert = AlertService()
     
     var selectedSphere: Sphere?
     let maxSymbolsCount: Int = 300
@@ -92,10 +93,16 @@ class AddPostViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
-                Toast(text: "\(sphere.icon) \(sphere.name) \(R.string.localizable.postSuccessValue())",
-                    delay: 0,
-                    duration: 5)
-                    .show()
+//                Toast(text: "\(sphere.icon) \(sphere.name) \(R.string.localizable.postSuccessValue())",
+//                        delay: 0,
+//                        duration: 5
+//                ).show()
+
+                self?.alertService.showPopUp(
+                        icon: sphere.icon,
+                        title: sphere.name,
+                        description: R.string.localizable.postSuccessValue()
+                )
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)
             }

@@ -85,6 +85,10 @@
 		C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */; };
 		C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */; };
 		C9446CAB022057A4B4E41A5C /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */; };
+		F149517261CA7E25B2091B67 /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14957010302BA2E9ACD60BC /* AppAlert.swift */; };
+		F1495234822713798C6A44A9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495DDC93DAF058DE2ED525 /* AlertService.swift */; };
+		F14954DB233E992DD4A66938 /* MyPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14953C541816FF1E0CBA2FE /* MyPopUpView.swift */; };
+		F14959FA59B21C687BF98581 /* UIView+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14953C431AE851A0EB8E085 /* UIView+Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -170,6 +174,10 @@
 		C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPostViewController.xib; sourceTree = "<group>"; };
 		E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F14953C431AE851A0EB8E085 /* UIView+Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Message.swift"; sourceTree = "<group>"; };
+		F14953C541816FF1E0CBA2FE /* MyPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPopUpView.swift; sourceTree = "<group>"; };
+		F14957010302BA2E9ACD60BC /* AppAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
+		F1495DDC93DAF058DE2ED525 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +270,7 @@
 				C3724ECC23AFAD6E00D49AD6 /* Models */,
 				C306790C23AC990500B6E105 /* Extensions */,
 				C3BFEBC92477F8F3000B5B41 /* Resources */,
+				F149545BD46CAD36FB0DA8B2 /* Alert */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -544,6 +553,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F149545BD46CAD36FB0DA8B2 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				F14957010302BA2E9ACD60BC /* AppAlert.swift */,
+				F1495DDC93DAF058DE2ED525 /* AlertService.swift */,
+				F14953C541816FF1E0CBA2FE /* MyPopUpView.swift */,
+				F14953C431AE851A0EB8E085 /* UIView+Message.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -753,6 +773,10 @@
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
 				C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */,
 				C3ED5A2A23AFBF1300C7A492 /* LifeCircleViewController.swift in Sources */,
+				F149517261CA7E25B2091B67 /* AppAlert.swift in Sources */,
+				F1495234822713798C6A44A9 /* AlertService.swift in Sources */,
+				F14954DB233E992DD4A66938 /* MyPopUpView.swift in Sources */,
+				F14959FA59B21C687BF98581 /* UIView+Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
