@@ -6,7 +6,7 @@
 import UIKit
 import SwiftEntryKit
 
-class MyPopUpView: UIView {
+class PopUpView: UIView {
 
     private var imageView: UIImageView!
     private let titleLabel = UILabel()
@@ -32,7 +32,7 @@ class MyPopUpView: UIView {
 }
 
 // MARK: - Setup View
-extension MyPopUpView {
+extension PopUpView {
     func setupElements() {
         titleLabel.content = self.message.title
         descriptionLabel.content = self.message.description
@@ -47,7 +47,7 @@ extension MyPopUpView {
 }
 
 // MARK: - Setup Constraints
-extension MyPopUpView {
+extension PopUpView {
     func setupConstraints() {
 
         addSubview(imageView)

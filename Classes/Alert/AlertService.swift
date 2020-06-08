@@ -7,14 +7,95 @@ import UIKit
 import SwiftEntryKit
 
 class AlertService: UIViewController, AppAlert {
+
     func showPopUp(icon: String, title: String, description: String) {
-        let attributes = setupAttributes()
-        let message = setupMessage(icon: icon, title: title, description: description)
-        SwiftEntryKit.display(entry: MyPopUpView(with: message), using: attributes)
+        let attributes = setupPopUpAttributes(duration: .infinity)
+        let message = setupPopUpMessage(icon: icon, title: title, description: description)
+        SwiftEntryKit.display(entry: PopUpView(with: message), using: attributes)
     }
 
-    private func setupMessage(icon: String, title: String, description: String) -> EKPopUpMessage {
-        let image = R.image.attach()!.withRenderingMode(.alwaysTemplate)
+    func showNotificationMessage(title: String,
+                                 desc: String,
+                                 textColor: EKColor,
+                                 imageName: String? = nil) {
+        let title = EKProperty.LabelContent(
+                text: title,
+                style: .init(
+                        font: UIFont.systemFont(ofSize: 16),
+                        color: textColor,
+                        displayMode: .inferred
+                ),
+                accessibilityIdentifier: "title"
+        )
+        let description = EKProperty.LabelContent(
+                text: desc,
+                style: .init(
+                        font: UIFont.systemFont(ofSize: 14),
+                        color: textColor,
+                        displayMode: .inferred
+                ),
+                accessibilityIdentifier: "description"
+        )
+        var image: EKProperty.ImageContent?
+        if let imageName = imageName {
+            image = EKProperty.ImageContent(
+                    image: UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate),
+                    displayMode: .inferred,
+                    size: CGSize(width: 35, height: 35),
+                    tint: textColor,
+                    accessibilityIdentifier: "thumbnail"
+            )
+        }
+        let simpleMessage = EKSimpleMessage(
+                image: image,
+                title: title,
+                description: description
+        )
+        let notificationMessage = EKNotificationMessage(simpleMessage: simpleMessage)
+        let contentView = EKNotificationMessageView(with: notificationMessage)
+        let attributes = setupTopFloatAttributes()
+        SwiftEntryKit.display(entry: contentView, using: attributes)
+    }
+
+    private func setupTopFloatAttributes() -> EKAttributes {
+        var attributes: EKAttributes
+        attributes = .topFloat
+        attributes.displayMode = .inferred
+        attributes.hapticFeedbackType = .success
+        attributes.entryBackground = .gradient(
+                gradient: .init(
+                        colors: [EKColor(.violet), EKColor(.coral)],
+                        startPoint: .zero,
+                        endPoint: CGPoint(x: 1, y: 1)
+                )
+        )
+        attributes.popBehavior = .animated(
+                animation: .init(
+                        translate: .init(duration: 0.3),
+                        scale: .init(from: 1, to: 0.7, duration: 0.7)
+                )
+        )
+        attributes.shadow = .active(
+                with: .init(
+                        color: .black,
+                        opacity: 0.5,
+                        radius: 10
+                )
+        )
+        attributes.statusBar = .dark
+        attributes.scroll = .enabled(
+                swipeable: true,
+                pullbackAnimation: .easeOut
+        )
+        attributes.positionConstraints.maxSize = .init(
+                width: .constant(value: UIScreen.main.bounds.minEdge),
+                height: .intrinsic
+        )
+        return attributes
+    }
+
+    private func setupPopUpMessage(icon: String, title: String, description: String) -> EKPopUpMessage {
+        let image = R.image.splash()!.withRenderingMode(.alwaysTemplate)
 
         let themeImage = EKPopUpMessage.ThemeImage(
                 image: EKProperty.ImageContent(
@@ -52,7 +133,7 @@ class AlertService: UIViewController, AppAlert {
                 backgroundColor: .init(UIColor.systemOrange),
                 highlightedBackgroundColor: .clear
         )
-
+        
         let message = EKPopUpMessage(
                 themeImage: themeImage,
                 title: titleLabel,
@@ -64,9 +145,9 @@ class AlertService: UIViewController, AppAlert {
         return message
     }
 
-    private func setupAttributes() -> EKAttributes {
+    private func setupPopUpAttributes(duration: EKAttributes.DisplayDuration) -> EKAttributes {
         var attributes = EKAttributes.centerFloat
-        attributes.displayDuration = .infinity
+        attributes.displayDuration = duration
         attributes.screenBackground = .color(color: .init(
                 light: UIColor(white: 100.0/255.0, alpha: 0.3),
                 dark: UIColor(white: 50.0/255.0, alpha: 0.3))

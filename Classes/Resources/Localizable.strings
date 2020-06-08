@@ -66,6 +66,7 @@
 // MARK: Error
 
 "Error.notLoading" = "Не удалось загрузить";
+"Error" = "Ошибка";
 
 // MARK: Profile
 

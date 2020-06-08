@@ -7,21 +7,37 @@
 //
 
 import Foundation
-import Toaster
 
 class FormValidator {
-    
+
     static func isFormValid(email: String, password: String) -> Bool {
-        
+
+        let alertService: AppAlert = AlertService()
+
         switch true {
         case email.isEmpty:
-            Toast(text: R.string.localizable.emailIsEmpty()).show()
+            alertService.showNotificationMessage(
+                    title: R.string.localizable.error(),
+                    desc: R.string.localizable.emailIsEmpty(),
+                    textColor: .white,
+                    imageName: nil
+            )
             return false
         case !email.contains("@"):
-            Toast(text: R.string.localizable.emailIsNotValid()).show()
+            alertService.showNotificationMessage(
+                    title: R.string.localizable.error(),
+                    desc: R.string.localizable.emailIsNotValid(),
+                    textColor: .white,
+                    imageName: nil
+            )
             return false
         case password.isEmpty:
-            Toast(text: R.string.localizable.passwordIsEmpty()).show()
+            alertService.showNotificationMessage(
+                    title: R.string.localizable.error(),
+                    desc: R.string.localizable.passwordIsEmpty(),
+                    textColor: .white,
+                    imageName: nil
+            )
             return false
         default:
             return true

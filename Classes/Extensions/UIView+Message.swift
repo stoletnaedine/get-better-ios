@@ -8,7 +8,6 @@ import SwiftEntryKit
 
 // MARK: - UILabel
 extension UILabel {
-
     var style: EKProperty.LabelStyle {
         set {
             font = newValue.font

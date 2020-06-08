@@ -4,7 +4,14 @@
 //
 
 import Foundation
+import SwiftEntryKit
 
 protocol AppAlert {
+    
     func showPopUp(icon: String, title: String, description: String)
+
+    func showNotificationMessage(title: String,
+                                 desc: String,
+                                 textColor: EKColor,
+                                 imageName: String?)
 }
