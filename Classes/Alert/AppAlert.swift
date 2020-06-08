@@ -8,10 +8,11 @@ import SwiftEntryKit
 
 protocol AppAlert {
     
-    func showPopUp(icon: String, title: String, description: String)
+    func showPopUpMessage(icon: String, title: String, description: String)
 
-    func showNotificationMessage(title: String,
-                                 desc: String,
-                                 textColor: EKColor,
-                                 imageName: String?)
+    func showNotificationMessage(title: String, desc: String, textColor: EKColor, imageName: String?)
+
+    func showErrorMessage(desc: String)
+
+    func showSuccessMessage(desc: String)
 }

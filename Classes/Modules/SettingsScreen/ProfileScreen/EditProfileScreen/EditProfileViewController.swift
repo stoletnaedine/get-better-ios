@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import FirebaseStorage
 import FirebaseAuth
-import Toaster
 
 class EditProfileViewController: UIViewController {
     
@@ -28,6 +27,7 @@ class EditProfileViewController: UIViewController {
     
     let user = Auth.auth().currentUser
     let storageService = FirebaseStorageService()
+    let alertService: AppAlert = AlertService()
     
     var completion: () -> () = {}
     
@@ -35,7 +35,7 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         self.title = R.string.localizable.profileEditTitle()
-        customizeBarButon()
+        setupBarButton()
         customizeView()
     }
 
@@ -56,7 +56,7 @@ class EditProfileViewController: UIViewController {
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
-            storageService.uploadAvatar(photo: newAvatar, completion: { result in
+            storageService.uploadAvatar(photo: newAvatar, completion: { [weak self] result in
                 switch result {
                 case .success(let url):
                     let changeRequest = user.createProfileChangeRequest()
@@ -64,12 +64,12 @@ class EditProfileViewController: UIViewController {
                     changeRequest.commitChanges(completion: { error in
                         if let error = error {
                             print("Firebase commit changes error = \(error.localizedDescription)")
-                            Toast(text: "\(error.localizedDescription)").show()
+                            self?.alertService.showErrorMessage(desc: error.localizedDescription)
                         }
                         dispatchGroup.leave()
                     })
                 case .failure(let error):
-                    Toast(text: "\(String(describing: error.name))").show()
+                    self?.alertService.showErrorMessage(desc: String(describing: error.name))
                     dispatchGroup.leave()
                 }
             })
@@ -83,9 +83,9 @@ class EditProfileViewController: UIViewController {
             
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = newName
-            changeRequest.commitChanges(completion: { error in
+            changeRequest.commitChanges(completion: { [weak self] error in
                 if let error = error {
-                    Toast(text: "\(error.localizedDescription)").show()
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 }
                 dispatchGroup.leave()
             })
@@ -96,11 +96,11 @@ class EditProfileViewController: UIViewController {
             
             dispatchGroup.enter()
             
-            user.updatePassword(to: newPassword, completion: { error in
+            user.updatePassword(to: newPassword, completion: { [weak self] error in
                 if let error = error {
-                    Toast(text: "\(error.localizedDescription)").show()
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    Toast(text: R.string.localizable.editProfileSuccessPassChanged()).show()
+                    self?.alertService.showSuccessMessage(desc: R.string.localizable.editProfileSuccessPassChanged())
                 }
                 dispatchGroup.leave()
             })
@@ -112,12 +112,12 @@ class EditProfileViewController: UIViewController {
             
             dispatchGroup.enter()
             
-            user.updateEmail(to: newEmail, completion: { error in
+            user.updateEmail(to: newEmail, completion: { [weak self] error in
                 
                 dispatchGroup.leave()
                 
                 if let error = error {
-                    Toast(text: "\(error.localizedDescription)").show()
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 }
             })
         }
@@ -125,6 +125,7 @@ class EditProfileViewController: UIViewController {
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
             self?.removeActivityIndicator()
             self?.navigationController?.popViewController(animated: true)
+            self?.alertService.showSuccessMessage(desc: R.string.localizable.profileSuccessEdit())
             self?.completion()
         })
     }
@@ -138,26 +139,21 @@ class EditProfileViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: R.string.localizable.editProfileDelAccountAlertYesButton(),
                                       style: .destructive, handler: { _ in
-            user.delete(completion: { error in
+            user.delete(completion: { [weak self] error in
                 if let error = error {
-                    Toast(text: error.localizedDescription,
-                          delay: 0,
-                          duration: 5)
-                        .show()
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    Toast(text: R.string.localizable.editProfileDelAccountSuccessMessage(),
-                          delay: 0,
-                          duration: 5)
-                        .show()
+                    self?.alertService.showSuccessMessage(
+                            desc: R.string.localizable.editProfileDelAccountSuccessMessage()
+                    )
                     NotificationCenter.default.post(name: .logout, object: nil)
                 }
             })
         }))
         
         alert.addAction(UIAlertAction(title: R.string.localizable.editProfileDelAccountAlertNoButton(),
-                                      style: .default,
-                                      handler: nil))
-        
+                style: .default, handler: nil)
+        )
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -217,12 +213,12 @@ class EditProfileViewController: UIViewController {
         deleteAccountButton.titleLabel?.underline()
     }
     
-    func customizeBarButon() {
-        let saveBarButtom = UIBarButtonItem(title: R.string.localizable.editProfileSave(),
+    func setupBarButton() {
+        let saveBarButton = UIBarButtonItem(title: R.string.localizable.editProfileSave(),
                                             style: .plain,
                                             target: self,
                                             action: #selector(saveProfile))
-        navigationItem.rightBarButtonItem = saveBarButtom
+        navigationItem.rightBarButtonItem = saveBarButton
     }
 }
 

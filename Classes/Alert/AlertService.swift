@@ -8,10 +8,26 @@ import SwiftEntryKit
 
 class AlertService: UIViewController, AppAlert {
 
-    func showPopUp(icon: String, title: String, description: String) {
+    func showPopUpMessage(icon: String,
+                          title: String,
+                          description: String) {
         let attributes = setupPopUpAttributes(duration: .infinity)
         let message = setupPopUpMessage(icon: icon, title: title, description: description)
         SwiftEntryKit.display(entry: PopUpView(with: message), using: attributes)
+    }
+
+    func showErrorMessage(desc: String) {
+        showNotificationMessage(
+                title: R.string.localizable.error(),
+                desc: desc,
+                textColor: .white)
+    }
+
+    func showSuccessMessage(desc: String) {
+        showNotificationMessage(
+                title: R.string.localizable.success(),
+                desc: desc,
+                textColor: .white)
     }
 
     func showNotificationMessage(title: String,
@@ -36,10 +52,11 @@ class AlertService: UIViewController, AppAlert {
                 ),
                 accessibilityIdentifier: "description"
         )
-        var image: EKProperty.ImageContent?
-        if let imageName = imageName {
-            image = EKProperty.ImageContent(
-                    image: UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate),
+        var imageContent: EKProperty.ImageContent?
+        if let imageName = imageName,
+           let image = UIImage(named: imageName) {
+            imageContent = EKProperty.ImageContent(
+                    image: image.withRenderingMode(.alwaysTemplate),
                     displayMode: .inferred,
                     size: CGSize(width: 35, height: 35),
                     tint: textColor,
@@ -47,7 +64,7 @@ class AlertService: UIViewController, AppAlert {
             )
         }
         let simpleMessage = EKSimpleMessage(
-                image: image,
+                image: imageContent,
                 title: title,
                 description: description
         )
@@ -109,8 +126,8 @@ class AlertService: UIViewController, AppAlert {
         let titleLabel = EKProperty.LabelContent(
                 text: title,
                 style: .init(font: UIFont.systemFont(ofSize: 24),
-                color: .black,
-                alignment: .center)
+                        color: .black,
+                        alignment: .center)
         )
 
         let descriptionLabel = EKProperty.LabelContent(
@@ -133,7 +150,7 @@ class AlertService: UIViewController, AppAlert {
                 backgroundColor: .init(UIColor.systemOrange),
                 highlightedBackgroundColor: .clear
         )
-        
+
         let message = EKPopUpMessage(
                 themeImage: themeImage,
                 title: titleLabel,
@@ -149,8 +166,8 @@ class AlertService: UIViewController, AppAlert {
         var attributes = EKAttributes.centerFloat
         attributes.displayDuration = duration
         attributes.screenBackground = .color(color: .init(
-                light: UIColor(white: 100.0/255.0, alpha: 0.3),
-                dark: UIColor(white: 50.0/255.0, alpha: 0.3))
+                light: UIColor(white: 100.0 / 255.0, alpha: 0.3),
+                dark: UIColor(white: 50.0 / 255.0, alpha: 0.3))
         )
         attributes.shadow = .active(
                 with: .init(
