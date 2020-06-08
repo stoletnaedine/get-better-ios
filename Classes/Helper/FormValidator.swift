@@ -16,28 +16,13 @@ class FormValidator {
 
         switch true {
         case email.isEmpty:
-            alertService.showNotificationMessage(
-                    title: R.string.localizable.error(),
-                    desc: R.string.localizable.emailIsEmpty(),
-                    textColor: .white,
-                    imageName: nil
-            )
+            alertService.showErrorMessage(desc: R.string.localizable.emailIsEmpty())
             return false
         case !email.contains("@"):
-            alertService.showNotificationMessage(
-                    title: R.string.localizable.error(),
-                    desc: R.string.localizable.emailIsNotValid(),
-                    textColor: .white,
-                    imageName: nil
-            )
+            alertService.showErrorMessage(desc: R.string.localizable.emailIsNotValid())
             return false
         case password.isEmpty:
-            alertService.showNotificationMessage(
-                    title: R.string.localizable.error(),
-                    desc: R.string.localizable.passwordIsEmpty(),
-                    textColor: .white,
-                    imageName: nil
-            )
+            alertService.showErrorMessage(desc: R.string.localizable.passwordIsEmpty())
             return false
         default:
             return true

@@ -93,11 +93,7 @@ class AddPostViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
-                self?.alertService.showNotificationMessage(
-                        title: sphere.name,
-                        desc: R.string.localizable.postSuccessValue(),
-                        textColor: .white,
-                        imageName: nil)
+                self?.alertService.showSuccessMessage(desc: R.string.localizable.postSuccessValue())
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)
             }

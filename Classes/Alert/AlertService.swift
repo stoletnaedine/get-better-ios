@@ -20,19 +20,22 @@ class AlertService: UIViewController, AppAlert {
         showNotificationMessage(
                 title: R.string.localizable.error(),
                 desc: desc,
-                textColor: .white)
+                textColor: .white,
+                colors: [EKColor(.coral), EKColor(.violet)])
     }
 
     func showSuccessMessage(desc: String) {
         showNotificationMessage(
                 title: R.string.localizable.success(),
                 desc: desc,
-                textColor: .white)
+                textColor: .white,
+                colors: [EKColor(.violet), EKColor(.coral)])
     }
 
     func showNotificationMessage(title: String,
                                  desc: String,
                                  textColor: EKColor,
+                                 colors: [EKColor],
                                  imageName: String? = nil) {
         let title = EKProperty.LabelContent(
                 text: title,
@@ -70,18 +73,18 @@ class AlertService: UIViewController, AppAlert {
         )
         let notificationMessage = EKNotificationMessage(simpleMessage: simpleMessage)
         let contentView = EKNotificationMessageView(with: notificationMessage)
-        let attributes = setupTopFloatAttributes()
+        let attributes = setupTopFloatAttributes(colors: colors)
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
 
-    private func setupTopFloatAttributes() -> EKAttributes {
+    private func setupTopFloatAttributes(colors: [EKColor]) -> EKAttributes {
         var attributes: EKAttributes
         attributes = .topFloat
         attributes.displayMode = .inferred
         attributes.hapticFeedbackType = .success
         attributes.entryBackground = .gradient(
                 gradient: .init(
-                        colors: [EKColor(.violet), EKColor(.coral)],
+                        colors: colors,
                         startPoint: .zero,
                         endPoint: CGPoint(x: 1, y: 1)
                 )
