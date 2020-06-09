@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 class AppError: Error {
     
@@ -22,6 +23,23 @@ class AppError: Error {
     
     init(errorCode: AppErrorCode) {
         self.name = errorCode.rawValue
+    }
+    
+    init(firebaseError: Error) {
+        if let errorCode = AuthErrorCode(rawValue: firebaseError._code) {
+        switch errorCode {
+        case .emailAlreadyInUse:
+            self.name = "Этот E-mail уже используется другим пользователем"
+        case .wrongPassword:
+            self.name = "Неверный пароль"
+        case .tooManyRequests:
+            self.name = "Слишком много неудачных попыток. Попробуйте позже"
+        case .userNotFound:
+            self.name = "Пользователь не найден"
+        default:
+            self.name = firebaseError.localizedDescription
+            }
+        }
     }
 }
 

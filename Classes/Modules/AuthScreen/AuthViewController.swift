@@ -56,8 +56,9 @@ class AuthViewController: UIViewController {
                 
                 self?.removeActivityIndicator()
 
-                if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                if let error = error,
+                    let appError = AppError(firebaseError: error).name {
+                    self?.alertService.showErrorMessage(desc: appError)
                 } else {
                     KeychainHelper.saveUserEmail(email)
                     self?.signInCompletion()
