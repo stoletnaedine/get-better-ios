@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toaster
 
 class PostDetailViewController: UIViewController {
     
@@ -19,6 +18,8 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     var post: Post?
+    
+    let alertService: AppAlert = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,7 @@ class PostDetailViewController: UIViewController {
     @objc func copyLabelText(_ sender: UITapGestureRecognizer) {
         if let copyText = textLabel.text {
             UIPasteboard.general.string = copyText
-            Toast(text: R.string.localizable.textCopyAlert(), delay: 0, duration: 0.5).show()
+            alertService.showSuccessMessage(desc: R.string.localizable.textCopyAlert())
         }
     }
 

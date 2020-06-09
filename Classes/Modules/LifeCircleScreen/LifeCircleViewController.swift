@@ -8,7 +8,6 @@
 
 import UIKit
 import Charts
-import Toaster
 
 class LifeCircleViewController: UIViewController {
 

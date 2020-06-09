@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toaster
 
 class NoInternetViewController: UIViewController {
 
@@ -17,6 +16,7 @@ class NoInternetViewController: UIViewController {
     @IBOutlet weak var retryButton: UIButton!
     
     let connectionHelper = ConnectionHelper()
+    let alertService: AppAlert = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class NoInternetViewController: UIViewController {
 
     @IBAction func retryButtonDidTap(_ sender: UIButton) {
         if connectionHelper.isConnectionAvailable() {
-            Toast(text: R.string.localizable.noInternetTryConnectAlert(), duration: 5).show()
+            alertService.showSuccessMessage(desc: R.string.localizable.noInternetTryConnectAlert())
             NotificationCenter.default.post(name: .enterApp, object: nil)
         }
     }

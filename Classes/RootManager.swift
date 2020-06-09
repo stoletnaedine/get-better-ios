@@ -6,7 +6,6 @@
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import Toaster
 import Firebase
 import UIKit
 
@@ -23,7 +22,6 @@ class RootManager {
         
         addObservers()
         setupNavigationBar()
-        configToaster()
         
         if connectionHelper.isConnectionAvailable() {
             enterApp()
@@ -115,12 +113,5 @@ class RootManager {
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,
                                                             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-    }
-    
-    func configToaster() {
-        ToastView.appearance().backgroundColor = .darkGray
-        ToastView.appearance().font = UIFont.systemFont(ofSize: 16)
-        let screenHeight = UIScreen.main.bounds.height
-        ToastView.appearance().bottomOffsetPortrait = CGFloat(screenHeight / 2)
     }
 }

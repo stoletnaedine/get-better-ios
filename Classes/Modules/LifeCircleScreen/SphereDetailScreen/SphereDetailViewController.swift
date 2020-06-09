@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toaster
 
 class SphereDetailViewController: UIViewController {
     
@@ -19,6 +18,8 @@ class SphereDetailViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     var sphereValue: SphereValue?
+    
+    let alertService: AppAlert = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,7 @@ class SphereDetailViewController: UIViewController {
     @objc func copyLabelText(_ sender: UITapGestureRecognizer) {
         if let copyText = textLabel.text {
             UIPasteboard.general.string = copyText
-            Toast(text: R.string.localizable.textCopyAlert(),
-                  delay: 0,
-                  duration: 0.5)
-                .show()
+            alertService.showSuccessMessage(desc: R.string.localizable.textCopyAlert())
         }
     }
 

@@ -22,6 +22,7 @@
 // MARK: Journal
 
 "Journal.loading" = "Загрузка";
+"Journal.deletedPost" = "Пост удалён";
 
 // MARK: NoInternet
 

@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import Toaster
 
 class OnboardingPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
-    let databaseService = FirebaseDatabaseService()
+    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let alertService: AppAlert = AlertService()
     
     var completion: () -> () = {}
     
@@ -86,7 +86,7 @@ class OnboardingPageViewController: UIViewController {
         let sphereMetrics = SphereMetrics(values: metricsArray)
         
         if sphereMetrics.notValid() {
-            Toast(text: R.string.localizable.onboardingEmptyValuesWarning()).show()
+            alertService.showSuccessMessage(desc: R.string.localizable.onboardingEmptyValuesWarning())
             return
         }
         

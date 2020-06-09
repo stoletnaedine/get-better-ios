@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import Toaster
 
 class ResetPasswordViewController: UIViewController {
     
@@ -21,6 +20,8 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var cancelImageView: UIImageView!
     
+    let alertService: AppAlert = AlertService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -31,23 +32,20 @@ class ResetPasswordViewController: UIViewController {
         
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             !email.isEmpty else {
-                Toast(text: R.string.localizable.emailIsEmpty()).show()
+                alertService.showErrorMessage(desc: R.string.localizable.emailIsEmpty())
                 return
         }
         
         self.showActivityIndicator(onView: self.view)
-        Auth.auth().sendPasswordReset(withEmail: email, completion: { error in
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { [weak self] error in
             
-            self.removeActivityIndicator()
+            self?.removeActivityIndicator()
             
             if let error = error {
-                Toast(text: error.localizedDescription).show()
+                self?.alertService.showErrorMessage(desc: error.localizedDescription)
             } else {
-                Toast(text: R.string.localizable.resetPasswordAlertEmail(),
-                      delay: 1,
-                      duration: 5)
-                    .show()
-                self.dismiss(animated: true, completion: nil)
+                self?.alertService.showSuccessMessage(desc: R.string.localizable.resetPasswordAlertEmail())
+                self?.dismiss(animated: true, completion: nil)
             }
         })
     }

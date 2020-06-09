@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toaster
 
 class AddPostViewController: UIViewController {
     
@@ -54,11 +53,11 @@ class AddPostViewController: UIViewController {
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         guard let text = postTextView.text, !text.isEmpty else {
-            Toast(text: R.string.localizable.postEmptyTextWarning(), delay: 0, duration: 0.3).show()
+            alertService.showErrorMessage(desc: R.string.localizable.postEmptyTextWarning())
             return
         }
         guard let sphere = selectedSphere else {
-            Toast(text: R.string.localizable.postEmptySphereWarning(), delay: 0, duration: 0.3).show()
+            alertService.showErrorMessage(desc: R.string.localizable.postEmptySphereWarning())
             return
         }
         
@@ -93,7 +92,8 @@ class AddPostViewController: UIViewController {
             
             DispatchQueue.main.async { [weak self] in
                 self?.removeActivityIndicator()
-                self?.alertService.showSuccessMessage(desc: R.string.localizable.postSuccessValue())
+                let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
+                self?.alertService.showSuccessMessage(desc: description)
                 self?.completion()
                 self?.dismiss(animated: true, completion: nil)
             }
@@ -181,7 +181,9 @@ extension AddPostViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         if text.count > maxSymbolsCount {
-            Toast(text: R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))).show()
+            alertService.showErrorMessage(
+                desc: R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))
+            )
         }
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)

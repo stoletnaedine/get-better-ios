@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import Toaster
 
 class RegisterViewController: UIViewController {
     
@@ -23,6 +22,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var cancelImageView: UIImageView!
     
     var completion: () -> () = {}
+    let alertService: AppAlert = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +42,12 @@ class RegisterViewController: UIViewController {
                 self?.removeActivityIndicator()
                 
                 if let error = error {
-                    Toast(text: "\(error.localizedDescription)").show()
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                     return
                 }
                 
                 if let _ = Auth.auth().currentUser {
-                    Toast(text: R.string.localizable.registerSuccessAlert(),
-                          delay: 0,
-                          duration: 3)
-                        .show()
+                    self?.alertService.showSuccessMessage(desc: R.string.localizable.registerSuccessAlert())
                     self?.completion()
                 } else {
                     self?.dismiss(animated: true, completion: nil)

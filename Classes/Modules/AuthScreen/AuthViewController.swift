@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import Toaster
 
 class AuthViewController: UIViewController {
     
@@ -28,6 +27,7 @@ class AuthViewController: UIViewController {
     
     var signInCompletion: () -> () = {}
     var registerCompletion: () -> () = {}
+    let alertService: AppAlert = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class AuthViewController: UIViewController {
                 self?.removeActivityIndicator()
 
                 if let error = error {
-                    Toast(text: "\(error.localizedDescription)").show()
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 } else {
                     KeychainHelper.saveUserEmail(email)
                     self?.signInCompletion()
@@ -84,7 +84,7 @@ class AuthViewController: UIViewController {
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
             
             if let error = error {
-                Toast(text: "\(error.localizedDescription)").show()
+                self?.alertService.showErrorMessage(desc: error.localizedDescription)
             } else {
                 self?.registerCompletion()
             }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toaster
 
 class JournalViewController: UIViewController {
 
@@ -22,6 +21,7 @@ class JournalViewController: UIViewController {
     let cellXibName = R.nib.journalTableViewCell.name
     
     let databaseService: DatabaseService = FirebaseDatabaseService()
+    let alertService: AppAlert = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,9 @@ class JournalViewController: UIViewController {
             switch result {
                 
             case .failure(let error):
-                Toast(text: "\(String(describing: error.name))").show()
+                if let errorName = error.name {
+                    self?.alertService.showErrorMessage(desc: errorName)
+                }
                 completion()
                 
             case .success(let posts):
@@ -205,6 +207,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             guard let post = getPost(by: indexPath) else { return }
             if databaseService.deletePost(post) {
+                alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
                 updatePostsInTableView()
             }
         }
