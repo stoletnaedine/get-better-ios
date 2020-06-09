@@ -10,7 +10,7 @@ protocol AppAlert {
     
     func showPopUpMessage(icon: String, title: String, description: String)
 
-    func showNotificationMessage(title: String, desc: String, textColor: EKColor, colors: [EKColor], imageName: String?)
+    func showNotificationMessage(title: String, desc: String, textColor: EKColor, colors: [EKColor], image: UIImage?)
 
     func showErrorMessage(desc: String)
 

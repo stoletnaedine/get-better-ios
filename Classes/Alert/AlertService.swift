@@ -21,7 +21,8 @@ class AlertService: UIViewController, AppAlert {
                 title: R.string.localizable.error(),
                 desc: desc,
                 textColor: .white,
-                colors: [EKColor(.coral), EKColor(.violet)])
+                colors: [EKColor(.coral), EKColor(.violet)],
+                image: R.image.error())
     }
 
     func showSuccessMessage(desc: String) {
@@ -29,14 +30,15 @@ class AlertService: UIViewController, AppAlert {
                 title: R.string.localizable.success(),
                 desc: desc,
                 textColor: .white,
-                colors: [EKColor(.violet), EKColor(.coral)])
+                colors: [EKColor(.violet), EKColor(.coral)],
+                image: R.image.success())
     }
 
     func showNotificationMessage(title: String,
                                  desc: String,
                                  textColor: EKColor,
                                  colors: [EKColor],
-                                 imageName: String? = nil) {
+                                 image: UIImage? = nil) {
         let title = EKProperty.LabelContent(
                 text: title,
                 style: .init(
@@ -56,8 +58,7 @@ class AlertService: UIViewController, AppAlert {
                 accessibilityIdentifier: "description"
         )
         var imageContent: EKProperty.ImageContent?
-        if let imageName = imageName,
-           let image = UIImage(named: imageName) {
+        if let image = image {
             imageContent = EKProperty.ImageContent(
                     image: image.withRenderingMode(.alwaysTemplate),
                     displayMode: .inferred,

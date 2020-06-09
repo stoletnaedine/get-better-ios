@@ -270,9 +270,9 @@
 				C3724EC423AFABD000D49AD6 /* Modules */,
 				C392971D247FADF2000340DC /* Mapper */,
 				C3724ECC23AFAD6E00D49AD6 /* Models */,
+				F149545BD46CAD36FB0DA8B2 /* Alert */,
 				C306790C23AC990500B6E105 /* Extensions */,
 				C3BFEBC92477F8F3000B5B41 /* Resources */,
-				F149545BD46CAD36FB0DA8B2 /* Alert */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
