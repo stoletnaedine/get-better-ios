@@ -25,7 +25,7 @@ class AddPostViewController: UIViewController {
     
     let databaseService: DatabaseService = FirebaseDatabaseService()
     let storageService: StorageService = FirebaseStorageService()
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     var selectedSphere: Sphere?
     let maxSymbolsCount: Int = 300

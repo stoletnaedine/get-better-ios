@@ -20,7 +20,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var cancelImageView: UIImageView!
     
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

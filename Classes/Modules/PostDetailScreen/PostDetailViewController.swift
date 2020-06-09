@@ -19,7 +19,7 @@ class PostDetailViewController: UIViewController {
     
     var post: Post?
     
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

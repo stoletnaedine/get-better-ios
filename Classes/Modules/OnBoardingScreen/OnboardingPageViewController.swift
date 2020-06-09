@@ -12,7 +12,7 @@ class OnboardingPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
     let databaseService: DatabaseService = FirebaseDatabaseService()
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     var completion: () -> () = {}
     

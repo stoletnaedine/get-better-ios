@@ -27,7 +27,7 @@ class EditProfileViewController: UIViewController {
     
     let user = Auth.auth().currentUser
     let storageService = FirebaseStorageService()
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     var completion: () -> () = {}
     

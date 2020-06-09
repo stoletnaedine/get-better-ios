@@ -19,7 +19,7 @@ class SphereDetailViewController: UIViewController {
     
     var sphereValue: SphereValue?
     
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -27,7 +27,7 @@ class AuthViewController: UIViewController {
     
     var signInCompletion: () -> () = {}
     var registerCompletion: () -> () = {}
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

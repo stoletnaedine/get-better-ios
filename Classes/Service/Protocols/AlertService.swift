@@ -6,7 +6,7 @@
 import Foundation
 import SwiftEntryKit
 
-protocol AppAlert {
+protocol AlertService {
     
     func showPopUpMessage(icon: String, title: String, description: String)
 

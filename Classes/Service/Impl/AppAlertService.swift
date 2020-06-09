@@ -6,7 +6,7 @@
 import UIKit
 import SwiftEntryKit
 
-class AlertService: UIViewController, AppAlert {
+class AppAlertService: UIViewController, AlertService {
 
     func showPopUpMessage(icon: String,
                           title: String,

@@ -22,7 +22,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var cancelImageView: UIImageView!
     
     var completion: () -> () = {}
-    let alertService: AppAlert = AlertService()
+    let alertService: AlertService = AppAlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

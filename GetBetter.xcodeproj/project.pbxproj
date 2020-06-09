@@ -18,7 +18,6 @@
 		6E7071F3245C474D00ED7D08 /* SphereValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7071F2245C474D00ED7D08 /* SphereValue.swift */; };
 		6E711E88246857720068FD8C /* SphereDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E711E87246857720068FD8C /* SphereDetailViewController.xib */; };
 		6E711E8C24685BE00068FD8C /* SphereDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E711E8B24685BE00068FD8C /* SphereDetailViewController.swift */; };
-		6E9E01BB24545A690083499E /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BA24545A690083499E /* FirebaseStorageService.swift */; };
 		6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BC245464360083499E /* SphereMetrics.swift */; };
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
 		6EA85199244F7E8F00D40E14 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85198244F7E8F00D40E14 /* Date.swift */; };
@@ -38,7 +37,6 @@
 		C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C317E570247D6559001521FE /* NoInternetViewController.xib */; };
 		C31FF9792452CC8D00642C7B /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31FF9782452CC8D00642C7B /* ArticleViewController.swift */; };
 		C31FF97B2452CCA400642C7B /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31FF97A2452CCA400642C7B /* ArticleViewController.xib */; };
-		C31FF9842453341900642C7B /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31FF9832453341900642C7B /* FirebaseDatabaseService.swift */; };
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
 		C328EE062447294100445704 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328EE042447294100445704 /* RegisterViewController.xib */; };
 		C32D4CE123D0F3FC00AD9863 /* GlobalDefiitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* GlobalDefiitions.swift */; };
@@ -85,11 +83,13 @@
 		C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */; };
 		C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */; };
 		C9446CAB022057A4B4E41A5C /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */; };
-		F149517261CA7E25B2091B67 /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14957010302BA2E9ACD60BC /* AppAlert.swift */; };
-		F1495234822713798C6A44A9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495DDC93DAF058DE2ED525 /* AlertService.swift */; };
-		F14954DB233E992DD4A66938 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14953C541816FF1E0CBA2FE /* PopUpView.swift */; };
+		F14951F2B74F664679F89A1B /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495A16A4CD0EEE0497DED1 /* FirebaseDatabaseService.swift */; };
+		F14956A71011DCD683455A19 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149592174102B3CF4D0BF93 /* AlertService.swift */; };
 		F149571D8D5ACCC62F0EB363 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14955E497B188FBBB345A1A /* CGRect.swift */; };
+		F149598D7787CB41EDB3EA16 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495AFC05F6D974F60AB947 /* FirebaseStorageService.swift */; };
 		F1495A2BAA0794DBE208648C /* UIView+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14950817E129DCC6D81127A /* UIView+Message.swift */; };
+		F1495B3E0B748EEF6DED3C8E /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495F1990471AD93206DE2B /* PopUpView.swift */; };
+		F1495FF62886FDCD42C6E1A0 /* AppAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495C80D26368B970593B5F /* AppAlertService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,7 +104,6 @@
 		6E7071F2245C474D00ED7D08 /* SphereValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereValue.swift; sourceTree = "<group>"; };
 		6E711E87246857720068FD8C /* SphereDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SphereDetailViewController.xib; sourceTree = "<group>"; };
 		6E711E8B24685BE00068FD8C /* SphereDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereDetailViewController.swift; sourceTree = "<group>"; };
-		6E9E01BA24545A690083499E /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		6E9E01BC245464360083499E /* SphereMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetrics.swift; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		6EA85198244F7E8F00D40E14 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -128,7 +127,6 @@
 		C317E570247D6559001521FE /* NoInternetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetViewController.xib; sourceTree = "<group>"; };
 		C31FF9782452CC8D00642C7B /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		C31FF97A2452CCA400642C7B /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
-		C31FF9832453341900642C7B /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C328EE042447294100445704 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		C32D4CE023D0F3FC00AD9863 /* GlobalDefiitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDefiitions.swift; sourceTree = "<group>"; };
@@ -176,10 +174,12 @@
 		C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPostViewController.xib; sourceTree = "<group>"; };
 		E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14950817E129DCC6D81127A /* UIView+Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Message.swift"; sourceTree = "<group>"; };
-		F14953C541816FF1E0CBA2FE /* PopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		F14955E497B188FBBB345A1A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
-		F14957010302BA2E9ACD60BC /* AppAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
-		F1495DDC93DAF058DE2ED525 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		F149592174102B3CF4D0BF93 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		F1495A16A4CD0EEE0497DED1 /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
+		F1495AFC05F6D974F60AB947 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
+		F1495C80D26368B970593B5F /* AppAlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAlertService.swift; sourceTree = "<group>"; };
+		F1495F1990471AD93206DE2B /* PopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +270,6 @@
 				C3724EC423AFABD000D49AD6 /* Modules */,
 				C392971D247FADF2000340DC /* Mapper */,
 				C3724ECC23AFAD6E00D49AD6 /* Models */,
-				F149545BD46CAD36FB0DA8B2 /* Alert */,
 				C306790C23AC990500B6E105 /* Extensions */,
 				C3BFEBC92477F8F3000B5B41 /* Resources */,
 			);
@@ -359,6 +358,7 @@
 			children = (
 				C36DE9C0246E7F3F005635E4 /* DatabaseService.swift */,
 				C36DE9C2246E7F58005635E4 /* StorageService.swift */,
+				F149592174102B3CF4D0BF93 /* AlertService.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -385,6 +385,7 @@
 				C3724ECA23AFAC5D00D49AD6 /* JournalScreen */,
 				6E5AFCD32450C06800F283C4 /* AddPostScreen */,
 				C3724EC723AFAC2400D49AD6 /* PostDetailScreen */,
+				F1495148C9B23AA07950B63D /* AlertView */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -543,8 +544,7 @@
 			isa = PBXGroup;
 			children = (
 				C36DE9BF246E7F0E005635E4 /* Protocols */,
-				C31FF9832453341900642C7B /* FirebaseDatabaseService.swift */,
-				6E9E01BA24545A690083499E /* FirebaseStorageService.swift */,
+				F1495A4CCD11BF944AD5B848 /* Impl */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -557,14 +557,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F149545BD46CAD36FB0DA8B2 /* Alert */ = {
+		F1495148C9B23AA07950B63D /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
-				F14957010302BA2E9ACD60BC /* AppAlert.swift */,
-				F1495DDC93DAF058DE2ED525 /* AlertService.swift */,
-				F14953C541816FF1E0CBA2FE /* PopUpView.swift */,
+				F1495F1990471AD93206DE2B /* PopUpView.swift */,
 			);
-			path = Alert;
+			path = AlertView;
+			sourceTree = "<group>";
+		};
+		F1495A4CCD11BF944AD5B848 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				F1495C80D26368B970593B5F /* AppAlertService.swift */,
+				F1495A16A4CD0EEE0497DED1 /* FirebaseDatabaseService.swift */,
+				F1495AFC05F6D974F60AB947 /* FirebaseStorageService.swift */,
+			);
+			path = Impl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -722,7 +730,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C31FF9792452CC8D00642C7B /* ArticleViewController.swift in Sources */,
-				C31FF9842453341900642C7B /* FirebaseDatabaseService.swift in Sources */,
 				C32D4CE123D0F3FC00AD9863 /* GlobalDefiitions.swift in Sources */,
 				6E7071F3245C474D00ED7D08 /* SphereValue.swift in Sources */,
 				C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */,
@@ -761,7 +768,6 @@
 				C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */,
 				6EA8519B244F827A00D40E14 /* Post.swift in Sources */,
 				C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */,
-				6E9E01BB24545A690083499E /* FirebaseStorageService.swift in Sources */,
 				C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */,
 				C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */,
 				6ED5FF16245207AC00792B1F /* WelcomeViewController.swift in Sources */,
@@ -776,11 +782,13 @@
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
 				C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */,
 				C3ED5A2A23AFBF1300C7A492 /* LifeCircleViewController.swift in Sources */,
-				F149517261CA7E25B2091B67 /* AppAlert.swift in Sources */,
-				F1495234822713798C6A44A9 /* AlertService.swift in Sources */,
-				F14954DB233E992DD4A66938 /* PopUpView.swift in Sources */,
 				F1495A2BAA0794DBE208648C /* UIView+Message.swift in Sources */,
 				F149571D8D5ACCC62F0EB363 /* CGRect.swift in Sources */,
+				F14956A71011DCD683455A19 /* AlertService.swift in Sources */,
+				F1495B3E0B748EEF6DED3C8E /* PopUpView.swift in Sources */,
+				F1495FF62886FDCD42C6E1A0 /* AppAlertService.swift in Sources */,
+				F14951F2B74F664679F89A1B /* FirebaseDatabaseService.swift in Sources */,
+				F149598D7787CB41EDB3EA16 /* FirebaseStorageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
