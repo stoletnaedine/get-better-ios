@@ -36,7 +36,7 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func eyeButtonDidPressed(_ sender: UIButton) {
-        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+        passwordTextField.isSecureTextEntry.toggle()
         if eyeImageView.tintColor == .gray {
             eyeImageView.tintColor = .violet
         } else {
