@@ -26,13 +26,12 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     
     var signInCompletion: () -> () = {}
-    var registerCompletion: () -> () = {}
     let alertService: AlertService = AppAlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        customizeView()
+        setupView()
     }
     
     @IBAction func eyeButtonDidPressed(_ sender: UIButton) {
@@ -75,7 +74,7 @@ class AuthViewController: UIViewController {
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
         let registerViewController = RegisterViewController()
         registerViewController.completion = { [weak self] in
-            self?.registerCompletion()
+            self?.signInCompletion()
         }
         present(registerViewController, animated: true, completion: nil)
     }
@@ -87,12 +86,16 @@ class AuthViewController: UIViewController {
             if let error = error {
                 self?.alertService.showErrorMessage(desc: error.localizedDescription)
             } else {
-                self?.registerCompletion()
+                self?.signInCompletion()
             }
         })
     }
+}
+
+// MARK: setupView
+extension AuthViewController {
     
-    func customizeView() {
+    func setupView() {
         self.title = R.string.localizable.authTitle()
         
         emailLabel.text = R.string.localizable.authEmail()
