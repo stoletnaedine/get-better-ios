@@ -22,6 +22,12 @@ class JournalTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupView()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoImageView.image = nil
+        showImageInCell(false)
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -45,18 +51,15 @@ class JournalTableViewCell: UITableViewCell {
                     let image = UIImage(data: imageData) {
                 
                     DispatchQueue.main.async {
-                        self?.showImageInCell(true)
                         self?.photoImageView.image = image
+                        self?.showImageInCell(true)
                     }
                 }
             }
-        } else {
-            showImageInCell(false)
         }
     }
     
     func setupView() {
-        photoImageView.image = nil
         showImageInCell(false)
         photoImageView.layer.cornerRadius = 5
         photoImageView.layer.masksToBounds = true

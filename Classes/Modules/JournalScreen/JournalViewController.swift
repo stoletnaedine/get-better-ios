@@ -131,6 +131,7 @@ class JournalViewController: UIViewController {
     }
 }
 
+// MARK: TableView Delegate
 extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func getPost(by indexPath: IndexPath) -> Post? {
@@ -150,14 +151,16 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let date = sectionMonthYear[section]
-        let postsInSectionByDate = sectionPosts.filter { $0.sectionName == date }
+        let sectionDate = sectionMonthYear[section]
         
-        if postsInSectionByDate.isEmpty || postsInSectionByDate.count != 1 {
-            return 0
+        if let postsInSectionByDate = sectionPosts
+            .filter({
+                $0.sectionName == sectionDate
+            }).first {
+            return postsInSectionByDate.posts.count
         }
         
-        return postsInSectionByDate[0].posts.count
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -183,8 +186,11 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                       for: indexPath) as! JournalTableViewCell
-        cell.selectionStyle = .none
         cell.fillCell(from: post)
+        cell.selectionStyle = .none
+        if let preview = post.previewUrl, !preview.isEmpty {
+            cell.setNeedsLayout()
+        }
         
         return cell
     }

@@ -86,7 +86,7 @@ class OnboardingPageViewController: UIViewController {
         let sphereMetrics = SphereMetrics(values: metricsArray)
         
         if sphereMetrics.notValid() {
-            alertService.showSuccessMessage(desc: R.string.localizable.onboardingEmptyValuesWarning())
+            alertService.showErrorMessage(desc: R.string.localizable.onboardingEmptyValuesWarning())
             return
         }
         
