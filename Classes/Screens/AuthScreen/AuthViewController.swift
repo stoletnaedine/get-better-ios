@@ -83,8 +83,9 @@ class AuthViewController: UIViewController {
         
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
             
-            if let error = error {
-                self?.alertService.showErrorMessage(desc: error.localizedDescription)
+            if let error = error,
+                let appError = AppError(firebaseError: error).name {
+                self?.alertService.showErrorMessage(desc: appError)
             } else {
                 self?.signInCompletion()
             }

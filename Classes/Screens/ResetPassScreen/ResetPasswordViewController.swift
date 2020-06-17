@@ -41,8 +41,9 @@ class ResetPasswordViewController: UIViewController {
             
             self?.removeActivityIndicator()
             
-            if let error = error {
-                self?.alertService.showErrorMessage(desc: error.localizedDescription)
+            if let error = error,
+                let appError = AppError(firebaseError: error).name {
+                self?.alertService.showErrorMessage(desc: appError)
             } else {
                 self?.alertService.showSuccessMessage(desc: R.string.localizable.resetPasswordAlertEmail())
                 self?.dismiss(animated: true, completion: nil)

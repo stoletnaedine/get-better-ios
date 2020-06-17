@@ -36,6 +36,8 @@ class AppError: Error {
             self.name = "Слишком много неудачных попыток. Попробуйте позже"
         case .userNotFound:
             self.name = "Пользователь не найден"
+        case .networkError:
+            self.name = "Нет подключения к интернету"
         default:
             self.name = firebaseError.localizedDescription
             }

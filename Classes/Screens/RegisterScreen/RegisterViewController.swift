@@ -41,8 +41,9 @@ class RegisterViewController: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] authResult, error in
                 self?.removeActivityIndicator()
                 
-                if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                if let error = error,
+                    let appError = AppError(firebaseError: error).name {
+                    self?.alertService.showErrorMessage(desc: appError)
                     return
                 }
                 
