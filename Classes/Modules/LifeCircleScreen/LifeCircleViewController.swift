@@ -65,7 +65,7 @@ class LifeCircleViewController: UIViewController {
         
         dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            self?.databaseService.getSphereMetrics(from: GlobalDefiitions.SphereMetrics.start,
+            self?.databaseService.getSphereMetrics(from: GlobalDefinitions.SphereMetrics.start,
                                                    completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):
@@ -80,7 +80,7 @@ class LifeCircleViewController: UIViewController {
         
         dispatchGroup.enter()
         DispatchQueue.global().async { [weak self] in
-            self?.databaseService.getSphereMetrics(from: GlobalDefiitions.SphereMetrics.current,
+            self?.databaseService.getSphereMetrics(from: GlobalDefinitions.SphereMetrics.current,
                                                    completion: { [weak self] result in
                 switch result {
                 case .success(let sphereMetrics):

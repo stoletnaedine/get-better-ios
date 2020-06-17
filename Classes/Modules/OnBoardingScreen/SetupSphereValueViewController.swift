@@ -15,7 +15,7 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var valueForSphereLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    var sphereValue: Double? = GlobalDefiitions.notValidSphereValue
+    var sphereValue: Double? = GlobalDefinitions.notValidSphereValue
     var sphere: Sphere?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     let valuesTitle = [R.string.localizable.onboarding10(),

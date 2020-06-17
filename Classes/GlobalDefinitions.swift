@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GlobalDefiitions {
+struct GlobalDefinitions {
     
     struct Keychain {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"

@@ -135,7 +135,7 @@ class FirebaseDatabaseService: DatabaseService {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getSphereMetrics(from: GlobalDefiitions.SphereMetrics.current,
+        getSphereMetrics(from: GlobalDefinitions.SphereMetrics.current,
                          dispatchGroup: dispatchGroup,
                          completion: { sphereMetrics in
             currentSphereMetrics = sphereMetrics
@@ -153,7 +153,7 @@ class FirebaseDatabaseService: DatabaseService {
                 let newValue = (currentValue * 10 + diffValue * 10) / 10
                 let sphereValue = SphereValue(sphere: sphere, value: newValue)
                 let saveResult = self?.updateSphereValue(sphereValue,
-                                                         pathToSave: GlobalDefiitions.SphereMetrics.current)
+                                                         pathToSave: GlobalDefinitions.SphereMetrics.current)
                 print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
             }
         })
@@ -164,14 +164,14 @@ class FirebaseDatabaseService: DatabaseService {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getSphereMetrics(from: GlobalDefiitions.SphereMetrics.start,
+        getSphereMetrics(from: GlobalDefinitions.SphereMetrics.start,
                          dispatchGroup: dispatchGroup,
                          completion: { sphereMetrics in
             startSphereMetrics = sphereMetrics
         })
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            self?.getSphereMetrics(from: GlobalDefiitions.SphereMetrics.current, completion: { result in
+            self?.getSphereMetrics(from: GlobalDefinitions.SphereMetrics.current, completion: { result in
                 
                 let diffValue = 0.1
                 let minValue = 0.0
@@ -188,7 +188,7 @@ class FirebaseDatabaseService: DatabaseService {
                         let newValue = (currentValue * 10 - diffValue * 10) / 10
                         let sphereValue = SphereValue(sphere: sphere, value: newValue)
                         let saveResult = self?.updateSphereValue(sphereValue,
-                                                                 pathToSave: GlobalDefiitions.SphereMetrics.current)
+                                                                 pathToSave: GlobalDefinitions.SphereMetrics.current)
                         print("Decrement SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
                     }
                 case .failure(let error):

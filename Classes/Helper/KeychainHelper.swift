@@ -13,14 +13,14 @@ class KeychainHelper {
     
     @discardableResult
     static func saveUserEmail(_ email: String) -> Bool {
-        return KeychainWrapper.standard.set(email, forKey: GlobalDefiitions.Keychain.emailKey)
+        return KeychainWrapper.standard.set(email, forKey: GlobalDefinitions.Keychain.emailKey)
     }
     
     static func getUserEmail() -> String? {
-        return KeychainWrapper.standard.string(forKey: GlobalDefiitions.Keychain.emailKey)
+        return KeychainWrapper.standard.string(forKey: GlobalDefinitions.Keychain.emailKey)
     }
     
     static func deleteCredentials() {
-        KeychainWrapper.standard.removeObject(forKey: GlobalDefiitions.Keychain.emailKey)
+        KeychainWrapper.standard.removeObject(forKey: GlobalDefinitions.Keychain.emailKey)
     }
 }

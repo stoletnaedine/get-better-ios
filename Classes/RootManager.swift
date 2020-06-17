@@ -61,7 +61,7 @@ class RootManager {
     }
     
     func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
-        FirebaseDatabaseService().getSphereMetrics(from: GlobalDefiitions.SphereMetrics.start, completion: { result in
+        FirebaseDatabaseService().getSphereMetrics(from: GlobalDefinitions.SphereMetrics.start, completion: { result in
             switch result {
             case .failure:
                 completion(false)

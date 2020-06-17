@@ -90,8 +90,8 @@ class OnboardingPageViewController: UIViewController {
             return
         }
         
-        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefiitions.SphereMetrics.start)
-            && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefiitions.SphereMetrics.current) {
+        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefinitions.SphereMetrics.start)
+            && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefinitions.SphereMetrics.current) {
             self.completion()
         }
     }
