@@ -83,10 +83,10 @@
 		C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */; };
 		C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */; };
 		C9446CAB022057A4B4E41A5C /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */; };
+		F149500867BAD32486EDDC1F /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = F14951F0C54A8A8B957A745A /* 10.png */; };
 		F1495164F6AA534B935D0CFE /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = F14959955A9EB2183A9B24B7 /* 3.png */; };
 		F14951F2B74F664679F89A1B /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495A16A4CD0EEE0497DED1 /* FirebaseDatabaseService.swift */; };
 		F14953C8F7E92D19D84462B2 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = F149530E29EDF6C0492F8CB3 /* 5.png */; };
-		F14953CAC7AA27C2689CB544 /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495A40D4D39BE1BB3B95EB /* 10.png */; };
 		F14953E5F85A6CD896C3414F /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = F14958864ACAEC3818CCA45E /* 7.png */; };
 		F14956A71011DCD683455A19 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149592174102B3CF4D0BF93 /* AlertService.swift */; };
 		F149571D8D5ACCC62F0EB363 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14955E497B188FBBB345A1A /* CGRect.swift */; };
@@ -185,13 +185,13 @@
 		E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1495074B4E21424AC6CEBF0 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		F14950817E129DCC6D81127A /* UIView+Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Message.swift"; sourceTree = "<group>"; };
+		F14951F0C54A8A8B957A745A /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
 		F149530E29EDF6C0492F8CB3 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
 		F14955E497B188FBBB345A1A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		F14958864ACAEC3818CCA45E /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		F149592174102B3CF4D0BF93 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		F14959955A9EB2183A9B24B7 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		F1495A16A4CD0EEE0497DED1 /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
-		F1495A40D4D39BE1BB3B95EB /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
 		F1495AB57AE86F4BB2B85962 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		F1495AFC05F6D974F60AB947 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		F1495B637B114DD9251810C1 /* get-better-readme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "get-better-readme.jpg"; sourceTree = "<group>"; };
@@ -608,7 +608,7 @@
 				F149530E29EDF6C0492F8CB3 /* 5.png */,
 				F1495FC4624899B271CCCF0E /* 8.png */,
 				F1495AB57AE86F4BB2B85962 /* 4.png */,
-				F1495A40D4D39BE1BB3B95EB /* 10.png */,
+				F14951F0C54A8A8B957A745A /* 10.png */,
 			);
 			path = Pics;
 			sourceTree = "<group>";
@@ -705,7 +705,7 @@
 				F14953C8F7E92D19D84462B2 /* 5.png in Resources */,
 				F14959522679C3337FE105C7 /* 8.png in Resources */,
 				F1495B1D5D4440F8438F5DE5 /* 4.png in Resources */,
-				F14953CAC7AA27C2689CB544 /* 10.png in Resources */,
+				F149500867BAD32486EDDC1F /* 10.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
