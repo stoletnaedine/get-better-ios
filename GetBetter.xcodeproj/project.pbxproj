@@ -83,13 +83,13 @@
 		C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */; };
 		C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */; };
 		C9446CAB022057A4B4E41A5C /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */; };
-		F14950603E4BBFAB23440180 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495A3A1A8ED9AC4276F75C /* 8.png */; };
-		F14951ADCAB034E8DF436B5D /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495722D8909D273691A8A4 /* 7.png */; };
+		F14950603E4BBFAB23440180 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495A3A1A8ED9AC4276F75C /* 7.png */; };
+		F14951ADCAB034E8DF436B5D /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495722D8909D273691A8A4 /* 6.png */; };
 		F14951F2B74F664679F89A1B /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495A16A4CD0EEE0497DED1 /* FirebaseDatabaseService.swift */; };
-		F14954FEAEF05672B805215A /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = F14953E2C36B7AC09151054D /* 9.png */; };
+		F14954FEAEF05672B805215A /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = F14953E2C36B7AC09151054D /* 8.png */; };
 		F14955EA34AE8AA776A7C8ED /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F149537E71EDAF6963040654 /* 2.png */; };
 		F149566708A477FB446667C9 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = F14958C6AC488E270BB36001 /* 3.png */; };
-		F149568306069F87D911B76D /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = F149568D8593B53F43E6DF5E /* 10.png */; };
+		F149568306069F87D911B76D /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = F149568D8593B53F43E6DF5E /* 9.png */; };
 		F14956A71011DCD683455A19 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149592174102B3CF4D0BF93 /* AlertService.swift */; };
 		F149571D8D5ACCC62F0EB363 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14955E497B188FBBB345A1A /* CGRect.swift */; };
 		F149598D7787CB41EDB3EA16 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495AFC05F6D974F60AB947 /* FirebaseStorageService.swift */; };
@@ -185,15 +185,15 @@
 		E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14950817E129DCC6D81127A /* UIView+Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Message.swift"; sourceTree = "<group>"; };
 		F149537E71EDAF6963040654 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		F14953E2C36B7AC09151054D /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
+		F14953E2C36B7AC09151054D /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		F14955E497B188FBBB345A1A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
-		F149568D8593B53F43E6DF5E /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
-		F1495722D8909D273691A8A4 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
+		F149568D8593B53F43E6DF5E /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
+		F1495722D8909D273691A8A4 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		F14958BF1B820ACB6FC09854 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F14958C6AC488E270BB36001 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		F149592174102B3CF4D0BF93 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		F1495A16A4CD0EEE0497DED1 /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
-		F1495A3A1A8ED9AC4276F75C /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
+		F1495A3A1A8ED9AC4276F75C /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		F1495AFC05F6D974F60AB947 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		F1495B637B114DD9251810C1 /* get-better-readme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "get-better-readme.jpg"; sourceTree = "<group>"; };
 		F1495C80D26368B970593B5F /* AppAlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAlertService.swift; sourceTree = "<group>"; };
@@ -601,14 +601,14 @@
 			children = (
 				F1495B637B114DD9251810C1 /* get-better-readme.jpg */,
 				F14958C6AC488E270BB36001 /* 3.png */,
-				F1495722D8909D273691A8A4 /* 7.png */,
-				F1495A3A1A8ED9AC4276F75C /* 8.png */,
-				F14953E2C36B7AC09151054D /* 9.png */,
+				F1495722D8909D273691A8A4 /* 6.png */,
+				F1495A3A1A8ED9AC4276F75C /* 7.png */,
+				F14953E2C36B7AC09151054D /* 8.png */,
 				F149537E71EDAF6963040654 /* 2.png */,
 				F1495DC187F39C709B8B85F8 /* 5.png */,
 				F14958BF1B820ACB6FC09854 /* 1.png */,
 				F1495D61E9E5A5FE7FF55202 /* 4.png */,
-				F149568D8593B53F43E6DF5E /* 10.png */,
+				F149568D8593B53F43E6DF5E /* 9.png */,
 			);
 			path = Pics;
 			sourceTree = "<group>";
@@ -698,14 +698,14 @@
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
 				F1495E1F759594DE3F707CCF /* get-better-readme.jpg in Resources */,
 				F149566708A477FB446667C9 /* 3.png in Resources */,
-				F14951ADCAB034E8DF436B5D /* 7.png in Resources */,
-				F14950603E4BBFAB23440180 /* 8.png in Resources */,
-				F14954FEAEF05672B805215A /* 9.png in Resources */,
+				F14951ADCAB034E8DF436B5D /* 6.png in Resources */,
+				F14950603E4BBFAB23440180 /* 7.png in Resources */,
+				F14954FEAEF05672B805215A /* 8.png in Resources */,
 				F14955EA34AE8AA776A7C8ED /* 2.png in Resources */,
 				F1495D5ECDF0B97F424E8224 /* 5.png in Resources */,
 				F1495CCF35CE078ED01A9258 /* 1.png in Resources */,
 				F1495CE9448BA43B6273D3AB /* 4.png in Resources */,
-				F149568306069F87D911B76D /* 10.png in Resources */,
+				F149568306069F87D911B76D /* 9.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
