@@ -103,13 +103,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = Classes/Modules/LifeCircleScreen/AchievementsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		6E045E962463E8150001E378 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AchievementsTableViewCell.xib; path = Classes/Screens/LifeCircleScreen/AchievementsCell/AchievementsTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		6E045E982463E8B40001E378 /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewCell.swift; sourceTree = "<group>"; };
 		6E045E9A24640A6A0001E378 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		6E56840E2451AB1F009FBE13 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
 		6E56840F2451AB1F009FBE13 /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
-		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = Classes/Modules/ResetPassScreen/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
-		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = Classes/Modules/ResetPassScreen/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
+		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = Classes/Screens/ResetPassScreen/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
+		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = Classes/Screens/ResetPassScreen/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
 		6E6A21792466C6FB00D8AC68 /* Atricle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atricle.swift; sourceTree = "<group>"; };
 		6E7071F2245C474D00ED7D08 /* SphereValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereValue.swift; sourceTree = "<group>"; };
 		6E711E87246857720068FD8C /* SphereDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SphereDetailViewController.xib; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 				C3C873CF2436032400931E9B /* Error */,
 				C34B14E724475EA700B58B18 /* Helper */,
 				C3F0141723D080CE009D83AD /* Service */,
-				C3724EC423AFABD000D49AD6 /* Modules */,
+				C3724EC423AFABD000D49AD6 /* Screens */,
 				C392971D247FADF2000340DC /* Mapper */,
 				C3724ECC23AFAD6E00D49AD6 /* Models */,
 				C306790C23AC990500B6E105 /* Extensions */,
@@ -392,7 +392,7 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C3724EC423AFABD000D49AD6 /* Modules */ = {
+		C3724EC423AFABD000D49AD6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				C317E56E247D6531001521FE /* NoInternetScreen */,
@@ -408,7 +408,7 @@
 				C3724EC723AFAC2400D49AD6 /* PostDetailScreen */,
 				F1495148C9B23AA07950B63D /* AlertView */,
 			);
-			path = Modules;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		C3724EC723AFAC2400D49AD6 /* PostDetailScreen */ = {
