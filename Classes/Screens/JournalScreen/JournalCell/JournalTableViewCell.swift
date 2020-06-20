@@ -76,18 +76,10 @@ class JournalTableViewCell: UITableViewCell {
     }
     
     private func showImageInCell(_ show: Bool) {
-        if show {
-            photoImageView?.isHidden = false
-            titleLabel.isHidden = false
-            dateLabel.isHidden = false
-            titleLabelNoImage.isHidden = true
-            dateLabelNoImage.isHidden = true
-        } else {
-            photoImageView?.isHidden = true
-            titleLabel.isHidden = true
-            dateLabel.isHidden = true
-            titleLabelNoImage.isHidden = false
-            dateLabelNoImage.isHidden = false
-        }
+        photoImageView?.isHidden = !show
+        titleLabel.isHidden = !show
+        dateLabel.isHidden = !show
+        titleLabelNoImage.isHidden = show
+        dateLabelNoImage.isHidden = show
     }
 }
