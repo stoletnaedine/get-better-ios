@@ -32,7 +32,7 @@ class LifeCircleViewController: UIViewController {
     let achievementsReuseCellIdentifier = R.reuseIdentifier.achievementsCell.identifier
     let sphereIconSize: CGFloat = 30
     
-    var setupSphereCompletion: () -> () = {}
+    var showOnboardingCompletion: () -> () = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,6 @@ class LifeCircleViewController: UIViewController {
         setupSegmentedControl()
         setupTableViews()
         setupRefreshControl()
-        loadAndShowData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +71,7 @@ class LifeCircleViewController: UIViewController {
                     self?.startSphereMetrics = sphereMetrics
                     dispatchGroup.leave()
                 case .failure(_):
-                    self?.setupSphereCompletion()
+                    self?.showOnboardingCompletion()
                     dispatchGroup.leave()
                 }
             })
@@ -87,7 +86,7 @@ class LifeCircleViewController: UIViewController {
                     self?.currentSphereMetrics = sphereMetrics
                     dispatchGroup.leave()
                 case .failure(_):
-                    self?.setupSphereCompletion()
+                    self?.showOnboardingCompletion()
                     dispatchGroup.leave()
                 }
             })
@@ -100,7 +99,7 @@ class LifeCircleViewController: UIViewController {
                 case .success(let posts):
                     self?.posts = posts
                     dispatchGroup.leave()
-                case .failure(_):
+                default:
                     dispatchGroup.leave()
                 }
             })
@@ -110,9 +109,11 @@ class LifeCircleViewController: UIViewController {
             if let startSphereMetrics = self?.startSphereMetrics,
                 let currentSphereMetrics = self?.currentSphereMetrics,
                 let posts = self?.posts,
-                let achievements = self?.viewModel.getAchievements(posts: posts,
-                                                                   startSphereMetrics: startSphereMetrics,
-                                                                   currentSphereMetrics: currentSphereMetrics) {
+                let achievements = self?.viewModel.getAchievements(
+                    posts: posts,
+                    startSphereMetrics: startSphereMetrics,
+                    currentSphereMetrics: currentSphereMetrics
+                ) {
                 self?.achievements = achievements
             }
             self?.setupChartView()
@@ -264,22 +265,24 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     private func getSphereValue(by indexPath: IndexPath) -> SphereValue? {
         
         let sphereValueDict = currentSphereMetrics?.sortedValues()[indexPath.row]
-        let value = sphereValueDict?.value ?? 0
         let sphereRawValue = sphereValueDict?.key ?? ""
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return nil }
+        let value = sphereValueDict?.value ?? 0
         let sphereValue = SphereValue(sphere: sphere, value: value)
         
         return sphereValue
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         switch tableView {
         
         case metricsTableView:
             return currentSphereMetrics?.values.count ?? 0
-            
+        
         case achievementsTableView:
             return achievements.count
+        
         default:
             return 0
         }
@@ -290,7 +293,6 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
             
         case metricsTableView:
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
                                                      for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .default
@@ -300,9 +302,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         case achievementsTableView:
-            
             let achievement = achievements[indexPath.row]
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier,
                                                      for: indexPath) as! AchievementsTableViewCell
             cell.selectionStyle = .none

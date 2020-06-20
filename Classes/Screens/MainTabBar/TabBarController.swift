@@ -10,7 +10,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    var setupSphereCompletion: () -> () = {}
+    var showOnboardingCompletion: () -> () = {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +21,8 @@ class TabBarController: UITabBarController {
     
     func initViewControllers() {
         let lifeCircleVC = LifeCircleViewController()
-        lifeCircleVC.setupSphereCompletion = { [weak self] in
-            self?.setupSphereCompletion()
+        lifeCircleVC.showOnboardingCompletion = { [weak self] in
+            self?.showOnboardingCompletion()
         }
         let lifeCircleNC = UINavigationController(rootViewController: lifeCircleVC)
         lifeCircleNC.tabBarItem.image = R.image.circle()

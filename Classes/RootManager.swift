@@ -83,7 +83,7 @@ class RootManager {
     
     @objc func showTabBarController() {
         let tabBarController = TabBarController()
-        tabBarController.setupSphereCompletion = { [weak self] in
+        tabBarController.showOnboardingCompletion = { [weak self] in
             self?.showOnboardingPageViewController()
         }
         window?.rootViewController = tabBarController

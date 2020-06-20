@@ -48,5 +48,4 @@ class AchievementsTableViewCell: UITableViewCell {
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
         descriptionLabel.textColor = .gray
     }
-    
 }
