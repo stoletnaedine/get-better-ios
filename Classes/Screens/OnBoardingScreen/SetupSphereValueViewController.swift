@@ -14,6 +14,8 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var valueForSphereLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var arrowDownImageView: UIImageView!
+    @IBOutlet weak var arrowUpImageView: UIImageView!
     
     var sphereValue: Double? = GlobalDefinitions.notValidSphereValue
     var sphere: Sphere?
@@ -65,16 +67,22 @@ class SetupSphereValueViewController: UIViewController {
         customtTextField.inputView = picker
         customtTextField.becomeFirstResponder()
     }
-    
+}
+
+// MARK: Setup View
+extension SetupSphereValueViewController {
     func setupView() {
         questionLabel.font = UIFont.systemFont(ofSize: 16)
         sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 30)
         valueForSphereLabel.font = UIFont.systemFont(ofSize: 70)
         valueForSphereLabel.textColor = .violet
         valueForSphereLabel.text = R.string.localizable.onboardingUnSelect()
+        arrowDownImageView.tint(with: .violet)
+        arrowUpImageView.tint(with: .violet)
     }
 }
 
+// MARK: UIPicker Delegate
 extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
