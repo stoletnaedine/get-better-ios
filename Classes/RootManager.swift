@@ -17,11 +17,9 @@ class RootManager {
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        
         window?.rootViewController = R.storyboard.launchScreen().instantiateInitialViewController()
         
         addObservers()
-        setupNavigationBar()
         
         if connectionHelper.isConnectionAvailable() {
             enterApp()
@@ -103,12 +101,5 @@ class RootManager {
             self?.enterApp()
         }
         window?.rootViewController = UINavigationController(rootViewController: authViewController)
-    }
-    
-    func setupNavigationBar() {
-        UINavigationBar.appearance().barTintColor = .violet
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,
-                                                            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
     }
 }

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        setupNavigationBar()
         FirebaseApp.configure()
         Auth.auth().languageCode = "ru"
         IQKeyboardManager.shared.enable = true
@@ -28,5 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
+    }
+    
+    private func setupNavigationBar() {
+        UINavigationBar.appearance().barTintColor = .violet
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,
+                                                            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
     }
 }
