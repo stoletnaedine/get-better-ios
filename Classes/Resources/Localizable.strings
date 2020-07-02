@@ -91,6 +91,7 @@
 
 // MARK: Onboarding
 
+"Onboarding.unSelect" = "0";
 "Onboarding.title" = "Привет";
 "Onboarding.save" = "Сохранить";
 "Onboarding.exit" = "Выйти";

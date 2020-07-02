@@ -76,7 +76,6 @@ class ResetPasswordViewController: UIViewController {
         noticeLabel.text = R.string.localizable.resetPasswordNoticeLabel()
         
         cancelButton.setTitle("", for: .normal)
-        cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
-        cancelImageView.tintColor = .violet
+        cancelImageView.tint(with: .violet)
     }
 }

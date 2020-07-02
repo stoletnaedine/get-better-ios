@@ -16,12 +16,14 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var saveButtonView: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var cancelImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var attachButton: UIButton!
     @IBOutlet weak var attachImageView: UIImageView!
     @IBOutlet weak var symbolsCountLabel: UILabel!
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var arrowDownImageView: UIImageView!
     
     let databaseService: DatabaseService = FirebaseDatabaseService()
     let storageService: StorageService = FirebaseStorageService()
@@ -37,7 +39,7 @@ class AddPostViewController: UIViewController {
         self.title = R.string.localizable.postTitle()
         self.hideKeyboardWhenTappedAround()
         registerTapForSelectedSphereLabel()
-        customizeView()
+        setupView()
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
@@ -117,8 +119,11 @@ class AddPostViewController: UIViewController {
         customtTextField.inputView = picker
         customtTextField.becomeFirstResponder()
     }
-    
-    func customizeView() {
+}
+
+// MARK: Setup View
+extension AddPostViewController {
+    func setupView() {
         photoImageView.isHidden = true
         postTextView.delegate = self
         postTextView.becomeFirstResponder()
@@ -145,6 +150,9 @@ class AddPostViewController: UIViewController {
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
+        arrowDownImageView.tint(with: .violet)
+        attachImageView.tint(with: .violet)
+        cancelImageView.tint(with: .violet)
     }
 }
 

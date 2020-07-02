@@ -75,6 +75,7 @@
 		C3C66AF224582B5000D3964D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */; };
 		C3C66AF324582B5000D3964D /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */; };
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
+		C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */; };
 		C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EB7323C710BB0045B70A /* RootManager.swift */; };
 		C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */; };
 		C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */; };
@@ -175,6 +176,7 @@
 		C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C3E7EB7323C710BB0045B70A /* RootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootManager.swift; sourceTree = "<group>"; };
 		C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalViewController.xib; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				C33B3452247C137A008EA2D1 /* UIFont.swift */,
 				F14950817E129DCC6D81127A /* UIView+Message.swift */,
 				F14955E497B188FBBB345A1A /* CGRect.swift */,
+				C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */,
 				C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */,
 				C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */,
+				C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */,
 				C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */,
 				C396E23E246AC8E200DBF0E4 /* AchievementViewModel.swift in Sources */,
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,

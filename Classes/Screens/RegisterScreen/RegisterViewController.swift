@@ -89,7 +89,6 @@ class RegisterViewController: UIViewController {
         registerButtonLabel.font = .formButtonFont
         
         cancelButton.setTitle("", for: .normal)
-        cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
-        cancelImageView.tintColor = .violet
+        cancelImageView.tint(with: .violet)
     }
 }

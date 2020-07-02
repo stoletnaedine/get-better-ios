@@ -91,7 +91,6 @@ class PostDetailViewController: UIViewController {
         dateLabel.textColor = .gray
         cancelButton.setTitle("", for: .normal)
         photoImageView.alpha = 0.15
-        cancelImageView.image = cancelImageView.image?.withRenderingMode(.alwaysTemplate)
-        cancelImageView.tintColor = .violet
+        cancelImageView.tint(with: .violet)
     }
 }

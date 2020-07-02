@@ -71,7 +71,7 @@ class SetupSphereValueViewController: UIViewController {
         sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 30)
         valueForSphereLabel.font = UIFont.systemFont(ofSize: 70)
         valueForSphereLabel.textColor = .violet
-        valueForSphereLabel.text = "0"
+        valueForSphereLabel.text = R.string.localizable.onboardingUnSelect()
     }
 }
 
