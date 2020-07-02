@@ -37,9 +37,11 @@ class AuthViewController: UIViewController {
     @IBAction func eyeButtonDidPressed(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry.toggle()
         if eyeImageView.tintColor == .gray {
-            eyeImageView.tintColor = .violet
+            eyeImageView.image = R.image.openEye()
+            eyeImageView.tint(with: .violet)
         } else {
-            eyeImageView.tintColor = .gray
+            eyeImageView.image = R.image.closedEye()
+            eyeImageView.tint(with: .gray)
         }
     }
     
@@ -93,7 +95,7 @@ class AuthViewController: UIViewController {
     }
 }
 
-// MARK: setupView
+// MARK: Setup View
 extension AuthViewController {
     
     func setupView() {
@@ -120,7 +122,7 @@ extension AuthViewController {
         passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterPassword(),
                                                                      attributes: NSAttributedString.formFieldPlaceholderAttributes)
         passwordTextField.isSecureTextEntry = true
-        eyeImageView.image = R.image.combinedShape()
+        eyeImageView.image = R.image.closedEye()
         eyeButton.setTitle("", for: .normal)
         
         enterView.backgroundColor = .violet
@@ -146,10 +148,7 @@ extension AuthViewController {
         anonymButton.titleLabel?.font = .formButtonFont
         anonymButton.titleLabel?.underline()
         
-        logoImageView.image = logoImageView.image?.withRenderingMode(.alwaysTemplate)
-        logoImageView.tintColor = .violet
-        
-        eyeImageView.image = eyeImageView.image?.withRenderingMode(.alwaysTemplate)
-        eyeImageView.tintColor = .gray
+        logoImageView.tint(with: .violet)
+        eyeImageView.tint(with: .gray)
     }
 }
