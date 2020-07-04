@@ -33,10 +33,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="745" verticalCompressionResistancePriority="745" ambiguous="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6oS-0v-hJz">
-                    <rect key="frame" x="20" y="114.5" width="374" height="200"/>
+                    <rect key="frame" x="20" y="115" width="374" height="200"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="YEh-fg-H2M"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="PRd-jR-zPg"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="plw-aj-wlh"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="oAJ-3t-H08"/>
