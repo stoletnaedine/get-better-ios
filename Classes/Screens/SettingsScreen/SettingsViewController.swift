@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
     var profile: Profile?
     
     let SectionHeaderHeight: CGFloat = 35
-    var tableItems: [TableSection : [SettingsCell]]?
+    var tableItems: [TableSection : [CommonSettingsCell]]?
     let refreshControl = UIRefreshControl()
     
     let profileCellIdentifier = R.reuseIdentifier.profileCell.identifier
@@ -59,10 +59,16 @@ class SettingsViewController: UIViewController {
             self?.loadProfileAndReloadTableView()
         }
         
-        let articles = viewModel.fillArticles()
-        
-        tableItems = [TableSection.profile : [SettingsCell(title: "", viewController: editProfileViewController)],
-                      TableSection.articles : articles]
+        tableItems = [
+            TableSection.profile : [CommonSettingsCell(title: "", viewController: editProfileViewController)],
+            TableSection.articles : viewModel.fillArticles(),
+            TableSection.config : [
+                CommonSettingsCell(
+                        title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
+                        viewController: nil
+                )
+            ]
+        ]
     }
     
     func setupRefreshControl() {
@@ -116,8 +122,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
-        case .settings:
-            return UITableViewCell()
+        case .config:
+            let cell = UITableViewCell()
+            cell.textLabel?.text = items[tableSection]?[indexPath.row].title
+            cell.textLabel?.textColor = .gray
+            cell.selectionStyle = .none
+            return cell
         }
     }
     
@@ -128,7 +138,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .profile:
             let cell = tableView.dequeueReusableCell(withIdentifier: profileCellIdentifier) as! ProfileTableViewCell
             return cell.frame.height
-        case .articles, .settings:
+        case .articles, .config:
             return defaultHeight
         }
     }
@@ -137,8 +147,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let items = tableItems else { return }
         guard let tableSection = TableSection(rawValue: indexPath.section) else { return }
         guard let viewControllers = items[tableSection] else { return }
-        let viewController = viewControllers[indexPath.row].viewController
-        navigationController?.pushViewController(viewController, animated: true)
+        if let viewController = viewControllers[indexPath.row].viewController {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

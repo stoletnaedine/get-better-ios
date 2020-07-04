@@ -37,13 +37,13 @@ class SettingsViewModel {
         }
     }
     
-    func fillArticles() -> [SettingsCell] {
+    func fillArticles() -> [CommonSettingsCell] {
         
         let aboutCircleViewController = ArticleViewController()
         aboutCircleViewController.article = Article(title: R.string.localizable.aboutCircleTitle(),
                                                     titleView: nil,
                                                     text: R.string.localizable.aboutCircleDescription(),
-                                                    image: R.image.aboutCircle())
+                                                    image: R.image.lifeCircleExample())
         
         let aboutJournalViewController = ArticleViewController()
         aboutJournalViewController.article = Article(title: R.string.localizable.aboutJournalTitle(),
@@ -57,8 +57,8 @@ class SettingsViewModel {
                                                  text: R.string.localizable.aboutAppDescription(),
                                                  image: R.image.aboutTeam())
         
-        return [SettingsCell(title: R.string.localizable.aboutCircleTableTitle(), viewController: aboutCircleViewController),
-                SettingsCell(title: R.string.localizable.aboutJournalTableTitle(), viewController: aboutJournalViewController),
-                SettingsCell(title: R.string.localizable.aboutAppTableTitle(), viewController: aboutAppViewController)]
+        return [CommonSettingsCell(title: R.string.localizable.aboutCircleTableTitle(), viewController: aboutCircleViewController),
+                CommonSettingsCell(title: R.string.localizable.aboutJournalTableTitle(), viewController: aboutJournalViewController),
+                CommonSettingsCell(title: R.string.localizable.aboutAppTableTitle(), viewController: aboutAppViewController)]
     }
 }

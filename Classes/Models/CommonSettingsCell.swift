@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-struct SettingsCell {
+struct CommonSettingsCell {
     let title: String
-    let viewController: UIViewController
+    let viewController: UIViewController?
 }
 
 enum TableSection: Int {
-    case profile = 0, articles, settings
+    case profile = 0, articles, config
 }
