@@ -51,6 +51,7 @@ class SettingsViewController: UIViewController {
                            forCellReuseIdentifier: profileCellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tableFooterView = UIView()
     }
     
     private func fillTableItems() {
@@ -153,6 +154,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
         return SectionHeaderHeight
     }
     
