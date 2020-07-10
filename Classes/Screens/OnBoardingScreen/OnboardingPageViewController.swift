@@ -77,7 +77,7 @@ class OnboardingPageViewController: UIViewController {
     @objc func saveSphereValues() {
         
         let setupSphereValueViewControllers = viewControllers
-            .filter { !($0 is WelcomeViewController) }
+            .filter { $0 is SetupSphereValueViewController }
             .map { $0 as! SetupSphereValueViewController }
         
         let metricsArray = setupSphereValueViewControllers.reduce(into: [String: Double]()) {
@@ -92,6 +92,7 @@ class OnboardingPageViewController: UIViewController {
         
         if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefinitions.SphereMetrics.start)
             && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefinitions.SphereMetrics.current) {
+            UserDefaults.standard.set(false, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
             self.completion()
         }
     }

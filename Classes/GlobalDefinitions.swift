@@ -14,6 +14,10 @@ struct GlobalDefinitions {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
     }
     
+    struct UserDefaults {
+        static let tutorialHasShowed = "tutorialHasShowed"
+    }
+    
     struct SphereMetrics {
         static let start = "start_sphere_level"
         static let current = "current_sphere_level"

@@ -10,4 +10,5 @@ target 'GetBetter' do
   pod 'SwiftEntryKit', '1.2.3'
   pod 'R.swift'
   pod 'ReachabilitySwift'
+  pod 'MaterialShowcase'
 end

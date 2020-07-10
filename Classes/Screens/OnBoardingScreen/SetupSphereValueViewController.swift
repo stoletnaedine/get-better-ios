@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaterialShowcase
 
 class SetupSphereValueViewController: UIViewController {
     
@@ -17,7 +18,7 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var arrowDownImageView: UIImageView!
     @IBOutlet weak var arrowUpImageView: UIImageView!
     
-    var sphereValue: Double? = GlobalDefinitions.notValidSphereValue
+    var sphereValue: Double = GlobalDefinitions.notValidSphereValue
     var sphere: Sphere?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     let valuesTitle = [R.string.localizable.onboarding10(),
@@ -41,6 +42,24 @@ class SetupSphereValueViewController: UIViewController {
             fillView(from: sphere)
         }
         registerTapForSelectedSphereLabel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        showTutorial()
+    }
+    
+    private func showTutorial() {
+        if !UserDefaults.standard.bool(forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed) {
+            let showcase = MaterialShowcase()
+            showcase.backgroundRadius = 1000
+            showcase.backgroundAlpha = 0.9
+            showcase.setTargetView(view: valueForSphereLabel)
+            showcase.primaryText = R.string.localizable.onboardingTutorialPrimaryText()
+            showcase.secondaryText = R.string.localizable.onboardingTutorialSecondaryText()
+            showcase.show(completion: {
+                UserDefaults.standard.set(true, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+            })
+        }
     }
     
     func fillView(from sphere: Sphere) {

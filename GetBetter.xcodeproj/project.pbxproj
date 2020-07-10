@@ -177,7 +177,6 @@
 		C3C66AF024582B5000D3964D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		C3C66AF124582B5000D3964D /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
-		C3C9DD8524B5F5AB003C83BD /* GetBetter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetBetter.entitlements; sourceTree = "<group>"; };
 		C3C9DD8624B843B3003C83BD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		C3E7EB7323C710BB0045B70A /* RootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootManager.swift; sourceTree = "<group>"; };
@@ -267,7 +266,6 @@
 		9277D37B238C725200B3AECA = {
 			isa = PBXGroup;
 			children = (
-				C3C9DD8524B5F5AB003C83BD /* GetBetter.entitlements */,
 				C3BFEBC72477F5A3000B5B41 /* R.generated.swift */,
 				9277D386238C725200B3AECA /* Classes */,
 				9277D385238C725200B3AECA /* Products */,
