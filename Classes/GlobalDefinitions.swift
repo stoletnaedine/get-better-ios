@@ -12,7 +12,6 @@ struct GlobalDefinitions {
     
     struct Keychain {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
-        static let isShowedTutorialKey = "com.stoletnaedine.GetBetter.isShowedTutorialKey"
     }
     
     struct SphereMetrics {
@@ -22,5 +21,5 @@ struct GlobalDefinitions {
     
     static let notValidSphereValue = -1.0
     
-    static let appVersion = "1.0"
+    static let appVersion = "1.0.1"
 }

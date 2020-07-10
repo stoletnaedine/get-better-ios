@@ -31,6 +31,8 @@ class ArticleViewController: UIViewController {
             navigationItem.titleView = titleView
         }
         textView.text = article.text ?? ""
+        // TODO: раскомментировать после того, как тексты будут в html
+//        textView.attributedText = article.text?.htmlToAttributedString
         imageView.image = article.image ?? UIImage()
     }
     

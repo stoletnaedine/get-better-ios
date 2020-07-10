@@ -126,7 +126,9 @@
 
 "AboutApp.title" = "Что такое GetBetter?";
 "AboutApp.tableTitle" = "О приложении";
-"AboutApp.description" = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nНаша команда:\n\nИдея и разработка\nИсламгулов Артур\ngithub.com/stoletnaedine\n\nВизуальный стиль\nАлексей Бусыгин\nalekseybusygin.com";
+"AboutApp.description" = "Это приложение, которое помогает тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nНаша команда:\n\nИдея и разработка\nАртур Исламгулов\n\nВизуальный стиль\nАлексей Бусыгин\nalekseybusygin.com";
+
+// <a href=\"https://www.notion.so/Artur-Islamgulov-72c202cd6d954fce9dc0f00cba8270d6\">Артур Исламгулов</a>
 
 // MARK: AboutCircle
 
