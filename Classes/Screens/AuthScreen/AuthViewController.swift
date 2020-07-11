@@ -83,12 +83,16 @@ class AuthViewController: UIViewController {
     
     @IBAction func anonymousRegisterButtonDidTap(_ sender: UIButton) {
         
+        self.showActivityIndicator(onView: self.view)
+        
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
             
             if let error = error,
                 let appError = AppError(firebaseError: error).name {
+                self?.removeActivityIndicator()
                 self?.alertService.showErrorMessage(desc: appError)
             } else {
+                self?.removeActivityIndicator()
                 self?.signInCompletion()
             }
         })
