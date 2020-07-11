@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class OnboardingPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
     let databaseService: DatabaseService = FirebaseDatabaseService()
     let alertService: AlertService = AppAlertService()
+    let user = Auth.auth().currentUser
     
     var completion: () -> () = {}
     
@@ -71,11 +73,24 @@ class OnboardingPageViewController: UIViewController {
     }
     
     @objc func exit() {
-        NotificationCenter.default.post(name: .logout, object: nil)
+        
+        guard let user = user else { return }
+        
+        if user.isAnonymous {
+            user.delete(completion: { [weak self] error in
+                if let error = error {
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                } else {
+                    self?.alertService.showSuccessMessage(
+                            desc: R.string.localizable.onboardingDeleteAnonymousAccountSuccess()
+                    )
+                }
+                NotificationCenter.default.post(name: .logout, object: nil)
+            })
+        }
     }
     
     @objc func saveSphereValues() {
-        
         let setupSphereValueViewControllers = viewControllers
             .filter { $0 is SetupSphereValueViewController }
             .map { $0 as! SetupSphereValueViewController }
@@ -90,8 +105,14 @@ class OnboardingPageViewController: UIViewController {
             return
         }
         
-        if databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefinitions.SphereMetrics.start)
-            && databaseService.saveSphereMetrics(sphereMetrics, pathToSave: GlobalDefinitions.SphereMetrics.current) {
+        if databaseService.saveSphereMetrics(
+            sphereMetrics,
+            pathToSave: GlobalDefinitions.SphereMetrics.start
+            )
+            && databaseService.saveSphereMetrics(
+                sphereMetrics,
+                pathToSave: GlobalDefinitions.SphereMetrics.current
+            ) {
             UserDefaults.standard.set(false, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
             self.completion()
         }

@@ -109,6 +109,7 @@
 "Onboarding.0" = "0 — у меня нет этого";
 "Onboarding.Tutorial.PrimaryText" = "Нажмите";
 "Onboarding.Tutorial.SecondaryText" = "чтобы выбрать значение";
+"Onboarding.DeleteAnonymousAccount.Success" = "Анонимный аккаунт успешно удалён. До новых встреч!";
 
 // MARK: Post
 
