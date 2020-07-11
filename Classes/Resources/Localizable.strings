@@ -95,7 +95,7 @@
 "Onboarding.title" = "Привет";
 "Onboarding.save" = "Сохранить";
 "Onboarding.exit" = "Выйти";
-"Onboarding.emptyValuesWarning" = "Нужно выбрать все значения";
+"Onboarding.emptyValuesWarning" = "Нужно ответить на все вопросы";
 "Onboarding.10" = "10 — идеально";
 "Onboarding.9" = "9 — отлично";
 "Onboarding.8" = "8 — хорошо";
@@ -107,7 +107,7 @@
 "Onboarding.2" = "2 — плохо";
 "Onboarding.1" = "1 — ужасно";
 "Onboarding.0" = "0 — у меня нет этого";
-"Onboarding.Tutorial.PrimaryText" = "Нажмите";
+"Onboarding.Tutorial.PrimaryText" = "Нажми";
 "Onboarding.Tutorial.SecondaryText" = "чтобы выбрать значение";
 "Onboarding.DeleteAnonymousAccount.Success" = "Анонимный аккаунт успешно удалён. До новых встреч!";
 "Onboarding.User.Error" = "Не удалось определить пользователя";
@@ -124,7 +124,7 @@
 // MARK: Welcome
 
 "Welcome.title" = "Что такое GetBetter?";
-"Welcome.description" = "Это приложение, которое поможет тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nДля начала давай определим твой текущий уровень.\n\nНе торопись отвечать, будь честен с собой.";
+"Welcome.description" = "Это приложение, которое поможет тебе определить, какие сферы жизни нужно прокачать, чтобы добиться гармонии.\n\nДля начала давай определим твой текущий уровень.\n\nЛистай вправо ➡️➡️➡️\n\nНе торопись отвечать, будь честен с собой.";
 
 // MARK: AboutApp
 

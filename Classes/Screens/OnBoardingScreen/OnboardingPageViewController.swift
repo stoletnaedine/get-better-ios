@@ -73,6 +73,8 @@ class OnboardingPageViewController: UIViewController {
     }
     
     @objc func exit() {
+        UserDefaults.standard.set(false, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+        
         guard let user = user else {
             alertService.showErrorMessage(desc: R.string.localizable.onboardingUserError())
             NotificationCenter.default.post(name: .logout, object: nil)

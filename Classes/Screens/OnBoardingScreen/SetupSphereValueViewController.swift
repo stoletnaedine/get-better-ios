@@ -49,7 +49,9 @@ class SetupSphereValueViewController: UIViewController {
     }
     
     private func showTutorial() {
-        if !UserDefaults.standard.bool(forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed) {
+        let tutorialHasNotShowed = !UserDefaults.standard.bool(forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+        
+        if tutorialHasNotShowed {
             let showcase = MaterialShowcase()
             showcase.backgroundRadius = 1000
             showcase.backgroundAlpha = 0.9
