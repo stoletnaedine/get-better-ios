@@ -110,6 +110,7 @@
 "Onboarding.Tutorial.PrimaryText" = "Нажмите";
 "Onboarding.Tutorial.SecondaryText" = "чтобы выбрать значение";
 "Onboarding.DeleteAnonymousAccount.Success" = "Анонимный аккаунт успешно удалён. До новых встреч!";
+"Onboarding.User.Error" = "Не удалось определить пользователя";
 
 // MARK: Post
 

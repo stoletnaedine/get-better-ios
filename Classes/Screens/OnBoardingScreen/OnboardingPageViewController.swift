@@ -73,8 +73,11 @@ class OnboardingPageViewController: UIViewController {
     }
     
     @objc func exit() {
-        
-        guard let user = user else { return }
+        guard let user = user else {
+            alertService.showErrorMessage(desc: R.string.localizable.onboardingUserError())
+            NotificationCenter.default.post(name: .logout, object: nil)
+            return
+        }
         
         if user.isAnonymous {
             user.delete(completion: { [weak self] error in
