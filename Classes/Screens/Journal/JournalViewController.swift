@@ -124,7 +124,7 @@ class JournalViewController: UIViewController {
     
     @objc func addPost() {
         let addPostViewController = AddPostViewController()
-        addPostViewController.completion = { [weak self] in
+        addPostViewController.addedPostCompletion = { [weak self] in
             self?.updatePostsInTableView()
         }
         present(addPostViewController, animated: true, completion: nil)

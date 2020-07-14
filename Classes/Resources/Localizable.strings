@@ -116,10 +116,11 @@
 
 "Post.title" = "Добавить событие";
 "Post.emptySphereWarning" = "Выбери сферу";
-"Post.chooseSphere" = "Выберите сферу";
+"Post.chooseSphere" = "Выбери сферу";
 "Post.titleDefault" = "Событие";
 "Post.successValue" = "+0,1 балла";
 "Post.emptyTextWarning" = "Поле текста пустое";
+"Post.placeholder" = "Например, сделал зарядку, прочитал книгу, помедитировал...";
 
 // MARK: Welcome
 

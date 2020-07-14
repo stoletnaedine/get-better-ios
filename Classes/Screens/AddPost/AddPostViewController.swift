@@ -23,6 +23,7 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var selectSphereButton: UIButton!
+    @IBOutlet weak var placeholderLabel: UILabel!
     
     let databaseService: DatabaseService = FirebaseDatabaseService()
     let storageService: StorageService = FirebaseStorageService()
@@ -31,13 +32,12 @@ class AddPostViewController: UIViewController {
     var selectedSphere: Sphere?
     let maxSymbolsCount: Int = 300
     
-    var completion: () -> () = {}
+    var addedPostCompletion: () -> () = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = R.string.localizable.postTitle()
         self.hideKeyboardWhenTappedAround()
-        registerTapForSelectedSphereLabel()
         setupView()
     }
     
@@ -95,15 +95,10 @@ class AddPostViewController: UIViewController {
                 self?.removeActivityIndicator()
                 let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
                 self?.alertService.showSuccessMessage(desc: description)
-                self?.completion()
+                self?.addedPostCompletion()
                 self?.dismiss(animated: true, completion: nil)
             }
         })
-    }
-    
-    private func registerTapForSelectedSphereLabel() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
-        selectSphereButton.addGestureRecognizer(tap)
     }
     
     @objc func showPicker() {
@@ -122,6 +117,7 @@ class AddPostViewController: UIViewController {
 // MARK: Setup View
 extension AddPostViewController {
     func setupView() {
+        selectSphereButton.addTarget(self, action: #selector(showPicker), for: .allTouchEvents)
         photoImageView.isHidden = true
         postTextView.delegate = self
         postTextView.becomeFirstResponder()
@@ -151,8 +147,20 @@ extension AddPostViewController {
         selectSphereButton.titleLabel?.font = .journalButtonFont
         selectSphereButton.setImage(R.image.arrowDown(), for: .normal)
         selectSphereButton.tintColor = .violet
-        selectSphereButton.reverseImageTextDirection()
+        selectSphereButton.setImageRightToText()
         selectSphereButton.centerTextAndImage(spacing: -5)
+        placeholderLabel.text = R.string.localizable.postPlaceholder()
+        placeholderLabel.font = postTextView.font?.withSize(18)
+        placeholderLabel.textColor = .gray
+    }
+    
+    private func switchPlaceholder(text: String) {
+        switch text.count {
+        case 0:
+            placeholderLabel.isHidden = false
+        default:
+            placeholderLabel.isHidden = true
+        }
     }
 }
 
@@ -184,11 +192,15 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 extension AddPostViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        switchPlaceholder(text: textView.text)
+        
         let currentTextCount = postTextView.text.count
         symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        switchPlaceholder(text: text)
+        
         let currentText = textView.text ?? ""
         if text.count > maxSymbolsCount {
             alertService.showErrorMessage(
@@ -201,6 +213,7 @@ extension AddPostViewController: UITextViewDelegate {
     }
 }
 
+// MARK: UIImagePickerControllerDelegate
 extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
