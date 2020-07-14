@@ -151,7 +151,7 @@ extension AddPostViewController {
         selectSphereButton.titleLabel?.font = .journalButtonFont
         selectSphereButton.setImage(R.image.arrowDown(), for: .normal)
         selectSphereButton.tintColor = .violet
-        selectSphereButton.setImageRight()
+        selectSphereButton.reverseImageTextDirection()
         selectSphereButton.centerTextAndImage(spacing: -5)
     }
 }

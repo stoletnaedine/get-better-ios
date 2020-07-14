@@ -16,7 +16,7 @@ extension UIButton {
         contentEdgeInsets = UIEdgeInsets(top: 0, left: insetAmount, bottom: 0, right: insetAmount)
     }
     
-    func setImageRight() {
+    func reverseImageTextDirection() {
         self.semanticContentAttribute = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
             ? .forceLeftToRight
             : .forceRightToLeft
