@@ -151,7 +151,7 @@ extension AddPostViewController {
         selectSphereButton.centerTextAndImage(spacing: -5)
         placeholderLabel.text = R.string.localizable.postPlaceholder()
         placeholderLabel.font = postTextView.font?.withSize(18)
-        placeholderLabel.textColor = .gray
+        placeholderLabel.textColor = .lightGray
     }
     
     private func switchPlaceholder(text: String) {

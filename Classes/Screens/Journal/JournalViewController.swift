@@ -13,8 +13,8 @@ class JournalViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let activityIndicator = UIActivityIndicatorView()
     
-    var sectionMonthYear: [String] = []
-    var sectionPosts: [PostsDateSection] = []
+    var monthYearSection: [String] = []
+    var postsSection: [PostsDateSection] = []
     let SectionHeaderHeight: CGFloat = 30
     
     let cellIdentifier = R.reuseIdentifier.journalCell.identifier
@@ -58,7 +58,8 @@ class JournalViewController: UIViewController {
     }
     
     @objc func getPosts(completion: @escaping () -> Void) {
-        sectionPosts = []
+        postsSection = []
+        monthYearSection = []
         
         databaseService.getPosts(completion: { [weak self] result in
             switch result {
@@ -113,8 +114,8 @@ class JournalViewController: UIViewController {
             .sorted(by: { $0.sectionTimestamp ?? 0 > $1.sectionTimestamp ?? 0 })
             .map { $0.sectionName ?? "" }
         
-        sectionPosts = postsDateSection
-        sectionMonthYear = sortedUniqueDates
+        postsSection = postsDateSection
+        monthYearSection = sortedUniqueDates
     }
     
     func setupBarButton() {
@@ -135,8 +136,11 @@ class JournalViewController: UIViewController {
 extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func getPost(by indexPath: IndexPath) -> Post? {
-        let date = self.sectionMonthYear[indexPath.section]
-        let postsDateInSection = self.sectionPosts.filter { $0.sectionName == date }
+        if monthYearSection.isEmpty {
+            return nil
+        }
+        let date = self.monthYearSection[indexPath.section]
+        let postsDateInSection = self.postsSection.filter { $0.sectionName == date }
         
         if postsDateInSection.isEmpty { return nil }
         
@@ -147,13 +151,16 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionMonthYear.count
+        return monthYearSection.isEmpty ? 1 : monthYearSection.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionDate = sectionMonthYear[section]
+        if monthYearSection.isEmpty {
+            return 1
+        }
+        let sectionDate = monthYearSection[section]
         
-        if let postsInSectionByDate = sectionPosts
+        if let postsInSectionByDate = postsSection
             .filter({
                 $0.sectionName == sectionDate
             }).first {
@@ -164,15 +171,22 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if monthYearSection.isEmpty {
+            return 0
+        }
         return SectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if monthYearSection.isEmpty {
+            return UIView()
+        }
+        
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.bounds.width - 30, height: SectionHeaderHeight))
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .white
         
-        let date = sectionMonthYear[section]
+        let date = monthYearSection[section]
         label.text = date
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: SectionHeaderHeight))
@@ -182,7 +196,11 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let post = getPost(by: indexPath) else { return UITableViewCell() }
+        guard let post = getPost(by: indexPath) else {
+            let cell = UITableViewCell()
+            cell.textLabel?.text = R.string.localizable.journalPlaceholder()
+            return cell
+        }
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                       for: indexPath) as! JournalTableViewCell
@@ -217,6 +235,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                 updatePostsInTableView()
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
 }
