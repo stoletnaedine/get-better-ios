@@ -12,7 +12,6 @@ class AddPostViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postTextView: UITextView!
-    @IBOutlet weak var selectedSphereLabel: UILabel!
     @IBOutlet weak var saveButtonView: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -23,7 +22,7 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var symbolsCountLabel: UILabel!
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var arrowDownImageView: UIImageView!
+    @IBOutlet weak var selectSphereButton: UIButton!
     
     let databaseService: DatabaseService = FirebaseDatabaseService()
     let storageService: StorageService = FirebaseStorageService()
@@ -102,10 +101,9 @@ class AddPostViewController: UIViewController {
         })
     }
     
-    func registerTapForSelectedSphereLabel() {
+    private func registerTapForSelectedSphereLabel() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
-        selectedSphereLabel.isUserInteractionEnabled = true
-        selectedSphereLabel.addGestureRecognizer(tap)
+        selectSphereButton.addGestureRecognizer(tap)
     }
     
     @objc func showPicker() {
@@ -131,9 +129,6 @@ extension AddPostViewController {
         titleLabel.font = .journalTitleFont
         titleLabel.textColor = .violet
         titleLabel.text = R.string.localizable.addPostTitle()
-        selectedSphereLabel.textColor = .violet
-        selectedSphereLabel.text = R.string.localizable.postChooseSphere()
-        selectedSphereLabel.font = .journalButtonFont
         saveButtonView.backgroundColor = .gray
         saveButtonView.layer.cornerRadius = 20
         saveButton.setTitle(R.string.localizable.addPostSave(), for: .normal)
@@ -150,12 +145,18 @@ extension AddPostViewController {
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
-        arrowDownImageView.tint(with: .violet)
         attachImageView.tint(with: .violet)
         cancelImageView.tint(with: .violet)
+        selectSphereButton.setTitle(R.string.localizable.postChooseSphere(), for: .normal)
+        selectSphereButton.titleLabel?.font = .journalButtonFont
+        selectSphereButton.setImage(R.image.arrowDown(), for: .normal)
+        selectSphereButton.tintColor = .violet
+        selectSphereButton.setImageRight()
+        selectSphereButton.centerTextAndImage(spacing: -5)
     }
 }
 
+// MARK: UIPickerViewDelegate
 extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -174,11 +175,12 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let sphere = Sphere.allCases[row]
         selectedSphere = sphere
-        selectedSphereLabel.text = sphere.name
+        selectSphereButton.setTitle(sphere.name, for: .normal)
         saveButtonView.backgroundColor = .violet
     }
 }
 
+// MARK: UITextViewDelegate
 extension AddPostViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -201,7 +203,8 @@ extension AddPostViewController: UITextViewDelegate {
 
 extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         photoImageView.image = image

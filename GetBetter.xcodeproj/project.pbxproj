@@ -31,6 +31,7 @@
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
+		C3452B5724BE17BD00C973B1 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3452B5624BE17BD00C973B1 /* UIButton.swift */; };
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
 		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
@@ -130,6 +131,7 @@
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		C3452B5624BE17BD00C973B1 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				F14955E497B188FBBB345A1A /* CGRect.swift */,
 				C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */,
 				C3C9DD8624B843B3003C83BD /* String.swift */,
+				C3452B5624BE17BD00C973B1 /* UIButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				6EA8519B244F827A00D40E14 /* Post.swift in Sources */,
 				C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */,
 				C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */,
+				C3452B5724BE17BD00C973B1 /* UIButton.swift in Sources */,
 				C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */,
 				6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */,
 				C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */,

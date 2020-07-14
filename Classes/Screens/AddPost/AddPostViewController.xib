@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -9,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddPostViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
-                <outlet property="arrowDownImageView" destination="4p3-W1-RR4" id="vkA-RY-yzB"/>
                 <outlet property="attachButton" destination="kDR-MY-RhO" id="Jji-vQ-wGh"/>
                 <outlet property="attachImageView" destination="QFF-em-lVD" id="so6-tS-l5l"/>
                 <outlet property="cancelButton" destination="QdY-07-83M" id="ToA-Tw-H1K"/>
@@ -19,7 +19,7 @@
                 <outlet property="postTextView" destination="sLD-WP-KS7" id="pAl-6V-DAG"/>
                 <outlet property="saveButton" destination="G4Y-RJ-AVC" id="PCU-mk-02P"/>
                 <outlet property="saveButtonView" destination="g7W-yF-nBF" id="PFd-fQ-4I7"/>
-                <outlet property="selectedSphereLabel" destination="Sgf-FI-Pt4" id="Scb-NI-XuZ"/>
+                <outlet property="selectSphereButton" destination="cx3-hf-cPr" id="tDc-5I-fgE"/>
                 <outlet property="sphereView" destination="UYD-Zb-BWf" id="IUz-UG-MlC"/>
                 <outlet property="symbolsCountLabel" destination="mIe-nL-Fw3" id="klb-S2-lza"/>
                 <outlet property="titleLabel" destination="DvL-Jo-K4r" id="ZSx-NK-1c4"/>
@@ -150,39 +150,16 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-Zb-BWf" userLabel="SphereView">
                     <rect key="frame" x="80" y="317" width="254" height="40"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WtA-Yu-iAq" userLabel="NameArrowView">
-                            <rect key="frame" x="96" y="10" width="62" height="20"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-FI-Pt4">
-                                    <rect key="frame" x="0.0" y="0.0" width="42" height="20"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-down" translatesAutoresizingMaskIntoConstraints="NO" id="4p3-W1-RR4">
-                                    <rect key="frame" x="47" y="2.5" width="15" height="15"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="15" id="026-KJ-kVA"/>
-                                        <constraint firstAttribute="width" constant="15" id="VaH-bo-IFh"/>
-                                    </constraints>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="Sgf-FI-Pt4" firstAttribute="top" secondItem="WtA-Yu-iAq" secondAttribute="top" id="A7t-Jb-3qC"/>
-                                <constraint firstAttribute="bottom" secondItem="Sgf-FI-Pt4" secondAttribute="bottom" id="BBK-vd-KCT"/>
-                                <constraint firstItem="4p3-W1-RR4" firstAttribute="centerY" secondItem="WtA-Yu-iAq" secondAttribute="centerY" id="Hsr-r5-6wo"/>
-                                <constraint firstItem="4p3-W1-RR4" firstAttribute="leading" secondItem="Sgf-FI-Pt4" secondAttribute="trailing" constant="5" id="QkW-mN-Ohp"/>
-                                <constraint firstAttribute="trailing" secondItem="4p3-W1-RR4" secondAttribute="trailing" id="jmd-Pa-qOA"/>
-                                <constraint firstItem="Sgf-FI-Pt4" firstAttribute="leading" secondItem="WtA-Yu-iAq" secondAttribute="leading" id="lfa-zX-T1m"/>
-                            </constraints>
-                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cx3-hf-cPr">
+                            <rect key="frame" x="104" y="5" width="46" height="30"/>
+                            <state key="normal" title="Button"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="cx3-hf-cPr" firstAttribute="centerY" secondItem="UYD-Zb-BWf" secondAttribute="centerY" id="Eid-h1-PKZ"/>
                         <constraint firstAttribute="height" constant="40" id="TJQ-et-LbG"/>
-                        <constraint firstItem="WtA-Yu-iAq" firstAttribute="centerX" secondItem="UYD-Zb-BWf" secondAttribute="centerX" id="cxO-86-xT0"/>
-                        <constraint firstItem="WtA-Yu-iAq" firstAttribute="centerY" secondItem="UYD-Zb-BWf" secondAttribute="centerY" id="sAb-7y-OQ6"/>
+                        <constraint firstItem="cx3-hf-cPr" firstAttribute="centerX" secondItem="UYD-Zb-BWf" secondAttribute="centerX" id="k5X-IR-xGq"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7W-yF-nBF" userLabel="SaveView">
@@ -230,7 +207,6 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow-down" width="24" height="24"/>
         <image name="attach" width="24" height="24"/>
         <image name="cancel" width="50" height="50"/>
     </resources>
