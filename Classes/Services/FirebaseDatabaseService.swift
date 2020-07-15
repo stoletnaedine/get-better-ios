@@ -117,7 +117,6 @@ class FirebaseDatabaseService: DatabaseService {
         ref
             .child(path)
             .observeSingleEvent(of: .value, with: { snapshot in
-
                 if let value = snapshot.value as? NSDictionary {
                     let sphereMetrics = SphereMetrics(values: value as! [String : Double])
                     completion(.success(sphereMetrics))

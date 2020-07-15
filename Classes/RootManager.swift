@@ -13,6 +13,7 @@ class RootManager {
     
     var window: UIWindow?
     let connectionHelper = ConnectionHelper()
+    let alertService: AlertService = AlertServiceDefault()
     
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -59,10 +60,15 @@ class RootManager {
     }
     
     func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
-        FirebaseDatabaseService().getSphereMetrics(from: GlobalDefinitions.SphereMetrics.start, completion: { result in
+        FirebaseDatabaseService().getSphereMetrics(from: GlobalDefinitions.SphereMetrics.start,
+                                                   completion: { [weak self] result in
             switch result {
-            case .failure:
-                completion(false)
+            case .failure(let error):
+                if error.name == AppErrorCode.notFound.rawValue {
+                    completion(false)
+                } else {
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                }
             case .success:
                 completion(true)
             }
