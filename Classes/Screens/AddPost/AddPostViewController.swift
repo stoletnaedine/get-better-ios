@@ -116,7 +116,7 @@ class AddPostViewController: UIViewController {
 
 // MARK: Setup View
 extension AddPostViewController {
-    func setupView() {
+    private func setupView() {
         selectSphereButton.addTarget(self, action: #selector(showPicker), for: .allTouchEvents)
         photoImageView.isHidden = true
         postTextView.delegate = self
@@ -154,7 +154,7 @@ extension AddPostViewController {
         placeholderLabel.textColor = .lightGray
     }
     
-    private func switchPlaceholder(text: String) {
+    private func switchTextViewPlaceholder(text: String) {
         switch text.count {
         case 0:
             placeholderLabel.isHidden = false
@@ -192,14 +192,14 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 extension AddPostViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        switchPlaceholder(text: textView.text)
+        switchTextViewPlaceholder(text: textView.text)
         
         let currentTextCount = postTextView.text.count
         symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        switchPlaceholder(text: text)
+        switchTextViewPlaceholder(text: text)
         
         let currentText = textView.text ?? ""
         if text.count > maxSymbolsCount {
