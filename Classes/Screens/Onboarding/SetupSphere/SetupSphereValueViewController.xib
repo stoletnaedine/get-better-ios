@@ -14,8 +14,8 @@
                 <outlet property="arrowUpImageView" destination="fpI-si-Kqe" id="sRd-9Q-MKy"/>
                 <outlet property="imageView" destination="E9S-b4-duR" id="Uuk-Vb-ZGb"/>
                 <outlet property="questionLabel" destination="I8I-HG-oR5" id="DP0-Jd-7zS"/>
+                <outlet property="setupValueButton" destination="DMi-nU-hgK" id="dCW-0C-lws"/>
                 <outlet property="sphereNameLabel" destination="SZL-ic-fjL" id="0qS-TQ-4E8"/>
-                <outlet property="valueForSphereLabel" destination="sG4-hH-NfL" id="RgE-dU-Pc2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,42 +37,43 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="E9S-b4-duR" userLabel="picture">
-                    <rect key="frame" x="10" y="226.5" width="394" height="625.5"/>
+                    <rect key="frame" x="10" y="235.5" width="394" height="616.5"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3B-pq-FCG">
-                    <rect key="frame" x="136" y="175.5" width="142" height="21"/>
+                    <rect key="frame" x="142" y="175.5" width="130" height="30"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sG4-hH-NfL">
-                            <rect key="frame" x="50" y="0.0" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-up" translatesAutoresizingMaskIntoConstraints="NO" id="fpI-si-Kqe" userLabel="up">
-                            <rect key="frame" x="0.0" y="3" width="15" height="15"/>
+                            <rect key="frame" x="0.0" y="7.5" width="15" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="D6z-U2-lCT"/>
                                 <constraint firstAttribute="width" constant="15" id="zTV-fv-gNg"/>
                             </constraints>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-down" translatesAutoresizingMaskIntoConstraints="NO" id="C7B-ao-SaU" userLabel="down">
-                            <rect key="frame" x="127" y="3" width="15" height="15"/>
+                            <rect key="frame" x="115" y="7.5" width="15" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="6tG-lI-eT3"/>
                                 <constraint firstAttribute="height" constant="15" id="wAk-ci-jeB"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMi-nU-hgK" userLabel="Sphere Value Button">
+                            <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="valueButtonDidTap:" destination="-1" eventType="touchUpInside" id="yw4-AB-Thi"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="sG4-hH-NfL" firstAttribute="top" secondItem="u3B-pq-FCG" secondAttribute="top" id="4qv-eY-kti"/>
-                        <constraint firstAttribute="bottom" secondItem="sG4-hH-NfL" secondAttribute="bottom" id="6he-jc-r2L"/>
-                        <constraint firstItem="sG4-hH-NfL" firstAttribute="leading" secondItem="fpI-si-Kqe" secondAttribute="trailing" constant="35" id="8yw-Zn-eBJ"/>
+                        <constraint firstAttribute="bottom" secondItem="DMi-nU-hgK" secondAttribute="bottom" id="3vH-zB-rJr"/>
+                        <constraint firstItem="DMi-nU-hgK" firstAttribute="leading" secondItem="u3B-pq-FCG" secondAttribute="leading" id="BrE-EB-m9v"/>
                         <constraint firstItem="fpI-si-Kqe" firstAttribute="leading" secondItem="u3B-pq-FCG" secondAttribute="leading" id="CDP-5y-QHm"/>
-                        <constraint firstItem="sG4-hH-NfL" firstAttribute="centerX" secondItem="u3B-pq-FCG" secondAttribute="centerX" id="Ieb-ny-yKf"/>
+                        <constraint firstItem="DMi-nU-hgK" firstAttribute="top" secondItem="u3B-pq-FCG" secondAttribute="top" id="MXY-XM-vvk"/>
                         <constraint firstItem="C7B-ao-SaU" firstAttribute="centerY" secondItem="u3B-pq-FCG" secondAttribute="centerY" id="NTA-wu-bTj"/>
                         <constraint firstAttribute="trailing" secondItem="C7B-ao-SaU" secondAttribute="trailing" id="Sa0-CA-0po"/>
-                        <constraint firstItem="C7B-ao-SaU" firstAttribute="leading" secondItem="sG4-hH-NfL" secondAttribute="trailing" constant="35" id="oDm-pw-XkC"/>
+                        <constraint firstAttribute="width" constant="130" id="ZAm-40-Aa7"/>
+                        <constraint firstAttribute="trailing" secondItem="DMi-nU-hgK" secondAttribute="trailing" id="kk6-FJ-O1q"/>
                         <constraint firstItem="fpI-si-Kqe" firstAttribute="centerY" secondItem="u3B-pq-FCG" secondAttribute="centerY" id="wC6-X9-HEE"/>
                     </constraints>
                 </view>

@@ -13,7 +13,7 @@ class SetupSphereValueViewController: UIViewController {
     
     @IBOutlet weak var sphereNameLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var valueForSphereLabel: UILabel!
+    @IBOutlet weak var setupValueButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var arrowDownImageView: UIImageView!
     @IBOutlet weak var arrowUpImageView: UIImageView!
@@ -41,43 +41,13 @@ class SetupSphereValueViewController: UIViewController {
         if let sphere = sphere {
             fillView(from: sphere)
         }
-        registerTapForSelectedSphereLabel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         showTutorial()
     }
     
-    private func showTutorial() {
-        let tutorialHasNotShowed = !UserDefaults.standard.bool(forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
-        
-        if tutorialHasNotShowed {
-            let showcase = MaterialShowcase()
-            showcase.backgroundRadius = 1000
-            showcase.backgroundAlpha = 0.9
-            showcase.setTargetView(view: valueForSphereLabel)
-            showcase.primaryText = R.string.localizable.onboardingTutorialPrimaryText()
-            showcase.secondaryText = R.string.localizable.onboardingTutorialSecondaryText()
-            showcase.show(completion: {
-                UserDefaults.standard.set(true, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
-            })
-        }
-    }
-    
-    func fillView(from sphere: Sphere) {
-        self.sphereNameLabel.text = sphere.name
-        self.questionLabel.text = sphere.description
-        self.imageView.image = sphere.image
-        questionLabel.text = sphere.question
-    }
-    
-    func registerTapForSelectedSphereLabel() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showPicker))
-        valueForSphereLabel.isUserInteractionEnabled = true
-        valueForSphereLabel.addGestureRecognizer(tap)
-    }
-    
-    @objc func showPicker() {
+    @IBAction func valueButtonDidTap(_ sender: Any) {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
@@ -88,6 +58,29 @@ class SetupSphereValueViewController: UIViewController {
         customtTextField.inputView = picker
         customtTextField.becomeFirstResponder()
     }
+    
+    private func showTutorial() {
+        let tutorialHasNotShowed = !UserDefaults.standard.bool(forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+        
+        if tutorialHasNotShowed {
+            let showcase = MaterialShowcase()
+            showcase.backgroundRadius = 1000
+            showcase.backgroundAlpha = 0.9
+            showcase.setTargetView(view: setupValueButton)
+            showcase.primaryText = R.string.localizable.onboardingTutorialPrimaryText()
+            showcase.secondaryText = R.string.localizable.onboardingTutorialSecondaryText()
+            showcase.show(completion: {
+                UserDefaults.standard.set(true, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+            })
+        }
+    }
+    
+    private func fillView(from sphere: Sphere) {
+        self.sphereNameLabel.text = sphere.name
+        self.questionLabel.text = sphere.description
+        self.imageView.image = sphere.image
+        questionLabel.text = sphere.question
+    }
 }
 
 // MARK: Setup View
@@ -95,9 +88,9 @@ extension SetupSphereValueViewController {
     func setupView() {
         questionLabel.font = UIFont.systemFont(ofSize: 16)
         sphereNameLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        valueForSphereLabel.font = UIFont.systemFont(ofSize: 70)
-        valueForSphereLabel.textColor = .violet
-        valueForSphereLabel.text = R.string.localizable.onboardingUnSelect()
+        setupValueButton.setTitle(R.string.localizable.onboardingUnselect(), for: .normal)
+        setupValueButton.titleLabel?.font = UIFont.systemFont(ofSize: 70)
+        setupValueButton.tintColor =  .violet
         arrowDownImageView.tint(with: .violet)
         arrowUpImageView.tint(with: .violet)
     }
@@ -121,6 +114,6 @@ extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDe
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let value = values[row]
         sphereValue = Double(value)
-        valueForSphereLabel.text = String(value)
+        setupValueButton.setTitle(String(value), for: .normal)
     }
 }
