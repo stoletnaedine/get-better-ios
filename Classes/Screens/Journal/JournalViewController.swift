@@ -139,6 +139,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         if monthYearSection.isEmpty {
             return nil
         }
+        
         let date = self.monthYearSection[indexPath.section]
         let postsDateInSection = self.postsSection.filter { $0.sectionName == date }
         
@@ -158,12 +159,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         if monthYearSection.isEmpty {
             return 1
         }
-        let sectionDate = monthYearSection[section]
         
+        let sectionDate = monthYearSection[section]
         if let postsInSectionByDate = postsSection
-            .filter({
-                $0.sectionName == sectionDate
-            }).first {
+            .filter({ $0.sectionName == sectionDate }).first {
             return postsInSectionByDate.posts.count
         }
         
@@ -174,6 +173,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         if monthYearSection.isEmpty {
             return 0
         }
+        
         return SectionHeaderHeight
     }
     
@@ -198,6 +198,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let post = getPost(by: indexPath) else {
             let cell = UITableViewCell()
+            cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = R.string.localizable.journalPlaceholder()
             return cell
         }

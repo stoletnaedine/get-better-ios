@@ -23,7 +23,7 @@
 
 "Journal.loading" = "Загрузка";
 "Journal.deletedPost" = "Пост удалён";
-"Journal.placeholder" = "Добавь свою первую запись, нажав на плюс";
+"Journal.placeholder" = "Здесь будут твои события дня. Чтобы добавить первое, нажми на +";
 
 // MARK: NoInternet
 
