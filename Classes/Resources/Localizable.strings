@@ -155,6 +155,9 @@
 "Settings.defaultName" = "Анонимный пользователь";
 "Settings.defaultEmail" = "E-mail не указан";
 "Settings.versionIs" = "Версия %@";
+"Settings.logout.alert.question" = "Вы действительно хотите выйти?";
+"Settings.logout.alert.yes" = "Да";
+"Settings.logout.alert.no" = "Нет";
 
 // MARK: EditProfile
 

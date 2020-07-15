@@ -82,12 +82,26 @@ class SettingsViewController: UIViewController {
         let signOutBarButton = UIBarButtonItem(title: R.string.localizable.settingsExit(),
                                                style: .plain,
                                                target: self,
-                                               action: #selector(logout))
+                                               action: #selector(logoutButtonDidTap))
         navigationItem.rightBarButtonItem = signOutBarButton
     }
     
-    @objc func logout() {
-        NotificationCenter.default.post(name: .logout, object: nil)
+    @objc func logoutButtonDidTap() {
+        let alert = UIAlertController(title: R.string.localizable.settingsLogoutAlertQuestion(),
+                                      message: "",
+                                      preferredStyle: .alert)
+        let logoutAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertYes(),
+                                         style: .destructive,
+                                         handler: { (alertAction: UIAlertAction) in
+                                            NotificationCenter.default.post(name: .logout, object: nil)
+        })
+        let cancelAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertNo(),
+                                         style: .cancel,
+                                         handler: nil)
+        
+        alert.addAction(logoutAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 
