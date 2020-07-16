@@ -92,8 +92,8 @@ class AuthViewController: UIViewController {
                 self?.removeActivityIndicator()
                 self?.alertService.showErrorMessage(desc: appError)
             } else {
-                self?.removeActivityIndicator()
                 self?.signInCompletion()
+                self?.removeActivityIndicator()
             }
         })
     }

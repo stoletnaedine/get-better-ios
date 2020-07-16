@@ -237,9 +237,4 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
 }
