@@ -61,4 +61,10 @@ class SettingsViewModel {
                 CommonSettingsCell(title: R.string.localizable.aboutJournalTableTitle(), viewController: aboutJournalViewController),
                 CommonSettingsCell(title: R.string.localizable.aboutAppTableTitle(), viewController: aboutAppViewController)]
     }
+    
+    func changeLog() -> UIViewController {
+        let vc = TextViewViewController()
+        vc.text = R.string.localizable.appVersions()
+        return vc
+    }
 }

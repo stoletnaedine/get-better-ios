@@ -42,6 +42,8 @@
 		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
 		C37D0B3E23D79088005A1BCF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* Label.swift */; };
+		C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */; };
+		C390A76024C0CFC900EAD48E /* TextViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */; };
 		C392971F247FAE04000340DC /* PostMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C392971E247FAE04000340DC /* PostMapper.swift */; };
 		C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39423D624404E8E0060CF50 /* AuthViewController.swift */; };
 		C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39423D724404E8E0060CF50 /* AuthViewController.xib */; };
@@ -142,6 +144,8 @@
 		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		C37D0B3D23D79088005A1BCF /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
+		C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewViewController.xib; sourceTree = "<group>"; };
 		C392971E247FAE04000340DC /* PostMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMapper.swift; sourceTree = "<group>"; };
 		C39423D624404E8E0060CF50 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		C39423D724404E8E0060CF50 /* AuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 		9277D386238C725200B3AECA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C390A75B24C0CF9800EAD48E /* Views */,
 				9277D387238C725200B3AECA /* AppDelegate.swift */,
 				C3E7EB7323C710BB0045B70A /* RootManager.swift */,
 				C32D4CE023D0F3FC00AD9863 /* GlobalDefinitions.swift */,
@@ -425,6 +430,23 @@
 				6E6A21792466C6FB00D8AC68 /* Atricle.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C390A75B24C0CF9800EAD48E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C390A75C24C0CFA000EAD48E /* TextView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C390A75C24C0CFA000EAD48E /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */,
+				C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */,
+			);
+			path = TextView;
 			sourceTree = "<group>";
 		};
 		C392971D247FADF2000340DC /* Mapper */ = {
@@ -710,6 +732,7 @@
 				C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */,
 				C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */,
 				C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */,
+				C390A76024C0CFC900EAD48E /* TextViewViewController.xib in Resources */,
 				6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */,
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
 				C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */,
@@ -844,6 +867,7 @@
 				C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */,
 				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
+				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
 				C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */,
@@ -1004,7 +1028,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1029,7 +1053,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

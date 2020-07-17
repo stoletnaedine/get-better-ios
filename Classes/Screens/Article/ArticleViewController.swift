@@ -39,6 +39,7 @@ class ArticleViewController: UIViewController {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.resizeByContent()
+        textView.tintColor = .violet
     }
     
 }

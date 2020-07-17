@@ -66,14 +66,15 @@ class SettingsViewController: UIViewController {
             TableSection.config : [
                 CommonSettingsCell(
                         title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
-                        viewController: nil
+                        viewController: viewModel.changeLog()
                 )
             ]
         ]
     }
     
     func setupRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(loadProfileAndReloadTableView),
+        refreshControl.addTarget(self,
+                                 action: #selector(loadProfileAndReloadTableView),
                                  for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
@@ -93,8 +94,7 @@ class SettingsViewController: UIViewController {
         let logoutAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertYes(),
                                          style: .destructive,
                                          handler: { (alertAction: UIAlertAction) in
-                                            NotificationCenter.default.post(name: .logout, object: nil)
-        })
+                                            NotificationCenter.default.post(name: .logout, object: nil)})
         let cancelAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertNo(),
                                          style: .cancel,
                                          handler: nil)
@@ -142,6 +142,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = items[tableSection]?[indexPath.row].title
             cell.textLabel?.textColor = .gray
             cell.selectionStyle = .none
+            cell.accessoryType = .detailButton
             return cell
         }
     }
@@ -153,7 +154,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .profile:
             let cell = tableView.dequeueReusableCell(withIdentifier: profileCellIdentifier) as! ProfileTableViewCell
             return cell.frame.height
-        case .articles, .config:
+        default:
             return defaultHeight
         }
     }
