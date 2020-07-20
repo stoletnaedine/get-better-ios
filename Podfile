@@ -11,4 +11,5 @@ target 'GetBetter' do
   pod 'R.swift'
   pod 'ReachabilitySwift'
   pod 'MaterialShowcase'
+  pod 'Kingfisher', '~> 5.0'
 end

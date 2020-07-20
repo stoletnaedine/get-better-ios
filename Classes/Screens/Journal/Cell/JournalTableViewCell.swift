@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class JournalTableViewCell: UITableViewCell {
 
@@ -28,10 +29,6 @@ class JournalTableViewCell: UITableViewCell {
         photoImageView.image = nil
         showImageInCell(false)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
     func fillCell(from post: Post) {
         sphereNameLabel.text = post.sphere?.name ?? ""
@@ -44,22 +41,14 @@ class JournalTableViewCell: UITableViewCell {
         
         if let urlString = post.previewUrl,
             !urlString.isEmpty {
-        
-            DispatchQueue.global().async { [weak self] in
-                if let url = URL(string: urlString),
-                    let imageData = try? Data(contentsOf: url),
-                    let image = UIImage(data: imageData) {
-                
-                    DispatchQueue.main.async {
-                        self?.photoImageView.image = image
-                        self?.showImageInCell(true)
-                    }
-                }
+            if let url = URL(string: urlString) {
+                photoImageView.kf.setImage(with: url)
+                showImageInCell(true)
             }
         }
     }
     
-    func setupView() {
+    private func setupView() {
         showImageInCell(false)
         photoImageView.layer.cornerRadius = 5
         photoImageView.layer.masksToBounds = true
