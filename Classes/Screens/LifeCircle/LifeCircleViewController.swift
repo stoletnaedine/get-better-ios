@@ -213,6 +213,7 @@ class LifeCircleViewController: UIViewController {
                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)],
                 for: .normal
         )
+        segmentedControl.tintColor = .violet
         segmentedControl.setTitle(R.string.localizable.lifeCircleCircle(), forSegmentAt: 0)
         segmentedControl.setTitle(R.string.localizable.lifeCircleMetrics(), forSegmentAt: 1)
         segmentedControl.setTitle(R.string.localizable.lifeCircleAchievements(), forSegmentAt: 2)
