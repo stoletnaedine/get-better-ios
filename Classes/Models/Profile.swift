@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct Profile {
-    let avatar: UIImage?
+    let avatarURL: URL?
     let name: String?
     let email: String?
 }

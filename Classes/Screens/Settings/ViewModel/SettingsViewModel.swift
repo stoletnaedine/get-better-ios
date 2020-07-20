@@ -18,7 +18,7 @@ class SettingsViewModel {
         DispatchQueue.global().async {
             var name = R.string.localizable.settingsDefaultName()
             var email = R.string.localizable.settingsDefaultEmail()
-            var avatar: UIImage?
+            var avatarURL: URL?
             
             if let userName = user.displayName {
                 name = userName
@@ -26,13 +26,14 @@ class SettingsViewModel {
             if let userEmail = user.email {
                 email = userEmail
             }
-            if let photoURL = user.photoURL,
-                let imageData = try? Data(contentsOf: photoURL),
-                let loadedAvatar = UIImage(data: imageData) {
-                avatar = loadedAvatar
+            if let userAvatarURL = user.photoURL {
+                avatarURL = userAvatarURL
             }
             DispatchQueue.main.async {
-                completion(Profile(avatar: avatar, name: name, email: email))
+                completion(Profile(avatarURL: avatarURL,
+                                   name: name,
+                                   email: email)
+                )
             }
         }
     }

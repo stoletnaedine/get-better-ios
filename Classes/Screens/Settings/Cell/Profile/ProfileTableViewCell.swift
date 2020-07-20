@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileTableViewCell: UITableViewCell {
     
@@ -24,14 +25,14 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     func fillCell(profile: Profile) {
-        if let avatar = profile.avatar {
-            self.avatarImageView.image = avatar
+        if let avatarURL = profile.avatarURL {
+            self.avatarImageView.kf.setImage(with: avatarURL)
         }
         self.nameLabel.text = profile.name ?? ""
         self.emailLabel.text = profile.email ?? ""
     }
     
-    func customizeView() {
+    private func customizeView() {
         avatarImageView.backgroundColor = .tableViewSectionColor
         nameLabel.text = ""
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
