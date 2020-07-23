@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PostDetailViewController: UIViewController {
     
@@ -57,34 +58,35 @@ class PostDetailViewController: UIViewController {
         if let timestamp = post.timestamp {
             self.dateLabel.text = Date.convertToFullDate(from: timestamp)
         }
-        DispatchQueue.global().async { [weak self] in
-            if let urlString = post.photoUrl,
-                let url = URL(string: urlString) {
-                
-                DispatchQueue.main.async {
-                    guard let selfView = self?.view else { return }
-                    self?.showActivityIndicator(onView: selfView)
-                }
-                
-                if let imageData = try? Data(contentsOf: url),
-                let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        self?.removeActivityIndicator()
-                        self?.photoImageView.image = image
-                        self?.photoImageView.alpha = 1
-                        self?.photoImageView.contentMode = .scaleAspectFill
+        
+        if let urlString = post.photoUrl,
+            let url = URL(string: urlString) {
+            self.photoImageView.kf.indicatorType = .activity
+            self.photoImageView.kf.setImage(
+                with: url,
+                options: [
+                        .transition(.fade(1)),
+                        .cacheOriginalImage
+                    ])
+                {
+                    result in
+                    switch result {
+                    case .success(let value):
+                        print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print("Job failed: \(error.localizedDescription)")
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        self?.removeActivityIndicator()
-                    }
-                }
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.photoImageView.alpha = 1
+                self?.photoImageView.contentMode = .scaleAspectFill
             }
         }
     }
     
     func customizeView() {
-        textLabel.font = UIFont.systemFont(ofSize: 18)
+        textLabel.font = UIFont.systemFont(ofSize: 16)
         sphereLabel.font = UIFont.boldSystemFont(ofSize: 24)
         sphereLabel.textColor = .violet
         dateLabel.font = UIFont.systemFont(ofSize: 14)
