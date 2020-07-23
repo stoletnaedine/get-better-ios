@@ -121,7 +121,7 @@ extension AddPostViewController {
         photoImageView.isHidden = true
         postTextView.delegate = self
         postTextView.becomeFirstResponder()
-        postTextView.font = postTextView.font?.withSize(18)
+        postTextView.font = postTextView.font?.withSize(16)
         titleLabel.font = .journalTitleFont
         titleLabel.textColor = .violet
         titleLabel.text = R.string.localizable.addPostTitle()
@@ -150,7 +150,7 @@ extension AddPostViewController {
         selectSphereButton.setImageRightToText()
         selectSphereButton.centerTextAndImage(spacing: -5)
         placeholderLabel.text = R.string.localizable.postPlaceholder()
-        placeholderLabel.font = postTextView.font?.withSize(18)
+        placeholderLabel.font = postTextView.font?.withSize(16)
         placeholderLabel.textColor = .lightGray
     }
     

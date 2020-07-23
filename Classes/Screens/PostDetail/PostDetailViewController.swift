@@ -87,7 +87,7 @@ class PostDetailViewController: UIViewController {
     
     func customizeView() {
         textLabel.font = UIFont.systemFont(ofSize: 16)
-        sphereLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        sphereLabel.font = .journalTitleFont
         sphereLabel.textColor = .violet
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .gray

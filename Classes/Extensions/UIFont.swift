@@ -41,7 +41,7 @@ extension UIFont {
     }
     
     static var journalTitleFont: UIFont {
-        return UIFont.boldSystemFont(ofSize: 24)
+        return UIFont.boldSystemFont(ofSize: 22)
     }
     
     static var journalButtonFont: UIFont {
