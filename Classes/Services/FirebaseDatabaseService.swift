@@ -42,9 +42,6 @@ class FirebaseDatabaseService: DatabaseService {
         
         print("Firebase saved post \(post)")
         
-        guard let sphere = post.sphere else { return false }
-        incrementSphereValue(for: sphere)
-        
         return true
     }
     
@@ -55,9 +52,6 @@ class FirebaseDatabaseService: DatabaseService {
             .child(postsPath)
             .child(post.id ?? "")
             .removeValue()
-        
-        guard let sphere = post.sphere else { return false }
-        decrementSphereValue(for: sphere)
         
         if let photoName = post.photoName, !photoName.isEmpty {
             storageService.deletePhoto(name: photoName)
@@ -138,74 +132,6 @@ class FirebaseDatabaseService: DatabaseService {
             .updateChildValues([sphereField: value])
         
         return true
-    }
-    
-    private func incrementSphereValue(for sphere: Sphere) {
-        var currentSphereMetrics: SphereMetrics?
-        let dispatchGroup = DispatchGroup()
-        
-        dispatchGroup.enter()
-        getSphereMetrics(from: GlobalDefinitions.SphereMetrics.current,
-                         dispatchGroup: dispatchGroup,
-                         completion: { sphereMetrics in
-            currentSphereMetrics = sphereMetrics
-        })
-        
-        dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            
-            let diffValue = 0.1
-            let maxValue = 10.0
-            
-            guard let currentSphereMetrics = currentSphereMetrics else { return }
-            
-            if let currentValue = currentSphereMetrics.values[sphere.rawValue],
-                currentValue < maxValue {
-                let newValue = (currentValue * 10 + diffValue * 10) / 10
-                let sphereValue = SphereValue(sphere: sphere, value: newValue)
-                let saveResult = self?.updateSphereValue(sphereValue,
-                                                         pathToSave: GlobalDefinitions.SphereMetrics.current)
-                print("Increment SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
-            }
-        })
-    }
-    
-    private func decrementSphereValue(for sphere: Sphere) {
-        var startSphereMetrics: SphereMetrics?
-        let dispatchGroup = DispatchGroup()
-        
-        dispatchGroup.enter()
-        getSphereMetrics(from: GlobalDefinitions.SphereMetrics.start,
-                         dispatchGroup: dispatchGroup,
-                         completion: { sphereMetrics in
-            startSphereMetrics = sphereMetrics
-        })
-        
-        dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            self?.getSphereMetrics(from: GlobalDefinitions.SphereMetrics.current, completion: { result in
-                
-                let diffValue = 0.1
-                let minValue = 0.0
-                                
-                switch result {
-                case .success(let sphereMetrics):
-                    guard let startSphereMetrics = startSphereMetrics else { return }
-                    guard let startValue = startSphereMetrics.values[sphere.rawValue] else { return }
-                    
-                    if let currentValue = sphereMetrics.values[sphere.rawValue],
-                        currentValue > minValue,
-                        currentValue > startValue {
-                        
-                        let newValue = (currentValue * 10 - diffValue * 10) / 10
-                        let sphereValue = SphereValue(sphere: sphere, value: newValue)
-                        let saveResult = self?.updateSphereValue(sphereValue,
-                                                                 pathToSave: GlobalDefinitions.SphereMetrics.current)
-                        print("Decrement SphereValue for \(sphere.rawValue)=\(String(describing: saveResult))")
-                    }
-                case .failure(let error):
-                    print("Decrement SphereValue error=\(error)")
-                }
-            })
-        })
     }
     
     private func getSphereMetrics(from path: String,

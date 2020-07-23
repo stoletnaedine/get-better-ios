@@ -19,7 +19,7 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var startLabel: UILabel!
     
     let refreshControl = UIRefreshControl()
-    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let sphereMetricsService: SphereMetricsService = SphereMetricsServiceDefault()
     let viewModel = AchievementViewModel()
     
     var startSphereMetrics: SphereMetrics?
@@ -61,49 +61,13 @@ class LifeCircleViewController: UIViewController {
     
     @objc func loadAndShowData() {
         let dispatchGroup = DispatchGroup()
-        
         dispatchGroup.enter()
-        DispatchQueue.global().async { [weak self] in
-            self?.databaseService.getSphereMetrics(from: GlobalDefinitions.SphereMetrics.start,
-                                                   completion: { [weak self] result in
-                switch result {
-                case .success(let sphereMetrics):
-                    self?.startSphereMetrics = sphereMetrics
-                    dispatchGroup.leave()
-                case .failure(_):
-                    self?.showOnboardingCompletion()
-                    dispatchGroup.leave()
-                }
-            })
-        }
-        
-        dispatchGroup.enter()
-        DispatchQueue.global().async { [weak self] in
-            self?.databaseService.getSphereMetrics(from: GlobalDefinitions.SphereMetrics.current,
-                                                   completion: { [weak self] result in
-                switch result {
-                case .success(let sphereMetrics):
-                    self?.currentSphereMetrics = sphereMetrics
-                    dispatchGroup.leave()
-                case .failure(_):
-                    self?.showOnboardingCompletion()
-                    dispatchGroup.leave()
-                }
-            })
-        }
-        
-        dispatchGroup.enter()
-        DispatchQueue.global().async { [weak self] in
-            self?.databaseService.getPosts(completion: { [weak self] result in
-                switch result {
-                case .success(let posts):
-                    self?.posts = posts
-                    dispatchGroup.leave()
-                default:
-                    dispatchGroup.leave()
-                }
-            })
-        }
+        sphereMetricsService.calcMetrics(completion: { [weak self] (startMetrics, currentMetrics, posts) in
+            self?.startSphereMetrics = startMetrics
+            self?.currentSphereMetrics = currentMetrics
+            self?.posts = posts
+            dispatchGroup.leave()
+        })
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
             if let startSphereMetrics = self?.startSphereMetrics,

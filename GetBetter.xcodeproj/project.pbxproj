@@ -31,6 +31,7 @@
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
+		C34434F324C9A9120045F1BD /* SphereMetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34434F224C9A9120045F1BD /* SphereMetricsService.swift */; };
 		C3452B5724BE17BD00C973B1 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3452B5624BE17BD00C973B1 /* UIButton.swift */; };
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
 		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
@@ -133,6 +134,7 @@
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		C34434F224C9A9120045F1BD /* SphereMetricsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetricsService.swift; sourceTree = "<group>"; };
 		C3452B5624BE17BD00C973B1 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */,
 				F14959BA831454BA379465FF /* FirebaseStorageService.swift */,
 				F1495297F7AD9CAF4E9198A5 /* FirebaseDatabaseService.swift */,
+				C34434F224C9A9120045F1BD /* SphereMetricsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				F14957534493CFF9CA95F186 /* ArticleViewController.swift in Sources */,
 				F14952606F9F2D69620BA836 /* AlertServiceDefault.swift in Sources */,
 				F14953B62F438A822C859E2D /* FirebaseStorageService.swift in Sources */,
+				C34434F324C9A9120045F1BD /* SphereMetricsService.swift in Sources */,
 				F1495758B8B86F71B37096B8 /* FirebaseDatabaseService.swift in Sources */,
 				F1495D08557F105CA2F17BBD /* EditProfileViewController.swift in Sources */,
 				F14951C7F023A062FD05EEEE /* ProfileTableViewCell.swift in Sources */,

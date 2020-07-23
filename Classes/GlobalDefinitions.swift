@@ -20,7 +20,6 @@ struct GlobalDefinitions {
     
     struct SphereMetrics {
         static let start = "start_sphere_level"
-        static let current = "current_sphere_level"
     }
     
     static let notValidSphereValue = -1.0
