@@ -10,7 +10,7 @@ import Foundation
 
 class AchievementViewModel {
     
-    func getAchievements(posts: [Post],
+    func calcAchievements(posts: [Post],
                          startSphereMetrics: SphereMetrics,
                          currentSphereMetrics: SphereMetrics) -> [Achievement] {
         let daysAchievements = getDaysAchievements(posts: posts)

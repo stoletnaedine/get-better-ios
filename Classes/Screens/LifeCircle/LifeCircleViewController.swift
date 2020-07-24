@@ -59,35 +59,34 @@ class LifeCircleViewController: UIViewController {
         metricsTableView.addSubview(refreshControl)
     }
     
-    @objc func loadAndShowData() {
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        databaseService.getUserData(completion: { [weak self] (startMetrics, currentMetrics, posts) in
-            self?.startSphereMetrics = startMetrics
-            self?.currentSphereMetrics = currentMetrics
+    @objc private func loadAndShowData() {
+        databaseService.getUserData(completion: { [weak self] (startSphereMetrics, currentSphereMetrics, posts) in
+            guard let startSphereMetrics = startSphereMetrics else { return }
+            guard let currentSphereMetrics = currentSphereMetrics else { return }
+            self?.startSphereMetrics = startSphereMetrics
+            self?.currentSphereMetrics = currentSphereMetrics
             self?.posts = posts
-            dispatchGroup.leave()
-        })
-        
-        dispatchGroup.notify(queue: .main, execute: { [weak self] in
-            if let startSphereMetrics = self?.startSphereMetrics,
-                let currentSphereMetrics = self?.currentSphereMetrics,
-                let posts = self?.posts,
-                let achievements = self?.viewModel.getAchievements(
-                    posts: posts,
-                    startSphereMetrics: startSphereMetrics,
-                    currentSphereMetrics: currentSphereMetrics
+            if let achievements = self?.viewModel.calcAchievements(
+                posts: posts,
+                startSphereMetrics: startSphereMetrics,
+                currentSphereMetrics: currentSphereMetrics
                 ) {
                 self?.achievements = achievements
             }
-            self?.setupChartView()
-            self?.metricsTableView.reloadData()
-            self?.achievementsTableView.reloadData()
-            self?.refreshControl.endRefreshing()
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadViews()
+                self?.refreshControl.endRefreshing()
+            }
         })
     }
     
-    func setupCircleLabels() {
+    private func reloadViews() {
+        setupChartView()
+        metricsTableView.reloadData()
+        achievementsTableView.reloadData()
+    }
+    
+    private func setupCircleLabels() {
         currentLabel.text = R.string.localizable.lifeCircleCurrent()
         currentLabel.font = UIFont.boldSystemFont(ofSize: 14)
         currentLabel.textColor = .lifeCircleLineCurrent
@@ -96,7 +95,7 @@ class LifeCircleViewController: UIViewController {
         startLabel.textColor = .lifeCircleLineStart
     }
     
-    func setupChartView() {
+    private func setupChartView() {
         chartView.backgroundColor = .appBackground
         chartView.webLineWidth = 2
         chartView.innerWebLineWidth = 2
@@ -152,7 +151,7 @@ class LifeCircleViewController: UIViewController {
         chartView.legend.enabled = false
     }
     
-    func setupTableViews() {
+    private func setupTableViews() {
         achievementsTableView.dataSource = self
         achievementsTableView.delegate = self
         achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil),
@@ -168,7 +167,7 @@ class LifeCircleViewController: UIViewController {
         metricsTableView.separatorInset = UIEdgeInsets.zero
     }
     
-    func setupSegmentedControl() {
+    private func setupSegmentedControl() {
         chartView.isHidden = false
         metricsTableView.isHidden = true
         achievementsTableView.isHidden = true
