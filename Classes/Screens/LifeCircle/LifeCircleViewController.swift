@@ -19,7 +19,7 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var startLabel: UILabel!
     
     let refreshControl = UIRefreshControl()
-    let sphereMetricsService: SphereMetricsService = SphereMetricsServiceDefault()
+    let databaseService: DatabaseService = FirebaseDatabaseService()
     let viewModel = AchievementViewModel()
     
     var startSphereMetrics: SphereMetrics?
@@ -62,7 +62,7 @@ class LifeCircleViewController: UIViewController {
     @objc func loadAndShowData() {
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
-        sphereMetricsService.calcMetrics(completion: { [weak self] (startMetrics, currentMetrics, posts) in
+        databaseService.getUserData(completion: { [weak self] (startMetrics, currentMetrics, posts) in
             self?.startSphereMetrics = startMetrics
             self?.currentSphereMetrics = currentMetrics
             self?.posts = posts

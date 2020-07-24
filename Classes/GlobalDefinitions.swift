@@ -18,10 +18,6 @@ struct GlobalDefinitions {
         static let tutorialHasShowed = "tutorialHasShowed"
     }
     
-    struct SphereMetrics {
-        static let start = "start_sphere_level"
-    }
-    
     static let notValidSphereValue = -1.0
     
     static let appVersion = "1.0.6"

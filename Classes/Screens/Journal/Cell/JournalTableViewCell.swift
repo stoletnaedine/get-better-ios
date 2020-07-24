@@ -42,7 +42,14 @@ class JournalTableViewCell: UITableViewCell {
         if let urlString = post.previewUrl,
             !urlString.isEmpty {
             if let url = URL(string: urlString) {
-                photoImageView.kf.setImage(with: url)
+                self.photoImageView.kf.indicatorType = .activity
+                self.photoImageView.kf.setImage(
+                    with: url,
+                    options: [
+                            .transition(.fade(1)),
+                            .cacheOriginalImage
+                        ])
+                
                 showImageInCell(true)
             }
         }

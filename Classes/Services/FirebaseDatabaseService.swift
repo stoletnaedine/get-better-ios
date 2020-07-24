@@ -10,18 +10,24 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 
+typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
+
 protocol DatabaseService {
 
     @discardableResult
     func savePost(_ post: Post) -> Bool
-
     func deletePost(_ post: Post) -> Bool
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
-    func saveSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool
-    func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
+    func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool
+    func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
+    func getUserData(completion: @escaping (UserData) -> Void)
 }
 
 class FirebaseDatabaseService: DatabaseService {
+    
+    enum Constants {
+        static let startMetricsPath = "start_sphere_level"
+    }
     
     let ref = Database.database().reference()
     let storageService: StorageService = FirebaseStorageService()
@@ -95,21 +101,21 @@ class FirebaseDatabaseService: DatabaseService {
         }
     }
     
-    func saveSphereMetrics(_ sphereMetrics: SphereMetrics, pathToSave: String) -> Bool {
+    func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool {
         guard let ref = currentUserPath() else { return false }
         
         ref
-            .child(pathToSave)
+            .child(Constants.startMetricsPath)
             .setValue(sphereMetrics.values)
         
         return true
     }
     
-    func getSphereMetrics(from path: String, completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
+    func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
         guard let ref = currentUserPath() else { return }
         
         ref
-            .child(path)
+            .child(Constants.startMetricsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
                 if let value = snapshot.value as? NSDictionary {
                     let sphereMetrics = SphereMetrics(values: value as! [String : Double])
@@ -122,32 +128,55 @@ class FirebaseDatabaseService: DatabaseService {
         }
     }
     
-    private func updateSphereValue(_ sphereValue: SphereValue, pathToSave: String) -> Bool {
-        guard let ref = currentUserPath() else { return false }
-        guard let sphereField = sphereValue.sphere?.rawValue else { return false }
-        guard let value = sphereValue.value else { return false }
+    func getUserData(completion: @escaping (UserData) -> Void) {
         
-        ref
-            .child(pathToSave)
-            .updateChildValues([sphereField: value])
+        var posts: [Post] = []
+        var startSphereMetrics: SphereMetrics?
         
-        return true
-    }
-    
-    private func getSphereMetrics(from path: String,
-                                  dispatchGroup: DispatchGroup,
-                                  completion: @escaping (SphereMetrics) -> Void) {
-        getSphereMetrics(from: path, completion: { result in
-            
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        getPosts(completion: { result in
+            switch result {
+            case .success(let postsFromDB):
+                posts = postsFromDB
+                dispatchGroup.leave()
+            default:
+                dispatchGroup.leave()
+                break
+            }
+        })
+        
+        dispatchGroup.enter()
+        getStartSphereMetrics(completion: { result in
             switch result {
             case .success(let sphereMetrics):
-                completion(sphereMetrics)
+                startSphereMetrics = sphereMetrics
                 dispatchGroup.leave()
-
-            case .failure(let error):
-                print("Getting sphere metrics error=\(error)")
+            default:
                 dispatchGroup.leave()
+                break
             }
+        })
+        
+        dispatchGroup.notify(queue: .global(), execute: {
+            let spheresInPosts = posts.map { $0.sphere }
+            guard let startSphereMetrics = startSphereMetrics else { return }
+            var currentSphereMetricsValues = startSphereMetrics.values
+            
+            let diffValue = 0.1
+            let maxValue = 10.0
+
+            spheresInPosts.forEach { sphere in
+                if let sphereString = sphere?.rawValue,
+                    let sphereValue = currentSphereMetricsValues[sphereString],
+                    sphereValue < maxValue {
+                    let newValue = (sphereValue * 10 + diffValue * 10) / 10
+                    currentSphereMetricsValues[sphereString] = newValue
+                }
+            }
+
+            let currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
+            completion((startSphereMetrics, currentSphereMetrics, posts))
         })
     }
     

@@ -68,15 +68,6 @@ class PostDetailViewController: UIViewController {
                         .transition(.fade(1)),
                         .cacheOriginalImage
                     ])
-                {
-                    result in
-                    switch result {
-                    case .success(let value):
-                        print("Task done for: \(value.source.url?.absoluteString ?? "")")
-                    case .failure(let error):
-                        print("Job failed: \(error.localizedDescription)")
-                    }
-            }
             
             DispatchQueue.main.async { [weak self] in
                 self?.photoImageView.alpha = 1

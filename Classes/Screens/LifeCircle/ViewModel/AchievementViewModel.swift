@@ -191,8 +191,8 @@ class AchievementViewModel {
             let spheresString = fastSphereNames.joined(separator: ", ")
             achievement = Achievement(icon: "🚀",
                                       title: "Rocketman",
-                                      description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней", 
-                    unlocked: true)
+                                      description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней",
+                unlocked: true)
         }
         
         return [achievement]

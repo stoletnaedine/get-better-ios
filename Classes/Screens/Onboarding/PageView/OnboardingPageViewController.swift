@@ -110,8 +110,7 @@ class OnboardingPageViewController: UIViewController {
             return
         }
         
-        if databaseService.saveSphereMetrics(sphereMetrics,
-                                             pathToSave: GlobalDefinitions.SphereMetrics.start) {
+        if databaseService.saveStartSphereMetrics(sphereMetrics) {
             UserDefaults.standard.set(false, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
             self.completion()
         }
