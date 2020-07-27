@@ -15,8 +15,8 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var metricsTableView: UITableView!
     @IBOutlet weak var achievementsTableView: UITableView!
-    @IBOutlet weak var currentLabel: UILabel!
-    @IBOutlet weak var startLabel: UILabel!
+    @IBOutlet weak var currentLevelButton: UIButton!
+    @IBOutlet weak var startLevelButton: UIButton!
     
     let refreshControl = UIRefreshControl()
     let databaseService: DatabaseService = FirebaseDatabaseService()
@@ -32,12 +32,15 @@ class LifeCircleViewController: UIViewController {
     let achievementsReuseCellIdentifier = R.reuseIdentifier.achievementsCell.identifier
     let sphereIconSize: CGFloat = 30
     
+    var isStartDataVisible = true
+    var isCurrentDataVisible = true
+    
     var showOnboardingCompletion: () -> () = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupCircleLabels()
+        setupLevelButtons()
         setupSegmentedControl()
         setupTableViews()
         setupRefreshControl()
@@ -47,6 +50,17 @@ class LifeCircleViewController: UIViewController {
         super.viewWillAppear(animated)
         loadAndShowData()
     }
+    
+    @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
+        isCurrentDataVisible.toggle()
+        setupChartView(isStartDataVisible: isStartDataVisible, isCurrentDataVisible: isCurrentDataVisible, animate: false)
+    }
+    
+    @IBAction func startLevelButtonDidTap(_ sender: UIButton) {
+        isStartDataVisible.toggle()
+        setupChartView(isStartDataVisible: isStartDataVisible, isCurrentDataVisible: isCurrentDataVisible, animate: false)
+    }
+    
     
     private func setupView() {
         title = R.string.localizable.tabBarLifeCircle()
@@ -81,28 +95,28 @@ class LifeCircleViewController: UIViewController {
     }
     
     private func reloadViews() {
-        setupChartView()
+        setupChartView(isStartDataVisible: isStartDataVisible, isCurrentDataVisible: isCurrentDataVisible, animate: true)
         metricsTableView.reloadData()
         achievementsTableView.reloadData()
     }
     
-    private func setupCircleLabels() {
-        currentLabel.text = R.string.localizable.lifeCircleCurrent()
-        currentLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        currentLabel.textColor = .lifeCircleLineCurrent
-        startLabel.text = R.string.localizable.lifeCircleStart()
-        startLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        startLabel.textColor = .lifeCircleLineStart
+    private func setupLevelButtons() {
+        currentLevelButton.setTitle(R.string.localizable.lifeCircleCurrent(), for: .normal)
+        currentLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        currentLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
+        startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
+        startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        startLevelButton.setTitleColor(.lifeCircleLineStart, for: .normal)
     }
     
-    private func setupChartView() {
+    private func setupChartView(isStartDataVisible: Bool, isCurrentDataVisible: Bool, animate: Bool) {
         chartView.backgroundColor = .appBackground
         chartView.webLineWidth = 2
         chartView.innerWebLineWidth = 2
         chartView.webColor = .lifeCircleLineBack
         chartView.innerWebColor = .lifeCircleLineBack
         chartView.rotationEnabled = true
-        chartView.legend.enabled = true
+        chartView.legend.enabled = false
         
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
@@ -133,12 +147,13 @@ class LifeCircleViewController: UIViewController {
         }
         
         let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: "")
-        let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: "")
-        
+        dataSetStart.visible = isStartDataVisible
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
         dataSetStart.valueFormatter = DataSetValueFormatter()
         
+        let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: "")
+        dataSetCurrent.visible = isCurrentDataVisible
         dataSetCurrent.lineWidth = 2
         dataSetCurrent.colors = [.lifeCircleLineCurrent]
         dataSetCurrent.fillColor = .lifeCircleFillCurrent
@@ -147,8 +162,10 @@ class LifeCircleViewController: UIViewController {
         dataSetCurrent.valueFormatter = DataSetValueFormatter()
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
-        chartView.animate(xAxisDuration: 0.6, easingOption: .easeInOutCirc)
-        chartView.legend.enabled = false
+        
+        if animate {
+            chartView.animate(xAxisDuration: 0.8, easingOption: .easeInOutQuad)
+        }
     }
     
     private func setupTableViews() {
