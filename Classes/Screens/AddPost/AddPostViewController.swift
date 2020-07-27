@@ -14,8 +14,6 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var saveButtonView: UIView!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var cancelImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var attachButton: UIButton!
     @IBOutlet weak var attachImageView: UIImageView!
@@ -130,7 +128,6 @@ extension AddPostViewController {
         saveButton.setTitle(R.string.localizable.addPostSave(), for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = .journalButtonFont
-        cancelButton.setTitle("", for: .normal)
         attachButton.setTitle("", for: .normal)
         dateLabel.font = .journalDateFont
         dateLabel.textColor = .gray
@@ -142,7 +139,6 @@ extension AddPostViewController {
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
         attachImageView.tint(with: .violet)
-        cancelImageView.tint(with: .violet)
         selectSphereButton.setTitle(R.string.localizable.postChooseSphere(), for: .normal)
         selectSphereButton.titleLabel?.font = .journalButtonFont
         selectSphereButton.setImage(R.image.arrowDown(), for: .normal)

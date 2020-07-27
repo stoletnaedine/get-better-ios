@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -9,8 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="M18-Zq-MPI" id="VSJ-VK-1r5"/>
-                <outlet property="cancelImageView" destination="I1B-ZA-et8" id="fYz-ZN-xfU"/>
                 <outlet property="emailLabel" destination="mL2-UJ-v9r" id="VO8-8M-zSd"/>
                 <outlet property="emailTextField" destination="OMc-X0-HHv" id="s8U-55-kYj"/>
                 <outlet property="passwordLabel" destination="B5w-kM-T9C" id="ZaZ-sd-q4I"/>
@@ -92,39 +91,21 @@
                         <constraint firstAttribute="trailing" secondItem="B7w-fg-S8h" secondAttribute="trailing" id="ytb-1q-9SV"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDg-8i-sZg" userLabel="CancelView">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Yk-fh-uCY" userLabel="Cancel Button" customClass="CancelButton" customModule="GetBetter" customModuleProvider="target">
                     <rect key="frame" x="362" y="64" width="32" height="32"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="I1B-ZA-et8">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M18-Zq-MPI">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="JnW-Y6-BIS"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="I1B-ZA-et8" firstAttribute="leading" secondItem="FDg-8i-sZg" secondAttribute="leading" id="GDL-KY-D5k"/>
-                        <constraint firstAttribute="bottom" secondItem="M18-Zq-MPI" secondAttribute="bottom" id="IMp-HS-Coq"/>
-                        <constraint firstItem="I1B-ZA-et8" firstAttribute="top" secondItem="FDg-8i-sZg" secondAttribute="top" id="VbY-SZ-Vkj"/>
-                        <constraint firstItem="M18-Zq-MPI" firstAttribute="top" secondItem="FDg-8i-sZg" secondAttribute="top" id="Yid-gd-r8C"/>
-                        <constraint firstAttribute="trailing" secondItem="I1B-ZA-et8" secondAttribute="trailing" id="b74-JQ-irh"/>
-                        <constraint firstAttribute="trailing" secondItem="M18-Zq-MPI" secondAttribute="trailing" id="jTZ-P1-YkF"/>
-                        <constraint firstItem="M18-Zq-MPI" firstAttribute="leading" secondItem="FDg-8i-sZg" secondAttribute="leading" id="rgP-eB-vr6"/>
-                        <constraint firstAttribute="height" constant="32" id="vQ0-Ke-qs0"/>
-                        <constraint firstAttribute="bottom" secondItem="I1B-ZA-et8" secondAttribute="bottom" id="ydX-fn-Alv"/>
-                        <constraint firstAttribute="width" constant="32" id="yqO-fp-HYH"/>
+                        <constraint firstAttribute="height" constant="32" id="cEs-2L-aDO"/>
+                        <constraint firstAttribute="width" constant="32" id="kmY-yM-ZAw"/>
                     </constraints>
-                </view>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Ohs-Iy-w5d"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="mL2-UJ-v9r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="01M-fA-vpf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FDg-8i-sZg" secondAttribute="trailing" constant="20" id="BbZ-8g-VnO"/>
                 <constraint firstAttribute="trailing" secondItem="Vde-9X-gie" secondAttribute="trailing" constant="20" id="Jkt-S8-uSi"/>
                 <constraint firstItem="B5w-kM-T9C" firstAttribute="top" secondItem="xmY-s0-m7Y" secondAttribute="bottom" constant="20" id="KRk-UC-IYU"/>
                 <constraint firstItem="xmY-s0-m7Y" firstAttribute="top" secondItem="OMc-X0-HHv" secondAttribute="bottom" constant="10" id="LHc-6m-hnS"/>
@@ -134,13 +115,14 @@
                 <constraint firstItem="B5w-kM-T9C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QOF-ET-qRB"/>
                 <constraint firstItem="c6k-Aj-A4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QSb-Lc-FMd"/>
                 <constraint firstItem="c6k-Aj-A4O" firstAttribute="top" secondItem="Vde-9X-gie" secondAttribute="bottom" constant="30" id="T6l-Jy-dLZ"/>
-                <constraint firstItem="FDg-8i-sZg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="aCg-Qx-FZL"/>
                 <constraint firstItem="Vde-9X-gie" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="bBZ-a2-ZvZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c6k-Aj-A4O" secondAttribute="trailing" constant="20" id="d89-g5-OFz"/>
                 <constraint firstItem="ucb-gn-GaY" firstAttribute="top" secondItem="B5w-kM-T9C" secondAttribute="bottom" constant="6" id="ffn-Kb-cEy"/>
+                <constraint firstItem="9Yk-fh-uCY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="h2w-q2-Jip"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ucb-gn-GaY" secondAttribute="trailing" constant="20" id="hrQ-8t-6cf"/>
                 <constraint firstItem="mL2-UJ-v9r" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="i7B-KD-0JA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OMc-X0-HHv" secondAttribute="trailing" constant="20" id="l9l-lx-An0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9Yk-fh-uCY" secondAttribute="trailing" constant="20" id="oeC-zQ-D2g"/>
                 <constraint firstItem="xmY-s0-m7Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="v52-1V-4PF"/>
                 <constraint firstItem="OMc-X0-HHv" firstAttribute="top" secondItem="mL2-UJ-v9r" secondAttribute="bottom" constant="6" id="vV6-69-nb7"/>
                 <constraint firstItem="OMc-X0-HHv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="x2p-Kx-Djk"/>
@@ -149,7 +131,4 @@
             <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>
-    <resources>
-        <image name="cancel" width="16" height="16"/>
-    </resources>
 </document>

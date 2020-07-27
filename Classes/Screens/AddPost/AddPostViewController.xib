@@ -12,8 +12,6 @@
             <connections>
                 <outlet property="attachButton" destination="kDR-MY-RhO" id="Jji-vQ-wGh"/>
                 <outlet property="attachImageView" destination="QFF-em-lVD" id="so6-tS-l5l"/>
-                <outlet property="cancelButton" destination="QdY-07-83M" id="ToA-Tw-H1K"/>
-                <outlet property="cancelImageView" destination="bYW-ci-QWn" id="Y7H-K2-OCz"/>
                 <outlet property="dateLabel" destination="EdK-CD-Y8S" id="9kl-0w-jNK"/>
                 <outlet property="photoImageView" destination="mM1-1j-B6b" id="7pQ-Ce-GOx"/>
                 <outlet property="placeholderLabel" destination="gqB-hQ-rk0" id="jjN-Bp-769"/>
@@ -54,34 +52,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYj-7l-EGR" userLabel="CancelView">
-                    <rect key="frame" x="362" y="64" width="32" height="32"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="bYW-ci-QWn">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdY-07-83M">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="7u6-SN-8mZ"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="bYW-ci-QWn" secondAttribute="trailing" id="5Qe-Dz-fRG"/>
-                        <constraint firstItem="QdY-07-83M" firstAttribute="leading" secondItem="dYj-7l-EGR" secondAttribute="leading" id="BLL-22-5Mp"/>
-                        <constraint firstItem="QdY-07-83M" firstAttribute="top" secondItem="dYj-7l-EGR" secondAttribute="top" id="ELQ-W5-uiP"/>
-                        <constraint firstAttribute="height" constant="32" id="I3S-Tm-T4j"/>
-                        <constraint firstAttribute="trailing" secondItem="QdY-07-83M" secondAttribute="trailing" id="QIz-dv-jYT"/>
-                        <constraint firstItem="bYW-ci-QWn" firstAttribute="top" secondItem="dYj-7l-EGR" secondAttribute="top" id="ReD-ez-1Qn"/>
-                        <constraint firstAttribute="width" constant="32" id="Y48-ai-CP5"/>
-                        <constraint firstAttribute="bottom" secondItem="bYW-ci-QWn" secondAttribute="bottom" id="YOS-Mi-9MN"/>
-                        <constraint firstAttribute="bottom" secondItem="QdY-07-83M" secondAttribute="bottom" id="rru-Rq-MoJ"/>
-                        <constraint firstItem="bYW-ci-QWn" firstAttribute="leading" secondItem="dYj-7l-EGR" secondAttribute="leading" id="vnG-bb-Eak"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eP-dz-X34" userLabel="DateAttachView">
                     <rect key="frame" x="15" y="245" width="384" height="40"/>
                     <subviews>
@@ -189,12 +159,22 @@
                         <constraint firstItem="G4Y-RJ-AVC" firstAttribute="top" secondItem="g7W-yF-nBF" secondAttribute="top" id="j9Q-qY-n68"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyS-0w-vzY" userLabel="Cancel Button" customClass="CancelButton" customModule="GetBetter" customModuleProvider="target">
+                    <rect key="frame" x="362" y="64" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="bM9-NC-h2b"/>
+                        <constraint firstAttribute="height" constant="32" id="dWf-go-FMp"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="dog-6n-dnj"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="gqB-hQ-rk0" firstAttribute="top" secondItem="DvL-Jo-K4r" secondAttribute="bottom" constant="27" id="4U9-GR-3wv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UYD-Zb-BWf" secondAttribute="trailing" constant="80" id="AAR-iL-mBM"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dYj-7l-EGR" secondAttribute="trailing" constant="20" id="D4e-Kv-Gpq"/>
                 <constraint firstItem="UYD-Zb-BWf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="Dhn-Zd-bWd"/>
                 <constraint firstItem="DvL-Jo-K4r" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="H5g-ca-uWl"/>
                 <constraint firstItem="sLD-WP-KS7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="HjA-im-nPX"/>
@@ -207,7 +187,8 @@
                 <constraint firstItem="gqB-hQ-rk0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="26" id="XAA-Qz-IVC"/>
                 <constraint firstItem="g7W-yF-nBF" firstAttribute="top" secondItem="UYD-Zb-BWf" secondAttribute="bottom" constant="20" id="bkD-IK-e2z"/>
                 <constraint firstItem="0eP-dz-X34" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="hls-eI-jih"/>
-                <constraint firstItem="dYj-7l-EGR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="mDT-Ws-kqe"/>
+                <constraint firstItem="HyS-0w-vzY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="jCK-6x-Wuf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HyS-0w-vzY" secondAttribute="trailing" constant="20" id="qa1-7y-WEd"/>
                 <constraint firstItem="sLD-WP-KS7" firstAttribute="top" secondItem="DvL-Jo-K4r" secondAttribute="bottom" constant="20" id="sQx-iz-xK9"/>
                 <constraint firstItem="0eP-dz-X34" firstAttribute="top" secondItem="sLD-WP-KS7" secondAttribute="bottom" constant="20" id="vfT-Ov-bb8"/>
                 <constraint firstItem="DvL-Jo-K4r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="wnZ-AM-rcd"/>
@@ -218,6 +199,5 @@
     </objects>
     <resources>
         <image name="attach" width="24" height="24"/>
-        <image name="cancel" width="50" height="50"/>
     </resources>
 </document>

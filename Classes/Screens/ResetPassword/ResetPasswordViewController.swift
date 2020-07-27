@@ -17,8 +17,6 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var resetPasswordButtonLabel: UILabel!
     @IBOutlet weak var noticeLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var cancelImageView: UIImageView!
     
     let alertService: AlertService = AlertServiceDefault()
     
@@ -74,8 +72,5 @@ class ResetPasswordViewController: UIViewController {
         
         noticeLabel.font = .formNoticeFont
         noticeLabel.text = R.string.localizable.resetPasswordNoticeLabel()
-        
-        cancelButton.setTitle("", for: .normal)
-        cancelImageView.tint(with: .violet)
     }
 }

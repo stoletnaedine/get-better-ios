@@ -18,8 +18,6 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerView: UIView!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var registerButtonLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var cancelImageView: UIImageView!
     
     var completion: () -> () = {}
     let alertService: AlertService = AlertServiceDefault()
@@ -87,8 +85,5 @@ class RegisterViewController: UIViewController {
         registerButtonLabel.text = R.string.localizable.authDoRegister().uppercased()
         registerButtonLabel.textColor = .white
         registerButtonLabel.font = .formButtonFont
-        
-        cancelButton.setTitle("", for: .normal)
-        cancelImageView.tint(with: .violet)
     }
 }

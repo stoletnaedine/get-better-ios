@@ -142,7 +142,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = items[tableSection]?[indexPath.row].title
             cell.textLabel?.textColor = .gray
             cell.selectionStyle = .none
-            cell.accessoryType = .detailButton
+            cell.accessoryType = .disclosureIndicator
             return cell
         }
     }

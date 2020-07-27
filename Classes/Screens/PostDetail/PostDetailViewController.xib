@@ -10,8 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostDetailViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="NaE-zu-ejL" id="iYc-6y-2wP"/>
-                <outlet property="cancelImageView" destination="yKq-zC-k3Q" id="2ma-DJ-YOw"/>
                 <outlet property="dateLabel" destination="xHi-Jy-d5y" id="wRh-CL-I9i"/>
                 <outlet property="photoImageView" destination="bi8-Sd-74i" id="3Bs-ue-OBB"/>
                 <outlet property="sphereLabel" destination="Nwm-Ht-GLd" id="zuc-5S-1fP"/>
@@ -36,34 +34,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L75-po-3ZB" userLabel="CancelView">
-                    <rect key="frame" x="362" y="64" width="32" height="32"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="yKq-zC-k3Q">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NaE-zu-ejL">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="dcd-nR-8sC"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="NaE-zu-ejL" secondAttribute="bottom" id="5nN-aG-hwD"/>
-                        <constraint firstItem="yKq-zC-k3Q" firstAttribute="leading" secondItem="L75-po-3ZB" secondAttribute="leading" id="9mj-zA-4CI"/>
-                        <constraint firstAttribute="trailing" secondItem="NaE-zu-ejL" secondAttribute="trailing" id="ArR-ep-BOe"/>
-                        <constraint firstAttribute="bottom" secondItem="yKq-zC-k3Q" secondAttribute="bottom" id="DsI-Ry-whM"/>
-                        <constraint firstAttribute="trailing" secondItem="yKq-zC-k3Q" secondAttribute="trailing" id="NIe-Kh-FVQ"/>
-                        <constraint firstItem="yKq-zC-k3Q" firstAttribute="top" secondItem="L75-po-3ZB" secondAttribute="top" id="Ukt-TI-oEB"/>
-                        <constraint firstItem="NaE-zu-ejL" firstAttribute="top" secondItem="L75-po-3ZB" secondAttribute="top" id="cvi-Hp-0fb"/>
-                        <constraint firstItem="NaE-zu-ejL" firstAttribute="leading" secondItem="L75-po-3ZB" secondAttribute="leading" id="dFx-Fe-V6y"/>
-                        <constraint firstAttribute="height" constant="32" id="tf5-4k-TDC"/>
-                        <constraint firstAttribute="width" constant="32" id="yOQ-Ix-qgR"/>
-                    </constraints>
-                </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="bi8-Sd-74i">
                     <rect key="frame" x="0.0" y="187" width="414" height="675"/>
                 </imageView>
@@ -73,29 +43,37 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvT-fV-vqB" customClass="CancelButton" customModule="GetBetter" customModuleProvider="target">
+                    <rect key="frame" x="362" y="64" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="cBX-bL-Z4h"/>
+                        <constraint firstAttribute="width" constant="32" id="zpy-LG-EI8"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="snj-Cl-wQs"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="yUo-ZQ-frE" firstAttribute="top" secondItem="L75-po-3ZB" secondAttribute="bottom" constant="20" id="0Ky-J4-2qP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZvT-fV-vqB" secondAttribute="trailing" constant="20" id="12t-82-lCU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yUo-ZQ-frE" secondAttribute="trailing" constant="20" id="2K6-pp-el7"/>
                 <constraint firstItem="bi8-Sd-74i" firstAttribute="top" secondItem="xHi-Jy-d5y" secondAttribute="bottom" constant="20" id="67f-sz-49z"/>
+                <constraint firstItem="ZvT-fV-vqB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="BQI-Qx-aWP"/>
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="top" secondItem="yUo-ZQ-frE" secondAttribute="bottom" constant="10" id="F4Q-Og-OhW"/>
+                <constraint firstItem="yUo-ZQ-frE" firstAttribute="top" secondItem="Nwm-Ht-GLd" secondAttribute="bottom" constant="31.5" id="NWm-5C-fIL"/>
                 <constraint firstItem="xHi-Jy-d5y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="UzG-mE-Axr"/>
                 <constraint firstItem="Nwm-Ht-GLd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="YYP-KV-B6z"/>
                 <constraint firstItem="Nwm-Ht-GLd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="clf-P0-VKv"/>
                 <constraint firstItem="yUo-ZQ-frE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dDx-RP-owH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bi8-Sd-74i" secondAttribute="bottom" id="mKg-N6-Nma"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xHi-Jy-d5y" secondAttribute="trailing" constant="20" id="o9V-oI-prZ"/>
-                <constraint firstItem="L75-po-3ZB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="rIA-1D-GBs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bi8-Sd-74i" secondAttribute="trailing" id="rYp-ZF-nxQ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="L75-po-3ZB" secondAttribute="trailing" constant="20" id="sza-kM-LPH"/>
                 <constraint firstItem="bi8-Sd-74i" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yZM-tp-hEe"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
     </objects>
-    <resources>
-        <image name="cancel" width="50" height="50"/>
-    </resources>
 </document>
