@@ -279,7 +279,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         case metricsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
                                                      for: indexPath) as! SphereMetricsTableViewCell
-            cell.selectionStyle = .default
+            cell.selectionStyle = .none
             guard let sphereValue = getSphereValue(by: indexPath) else { return cell }
             cell.fillCell(from: sphereValue)
             
@@ -290,9 +290,6 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier,
                                                      for: indexPath) as! AchievementsTableViewCell
             cell.selectionStyle = .none
-            if !achievement.unlocked {
-                cell.backgroundColor = .lighterGray
-            }
             cell.fillCell(from: achievement)
             
             return cell
@@ -313,7 +310,11 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             present(sphereDetailViewController, animated: true, completion: nil)
             
         default:
-            print("Error: Default case in didSelectRowAt method!")
+            print("Not metricsTableView tapped in didSelectRowAt method!")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 }

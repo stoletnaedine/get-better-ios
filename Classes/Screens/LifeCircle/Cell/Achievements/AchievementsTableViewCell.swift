@@ -19,8 +19,8 @@ class AchievementsTableViewCell: UITableViewCell {
         setupView()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    override func prepareForReuse() {
+        self.backgroundColor = .clear
     }
     
     func fillCell(from achievement: Achievement) {
@@ -30,6 +30,8 @@ class AchievementsTableViewCell: UITableViewCell {
         if achievement.unlocked {
             self.iconLabel.text = achievement.icon
             setupUnlockedView()
+        } else {
+            self.backgroundColor = .lighterGray
         }
     }
     
