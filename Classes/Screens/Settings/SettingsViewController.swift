@@ -12,7 +12,7 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let viewModel = SettingsViewModel()
+    let presenter: SettingsPresenter = SettingsPresenterDefault()
     var profile: Profile?
     
     let SectionHeaderHeight: CGFloat = 35
@@ -33,7 +33,7 @@ class SettingsViewController: UIViewController {
     }
     
     @objc func loadProfileAndReloadTableView() {
-        viewModel.loadProfileInfo(completion: { [weak self] profile in
+        presenter.loadProfileInfo(completion: { [weak self] profile in
             self?.profile = profile
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
@@ -62,11 +62,11 @@ class SettingsViewController: UIViewController {
         
         tableItems = [
             TableSection.profile : [CommonSettingsCell(title: "", viewController: editProfileViewController)],
-            TableSection.articles : viewModel.fillArticles(),
+            TableSection.articles : presenter.fillArticles(),
             TableSection.config : [
                 CommonSettingsCell(
                         title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
-                        viewController: viewModel.changeLog()
+                        viewController: presenter.createAppHistoryVersions()
                 )
             ]
         ]

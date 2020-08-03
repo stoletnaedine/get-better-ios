@@ -6,10 +6,16 @@
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Firebase
 
-class SettingsViewModel {
+protocol SettingsPresenter {
+    func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void)
+    func fillArticles() -> [CommonSettingsCell]
+    func createAppHistoryVersions() -> UIViewController
+}
+
+class SettingsPresenterDefault: SettingsPresenter {
     
     func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
         
@@ -63,7 +69,7 @@ class SettingsViewModel {
                 CommonSettingsCell(title: R.string.localizable.aboutAppTableTitle(), viewController: aboutAppViewController)]
     }
     
-    func changeLog() -> UIViewController {
+    func createAppHistoryVersions() -> UIViewController {
         let vc = TextViewViewController()
         vc.text = R.string.localizable.appVersions()
         return vc
