@@ -14,7 +14,7 @@ protocol AchievementPresenter {
                           currentSphereMetrics: SphereMetrics) -> [Achievement]
 }
 
-class AchievementPresenterDefault {
+class AchievementPresenterDefault: AchievementPresenter {
     
     func calcAchievements(posts: [Post],
                          startSphereMetrics: SphereMetrics,
