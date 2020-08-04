@@ -43,13 +43,15 @@
 		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
 		C37D0B3E23D79088005A1BCF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* Label.swift */; };
+		C3813FFE24D92F7000A3C6AA /* LifeCirclePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */; };
+		C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */; };
 		C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */; };
 		C390A76024C0CFC900EAD48E /* TextViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */; };
 		C392971F247FAE04000340DC /* PostMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C392971E247FAE04000340DC /* PostMapper.swift */; };
 		C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39423D624404E8E0060CF50 /* AuthViewController.swift */; };
 		C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39423D724404E8E0060CF50 /* AuthViewController.xib */; };
 		C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23B246AC71E00DBF0E4 /* Double.swift */; };
-		C396E23E246AC8E200DBF0E4 /* AchievementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23D246AC8E200DBF0E4 /* AchievementViewModel.swift */; };
+		C396E23E246AC8E200DBF0E4 /* AchievementPresenterDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23D246AC8E200DBF0E4 /* AchievementPresenterDefault.swift */; };
 		C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A321D245710BC005D2EDF /* SettingsViewController.swift */; };
 		C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39A321E245710BC005D2EDF /* SettingsViewController.xib */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
@@ -146,13 +148,15 @@
 		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		C37D0B3D23D79088005A1BCF /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCirclePresenter.swift; sourceTree = "<group>"; };
+		C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
 		C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewViewController.xib; sourceTree = "<group>"; };
 		C392971E247FAE04000340DC /* PostMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMapper.swift; sourceTree = "<group>"; };
 		C39423D624404E8E0060CF50 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		C39423D724404E8E0060CF50 /* AuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
 		C396E23B246AC71E00DBF0E4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
-		C396E23D246AC8E200DBF0E4 /* AchievementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViewModel.swift; sourceTree = "<group>"; };
+		C396E23D246AC8E200DBF0E4 /* AchievementPresenterDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenterDefault.swift; sourceTree = "<group>"; };
 		C39A321D245710BC005D2EDF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C39A321E245710BC005D2EDF /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -307,6 +311,7 @@
 				C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */,
 				C3C9DD8624B843B3003C83BD /* String.swift */,
 				C3452B5624BE17BD00C973B1 /* UIButton.swift */,
+				C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,12 +371,13 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		C36DE9C4246E84BB005635E4 /* ViewModel */ = {
+		C36DE9C4246E84BB005635E4 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				C396E23D246AC8E200DBF0E4 /* AchievementViewModel.swift */,
+				C396E23D246AC8E200DBF0E4 /* AchievementPresenterDefault.swift */,
+				C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */,
 			);
-			path = ViewModel;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		C3724EC423AFABD000D49AD6 /* Screens */ = {
@@ -407,7 +413,7 @@
 		C3724EC923AFAC5800D49AD6 /* LifeCircle */ = {
 			isa = PBXGroup;
 			children = (
-				C36DE9C4246E84BB005635E4 /* ViewModel */,
+				C36DE9C4246E84BB005635E4 /* Presenter */,
 				C3ED5A2823AFBF1300C7A492 /* LifeCircleViewController.swift */,
 				C3ED5A2923AFBF1300C7A492 /* LifeCircleViewController.xib */,
 				F149521D579776BEE4DF3881 /* Cell */,
@@ -842,7 +848,8 @@
 				C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */,
 				C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */,
 				C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */,
-				C396E23E246AC8E200DBF0E4 /* AchievementViewModel.swift in Sources */,
+				C396E23E246AC8E200DBF0E4 /* AchievementPresenterDefault.swift in Sources */,
+				C3813FFE24D92F7000A3C6AA /* LifeCirclePresenter.swift in Sources */,
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,
 				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,
 				C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */,
@@ -869,6 +876,7 @@
 				C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */,
 				6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */,
 				C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */,
+				C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */,
 				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
 				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,
@@ -1040,7 +1048,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1065,7 +1073,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

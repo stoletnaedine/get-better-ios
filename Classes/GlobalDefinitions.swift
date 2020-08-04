@@ -20,5 +20,5 @@ struct GlobalDefinitions {
     
     static let notValidSphereValue = -1.0
     
-    static let appVersion = "1.1.0"
+    static let appVersion = "1.1.1"
 }

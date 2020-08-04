@@ -13,14 +13,12 @@ import FirebaseAuth
 typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
 
 protocol DatabaseService {
-
     @discardableResult
     func savePost(_ post: Post) -> Bool
     func deletePost(_ post: Post) -> Bool
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
     func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
-    func getUserData(completion: @escaping (UserData) -> Void)
 }
 
 class FirebaseDatabaseService: DatabaseService {
@@ -126,58 +124,6 @@ class FirebaseDatabaseService: DatabaseService {
             }) { error in
                 completion(.failure(AppError(error: error)!))
         }
-    }
-    
-    func getUserData(completion: @escaping (UserData) -> Void) {
-        
-        var posts: [Post] = []
-        var startSphereMetrics: SphereMetrics?
-        
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        getPosts(completion: { result in
-            switch result {
-            case .success(let postsFromDB):
-                posts = postsFromDB
-                dispatchGroup.leave()
-            default:
-                dispatchGroup.leave()
-                break
-            }
-        })
-        
-        dispatchGroup.enter()
-        getStartSphereMetrics(completion: { result in
-            switch result {
-            case .success(let sphereMetrics):
-                startSphereMetrics = sphereMetrics
-                dispatchGroup.leave()
-            default:
-                dispatchGroup.leave()
-                break
-            }
-        })
-        
-        dispatchGroup.notify(queue: .global(), execute: {
-            let spheresInPosts = posts.map { $0.sphere }
-            guard let startSphereMetrics = startSphereMetrics else { return }
-            var currentSphereMetricsValues = startSphereMetrics.values
-            
-            let diffValue = 0.1
-            let maxValue = 10.0
-
-            spheresInPosts.forEach { sphere in
-                if let sphereString = sphere?.rawValue,
-                    let sphereValue = currentSphereMetricsValues[sphereString],
-                    sphereValue < maxValue {
-                    let newValue = (sphereValue * 10 + diffValue * 10) / 10
-                    currentSphereMetricsValues[sphereString] = newValue
-                }
-            }
-
-            let currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
-            completion((startSphereMetrics, currentSphereMetrics, posts))
-        })
     }
     
     private func currentUserPath() -> DatabaseReference? {

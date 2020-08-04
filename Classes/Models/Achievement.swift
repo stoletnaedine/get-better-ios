@@ -12,5 +12,5 @@ struct Achievement {
     let icon: String
     let title: String
     let description: String
-    var unlocked: Bool
+    var unlocked: Bool = false
 }

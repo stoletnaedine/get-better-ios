@@ -19,8 +19,9 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var startLevelButton: UIButton!
     
     let refreshControl = UIRefreshControl()
-    let databaseService: DatabaseService = FirebaseDatabaseService()
-    let viewModel = AchievementViewModel()
+    
+    let achievementPresenter: AchievementPresenter = AchievementPresenterDefault()
+    let lifeCirclePresenter: LifeCirclePresenter = LifeCirclePresenterDefault()
     
     var startSphereMetrics: SphereMetrics?
     var currentSphereMetrics: SphereMetrics?
@@ -53,12 +54,16 @@ class LifeCircleViewController: UIViewController {
     
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
         isCurrentDataVisible.toggle()
-        setupChartView(isStartDataVisible: isStartDataVisible, isCurrentDataVisible: isCurrentDataVisible, animate: false)
+        setupChartView(isStartDataVisible: isStartDataVisible,
+                       isCurrentDataVisible: isCurrentDataVisible,
+                       animate: false)
     }
     
     @IBAction func startLevelButtonDidTap(_ sender: UIButton) {
         isStartDataVisible.toggle()
-        setupChartView(isStartDataVisible: isStartDataVisible, isCurrentDataVisible: isCurrentDataVisible, animate: false)
+        setupChartView(isStartDataVisible: isStartDataVisible,
+                       isCurrentDataVisible: isCurrentDataVisible,
+                       animate: false)
     }
     
     
@@ -74,13 +79,13 @@ class LifeCircleViewController: UIViewController {
     }
     
     @objc private func loadAndShowData() {
-        databaseService.getUserData(completion: { [weak self] (startSphereMetrics, currentSphereMetrics, posts) in
+        lifeCirclePresenter.loadUserData(completion: { [weak self] (startSphereMetrics, currentSphereMetrics, posts) in
             guard let startSphereMetrics = startSphereMetrics else { return }
             guard let currentSphereMetrics = currentSphereMetrics else { return }
             self?.startSphereMetrics = startSphereMetrics
             self?.currentSphereMetrics = currentSphereMetrics
             self?.posts = posts
-            if let achievements = self?.viewModel.calcAchievements(
+            if let achievements = self?.achievementPresenter.calcAchievements(
                 posts: posts,
                 startSphereMetrics: startSphereMetrics,
                 currentSphereMetrics: currentSphereMetrics
@@ -238,7 +243,7 @@ class DataSetValueFormatter: IValueFormatter {
                         viewPortHandler: ViewPortHandler?) -> String {
 //        let dataSetCurrentIndex = 1
 //        if dataSetIndex == dataSetCurrentIndex {
-//            return value.convertToRusString()
+//            return value.stringWithComma()
 //        }
         return ""
     }

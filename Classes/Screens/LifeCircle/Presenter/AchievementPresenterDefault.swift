@@ -8,7 +8,13 @@
 
 import Foundation
 
-class AchievementViewModel {
+protocol AchievementPresenter {
+    func calcAchievements(posts: [Post],
+                          startSphereMetrics: SphereMetrics,
+                          currentSphereMetrics: SphereMetrics) -> [Achievement]
+}
+
+class AchievementPresenterDefault {
     
     func calcAchievements(posts: [Post],
                          startSphereMetrics: SphereMetrics,
@@ -47,7 +53,7 @@ class AchievementViewModel {
             unlocked: maxCountDaysInRow >= seven)
         
         let regularTen = Achievement(icon: "😎",
-                                     title: "Более лучше стал ты",
+                                     title: "Преисполнился",
                                      description: "Добавлять события \(ten) дней подряд (\(maxCountDaysInRow)/\(ten))",
             unlocked: maxCountDaysInRow >= ten)
         return [regularThree, regularFive, regularSeven, regularTen]
@@ -101,8 +107,7 @@ class AchievementViewModel {
             spheresAchievements = [
                 Achievement(icon: "🏆",
                             title: "Прокачано",
-                            description: "Прокачать любую Сферу до 10 баллов",
-                            unlocked: false)
+                            description: "Прокачать любую Сферу до 10 баллов")
             ]
         } else {
             for sphere in spheres {
@@ -149,8 +154,7 @@ class AchievementViewModel {
             let spheresString = fromRedZoneSpheres.joined(separator: ", ")
             byeLooser = Achievement(icon: "👻",
                                     title: "Прощай, лузер",
-                                    description: "\(spheresString): теперь не в красной зоне",
-                unlocked: true)
+                                    description: "\(spheresString): теперь не в красной зоне", unlocked: true)
         }
         
         return [byeLooser]
@@ -159,10 +163,8 @@ class AchievementViewModel {
     private func getPlusOneAchievements(posts: [Post]) -> [Achievement] {
         let daysLimit = 5
         let postsCountCondition = 10
-        var achievement = Achievement(icon: "🚀",
-                                      title: "Rocketman",
-                                      description: "Набрать 1 балл в любой сфере меньше, чем за \(daysLimit) дней",
-            unlocked: false)
+        var achievement = Achievement(icon: "🚀", title: "Rocketman",
+                                      description: "Набрать 1 балл в любой сфере меньше, чем за \(daysLimit) дней")
         
         var fastSphereNames: [String] = []
         for sphere in Sphere.allCases {
@@ -189,8 +191,7 @@ class AchievementViewModel {
         
         if !fastSphereNames.isEmpty {
             let spheresString = fastSphereNames.joined(separator: ", ")
-            achievement = Achievement(icon: "🚀",
-                                      title: "Rocketman",
+            achievement = Achievement(icon: "🚀", title: "Rocketman",
                                       description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней",
                 unlocked: true)
         }
