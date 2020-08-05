@@ -122,7 +122,7 @@
 "Post.titleDefault" = "Событие";
 "Post.successValue" = "+0,1 балла";
 "Post.emptyTextWarning" = "Поле текста пустое";
-"Post.placeholder" = "Например, сделал зарядку, прочитал книгу, помедитировал...";
+"Post.placeholder" = "Например, сделал зарядку, прочитал книгу, сходил на свидание...";
 
 // MARK: Welcome
 
