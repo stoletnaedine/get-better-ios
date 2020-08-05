@@ -55,7 +55,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="fxn-qj-OtY" firstAttribute="centerX" secondItem="MNE-VG-tkU" secondAttribute="centerX" id="2v8-nC-hca"/>
                         <constraint firstItem="fxn-qj-OtY" firstAttribute="centerY" secondItem="MNE-VG-tkU" secondAttribute="centerY" id="QsX-lW-sfO"/>

@@ -53,8 +53,7 @@ class JournalViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: cellXibName, bundle: nil),
-                           forCellReuseIdentifier: cellIdentifier)
+        tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
     @objc func getPosts(completion: @escaping () -> Void) {
@@ -119,7 +118,9 @@ class JournalViewController: UIViewController {
     }
     
     func setupBarButton() {
-        let addPostBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPost))
+        let addPostBarButton = UIBarButtonItem(barButtonSystemItem: .add,
+                                               target: self,
+                                               action: #selector(addPost))
         navigationItem.rightBarButtonItem = addPostBarButton
     }
     
@@ -207,10 +208,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                                                       for: indexPath) as! JournalTableViewCell
         cell.fillCell(from: post)
         cell.selectionStyle = .none
-        if let preview = post.previewUrl, !preview.isEmpty {
-            cell.setNeedsLayout()
-        }
-        
         return cell
     }
     

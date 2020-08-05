@@ -289,6 +289,15 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         case metricsTableView:
+            // TODO поправить метод getSphereValue!
+            if indexPath.row == 0 {
+                let cell = UITableViewCell()
+                cell.textLabel?.numberOfLines = 0
+                let hapinessIndex = lifeCirclePresenter.averageSphereValue().stringWithComma()
+                cell.textLabel?.text = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
+                return cell
+            }
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
                                                      for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .none

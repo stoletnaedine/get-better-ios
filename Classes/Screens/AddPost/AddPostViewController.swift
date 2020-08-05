@@ -27,6 +27,7 @@ class AddPostViewController: UIViewController {
     
     var selectedSphere: Sphere?
     let maxSymbolsCount: Int = 300
+    private var isPhotoUpload: Bool = false
     
     var addedPostCompletion: () -> () = {}
     
@@ -61,7 +62,7 @@ class AddPostViewController: UIViewController {
         var photoResult: Photo = Photo(photoUrl: nil, photoName: nil, previewUrl: nil, previewName: nil)
         let dispatchGroup = DispatchGroup()
         
-        if let photo = attachButton.imageView?.image {
+        if let photo = attachButton.imageView?.image, isPhotoUpload {
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
@@ -216,5 +217,6 @@ extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerCo
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         attachButton.setImage(image, for: .normal)
+        isPhotoUpload = true
     }
 }
