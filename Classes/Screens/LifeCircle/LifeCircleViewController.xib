@@ -12,7 +12,9 @@
             <connections>
                 <outlet property="achievementsTableView" destination="Uam-k0-6uc" id="3b3-iu-c6L"/>
                 <outlet property="chartView" destination="fxn-qj-OtY" id="jI9-FH-eve"/>
+                <outlet property="circleLegendView" destination="tZe-0q-jOl" id="uQm-JG-D2H"/>
                 <outlet property="currentLevelButton" destination="ryy-Gn-g4H" id="s3k-kX-JkJ"/>
+                <outlet property="currentValuesButton" destination="AdX-Ry-mtF" id="X0U-Wb-iIM"/>
                 <outlet property="metricsTableView" destination="vic-bJ-U3q" id="t8j-i0-E2B"/>
                 <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
                 <outlet property="startLevelButton" destination="Gs0-Sf-Xir" id="PXQ-8Y-vbe"/>
@@ -44,42 +46,53 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="Circle Chart View" customClass="RadarChartView" customModule="Charts">
-                    <rect key="frame" x="10" y="115" width="394" height="707"/>
+                    <rect key="frame" x="10" y="125" width="394" height="687"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Legend View">
-                            <rect key="frame" x="111" y="677" width="172" height="30"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryy-Gn-g4H" userLabel="Current Level Button">
-                                    <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                    <state key="normal" title="Button"/>
-                                    <connections>
-                                        <action selector="currentLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="08T-i6-9QJ"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs0-Sf-Xir" userLabel="Start Level Button">
-                                    <rect key="frame" x="126" y="0.0" width="46" height="30"/>
-                                    <state key="normal" title="Button"/>
-                                    <connections>
-                                        <action selector="startLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Sss-nf-I1G"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdX-Ry-mtF" userLabel="Current Values Button">
+                            <rect key="frame" x="364" y="0.0" width="15" height="15"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Gs0-Sf-Xir" secondAttribute="trailing" id="LIw-ct-Fvx"/>
-                                <constraint firstAttribute="bottom" secondItem="Gs0-Sf-Xir" secondAttribute="bottom" id="SbC-PC-zyW"/>
-                                <constraint firstAttribute="bottom" secondItem="ryy-Gn-g4H" secondAttribute="bottom" id="TGR-Xo-l8A"/>
-                                <constraint firstItem="Gs0-Sf-Xir" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="f2D-bq-7y5"/>
-                                <constraint firstItem="ryy-Gn-g4H" firstAttribute="leading" secondItem="tZe-0q-jOl" secondAttribute="leading" id="gYM-uk-kIP"/>
-                                <constraint firstItem="Gs0-Sf-Xir" firstAttribute="leading" secondItem="ryy-Gn-g4H" secondAttribute="trailing" constant="80" id="n40-DJ-ZmO"/>
-                                <constraint firstItem="ryy-Gn-g4H" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="vVq-Z0-3yI"/>
+                                <constraint firstAttribute="width" constant="15" id="Ggf-Ob-Fhi"/>
+                                <constraint firstAttribute="height" constant="15" id="Htp-w8-ivm"/>
                             </constraints>
-                        </view>
+                            <state key="normal" title="Button" image="circle-button"/>
+                            <connections>
+                                <action selector="currentValuesButtonDidTap:" destination="-1" eventType="touchUpInside" id="eHA-3W-sO4"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="tZe-0q-jOl" firstAttribute="centerX" secondItem="fxn-qj-OtY" secondAttribute="centerX" id="3Mo-Dl-arU"/>
-                        <constraint firstAttribute="bottom" secondItem="tZe-0q-jOl" secondAttribute="bottom" id="sQO-LV-CEH"/>
+                        <constraint firstAttribute="trailing" secondItem="AdX-Ry-mtF" secondAttribute="trailing" constant="15" id="dUi-fk-ll9"/>
+                        <constraint firstItem="AdX-Ry-mtF" firstAttribute="top" secondItem="fxn-qj-OtY" secondAttribute="top" id="uQa-l7-Wg2"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Circle Legend View">
+                    <rect key="frame" x="97" y="812" width="220" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryy-Gn-g4H" userLabel="Current Level Button">
+                            <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
+                            <state key="normal" title="Текущее"/>
+                            <connections>
+                                <action selector="currentLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="08T-i6-9QJ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs0-Sf-Xir" userLabel="Start Level Button">
+                            <rect key="frame" x="142" y="0.0" width="78" height="30"/>
+                            <state key="normal" title="Начальное"/>
+                            <connections>
+                                <action selector="startLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Sss-nf-I1G"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Gs0-Sf-Xir" secondAttribute="trailing" id="LIw-ct-Fvx"/>
+                        <constraint firstAttribute="bottom" secondItem="Gs0-Sf-Xir" secondAttribute="bottom" id="SbC-PC-zyW"/>
+                        <constraint firstAttribute="bottom" secondItem="ryy-Gn-g4H" secondAttribute="bottom" id="TGR-Xo-l8A"/>
+                        <constraint firstItem="Gs0-Sf-Xir" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="f2D-bq-7y5"/>
+                        <constraint firstItem="ryy-Gn-g4H" firstAttribute="leading" secondItem="tZe-0q-jOl" secondAttribute="leading" id="gYM-uk-kIP"/>
+                        <constraint firstItem="Gs0-Sf-Xir" firstAttribute="leading" secondItem="ryy-Gn-g4H" secondAttribute="trailing" constant="80" id="n40-DJ-ZmO"/>
+                        <constraint firstItem="ryy-Gn-g4H" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="vVq-Z0-3yI"/>
                     </constraints>
                 </view>
             </subviews>
@@ -91,18 +104,23 @@
                 <constraint firstItem="fxn-qj-OtY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="5oE-WE-063"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fxn-qj-OtY" secondAttribute="trailing" constant="10" id="Cww-VD-MD1"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="KZ5-Cy-BE3"/>
-                <constraint firstItem="fxn-qj-OtY" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="KbC-ox-cql"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fxn-qj-OtY" secondAttribute="bottom" constant="40" id="Ny7-ch-Sy6"/>
+                <constraint firstItem="fxn-qj-OtY" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="30" id="KbC-ox-cql"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fxn-qj-OtY" secondAttribute="bottom" constant="50" id="Ny7-ch-Sy6"/>
                 <constraint firstItem="Uam-k0-6uc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="O17-Io-QQt"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="YGd-5u-T7W"/>
+                <constraint firstItem="tZe-0q-jOl" firstAttribute="top" secondItem="fxn-qj-OtY" secondAttribute="bottom" id="Yvd-RO-l0R"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vic-bJ-U3q" secondAttribute="bottom" id="as5-GM-r5m"/>
                 <constraint firstItem="Uam-k0-6uc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="cbk-09-DlL"/>
+                <constraint firstItem="tZe-0q-jOl" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dNG-qU-KFJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vic-bJ-U3q" secondAttribute="trailing" id="luZ-Sa-XBG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Uam-k0-6uc" secondAttribute="bottom" id="mWk-KG-H1t"/>
                 <constraint firstItem="vic-bJ-U3q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mpn-JD-N7g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="137.68115942028987" y="148.36956521739131"/>
+            <point key="canvasLocation" x="137.68115942028987" y="147.99107142857142"/>
         </view>
     </objects>
+    <resources>
+        <image name="circle-button" width="48" height="48"/>
+    </resources>
 </document>

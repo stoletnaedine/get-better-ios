@@ -13,10 +13,12 @@ class LifeCircleViewController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var chartView: RadarChartView!
+    @IBOutlet weak var circleLegendView: UIView!
     @IBOutlet weak var metricsTableView: UITableView!
     @IBOutlet weak var achievementsTableView: UITableView!
     @IBOutlet weak var currentLevelButton: UIButton!
     @IBOutlet weak var startLevelButton: UIButton!
+    @IBOutlet weak var currentValuesButton: UIButton!
     
     let refreshControl = UIRefreshControl()
     
@@ -33,8 +35,9 @@ class LifeCircleViewController: UIViewController {
     let achievementsReuseCellIdentifier = R.reuseIdentifier.achievementsCell.identifier
     let sphereIconSize: CGFloat = 30
     
-    var isStartDataVisible = true
-    var isCurrentDataVisible = true
+    private var isStartDataVisible = true
+    private var isCurrentDataVisible = true
+    private var isHiddenCurrentValues = true
     
     var showOnboardingCompletion: () -> () = {}
     
@@ -54,18 +57,19 @@ class LifeCircleViewController: UIViewController {
     
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
         isCurrentDataVisible.toggle()
-        setupChartView(isStartDataVisible: isStartDataVisible,
-                       isCurrentDataVisible: isCurrentDataVisible,
-                       animate: false)
+        setupChartView(animate: false)
     }
     
     @IBAction func startLevelButtonDidTap(_ sender: UIButton) {
         isStartDataVisible.toggle()
-        setupChartView(isStartDataVisible: isStartDataVisible,
-                       isCurrentDataVisible: isCurrentDataVisible,
-                       animate: false)
+        setupChartView(animate: false)
     }
     
+    
+    @IBAction func currentValuesButtonDidTap(_ sender: UIButton) {
+        isHiddenCurrentValues.toggle()
+        setupChartView(animate: false)
+    }
     
     private func setupView() {
         title = R.string.localizable.tabBarLifeCircle()
@@ -100,7 +104,7 @@ class LifeCircleViewController: UIViewController {
     }
     
     private func reloadViews() {
-        setupChartView(isStartDataVisible: isStartDataVisible, isCurrentDataVisible: isCurrentDataVisible, animate: true)
+        setupChartView(animate: true)
         metricsTableView.reloadData()
         achievementsTableView.reloadData()
     }
@@ -112,9 +116,10 @@ class LifeCircleViewController: UIViewController {
         startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
         startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         startLevelButton.setTitleColor(.lifeCircleLineStart, for: .normal)
+        currentValuesButton.tintColor = .violet
     }
     
-    private func setupChartView(isStartDataVisible: Bool, isCurrentDataVisible: Bool, animate: Bool) {
+    private func setupChartView(animate: Bool) {
         chartView.backgroundColor = .appBackground
         chartView.webLineWidth = 2
         chartView.innerWebLineWidth = 2
@@ -155,16 +160,16 @@ class LifeCircleViewController: UIViewController {
         dataSetStart.visible = isStartDataVisible
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
-        dataSetStart.valueFormatter = DataSetValueFormatter()
+        dataSetStart.valueFormatter = DataSetValueFormatter(isValuesHidden: isHiddenCurrentValues)
         
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: "")
         dataSetCurrent.visible = isCurrentDataVisible
         dataSetCurrent.lineWidth = 2
         dataSetCurrent.colors = [.lifeCircleLineCurrent]
         dataSetCurrent.fillColor = .lifeCircleFillCurrent
-        dataSetCurrent.fillAlpha = 0.75
+        dataSetCurrent.fillAlpha = 0.5
         dataSetCurrent.drawFilledEnabled = true
-        dataSetCurrent.valueFormatter = DataSetValueFormatter()
+        dataSetCurrent.valueFormatter = DataSetValueFormatter(isValuesHidden: isHiddenCurrentValues)
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
         
@@ -208,14 +213,17 @@ class LifeCircleViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             chartView.isHidden = false
+            circleLegendView.isHidden = false
             metricsTableView.isHidden = true
             achievementsTableView.isHidden = true
         case 1:
             chartView.isHidden = true
+            circleLegendView.isHidden = true
             metricsTableView.isHidden = false
             achievementsTableView.isHidden = true
         default:
             chartView.isHidden = true
+            circleLegendView.isHidden = true
             metricsTableView.isHidden = true
             achievementsTableView.isHidden = false
         }
@@ -237,14 +245,21 @@ class XAxisFormatter: IAxisValueFormatter {
 
 class DataSetValueFormatter: IValueFormatter {
     
+    private var isHiddenCurrentValues: Bool
+    
+    init(isValuesHidden: Bool) {
+        self.isHiddenCurrentValues = isValuesHidden
+    }
+    
     func stringForValue(_ value: Double,
                         entry: ChartDataEntry,
                         dataSetIndex: Int,
                         viewPortHandler: ViewPortHandler?) -> String {
-//        let dataSetCurrentIndex = 1
-//        if dataSetIndex == dataSetCurrentIndex {
-//            return value.stringWithComma()
-//        }
+        let dataSetCurrentIndex = 1
+        if dataSetIndex == dataSetCurrentIndex
+            && !isHiddenCurrentValues {
+            return value.stringWithComma()
+        }
         return ""
     }
 }
