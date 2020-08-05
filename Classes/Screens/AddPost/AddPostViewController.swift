@@ -16,10 +16,8 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var attachButton: UIButton!
-    @IBOutlet weak var attachImageView: UIImageView!
     @IBOutlet weak var symbolsCountLabel: UILabel!
     @IBOutlet weak var sphereView: UIView!
-    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var selectSphereButton: UIButton!
     @IBOutlet weak var placeholderLabel: UILabel!
     
@@ -63,8 +61,7 @@ class AddPostViewController: UIViewController {
         var photoResult: Photo = Photo(photoUrl: nil, photoName: nil, previewUrl: nil, previewName: nil)
         let dispatchGroup = DispatchGroup()
         
-        if let photo = photoImageView.image {
-            
+        if let photo = attachButton.imageView?.image {
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
@@ -82,11 +79,14 @@ class AddPostViewController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            
-            let post = Post(id: nil, text: text, sphere: sphere, timestamp: Date.currentTimestamp,
-                            photoUrl: photoResult.photoUrl, photoName: photoResult.photoName,
-                            previewUrl: photoResult.previewUrl, previewName: photoResult.previewName)
-            
+            let post = Post(id: nil,
+                            text: text,
+                            sphere: sphere,
+                            timestamp: Date.currentTimestamp,
+                            photoUrl: photoResult.photoUrl,
+                            photoName: photoResult.photoName,
+                            previewUrl: photoResult.previewUrl,
+                            previewName: photoResult.previewName)
             self?.databaseService.savePost(post)
             
             DispatchQueue.main.async { [weak self] in
@@ -116,7 +116,6 @@ class AddPostViewController: UIViewController {
 extension AddPostViewController {
     private func setupView() {
         selectSphereButton.addTarget(self, action: #selector(showPicker), for: .allTouchEvents)
-        photoImageView.isHidden = true
         postTextView.delegate = self
         postTextView.becomeFirstResponder()
         postTextView.font = postTextView.font?.withSize(16)
@@ -138,7 +137,6 @@ extension AddPostViewController {
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
-        attachImageView.tint(with: .violet)
         selectSphereButton.setTitle(R.string.localizable.postChooseSphere(), for: .normal)
         selectSphereButton.titleLabel?.font = .journalButtonFont
         selectSphereButton.setImage(R.image.arrowDown(), for: .normal)
@@ -148,6 +146,7 @@ extension AddPostViewController {
         placeholderLabel.text = R.string.localizable.postPlaceholder()
         placeholderLabel.font = postTextView.font?.withSize(16)
         placeholderLabel.textColor = .lightGray
+        attachButton.tintColor = .violet
     }
     
     private func switchTextViewPlaceholder(text: String) {
@@ -216,8 +215,6 @@ extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerCo
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        photoImageView.image = image
-        photoImageView.isHidden = false
-        attachImageView.isHidden = true
+        attachButton.setImage(image, for: .normal)
     }
 }

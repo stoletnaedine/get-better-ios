@@ -11,9 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddPostViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="attachButton" destination="kDR-MY-RhO" id="Jji-vQ-wGh"/>
-                <outlet property="attachImageView" destination="QFF-em-lVD" id="so6-tS-l5l"/>
                 <outlet property="dateLabel" destination="EdK-CD-Y8S" id="9kl-0w-jNK"/>
-                <outlet property="photoImageView" destination="mM1-1j-B6b" id="7pQ-Ce-GOx"/>
                 <outlet property="placeholderLabel" destination="gqB-hQ-rk0" id="jjN-Bp-769"/>
                 <outlet property="postTextView" destination="sLD-WP-KS7" id="pAl-6V-DAG"/>
                 <outlet property="saveButton" destination="G4Y-RJ-AVC" id="PCU-mk-02P"/>
@@ -71,15 +69,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Al-Gr6" userLabel="AttachView">
                             <rect key="frame" x="294" y="10" width="20" height="20"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mM1-1j-B6b" userLabel="Photo Image View">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO">
                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                </imageView>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attach" translatesAutoresizingMaskIntoConstraints="NO" id="QFF-em-lVD">
-                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO">
-                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" title="Button" image="photo-gallery"/>
                                     <connections>
                                         <action selector="attachButtonDidTap:" destination="-1" eventType="touchUpInside" id="I9m-DA-FjP"/>
                                     </connections>
@@ -90,15 +82,7 @@
                                 <constraint firstItem="kDR-MY-RhO" firstAttribute="top" secondItem="4Tm-Al-Gr6" secondAttribute="top" id="33F-QD-otA"/>
                                 <constraint firstAttribute="bottom" secondItem="kDR-MY-RhO" secondAttribute="bottom" id="HaA-2E-3JD"/>
                                 <constraint firstAttribute="width" constant="20" id="IRo-Lv-uyB"/>
-                                <constraint firstAttribute="trailing" secondItem="mM1-1j-B6b" secondAttribute="trailing" id="K5a-o1-oQy"/>
-                                <constraint firstAttribute="bottom" secondItem="QFF-em-lVD" secondAttribute="bottom" id="YxO-IT-i2G"/>
                                 <constraint firstItem="kDR-MY-RhO" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="leading" id="cCR-qg-7xv"/>
-                                <constraint firstItem="mM1-1j-B6b" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="leading" id="evf-WS-RmU"/>
-                                <constraint firstItem="mM1-1j-B6b" firstAttribute="top" secondItem="4Tm-Al-Gr6" secondAttribute="top" id="hNf-vZ-G9W"/>
-                                <constraint firstAttribute="bottom" secondItem="mM1-1j-B6b" secondAttribute="bottom" id="hyx-jS-Ry6"/>
-                                <constraint firstItem="QFF-em-lVD" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="leading" id="ltA-Xn-gHy"/>
-                                <constraint firstAttribute="trailing" secondItem="QFF-em-lVD" secondAttribute="trailing" id="m8R-fd-oxL"/>
-                                <constraint firstItem="QFF-em-lVD" firstAttribute="top" secondItem="4Tm-Al-Gr6" secondAttribute="top" id="oGY-T0-wvn"/>
                                 <constraint firstAttribute="trailing" secondItem="kDR-MY-RhO" secondAttribute="trailing" id="pA5-9W-gH0"/>
                                 <constraint firstAttribute="height" constant="20" id="r3p-Jd-kVa"/>
                             </constraints>
@@ -160,10 +144,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyS-0w-vzY" userLabel="Cancel Button" customClass="CancelButton" customModule="GetBetter" customModuleProvider="target">
-                    <rect key="frame" x="362" y="64" width="32" height="32"/>
+                    <rect key="frame" x="369" y="64" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="32" id="bM9-NC-h2b"/>
-                        <constraint firstAttribute="height" constant="32" id="dWf-go-FMp"/>
+                        <constraint firstAttribute="width" constant="25" id="bM9-NC-h2b"/>
+                        <constraint firstAttribute="height" constant="25" id="dWf-go-FMp"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -198,6 +182,6 @@
         </view>
     </objects>
     <resources>
-        <image name="attach" width="24" height="24"/>
+        <image name="photo-gallery" width="52" height="52"/>
     </resources>
 </document>

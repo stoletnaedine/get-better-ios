@@ -92,10 +92,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Yk-fh-uCY" userLabel="Cancel Button" customClass="CancelButton" customModule="GetBetter" customModuleProvider="target">
-                    <rect key="frame" x="362" y="64" width="32" height="32"/>
+                    <rect key="frame" x="369" y="64" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="cEs-2L-aDO"/>
-                        <constraint firstAttribute="width" constant="32" id="kmY-yM-ZAw"/>
+                        <constraint firstAttribute="height" constant="25" id="cEs-2L-aDO"/>
+                        <constraint firstAttribute="width" constant="25" id="kmY-yM-ZAw"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
