@@ -18,7 +18,6 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var achievementsTableView: UITableView!
     @IBOutlet weak var currentLevelButton: UIButton!
     @IBOutlet weak var startLevelButton: UIButton!
-    @IBOutlet weak var currentValuesButton: UIButton!
     
     let refreshControl = UIRefreshControl()
     
@@ -48,6 +47,7 @@ class LifeCircleViewController: UIViewController {
         setupSegmentedControl()
         setupTableViews()
         setupRefreshControl()
+        setupTapChartView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,8 +65,12 @@ class LifeCircleViewController: UIViewController {
         setupChartView(animate: false)
     }
     
+    private func setupTapChartView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showCurrentValues))
+        chartView.addGestureRecognizer(tap)
+    }
     
-    @IBAction func currentValuesButtonDidTap(_ sender: UIButton) {
+    @objc func showCurrentValues() {
         isHiddenCurrentValues.toggle()
         setupChartView(animate: false)
     }
@@ -116,7 +120,6 @@ class LifeCircleViewController: UIViewController {
         startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
         startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         startLevelButton.setTitleColor(.lifeCircleLineStart, for: .normal)
-        currentValuesButton.tintColor = .violet
     }
     
     private func setupChartView(animate: Bool) {
@@ -231,8 +234,7 @@ class LifeCircleViewController: UIViewController {
 }
 
 class XAxisFormatter: IAxisValueFormatter {
-    
-    let titles: [String]
+    private let titles: [String]
     
     init(titles: [String]) {
         self.titles = titles
@@ -244,7 +246,6 @@ class XAxisFormatter: IAxisValueFormatter {
 }
 
 class DataSetValueFormatter: IValueFormatter {
-    
     private var isHiddenCurrentValues: Bool
     
     init(isValuesHidden: Bool) {
@@ -267,68 +268,52 @@ class DataSetValueFormatter: IValueFormatter {
 extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func getSphereValue(by indexPath: IndexPath) -> SphereValue? {
-        
         let sphereValueDict = currentSphereMetrics?.sortedValues()[indexPath.row]
         let sphereRawValue = sphereValueDict?.key ?? ""
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return nil }
         let value = sphereValueDict?.value ?? 0
-        let sphereValue = SphereValue(sphere: sphere, value: value)
-        
-        return sphereValue
+        return SphereValue(sphere: sphere, value: value)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         switch tableView {
-        
         case metricsTableView:
             return currentSphereMetrics?.values.count ?? 0
-        
         case achievementsTableView:
             return achievements.count
-        
         default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch tableView {
-            
         case metricsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
                                                      for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .none
             guard let sphereValue = getSphereValue(by: indexPath) else { return cell }
             cell.fillCell(from: sphereValue)
-            
             return cell
-            
         case achievementsTableView:
             let achievement = achievements[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier,
                                                      for: indexPath) as! AchievementsTableViewCell
             cell.selectionStyle = .none
             cell.fillCell(from: achievement)
-            
             return cell
-            
         default:
             return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         switch tableView {
-            
         case metricsTableView:
             guard let sphereValue = getSphereValue(by: indexPath) else { return }
             let sphereDetailViewController = SphereDetailViewController()
             sphereDetailViewController.sphereValue = sphereValue
             present(sphereDetailViewController, animated: true, completion: nil)
-            
         default:
             print("Not metricsTableView tapped in didSelectRowAt method!")
         }
