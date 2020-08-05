@@ -18,7 +18,6 @@ protocol StorageService {
 }
 
 class FirebaseStorageService: StorageService {
-    
     let metadata = StorageMetadata()
     let contentType = "image/jpeg"
     let avatarFileName = "avatar"
@@ -26,13 +25,13 @@ class FirebaseStorageService: StorageService {
     let previewsPath = "previews"
     let usersPath = "users"
     let uuidString: String = UUID().uuidString
-    let photoQuality: CGFloat = 0.5
-    let resizeWidthPhoto: CGFloat = 750
+    let photoQuality: CGFloat = 0.75
+    let resizeWidthPhoto: CGFloat = 900
     let resizeWidthPreview: CGFloat = 100
     let resizeWidthAvatar: CGFloat = 250
     
-    func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void) {
-        
+    func uploadAvatar(photo: UIImage,
+                      completion: @escaping (Result<URL, AppError>) -> Void) {
         guard let currentUserRef = currentUserPath() else { return }
         guard let resizeImage = photo.resized(toWidth: resizeWidthAvatar) else { return }
         guard let imageData = resizeImage.jpegData(compressionQuality: photoQuality) else { return }
@@ -56,8 +55,8 @@ class FirebaseStorageService: StorageService {
         })
     }
     
-    func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
-        
+    func uploadPhoto(photo: UIImage,
+                     completion: @escaping (Result<Photo, AppError>) -> Void) {
         var photoName: String?
         var photoUrl: String?
         var previewName: String?
@@ -74,7 +73,10 @@ class FirebaseStorageService: StorageService {
             .child(uuidString)
         
         dispatchGroup.enter()
-        uploadPhoto(ref: photoRef, data: photoData, dispatchGroup: dispatchGroup, completion: { result in
+        uploadPhoto(ref: photoRef,
+                    data: photoData,
+                    dispatchGroup: dispatchGroup,
+                    completion: { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -92,7 +94,10 @@ class FirebaseStorageService: StorageService {
             .child(uuidString)
         
         dispatchGroup.enter()
-        uploadPhoto(ref: previewRef, data: previewData, dispatchGroup: dispatchGroup, completion: { result in
+        uploadPhoto(ref: previewRef,
+                    data: previewData,
+                    dispatchGroup: dispatchGroup,
+                    completion: { result in
             switch result {
             case .failure(let error):
                 completion(.failure(error))
@@ -103,7 +108,10 @@ class FirebaseStorageService: StorageService {
         })
         
         dispatchGroup.notify(queue: .global(), execute: {
-            let photo = Photo(photoUrl: photoUrl, photoName: photoName, previewUrl: previewUrl, previewName: previewName)
+            let photo = Photo(photoUrl: photoUrl,
+                              photoName: photoName,
+                              previewUrl: previewUrl,
+                              previewName: previewName)
             completion(.success(photo))
         })
     }
@@ -118,7 +126,9 @@ class FirebaseStorageService: StorageService {
         delete(imageName: name, imagePath: photosPath, reference: ref)
     }
     
-    private func uploadPhoto(ref: StorageReference, data: Data, dispatchGroup: DispatchGroup,
+    private func uploadPhoto(ref: StorageReference,
+                             data: Data,
+                             dispatchGroup: DispatchGroup,
                              completion: @escaping (Result<(name: String, urlString: String), AppError>) -> Void) {
         ref
             .putData(data, metadata: metadata, completion: { (metadata, error) in
@@ -163,5 +173,4 @@ class FirebaseStorageService: StorageService {
             .child(usersPath)
             .child(userId)
     }
-    
 }
