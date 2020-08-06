@@ -301,6 +301,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = UITableViewCell()
                 cell.textLabel?.numberOfLines = 0
                 cell.selectionStyle = .none
+                cell.textLabel?.font = .journalDateFont
                 
                 let hapinessIndex = lifeCirclePresenter.averageSphereValue().stringWithComma()
                 let hapinessIndexString = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
@@ -316,10 +317,10 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
                     let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
                     
                     let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
-                    mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? "") — \(spheresCount[mostPopularSphere?.key] ?? 0) записей"
+                    mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? ""), записей: \(spheresCount[mostPopularSphere?.key] ?? 0)"
                     
                     let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
-                    lessPopularSphereString = "\nМеньше всего внимания ты уделяешь сфере \(lessPopularSphere?.key?.name ?? "") — \(spheresCount[lessPopularSphere?.key] ?? 0) записей"
+                    lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
                 }
                 cell.textLabel?.text = "\(hapinessIndexString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
                 return cell
