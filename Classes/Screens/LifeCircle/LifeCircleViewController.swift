@@ -279,6 +279,36 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         return SphereValue(sphere: sphere, value: value)
     }
     
+    private func commonMetricsCell() -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.backgroundColor = .appBackground
+        cell.textLabel?.numberOfLines = 0
+        cell.selectionStyle = .none
+        cell.textLabel?.font = .journalDateFont
+        
+        let hapinessIndex = lifeCirclePresenter.averageSphereValue().stringWithComma()
+        let hapinessIndexString = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
+        
+        let countPosts = posts.count
+        let countPostsString = "\nЗаписей в дневнике: \(posts.count)"
+        
+        var mostPopularSphereString = ""
+        var lessPopularSphereString = ""
+        if countPosts > 0 {
+            let spheres = posts.map { $0.sphere }
+            let spheresDict = spheres.map { ($0, 1) }
+            let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
+            
+            let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
+            mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? ""), записей: \(spheresCount[mostPopularSphere?.key] ?? 0)"
+            
+            let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
+            lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
+        }
+        cell.textLabel?.text = "\(hapinessIndexString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
+        return cell
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case metricsTableView:
@@ -298,38 +328,13 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case metricsTableView:
             if indexPath.row == 0 {
-                let cell = UITableViewCell()
-                cell.textLabel?.numberOfLines = 0
-                cell.selectionStyle = .none
-                cell.textLabel?.font = .journalDateFont
-                
-                let hapinessIndex = lifeCirclePresenter.averageSphereValue().stringWithComma()
-                let hapinessIndexString = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
-                
-                let countPosts = posts.count
-                let countPostsString = "\nЗаписей в дневнике \(posts.count)"
-                
-                var mostPopularSphereString = ""
-                var lessPopularSphereString = ""
-                if countPosts > 0 {
-                    let spheres = posts.map { $0.sphere }
-                    let spheresDict = spheres.map { ($0, 1) }
-                    let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
-                    
-                    let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
-                    mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? ""), записей: \(spheresCount[mostPopularSphere?.key] ?? 0)"
-                    
-                    let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
-                    lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
-                }
-                cell.textLabel?.text = "\(hapinessIndexString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
-                return cell
+                return commonMetricsCell()
             }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
                                                      for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .none
-             // indexPath.row - 1 для ячейки индекс счастья
+             // indexPath.row - 1 для ячейки метрик
             guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return cell }
             cell.fillCell(from: sphereValue)
             return cell

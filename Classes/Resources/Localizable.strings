@@ -18,7 +18,7 @@
 "LifeCircle.achievements" = "Достижения";
 "LifeCircle.current" = "Текущее";
 "LifeCircle.start" = "Начальное";
-"LifeCircle.happyIndex" = "Индекс счастья %@";
+"LifeCircle.happyIndex" = "Индекс счастья: %@";
 
 // MARK: Journal
 
