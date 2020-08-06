@@ -271,8 +271,8 @@ class DataSetValueFormatter: IValueFormatter {
 
 extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     
-    private func getSphereValue(by indexPath: IndexPath) -> SphereValue? {
-        let sphereValueDict = currentSphereMetrics?.sortedValues()[indexPath.row]
+    private func getSphereValue(index: Int) -> SphereValue? {
+        let sphereValueDict = currentSphereMetrics?.sortedValues()[index]
         let sphereRawValue = sphereValueDict?.key ?? ""
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return nil }
         let value = sphereValueDict?.value ?? 0
@@ -282,7 +282,11 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case metricsTableView:
-            return currentSphereMetrics?.values.count ?? 0
+            if let rowsCount = currentSphereMetrics?.values.count {
+                return rowsCount + 1 // Для ячейки индекс счастья
+            } else {
+                return 0
+            }
         case achievementsTableView:
             return achievements.count
         default:
@@ -293,19 +297,27 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         case metricsTableView:
-            // TODO поправить метод getSphereValue!
             if indexPath.row == 0 {
                 let cell = UITableViewCell()
                 cell.textLabel?.numberOfLines = 0
+                cell.selectionStyle = .none
                 let hapinessIndex = lifeCirclePresenter.averageSphereValue().stringWithComma()
-                cell.textLabel?.text = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
+                let hapinessIndexString = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
+                let countPosts = "Записей в дневнике \(posts.count)"
+                let spheres = posts.map { $0.sphere }
+                let spheresDict = spheres.map { ($0, 1) }
+                let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
+                let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
+                let mostPopularSphereString = "Больше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? "") — \(spheresCount[mostPopularSphere?.key] ?? 0) записей"
+                cell.textLabel?.text = "\(hapinessIndexString)\n\(countPosts)\n\(mostPopularSphereString)"
                 return cell
             }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
                                                      for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .none
-            guard let sphereValue = getSphereValue(by: indexPath) else { return cell }
+             // indexPath.row - 1 для ячейки индекс счастья
+            guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return cell }
             cell.fillCell(from: sphereValue)
             return cell
         case achievementsTableView:
@@ -323,7 +335,11 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case metricsTableView:
-            guard let sphereValue = getSphereValue(by: indexPath) else { return }
+            if indexPath.row == 0 {
+                return
+            }
+            // indexPath.row - 1 для ячейки индекс счастья
+            guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return }
             let sphereDetailViewController = SphereDetailViewController()
             sphereDetailViewController.sphereValue = sphereValue
             present(sphereDetailViewController, animated: true, completion: nil)

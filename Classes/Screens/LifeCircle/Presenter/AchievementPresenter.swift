@@ -39,22 +39,22 @@ class AchievementPresenterDefault: AchievementPresenter {
         
         let regularThree = Achievement(icon: "⚡️",
                                        title: "Not bad",
-                                       description: "Добавлять события \(three) дня подряд (\(maxCountDaysInRow)/\(three))",
+                                       description: "Добавлять события \(three) дня подряд (\(maxCountDaysInRow >= three ? three : maxCountDaysInRow)/\(three))",
             unlocked: maxCountDaysInRow >= three)
         
         let regularFive = Achievement(icon: "🖐",
                                       title: "Дай пять!",
-                                      description: "Добавлять события \(five) дней подряд (\(maxCountDaysInRow)/\(five))",
+                                      description: "Добавлять события \(five) дней подряд (\(maxCountDaysInRow >= five ? five : maxCountDaysInRow)/\(five))",
             unlocked: maxCountDaysInRow >= five)
         
         let regularSeven = Achievement(icon: "🤘",
                                        title: "Эта неделя была ок",
-                                       description: "Добавлять события \(seven) дней подряд (\(maxCountDaysInRow)/\(seven))",
+                                       description: "Добавлять события \(seven) дней подряд (\(maxCountDaysInRow >= seven ? seven : maxCountDaysInRow)/\(seven))",
             unlocked: maxCountDaysInRow >= seven)
         
         let regularTen = Achievement(icon: "😎",
                                      title: "Преисполнился",
-                                     description: "Добавлять события \(ten) дней подряд (\(maxCountDaysInRow)/\(ten))",
+                                     description: "Добавлять события \(ten) дней подряд (\(maxCountDaysInRow >= ten ? ten : maxCountDaysInRow)/\(ten))",
             unlocked: maxCountDaysInRow >= ten)
         return [regularThree, regularFive, regularSeven, regularTen]
     }
@@ -100,21 +100,21 @@ class AchievementPresenterDefault: AchievementPresenter {
             return []
         }
         
-        let spheres = maxValueSphereRawValues.map { Sphere(rawValue: $0)?.name ?? "" }
+        let spheres = maxValueSphereRawValues.map { Sphere(rawValue: $0) }
         
         var spheresAchievements: [Achievement] = []
         if spheres.isEmpty {
             spheresAchievements = [
                 Achievement(icon: "🏆",
                             title: "Прокачано",
-                            description: "Прокачать любую Сферу до 10 баллов")
+                            description: "Прокачать любую сферу до 10 баллов")
             ]
         } else {
             for sphere in spheres {
                 spheresAchievements.append(
-                    Achievement(icon: "🏆",
-                                title: "\(sphere) на максимум",
-                                description: "Отличная работа! Сфера \(sphere) прокачена до 10 баллов",
+                    Achievement(icon: sphere?.icon ?? "🏆",
+                                title: "\(sphere?.name ?? "") на максимум",
+                        description: "Отличная работа! Сфера \(sphere?.name ?? "") прокачена на 10 баллов",
                                 unlocked: true))
             }
         }
