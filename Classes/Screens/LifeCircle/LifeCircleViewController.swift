@@ -129,42 +129,36 @@ class LifeCircleViewController: UIViewController {
         chartView.innerWebLineWidth = 2
         chartView.webColor = .lifeCircleLineBack
         chartView.innerWebColor = .lifeCircleLineBack
-        chartView.rotationEnabled = true
         chartView.legend.enabled = false
         
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 9
         xAxis.labelFont = .systemFont(ofSize: sphereIconSize)
-        if let sphereMetrics = startSphereMetrics {
-            let titles = sphereMetrics.sortedValues()
-                .map { Sphere(rawValue: $0.key)?.icon ?? "" }
-            xAxis.valueFormatter = XAxisFormatter(titles: titles)
-        }
+        
+        guard let startSphereMetrics = startSphereMetrics else { return }
+        guard let currentSphereMetrics = currentSphereMetrics else { return }
+        
+        let titles = startSphereMetrics.sortedValues()
+            .map { Sphere(rawValue: $0.key)?.icon ?? "" }
+        xAxis.valueFormatter = XAxisFormatter(titles: titles)
         
         let yAxis = chartView.yAxis
         yAxis.axisMinimum = 0
         yAxis.axisMaximum = 9
         yAxis.drawTopYLabelEntryEnabled = false
         yAxis.enabled = false
-        
-        var dataEntriesStart: [RadarChartDataEntry] = []
-        var dataEntriesCurrent: [RadarChartDataEntry] = []
-        
-        if let startSphereMetrics = startSphereMetrics,
-            let currentSphereMetrics = currentSphereMetrics {
             
-            dataEntriesStart = startSphereMetrics.sortedValues()
+        let dataEntriesStart = startSphereMetrics.sortedValues()
                 .map { RadarChartDataEntry(value: $0.value) }
-            dataEntriesCurrent = currentSphereMetrics.sortedValues()
+        let dataEntriesCurrent = currentSphereMetrics.sortedValues()
                 .map { RadarChartDataEntry(value: $0.value) }
-        }
         
         let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: "")
         dataSetStart.visible = isStartDataVisible
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
-        dataSetStart.valueFormatter = DataSetValueFormatter(isValuesHidden: isHiddenCurrentValues)
+        dataSetStart.valueFormatter = DataSetValueFormatter(isCurrentValuesHidden: isHiddenCurrentValues)
         
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: "")
         dataSetCurrent.visible = isCurrentDataVisible
@@ -173,7 +167,7 @@ class LifeCircleViewController: UIViewController {
         dataSetCurrent.fillColor = .lifeCircleFillCurrent
         dataSetCurrent.fillAlpha = 0.5
         dataSetCurrent.drawFilledEnabled = true
-        dataSetCurrent.valueFormatter = DataSetValueFormatter(isValuesHidden: isHiddenCurrentValues)
+        dataSetCurrent.valueFormatter = DataSetValueFormatter(isCurrentValuesHidden: isHiddenCurrentValues)
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
         
@@ -250,10 +244,10 @@ class XAxisFormatter: IAxisValueFormatter {
 }
 
 class DataSetValueFormatter: IValueFormatter {
-    private var isHiddenCurrentValues: Bool
+    private var isCurrentValuesHidden: Bool
     
-    init(isValuesHidden: Bool) {
-        self.isHiddenCurrentValues = isValuesHidden
+    init(isCurrentValuesHidden: Bool) {
+        self.isCurrentValuesHidden = isCurrentValuesHidden
     }
     
     func stringForValue(_ value: Double,
@@ -262,7 +256,7 @@ class DataSetValueFormatter: IValueFormatter {
                         viewPortHandler: ViewPortHandler?) -> String {
         let dataSetCurrentIndex = 1
         if dataSetIndex == dataSetCurrentIndex
-            && !isHiddenCurrentValues {
+            && !isCurrentValuesHidden {
             return value.stringWithComma()
         }
         return ""
