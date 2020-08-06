@@ -12,6 +12,7 @@ import Charts
 class LifeCircleViewController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var circleLegendView: UIView!
     @IBOutlet weak var metricsTableView: UITableView!
@@ -216,16 +217,19 @@ class LifeCircleViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             chartView.isHidden = false
+            containerView.isHidden = false
             circleLegendView.isHidden = false
             metricsTableView.isHidden = true
             achievementsTableView.isHidden = true
         case 1:
             chartView.isHidden = true
+            containerView.isHidden = true
             circleLegendView.isHidden = true
             metricsTableView.isHidden = false
             achievementsTableView.isHidden = true
         default:
             chartView.isHidden = true
+            containerView.isHidden = true
             circleLegendView.isHidden = true
             metricsTableView.isHidden = true
             achievementsTableView.isHidden = false

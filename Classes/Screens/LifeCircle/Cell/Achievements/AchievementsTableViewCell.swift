@@ -20,7 +20,7 @@ class AchievementsTableViewCell: UITableViewCell {
     }
 
     override func prepareForReuse() {
-        self.backgroundColor = .clear
+        setupView()
     }
     
     func fillCell(from achievement: Achievement) {
@@ -44,6 +44,7 @@ class AchievementsTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
+        self.backgroundColor = .clear
         iconLabel.text = "•"
         titleLabel.textColor = .gray
         titleLabel.font = UIFont.systemFont(ofSize: 22)

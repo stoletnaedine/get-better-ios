@@ -13,6 +13,7 @@
                 <outlet property="achievementsTableView" destination="Uam-k0-6uc" id="3b3-iu-c6L"/>
                 <outlet property="chartView" destination="fxn-qj-OtY" id="jI9-FH-eve"/>
                 <outlet property="circleLegendView" destination="tZe-0q-jOl" id="uQm-JG-D2H"/>
+                <outlet property="containerView" destination="MNE-VG-tkU" id="QoH-cK-6Tv"/>
                 <outlet property="currentLevelButton" destination="ryy-Gn-g4H" id="s3k-kX-JkJ"/>
                 <outlet property="metricsTableView" destination="vic-bJ-U3q" id="t8j-i0-E2B"/>
                 <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
