@@ -301,15 +301,27 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = UITableViewCell()
                 cell.textLabel?.numberOfLines = 0
                 cell.selectionStyle = .none
+                
                 let hapinessIndex = lifeCirclePresenter.averageSphereValue().stringWithComma()
                 let hapinessIndexString = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
-                let countPosts = "Записей в дневнике \(posts.count)"
-                let spheres = posts.map { $0.sphere }
-                let spheresDict = spheres.map { ($0, 1) }
-                let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
-                let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
-                let mostPopularSphereString = "Больше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? "") — \(spheresCount[mostPopularSphere?.key] ?? 0) записей"
-                cell.textLabel?.text = "\(hapinessIndexString)\n\(countPosts)\n\(mostPopularSphereString)"
+                
+                let countPosts = posts.count
+                let countPostsString = "\nЗаписей в дневнике \(posts.count)"
+                
+                var mostPopularSphereString = ""
+                var lessPopularSphereString = ""
+                if countPosts > 0 {
+                    let spheres = posts.map { $0.sphere }
+                    let spheresDict = spheres.map { ($0, 1) }
+                    let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
+                    
+                    let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
+                    mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? "") — \(spheresCount[mostPopularSphere?.key] ?? 0) записей"
+                    
+                    let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
+                    lessPopularSphereString = "\nМеньше всего внимания ты уделяешь сфере \(lessPopularSphere?.key?.name ?? "") — \(spheresCount[lessPopularSphere?.key] ?? 0) записей"
+                }
+                cell.textLabel?.text = "\(hapinessIndexString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
                 return cell
             }
             
