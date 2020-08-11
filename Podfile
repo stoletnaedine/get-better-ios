@@ -4,6 +4,8 @@ target 'GetBetter' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftKeychainWrapper'
   pod 'Charts'
