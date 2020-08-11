@@ -68,6 +68,9 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryy-Gn-g4H" userLabel="Current Level Button">
                             <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="GIc-t4-8sO"/>
+                            </constraints>
                             <state key="normal" title="Текущее"/>
                             <connections>
                                 <action selector="currentLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="08T-i6-9QJ"/>
@@ -75,6 +78,9 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs0-Sf-Xir" userLabel="Start Level Button">
                             <rect key="frame" x="142" y="0.0" width="78" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Wt5-r4-wPW"/>
+                            </constraints>
                             <state key="normal" title="Начальное"/>
                             <connections>
                                 <action selector="startLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Sss-nf-I1G"/>

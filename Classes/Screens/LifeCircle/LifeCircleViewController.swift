@@ -78,16 +78,18 @@ class LifeCircleViewController: UIViewController {
     }
     
     private func setupLevelButtons() {
+        currentLevelButton.isSelected = isCurrentButtonSelected
+        startLevelButton.isSelected = !isCurrentButtonSelected
+        
         currentLevelButton.setTitle(R.string.localizable.lifeCircleCurrent(), for: .normal)
         currentLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         currentLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
+        currentLevelButton.setBackgroundColor(color: .violet, forState: .selected)
         
         startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
         startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         startLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
-        
-        currentLevelButton.isSelected = true
-        startLevelButton.isSelected = false
+        startLevelButton.setBackgroundColor(color: .violet, forState: .selected)
     }
     
     private func setupTapChartView() {
