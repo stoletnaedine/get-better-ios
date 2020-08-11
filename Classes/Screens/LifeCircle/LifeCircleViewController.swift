@@ -37,8 +37,8 @@ class LifeCircleViewController: UIViewController {
     private let underlineAttribute: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue]
     
     private var isCurrentDataVisible = true
-    private var isHiddenCurrentValues = true
-    private var isHiddenStartValues = true
+    private var isValuesVisible = false
+    private var isCurrentButtonSelected = true
     
     var showOnboardingCompletion: () -> () = {}
     
@@ -60,28 +60,34 @@ class LifeCircleViewController: UIViewController {
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
         isCurrentDataVisible = true
         setupChartView(animate: false)
-        underline(for: currentLevelButton)
-        disableUnderline(for: startLevelButton)
+        if !isCurrentButtonSelected {
+            isCurrentButtonSelected.toggle()
+            currentLevelButton.isSelected.toggle()
+            startLevelButton.isSelected.toggle()
+        }
     }
     
     @IBAction func startLevelButtonDidTap(_ sender: UIButton) {
         isCurrentDataVisible = false
         setupChartView(animate: false)
-        underline(for: startLevelButton)
-        disableUnderline(for: currentLevelButton)
+        if isCurrentButtonSelected {
+            isCurrentButtonSelected.toggle()
+            currentLevelButton.isSelected.toggle()
+            startLevelButton.isSelected.toggle()
+        }
     }
     
-    private func underline(for button: UIButton) {
-        let title = button.titleLabel?.text ?? ""
-        let attributeString = NSMutableAttributedString(string: title,
-                                                        attributes: underlineAttribute)
-        button.setAttributedTitle(attributeString, for: .normal)
-    }
-    
-    private func disableUnderline(for button: UIButton) {
-        let title = button.titleLabel?.text ?? ""
-        let attributeString = NSMutableAttributedString(string: title)
-        button.setAttributedTitle(attributeString, for: .normal)
+    private func setupLevelButtons() {
+        currentLevelButton.setTitle(R.string.localizable.lifeCircleCurrent(), for: .normal)
+        currentLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        currentLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
+        
+        startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
+        startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        startLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
+        
+        currentLevelButton.isSelected = true
+        startLevelButton.isSelected = false
     }
     
     private func setupTapChartView() {
@@ -90,11 +96,7 @@ class LifeCircleViewController: UIViewController {
     }
     
     @objc func showValues() {
-        if isCurrentDataVisible {
-          isHiddenCurrentValues.toggle()
-        } else {
-            isHiddenStartValues.toggle()
-        }
+        isValuesVisible.toggle()
         setupChartView(animate: false)
     }
     
@@ -136,16 +138,6 @@ class LifeCircleViewController: UIViewController {
         achievementsTableView.reloadData()
     }
     
-    private func setupLevelButtons() {
-        currentLevelButton.setTitle(R.string.localizable.lifeCircleCurrent(), for: .normal)
-        currentLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        currentLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
-        startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
-        startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        startLevelButton.setTitleColor(.lifeCircleLineStart, for: .normal)
-        underline(for: currentLevelButton)
-    }
-    
     private func setupChartView(animate: Bool) {
         chartView.backgroundColor = .appBackground
         chartView.webLineWidth = 2
@@ -181,8 +173,7 @@ class LifeCircleViewController: UIViewController {
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
         dataSetStart.valueFormatter = DataSetValueFormatter(isCurrentDataVisible: isCurrentDataVisible,
-                                                            isHiddenCurrentValues: isHiddenCurrentValues,
-                                                            isHiddenStartValues: isHiddenStartValues)
+                                                            isValuesVisible: isValuesVisible)
         
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: "")
         dataSetCurrent.visible = isCurrentDataVisible
@@ -192,8 +183,7 @@ class LifeCircleViewController: UIViewController {
         dataSetCurrent.fillAlpha = 0.5
         dataSetCurrent.drawFilledEnabled = true
         dataSetCurrent.valueFormatter = DataSetValueFormatter(isCurrentDataVisible: isCurrentDataVisible,
-                                                              isHiddenCurrentValues: isHiddenCurrentValues,
-                                                              isHiddenStartValues: isHiddenStartValues)
+                                                              isValuesVisible: isValuesVisible)
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
         
@@ -271,31 +261,29 @@ class XAxisFormatter: IAxisValueFormatter {
 
 class DataSetValueFormatter: IValueFormatter {
     private var isCurrentDataVisible: Bool
-    private var isHiddenStartValues: Bool
-    private var isHiddenCurrentValues: Bool
+    private var isValuesVisible: Bool
     
-    init(isCurrentDataVisible: Bool, isHiddenCurrentValues: Bool, isHiddenStartValues: Bool) {
+    init(isCurrentDataVisible: Bool, isValuesVisible: Bool) {
         self.isCurrentDataVisible = isCurrentDataVisible
-        self.isHiddenCurrentValues = isHiddenCurrentValues
-        self.isHiddenStartValues = isHiddenStartValues
+        self.isValuesVisible = isValuesVisible
     }
     
     func stringForValue(_ value: Double,
                         entry: ChartDataEntry,
                         dataSetIndex: Int,
                         viewPortHandler: ViewPortHandler?) -> String {
-        let dataSetStartIndex = 0
-        let dataSetCurrentIndex = 1
-        if dataSetIndex == dataSetCurrentIndex
-            && !isHiddenCurrentValues {
+        let startDataSetIndex = 0
+        let currentDataSetIndex = 1
+        if dataSetIndex == currentDataSetIndex
+            && isCurrentDataVisible
+            && isValuesVisible {
             return value.stringWithComma()
         }
-        if dataSetIndex == dataSetStartIndex
-            && !isHiddenStartValues
-            && !isCurrentDataVisible {
+        if dataSetIndex == startDataSetIndex
+            && !isCurrentDataVisible
+            && isValuesVisible {
             return value.stringWithComma()
         }
-        
         return ""
     }
 }
