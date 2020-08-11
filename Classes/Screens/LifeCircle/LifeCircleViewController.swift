@@ -34,10 +34,11 @@ class LifeCircleViewController: UIViewController {
     let achievementsXibName = R.nib.achievementsTableViewCell.name
     let achievementsReuseCellIdentifier = R.reuseIdentifier.achievementsCell.identifier
     let sphereIconSize: CGFloat = 30
+    private let underlineAttribute: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue]
     
-    private var isStartDataVisible = true
     private var isCurrentDataVisible = true
     private var isHiddenCurrentValues = true
+    private var isHiddenStartValues = true
     
     var showOnboardingCompletion: () -> () = {}
     
@@ -57,22 +58,43 @@ class LifeCircleViewController: UIViewController {
     }
     
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
-        isCurrentDataVisible.toggle()
+        isCurrentDataVisible = true
         setupChartView(animate: false)
+        underline(for: currentLevelButton)
+        disableUnderline(for: startLevelButton)
     }
     
     @IBAction func startLevelButtonDidTap(_ sender: UIButton) {
-        isStartDataVisible.toggle()
+        isCurrentDataVisible = false
         setupChartView(animate: false)
+        underline(for: startLevelButton)
+        disableUnderline(for: currentLevelButton)
+    }
+    
+    private func underline(for button: UIButton) {
+        let title = button.titleLabel?.text ?? ""
+        let attributeString = NSMutableAttributedString(string: title,
+                                                        attributes: underlineAttribute)
+        button.setAttributedTitle(attributeString, for: .normal)
+    }
+    
+    private func disableUnderline(for button: UIButton) {
+        let title = button.titleLabel?.text ?? ""
+        let attributeString = NSMutableAttributedString(string: title)
+        button.setAttributedTitle(attributeString, for: .normal)
     }
     
     private func setupTapChartView() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showCurrentValues))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showValues))
         chartView.addGestureRecognizer(tap)
     }
     
-    @objc func showCurrentValues() {
-        isHiddenCurrentValues.toggle()
+    @objc func showValues() {
+        if isCurrentDataVisible {
+          isHiddenCurrentValues.toggle()
+        } else {
+            isHiddenStartValues.toggle()
+        }
         setupChartView(animate: false)
     }
     
@@ -121,6 +143,7 @@ class LifeCircleViewController: UIViewController {
         startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
         startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         startLevelButton.setTitleColor(.lifeCircleLineStart, for: .normal)
+        underline(for: currentLevelButton)
     }
     
     private func setupChartView(animate: Bool) {
@@ -155,10 +178,11 @@ class LifeCircleViewController: UIViewController {
                 .map { RadarChartDataEntry(value: $0.value) }
         
         let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: "")
-        dataSetStart.visible = isStartDataVisible
         dataSetStart.lineWidth = 2
         dataSetStart.colors = [.lifeCircleLineStart]
-        dataSetStart.valueFormatter = DataSetValueFormatter(isCurrentValuesHidden: isHiddenCurrentValues)
+        dataSetStart.valueFormatter = DataSetValueFormatter(isCurrentDataVisible: isCurrentDataVisible,
+                                                            isHiddenCurrentValues: isHiddenCurrentValues,
+                                                            isHiddenStartValues: isHiddenStartValues)
         
         let dataSetCurrent = RadarChartDataSet(entries: dataEntriesCurrent, label: "")
         dataSetCurrent.visible = isCurrentDataVisible
@@ -167,7 +191,9 @@ class LifeCircleViewController: UIViewController {
         dataSetCurrent.fillColor = .lifeCircleFillCurrent
         dataSetCurrent.fillAlpha = 0.5
         dataSetCurrent.drawFilledEnabled = true
-        dataSetCurrent.valueFormatter = DataSetValueFormatter(isCurrentValuesHidden: isHiddenCurrentValues)
+        dataSetCurrent.valueFormatter = DataSetValueFormatter(isCurrentDataVisible: isCurrentDataVisible,
+                                                              isHiddenCurrentValues: isHiddenCurrentValues,
+                                                              isHiddenStartValues: isHiddenStartValues)
         
         chartView.data = RadarChartData(dataSets: [dataSetStart, dataSetCurrent])
         
@@ -244,21 +270,32 @@ class XAxisFormatter: IAxisValueFormatter {
 }
 
 class DataSetValueFormatter: IValueFormatter {
-    private var isCurrentValuesHidden: Bool
+    private var isCurrentDataVisible: Bool
+    private var isHiddenStartValues: Bool
+    private var isHiddenCurrentValues: Bool
     
-    init(isCurrentValuesHidden: Bool) {
-        self.isCurrentValuesHidden = isCurrentValuesHidden
+    init(isCurrentDataVisible: Bool, isHiddenCurrentValues: Bool, isHiddenStartValues: Bool) {
+        self.isCurrentDataVisible = isCurrentDataVisible
+        self.isHiddenCurrentValues = isHiddenCurrentValues
+        self.isHiddenStartValues = isHiddenStartValues
     }
     
     func stringForValue(_ value: Double,
                         entry: ChartDataEntry,
                         dataSetIndex: Int,
                         viewPortHandler: ViewPortHandler?) -> String {
+        let dataSetStartIndex = 0
         let dataSetCurrentIndex = 1
         if dataSetIndex == dataSetCurrentIndex
-            && !isCurrentValuesHidden {
+            && !isHiddenCurrentValues {
             return value.stringWithComma()
         }
+        if dataSetIndex == dataSetStartIndex
+            && !isHiddenStartValues
+            && !isCurrentDataVisible {
+            return value.stringWithComma()
+        }
+        
         return ""
     }
 }
