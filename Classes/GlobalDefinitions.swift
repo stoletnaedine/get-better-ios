@@ -18,7 +18,11 @@ struct GlobalDefinitions {
         static let tutorialHasShowed = "tutorialHasShowed"
     }
     
+    struct NotificationTopic {
+        static let dailyPost = "daily"
+    }
+    
     static let notValidSphereValue = -1.0
     
-    static let appVersion = "1.1.1"
+    static let appVersion = "1.1.3"
 }
