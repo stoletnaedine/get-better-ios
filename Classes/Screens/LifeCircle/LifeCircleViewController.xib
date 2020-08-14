@@ -46,10 +46,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MNE-VG-tkU" userLabel="Container View">
-                    <rect key="frame" x="0.0" y="105" width="414" height="677"/>
+                    <rect key="frame" x="0.0" y="105" width="414" height="679"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="Circle Chart View" customClass="RadarChartView" customModule="Charts">
-                            <rect key="frame" x="19.5" y="132.5" width="375" height="412"/>
+                            <rect key="frame" x="19.5" y="133.5" width="375" height="412"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="fxn-qj-OtY" secondAttribute="height" multiplier="1:1.1" id="qje-9Z-bwr"/>
@@ -64,23 +64,19 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Circle Legend View">
-                    <rect key="frame" x="97" y="802" width="220" height="30"/>
+                    <rect key="frame" x="87" y="804" width="240" height="28"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryy-Gn-g4H" userLabel="Current Level Button">
-                            <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="GIc-t4-8sO"/>
-                            </constraints>
+                            <rect key="frame" x="0.0" y="0.0" width="82" height="28"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                             <state key="normal" title="Текущее"/>
                             <connections>
                                 <action selector="currentLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="08T-i6-9QJ"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs0-Sf-Xir" userLabel="Start Level Button">
-                            <rect key="frame" x="142" y="0.0" width="78" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="Wt5-r4-wPW"/>
-                            </constraints>
+                            <rect key="frame" x="142" y="0.0" width="98" height="28"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                             <state key="normal" title="Начальное"/>
                             <connections>
                                 <action selector="startLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Sss-nf-I1G"/>
@@ -94,7 +90,7 @@
                         <constraint firstAttribute="bottom" secondItem="ryy-Gn-g4H" secondAttribute="bottom" id="TGR-Xo-l8A"/>
                         <constraint firstItem="Gs0-Sf-Xir" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="f2D-bq-7y5"/>
                         <constraint firstItem="ryy-Gn-g4H" firstAttribute="leading" secondItem="tZe-0q-jOl" secondAttribute="leading" id="gYM-uk-kIP"/>
-                        <constraint firstItem="Gs0-Sf-Xir" firstAttribute="leading" secondItem="ryy-Gn-g4H" secondAttribute="trailing" constant="80" id="n40-DJ-ZmO"/>
+                        <constraint firstItem="Gs0-Sf-Xir" firstAttribute="leading" secondItem="ryy-Gn-g4H" secondAttribute="trailing" constant="60" id="n40-DJ-ZmO"/>
                         <constraint firstItem="ryy-Gn-g4H" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="vVq-Z0-3yI"/>
                     </constraints>
                 </view>
