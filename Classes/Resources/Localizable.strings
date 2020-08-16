@@ -174,7 +174,7 @@
 "Settings.logout.alert.question" = "Вы действительно хотите выйти?";
 "Settings.logout.alert.yes" = "Да";
 "Settings.logout.alert.no" = "Нет";
-"Settings.Notification.Title" = "Получать ежедневные уведомления";
+"Settings.Notification.Title" = "Напоминать записывать итоги дня";
 "Settings.Notification.Unsubscribe" = "Вы больше не будете получать напоминания";
 "Settings.Notification.Subscribe" = "Вы подписаны на уведомления";
 
