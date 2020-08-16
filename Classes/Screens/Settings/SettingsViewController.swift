@@ -63,7 +63,8 @@ class SettingsViewController: UIViewController {
         tableItems = [
             TableSection.profile : [CommonSettingsCell(title: "", viewController: editProfileViewController)],
             TableSection.articles : presenter.fillArticles(),
-            TableSection.config : [
+            TableSection.notifications : [CommonSettingsCell(title: "", viewController: nil)],
+            TableSection.version : [
                 CommonSettingsCell(
                         title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
                         viewController: presenter.createAppHistoryVersions()
@@ -137,7 +138,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
-        case .config:
+        case .notifications:
+            // TODO: сделать нормально
+            return presenter.createPushNotificationsCell()
+        case .version:
             let cell = UITableViewCell()
             cell.textLabel?.text = items[tableSection]?[indexPath.row].title
             cell.textLabel?.textColor = .gray

@@ -15,5 +15,5 @@ struct CommonSettingsCell {
 }
 
 enum TableSection: Int {
-    case profile = 0, articles, config
+    case profile = 0, articles, notifications, version
 }
