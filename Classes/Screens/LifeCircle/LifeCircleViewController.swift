@@ -311,11 +311,12 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         let hapinessIndexString = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
         
         let countPosts = posts.count
+        // TODO: вынести в ресурсы
         let countPostsString = "\nЗаписей в дневнике: \(posts.count)"
         
         var mostPopularSphereString = ""
         var lessPopularSphereString = ""
-        if countPosts > 0 {
+        if countPosts > 3 {
             let spheres = posts.map { $0.sphere }
             let spheresDict = spheres.map { ($0, 1) }
             let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
