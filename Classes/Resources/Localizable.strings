@@ -138,30 +138,26 @@
 <p style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size:26px;\"><b>Наша команда:</b></p/>
 <p style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size:14px;\">
 <b>Идея и разработка</b><br>
-<a href=\"https://www.notion.so/Artur-Islamgulov-72c202cd6d954fce9dc0f00cba8270d6\">Артур Исламгулов</a>
-<br><br>
+<a href=\"https://www.notion.so/Artur-Islamgulov-72c202cd6d954fce9dc0f00cba8270d6\">Артур Исламгулов</a><br><br>
 <b>Визуальный стиль</b><br>
 <a href=\"https://alekseybusygin.com\">Алексей Бусыгин</a></p>";
 
 // MARK: AboutCircle
 
 "AboutCircle.title" = "Колесо жизненного баланса";
-"AboutCircle.tableTitle" = "Колесо жизненного баланса";
+"AboutCircle.tableTitle" = "Колесо жизни";
 "AboutCircle.description" = "<p style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size:14px;\">
-Эта диаграмма наглядно показывает, какие сферы в твоей жизни уже находятся на хорошем уровне, а <b><span style=\"color:#7d4df1\">какие сферы следует прокачать.</span></b>
-<br>
+Эта диаграмма наглядно показывает, какие сферы в твоей жизни уже находятся на хорошем уровне, а <b><span style=\"color:#7d4df1\">какие сферы следует прокачать.</span></b><br>
 Чтобы колесо стало круглым, нужно выровнить значения — уменьшить важность одного или сделать что-то в других сферах.
 <b><span style=\"color:#7d4df1\">Регулярно веди записи в разделе Дневник.</span></b> Так ты наглядно увидишь результаты.";
 
 // MARK: AboutJournal
 
 "AboutJournal.title" = "Правила игры";
-"AboutJournal.tableTitle" = "Правила игры (зачем нужен дневник)";
+"AboutJournal.tableTitle" = "Правила игры";
 "AboutJournal.description" = "<p style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size:14px;\">
-Каждый раз, когда ты добавляешь событие в дневник, ты получаешь за него <b><span style=\"color:#7d4df1\">плюс 0,1 балла к текущему уровню</span></b>. Например, сделал зарядку — плюс 0,1 к здоровью. Закрыл важную сделку — плюс 0,1 к работе. И так далее.
-<br>
-С каждым днём при должных усилиях колесо будет всё больше выпрямлять свои грани. <b><span style=\"color:#7d4df1\">В этом и смысл GetBetter.</span></b>
-<br>
+Каждый раз, когда ты добавляешь событие в дневник, ты получаешь за него <b><span style=\"color:#7d4df1\">плюс 0,1 балла к текущему уровню</span></b>. Например, сделал зарядку — плюс 0,1 к здоровью. Закрыл важную сделку — плюс 0,1 к работе. И так далее.<br>
+С каждым днём при должных усилиях колесо будет всё больше выпрямлять свои грани. <b><span style=\"color:#7d4df1\">В этом и смысл GetBetter.</span></b><br>
 Не забывай регулярно множить яркие события и не забрасывать сферы, которые требуют внимания.";
 
 // MARK: Settings
@@ -174,7 +170,7 @@
 "Settings.logout.alert.question" = "Вы действительно хотите выйти?";
 "Settings.logout.alert.yes" = "Да";
 "Settings.logout.alert.no" = "Нет";
-"Settings.Notification.Title" = "Напоминать записывать итоги дня";
+"Settings.Notification.Title" = "Ежедневно напоминать вести дневник";
 "Settings.Notification.Unsubscribe" = "Вы больше не будете получать напоминания";
 "Settings.Notification.Subscribe" = "Вы подписаны на уведомления";
 
