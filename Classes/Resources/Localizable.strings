@@ -145,7 +145,7 @@
 // MARK: AboutCircle
 
 "AboutCircle.title" = "Колесо жизненного баланса";
-"AboutCircle.tableTitle" = "Колесо жизни";
+"AboutCircle.tableTitle" = "Колесо жизненного баланса";
 "AboutCircle.description" = "<p style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size:14px;\">
 Эта диаграмма наглядно показывает, какие сферы в твоей жизни уже находятся на хорошем уровне, а <b><span style=\"color:#7d4df1\">какие сферы следует прокачать.</span></b><br>
 Чтобы колесо стало круглым, нужно выровнить значения — уменьшить важность одного или сделать что-то в других сферах.
@@ -170,7 +170,7 @@
 "Settings.logout.alert.question" = "Вы действительно хотите выйти?";
 "Settings.logout.alert.yes" = "Да";
 "Settings.logout.alert.no" = "Нет";
-"Settings.Notification.Title" = "Ежедневно напоминать вести дневник";
+"Settings.Notification.Title" = "Ежедневные напоминания";
 "Settings.Notification.Unsubscribe" = "Вы больше не будете получать уведомления";
 "Settings.Notification.Subscribe" = "Вы подписаны на уведомления";
 

@@ -86,7 +86,6 @@ class SettingsPresenterDefault: SettingsPresenter {
     
     func createPushNotificationsCell() -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.numberOfLines = 0
         cell.selectionStyle = .none
         cell.textLabel?.text = R.string.localizable.settingsNotificationTitle()
         
