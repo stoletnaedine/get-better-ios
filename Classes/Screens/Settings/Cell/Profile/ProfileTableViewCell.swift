@@ -35,9 +35,9 @@ class ProfileTableViewCell: UITableViewCell {
     private func customizeView() {
         avatarImageView.backgroundColor = .tableViewSectionColor
         nameLabel.text = ""
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        nameLabel.font = .journalTitleFont
         emailLabel.text = R.string.localizable.profileLoading()
-        emailLabel.font = UIFont.systemFont(ofSize: 14)
+        emailLabel.font = .journalDateFont
     }
     
 }
