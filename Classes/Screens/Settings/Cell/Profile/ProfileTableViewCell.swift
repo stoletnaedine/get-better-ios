@@ -38,6 +38,7 @@ class ProfileTableViewCell: UITableViewCell {
         nameLabel.font = .journalTitleFont
         emailLabel.text = R.string.localizable.profileLoading()
         emailLabel.font = .journalDateFont
+        emailLabel.textColor = .gray
     }
     
 }

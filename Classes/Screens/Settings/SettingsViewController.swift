@@ -130,7 +130,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.fillCell(profile: profile)
             }
             cell.selectionStyle = .none
-            cell.accessoryType = .disclosureIndicator
             return cell
         case .articles:
             let cell = UITableViewCell()
