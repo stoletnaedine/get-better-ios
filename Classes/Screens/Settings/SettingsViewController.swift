@@ -89,17 +89,20 @@ class SettingsViewController: UIViewController {
     }
     
     @objc func logoutButtonDidTap() {
+        var message = ""
+        if profile?.email == R.string.localizable.settingsDefaultEmail() {
+            message = R.string.localizable.settingsLogoutAlertNoEmail()
+        }
         let alert = UIAlertController(title: R.string.localizable.settingsLogoutAlertQuestion(),
-                                      message: "",
+                                      message: message,
                                       preferredStyle: .alert)
         let logoutAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertYes(),
                                          style: .destructive,
-                                         handler: { (alertAction: UIAlertAction) in
+                                         handler: { _ in
                                             NotificationCenter.default.post(name: .logout, object: nil)})
         let cancelAction = UIAlertAction(title: R.string.localizable.settingsLogoutAlertNo(),
                                          style: .cancel,
-                                         handler: nil)
-        
+                                         handler: nil)        
         alert.addAction(logoutAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)

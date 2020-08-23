@@ -19,10 +19,6 @@ class ProfileTableViewCell: UITableViewCell {
         super.awakeFromNib()
         customizeView()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
     func fillCell(profile: Profile) {
         if let avatarURL = profile.avatarURL {
