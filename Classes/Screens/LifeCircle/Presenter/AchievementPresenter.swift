@@ -62,7 +62,7 @@ class AchievementPresenterDefault: AchievementPresenter {
     private func calcMaxCountDaysInRow(from posts: [Post]) -> Int {
         let days = posts
             .map { Date(timeIntervalSince1970: Double($0.timestamp ?? 0)) }
-            .map { $0.diffInDays() }
+            .map { $0.diffInDaysSince1970() }
         
         let daysSet = Set(days).sorted()
         var countDaysInRowArray: [Int] = []
@@ -171,7 +171,7 @@ class AchievementPresenterDefault: AchievementPresenter {
             let postDays = posts
                 .filter { $0.sphere == sphere }
                 .map { Date(timeIntervalSince1970: Double($0.timestamp ?? 0)) }
-                .map { $0.diffInDays() }
+                .map { $0.diffInDaysSince1970() }
                 .sorted()
             
             let daysCount = postDays.count

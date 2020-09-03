@@ -45,10 +45,21 @@ extension Date {
         return convertToDateWithWeekday(from: Int64(Date().timeIntervalSince1970))
     }
     
-    func diffInDays() -> Int {
+    static func diffInDays(from date: Date) -> Int {
+        let calendar = Calendar.current
+
+        let date1 = calendar.startOfDay(for: date)
+        let date2 = calendar.startOfDay(for: Date())
+
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+        return components.day ?? 0
+    }
+
+    
+    func diffInDaysSince1970() -> Int {
         return Calendar.current.dateComponents([.day], from: .init(timeIntervalSince1970: 0), to: self).day ?? 0
     }
-    
+        
     private static func monthRus(monthIndex: Int) -> String {
         switch monthIndex {
         case 1:

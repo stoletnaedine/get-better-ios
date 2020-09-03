@@ -80,7 +80,7 @@ class FirebaseDatabaseService: DatabaseService {
                 let value = snapshot.value as? NSDictionary
                 
                 if let keys = value?.allKeys {
-                    var postArray: [Post] = []
+                    var posts: [Post] = []
                     
                     for key in keys.enumerated() {
                         let id = key.element
@@ -88,9 +88,9 @@ class FirebaseDatabaseService: DatabaseService {
                         
                         let mapper = PostMapper()
                         let post = mapper.map(id: id, entity: entity)
-                        postArray.append(post)
+                        posts.append(post)
                     }
-                    completion(.success(postArray))
+                    completion(.success(posts))
                 } else {
                     completion(.success([]))
                 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol LifeCirclePresenter {
     func loadUserData(completion: @escaping (UserData) -> Void)
@@ -63,6 +64,16 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
                     let newValue = (sphereValue * 10 + diffValue * 10) / 10
                     currentSphereMetricsValues[sphereString] = newValue
                 }
+            }
+            
+            guard let userCreationDate = Auth.auth().currentUser?.metadata.creationDate else { return }
+            let daysFromUserCreation = Date.diffInDays(from: userCreationDate)
+            // 1 балл за 200 дней
+            let reductionValue: Double = Double(daysFromUserCreation / 20).rounded(toPlaces: 1)
+            
+            currentSphereMetricsValues.forEach { key, value in
+                let decreaseValue = (value * 10 - reductionValue) / 10
+                currentSphereMetricsValues[key] = decreaseValue
             }
 
             self?.currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
