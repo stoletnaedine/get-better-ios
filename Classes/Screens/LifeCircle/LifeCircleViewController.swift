@@ -307,8 +307,10 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         cell.textLabel?.font = .journalDateFont
         
-        let hapinessIndex = lifeCirclePresenter.averageSphereValue().stringWithComma()
-        let hapinessIndexString = R.string.localizable.lifeCircleHappyIndex(hapinessIndex)
+        let averageCurrentSphereValue = lifeCirclePresenter.averageCurrentSphereValue().stringWithComma()
+        let averageCurrentSphereValueString = R.string.localizable.lifeCircleAverageCurrent(averageCurrentSphereValue)
+        let averageStartSphereValue = lifeCirclePresenter.averageStartSphereValue().stringWithComma()
+        let averageStartSphereValueString = R.string.localizable.lifeCircleAverageStart(averageStartSphereValue)
         
         let countPosts = posts.count
         // TODO: вынести в ресурсы
@@ -327,7 +329,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
             lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
         }
-        cell.textLabel?.text = "\(hapinessIndexString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
+        cell.textLabel?.text = "\(averageStartSphereValueString)\n\(averageCurrentSphereValueString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
         return cell
     }
     

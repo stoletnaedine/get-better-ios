@@ -11,7 +11,8 @@ import FirebaseAuth
 
 protocol LifeCirclePresenter {
     func loadUserData(completion: @escaping (UserData) -> Void)
-    func averageSphereValue() -> Double
+    func averageCurrentSphereValue() -> Double
+    func averageStartSphereValue() -> Double
 }
 
 class LifeCirclePresenterDefault: LifeCirclePresenter {
@@ -49,15 +50,22 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
         }
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            let spheresInPosts = self?.posts.map { $0.sphere }
-            guard let startSphereMetrics = self?.startSphereMetrics else { return }
+            guard let self = self else { return }
+            let spheresInPosts = self.posts.map { $0.sphere }
+            
+            // Посты с фото получают больше?
+//            let spheresInPostsWithPhoto = posts
+//                .filter { !($0.photoName ?? "").isEmpty }
+//                .map { $0.sphere }
+            guard let startSphereMetrics = self.startSphereMetrics else { return }
             var currentSphereMetricsValues = startSphereMetrics.values
             
             let diffValue = 0.1
             let maxValue = 10.0
 
             // Calc values
-            spheresInPosts?.forEach { sphere in
+//            let spheres = spheresInPosts + spheresInPostsWithPhoto
+            spheresInPosts.forEach { sphere in
                 if let sphereString = sphere?.rawValue,
                     let sphereValue = currentSphereMetricsValues[sphereString],
                     sphereValue < maxValue {
@@ -68,25 +76,26 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
             
             guard let userCreationDate = Auth.auth().currentUser?.metadata.creationDate else { return }
             let daysFromUserCreation = Date.diffInDays(from: userCreationDate)
-            // 1 балл за 200 дней
-            let reductionValue: Double = Double(daysFromUserCreation / 20).rounded(toPlaces: 1)
+            // Минус 1 балл за 300 дней. Нужна аналитика.
+            let reductionValue: Double = Double(daysFromUserCreation / 30).rounded(toPlaces: 1)
             
             currentSphereMetricsValues.forEach { key, value in
                 let decreaseValue = (value * 10 - reductionValue) / 10
                 currentSphereMetricsValues[key] = decreaseValue
             }
 
-            self?.currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
-            guard let currentSphereMetrics = self?.currentSphereMetrics else { return }
-            guard let posts = self?.posts else { return }
-            completion((startSphereMetrics,
-                        currentSphereMetrics,
-                        posts))
+            self.currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
+            completion((startSphereMetrics, self.currentSphereMetrics, self.posts))
         })
     }
     
-    func averageSphereValue() -> Double {
+    func averageCurrentSphereValue() -> Double {
         let values = self.currentSphereMetrics?.values.map { $0.value } ?? []
+        return values.average().rounded(toPlaces: 2)
+    }
+    
+    func averageStartSphereValue() -> Double {
+        let values = self.startSphereMetrics?.values.map { $0.value } ?? []
         return values.average().rounded(toPlaces: 2)
     }
 }
