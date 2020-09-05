@@ -31,35 +31,37 @@ class AchievementPresenterDefault: AchievementPresenter {
     }
     
     private func getDaysAchievements(posts: [Post]) -> [Achievement] {
-        let three = 3
-        let five = 5
-        let seven = 7
-        let ten = 10
-        let maxCountDaysInRow = calcMaxCountDaysInRow(from: posts)
+        let daysInRowTuple = calcMaxCountDaysInRow(from: posts)
+        let maxCountDaysInRow = daysInRowTuple.maxDaysInRowAllTime
+        let daysInRowLastTime = daysInRowTuple.daysInRowLastTime
         
+        let regularThreeDesc = "Добавлять события 3 дня подряд (\(maxCountDaysInRow >= 3 ? 3 : daysInRowLastTime)/3)"
         let regularThree = Achievement(icon: "⚡️",
                                        title: "Not bad",
-                                       description: "Добавлять события \(three) дня подряд (\(maxCountDaysInRow >= three ? three : maxCountDaysInRow)/\(three))",
-            unlocked: maxCountDaysInRow >= three)
+                                       description: regularThreeDesc,
+                                       unlocked: maxCountDaysInRow >= 3)
         
+        let regularFiveDesc = "Добавлять события 5 дней подряд (\(maxCountDaysInRow >= 5 ? 5 : daysInRowLastTime)/5)"
         let regularFive = Achievement(icon: "🖐",
                                       title: "Дай пять!",
-                                      description: "Добавлять события \(five) дней подряд (\(maxCountDaysInRow >= five ? five : maxCountDaysInRow)/\(five))",
-            unlocked: maxCountDaysInRow >= five)
+                                      description: regularFiveDesc,
+                                      unlocked: maxCountDaysInRow >= 5)
         
+        let regularSevenDesc = "Добавлять события 7 дней подряд (\(maxCountDaysInRow >= 7 ? 7 : daysInRowLastTime)/7)"
         let regularSeven = Achievement(icon: "🤘",
-                                       title: "Эта неделя была ок",
-                                       description: "Добавлять события \(seven) дней подряд (\(maxCountDaysInRow >= seven ? seven : maxCountDaysInRow)/\(seven))",
-            unlocked: maxCountDaysInRow >= seven)
+                                       title: "Эта неделя была норм",
+                                       description: regularSevenDesc,
+                                       unlocked: maxCountDaysInRow >= 7)
         
+        let regularTenDesc = "Добавлять события 10 дней подряд (\(maxCountDaysInRow >= 10 ? 10 : daysInRowLastTime)/10)"
         let regularTen = Achievement(icon: "😎",
-                                     title: "Преисполнился",
-                                     description: "Добавлять события \(ten) дней подряд (\(maxCountDaysInRow >= ten ? ten : maxCountDaysInRow)/\(ten))",
-            unlocked: maxCountDaysInRow >= ten)
+                                     title: "Десятикратный",
+                                     description: regularTenDesc,
+                                     unlocked: maxCountDaysInRow >= 10)
         return [regularThree, regularFive, regularSeven, regularTen]
     }
     
-    private func calcMaxCountDaysInRow(from posts: [Post]) -> Int {
+    private func calcMaxCountDaysInRow(from posts: [Post]) -> (maxDaysInRowAllTime: Int, daysInRowLastTime: Int) {
         let days = posts
             .map { Date(timeIntervalSince1970: Double($0.timestamp ?? 0)) }
             .map { $0.diffInDaysSince1970() }
@@ -88,7 +90,7 @@ class AchievementPresenterDefault: AchievementPresenter {
                 prevDay = day
             }
         }
-        return countDaysInRowArray.max() ?? 0
+        return (countDaysInRowArray.max() ?? 0, countDaysInRowArray.last ?? 0)
     }
     
     private func getMaxValueAchievements(currentSphereMetrics: SphereMetrics) -> [Achievement] {

@@ -30,9 +30,9 @@ extension UIButton {
       }
 
       let colorImage = UIGraphicsGetImageFromCurrentImageContext()
-      UIGraphicsEndImageContext()
-        self.clipsToBounds = true
+        UIGraphicsEndImageContext()
         self.layer.cornerRadius = 5
+        self.clipsToBounds = true
       self.setBackgroundImage(colorImage, for: forState)
     }
 }

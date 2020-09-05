@@ -12,7 +12,6 @@ import FirebaseAuth
 protocol LifeCirclePresenter {
     func loadUserData(completion: @escaping (UserData) -> Void)
     func averageCurrentSphereValue() -> Double
-    func averageStartSphereValue() -> Double
 }
 
 class LifeCirclePresenterDefault: LifeCirclePresenter {
@@ -52,38 +51,36 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
             guard let self = self else { return }
             let spheresInPosts = self.posts.map { $0.sphere }
-            
-            // Посты с фото получают больше?
-//            let spheresInPostsWithPhoto = posts
-//                .filter { !($0.photoName ?? "").isEmpty }
-//                .map { $0.sphere }
             guard let startSphereMetrics = self.startSphereMetrics else { return }
             var currentSphereMetricsValues = startSphereMetrics.values
-            
-            let diffValue = 0.1
-            let maxValue = 10.0
 
             // Calc values
-//            let spheres = spheresInPosts + spheresInPostsWithPhoto
+            guard let userCreationDate = Auth.auth().currentUser?.metadata.creationDate else { return }
+            let daysFromUserCreation = Date.diffInDays(from: userCreationDate)
+            
+            // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 100 дней.
+            let basePrescriptionRate: Double = 1.0
+            let decrementRate: Double = 0.1
+            let prescriptionRate = basePrescriptionRate - ((Double(daysFromUserCreation) / 100) * decrementRate)
+            
+            currentSphereMetricsValues.forEach { sphere, value in
+                currentSphereMetricsValues[sphere] = value * prescriptionRate
+            }
+            
+            // Прибавляем баллы за посты
+            let diffValue: Double = 0.1
+            let maxValue: Double = 10.0
+            let multiplier: Double = 10.0
+            
             spheresInPosts.forEach { sphere in
-                if let sphereString = sphere?.rawValue,
-                    let sphereValue = currentSphereMetricsValues[sphereString],
-                    sphereValue < maxValue {
-                    let newValue = (sphereValue * 10 + diffValue * 10) / 10
-                    currentSphereMetricsValues[sphereString] = newValue
+                if let sphere = sphere?.rawValue,
+                    let value = currentSphereMetricsValues[sphere],
+                    value < maxValue {
+                    let newValue = (value * multiplier + diffValue * multiplier) / multiplier
+                    currentSphereMetricsValues[sphere] = newValue.rounded(toPlaces: 1)
                 }
             }
             
-            guard let userCreationDate = Auth.auth().currentUser?.metadata.creationDate else { return }
-            let daysFromUserCreation = Date.diffInDays(from: userCreationDate)
-            // Минус 1 балл за 300 дней. Нужна аналитика.
-            let reductionValue: Double = Double(daysFromUserCreation / 30).rounded(toPlaces: 1)
-            
-            currentSphereMetricsValues.forEach { key, value in
-                let decreaseValue = (value * 10 - reductionValue) / 10
-                currentSphereMetricsValues[key] = decreaseValue
-            }
-
             self.currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
             completion((startSphereMetrics, self.currentSphereMetrics, self.posts))
         })
@@ -91,11 +88,6 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
     
     func averageCurrentSphereValue() -> Double {
         let values = self.currentSphereMetrics?.values.map { $0.value } ?? []
-        return values.average().rounded(toPlaces: 2)
-    }
-    
-    func averageStartSphereValue() -> Double {
-        let values = self.startSphereMetrics?.values.map { $0.value } ?? []
         return values.average().rounded(toPlaces: 2)
     }
 }

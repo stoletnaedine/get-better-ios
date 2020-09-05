@@ -20,21 +20,18 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var currentLevelButton: UIButton!
     @IBOutlet weak var startLevelButton: UIButton!
     
-    let refreshControl = UIRefreshControl()
-    
-    let achievementPresenter: AchievementPresenter = AchievementPresenterDefault()
-    let lifeCirclePresenter: LifeCirclePresenter = LifeCirclePresenterDefault()
-    
-    var startSphereMetrics: SphereMetrics?
-    var currentSphereMetrics: SphereMetrics?
-    var posts: [Post] = []
-    var achievements: [Achievement] = []
-    let sphereMetricsXibName = R.nib.sphereMetricsTableViewCell.name
-    let sphereMetricsReuseCellIdentifier = R.reuseIdentifier.sphereMetricsCell.identifier
-    let achievementsXibName = R.nib.achievementsTableViewCell.name
-    let achievementsReuseCellIdentifier = R.reuseIdentifier.achievementsCell.identifier
-    let sphereIconSize: CGFloat = 30
-    private let underlineAttribute: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue]
+    private let refreshControl = UIRefreshControl()
+    private let achievementPresenter: AchievementPresenter = AchievementPresenterDefault()
+    private let lifeCirclePresenter: LifeCirclePresenter = LifeCirclePresenterDefault()
+    private var startSphereMetrics: SphereMetrics?
+    private var currentSphereMetrics: SphereMetrics?
+    private var posts: [Post] = []
+    private var achievements: [Achievement] = []
+    private let sphereMetricsXibName = R.nib.sphereMetricsTableViewCell.name
+    private let sphereMetricsReuseId = R.reuseIdentifier.sphereMetricsCell.identifier
+    private let achievementsXibName = R.nib.achievementsTableViewCell.name
+    private let achievementsReuseId = R.reuseIdentifier.achievementsCell.identifier
+    private let sphereIconSize: CGFloat = 30
     
     private var isCurrentDataVisible = true
     private var isValuesVisible = false
@@ -97,7 +94,7 @@ class LifeCircleViewController: UIViewController {
         chartView.addGestureRecognizer(tap)
     }
     
-    @objc func showValues() {
+    @objc private func showValues() {
         isValuesVisible.toggle()
         setupChartView(animate: false)
     }
@@ -198,14 +195,14 @@ class LifeCircleViewController: UIViewController {
         achievementsTableView.dataSource = self
         achievementsTableView.delegate = self
         achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil),
-                                       forCellReuseIdentifier: achievementsReuseCellIdentifier)
+                                       forCellReuseIdentifier: achievementsReuseId)
         achievementsTableView.backgroundColor = .appBackground
         achievementsTableView.separatorInset = UIEdgeInsets.zero
         
         metricsTableView.dataSource = self
         metricsTableView.delegate = self
         metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil),
-                                  forCellReuseIdentifier: sphereMetricsReuseCellIdentifier)
+                                  forCellReuseIdentifier: sphereMetricsReuseId)
         metricsTableView.backgroundColor = .appBackground
         metricsTableView.separatorInset = UIEdgeInsets.zero
     }
@@ -309,8 +306,6 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         
         let averageCurrentSphereValue = lifeCirclePresenter.averageCurrentSphereValue().stringWithComma()
         let averageCurrentSphereValueString = R.string.localizable.lifeCircleAverageCurrent(averageCurrentSphereValue)
-        let averageStartSphereValue = lifeCirclePresenter.averageStartSphereValue().stringWithComma()
-        let averageStartSphereValueString = R.string.localizable.lifeCircleAverageStart(averageStartSphereValue)
         
         let countPosts = posts.count
         // TODO: вынести в ресурсы
@@ -329,7 +324,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
             lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
         }
-        cell.textLabel?.text = "\(averageStartSphereValueString)\n\(averageCurrentSphereValueString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
+        cell.textLabel?.text = "\(averageCurrentSphereValueString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
         return cell
     }
     
@@ -355,7 +350,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
                 return commonMetricsCell()
             }
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseCellIdentifier,
+            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseId,
                                                      for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .none
              // indexPath.row - 1 для ячейки метрик
@@ -364,7 +359,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case achievementsTableView:
             let achievement = achievements[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseCellIdentifier,
+            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseId,
                                                      for: indexPath) as! AchievementsTableViewCell
             cell.selectionStyle = .none
             cell.fillCell(from: achievement)
