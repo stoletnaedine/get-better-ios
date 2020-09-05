@@ -28,6 +28,8 @@
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
 		C328EE062447294100445704 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328EE042447294100445704 /* RegisterViewController.xib */; };
 		C32D4CE123D0F3FC00AD9863 /* GlobalDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* GlobalDefinitions.swift */; };
+		C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EA81A25043006009F6D52 /* CommonMetricsTableViewCell.swift */; };
+		C32EA81D25043007009F6D52 /* CommonMetricsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */; };
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
@@ -133,6 +135,8 @@
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C328EE042447294100445704 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		C32D4CE023D0F3FC00AD9863 /* GlobalDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDefinitions.swift; sourceTree = "<group>"; };
+		C32EA81A25043006009F6D52 /* CommonMetricsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMetricsTableViewCell.swift; sourceTree = "<group>"; };
+		C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonMetricsTableViewCell.xib; sourceTree = "<group>"; };
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -332,6 +336,15 @@
 				C328EE042447294100445704 /* RegisterViewController.xib */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		C32EA81925042FBD009F6D52 /* CommonMetrics */ = {
+			isa = PBXGroup;
+			children = (
+				C32EA81A25043006009F6D52 /* CommonMetricsTableViewCell.swift */,
+				C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */,
+			);
+			path = CommonMetrics;
 			sourceTree = "<group>";
 		};
 		C33AD1D9245191A500A08006 /* Onboarding */ = {
@@ -569,6 +582,7 @@
 		F149521D579776BEE4DF3881 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C32EA81925042FBD009F6D52 /* CommonMetrics */,
 				F149540FB0998047F5E95EB4 /* Achievements */,
 				F1495F97424957C89D347FB6 /* SphereMetrics */,
 			);
@@ -759,6 +773,7 @@
 				F14959E6D1E7A2AB6E42BF31 /* SphereDetailViewController.xib in Resources */,
 				F1495267BF7181FA76BBDF88 /* AchievementsTableViewCell.xib in Resources */,
 				F1495DEDB16766BBCE6BE394 /* SphereMetricsTableViewCell.xib in Resources */,
+				C32EA81D25043007009F6D52 /* CommonMetricsTableViewCell.xib in Resources */,
 				F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */,
 				F149557C8041D5BB75C0CA34 /* WelcomeViewController.xib in Resources */,
 				F14959446FAB1AE8F8479875 /* ArticleViewController.xib in Resources */,
@@ -866,6 +881,7 @@
 				C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
 				C3BFEBC52477E85F000B5B41 /* SettingsPresenter.swift in Sources */,
+				C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */,
 				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
 				6E6A217A2466C6FB00D8AC68 /* Atricle.swift in Sources */,
 				C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */,

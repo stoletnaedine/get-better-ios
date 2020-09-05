@@ -69,4 +69,19 @@ extension UIColor {
     static var appBackground: UIColor {
         return #colorLiteral(red: 0.9921568627, green: 0.9921568627, blue: 1, alpha: 1)
     }
+    
+    static func color(for value: Double) -> UIColor {
+        switch value {
+        case 0...3.4:
+            return .coral
+        case 3.5...4.0:
+            return .thirtyGray
+        case 4.1...6.0:
+            return .gray
+        case 6.1...7.4:
+            return .darkGray
+        default:
+            return .salad
+        }
+    }
 }

@@ -30,25 +30,10 @@ class SphereMetricsTableViewCell: UITableViewCell {
         nameLabel.text = sphereValue.sphere?.name
         if let value = sphereValue.value {
             valueLabel.text = value.stringWithComma()
-            changeValueLabelColorIfValueIsLow(for: value)
+            valueView.backgroundColor = UIColor.color(for: value)
         }
         descriptionLabel.text = sphereValue.sphere?.description
         
-    }
-    
-    private func changeValueLabelColorIfValueIsLow(for value: Double) {
-        switch value {
-        case 0...3.4:
-            valueView.backgroundColor = .coral
-        case 3.5...4.0:
-            valueView.backgroundColor = .thirtyGray
-        case 4.1...6.0:
-            valueView.backgroundColor = .gray
-        case 6.1...7.4:
-            valueView.backgroundColor = .darkGray
-        default:
-            valueView.backgroundColor = .salad
-        }
     }
     
     private func setupView() {

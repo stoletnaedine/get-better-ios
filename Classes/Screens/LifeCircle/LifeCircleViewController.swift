@@ -27,6 +27,8 @@ class LifeCircleViewController: UIViewController {
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
     private var achievements: [Achievement] = []
+    private let commonMetricsXibName = R.nib.commonMetricsTableViewCell.name
+    private let commonMetricsReuseId = R.reuseIdentifier.commonMetricsCell.identifier
     private let sphereMetricsXibName = R.nib.sphereMetricsTableViewCell.name
     private let sphereMetricsReuseId = R.reuseIdentifier.sphereMetricsCell.identifier
     private let achievementsXibName = R.nib.achievementsTableViewCell.name
@@ -203,6 +205,8 @@ class LifeCircleViewController: UIViewController {
         metricsTableView.delegate = self
         metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil),
                                   forCellReuseIdentifier: sphereMetricsReuseId)
+        metricsTableView.register(UINib(nibName: commonMetricsXibName, bundle: nil),
+                                  forCellReuseIdentifier: commonMetricsReuseId)
         metricsTableView.backgroundColor = .appBackground
         metricsTableView.separatorInset = UIEdgeInsets.zero
     }
@@ -297,36 +301,35 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         return SphereValue(sphere: sphere, value: value)
     }
     
-    private func commonMetricsCell() -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.backgroundColor = .appBackground
-        cell.textLabel?.numberOfLines = 0
-        cell.selectionStyle = .none
-        cell.textLabel?.font = .journalDateFont
-        
-        let averageCurrentSphereValue = lifeCirclePresenter.averageCurrentSphereValue().stringWithComma()
-        let averageCurrentSphereValueString = R.string.localizable.lifeCircleAverageCurrent(averageCurrentSphereValue)
-        
-        let countPosts = posts.count
-        // TODO: вынести в ресурсы
-        let countPostsString = "\nЗаписей в дневнике: \(posts.count)"
-        
-        var mostPopularSphereString = ""
-        var lessPopularSphereString = ""
-        if countPosts > 3 {
-            let spheres = posts.map { $0.sphere }
-            let spheresDict = spheres.map { ($0, 1) }
-            let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
-            
-            let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
-            mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? ""), записей: \(spheresCount[mostPopularSphere?.key] ?? 0)"
-            
-            let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
-            lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
-        }
-        cell.textLabel?.text = "\(averageCurrentSphereValueString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
-        return cell
-    }
+//    private func commonMetricsCell() -> UITableViewCell {
+//        let cell = UITableViewCell()
+//        cell.backgroundColor = .appBackground
+//        cell.textLabel?.numberOfLines = 0
+//        cell.selectionStyle = .none
+//        cell.textLabel?.font = .journalDateFont
+//
+//        let averageCurrentSphereValue = lifeCirclePresenter.averageCurrentSphereValue().stringWithComma()
+//        let averageCurrentSphereValueString = R.string.localizable.lifeCircleAverageCurrent(averageCurrentSphereValue)
+//
+//        let countPosts = posts.count
+//        let countPostsString = "\nЗаписей в дневнике: \(posts.count)"
+//
+//        var mostPopularSphereString = ""
+//        var lessPopularSphereString = ""
+//        if countPosts > 3 {
+//            let spheres = posts.map { $0.sphere }
+//            let spheresDict = spheres.map { ($0, 1) }
+//            let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
+//
+//            let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
+//            mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? ""), записей: \(spheresCount[mostPopularSphere?.key] ?? 0)"
+//
+//            let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
+//            lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
+//        }
+//        cell.textLabel?.text = "\(averageCurrentSphereValueString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
+//        return cell
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
@@ -347,13 +350,22 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case metricsTableView:
             if indexPath.row == 0 {
-                return commonMetricsCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: commonMetricsReuseId,
+                                                         for: indexPath) as! CommonMetricsTableViewCell
+                let average = lifeCirclePresenter.averageCurrentSphereValue()
+                let daysFromUserCreation = lifeCirclePresenter.daysFromUserCreation()
+                cell.fillCell(viewModel: CommonMetricsViewModel(posts: posts.count,
+                                                                average: average,
+                                                                days: daysFromUserCreation))
+                cell.selectionStyle = .none
+                cell.backgroundColor = .appBackground
+                return cell
             }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseId,
                                                      for: indexPath) as! SphereMetricsTableViewCell
             cell.selectionStyle = .none
-             // indexPath.row - 1 для ячейки метрик
+             // indexPath.row - 1 для ячейки Common Metrics
             guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return cell }
             cell.fillCell(from: sphereValue)
             return cell

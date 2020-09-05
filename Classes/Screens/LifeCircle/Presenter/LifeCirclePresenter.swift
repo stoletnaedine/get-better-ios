@@ -12,10 +12,10 @@ import FirebaseAuth
 protocol LifeCirclePresenter {
     func loadUserData(completion: @escaping (UserData) -> Void)
     func averageCurrentSphereValue() -> Double
+    func daysFromUserCreation() -> Int
 }
 
 class LifeCirclePresenterDefault: LifeCirclePresenter {
-    
     private let databaseService: DatabaseService = FirebaseDatabaseService()
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
@@ -54,13 +54,10 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
             guard let startSphereMetrics = self.startSphereMetrics else { return }
             var currentSphereMetricsValues = startSphereMetrics.values
 
-            // Calc values
-            guard let userCreationDate = Auth.auth().currentUser?.metadata.creationDate else { return }
-            let daysFromUserCreation = Date.diffInDays(from: userCreationDate)
-            
             // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 100 дней.
             let basePrescriptionRate: Double = 1.0
             let decrementRate: Double = 0.1
+            let daysFromUserCreation = self.daysFromUserCreation()
             let prescriptionRate = basePrescriptionRate - ((Double(daysFromUserCreation) / 100) * decrementRate)
             
             currentSphereMetricsValues.forEach { sphere, value in
@@ -84,6 +81,12 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
             self.currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
             completion((startSphereMetrics, self.currentSphereMetrics, self.posts))
         })
+    }
+    
+    func daysFromUserCreation() -> Int {
+        guard let userCreationDate = Auth.auth().currentUser?.metadata.creationDate else { return 0 }
+        let daysFromUserCreation = Date.diffInDays(from: userCreationDate)
+        return daysFromUserCreation
     }
     
     func averageCurrentSphereValue() -> Double {
