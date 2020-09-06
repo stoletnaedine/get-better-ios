@@ -74,8 +74,12 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
                     let value = currentSphereMetricsValues[sphere],
                     value < maxValue {
                     let newValue = (value * multiplier + diffValue * multiplier) / multiplier
-                    currentSphereMetricsValues[sphere] = newValue.rounded(toPlaces: 1)
+                    currentSphereMetricsValues[sphere] = newValue
                 }
+            }
+            
+            currentSphereMetricsValues.forEach { sphere, value in
+                currentSphereMetricsValues[sphere] = value.rounded(toPlaces: 1)
             }
             
             self.currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)

@@ -34,6 +34,11 @@ class CommonMetricsTableViewCell: UITableViewCell {
     
     func fillCell(viewModel: CommonMetricsViewModel) {
         postsValueLabel.text = "\(viewModel.posts)"
+        if viewModel.posts == 0 {
+            postsValueLabel.textColor = .coral
+        } else {
+            postsValueLabel.textColor = .darkGray
+        }
         averageValueLabel.text = viewModel.average.stringWithComma()
         averageValueLabel.textColor = UIColor.color(for: viewModel.average)
         daysValueLabel.text = "\(viewModel.days)"
@@ -42,13 +47,13 @@ class CommonMetricsTableViewCell: UITableViewCell {
     private func setupView() {
         postsValueLabel.font = UIFont.systemFont(ofSize: 32)
         postsValueLabel.textColor = .darkGray
-        postsLabel.text = "постов"
+        postsLabel.text = "событий"
         postsLabel.font = UIFont.systemFont(ofSize: 14)
         postsLabel.textColor = .gray
         
         averageValueLabel.font = UIFont.systemFont(ofSize: 32)
         averageValueLabel.textColor = .darkGray
-        averageLabel.text = "среднее"
+        averageLabel.text = "средний балл"
         averageLabel.font = UIFont.systemFont(ofSize: 14)
         averageLabel.textColor = .gray
         

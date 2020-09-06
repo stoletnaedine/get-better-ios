@@ -49,7 +49,7 @@ class AchievementPresenterDefault: AchievementPresenter {
         
         let regularSevenDesc = "Добавлять события 7 дней подряд (\(maxCountDaysInRow >= 7 ? 7 : daysInRowLastTime)/7)"
         let regularSeven = Achievement(icon: "🤘",
-                                       title: "Эта неделя была норм",
+                                       title: "WeekStart",
                                        description: regularSevenDesc,
                                        unlocked: maxCountDaysInRow >= 7)
         
