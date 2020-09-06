@@ -13,6 +13,7 @@ protocol LifeCirclePresenter {
     func loadUserData(completion: @escaping (UserData) -> Void)
     func averageCurrentSphereValue() -> Double
     func daysFromUserCreation() -> Int
+    func mostLessPopularSphere() -> (mostPopularSphere: Sphere?, lessPopularSphere: Sphere?)
 }
 
 class LifeCirclePresenterDefault: LifeCirclePresenter {
@@ -96,5 +97,20 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
     func averageCurrentSphereValue() -> Double {
         let values = self.currentSphereMetrics?.values.map { $0.value } ?? []
         return values.average().rounded(toPlaces: 2)
+    }
+    
+    func mostLessPopularSphere() -> (mostPopularSphere: Sphere?, lessPopularSphere: Sphere?) {
+        if posts.count > 3 {
+            let spheres = posts.map { $0.sphere }
+            let spheresDict = spheres.map { ($0, 1) }
+            let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
+
+            let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })?.key
+            let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })?.key
+            
+            return (mostPopularSphere, lessPopularSphere)
+        } else {
+            return (nil, nil)
+        }
     }
 }

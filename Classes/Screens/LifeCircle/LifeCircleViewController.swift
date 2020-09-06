@@ -301,41 +301,11 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         return SphereValue(sphere: sphere, value: value)
     }
     
-//    private func commonMetricsCell() -> UITableViewCell {
-//        let cell = UITableViewCell()
-//        cell.backgroundColor = .appBackground
-//        cell.textLabel?.numberOfLines = 0
-//        cell.selectionStyle = .none
-//        cell.textLabel?.font = .journalDateFont
-//
-//        let averageCurrentSphereValue = lifeCirclePresenter.averageCurrentSphereValue().stringWithComma()
-//        let averageCurrentSphereValueString = R.string.localizable.lifeCircleAverageCurrent(averageCurrentSphereValue)
-//
-//        let countPosts = posts.count
-//        let countPostsString = "\nЗаписей в дневнике: \(posts.count)"
-//
-//        var mostPopularSphereString = ""
-//        var lessPopularSphereString = ""
-//        if countPosts > 3 {
-//            let spheres = posts.map { $0.sphere }
-//            let spheresDict = spheres.map { ($0, 1) }
-//            let spheresCount = Dictionary(spheresDict, uniquingKeysWith: +)
-//
-//            let mostPopularSphere = spheresCount.max(by: { $0.value < $1.value })
-//            mostPopularSphereString = "\nБольше всего внимания ты уделяешь сфере \(mostPopularSphere?.key?.name ?? ""), записей: \(spheresCount[mostPopularSphere?.key] ?? 0)"
-//
-//            let lessPopularSphere = spheresCount.max(by: { $0.value > $1.value })
-//            lessPopularSphereString = "\nМеньше всего записей в сфере \(lessPopularSphere?.key?.name ?? ""): \(spheresCount[lessPopularSphere?.key] ?? 0)"
-//        }
-//        cell.textLabel?.text = "\(averageCurrentSphereValueString)\(countPostsString)\(mostPopularSphereString)\(lessPopularSphereString)"
-//        return cell
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case metricsTableView:
             if let rowsCount = currentSphereMetrics?.values.count {
-                return rowsCount + 1 // Для ячейки индекс счастья
+                return rowsCount + 1 // Для ячейки Common Metrics
             } else {
                 return 0
             }

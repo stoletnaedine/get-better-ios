@@ -29,7 +29,7 @@ class EditProfileViewController: UIViewController {
     let storageService = FirebaseStorageService()
     let alertService: AlertService = AlertServiceDefault()
     
-    var completion: () -> () = {}
+    var completion: () -> Void = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +52,8 @@ class EditProfileViewController: UIViewController {
         let dispatchGroup = DispatchGroup()
         
         if let newAvatar = avatarImageView.image {
-            
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
-            
             storageService.uploadAvatar(photo: newAvatar, completion: { [weak self] result in
                 switch result {
                 case .success(let url):
@@ -78,9 +76,7 @@ class EditProfileViewController: UIViewController {
         if let newName = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             !newName.isEmpty,
             newName != user.displayName {
-            
             dispatchGroup.enter()
-            
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = newName
             changeRequest.commitChanges(completion: { [weak self] error in
@@ -113,9 +109,7 @@ class EditProfileViewController: UIViewController {
             dispatchGroup.enter()
             
             user.updateEmail(to: newEmail, completion: { [weak self] error in
-                
                 dispatchGroup.leave()
-                
                 if let error = error {
                     self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 }
@@ -136,9 +130,9 @@ class EditProfileViewController: UIViewController {
         let alert = UIAlertController(title: R.string.localizable.editProfileDelAccountAlertTitle(),
                                       message: R.string.localizable.editProfileDelAccountAlertMessage(),
                                       preferredStyle: .alert)
-        
         alert.addAction(UIAlertAction(title: R.string.localizable.editProfileDelAccountAlertYesButton(),
-                                      style: .destructive, handler: { _ in
+                                      style: .destructive,
+                                      handler: { _ in
             user.delete(completion: { [weak self] error in
                 if let error = error {
                     self?.alertService.showErrorMessage(desc: error.localizedDescription)
@@ -162,6 +156,8 @@ class EditProfileViewController: UIViewController {
         avatarButton.setTitle(R.string.localizable.profileLoadAvatar(), for: .normal)
         avatarButton.setTitleColor(.white, for: .normal)
         avatarButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        avatarButton.titleLabel?.numberOfLines = 0
+        avatarButton.titleLabel?.textAlignment = .center
         
         if let user = user {
             if let name = user.displayName {
