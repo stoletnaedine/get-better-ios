@@ -11,17 +11,18 @@ import UIKit
 class JournalViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    let activityIndicator = UIActivityIndicatorView()
     
-    var monthYearSection: [String] = []
-    var postsSection: [PostsDateSection] = []
-    let SectionHeaderHeight: CGFloat = 30
+    private var monthYearSection: [String] = []
+    private var postsSection: [PostsDateSection] = []
+    private let SectionHeaderHeight: CGFloat = 30
+    private var tips: [Tip] = []
     
-    let cellIdentifier = R.reuseIdentifier.journalCell.identifier
-    let cellXibName = R.nib.journalTableViewCell.name
+    private let cellIdentifier = R.reuseIdentifier.journalCell.identifier
+    private let cellXibName = R.nib.journalTableViewCell.name
     
-    let databaseService: DatabaseService = FirebaseDatabaseService()
-    let alertService: AlertService = AlertServiceDefault()
+    private let databaseService: DatabaseService = FirebaseDatabaseService()
+    private let alertService: AlertService = AlertServiceDefault()
+    private let activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,10 @@ class JournalViewController: UIViewController {
         setupTableView()
         setupBarButton()
         updatePostsInTableView()
+        getTips()
     }
     
-    @objc func updatePostsInTableView() {
+    @objc private func updatePostsInTableView() {
         title = R.string.localizable.journalLoading()
         getPosts { [weak self] in
             self?.title = R.string.localizable.tabBarJournal()
@@ -40,7 +42,7 @@ class JournalViewController: UIViewController {
         }
     }
     
-    func setupRefreshControl() {
+    private func setupRefreshControl() {
         let refresh = UIRefreshControl()
         refresh.addTarget(self,
                           action: #selector(updatePostsInTableView),
@@ -48,7 +50,7 @@ class JournalViewController: UIViewController {
         tableView.refreshControl = refresh
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.dataSource = self
@@ -56,7 +58,7 @@ class JournalViewController: UIViewController {
         tableView.register(UINib(nibName: cellXibName, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
     
-    @objc func getPosts(completion: @escaping () -> Void) {
+    @objc private func getPosts(completion: @escaping () -> Void) {
         postsSection = []
         monthYearSection = []
         
@@ -117,14 +119,42 @@ class JournalViewController: UIViewController {
         monthYearSection = sortedUniqueDates
     }
     
+    private func getTips() {
+        databaseService.getTips(completion: { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let tips):
+                self.tips = tips
+                
+            case .failure(let error):
+                self.alertService.showErrorMessage(desc: error.localizedDescription)
+            }
+        })
+    }
+    
     func setupBarButton() {
         let addPostBarButton = UIBarButtonItem(barButtonSystemItem: .add,
                                                target: self,
                                                action: #selector(addPost))
         navigationItem.rightBarButtonItem = addPostBarButton
+        
+        // TODO: сделать нормально
+        let tipButton = UIBarButtonItem(title: "Tip", style: .plain, target: self, action: #selector(showTip))
+        navigationItem.leftBarButtonItem = tipButton
     }
     
-    @objc func addPost() {
+    @objc private func showTip() {
+        guard !tips.isEmpty else { return }
+        if let tip = tips.randomElement() {
+            let vc = TipViewController()
+            vc.tip = tip
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func addPost() {
         let addPostViewController = AddPostViewController()
         addPostViewController.addedPostCompletion = { [weak self] in
             self?.updatePostsInTableView()

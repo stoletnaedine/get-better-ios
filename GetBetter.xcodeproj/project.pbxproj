@@ -42,6 +42,8 @@
 		C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38B02462E1E700E0C416 /* UIImage.swift */; };
 		C35D835B250CF37D000C565E /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D835A250CF37D000C565E /* Tip.swift */; };
 		C35D835D250CF4FA000C565E /* TipMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D835C250CF4FA000C565E /* TipMapper.swift */; };
+		C35D8361250D40E5000C565E /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D835F250D40E5000C565E /* TipViewController.swift */; };
+		C35D8362250D40E5000C565E /* TipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35D8360250D40E5000C565E /* TipViewController.xib */; };
 		C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35EBD92244DE870004593CC /* GoogleService-Info.plist */; };
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
 		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
@@ -151,6 +153,8 @@
 		C35B38B02462E1E700E0C416 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C35D835A250CF37D000C565E /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
 		C35D835C250CF4FA000C565E /* TipMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipMapper.swift; sourceTree = "<group>"; };
+		C35D835F250D40E5000C565E /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
+		C35D8360250D40E5000C565E /* TipViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipViewController.xib; sourceTree = "<group>"; };
 		C35EBD92244DE870004593CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -388,6 +392,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C35D835E250D40C3000C565E /* Tip */ = {
+			isa = PBXGroup;
+			children = (
+				C35D835F250D40E5000C565E /* TipViewController.swift */,
+				C35D8360250D40E5000C565E /* TipViewController.xib */,
+			);
+			path = Tip;
+			sourceTree = "<group>";
+		};
 		C36DE9C4246E84BB005635E4 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +413,7 @@
 		C3724EC423AFABD000D49AD6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C35D835E250D40C3000C565E /* Tip */,
 				C317E56E247D6531001521FE /* NoInternet */,
 				C3BFEBC12477A291000B5B41 /* TabBar */,
 				C39A321C2457109A005D2EDF /* Settings */,
@@ -763,6 +777,7 @@
 				C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */,
 				C390A76024C0CFC900EAD48E /* TextViewViewController.xib in Resources */,
 				6EA8519F244F86FA00D40E14 /* JournalTableViewCell.xib in Resources */,
+				C35D8362250D40E5000C565E /* TipViewController.xib in Resources */,
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
 				C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */,
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
@@ -862,6 +877,7 @@
 				C3C9DD8724B843B3003C83BD /* String.swift in Sources */,
 				C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */,
 				C34434F824CEBD880045F1BD /* CancelButton.swift in Sources */,
+				C35D8361250D40E5000C565E /* TipViewController.swift in Sources */,
 				C392971F247FAE04000340DC /* PostMapper.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
 				C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */,
