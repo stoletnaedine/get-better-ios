@@ -52,7 +52,7 @@ class RootManager {
                 switch userHasSetupSphere {
                 case true:
                     self?.showTabBarController()
-                default:
+                case false:
                     self?.showOnboardingPageViewController()
                 }
             })

@@ -25,20 +25,20 @@ class FirebaseDatabaseService: DatabaseService {
     
     enum Constants {
         static let startMetricsPath = "start_sphere_level"
+        static let usersPath = "users"
+        static let postsPath = "post"
     }
     
     let ref = Database.database().reference()
     let storageService: StorageService = FirebaseStorageService()
     let user = Auth.auth().currentUser
-    let usersPath = "users"
-    let postsPath = "post"
     
     func savePost(_ post: Post) -> Bool {
         guard let ref = currentUserPath() else { return false }
         let mapper = PostMapper()
         
         ref
-            .child(postsPath)
+            .child(Constants.postsPath)
             .childByAutoId()
             .setValue(
                 mapper.map(post: post)
@@ -53,7 +53,7 @@ class FirebaseDatabaseService: DatabaseService {
         guard let ref = currentUserPath() else { return false }
         
         ref
-            .child(postsPath)
+            .child(Constants.postsPath)
             .child(post.id ?? "")
             .removeValue()
         
@@ -74,7 +74,7 @@ class FirebaseDatabaseService: DatabaseService {
         guard let ref = currentUserPath() else { return }
         
         ref
-            .child(postsPath)
+            .child(Constants.postsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 let value = snapshot.value as? NSDictionary
@@ -132,7 +132,7 @@ class FirebaseDatabaseService: DatabaseService {
         print("Current userId = \(userId)")
         
         return ref
-            .child(usersPath)
+            .child(Constants.usersPath)
             .child(userId)
     }
 }

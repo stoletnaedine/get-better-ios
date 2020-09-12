@@ -146,8 +146,8 @@ class EditProfileViewController: UIViewController {
         }))
         
         alert.addAction(UIAlertAction(title: R.string.localizable.editProfileDelAccountAlertNoButton(),
-                style: .default, handler: nil)
-        )
+                                      style: .cancel,
+                                      handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
