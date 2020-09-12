@@ -19,6 +19,7 @@ protocol DatabaseService {
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
     func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
+    func getTips(completion: @escaping (Result<[Tip], AppError>) -> Void)
 }
 
 class FirebaseDatabaseService: DatabaseService {
@@ -27,6 +28,7 @@ class FirebaseDatabaseService: DatabaseService {
         static let startMetricsPath = "start_sphere_level"
         static let usersPath = "users"
         static let postsPath = "post"
+        static let tipsPath = "tips"
     }
     
     let ref = Database.database().reference()
@@ -43,8 +45,6 @@ class FirebaseDatabaseService: DatabaseService {
             .setValue(
                 mapper.map(post: post)
         )
-        
-        print("Firebase saved post \(post)")
         
         return true
     }
@@ -63,8 +63,6 @@ class FirebaseDatabaseService: DatabaseService {
         if let previewName = post.previewName, !previewName.isEmpty {
             storageService.deletePreview(name: previewName)
         }
-        
-        print("Firebase deleted post \(post)")
         
         return true
     }
@@ -120,6 +118,39 @@ class FirebaseDatabaseService: DatabaseService {
                     completion(.success(sphereMetrics))
                 } else {
                     completion(.failure(AppError(errorCode: .notFound)))
+                }
+            }) { error in
+                completion(.failure(AppError(error: error)!))
+        }
+    }
+    
+    struct Model {
+        let title: String
+        let text: String
+    }
+    
+    func getTips(completion: @escaping (Result<[Tip], AppError>) -> Void) {
+        let mapper = TipMapper()
+        
+        ref
+            .child(Constants.tipsPath)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                
+                let value = snapshot.value as? NSDictionary
+                
+                if let keys = value?.allKeys {
+                    var tips: [Tip] = []
+                    
+                    for key in keys.enumerated() {
+                        let id = key.element
+                        let entity = value?[id] as? NSDictionary
+                        
+                        let tip = mapper.map(entity: entity)
+                        tips.append(tip)
+                    }
+                    completion(.success(tips))
+                } else {
+                    completion(.success([]))
                 }
             }) { error in
                 completion(.failure(AppError(error: error)!))

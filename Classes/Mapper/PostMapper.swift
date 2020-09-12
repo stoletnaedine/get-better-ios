@@ -9,14 +9,17 @@
 import Foundation
 
 class PostMapper {
+    
     func map(post: Post) -> [String : Any] {
-        return [PostField.text.rawValue : post.text ?? "",
-        PostField.sphere.rawValue : post.sphere?.rawValue ?? "",
-        PostField.timestamp.rawValue : post.timestamp ?? "",
-        PostField.photoUrl.rawValue : post.photoUrl ?? "",
-        PostField.photoName.rawValue : post.photoName ?? "",
-        PostField.previewUrl.rawValue : post.previewUrl ?? "",
-        PostField.previewName.rawValue : post.previewName ?? ""]
+        return [
+            PostField.text.rawValue : post.text ?? "",
+            PostField.sphere.rawValue : post.sphere?.rawValue ?? "",
+            PostField.timestamp.rawValue : post.timestamp ?? "",
+            PostField.photoUrl.rawValue : post.photoUrl ?? "",
+            PostField.photoName.rawValue : post.photoName ?? "",
+            PostField.previewUrl.rawValue : post.previewUrl ?? "",
+            PostField.previewName.rawValue : post.previewName ?? ""
+        ]
     }
     
     func map(id: Any, entity: NSDictionary?) -> Post {
