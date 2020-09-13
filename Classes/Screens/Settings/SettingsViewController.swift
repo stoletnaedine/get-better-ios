@@ -142,7 +142,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .notifications:
             // TODO: сделать нормально
-            return presenter.createPushNotificationsCell()
+            return presenter.createDailyPushNotificationsCell()
         case .version:
             let cell = UITableViewCell()
             cell.textLabel?.text = items[tableSection]?[indexPath.row].title

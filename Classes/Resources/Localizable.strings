@@ -170,7 +170,7 @@
 "Settings.logout.alert.question" = "Выйти из GetBetter?";
 "Settings.logout.alert.yes" = "Выйти";
 "Settings.logout.alert.no" = "Нет";
-"Settings.Notification.Title" = "Ежедневные напоминания";
+"Settings.Notification.Title" = "Напоминать вести дневник";
 "Settings.Notification.Unsubscribe" = "Ты больше не будешь получать push-уведомления";
 "Settings.Notification.Subscribe" = "Ура! Подписка на push-уведомления 😍";
 "Settings.Logout.Alert.No.Email" = "Не указан e-mail. Ты больше не сможешь войти вуыекгсешмупод этим профилем. Данные будут утеряны 😔";

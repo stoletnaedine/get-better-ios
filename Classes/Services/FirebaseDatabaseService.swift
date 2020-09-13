@@ -12,6 +12,10 @@ import FirebaseAuth
 
 typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
 
+enum NotificationTopic: String {
+    case daily
+}
+
 protocol DatabaseService {
     @discardableResult
     func savePost(_ post: Post) -> Bool
@@ -20,6 +24,8 @@ protocol DatabaseService {
     func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
     func getTips(completion: @escaping (Result<[Tip], AppError>) -> Void)
+    func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool)
+    func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
 }
 
 class FirebaseDatabaseService: DatabaseService {
@@ -29,6 +35,7 @@ class FirebaseDatabaseService: DatabaseService {
         static let usersPath = "users"
         static let postsPath = "post"
         static let tipsPath = "tips"
+        static let notificationsPath = "notifications"
     }
     
     let ref = Database.database().reference()
@@ -123,12 +130,7 @@ class FirebaseDatabaseService: DatabaseService {
                 completion(.failure(AppError(error: error)!))
         }
     }
-    
-    struct Model {
-        let title: String
-        let text: String
-    }
-    
+ 
     func getTips(completion: @escaping (Result<[Tip], AppError>) -> Void) {
         let mapper = TipMapper()
         
@@ -155,6 +157,29 @@ class FirebaseDatabaseService: DatabaseService {
             }) { error in
                 completion(.failure(AppError(error: error)!))
         }
+    }
+    
+    func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool) {
+        guard let ref = currentUserPath() else { return }
+        
+        ref
+            .child(Constants.notificationsPath)
+            .setValue([topic.rawValue : subscribe])
+    }
+    
+    func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void) {
+        guard let ref = currentUserPath() else { return }
+        
+        ref
+            .child(Constants.notificationsPath)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSDictionary
+                if let isSubscribe = value?[topic.rawValue] as? Bool {
+                    completion(isSubscribe)
+                } else {
+                    completion(nil)
+                }
+            })
     }
     
     private func currentUserPath() -> DatabaseReference? {

@@ -14,13 +14,16 @@ protocol SettingsPresenter {
     func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void)
     func fillArticles() -> [CommonSettingsCell]
     func createAppHistoryVersions() -> UIViewController
-    func createPushNotificationsCell() -> UITableViewCell
+    func createDailyPushNotificationsCell() -> UITableViewCell
 }
 
 class SettingsPresenterDefault: SettingsPresenter {
     
+    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let alertService: AlertService = AlertServiceDefault()
+    var isDailySubscribe: Bool?
+    
     struct Constansts {
-        static let dailyTopic = "daily"
         static let userDefaultsDailyKey = "dailyNotifications"
     }
     
@@ -84,7 +87,7 @@ class SettingsPresenterDefault: SettingsPresenter {
         return vc
     }
     
-    func createPushNotificationsCell() -> UITableViewCell {
+    func createDailyPushNotificationsCell() -> UITableViewCell {
         let cell = UITableViewCell()
         cell.selectionStyle = .none
         cell.textLabel?.text = R.string.localizable.settingsNotificationTitle()
@@ -96,8 +99,21 @@ class SettingsPresenterDefault: SettingsPresenter {
                                               y: 6,
                                               width: switchWidth,
                                               height: switchHeight))
-        let isDailySubscribe = UserDefaults.standard.bool(forKey: Constansts.userDefaultsDailyKey)
-        switcher.setOn(isDailySubscribe, animated: false)
+        
+        databaseService.getNotificationSettings(topic: .daily, completion: { [weak self] isSubscribe in
+            guard let self = self else { return }
+            
+            if let isSubscribe = isSubscribe {
+                self.isDailySubscribe = isSubscribe
+                switcher.setOn(isSubscribe, animated: false)
+            } else {
+                let isSubscribeUserDefaults = UserDefaults.standard.bool(forKey: Constansts.userDefaultsDailyKey)
+                self.isDailySubscribe = isSubscribeUserDefaults
+                self.databaseService.saveNotificationSetting(topic: .daily, subscribe: isSubscribeUserDefaults)
+                switcher.setOn(isSubscribeUserDefaults, animated: false)
+            }
+        })
+        
         switcher.addTarget(self, action: #selector(changeSubscribeDailyTopic), for: .valueChanged)
         cell.addSubview(switcher)
         
@@ -105,26 +121,34 @@ class SettingsPresenterDefault: SettingsPresenter {
     }
     
     @objc private func changeSubscribeDailyTopic() {
-        let isDailySubscribe = UserDefaults.standard.bool(forKey: Constansts.userDefaultsDailyKey)
+        guard let isDailySubscribe = self.isDailySubscribe else { return }
         
         if isDailySubscribe {
-            Messaging.messaging().unsubscribe(fromTopic: Constansts.dailyTopic) { error in
+            Messaging.messaging()
+                .unsubscribe(fromTopic: NotificationTopic.daily.rawValue) { [weak self] error in
+                guard let self = self else { return }
+                
                 if let error = error {
                     AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    UserDefaults.standard.set(false, forKey: Constansts.userDefaultsDailyKey)
-                    AlertServiceDefault().showSuccessMessage(
+                    self.databaseService.saveNotificationSetting(topic: .daily, subscribe: false)
+                    self.isDailySubscribe = false
+                    self.alertService.showSuccessMessage(
                         desc: R.string.localizable.settingsNotificationUnsubscribe()
                     )
                 }
             }
         } else {
-            Messaging.messaging().subscribe(toTopic: Constansts.dailyTopic) { error in
+            Messaging.messaging()
+                .subscribe(toTopic: NotificationTopic.daily.rawValue) { [weak self] error in
+                guard let self = self else { return }
+                
                 if let error = error {
                     AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    UserDefaults.standard.set(true, forKey: Constansts.userDefaultsDailyKey)
-                    AlertServiceDefault().showSuccessMessage(
+                    self.databaseService.saveNotificationSetting(topic: .daily, subscribe: true)
+                    self.isDailySubscribe = true
+                    self.alertService.showSuccessMessage(
                         desc: R.string.localizable.settingsNotificationSubscribe()
                     )
                 }
