@@ -15,7 +15,6 @@ class JournalViewController: UIViewController {
     private var monthYearSection: [String] = []
     private var postsSection: [PostsDateSection] = []
     private let SectionHeaderHeight: CGFloat = 30
-    private var tips: [Tip] = []
     
     private let cellIdentifier = R.reuseIdentifier.journalCell.identifier
     private let cellXibName = R.nib.journalTableViewCell.name
@@ -30,7 +29,6 @@ class JournalViewController: UIViewController {
         setupTableView()
         setupBarButton()
         updatePostsInTableView()
-        getTips()
     }
     
     @objc private func updatePostsInTableView() {
@@ -119,39 +117,10 @@ class JournalViewController: UIViewController {
         monthYearSection = sortedUniqueDates
     }
     
-    private func getTips() {
-        databaseService.getTips(completion: { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let tips):
-                self.tips = tips
-                
-            case .failure(let error):
-                self.alertService.showErrorMessage(desc: error.localizedDescription)
-            }
-        })
-    }
-    
     func setupBarButton() {
-        let addPostBarButton = UIBarButtonItem(barButtonSystemItem: .add,
-                                               target: self,
-                                               action: #selector(addPost))
-        navigationItem.rightBarButtonItem = addPostBarButton
-        
-        // TODO: сделать нормально
-        let tipButton = UIBarButtonItem(title: "Tip", style: .plain, target: self, action: #selector(showTip))
-        navigationItem.leftBarButtonItem = tipButton
-    }
-    
-    @objc private func showTip() {
-        guard !tips.isEmpty else { return }
-        if let tip = tips.randomElement() {
-            let vc = TipViewController()
-            vc.tip = tip
-            vc.modalPresentationStyle = .overFullScreen
-            self.present(vc, animated: true, completion: nil)
-        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                            target: self,
+                                                            action: #selector(addPost))
     }
     
     @objc private func addPost() {

@@ -23,10 +23,15 @@ class LifeCircleViewController: UIViewController {
     private let refreshControl = UIRefreshControl()
     private let achievementPresenter: AchievementPresenter = AchievementPresenterDefault()
     private let lifeCirclePresenter: LifeCirclePresenter = LifeCirclePresenterDefault()
+    private let databaseService: DatabaseService = FirebaseDatabaseService()
+    private let alertService: AlertService = AlertServiceDefault()
+    
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
     private var achievements: [Achievement] = []
+    private var tips: [Tip] = []
+    
     private let commonMetricsXibName = R.nib.commonMetricsTableViewCell.name
     private let commonMetricsReuseId = R.reuseIdentifier.commonMetricsCell.identifier
     private let sphereMetricsXibName = R.nib.sphereMetricsTableViewCell.name
@@ -49,6 +54,8 @@ class LifeCircleViewController: UIViewController {
         setupTableViews()
         setupRefreshControl()
         setupTapChartView()
+        setupBarButton()
+        getTips()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +81,36 @@ class LifeCircleViewController: UIViewController {
             currentLevelButton.isSelected.toggle()
             startLevelButton.isSelected.toggle()
         }
+    }
+    
+    private func getTips() {
+        databaseService.getTips(completion: { [weak self] tips in
+            guard let self = self else { return }
+            
+            if let tips = tips {
+                self.tips = tips
+            }
+        })
+    }
+    
+    func setupBarButton() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: R.string.localizable.journalTipOfTheDay(),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(showTip))
+    }
+    
+    @objc private func showTip() {
+        guard !tips.isEmpty else { return }
+
+        let days = Date().diffInDaysSince1970()
+        let sortedTips = self.tips.sorted(by: { $0.id  < $1.id })
+        let tipsCount = sortedTips.count
+        let tipIndex = days % tipsCount
+        
+        let vc = TipViewController()
+        vc.tip = sortedTips[tipIndex]
+        self.present(vc, animated: true, completion: nil)
     }
     
     private func setupLevelButtons() {

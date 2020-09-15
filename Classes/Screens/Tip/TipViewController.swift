@@ -12,8 +12,9 @@ class TipViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var tomorrowLabel: UILabel!
     
     var tip: Tip?
     var like: Bool = false
@@ -38,7 +39,9 @@ class TipViewController: UIViewController {
     
     private func configure(tip: Tip) {
         self.titleLabel.text = tip.title
-        self.textView.text = tip.text
+        self.textLabel.text = tip.text
+        self.titleLabel.sizeToFit()
+        self.textLabel.sizeToFit()
     }
     
     private func setupLikeButton() {
@@ -47,15 +50,18 @@ class TipViewController: UIViewController {
         } else {
             self.likeButton.setImage(R.image.likeOff(), for: .normal)
         }
-        self.likeButton.imageView?.tint(with: .white)
     }
 
     private func setupView() {
         self.imageView.image = R.image.lightBackground()
-        self.titleLabel.font = UIFont.boldSystemFont(ofSize: 40)
+        self.titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
         self.titleLabel.textColor = .black
-        self.textView.font = UIFont.systemFont(ofSize: 22)
-        self.textView.textColor = .darkGray
+        self.textLabel.font = UIFont.systemFont(ofSize: 18)
+        self.textLabel.textColor = .black
+        self.tomorrowLabel.textColor = .darkGray
+        self.tomorrowLabel.font = .journalDateFont
+        
         self.setupLikeButton()
+        self.likeButton.isHidden = true
     }
 }

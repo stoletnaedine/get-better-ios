@@ -23,7 +23,7 @@ protocol DatabaseService {
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
     func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
-    func getTips(completion: @escaping (Result<[Tip], AppError>) -> Void)
+    func getTips(completion: @escaping ([Tip]?) -> Void)
     func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool)
     func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
 }
@@ -131,7 +131,7 @@ class FirebaseDatabaseService: DatabaseService {
         }
     }
  
-    func getTips(completion: @escaping (Result<[Tip], AppError>) -> Void) {
+    func getTips(completion: @escaping ([Tip]?) -> Void) {
         let mapper = TipMapper()
         
         ref
@@ -150,12 +150,12 @@ class FirebaseDatabaseService: DatabaseService {
                         let tip = mapper.map(entity: entity)
                         tips.append(tip)
                     }
-                    completion(.success(tips))
+                    completion(tips)
                 } else {
-                    completion(.success([]))
+                    completion(nil)
                 }
             }) { error in
-                completion(.failure(AppError(error: error)!))
+                completion(nil)
         }
     }
     
