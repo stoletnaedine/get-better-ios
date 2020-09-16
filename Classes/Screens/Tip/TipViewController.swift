@@ -18,6 +18,14 @@ class TipViewController: UIViewController {
     
     var tip: Tip?
     var like: Bool = false
+    let backgrounds = [
+        R.image.tipBackground1(),
+        R.image.tipBackground2(),
+        R.image.tipBackground3(),
+        R.image.tipBackground4(),
+        R.image.tipBackground5(),
+        R.image.tipBackground6()
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,14 +60,23 @@ class TipViewController: UIViewController {
         }
     }
 
+    
     private func setupView() {
-        self.imageView.image = R.image.lightBackground()
+        let days = Date().diffInDaysSince1970()
+        let imageIndex = days % backgrounds.count
+        self.imageView.image = backgrounds[imageIndex]
+        
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
         self.titleLabel.textColor = .black
         self.textLabel.font = UIFont.systemFont(ofSize: 18)
         self.textLabel.textColor = .black
-        self.tomorrowLabel.textColor = .darkGray
+        self.tomorrowLabel.textColor = .white
         self.tomorrowLabel.font = .journalDateFont
+        self.tomorrowLabel.layer.shadowColor = UIColor.black.cgColor
+        self.tomorrowLabel.layer.shadowOffset = .init(width: 0.5, height: 0.5)
+        self.tomorrowLabel.layer.shadowOpacity = 0.7
+        self.tomorrowLabel.layer.shadowRadius = 5.0
+        self.tomorrowLabel.layer.masksToBounds = false
         
         self.setupLikeButton()
         self.likeButton.isHidden = true

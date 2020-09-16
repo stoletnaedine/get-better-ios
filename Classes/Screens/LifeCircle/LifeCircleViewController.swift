@@ -25,6 +25,7 @@ class LifeCircleViewController: UIViewController {
     private let lifeCirclePresenter: LifeCirclePresenter = LifeCirclePresenterDefault()
     private let databaseService: DatabaseService = FirebaseDatabaseService()
     private let alertService: AlertService = AlertServiceDefault()
+    private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
     
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
@@ -89,15 +90,11 @@ class LifeCircleViewController: UIViewController {
             
             if let tips = tips {
                 self.tips = tips
+                if !self.userDefaultsService.isTipOfTheDayShown() {
+                    self.showTip()
+                }
             }
         })
-    }
-    
-    func setupBarButton() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: R.string.localizable.journalTipOfTheDay(),
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(showTip))
     }
     
     @objc private func showTip() {
@@ -110,7 +107,15 @@ class LifeCircleViewController: UIViewController {
         
         let vc = TipViewController()
         vc.tip = sortedTips[tipIndex]
-        self.present(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
+        userDefaultsService.tipOfTheDayShown()
+    }
+    
+    private func setupBarButton() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: R.string.localizable.journalTipOfTheDay(),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(showTip))
     }
     
     private func setupLevelButtons() {
