@@ -8,23 +8,41 @@
 
 import UIKit
 
+struct TipBackground {
+    let style: TipStyle
+    let image: UIImage?
+    
+    enum TipStyle {
+        case light
+        case dark
+    }
+}
+
 class TipViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var tomorrowLabel: UILabel!
+    @IBOutlet weak var cancelButton: CancelButton!
     
     var tip: Tip?
     var like: Bool = false
-    let backgrounds = [
-        R.image.tipBackground1(),
-        R.image.tipBackground2(),
-        R.image.tipBackground3(),
-        R.image.tipBackground4(),
-        R.image.tipBackground5(),
-        R.image.tipBackground6()
+    let backgrounds: [TipBackground] = [
+        TipBackground(style: .light, image: R.image.lightBg1()),
+        TipBackground(style: .light, image: R.image.lightBg2()),
+        TipBackground(style: .light, image: R.image.lightBg3()),
+        TipBackground(style: .light, image: R.image.lightBg4()),
+        TipBackground(style: .light, image: R.image.lightBg5()),
+        TipBackground(style: .dark, image: R.image.darkBg1()),
+        TipBackground(style: .dark, image: R.image.darkBg2()),
+        TipBackground(style: .dark, image: R.image.darkBg3()),
+        TipBackground(style: .dark, image: R.image.darkBg4()),
+        TipBackground(style: .dark, image: R.image.darkBg5()),
+        TipBackground(style: .dark, image: R.image.darkBg6()),
+        TipBackground(style: .dark, image: R.image.darkBg7()),
+        TipBackground(style: .dark, image: R.image.darkBg8()),
+        TipBackground(style: .dark, image: R.image.darkBg9())
     ]
     
     override func viewDidLoad() {
@@ -40,11 +58,6 @@ class TipViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func likeButtonDidTap(_ sender: Any) {
-        self.like.toggle()
-        self.setupLikeButton()
-    }
-    
     private func configure(tip: Tip) {
         self.titleLabel.text = tip.title
         self.textLabel.text = tip.text
@@ -52,33 +65,33 @@ class TipViewController: UIViewController {
         self.textLabel.sizeToFit()
     }
     
-    private func setupLikeButton() {
-        if self.like {
-            self.likeButton.setImage(R.image.likeOn(), for: .normal)
-        } else {
-            self.likeButton.setImage(R.image.likeOff(), for: .normal)
-        }
-    }
-
-    
     private func setupView() {
         let days = Date().diffInDaysSince1970()
+        
         let imageIndex = days % backgrounds.count
-        self.imageView.image = backgrounds[imageIndex]
+        let tipBackground = backgrounds[imageIndex]
         
-        self.titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
-        self.titleLabel.textColor = .black
+        self.imageView.image = tipBackground.image
+        switch tipBackground.style {
+        case .light:
+            self.titleLabel.textColor = .black
+            self.textLabel.textColor = .black
+        case .dark:
+            self.titleLabel.textColor = .white
+            self.textLabel.textColor = .white
+        }
+        
+        self.cancelButton.style = .white
+        self.titleLabel.font = UIFont.systemFont(ofSize: 26)
         self.textLabel.font = UIFont.systemFont(ofSize: 18)
-        self.textLabel.textColor = .black
-        self.tomorrowLabel.textColor = .white
         self.tomorrowLabel.font = .journalDateFont
-        self.tomorrowLabel.layer.shadowColor = UIColor.black.cgColor
-        self.tomorrowLabel.layer.shadowOffset = .init(width: 0.5, height: 0.5)
-        self.tomorrowLabel.layer.shadowOpacity = 0.7
-        self.tomorrowLabel.layer.shadowRadius = 5.0
-        self.tomorrowLabel.layer.masksToBounds = false
         
-        self.setupLikeButton()
-        self.likeButton.isHidden = true
+        self.tomorrowLabel.isHidden = true
+//        self.tomorrowLabel.textColor = .white
+//        self.tomorrowLabel.layer.shadowColor = UIColor.black.cgColor
+//        self.tomorrowLabel.layer.shadowOffset = .init(width: 0.5, height: 0.5)
+//        self.tomorrowLabel.layer.shadowOpacity = 0.7
+//        self.tomorrowLabel.layer.shadowRadius = 5.0
+//        self.tomorrowLabel.layer.masksToBounds = false
     }
 }

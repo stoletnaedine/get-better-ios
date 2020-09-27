@@ -9,7 +9,18 @@
 import UIKit
 
 @IBDesignable
-final class CancelButton: UIButton {
+class CancelButton: UIButton {
+    
+    enum Style {
+        case violet
+        case white
+    }
+    
+    var style: Style = .violet {
+        didSet {
+            setupStyle()
+        }
+    }
     
     override init(frame: CGRect){
          super.init(frame: frame)
@@ -24,10 +35,19 @@ final class CancelButton: UIButton {
          setup()
      }
 
-     func setup() {
+     private func setup() {
         self.clipsToBounds = true
         self.setImage(R.image.cancel(), for: .normal)
         self.setTitle("", for: .normal)
-        self.tintColor = .violet
+        setupStyle()
      }
+    
+    private func setupStyle() {
+        switch style {
+        case .violet:
+            self.tintColor = .violet
+        case .white:
+            self.tintColor = .white
+        }
+    }
 }
