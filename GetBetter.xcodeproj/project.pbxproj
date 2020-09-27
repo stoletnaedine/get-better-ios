@@ -52,6 +52,8 @@
 		C37D0B3E23D79088005A1BCF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* Label.swift */; };
 		C3813FFE24D92F7000A3C6AA /* LifeCirclePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */; };
 		C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */; };
+		C38689EB2520FE9500BE9851 /* EditPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38689EA2520FE9500BE9851 /* EditPostViewController.swift */; };
+		C38689ED2521054300BE9851 /* EditPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C38689EC2521054300BE9851 /* EditPostViewController.xib */; };
 		C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */; };
 		C390A76024C0CFC900EAD48E /* TextViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */; };
 		C392971F247FAE04000340DC /* PostMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C392971E247FAE04000340DC /* PostMapper.swift */; };
@@ -164,6 +166,8 @@
 		C37D0B3D23D79088005A1BCF /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCirclePresenter.swift; sourceTree = "<group>"; };
 		C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		C38689EA2520FE9500BE9851 /* EditPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostViewController.swift; sourceTree = "<group>"; };
+		C38689EC2521054300BE9851 /* EditPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditPostViewController.xib; path = Classes/Screens/EditPost/EditPostViewController.xib; sourceTree = SOURCE_ROOT; };
 		C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
 		C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewViewController.xib; sourceTree = "<group>"; };
 		C392971E247FAE04000340DC /* PostMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMapper.swift; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 				C3724EC923AFAC5800D49AD6 /* LifeCircle */,
 				C3724ECA23AFAC5D00D49AD6 /* Journal */,
 				6E5AFCD32450C06800F283C4 /* AddPost */,
+				C38689E92520FE6000BE9851 /* EditPost */,
 				C3724EC723AFAC2400D49AD6 /* PostDetail */,
 				F1495F8E7917FD2E6FE4B9A6 /* SphereDetail */,
 				F149585DB5CA445CF9852B67 /* Article */,
@@ -480,6 +485,15 @@
 				C35D835A250CF37D000C565E /* Tip.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C38689E92520FE6000BE9851 /* EditPost */ = {
+			isa = PBXGroup;
+			children = (
+				C38689EA2520FE9500BE9851 /* EditPostViewController.swift */,
+				C38689EC2521054300BE9851 /* EditPostViewController.xib */,
+			);
+			path = EditPost;
 			sourceTree = "<group>";
 		};
 		C390A75B24C0CF9800EAD48E /* Views */ = {
@@ -770,6 +784,7 @@
 			files = (
 				6E5AE64424601DBC00418B23 /* ResetPasswordViewController.xib in Resources */,
 				9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */,
+				C38689ED2521054300BE9851 /* EditPostViewController.xib in Resources */,
 				C328EE062447294100445704 /* RegisterViewController.xib in Resources */,
 				9277D38F238C725300B3AECA /* Assets.xcassets in Resources */,
 				C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */,
@@ -882,6 +897,7 @@
 				C34434F824CEBD880045F1BD /* CancelButton.swift in Sources */,
 				C35D8361250D40E5000C565E /* TipViewController.swift in Sources */,
 				C392971F247FAE04000340DC /* PostMapper.swift in Sources */,
+				C38689EB2520FE9500BE9851 /* EditPostViewController.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
 				C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */,
 				C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */,

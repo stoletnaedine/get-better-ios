@@ -15,8 +15,10 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var editButton: UIButton!
     
     var post: Post?
+//    var journalVC: UIViewController?
     
     let alertService: AlertService = AlertServiceDefault()
     
@@ -28,11 +30,26 @@ class PostDetailViewController: UIViewController {
         }
         registerGestureCopyLabelText()
         customizeView()
+        
+        editButton.isHidden = true
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+//    @IBAction func editButtonDidTap(_ sender: Any) {
+//        if let journalVC = journalVC as? JournalViewController {
+//            self.dismiss(animated: false, completion: nil)
+//
+//            let editPostVC = EditPostViewController()
+//            editPostVC.post = post
+//            editPostVC.editPostCompletion = { [weak journalVC] in
+//                journalVC?.updatePostsInTableView()
+//            }
+//            journalVC.present(editPostVC, animated: false, completion: nil)
+//        }
+//    }
     
     func registerGestureCopyLabelText() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(copyLabelText))
@@ -81,5 +98,6 @@ class PostDetailViewController: UIViewController {
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .gray
         photoImageView.alpha = 0.15
+        editButton.tintColor = .violet
     }
 }

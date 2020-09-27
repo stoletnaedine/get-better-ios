@@ -36,6 +36,8 @@ class AddPostViewController: UIViewController {
         self.title = R.string.localizable.postTitle()
         self.hideKeyboardWhenTappedAround()
         setupView()
+        setupSelectSphereButtonTapHandler()
+        setupTextView()
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
@@ -80,24 +82,37 @@ class AddPostViewController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            let post = Post(id: nil,
-                            text: text,
-                            sphere: sphere,
-                            timestamp: Date.currentTimestamp,
-                            photoUrl: photoResult.photoUrl,
-                            photoName: photoResult.photoName,
-                            previewUrl: photoResult.previewUrl,
-                            previewName: photoResult.previewName)
-            self?.databaseService.savePost(post)
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.removeActivityIndicator()
-                let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
-                self?.alertService.showSuccessMessage(desc: description)
-                self?.addedPostCompletion()
-                self?.dismiss(animated: true, completion: nil)
-            }
+            self?.savePost(text: text, sphere: sphere, photoResult: photoResult)
         })
+    }
+    
+    func savePost(text: String, sphere: Sphere, photoResult: Photo) {
+        let post = Post(id: nil,
+                        text: text,
+                        sphere: sphere,
+                        timestamp: Date.currentTimestamp,
+                        photoUrl: photoResult.photoUrl,
+                        photoName: photoResult.photoName,
+                        previewUrl: photoResult.previewUrl,
+                        previewName: photoResult.previewName)
+        databaseService.savePost(post)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.removeActivityIndicator()
+            let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
+            self?.alertService.showSuccessMessage(desc: description)
+            self?.addedPostCompletion()
+            self?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func setupSelectSphereButtonTapHandler() {
+        selectSphereButton.addTarget(self, action: #selector(showPicker), for: .allTouchEvents)
+    }
+    
+    func setupTextView() {
+        postTextView.delegate = self
+        postTextView.becomeFirstResponder()
     }
     
     @objc func showPicker() {
@@ -105,20 +120,16 @@ class AddPostViewController: UIViewController {
         picker.dataSource = self
         picker.delegate = self
         
-        let customtTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.addSubview(customtTextField)
+        let customTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.addSubview(customTextField)
         
-        customtTextField.inputView = picker
-        customtTextField.becomeFirstResponder()
+        customTextField.inputView = picker
+        customTextField.becomeFirstResponder()
     }
-}
-
-// MARK: Setup View
-extension AddPostViewController {
-    private func setupView() {
-        selectSphereButton.addTarget(self, action: #selector(showPicker), for: .allTouchEvents)
-        postTextView.delegate = self
-        postTextView.becomeFirstResponder()
+    
+    // MARK: Setup View
+    
+    func setupView() {
         postTextView.font = postTextView.font?.withSize(16)
         titleLabel.font = .journalTitleFont
         titleLabel.textColor = .violet
@@ -148,15 +159,6 @@ extension AddPostViewController {
         placeholderLabel.font = postTextView.font?.withSize(16)
         placeholderLabel.textColor = .lightGray
         attachButton.tintColor = .violet
-    }
-    
-    private func switchTextViewPlaceholder(text: String) {
-        switch text.count {
-        case 0:
-            placeholderLabel.isHidden = false
-        default:
-            placeholderLabel.isHidden = true
-        }
     }
 }
 
@@ -188,16 +190,14 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 extension AddPostViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        switchTextViewPlaceholder(text: textView.text)
-        
         let currentTextCount = postTextView.text.count
         symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
+        placeholderLabel.isHidden = currentTextCount != 0
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        switchTextViewPlaceholder(text: text)
-        
         let currentText = textView.text ?? ""
+        placeholderLabel.isHidden = !currentText.isEmpty
         if text.count > maxSymbolsCount {
             alertService.showErrorMessage(
                 desc: R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))

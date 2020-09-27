@@ -215,6 +215,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         
         let postDetailViewController = PostDetailViewController()
         postDetailViewController.post = post
+        
+        // FIXME
+//        postDetailViewController.journalVC = self
+        
         present(postDetailViewController, animated: true, completion: nil)
     }
     

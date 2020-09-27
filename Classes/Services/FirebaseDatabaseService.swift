@@ -46,12 +46,21 @@ class FirebaseDatabaseService: DatabaseService {
         guard let ref = currentUserPath() else { return false }
         let mapper = PostMapper()
         
-        ref
-            .child(Constants.postsPath)
-            .childByAutoId()
-            .setValue(
-                mapper.map(post: post)
-        )
+        if let postId = post.id {
+            ref
+                .child(Constants.postsPath)
+                .child(postId)
+                .setValue(
+                    mapper.map(post: post)
+            )
+        } else {
+            ref
+                .child(Constants.postsPath)
+                .childByAutoId()
+                .setValue(
+                    mapper.map(post: post)
+            )
+        }
         
         return true
     }
