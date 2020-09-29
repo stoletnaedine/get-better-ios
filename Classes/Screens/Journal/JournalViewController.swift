@@ -31,7 +31,7 @@ class JournalViewController: UIViewController {
         updatePostsInTableView()
     }
     
-    @objc private func updatePostsInTableView() {
+    @objc func updatePostsInTableView() {
         title = R.string.localizable.journalLoading()
         getPosts { [weak self] in
             self?.title = R.string.localizable.tabBarJournal()
@@ -215,11 +215,12 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         
         let postDetailViewController = PostDetailViewController()
         postDetailViewController.post = post
-        
-        // FIXME
-//        postDetailViewController.journalVC = self
-        
-        present(postDetailViewController, animated: true, completion: nil)
+        postDetailViewController.editPostCompletion = { [weak self] in
+            guard let self = self else { return }
+            self.updatePostsInTableView()
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        navigationController?.pushViewController(postDetailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

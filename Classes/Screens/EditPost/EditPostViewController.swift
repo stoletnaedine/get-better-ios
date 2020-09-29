@@ -6,7 +6,7 @@
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class EditPostViewController: AddPostViewController {
     
@@ -30,11 +30,12 @@ class EditPostViewController: AddPostViewController {
         selectSphereButton.setTitle(post.sphere?.name, for: .normal)
         selectSphereButton.setImage(nil, for: .normal)
         selectSphereButton.tintColor = .violet
+        sphereView.layer.borderColor = UIColor.gray.cgColor
+        saveButtonView.backgroundColor = .violet
         
         selectedSphere = post.sphere
         postTextView.text = post.text
         dateLabel.text = Date.convertToDateWithWeekday(from: post.timestamp ?? 0)
-        saveButtonView.backgroundColor = .violet
         
         placeholderLabel.isHidden = true
         attachButton.isHidden = true

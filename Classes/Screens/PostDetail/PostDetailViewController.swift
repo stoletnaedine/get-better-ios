@@ -12,13 +12,11 @@ import Kingfisher
 class PostDetailViewController: UIViewController {
     
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var sphereLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var editButton: UIButton!
     
     var post: Post?
-//    var journalVC: UIViewController?
+    var editPostCompletion: (() -> Void)?
     
     let alertService: AlertService = AlertServiceDefault()
     
@@ -30,26 +28,26 @@ class PostDetailViewController: UIViewController {
         }
         registerGestureCopyLabelText()
         customizeView()
-        
-        editButton.isHidden = true
+        setupEditButton()
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-//    @IBAction func editButtonDidTap(_ sender: Any) {
-//        if let journalVC = journalVC as? JournalViewController {
-//            self.dismiss(animated: false, completion: nil)
-//
-//            let editPostVC = EditPostViewController()
-//            editPostVC.post = post
-//            editPostVC.editPostCompletion = { [weak journalVC] in
-//                journalVC?.updatePostsInTableView()
-//            }
-//            journalVC.present(editPostVC, animated: false, completion: nil)
-//        }
-//    }
+    private func setupEditButton() {
+        // FIXME в ресурсы
+        navigationItem.rightBarButtonItem = .init(title: "Редактировать", style: .plain, target: self, action: #selector(editButtonDidTap))
+    }
+    
+    @objc func editButtonDidTap() {
+        let editPostVC = EditPostViewController()
+        editPostVC.post = post
+        editPostVC.editPostCompletion = { [weak self] in
+            self?.editPostCompletion?()
+        }
+        present(editPostVC, animated: true, completion: nil)
+    }
     
     func registerGestureCopyLabelText() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(copyLabelText))
@@ -65,9 +63,8 @@ class PostDetailViewController: UIViewController {
     }
 
     func fillViewController(_ post: Post) {
-        self.title = post.text ?? R.string.localizable.postTitleDefault()
+        self.title = post.sphere?.name
         self.textLabel.text = post.text ?? ""
-        self.sphereLabel.text = post.sphere?.name ?? ""
         self.dateLabel.text = ""
         self.photoImageView.image = post.sphere?.image
         if let timestamp = post.timestamp {
@@ -93,11 +90,8 @@ class PostDetailViewController: UIViewController {
     
     func customizeView() {
         textLabel.font = UIFont.systemFont(ofSize: 16)
-        sphereLabel.font = .journalTitleFont
-        sphereLabel.textColor = .violet
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .gray
         photoImageView.alpha = 0.15
-        editButton.tintColor = .violet
     }
 }
