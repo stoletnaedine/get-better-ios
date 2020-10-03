@@ -53,11 +53,11 @@ class AddPostViewController: UIViewController {
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         guard let text = postTextView.text, !text.isEmpty else {
-            alertService.showErrorMessage(desc: R.string.localizable.postEmptyTextWarning())
+            alertService.showErrorMessage(desc: R.string.localizable.postEmptyText())
             return
         }
         guard let sphere = selectedSphere else {
-            alertService.showErrorMessage(desc: R.string.localizable.postEmptySphereWarning())
+            alertService.showErrorMessage(desc: R.string.localizable.postEmptySphere())
             return
         }
         

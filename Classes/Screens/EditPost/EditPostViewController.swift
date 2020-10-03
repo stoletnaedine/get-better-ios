@@ -56,7 +56,7 @@ class EditPostViewController: AddPostViewController {
         
         DispatchQueue.main.async { [weak self] in
             self?.removeActivityIndicator()
-            let description = "Пост отредактирован"
+            let description = R.string.localizable.postEditSuccess()
             self?.alertService.showSuccessMessage(desc: description)
             self?.editPostCompletion?()
             self?.dismiss(animated: true, completion: nil)

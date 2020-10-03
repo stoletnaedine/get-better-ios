@@ -54,7 +54,7 @@ class LifeCircleViewController: UIViewController {
         setupSegmentedControl()
         setupTableViews()
         setupRefreshControl()
-        setupTapChartView()
+        setupChartViewTap()
         setupBarButton()
         getTips()
     }
@@ -104,9 +104,11 @@ class LifeCircleViewController: UIViewController {
         let sortedTips = self.tips.sorted(by: { $0.id  < $1.id })
         let tipsCount = sortedTips.count
         let tipIndex = days % tipsCount
+        let tipOfTheDay = sortedTips[tipIndex]
         
         let vc = TipViewController()
-        vc.tip = sortedTips[tipIndex]
+        vc.modalPresentationStyle = .overFullScreen
+        vc.tip = tipOfTheDay
         present(vc, animated: true, completion: nil)
         userDefaultsService.tipOfTheDayShown()
     }
@@ -133,7 +135,7 @@ class LifeCircleViewController: UIViewController {
         startLevelButton.setBackgroundColor(color: .violet, forState: .selected)
     }
     
-    private func setupTapChartView() {
+    private func setupChartViewTap() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showValues))
         chartView.addGestureRecognizer(tap)
     }

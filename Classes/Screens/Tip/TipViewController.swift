@@ -48,13 +48,21 @@ class TipViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupTargets()
         
         if let tip = self.tip {
             configure(tip: tip)
         }
     }
+    
+    private func setupTargets() {
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissView))
+        downSwipe.direction = .down
+        cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        self.view.addGestureRecognizer(downSwipe)
+    }
 
-    @IBAction func cancelButtonDidTap(_ sender: Any) {
+    @objc private func dismissView() {
         self.dismiss(animated: true, completion: nil)
     }
     

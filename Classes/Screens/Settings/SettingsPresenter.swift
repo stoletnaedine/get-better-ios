@@ -14,18 +14,16 @@ protocol SettingsPresenter {
     func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void)
     func fillArticles() -> [CommonSettingsCell]
     func createAppHistoryVersions() -> UIViewController
-    func createDailyPushNotificationsCell() -> UITableViewCell
+    func createPushNotifyCell(topic: NotificationTopic) -> UITableViewCell
 }
 
 class SettingsPresenterDefault: SettingsPresenter {
     
     let databaseService: DatabaseService = FirebaseDatabaseService()
     let alertService: AlertService = AlertServiceDefault()
-    var isDailySubscribe: Bool?
     
-    struct Constansts {
-        static let userDefaultsDailyKey = "dailyNotifications"
-    }
+    var isDailySubscribe: Bool?
+    var isTipSubscribe: Bool?
     
     func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
         
@@ -87,10 +85,18 @@ class SettingsPresenterDefault: SettingsPresenter {
         return vc
     }
     
-    func createDailyPushNotificationsCell() -> UITableViewCell {
+    func createPushNotifyCell(topic: NotificationTopic) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.selectionStyle = .none
-        cell.textLabel?.text = R.string.localizable.settingsNotificationTitle()
+        
+        var title: String
+        switch topic {
+        case .daily:
+            title = R.string.localizable.settingsPushDaily()
+        case .tipOfTheDay:
+            title = R.string.localizable.settingsPushTip()
+        }
+        cell.textLabel?.text = title
         
         let screenWidth = UIScreen.main.bounds.width
         let switchWidth: CGFloat = 49
@@ -100,27 +106,41 @@ class SettingsPresenterDefault: SettingsPresenter {
                                               width: switchWidth,
                                               height: switchHeight))
         
-        databaseService.getNotificationSettings(topic: .daily, completion: { [weak self] isSubscribe in
+        databaseService.getNotificationSettings(topic: topic, completion: { [weak self] isSubscribe in
             guard let self = self else { return }
+            var isLocalSubscribe: Bool
             
             if let isSubscribe = isSubscribe {
-                self.isDailySubscribe = isSubscribe
-                switcher.setOn(isSubscribe, animated: false)
+                isLocalSubscribe = isSubscribe
+                switcher.setOn(isSubscribe, animated: true)
             } else {
-                let isSubscribeUserDefaults = UserDefaults.standard.bool(forKey: Constansts.userDefaultsDailyKey)
-                self.isDailySubscribe = isSubscribeUserDefaults
-                self.databaseService.saveNotificationSetting(topic: .daily, subscribe: isSubscribeUserDefaults)
-                switcher.setOn(isSubscribeUserDefaults, animated: false)
+                let isSubscribe = false
+                isLocalSubscribe = isSubscribe
+                self.databaseService.saveNotificationSetting(topic: topic, subscribe: isSubscribe)
+                switcher.setOn(isSubscribe, animated: true)
+            }
+            
+            switch topic {
+            case .daily:
+                self.isDailySubscribe = isLocalSubscribe
+            case .tipOfTheDay:
+                self.isTipSubscribe = isLocalSubscribe
             }
         })
         
-        switcher.addTarget(self, action: #selector(changeSubscribeDailyTopic), for: .valueChanged)
+        switch topic {
+        case .daily:
+            switcher.addTarget(self, action: #selector(changeSubscribeDaily), for: .valueChanged)
+        case .tipOfTheDay:
+            switcher.addTarget(self, action: #selector(changeSubscribeTip), for: .valueChanged)
+        }
+        
         cell.addSubview(switcher)
         
         return cell
     }
     
-    @objc private func changeSubscribeDailyTopic() {
+    @objc private func changeSubscribeDaily() {
         guard let isDailySubscribe = self.isDailySubscribe else { return }
         
         if isDailySubscribe {
@@ -154,6 +174,41 @@ class SettingsPresenterDefault: SettingsPresenter {
                 }
             }
         }
+    }
+    
+    @objc private func changeSubscribeTip() {
+        guard let isTipSubscribe = self.isTipSubscribe else { return }
         
+        if isTipSubscribe {
+            Messaging.messaging()
+                .unsubscribe(fromTopic: NotificationTopic.tipOfTheDay.rawValue) { [weak self] error in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
+                } else {
+                    self.databaseService.saveNotificationSetting(topic: .tipOfTheDay, subscribe: false)
+                    self.isTipSubscribe = false
+                    self.alertService.showSuccessMessage(
+                        desc: R.string.localizable.settingsNotificationUnsubscribe()
+                    )
+                }
+            }
+        } else {
+            Messaging.messaging()
+                .subscribe(toTopic: NotificationTopic.tipOfTheDay.rawValue) { [weak self] error in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
+                } else {
+                    self.databaseService.saveNotificationSetting(topic: .tipOfTheDay, subscribe: true)
+                    self.isTipSubscribe = true
+                    self.alertService.showSuccessMessage(
+                        desc: R.string.localizable.settingsNotificationSubscribe()
+                    )
+                }
+            }
+        }
     }
 }

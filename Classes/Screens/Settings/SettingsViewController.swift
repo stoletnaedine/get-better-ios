@@ -63,7 +63,11 @@ class SettingsViewController: UIViewController {
         tableItems = [
             TableSection.profile : [CommonSettingsCell(title: "", viewController: editProfileViewController)],
             TableSection.articles : presenter.fillArticles(),
-            TableSection.notifications : [CommonSettingsCell(title: "", viewController: nil)],
+            TableSection.notifications : [
+                CommonSettingsCell(title: NotificationTopic.daily.rawValue, viewController: nil)
+                // TODO доделать советы дня (в БД сейчас перезаписывается строка)
+//                CommonSettingsCell(title: NotificationTopic.tipOfTheDay.rawValue, viewController: nil)
+            ],
             TableSection.version : [
                 CommonSettingsCell(
                         title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
@@ -142,7 +146,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .notifications:
             // TODO: сделать нормально
-            return presenter.createDailyPushNotificationsCell()
+            guard let topic = NotificationTopic(rawValue: items[tableSection]?[indexPath.row].title ?? "") else { return UITableViewCell() }
+            return presenter.createPushNotifyCell(topic: topic)
         case .version:
             let cell = UITableViewCell()
             cell.textLabel?.text = items[tableSection]?[indexPath.row].title

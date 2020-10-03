@@ -14,6 +14,7 @@ typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Po
 
 enum NotificationTopic: String {
     case daily
+    case tipOfTheDay
 }
 
 protocol DatabaseService {
@@ -194,7 +195,7 @@ class FirebaseDatabaseService: DatabaseService {
     private func currentUserPath() -> DatabaseReference? {
         guard let userId = user?.uid else { return nil }
         
-        print("Current userId = \(userId)")
+        print("Request. UserId = \(userId)")
         
         return ref
             .child(Constants.usersPath)
