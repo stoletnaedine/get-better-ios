@@ -36,8 +36,7 @@ class PostDetailViewController: UIViewController {
     }
     
     private func setupEditButton() {
-        // FIXME в ресурсы
-        navigationItem.rightBarButtonItem = .init(title: "Редактировать", style: .plain, target: self, action: #selector(editButtonDidTap))
+        navigationItem.rightBarButtonItem = .init(image: R.image.edit(), style: .plain, target: self, action: #selector(editButtonDidTap))
     }
     
     @objc func editButtonDidTap() {
@@ -77,13 +76,13 @@ class PostDetailViewController: UIViewController {
             self.photoImageView.kf.setImage(
                 with: url,
                 options: [
-                        .transition(.fade(1)),
-                        .cacheOriginalImage
-                    ])
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+            ])
             
             DispatchQueue.main.async { [weak self] in
                 self?.photoImageView.alpha = 1
-                self?.photoImageView.contentMode = .scaleAspectFill
+                self?.photoImageView.contentMode = .scaleAspectFit
             }
         }
     }

@@ -74,14 +74,14 @@ extension UIColor {
         switch value {
         case 0...3.4:
             return .coral
-        case 3.5...4.0:
-            return .thirtyGray
-        case 4.1...6.0:
+        case 3.5...4.9:
             return .gray
-        case 6.1...7.4:
+        case 5.0...6.5:
             return .darkGray
-        default:
+        case 6.6...8.9:
             return .salad
+        default:
+            return .violet
         }
     }
 }
