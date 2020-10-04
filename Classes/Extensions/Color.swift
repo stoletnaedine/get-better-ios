@@ -72,13 +72,13 @@ extension UIColor {
     
     static func color(for value: Double) -> UIColor {
         switch value {
-        case 0...3.4:
+        case 0...3.49:
             return .coral
-        case 3.5...4.9:
+        case 3.5...4.99:
             return .gray
-        case 5.0...6.5:
+        case 5.0...6.59:
             return .darkGray
-        case 6.6...8.9:
+        case 6.6...8.99:
             return .salad
         default:
             return .violet
