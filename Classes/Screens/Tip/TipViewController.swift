@@ -92,14 +92,5 @@ class TipViewController: UIViewController {
         self.cancelButton.style = .white
         self.titleLabel.font = UIFont.systemFont(ofSize: 26)
         self.textLabel.font = UIFont.systemFont(ofSize: 18)
-        self.tomorrowLabel.font = .journalDateFont
-        
-        self.tomorrowLabel.isHidden = true
-//        self.tomorrowLabel.textColor = .white
-//        self.tomorrowLabel.layer.shadowColor = UIColor.black.cgColor
-//        self.tomorrowLabel.layer.shadowOffset = .init(width: 0.5, height: 0.5)
-//        self.tomorrowLabel.layer.shadowOpacity = 0.7
-//        self.tomorrowLabel.layer.shadowRadius = 5.0
-//        self.tomorrowLabel.layer.masksToBounds = false
     }
 }
