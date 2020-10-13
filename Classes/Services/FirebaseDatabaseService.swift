@@ -39,9 +39,10 @@ class FirebaseDatabaseService: DatabaseService {
         static let notificationsPath = "notifications"
     }
     
-    let ref = Database.database().reference()
-    let storageService: StorageService = FirebaseStorageService()
-    let user = Auth.auth().currentUser
+    private let connectionHelper = ConnectionHelper()
+    private let ref = Database.database().reference()
+    private let storageService: StorageService = FirebaseStorageService()
+    private let user = Auth.auth().currentUser
     
     func savePost(_ post: Post) -> Bool {
         guard let ref = currentUserPath() else { return false }
@@ -193,8 +194,9 @@ class FirebaseDatabaseService: DatabaseService {
     }
     
     private func currentUserPath() -> DatabaseReference? {
-        guard let userId = user?.uid else { return nil }
+        connectionHelper.checkConnect()
         
+        guard let userId = user?.uid else { return nil }
         print("Request. UserId = \(userId)")
         
         return ref

@@ -27,6 +27,8 @@ class NoInternetViewController: UIViewController {
         if connectionHelper.isConnectionAvailable() {
             alertService.showSuccessMessage(desc: R.string.localizable.noInternetTryConnectAlert())
             NotificationCenter.default.post(name: .enterApp, object: nil)
+        } else {
+            alertService.showErrorMessage(desc: R.string.localizable.errorNoInternet())
         }
     }
     
