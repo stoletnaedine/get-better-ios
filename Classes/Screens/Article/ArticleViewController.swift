@@ -18,27 +18,26 @@ class ArticleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customizeView()
         
-        if let article = article {
-            fillViewController(from: article)
-        }
+        customizeView()
+        guard let article = self.article else { return }
+        fillViewController(from: article)
     }
 
     func fillViewController(from article: Article) {
-        titleLabel.text = article.title ?? ""
-        if let titleView = article.titleView {
-            navigationItem.titleView = titleView
-        }
-        textView.text = article.text ?? ""
+        navigationItem.titleView = article.titleView
+        titleLabel.text = article.title
         textView.attributedText = article.text?.htmlToAttributedString
-        imageView.image = article.image ?? UIImage()
+        textView.sizeToFit()
+        imageView.image = article.image?.aspectFitImage(inRect: imageView.frame)
+        imageView.contentMode = .top
     }
     
     func customizeView() {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        textView.textContainer.lineFragmentPadding = .zero
+        textView.textContainerInset = .zero
         textView.font = UIFont.systemFont(ofSize: 14)
-        textView.resizeByContent()
         textView.tintColor = .violet
     }
     
