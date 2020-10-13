@@ -23,9 +23,8 @@ class PostDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let post = post {
-            fillViewController(post)
-        }
+        guard let post = self.post else { return }
+        fillViewController(post)
         registerGestureCopyLabelText()
         customizeView()
         setupEditButton()
@@ -63,8 +62,7 @@ class PostDetailViewController: UIViewController {
 
     func fillViewController(_ post: Post) {
         self.title = post.sphere?.name
-        self.textLabel.text = post.text ?? ""
-        self.dateLabel.text = ""
+        self.textLabel.text = post.text
         self.photoImageView.image = post.sphere?.image
         if let timestamp = post.timestamp {
             self.dateLabel.text = Date.convertToFullDate(from: timestamp)

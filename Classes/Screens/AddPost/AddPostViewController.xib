@@ -67,7 +67,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Al-Gr6" userLabel="AttachView">
-                            <rect key="frame" x="287" y="7.5" width="25" height="25"/>
+                            <rect key="frame" x="284" y="7.5" width="25" height="25"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO">
                                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -100,10 +100,10 @@
                         <constraint firstItem="mIe-nL-Fw3" firstAttribute="centerY" secondItem="0eP-dz-X34" secondAttribute="centerY" id="EMV-Wo-Pxf"/>
                         <constraint firstAttribute="height" constant="40" id="GDM-dY-YeO"/>
                         <constraint firstItem="4Tm-Al-Gr6" firstAttribute="centerY" secondItem="0eP-dz-X34" secondAttribute="centerY" id="NeL-2U-UPP"/>
-                        <constraint firstItem="mIe-nL-Fw3" firstAttribute="leading" secondItem="4Tm-Al-Gr6" secondAttribute="trailing" constant="20" id="UHN-2V-swu"/>
                         <constraint firstItem="1jt-fo-bWH" firstAttribute="leading" secondItem="0eP-dz-X34" secondAttribute="leading" id="bcT-bV-LOa"/>
                         <constraint firstItem="EdK-CD-Y8S" firstAttribute="centerY" secondItem="0eP-dz-X34" secondAttribute="centerY" id="bqL-DO-Qob"/>
                         <constraint firstAttribute="trailing" secondItem="mIe-nL-Fw3" secondAttribute="trailing" constant="10" id="gw0-Yv-FWK"/>
+                        <constraint firstAttribute="trailing" secondItem="4Tm-Al-Gr6" secondAttribute="trailing" constant="75" id="h3d-vv-CUM"/>
                         <constraint firstItem="EdK-CD-Y8S" firstAttribute="leading" secondItem="0eP-dz-X34" secondAttribute="leading" constant="10" id="qb8-CC-11g"/>
                         <constraint firstAttribute="trailing" secondItem="1jt-fo-bWH" secondAttribute="trailing" id="wuh-Op-UXG"/>
                     </constraints>
