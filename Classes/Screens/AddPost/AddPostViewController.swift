@@ -21,13 +21,13 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var selectSphereButton: UIButton!
     @IBOutlet weak var placeholderLabel: UILabel!
     
+    var selectedSphere: Sphere?
     let databaseService: DatabaseService = FirebaseDatabaseService()
-    let storageService: StorageService = FirebaseStorageService()
     let alertService: AlertService = AlertServiceDefault()
     
-    var selectedSphere: Sphere?
-    let maxSymbolsCount: Int = 300
-    private var isPhotoUpload: Bool = false
+    private let storageService: StorageService = FirebaseStorageService()
+    private let maxSymbolsCount: Int = 300
+    private var isPhotoSelected: Bool = false
     
     var addedPostCompletion: () -> () = {}
     
@@ -64,18 +64,17 @@ class AddPostViewController: UIViewController {
         var photoResult: Photo = Photo(photoUrl: nil, photoName: nil, previewUrl: nil, previewName: nil)
         let dispatchGroup = DispatchGroup()
         
-        if let photo = attachButton.imageView?.image, isPhotoUpload {
+        if let photo = attachButton.imageView?.image, isPhotoSelected {
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
-            storageService.uploadPhoto(photo: photo, completion: { result in
+            storageService.uploadPhoto(photo: photo, completion: { [weak self] result in
                 switch result {
                 case .success(let photo):
-                    print("Photo upload result=\(photo)")
                     photoResult = photo
                     dispatchGroup.leave()
                 case .failure(let error):
-                    print("Photo upload error=\(String(describing: error.name))")
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                     dispatchGroup.leave()
                 }
             })
@@ -217,6 +216,6 @@ extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerCo
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         attachButton.setImage(image, for: .normal)
-        isPhotoUpload = true
+        isPhotoSelected = true
     }
 }

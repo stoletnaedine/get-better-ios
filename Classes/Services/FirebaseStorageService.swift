@@ -18,7 +18,7 @@ protocol StorageService {
 }
 
 class FirebaseStorageService: StorageService {
-    let metadata = StorageMetadata()
+    
     let contentType = "image/jpeg"
     let avatarFileName = "avatar"
     let photosPath = "photos"
@@ -29,6 +29,9 @@ class FirebaseStorageService: StorageService {
     let resizeWidthPhoto: CGFloat = 900
     let resizeWidthPreview: CGFloat = 100
     let resizeWidthAvatar: CGFloat = 250
+    
+    private let metadata = StorageMetadata()
+    private let connectionHelper = ConnectionHelper()
     
     func uploadAvatar(photo: UIImage,
                       completion: @escaping (Result<URL, AppError>) -> Void) {
@@ -167,8 +170,8 @@ class FirebaseStorageService: StorageService {
     }
     
     private func currentUserPath() -> StorageReference? {
+        connectionHelper.checkConnect()
         guard let userId = Auth.auth().currentUser?.uid else { return nil }
-        
         return Storage.storage().reference()
             .child(usersPath)
             .child(userId)
