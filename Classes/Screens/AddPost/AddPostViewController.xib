@@ -69,7 +69,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Al-Gr6" userLabel="AttachView">
                             <rect key="frame" x="284" y="7.5" width="25" height="25"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO">
+                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO">
                                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                     <state key="normal" title="Button" image="photo-gallery"/>
                                     <connections>
