@@ -74,7 +74,10 @@ class AddPostViewController: UIViewController {
                     photoResult = photo
                     dispatchGroup.leave()
                 case .failure(let error):
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.removeActivityIndicator()
+                        self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    }
                     dispatchGroup.leave()
                 }
             })

@@ -48,7 +48,8 @@ class AppError: Error {
 enum AppErrorCode: String {
     case error = "Ошибка"
     case noInternet = "Нет интернета"
-    case unAuthorized = "Вы не авторизованы"
+    case unauthorized = "Вы не авторизованы"
     case serverError = "Ошибка сервера"
     case notFound = "Не удалось обновить данные с сервера"
+    case unexpected = "Что-то пошло не так"
 }
