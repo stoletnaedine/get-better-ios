@@ -18,7 +18,6 @@ class ArticleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         customizeView()
         guard let article = self.article else { return }
         fillViewController(from: article)
