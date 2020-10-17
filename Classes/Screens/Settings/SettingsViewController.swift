@@ -151,7 +151,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .version:
             let cell = UITableViewCell()
             cell.textLabel?.text = items[tableSection]?[indexPath.row].title
-            cell.textLabel?.textColor = .gray
+            cell.textLabel?.textColor = .grey
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
@@ -188,7 +188,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = .tableViewSectionColor
+        view.backgroundColor = .lifeCircleLineBack
         return view
     }
     

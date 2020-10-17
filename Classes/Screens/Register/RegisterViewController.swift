@@ -62,14 +62,14 @@ class RegisterViewController: UIViewController {
     func customizeView() {
         title = R.string.localizable.authRegister()
         emailLabel.text = R.string.localizable.authEmail()
-        emailLabel.textColor = .gray
+        emailLabel.textColor = .grey
         emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
         emailTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterEmail(),
                                                                   attributes: NSAttributedString.formFieldPlaceholderAttributes)
-        passwordLabel.textColor = .gray
+        passwordLabel.textColor = .grey
         passwordLabel.font = .formLabelFieldFont
         passwordLabel.text = R.string.localizable.authPassword()
         

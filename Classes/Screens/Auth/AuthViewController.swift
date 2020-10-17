@@ -36,12 +36,12 @@ class AuthViewController: UIViewController {
     
     @IBAction func eyeButtonDidPressed(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry.toggle()
-        if eyeImageView.tintColor == .gray {
+        if eyeImageView.tintColor == .grey {
             eyeImageView.image = R.image.openEye()
             eyeImageView.tint(with: .violet)
         } else {
             eyeImageView.image = R.image.closedEye()
-            eyeImageView.tint(with: .gray)
+            eyeImageView.tint(with: .grey)
         }
     }
     
@@ -106,7 +106,7 @@ extension AuthViewController {
         self.title = R.string.localizable.authTitle()
         
         emailLabel.text = R.string.localizable.authEmail()
-        emailLabel.textColor = .gray
+        emailLabel.textColor = .grey
         emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
@@ -118,7 +118,7 @@ extension AuthViewController {
         }
 
         passwordLabel.text = R.string.localizable.authPassword()
-        passwordLabel.textColor = .gray
+        passwordLabel.textColor = .grey
         passwordLabel.font = .formLabelFieldFont
         
         passwordTextField.borderStyle = .none
@@ -153,6 +153,6 @@ extension AuthViewController {
         anonymButton.titleLabel?.underline()
         
         logoImageView.tint(with: .violet)
-        eyeImageView.tint(with: .gray)
+        eyeImageView.tint(with: .grey)
     }
 }

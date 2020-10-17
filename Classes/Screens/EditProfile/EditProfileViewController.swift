@@ -174,7 +174,7 @@ class EditProfileViewController: UIViewController {
         }
         
         nameLabel.text = R.string.localizable.profileName()
-        nameLabel.textColor = .gray
+        nameLabel.textColor = .grey
         nameLabel.font = .formLabelFieldFont
         
         nameTextField.borderStyle = .none
@@ -182,7 +182,7 @@ class EditProfileViewController: UIViewController {
         nameTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterName(),
                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
         emailLabel.text = R.string.localizable.profileEmail()
-        emailLabel.textColor = .gray
+        emailLabel.textColor = .grey
         emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
@@ -191,7 +191,7 @@ class EditProfileViewController: UIViewController {
                                                                   attributes: NSAttributedString.formFieldPlaceholderAttributes)
         
         passwordLabel.text = R.string.localizable.profilePassword()
-        passwordLabel.textColor = .gray
+        passwordLabel.textColor = .grey
         passwordLabel.font = .formLabelFieldFont
         
         passwordTextField.placeholder = R.string.localizable.profileEnterPassword()
@@ -200,7 +200,7 @@ class EditProfileViewController: UIViewController {
         passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterPassword(),
                                                                      attributes: NSAttributedString.formFieldPlaceholderAttributes)
         noticeLabel.font = .formNoticeFont
-        noticeLabel.textColor = .gray
+        noticeLabel.textColor = .grey
         noticeLabel.text = R.string.localizable.profileWarning()
         
         deleteAccountButton.setTitle(R.string.localizable.editProfileDelAccount(), for: .normal)

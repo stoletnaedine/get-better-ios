@@ -45,7 +45,7 @@ class OnboardingPageViewController: UIViewController {
         pageViewController.delegate = self
         
         let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
-        appearance.pageIndicatorTintColor = .thirtyGray
+        appearance.pageIndicatorTintColor = .thirtyGrey
         appearance.currentPageIndicatorTintColor = .violet
         
         pageViewController.setViewControllers([firstViewController],

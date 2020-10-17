@@ -64,11 +64,11 @@ class JournalTableViewCell: UITableViewCell {
         titleLabel.font = .journalTableTitleFont
         titleLabel.textColor = .darkGray
         dateLabel.font = .journalTableDateFont
-        dateLabel.textColor = .gray
+        dateLabel.textColor = .grey
         titleLabelNoImage.font = .journalTableTitleFont
         titleLabelNoImage.textColor = .darkGray
         dateLabelNoImage.font = .journalTableDateFont
-        dateLabelNoImage.textColor = .gray
+        dateLabelNoImage.textColor = .grey
     }
     
     private func showImageInCell(_ show: Bool) {

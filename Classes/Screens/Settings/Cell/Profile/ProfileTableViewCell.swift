@@ -24,17 +24,16 @@ class ProfileTableViewCell: UITableViewCell {
         if let avatarURL = profile.avatarURL {
             self.avatarImageView.kf.setImage(with: avatarURL)
         }
-        self.nameLabel.text = profile.name ?? ""
-        self.emailLabel.text = profile.email ?? ""
+        self.nameLabel.text = profile.name
+        self.emailLabel.text = profile.email
     }
     
     private func customizeView() {
         avatarImageView.backgroundColor = .tableViewSectionColor
-        nameLabel.text = ""
         nameLabel.font = .journalTitleFont
         emailLabel.text = R.string.localizable.profileLoading()
         emailLabel.font = .journalDateFont
-        emailLabel.textColor = .gray
+        emailLabel.textColor = .grey
     }
     
 }

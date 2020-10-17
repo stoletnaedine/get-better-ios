@@ -30,7 +30,7 @@ class EditPostViewController: AddPostViewController {
         selectSphereButton.setTitle(post.sphere?.name, for: .normal)
         selectSphereButton.setImage(nil, for: .normal)
         selectSphereButton.tintColor = .violet
-        sphereView.layer.borderColor = UIColor.gray.cgColor
+        sphereView.layer.borderColor = UIColor.grey.cgColor
         saveButtonView.backgroundColor = .violet
         
         selectedSphere = post.sphere

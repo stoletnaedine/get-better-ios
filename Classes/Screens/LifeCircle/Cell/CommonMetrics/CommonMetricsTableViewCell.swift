@@ -49,18 +49,18 @@ class CommonMetricsTableViewCell: UITableViewCell {
         postsValueLabel.textColor = .darkGray
         postsLabel.text = R.string.localizable.commonEvents()
         postsLabel.font = UIFont.systemFont(ofSize: 14)
-        postsLabel.textColor = .gray
+        postsLabel.textColor = .grey
         
         averageValueLabel.font = UIFont.systemFont(ofSize: 32)
         averageValueLabel.textColor = .darkGray
         averageLabel.text = R.string.localizable.commonAverage()
         averageLabel.font = UIFont.systemFont(ofSize: 14)
-        averageLabel.textColor = .gray
+        averageLabel.textColor = .grey
         
         daysValueLabel.font = UIFont.systemFont(ofSize: 32)
         daysValueLabel.textColor = .darkGray
         daysLabel.font = UIFont.systemFont(ofSize: 14)
-        daysLabel.textColor = .gray
+        daysLabel.textColor = .grey
         daysLabel.text = R.string.localizable.commonDays()
     }
     

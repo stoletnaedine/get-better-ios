@@ -133,17 +133,17 @@ class AddPostViewController: UIViewController {
         titleLabel.font = .journalTitleFont
         titleLabel.textColor = .violet
         titleLabel.text = R.string.localizable.addPostTitle()
-        saveButtonView.backgroundColor = .gray
+        saveButtonView.backgroundColor = .grey
         saveButtonView.layer.cornerRadius = 20
         saveButton.setTitle(R.string.localizable.addPostSave(), for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = .journalButtonFont
         attachButton.setTitle("", for: .normal)
         dateLabel.font = .journalDateFont
-        dateLabel.textColor = .gray
+        dateLabel.textColor = .grey
         dateLabel.text = Date.currentDateWithWeekday()
         symbolsCountLabel.font = .journalDateFont
-        symbolsCountLabel.textColor = .gray
+        symbolsCountLabel.textColor = .grey
         symbolsCountLabel.text = "\(postTextView.text.count)/\(maxSymbolsCount)"
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
@@ -156,7 +156,7 @@ class AddPostViewController: UIViewController {
         selectSphereButton.centerTextAndImage(spacing: -5)
         placeholderLabel.text = R.string.localizable.postPlaceholder()
         placeholderLabel.font = postTextView.font?.withSize(16)
-        placeholderLabel.textColor = .lightGray
+        placeholderLabel.textColor = .lightGrey
         attachButton.tintColor = .violet
     }
 }

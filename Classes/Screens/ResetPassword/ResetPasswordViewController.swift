@@ -56,7 +56,7 @@ class ResetPasswordViewController: UIViewController {
     func customizeView() {
         title = R.string.localizable.resetPasswordTitle()
         emailLabel.text = R.string.localizable.authEmail()
-        emailLabel.textColor = .gray
+        emailLabel.textColor = .grey
         emailLabel.font = .formLabelFieldFont
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont

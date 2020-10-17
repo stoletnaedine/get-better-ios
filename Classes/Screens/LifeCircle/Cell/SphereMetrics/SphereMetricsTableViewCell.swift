@@ -43,7 +43,7 @@ class SphereMetricsTableViewCell: UITableViewCell {
         nameLabel.textColor = .darkGray
         valueLabel.font = UIFont.systemFont(ofSize: 22)
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
-        descriptionLabel.textColor = .gray
+        descriptionLabel.textColor = .grey
         valueView.layer.cornerRadius = 10
         valueLabel.textColor = .white
     }

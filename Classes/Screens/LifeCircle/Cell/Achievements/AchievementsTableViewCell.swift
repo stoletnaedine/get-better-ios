@@ -31,7 +31,7 @@ class AchievementsTableViewCell: UITableViewCell {
             self.iconLabel.text = achievement.icon
             setupUnlockedView()
         } else {
-            self.backgroundColor = .lighterGray
+            self.backgroundColor = .lighterGrey
         }
     }
     
@@ -39,16 +39,16 @@ class AchievementsTableViewCell: UITableViewCell {
         titleLabel.textColor = .darkGray
         titleLabel.font = UIFont.systemFont(ofSize: 22)
         titleLabel.textColor = .violet
-        descriptionLabel.textColor = .gray
+        descriptionLabel.textColor = .grey
         iconLabel.font = iconLabel.font.withSize(30)
     }
     
     private func setupView() {
         self.backgroundColor = .clear
         iconLabel.text = "•"
-        titleLabel.textColor = .gray
+        titleLabel.textColor = .grey
         titleLabel.font = UIFont.systemFont(ofSize: 22)
         descriptionLabel.font = UIFont.systemFont(ofSize: 12)
-        descriptionLabel.textColor = .gray
+        descriptionLabel.textColor = .grey
     }
 }

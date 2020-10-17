@@ -88,7 +88,7 @@ class PostDetailViewController: UIViewController {
     func customizeView() {
         textLabel.font = UIFont.systemFont(ofSize: 16)
         dateLabel.font = UIFont.systemFont(ofSize: 14)
-        dateLabel.textColor = .gray
+        dateLabel.textColor = .grey
         photoImageView.alpha = 0.15
     }
 }

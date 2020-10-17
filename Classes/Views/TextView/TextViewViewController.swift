@@ -16,20 +16,12 @@ class TextViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupView()
-         
-        if let text = text {
-            textView.text = text
-        }
+        textView.text = text
     }
     
-    private func setupView() {
-        textView.contentInset = .init(
-            top: 0,
-            left: 20,
-            bottom: 0,
-            right: 20
-        )
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        textView.setContentOffset(.zero, animated: false)
+        textView.contentInset = .init(top: 0, left: 20, bottom: 0, right: 20)
     }
 }
