@@ -12,7 +12,7 @@ import FirebaseAuth
 class OnboardingPageViewController: UIViewController {
 
     var viewControllers: [UIViewController] = []
-    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
     let user = Auth.auth().currentUser
     
@@ -110,7 +110,7 @@ class OnboardingPageViewController: UIViewController {
             return
         }
         
-        if databaseService.saveStartSphereMetrics(sphereMetrics) {
+        if database.saveStartSphereMetrics(sphereMetrics) {
             UserDefaults.standard.set(false, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
             self.completion()
         }

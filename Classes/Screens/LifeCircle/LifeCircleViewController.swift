@@ -23,7 +23,7 @@ class LifeCircleViewController: UIViewController {
     private let refreshControl = UIRefreshControl()
     private let achievementPresenter: AchievementPresenter = AchievementPresenterDefault()
     private let lifeCirclePresenter: LifeCirclePresenter = LifeCirclePresenterDefault()
-    private let databaseService: DatabaseService = FirebaseDatabaseService()
+    private let database: GBDatabase = FirebaseDatabase()
     private let alertService: AlertService = AlertServiceDefault()
     private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
     
@@ -85,7 +85,7 @@ class LifeCircleViewController: UIViewController {
     }
     
     private func getTips() {
-        databaseService.getTips(completion: { [weak self] tips in
+        database.getTips(completion: { [weak self] tips in
             guard let self = self else { return }
             guard let tips = tips else { return }
             self.tips = tips

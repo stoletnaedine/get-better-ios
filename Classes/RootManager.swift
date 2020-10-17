@@ -60,7 +60,7 @@ class RootManager {
     }
     
     func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
-        FirebaseDatabaseService().getStartSphereMetrics(completion: { [weak self] result in
+        FirebaseDatabase().getStartSphereMetrics(completion: { [weak self] result in
             switch result {
             case .failure(let error):
                 if error.name == AppErrorCode.notFound.rawValue {

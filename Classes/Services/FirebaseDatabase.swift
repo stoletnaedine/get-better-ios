@@ -1,5 +1,5 @@
 //
-//  FirebaseDatabaseService.swift
+//  FirebaseDatabase.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 24.04.2020.
@@ -17,7 +17,7 @@ enum NotificationTopic: String {
     case tipOfTheDay
 }
 
-protocol DatabaseService {
+protocol GBDatabase {
     @discardableResult
     func savePost(_ post: Post) -> Bool
     func deletePost(_ post: Post) -> Bool
@@ -29,9 +29,9 @@ protocol DatabaseService {
     func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
 }
 
-class FirebaseDatabaseService: DatabaseService {
+class FirebaseDatabase: GBDatabase {
     
-    enum Constants {
+    private enum Constants {
         static let startMetricsPath = "start_sphere_level"
         static let usersPath = "users"
         static let postsPath = "post"
@@ -41,7 +41,7 @@ class FirebaseDatabaseService: DatabaseService {
     
     private let connectionHelper = ConnectionHelper()
     private let ref = Database.database().reference()
-    private let storageService: StorageService = FirebaseStorageService()
+    private let storage: GBStorage = FirebaseStorage()
     private let user = Auth.auth().currentUser
     
     func savePost(_ post: Post) -> Bool {
@@ -76,10 +76,10 @@ class FirebaseDatabaseService: DatabaseService {
             .removeValue()
         
         if let photoName = post.photoName, !photoName.isEmpty {
-            storageService.deletePhoto(name: photoName)
+            storage.deletePhoto(name: photoName)
         }
         if let previewName = post.previewName, !previewName.isEmpty {
-            storageService.deletePreview(name: previewName)
+            storage.deletePreview(name: previewName)
         }
         
         return true

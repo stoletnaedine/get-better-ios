@@ -19,7 +19,7 @@ class JournalViewController: UIViewController {
     private let cellIdentifier = R.reuseIdentifier.journalCell.identifier
     private let cellXibName = R.nib.journalTableViewCell.name
     
-    private let databaseService: DatabaseService = FirebaseDatabaseService()
+    private let database: GBDatabase = FirebaseDatabase()
     private let alertService: AlertService = AlertServiceDefault()
     private let activityIndicator = UIActivityIndicatorView()
     
@@ -60,7 +60,7 @@ class JournalViewController: UIViewController {
         postsSection = []
         monthYearSection = []
         
-        databaseService.getPosts(completion: { [weak self] result in
+        database.getPosts(completion: { [weak self] result in
             switch result {
                 
             case .failure(let error):
@@ -232,7 +232,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let post = getPost(by: indexPath) else { return }
-            if databaseService.deletePost(post) {
+            if database.deletePost(post) {
                 alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
                 updatePostsInTableView()
             }

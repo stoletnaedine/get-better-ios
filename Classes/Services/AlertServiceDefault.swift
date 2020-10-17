@@ -7,19 +7,16 @@ import UIKit
 import SwiftEntryKit
 
 protocol AlertService {
-    func showPopUpMessage(icon: String, title: String, description: String)
-    func showNotificationMessage(title: String, desc: String, textColor: EKColor, colors: [EKColor], image: UIImage?)
+    func showPopUpMessage(icon: String, title: String, description: String, buttonText: String)
     func showErrorMessage(desc: String)
     func showSuccessMessage(desc: String)
 }
 
 class AlertServiceDefault: UIViewController, AlertService {
 
-    func showPopUpMessage(icon: String,
-                          title: String,
-                          description: String) {
+    func showPopUpMessage(icon: String, title: String, description: String, buttonText: String) {
         let attributes = setupPopUpAttributes(duration: .infinity)
-        let message = setupPopUpMessage(icon: icon, title: title, description: description)
+        let message = setupPopUpMessage(icon: icon, title: title, description: description, buttonText: buttonText)
         SwiftEntryKit.display(entry: CustomPopUpView(with: message), using: attributes)
     }
 
@@ -41,11 +38,11 @@ class AlertServiceDefault: UIViewController, AlertService {
                 image: R.image.success())
     }
 
-    func showNotificationMessage(title: String,
-                                 desc: String,
-                                 textColor: EKColor,
-                                 colors: [EKColor],
-                                 image: UIImage? = nil) {
+    private func showNotificationMessage(title: String,
+                                         desc: String,
+                                         textColor: EKColor,
+                                         colors: [EKColor],
+                                         image: UIImage? = nil) {
         let title = EKProperty.LabelContent(
                 text: title,
                 style: .init(
@@ -122,8 +119,8 @@ class AlertServiceDefault: UIViewController, AlertService {
         return attributes
     }
 
-    private func setupPopUpMessage(icon: String, title: String, description: String) -> EKPopUpMessage {
-        let image = R.image.splash()!.withRenderingMode(.alwaysTemplate)
+    private func setupPopUpMessage(icon: String, title: String, description: String, buttonText: String) -> EKPopUpMessage {
+        let image = R.image.titleViewLogo()!
 
         let themeImage = EKPopUpMessage.ThemeImage(
                 image: EKProperty.ImageContent(
@@ -152,13 +149,13 @@ class AlertServiceDefault: UIViewController, AlertService {
 
         let button = EKProperty.ButtonContent(
                 label: .init(
-                        text: "Хорошо",
+                        text: buttonText,
                         style: .init(
                                 font: UIFont.systemFont(ofSize: 16),
-                                color: .black
+                                color: .white
                         )
                 ),
-                backgroundColor: .init(UIColor.systemOrange),
+                backgroundColor: .init(.violet),
                 highlightedBackgroundColor: .clear
         )
 

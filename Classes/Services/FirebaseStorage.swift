@@ -10,25 +10,28 @@ import UIKit
 import FirebaseStorage
 import FirebaseAuth
 
-protocol StorageService {
+protocol GBStorage {
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void)
     func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void)
     func deletePreview(name: String)
     func deletePhoto(name: String)
 }
 
-class FirebaseStorageService: StorageService {
+class FirebaseStorage: GBStorage {
     
-    let contentType = "image/jpeg"
-    let avatarFileName = "avatar"
-    let photosPath = "photos"
-    let previewsPath = "previews"
-    let usersPath = "users"
+    private enum Constants {
+        static let contentType = "image/jpeg"
+        static let avatarFileName = "avatar"
+        static let photosPath = "photos"
+        static let previewsPath = "previews"
+        static let usersPath = "users"
+        static let photoQuality: CGFloat = 0.8
+        static let resizeWidthPhoto: CGFloat = 1000
+        static let resizeWidthPreview: CGFloat = 200
+        static let resizeWidthAvatar: CGFloat = 400
+    }
+    
     let uuidString: String = UUID().uuidString
-    let photoQuality: CGFloat = 0.75
-    let resizeWidthPhoto: CGFloat = 900
-    let resizeWidthPreview: CGFloat = 100
-    let resizeWidthAvatar: CGFloat = 250
     
     private let metadata = StorageMetadata()
     private let connectionHelper = ConnectionHelper()
@@ -36,11 +39,11 @@ class FirebaseStorageService: StorageService {
     func uploadAvatar(photo: UIImage,
                       completion: @escaping (Result<URL, AppError>) -> Void) {
         guard let currentUserRef = currentUserPath() else { return }
-        guard let resizeImage = photo.resized(toWidth: resizeWidthAvatar) else { return }
-        guard let imageData = resizeImage.jpegData(compressionQuality: photoQuality) else { return }
-        metadata.contentType = contentType
+        guard let resizeImage = photo.resized(toWidth: Constants.resizeWidthAvatar) else { return }
+        guard let imageData = resizeImage.jpegData(compressionQuality: Constants.photoQuality) else { return }
+        metadata.contentType = Constants.contentType
         
-        let avatarRef = currentUserRef.child(avatarFileName)
+        let avatarRef = currentUserRef.child(Constants.avatarFileName)
         
         avatarRef
             .putData(imageData, metadata: metadata, completion: { (metadata, error) in
@@ -67,12 +70,12 @@ class FirebaseStorageService: StorageService {
         let dispatchGroup = DispatchGroup()
         
         guard let currentUserRef = currentUserPath() else { return }
-        guard let resizePhoto = photo.resized(toWidth: resizeWidthPhoto) else { return }
-        guard let photoData = resizePhoto.jpegData(compressionQuality: photoQuality) else { return }
-        metadata.contentType = contentType
+        guard let resizePhoto = photo.resized(toWidth: Constants.resizeWidthPhoto) else { return }
+        guard let photoData = resizePhoto.jpegData(compressionQuality: Constants.photoQuality) else { return }
+        metadata.contentType = Constants.contentType
         
         let photoRef = currentUserRef
-            .child(photosPath)
+            .child(Constants.photosPath)
             .child(uuidString)
         
         dispatchGroup.enter()
@@ -89,11 +92,11 @@ class FirebaseStorageService: StorageService {
             }
         })
         
-        guard let resizePreview = photo.resized(toWidth: resizeWidthPreview) else { return }
-        guard let previewData = resizePreview.jpegData(compressionQuality: photoQuality) else { return }
+        guard let resizePreview = photo.resized(toWidth: Constants.resizeWidthPreview) else { return }
+        guard let previewData = resizePreview.jpegData(compressionQuality: Constants.photoQuality) else { return }
         
         let previewRef = currentUserRef
-            .child(previewsPath)
+            .child(Constants.previewsPath)
             .child(uuidString)
         
         dispatchGroup.enter()
@@ -121,12 +124,12 @@ class FirebaseStorageService: StorageService {
     
     func deletePreview(name: String) {
         guard let ref = currentUserPath() else { return }
-        delete(imageName: name, imagePath: previewsPath, reference: ref)
+        delete(imageName: name, imagePath: Constants.previewsPath, reference: ref)
     }
     
     func deletePhoto(name: String) {
         guard let ref = currentUserPath() else { return }
-        delete(imageName: name, imagePath: photosPath, reference: ref)
+        delete(imageName: name, imagePath: Constants.photosPath, reference: ref)
     }
     
     private func uploadPhoto(ref: StorageReference,
@@ -173,7 +176,7 @@ class FirebaseStorageService: StorageService {
         connectionHelper.checkConnect()
         guard let userId = Auth.auth().currentUser?.uid else { return nil }
         return Storage.storage().reference()
-            .child(usersPath)
+            .child(Constants.usersPath)
             .child(userId)
     }
 }

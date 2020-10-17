@@ -26,7 +26,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var deleteAccountButton: UIButton!
     
     let user = Auth.auth().currentUser
-    let storageService = FirebaseStorageService()
+    let storage = FirebaseStorage()
     let alertService: AlertService = AlertServiceDefault()
     
     var completion: () -> Void = {}
@@ -54,14 +54,13 @@ class EditProfileViewController: UIViewController {
         if let newAvatar = avatarImageView.image {
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
-            storageService.uploadAvatar(photo: newAvatar, completion: { [weak self] result in
+            storage.uploadAvatar(photo: newAvatar, completion: { [weak self] result in
                 switch result {
                 case .success(let url):
                     let changeRequest = user.createProfileChangeRequest()
                     changeRequest.photoURL = url
                     changeRequest.commitChanges(completion: { error in
                         if let error = error {
-                            print("Firebase commit changes error = \(error.localizedDescription)")
                             self?.alertService.showErrorMessage(desc: error.localizedDescription)
                         }
                         dispatchGroup.leave()

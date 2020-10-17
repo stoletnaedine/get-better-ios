@@ -19,7 +19,7 @@ protocol SettingsPresenter {
 
 class SettingsPresenterDefault: SettingsPresenter {
     
-    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
     
     var isDailySubscribe: Bool?
@@ -90,7 +90,7 @@ class SettingsPresenterDefault: SettingsPresenter {
                                               width: switchWidth,
                                               height: switchHeight))
         
-        databaseService.getNotificationSettings(topic: topic, completion: { [weak self] isSubscribe in
+        database.getNotificationSettings(topic: topic, completion: { [weak self] isSubscribe in
             guard let self = self else { return }
             var isLocalSubscribe: Bool
             
@@ -100,7 +100,7 @@ class SettingsPresenterDefault: SettingsPresenter {
             } else {
                 let isSubscribe = false
                 isLocalSubscribe = isSubscribe
-                self.databaseService.saveNotificationSetting(topic: topic, subscribe: isSubscribe)
+                self.database.saveNotificationSetting(topic: topic, subscribe: isSubscribe)
                 switcher.setOn(isSubscribe, animated: true)
             }
             
@@ -135,7 +135,7 @@ class SettingsPresenterDefault: SettingsPresenter {
                 if let error = error {
                     AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    self.databaseService.saveNotificationSetting(topic: .daily, subscribe: false)
+                    self.database.saveNotificationSetting(topic: .daily, subscribe: false)
                     self.isDailySubscribe = false
                     self.alertService.showSuccessMessage(
                         desc: R.string.localizable.settingsNotificationUnsubscribe()
@@ -150,7 +150,7 @@ class SettingsPresenterDefault: SettingsPresenter {
                 if let error = error {
                     AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    self.databaseService.saveNotificationSetting(topic: .daily, subscribe: true)
+                    self.database.saveNotificationSetting(topic: .daily, subscribe: true)
                     self.isDailySubscribe = true
                     self.alertService.showSuccessMessage(
                         desc: R.string.localizable.settingsNotificationSubscribe()
@@ -171,7 +171,7 @@ class SettingsPresenterDefault: SettingsPresenter {
                 if let error = error {
                     AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    self.databaseService.saveNotificationSetting(topic: .tipOfTheDay, subscribe: false)
+                    self.database.saveNotificationSetting(topic: .tipOfTheDay, subscribe: false)
                     self.isTipSubscribe = false
                     self.alertService.showSuccessMessage(
                         desc: R.string.localizable.settingsNotificationUnsubscribe()
@@ -186,7 +186,7 @@ class SettingsPresenterDefault: SettingsPresenter {
                 if let error = error {
                     AlertServiceDefault().showErrorMessage(desc: error.localizedDescription)
                 } else {
-                    self.databaseService.saveNotificationSetting(topic: .tipOfTheDay, subscribe: true)
+                    self.database.saveNotificationSetting(topic: .tipOfTheDay, subscribe: true)
                     self.isTipSubscribe = true
                     self.alertService.showSuccessMessage(
                         desc: R.string.localizable.settingsNotificationSubscribe()

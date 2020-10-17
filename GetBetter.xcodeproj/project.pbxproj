@@ -90,7 +90,7 @@
 		F1495267BF7181FA76BBDF88 /* AchievementsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495517C452EF92F48A6B72 /* AchievementsTableViewCell.xib */; };
 		F1495273E66F5AD91A5F822E /* SphereMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495C2FA436CF4A36B7F05F /* SphereMetricsTableViewCell.swift */; };
 		F149536F904F19914B26C190 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495ED73EC740C15F91A8CF /* EditProfileViewController.xib */; };
-		F14953B62F438A822C859E2D /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14959BA831454BA379465FF /* FirebaseStorageService.swift */; };
+		F14953B62F438A822C859E2D /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14959BA831454BA379465FF /* FirebaseStorage.swift */; };
 		F14954FEAEF05672B805215A /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = F14953E2C36B7AC09151054D /* 8.png */; };
 		F149557C8041D5BB75C0CA34 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F14950B134A6B877EF737842 /* WelcomeViewController.xib */; };
 		F14955EA34AE8AA776A7C8ED /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F149537E71EDAF6963040654 /* 2.png */; };
@@ -98,7 +98,7 @@
 		F149568306069F87D911B76D /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = F149568D8593B53F43E6DF5E /* 9.png */; };
 		F149571D8D5ACCC62F0EB363 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14955E497B188FBBB345A1A /* CGRect.swift */; };
 		F14957534493CFF9CA95F186 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14951ABC1D994236623358B /* ArticleViewController.swift */; };
-		F1495758B8B86F71B37096B8 /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495297F7AD9CAF4E9198A5 /* FirebaseDatabaseService.swift */; };
+		F1495758B8B86F71B37096B8 /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495297F7AD9CAF4E9198A5 /* FirebaseDatabase.swift */; };
 		F14959446FAB1AE8F8479875 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F14955127BD3A7CAEE9EC9E4 /* ArticleViewController.xib */; };
 		F14959E6D1E7A2AB6E42BF31 /* SphereDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F149585E02FD93E6AE2E43E1 /* SphereDetailViewController.xib */; };
 		F1495A2BAA0794DBE208648C /* UIView+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14950817E129DCC6D81127A /* UIView+Message.swift */; };
@@ -201,7 +201,7 @@
 		F14950C09BAEFB80A32F8E4F /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		F1495140518C692011416A1A /* SphereMetricsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SphereMetricsTableViewCell.xib; sourceTree = "<group>"; };
 		F14951ABC1D994236623358B /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
-		F1495297F7AD9CAF4E9198A5 /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
+		F1495297F7AD9CAF4E9198A5 /* FirebaseDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabase.swift; sourceTree = "<group>"; };
 		F14953380D25A47E53AF9652 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		F149534A1EC55C2C73098FDB /* SetupSphereValueViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetupSphereValueViewController.xib; sourceTree = "<group>"; };
 		F149537E71EDAF6963040654 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 		F14958BF1B820ACB6FC09854 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F14958C6AC488E270BB36001 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		F1495953C52FB85F7DABA142 /* CustomPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
-		F14959BA831454BA379465FF /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
+		F14959BA831454BA379465FF /* FirebaseStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
 		F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertServiceDefault.swift; sourceTree = "<group>"; };
 		F1495A3A1A8ED9AC4276F75C /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		F1495A99D279D2B2DE295323 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
@@ -574,8 +574,8 @@
 			isa = PBXGroup;
 			children = (
 				F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */,
-				F14959BA831454BA379465FF /* FirebaseStorageService.swift */,
-				F1495297F7AD9CAF4E9198A5 /* FirebaseDatabaseService.swift */,
+				F14959BA831454BA379465FF /* FirebaseStorage.swift */,
+				F1495297F7AD9CAF4E9198A5 /* FirebaseDatabase.swift */,
 				C35D83722511D88B000C565E /* UserDefaultsService.swift */,
 			);
 			path = Services;
@@ -955,8 +955,8 @@
 				F1495F5D467AC16BA57CE2BF /* WelcomeViewController.swift in Sources */,
 				F14957534493CFF9CA95F186 /* ArticleViewController.swift in Sources */,
 				F14952606F9F2D69620BA836 /* AlertServiceDefault.swift in Sources */,
-				F14953B62F438A822C859E2D /* FirebaseStorageService.swift in Sources */,
-				F1495758B8B86F71B37096B8 /* FirebaseDatabaseService.swift in Sources */,
+				F14953B62F438A822C859E2D /* FirebaseStorage.swift in Sources */,
+				F1495758B8B86F71B37096B8 /* FirebaseDatabase.swift in Sources */,
 				F1495D08557F105CA2F17BBD /* EditProfileViewController.swift in Sources */,
 				F14951C7F023A062FD05EEEE /* ProfileCell.swift in Sources */,
 			);

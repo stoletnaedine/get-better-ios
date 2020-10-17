@@ -17,7 +17,7 @@ protocol LifeCirclePresenter {
 }
 
 class LifeCirclePresenterDefault: LifeCirclePresenter {
-    private let databaseService: DatabaseService = FirebaseDatabaseService()
+    private let database: GBDatabase = FirebaseDatabase()
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
@@ -26,7 +26,7 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
         
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
-        databaseService.getPosts { [weak self] result in
+        database.getPosts { [weak self] result in
             switch result {
             case .success(let postsFromDB):
                 self?.posts = postsFromDB
@@ -38,7 +38,7 @@ class LifeCirclePresenterDefault: LifeCirclePresenter {
         }
         
         dispatchGroup.enter()
-        databaseService.getStartSphereMetrics { [weak self] result in
+        database.getStartSphereMetrics { [weak self] result in
             switch result {
             case .success(let sphereMetrics):
                 self?.startSphereMetrics = sphereMetrics

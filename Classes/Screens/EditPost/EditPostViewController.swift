@@ -43,7 +43,7 @@ class EditPostViewController: AddPostViewController {
     
     override func savePost(text: String, sphere: Sphere, photoResult: Photo) {
         guard let post = post, let postId = post.id else { return }
-        databaseService.savePost(
+        database.savePost(
             Post(id: postId,
                  text: text,
                  sphere: post.sphere,

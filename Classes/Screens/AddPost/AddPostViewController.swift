@@ -22,10 +22,10 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var placeholderLabel: UILabel!
     
     var selectedSphere: Sphere?
-    let databaseService: DatabaseService = FirebaseDatabaseService()
+    let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
     
-    private let storageService: StorageService = FirebaseStorageService()
+    private let storage: GBStorage = FirebaseStorage()
     private let maxSymbolsCount: Int = 300
     private var isPhotoSelected: Bool = false
     
@@ -68,7 +68,7 @@ class AddPostViewController: UIViewController {
             dispatchGroup.enter()
             self.showActivityIndicator(onView: self.view)
             
-            storageService.uploadPhoto(photo: photo, completion: { [weak self] result in
+            storage.uploadPhoto(photo: photo, completion: { [weak self] result in
                 switch result {
                 case .success(let photo):
                     photoResult = photo
@@ -76,8 +76,8 @@ class AddPostViewController: UIViewController {
                 case .failure(let error):
                     DispatchQueue.main.async { [weak self] in
                         self?.removeActivityIndicator()
-                        self?.alertService.showErrorMessage(desc: error.localizedDescription)
                     }
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                     dispatchGroup.leave()
                 }
             })
@@ -97,7 +97,7 @@ class AddPostViewController: UIViewController {
                         photoName: photoResult.photoName,
                         previewUrl: photoResult.previewUrl,
                         previewName: photoResult.previewName)
-        databaseService.savePost(post)
+        database.savePost(post)
         
         DispatchQueue.main.async { [weak self] in
             self?.removeActivityIndicator()
