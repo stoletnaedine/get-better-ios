@@ -87,12 +87,10 @@ class LifeCircleViewController: UIViewController {
     private func getTips() {
         databaseService.getTips(completion: { [weak self] tips in
             guard let self = self else { return }
-            
-            if let tips = tips {
-                self.tips = tips
-                if !self.userDefaultsService.isTipOfTheDayShown() {
-                    self.showTip()
-                }
+            guard let tips = tips else { return }
+            self.tips = tips
+            if !self.userDefaultsService.isTipOfTheDayShown() {
+                self.showTip()
             }
         })
     }

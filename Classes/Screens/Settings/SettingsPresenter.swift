@@ -26,29 +26,13 @@ class SettingsPresenterDefault: SettingsPresenter {
     var isTipSubscribe: Bool?
     
     func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
-        
         guard let user = Auth.auth().currentUser else { return }
-        
-        DispatchQueue.global().async {
-            var name = R.string.localizable.settingsDefaultName()
-            var email = R.string.localizable.settingsDefaultEmail()
-            var avatarURL: URL?
-            
-            if let userName = user.displayName {
-                name = userName
-            }
-            if let userEmail = user.email {
-                email = userEmail
-            }
-            if let userAvatarURL = user.photoURL {
-                avatarURL = userAvatarURL
-            }
-            DispatchQueue.main.async {
-                completion(Profile(avatarURL: avatarURL,
-                                   name: name,
-                                   email: email)
-                )
-            }
+        DispatchQueue.main.async {
+            completion(
+                Profile(avatarURL: user.photoURL,
+                        name: user.displayName ?? R.string.localizable.settingsDefaultName(),
+                        email: user.email ?? R.string.localizable.settingsDefaultEmail())
+            )
         }
     }
     
