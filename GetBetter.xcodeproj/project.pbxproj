@@ -83,9 +83,9 @@
 		C9446CAB022057A4B4E41A5C /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */; };
 		F14950603E4BBFAB23440180 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495A3A1A8ED9AC4276F75C /* 7.png */; };
 		F14951ADCAB034E8DF436B5D /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495722D8909D273691A8A4 /* 6.png */; };
-		F14951C7F023A062FD05EEEE /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495FAAE2CE65D0105BB9B3 /* ProfileTableViewCell.swift */; };
+		F14951C7F023A062FD05EEEE /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495FAAE2CE65D0105BB9B3 /* ProfileCell.swift */; };
 		F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F149534A1EC55C2C73098FDB /* SetupSphereValueViewController.xib */; };
-		F14951DADFEBD16EA7AA4EEE /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495A99D279D2B2DE295323 /* ProfileTableViewCell.xib */; };
+		F14951DADFEBD16EA7AA4EEE /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495A99D279D2B2DE295323 /* ProfileCell.xib */; };
 		F14952606F9F2D69620BA836 /* AlertServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */; };
 		F1495267BF7181FA76BBDF88 /* AchievementsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495517C452EF92F48A6B72 /* AchievementsTableViewCell.xib */; };
 		F1495273E66F5AD91A5F822E /* SphereMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495C2FA436CF4A36B7F05F /* SphereMetricsTableViewCell.swift */; };
@@ -221,14 +221,14 @@
 		F14959BA831454BA379465FF /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertServiceDefault.swift; sourceTree = "<group>"; };
 		F1495A3A1A8ED9AC4276F75C /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
-		F1495A99D279D2B2DE295323 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		F1495A99D279D2B2DE295323 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		F1495B637B114DD9251810C1 /* get-better-readme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "get-better-readme.jpg"; sourceTree = "<group>"; };
 		F1495C2FA436CF4A36B7F05F /* SphereMetricsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereMetricsTableViewCell.swift; sourceTree = "<group>"; };
 		F1495D61E9E5A5FE7FF55202 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		F1495DC187F39C709B8B85F8 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
 		F1495E175756D8C81C491673 /* SphereDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereDetailViewController.swift; sourceTree = "<group>"; };
 		F1495ED73EC740C15F91A8CF /* EditProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
-		F1495FAAE2CE65D0105BB9B3 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		F1495FAAE2CE65D0105BB9B3 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -638,8 +638,8 @@
 		F14954B63719E06420C4F676 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				F1495FAAE2CE65D0105BB9B3 /* ProfileTableViewCell.swift */,
-				F1495A99D279D2B2DE295323 /* ProfileTableViewCell.xib */,
+				F1495FAAE2CE65D0105BB9B3 /* ProfileCell.swift */,
+				F1495A99D279D2B2DE295323 /* ProfileCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -817,7 +817,7 @@
 				F149557C8041D5BB75C0CA34 /* WelcomeViewController.xib in Resources */,
 				F14959446FAB1AE8F8479875 /* ArticleViewController.xib in Resources */,
 				F149536F904F19914B26C190 /* EditProfileViewController.xib in Resources */,
-				F14951DADFEBD16EA7AA4EEE /* ProfileTableViewCell.xib in Resources */,
+				F14951DADFEBD16EA7AA4EEE /* ProfileCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,7 +958,7 @@
 				F14953B62F438A822C859E2D /* FirebaseStorageService.swift in Sources */,
 				F1495758B8B86F71B37096B8 /* FirebaseDatabaseService.swift in Sources */,
 				F1495D08557F105CA2F17BBD /* EditProfileViewController.swift in Sources */,
-				F14951C7F023A062FD05EEEE /* ProfileTableViewCell.swift in Sources */,
+				F14951C7F023A062FD05EEEE /* ProfileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,28 +50,28 @@
 
 "Auth.title" = "Авторизация";
 "Auth.email" = "E-mail";
-"Auth.enterEmail" = "Введите E-mail";
+"Auth.enterEmail" = "Введи E-mail";
 "Auth.password" = "Пароль";
-"Auth.enterPassword" = "Введите пароль";
+"Auth.enterPassword" = "Введи пароль";
 "Auth.enter" = "Войти";
 "Auth.doRegister" = "Зарегистрироваться";
-"Auth.forgotPassword" = "Забыли пароль?";
+"Auth.forgotPassword" = "Не помню пароль";
 "Auth.register" = "Регистрация";
 "Auth.successRegister" = "Вы успешно зарегистрировались";
 "Auth.anonymButton" = "Продолжить без регистрации";
 
 // MARK: RegisterValidate
 
-"emailIsEmpty" = "Введите E-mail";
-"emailIsNotValid" = "Введите корректный E-mail";
-"passwordIsEmpty" = "Введите пароль";
+"emailIsEmpty" = "Введи E-mail";
+"emailIsNotValid" = "Введи корректный E-mail";
+"passwordIsEmpty" = "Введи пароль";
 
 // MARK: ResetPassword
 
-"ResetPassword.alertEmail" = "Письмо отправлено на ваш E-mail. Проверьте почту";
+"ResetPassword.alertEmail" = "Письмо отправлено на E-mail. Проверь почту";
 "ResetPassword.title" = "Сбросить пароль";
 "ResetPassword.button" = "Сбросить пароль";
-"ResetPassword.noticeLabel" = "На указанный E-mail придёт ссылка, пройдя по которой вы сможете изменить пароль.";
+"ResetPassword.noticeLabel" = "На указанный E-mail придёт ссылка, по которой ты сможешь задать новый пароль";
 
 // MARK: Register
 
@@ -89,13 +89,13 @@
 "Profile.signOut" = "Выйти";
 "Profile.update" = "Обновить";
 "Profile.name" = "Имя";
-"Profile.enterName" = "Введите имя";
+"Profile.enterName" = "Введи имя";
 "Profile.email" = "E-mail";
-"Profile.enterEmail" = "Введите E-mail";
+"Profile.enterEmail" = "Введи E-mail";
 "Profile.password" = "Пароль";
-"Profile.enterPassword" = "Введите новый пароль";
+"Profile.enterPassword" = "Введи новый пароль";
 "Profile.loadAvatar" = "Выбрать\nаватар";
-"Profile.warning" = "После смены E-mail необходимо заново войти в приложение";
+"Profile.warning" = "После смены E-mail необходимо будет заново войти в приложение";
 "Profile.loading" = "Подождите, идет загрузка";
 "Profile.successEdit" = "Профиль обновлён";
 
@@ -104,8 +104,8 @@
 "Onboarding.unselect" = "?";
 "Onboarding.title" = "Привет";
 "Onboarding.save" = "Сохранить";
-"Onboarding.exit" = "Выйти";
-"Onboarding.emptyValuesWarning" = "Нужно ответить на все вопросы";
+"Onboarding.exit" = "Отмена";
+"Onboarding.emptyValuesWarning" = "Постой, нужно ответить на все вопросы 😉";
 "Onboarding.10" = "10 — идеально";
 "Onboarding.9" = "9 — отлично";
 "Onboarding.8" = "8 — хорошо";

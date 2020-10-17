@@ -104,7 +104,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldU-h1-AoD">
-                    <rect key="frame" x="184" y="498.5" width="46" height="30"/>
+                    <rect key="frame" x="20" y="498.5" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="deleteAccountButtonDidTap:" destination="-1" eventType="touchUpInside" id="UOe-Ah-qf2"/>
@@ -162,11 +162,11 @@
                 <constraint firstItem="nuf-To-UEE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="g8I-LZ-qlc"/>
                 <constraint firstItem="Br0-BS-dIh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="gJW-pr-4NC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="glj-Pf-xBa" secondAttribute="trailing" constant="20" id="haf-tc-SGU"/>
-                <constraint firstItem="ldU-h1-AoD" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="hgf-iP-bVN"/>
                 <constraint firstAttribute="trailing" secondItem="fsS-wq-HxJ" secondAttribute="trailing" constant="20" id="iqr-MX-YQC"/>
                 <constraint firstItem="piE-pJ-i4P" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jtQ-Xf-U4Y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GLo-Tj-2Os" secondAttribute="trailing" constant="20" id="jx3-Nz-rlk"/>
                 <constraint firstItem="ukh-K4-K3d" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="jzu-ey-pCg"/>
+                <constraint firstItem="ldU-h1-AoD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="kFF-Kt-Maj"/>
                 <constraint firstItem="piE-pJ-i4P" firstAttribute="top" secondItem="ewl-u8-E0N" secondAttribute="bottom" constant="10" id="mbC-F7-WzN"/>
                 <constraint firstAttribute="trailing" secondItem="ukh-K4-K3d" secondAttribute="trailing" constant="20" id="wDB-Al-9pp"/>
                 <constraint firstItem="fsS-wq-HxJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xmY-UM-fTD"/>

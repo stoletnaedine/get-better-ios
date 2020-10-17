@@ -12,15 +12,16 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    private enum Constants {
+        static let sectionHeaderHeight: CGFloat = 35
+        static let profileCellId = R.reuseIdentifier.profileCell.identifier
+        static let profileNibName = R.nib.profileCell.name
+    }
+    
     let presenter: SettingsPresenter = SettingsPresenterDefault()
     var profile: Profile?
-    
-    let SectionHeaderHeight: CGFloat = 35
     var tableItems: [TableSection : [CommonSettingsCell]]?
     let refreshControl = UIRefreshControl()
-    
-    let profileCellIdentifier = R.reuseIdentifier.profileCell.identifier
-    let profileNibName = R.nib.profileTableViewCell.name
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,13 +43,13 @@ class SettingsViewController: UIViewController {
     
     private func setupView() {
         title = R.string.localizable.settingsTitle()
-        tableView.backgroundColor = .appBackground
+        tableView.backgroundColor = .lifeCircleLineBack
         tableView.separatorInset = UIEdgeInsets.zero
     }
     
     private func registerTableCell() {
-        tableView.register(UINib(nibName: profileNibName, bundle: nil),
-                           forCellReuseIdentifier: profileCellIdentifier)
+        tableView.register(UINib(nibName: Constants.profileNibName, bundle: nil),
+                           forCellReuseIdentifier: Constants.profileCellId)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -129,28 +130,29 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let items = tableItems else { return UITableViewCell() }
-        guard let tableSection = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
-        switch tableSection {
+        guard let itemSection = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
+        switch itemSection {
         case .profile:
-            let cell = tableView.dequeueReusableCell(withIdentifier: profileCellIdentifier) as! ProfileTableViewCell
-            if let profile = profile {
-                cell.fillCell(profile: profile)
-            }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellId) as? ProfileCell
+                else { return UITableViewCell() }
+            guard let profile = self.profile else { return UITableViewCell() }
+            cell.fillCell(profile: profile)
             cell.selectionStyle = .none
             return cell
         case .articles:
             let cell = UITableViewCell()
-            cell.textLabel?.text = items[tableSection]?[indexPath.row].title
+            cell.textLabel?.text = items[itemSection]?[indexPath.row].title
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
         case .notifications:
             // TODO: сделать нормально
-            guard let topic = NotificationTopic(rawValue: items[tableSection]?[indexPath.row].title ?? "") else { return UITableViewCell() }
+            guard let topic = NotificationTopic(rawValue: items[itemSection]?[indexPath.row].title ?? "")
+                else { return UITableViewCell() }
             return presenter.createPushNotifyCell(topic: topic)
         case .version:
             let cell = UITableViewCell()
-            cell.textLabel?.text = items[tableSection]?[indexPath.row].title
+            cell.textLabel?.text = items[itemSection]?[indexPath.row].title
             cell.textLabel?.textColor = .grey
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
@@ -163,7 +165,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         guard let tableSection = TableSection(rawValue: indexPath.section) else { return defaultHeight }
         switch tableSection {
         case .profile:
-            let cell = tableView.dequeueReusableCell(withIdentifier: profileCellIdentifier) as! ProfileTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellId) as? ProfileCell else { return 0 }
             return cell.frame.height
         default:
             return defaultHeight
@@ -180,10 +182,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 0
-        }
-        return SectionHeaderHeight
+        return Constants.sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
