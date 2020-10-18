@@ -42,11 +42,8 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                 </textView>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XYe-vx-fDP">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XYe-vx-fDP" customClass="ScaledHeightImageView" customModule="GetBetter" customModuleProvider="target">
                                     <rect key="frame" x="20" y="264" width="374" height="374"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="XYe-vx-fDP" secondAttribute="height" multiplier="1:1" id="L3N-rf-JGE"/>
-                                    </constraints>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -56,7 +53,7 @@
                                 <constraint firstItem="pWA-40-K4u" firstAttribute="top" secondItem="m1F-nc-61e" secondAttribute="top" constant="20" id="F9F-w5-ISS"/>
                                 <constraint firstItem="0jP-zz-fsU" firstAttribute="leading" secondItem="m1F-nc-61e" secondAttribute="leading" constant="20" id="FHZ-TV-GKE"/>
                                 <constraint firstAttribute="trailing" secondItem="pWA-40-K4u" secondAttribute="trailing" constant="20" id="b1X-Kn-cVf"/>
-                                <constraint firstItem="XYe-vx-fDP" firstAttribute="top" secondItem="0jP-zz-fsU" secondAttribute="bottom" constant="20" id="b73-48-Vhc"/>
+                                <constraint firstItem="XYe-vx-fDP" firstAttribute="top" secondItem="0jP-zz-fsU" secondAttribute="bottom" constant="10" id="b73-48-Vhc"/>
                                 <constraint firstAttribute="trailing" secondItem="XYe-vx-fDP" secondAttribute="trailing" constant="20" id="c76-YQ-Vsf"/>
                                 <constraint firstItem="pWA-40-K4u" firstAttribute="leading" secondItem="m1F-nc-61e" secondAttribute="leading" constant="20" id="coo-rX-Zeb"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XYe-vx-fDP" secondAttribute="bottom" constant="20" id="j1M-7t-kg5"/>
