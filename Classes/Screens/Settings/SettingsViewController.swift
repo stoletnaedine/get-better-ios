@@ -21,20 +21,22 @@ class SettingsViewController: UIViewController {
     
     let presenter: SettingsPresenter = SettingsPresenterDefault()
     var profile: Profile?
-    var tableSections: [TableSection] = []
+    var tableSections: [Section] = []
     let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        registerTableCell()
-        fillCells()
         customizeBarButton()
+        setupView()
         setupRefreshControl()
+        setupTableView()
+        fillCells()
         loadProfileAndReloadTableView()
     }
     
-    @objc func loadProfileAndReloadTableView() {
+    // MARK: — Private methods
+    
+    @objc private func loadProfileAndReloadTableView() {
         loadProfileInfo(completion: { [weak self] profile in
             self?.profile = profile
             self?.tableView.reloadData()
@@ -48,7 +50,7 @@ class SettingsViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
     }
     
-    private func registerTableCell() {
+    private func setupTableView() {
         tableView.register(UINib(nibName: Constants.profileNibName, bundle: nil),
                            forCellReuseIdentifier: Constants.profileCellId)
         tableView.dataSource = self
@@ -56,14 +58,14 @@ class SettingsViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
-    func setupRefreshControl() {
+    private func setupRefreshControl() {
         refreshControl.addTarget(self,
                                  action: #selector(loadProfileAndReloadTableView),
                                  for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
     
-    func customizeBarButton() {
+    private func customizeBarButton() {
         let signOutBarButton = UIBarButtonItem(title: R.string.localizable.settingsExit(),
                                                style: .plain,
                                                target: self,
@@ -71,7 +73,7 @@ class SettingsViewController: UIViewController {
         navigationItem.rightBarButtonItem = signOutBarButton
     }
     
-    @objc func logoutButtonDidTap() {
+    @objc private func logoutButtonDidTap() {
         let message = (profile?.email == R.string.localizable.settingsDefaultEmail())
             ? R.string.localizable.settingsLogoutAlertNoEmail() : ""
         let alert = UIAlertController(title: R.string.localizable.settingsLogoutAlertQuestion(),
@@ -89,6 +91,8 @@ class SettingsViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 }
+
+// MARK: — UITableViewDelegate
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -160,6 +164,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// MARK: — Fill Cells
+
 extension SettingsViewController {
     
     private func fillCells() {
@@ -188,13 +194,13 @@ extension SettingsViewController {
         appVersionVC.text = R.string.localizable.appVersions()
         
         tableSections = [
-            TableSection(type: .profile,
+            Section(type: .profile,
                          cells: [
                             Cell(action: { [weak self] in
                                 self?.navigationController?.pushViewController(editProfileViewController, animated: true)
                             })
                          ]),
-            TableSection(type: .articles,
+            Section(type: .articles,
                          cells: [
                             Cell(title: R.string.localizable.aboutCircleTableTitle(),
                                  action: { [weak self] in
@@ -209,11 +215,11 @@ extension SettingsViewController {
                                     self?.navigationController?.pushViewController(aboutAppVC, animated: true)
                                  })
                          ]),
-            TableSection(type: .notifications,
+            Section(type: .notifications,
                          cells: [
                             Cell(title: NotificationTopic.daily.rawValue)
                          ]),
-            TableSection(type: .version,
+            Section(type: .version,
                          cells: [
                             Cell(title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
                                  action: { [weak self] in
@@ -224,6 +230,8 @@ extension SettingsViewController {
     }
     
 }
+
+// MARK: — LoadProfileInfo
 
 extension SettingsViewController {
     

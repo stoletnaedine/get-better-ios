@@ -1,15 +1,14 @@
 //
-//  TableSection.swift
+//  Section.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 29.04.2020.
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-struct TableSection {
+struct Section {
     let type: SectionType
     let cells: [Cell]
 }
