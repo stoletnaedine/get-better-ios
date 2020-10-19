@@ -29,7 +29,7 @@ class EditProfileViewController: UIViewController {
     let storage = FirebaseStorage()
     let alertService: AlertService = AlertServiceDefault()
     
-    var completion: () -> Void = {}
+    var editProfileCompletion: () -> Void = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +119,7 @@ class EditProfileViewController: UIViewController {
             self?.removeActivityIndicator()
             self?.navigationController?.popViewController(animated: true)
             self?.alertService.showSuccessMessage(desc: R.string.localizable.profileSuccessEdit())
-            self?.completion()
+            self?.editProfileCompletion()
         })
     }
     

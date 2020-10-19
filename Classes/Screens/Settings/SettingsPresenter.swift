@@ -7,13 +7,9 @@
 //
 
 import UIKit
-import Firebase
 import FirebaseMessaging
 
 protocol SettingsPresenter {
-    func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void)
-    func fillArticles() -> [CommonSettingsCell]
-    func createAppHistoryVersions() -> UIViewController
     func createPushNotifyCell(topic: NotificationTopic) -> UITableViewCell
 }
 
@@ -24,50 +20,6 @@ class SettingsPresenterDefault: SettingsPresenter {
     
     var isDailySubscribe: Bool?
     var isTipSubscribe: Bool?
-    
-    func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
-        guard let user = Auth.auth().currentUser else { return }
-        DispatchQueue.main.async {
-            completion(
-                Profile(avatarURL: user.photoURL,
-                        name: user.displayName ?? R.string.localizable.settingsDefaultName(),
-                        email: user.email ?? R.string.localizable.settingsDefaultEmail())
-            )
-        }
-    }
-    
-    func fillArticles() -> [CommonSettingsCell] {
-        let aboutCircleViewController = ArticleViewController()
-        aboutCircleViewController.article = Article(title: R.string.localizable.aboutCircleTitle(),
-                                                    titleView: nil,
-                                                    text: R.string.localizable.aboutCircleDescription(),
-                                                    image: R.image.lifeCircleExample())
-        
-        let aboutJournalViewController = ArticleViewController()
-        aboutJournalViewController.article = Article(title: R.string.localizable.aboutJournalTitle(),
-                                                     titleView: nil,
-                                                     text: R.string.localizable.aboutJournalDescription(),
-                                                     image: R.image.aboutEvents())
-        
-        let aboutAppViewController = ArticleViewController()
-        aboutAppViewController.article = Article(title: R.string.localizable.aboutAppTitle(),
-                                                 titleView: UIImageView(image: R.image.titleViewLogo()),
-                                                 text: R.string.localizable.aboutAppDescription(),
-                                                 image: R.image.aboutTeam())
-        
-        return [CommonSettingsCell(title: R.string.localizable.aboutCircleTableTitle(),
-                                   viewController: aboutCircleViewController),
-                CommonSettingsCell(title: R.string.localizable.aboutJournalTableTitle(),
-                                   viewController: aboutJournalViewController),
-                CommonSettingsCell(title: R.string.localizable.aboutAppTableTitle(),
-                                   viewController: aboutAppViewController)]
-    }
-    
-    func createAppHistoryVersions() -> UIViewController {
-        let vc = TextViewViewController()
-        vc.text = R.string.localizable.appVersions()
-        return vc
-    }
     
     func createPushNotifyCell(topic: NotificationTopic) -> UITableViewCell {
         let cell = UITableViewCell()

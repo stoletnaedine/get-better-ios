@@ -34,7 +34,7 @@ class ArticleViewController: UIViewController {
     private func fillViewController(from article: Article) {
         navigationItem.titleView = article.titleView
         titleLabel.text = article.title
-        textView.attributedText = article.text?.htmlToAttributedString
+        textView.attributedText = article.text.htmlToAttributedString
         textView.sizeToFit()
         imageView.image = article.image
     }

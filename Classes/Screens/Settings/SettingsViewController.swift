@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsViewController: UIViewController {
 
@@ -20,21 +21,21 @@ class SettingsViewController: UIViewController {
     
     let presenter: SettingsPresenter = SettingsPresenterDefault()
     var profile: Profile?
-    var tableItems: [TableSection : [CommonSettingsCell]]?
+    var tableSections: [TableSection] = []
     let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         registerTableCell()
-        fillTableItems()
+        fillCells()
         customizeBarButton()
         setupRefreshControl()
         loadProfileAndReloadTableView()
     }
     
     @objc func loadProfileAndReloadTableView() {
-        presenter.loadProfileInfo(completion: { [weak self] profile in
+        loadProfileInfo(completion: { [weak self] profile in
             self?.profile = profile
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
@@ -55,29 +56,6 @@ class SettingsViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
-    private func fillTableItems() {
-        let editProfileViewController = EditProfileViewController()
-        editProfileViewController.completion = { [weak self] in
-            self?.loadProfileAndReloadTableView()
-        }
-        
-        tableItems = [
-            TableSection.profile : [CommonSettingsCell(title: "", viewController: editProfileViewController)],
-            TableSection.articles : presenter.fillArticles(),
-            TableSection.notifications : [
-                CommonSettingsCell(title: NotificationTopic.daily.rawValue, viewController: nil)
-                // TODO доделать советы дня (в БД сейчас перезаписывается строка)
-//                CommonSettingsCell(title: NotificationTopic.tipOfTheDay.rawValue, viewController: nil)
-            ],
-            TableSection.version : [
-                CommonSettingsCell(
-                        title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
-                        viewController: presenter.createAppHistoryVersions()
-                )
-            ]
-        ]
-    }
-    
     func setupRefreshControl() {
         refreshControl.addTarget(self,
                                  action: #selector(loadProfileAndReloadTableView),
@@ -94,10 +72,8 @@ class SettingsViewController: UIViewController {
     }
     
     @objc func logoutButtonDidTap() {
-        var message = ""
-        if profile?.email == R.string.localizable.settingsDefaultEmail() {
-            message = R.string.localizable.settingsLogoutAlertNoEmail()
-        }
+        let message = (profile?.email == R.string.localizable.settingsDefaultEmail())
+            ? R.string.localizable.settingsLogoutAlertNoEmail() : ""
         let alert = UIAlertController(title: R.string.localizable.settingsLogoutAlertQuestion(),
                                       message: message,
                                       preferredStyle: .alert)
@@ -117,21 +93,16 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard let items = tableItems else { return 0 }
-        return items.count
+        return tableSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let items = tableItems else { return 0 }
-        guard let tableSection = TableSection(rawValue: section) else { return 0 }
-        guard let viewControllers = items[tableSection] else { return 0 }
-        return viewControllers.count
+        return tableSections[section].cells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let items = tableItems else { return UITableViewCell() }
-        guard let itemSection = TableSection(rawValue: indexPath.section) else { return UITableViewCell() }
-        switch itemSection {
+        let section = tableSections[indexPath.section]
+        switch section.type {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellId) as? ProfileCell
                 else { return UITableViewCell() }
@@ -141,18 +112,18 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .articles:
             let cell = UITableViewCell()
-            cell.textLabel?.text = items[itemSection]?[indexPath.row].title
+            cell.textLabel?.text = section.cells[indexPath.row].title ?? ""
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
         case .notifications:
             // TODO: сделать нормально
-            guard let topic = NotificationTopic(rawValue: items[itemSection]?[indexPath.row].title ?? "")
+            guard let topic = NotificationTopic(rawValue: section.cells[indexPath.row].title ?? "")
                 else { return UITableViewCell() }
             return presenter.createPushNotifyCell(topic: topic)
         case .version:
             let cell = UITableViewCell()
-            cell.textLabel?.text = items[itemSection]?[indexPath.row].title
+            cell.textLabel?.text = section.cells[indexPath.row].title
             cell.textLabel?.textColor = .grey
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
@@ -162,8 +133,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let defaultHeight = UITableViewCell().frame.height
-        guard let tableSection = TableSection(rawValue: indexPath.section) else { return defaultHeight }
-        switch tableSection {
+        let section = tableSections[indexPath.section]
+        switch section.type {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellId) as? ProfileCell else { return 0 }
             return cell.frame.height
@@ -173,12 +144,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let items = tableItems else { return }
-        guard let tableSection = TableSection(rawValue: indexPath.section) else { return }
-        guard let viewControllers = items[tableSection] else { return }
-        if let viewController = viewControllers[indexPath.row].viewController {
-            navigationController?.pushViewController(viewController, animated: true)
-        }
+        let cell = tableSections[indexPath.section].cells[indexPath.row]
+        cell.action?()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -189,6 +156,86 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let view = UIView()
         view.backgroundColor = .lifeCircleLineBack
         return view
+    }
+    
+}
+
+extension SettingsViewController {
+    
+    private func fillCells() {
+        let editProfileViewController = EditProfileViewController()
+        editProfileViewController.editProfileCompletion = { [weak self] in
+            self?.loadProfileAndReloadTableView()
+        }
+        
+        let aboutCircleVC = ArticleViewController()
+        aboutCircleVC.article = Article(title: R.string.localizable.aboutCircleTitle(),
+                                        text: R.string.localizable.aboutCircleDescription(),
+                                        image: R.image.lifeCircleExample())
+        
+        let aboutJournalVC = ArticleViewController()
+        aboutJournalVC.article = Article(title: R.string.localizable.aboutJournalTitle(),
+                                         text: R.string.localizable.aboutJournalDescription(),
+                                         image: R.image.aboutEvents())
+        
+        let aboutAppVC = ArticleViewController()
+        aboutAppVC.article = Article(title: R.string.localizable.aboutAppTitle(),
+                                     titleView: UIImageView(image: R.image.titleViewLogo()),
+                                     text: R.string.localizable.aboutAppDescription(),
+                                     image: R.image.aboutTeam())
+        
+        let appVersionVC = TextViewViewController()
+        appVersionVC.text = R.string.localizable.appVersions()
+        
+        tableSections = [
+            TableSection(type: .profile,
+                         cells: [
+                            Cell(action: { [weak self] in
+                                self?.navigationController?.pushViewController(editProfileViewController, animated: true)
+                            })
+                         ]),
+            TableSection(type: .articles,
+                         cells: [
+                            Cell(title: R.string.localizable.aboutCircleTableTitle(),
+                                 action: { [weak self] in
+                                    self?.navigationController?.pushViewController(aboutCircleVC, animated: true)
+                                 }),
+                            Cell(title: R.string.localizable.aboutJournalTitle(),
+                                 action: { [weak self] in
+                                    self?.navigationController?.pushViewController(aboutJournalVC, animated: true)
+                                 }),
+                            Cell(title: R.string.localizable.aboutAppTitle(),
+                                 action: { [weak self] in
+                                    self?.navigationController?.pushViewController(aboutAppVC, animated: true)
+                                 })
+                         ]),
+            TableSection(type: .notifications,
+                         cells: [
+                            Cell(title: NotificationTopic.daily.rawValue)
+                         ]),
+            TableSection(type: .version,
+                         cells: [
+                            Cell(title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
+                                 action: { [weak self] in
+                                    self?.navigationController?.pushViewController(appVersionVC, animated: true)
+                                 })
+                         ])
+        ]
+    }
+    
+}
+
+extension SettingsViewController {
+    
+    func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
+        guard let user = Auth.auth().currentUser else { return }
+        DispatchQueue.main.async {
+            completion(
+                Profile(avatarURL: user.photoURL,
+                        name: user.displayName ?? R.string.localizable.settingsDefaultName(),
+                        email: user.email ?? R.string.localizable.settingsDefaultEmail())
+            )
+        }
     }
     
 }
