@@ -33,7 +33,6 @@ class AddPostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = R.string.localizable.postTitle()
         self.hideKeyboardWhenTappedAround()
         setupView()
         setupSelectSphereButtonTapHandler()

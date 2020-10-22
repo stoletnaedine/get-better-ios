@@ -31,7 +31,7 @@ class JournalViewController: UIViewController {
         updatePostsInTableView()
     }
     
-    @objc func updatePostsInTableView() {
+    @objc public func updatePostsInTableView() {
         title = R.string.localizable.journalLoading()
         getPosts { [weak self] in
             self?.title = R.string.localizable.tabBarJournal()

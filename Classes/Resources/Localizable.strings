@@ -44,6 +44,8 @@
 
 "TabBar.lifeCircle" = "Колесо жизни";
 "TabBar.journal" = "Дневник";
+"TabBar.addPost" = "Новый пост";
+"TabBar.achievements" = "Достижения";
 "TabBar.settings" = "Настройки";
 
 // MARK: Auth
