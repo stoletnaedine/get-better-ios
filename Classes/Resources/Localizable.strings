@@ -29,7 +29,7 @@
 
 "Journal.loading" = "Загрузка";
 "Journal.deletedPost" = "Пост удалён";
-"Journal.placeholder" = "Здесь будут твои события. Каждое из них будет прокачивать колесо жизни. Попробуй добавить первую запись";
+"Journal.placeholder" = "Здесь будут посты твоего дневника. Каждый из них будет прокачивать колесо жизни. Попробуй добавить первую запись";
 "Journal.tipOfTheDay" = "Совет дня";
 
 // MARK: Achievements
@@ -45,7 +45,7 @@
 
 // Mark: TabBar
 
-"TabBar.lifeCircle" = "Колесо жизни";
+"TabBar.lifeCircle" = "Колесо";
 "TabBar.journal" = "Дневник";
 "TabBar.addPost" = "Новый пост";
 "TabBar.achievements" = "Достижения";

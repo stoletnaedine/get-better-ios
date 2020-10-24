@@ -18,6 +18,8 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var metricsTableView: UITableView!
     @IBOutlet weak var currentLevelButton: UIButton!
     @IBOutlet weak var startLevelButton: UIButton!
+    @IBOutlet weak var currentLevelView: UIView!
+    @IBOutlet weak var startLevelView: UIView!
     
     private let refreshControl = UIRefreshControl()
     private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
@@ -62,21 +64,35 @@ class LifeCircleViewController: UIViewController {
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
         isCurrentDataVisible = true
         setupChartView(animate: false)
-        if !isCurrentButtonSelected {
-            isCurrentButtonSelected.toggle()
-            currentLevelButton.isSelected.toggle()
-            startLevelButton.isSelected.toggle()
-        }
+        
+        startLevelView.backgroundColor = .white
+        startLevelButton.setTitleColor(.violet, for: .normal)
+        currentLevelView.backgroundColor = .violet
+        currentLevelButton.setTitleColor(.white, for: .normal)
     }
     
     @IBAction func startLevelButtonDidTap(_ sender: UIButton) {
         isCurrentDataVisible = false
         setupChartView(animate: false)
-        if isCurrentButtonSelected {
-            isCurrentButtonSelected.toggle()
-            currentLevelButton.isSelected.toggle()
-            startLevelButton.isSelected.toggle()
-        }
+        
+        startLevelView.backgroundColor = .violet
+        startLevelButton.setTitleColor(.white, for: .normal)
+        currentLevelView.backgroundColor = .white
+        currentLevelButton.setTitleColor(.violet, for: .normal)
+    }
+    
+    private func setupLevelButtons() {
+        currentLevelButton.setTitle(R.string.localizable.lifeCircleCurrent(), for: .normal)
+        currentLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        currentLevelButton.setTitleColor(.white, for: .normal)
+        currentLevelView.layer.cornerRadius = 8
+        currentLevelView.backgroundColor = .violet
+        
+        startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
+        startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        startLevelButton.setTitleColor(.violet, for: .normal)
+        startLevelView.layer.cornerRadius = 8
+        startLevelView.backgroundColor = .white
     }
     
     private func getTips() {
@@ -111,21 +127,6 @@ class LifeCircleViewController: UIViewController {
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(showTip))
-    }
-    
-    private func setupLevelButtons() {
-        currentLevelButton.isSelected = isCurrentButtonSelected
-        startLevelButton.isSelected = !isCurrentButtonSelected
-        
-        currentLevelButton.setTitle(R.string.localizable.lifeCircleCurrent(), for: .normal)
-        currentLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        currentLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
-        currentLevelButton.setBackgroundColor(color: .violet, forState: .selected)
-        
-        startLevelButton.setTitle(R.string.localizable.lifeCircleStart(), for: .normal)
-        startLevelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        startLevelButton.setTitleColor(.lifeCircleLineCurrent, for: .normal)
-        startLevelButton.setBackgroundColor(color: .violet, forState: .selected)
     }
     
     private func setupChartViewTap() {

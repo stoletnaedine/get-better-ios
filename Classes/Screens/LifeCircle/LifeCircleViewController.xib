@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,9 +15,11 @@
                 <outlet property="circleLegendView" destination="tZe-0q-jOl" id="uQm-JG-D2H"/>
                 <outlet property="containerView" destination="MNE-VG-tkU" id="QoH-cK-6Tv"/>
                 <outlet property="currentLevelButton" destination="ryy-Gn-g4H" id="s3k-kX-JkJ"/>
+                <outlet property="currentLevelView" destination="OSv-rN-0aG" id="ZwD-YF-Bf0"/>
                 <outlet property="metricsTableView" destination="vic-bJ-U3q" id="t8j-i0-E2B"/>
                 <outlet property="segmentedControl" destination="arR-df-p35" id="c02-5F-mmX"/>
                 <outlet property="startLevelButton" destination="Gs0-Sf-Xir" id="PXQ-8Y-vbe"/>
+                <outlet property="startLevelView" destination="Zjm-03-jdq" id="REw-uK-oQt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,10 +43,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MNE-VG-tkU" userLabel="Container View">
-                    <rect key="frame" x="0.0" y="105" width="414" height="679"/>
+                    <rect key="frame" x="0.0" y="105" width="414" height="687"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="Circle Chart View" customClass="RadarChartView" customModule="Charts">
-                            <rect key="frame" x="19.5" y="133.5" width="375" height="412"/>
+                            <rect key="frame" x="19.5" y="137.5" width="375" height="412"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="fxn-qj-OtY" secondAttribute="height" multiplier="1:1.1" id="qje-9Z-bwr"/>
@@ -58,40 +61,68 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Circle Legend View">
-                    <rect key="frame" x="87" y="804" width="240" height="28"/>
+                    <rect key="frame" x="62" y="812" width="290" height="20"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryy-Gn-g4H" userLabel="Current Level Button">
-                            <rect key="frame" x="0.0" y="0.0" width="82" height="28"/>
-                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                            <state key="normal" title="Текущее"/>
-                            <connections>
-                                <action selector="currentLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="08T-i6-9QJ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs0-Sf-Xir" userLabel="Start Level Button">
-                            <rect key="frame" x="142" y="0.0" width="98" height="28"/>
-                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                            <state key="normal" title="Начальное"/>
-                            <connections>
-                                <action selector="startLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Sss-nf-I1G"/>
-                            </connections>
-                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OSv-rN-0aG" userLabel="Current View">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryy-Gn-g4H" userLabel="Current Level Button">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                    <state key="normal" title="Текущее"/>
+                                    <connections>
+                                        <action selector="currentLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="08T-i6-9QJ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="ryy-Gn-g4H" firstAttribute="top" secondItem="OSv-rN-0aG" secondAttribute="top" id="Di4-hs-Ga1"/>
+                                <constraint firstAttribute="bottom" secondItem="ryy-Gn-g4H" secondAttribute="bottom" id="KCs-0G-c43"/>
+                                <constraint firstAttribute="width" constant="100" id="adm-Ny-Pc6"/>
+                                <constraint firstAttribute="height" constant="20" id="h5K-Yp-4el"/>
+                                <constraint firstAttribute="trailing" secondItem="ryy-Gn-g4H" secondAttribute="trailing" id="l3Z-a9-GLl"/>
+                                <constraint firstItem="ryy-Gn-g4H" firstAttribute="leading" secondItem="OSv-rN-0aG" secondAttribute="leading" id="yQF-dk-TYv"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjm-03-jdq" userLabel="Start View">
+                            <rect key="frame" x="190" y="0.0" width="100" height="20"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs0-Sf-Xir" userLabel="Start Level Button">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                    <state key="normal" title="Начальное"/>
+                                    <connections>
+                                        <action selector="startLevelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Sss-nf-I1G"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="Gs0-Sf-Xir" firstAttribute="top" secondItem="Zjm-03-jdq" secondAttribute="top" id="9Pg-Ii-egr"/>
+                                <constraint firstAttribute="width" constant="100" id="FE3-Ns-w1C"/>
+                                <constraint firstAttribute="bottom" secondItem="Gs0-Sf-Xir" secondAttribute="bottom" id="Hq8-4X-A87"/>
+                                <constraint firstAttribute="height" constant="20" id="ben-z5-G3l"/>
+                                <constraint firstAttribute="trailing" secondItem="Gs0-Sf-Xir" secondAttribute="trailing" id="dHb-eO-4Rz"/>
+                                <constraint firstItem="Gs0-Sf-Xir" firstAttribute="leading" secondItem="Zjm-03-jdq" secondAttribute="leading" id="ucN-L0-WnK"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Gs0-Sf-Xir" secondAttribute="trailing" id="LIw-ct-Fvx"/>
-                        <constraint firstAttribute="bottom" secondItem="Gs0-Sf-Xir" secondAttribute="bottom" id="SbC-PC-zyW"/>
-                        <constraint firstAttribute="bottom" secondItem="ryy-Gn-g4H" secondAttribute="bottom" id="TGR-Xo-l8A"/>
-                        <constraint firstItem="Gs0-Sf-Xir" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="f2D-bq-7y5"/>
-                        <constraint firstItem="ryy-Gn-g4H" firstAttribute="leading" secondItem="tZe-0q-jOl" secondAttribute="leading" id="gYM-uk-kIP"/>
-                        <constraint firstItem="Gs0-Sf-Xir" firstAttribute="leading" secondItem="ryy-Gn-g4H" secondAttribute="trailing" constant="60" id="n40-DJ-ZmO"/>
-                        <constraint firstItem="ryy-Gn-g4H" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="vVq-Z0-3yI"/>
+                        <constraint firstAttribute="bottom" secondItem="Zjm-03-jdq" secondAttribute="bottom" id="Cva-Sp-vXS"/>
+                        <constraint firstItem="OSv-rN-0aG" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="Y8b-XP-HKr"/>
+                        <constraint firstAttribute="trailing" secondItem="Zjm-03-jdq" secondAttribute="trailing" id="haS-Jc-rrx"/>
+                        <constraint firstAttribute="bottom" secondItem="OSv-rN-0aG" secondAttribute="bottom" id="i4H-30-cV3"/>
+                        <constraint firstItem="OSv-rN-0aG" firstAttribute="leading" secondItem="tZe-0q-jOl" secondAttribute="leading" id="vn6-go-hFY"/>
+                        <constraint firstItem="Zjm-03-jdq" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="wjS-2z-ODD"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="tZe-0q-jOl" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="03m-Pw-6Wy"/>
                 <constraint firstItem="MNE-VG-tkU" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="10" id="3A9-bU-sdE"/>
                 <constraint firstItem="vic-bJ-U3q" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="3qQ-ec-p2e"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="KZ5-Cy-BE3"/>
@@ -109,4 +140,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="147.99107142857142"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
