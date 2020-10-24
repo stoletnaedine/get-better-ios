@@ -43,10 +43,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MNE-VG-tkU" userLabel="Container View">
-                    <rect key="frame" x="0.0" y="105" width="414" height="687"/>
+                    <rect key="frame" x="0.0" y="105" width="414" height="682"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxn-qj-OtY" userLabel="Circle Chart View" customClass="RadarChartView" customModule="Charts">
-                            <rect key="frame" x="19.5" y="137.5" width="375" height="412"/>
+                            <rect key="frame" x="19.5" y="135" width="375" height="412"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="fxn-qj-OtY" secondAttribute="height" multiplier="1:1.1" id="qje-9Z-bwr"/>
@@ -61,13 +61,13 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZe-0q-jOl" userLabel="Circle Legend View">
-                    <rect key="frame" x="62" y="812" width="290" height="20"/>
+                    <rect key="frame" x="82" y="807" width="250" height="25"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OSv-rN-0aG" userLabel="Current View">
-                            <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryy-Gn-g4H" userLabel="Current Level Button">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                     <state key="normal" title="Текущее"/>
                                     <connections>
@@ -80,16 +80,16 @@
                                 <constraint firstItem="ryy-Gn-g4H" firstAttribute="top" secondItem="OSv-rN-0aG" secondAttribute="top" id="Di4-hs-Ga1"/>
                                 <constraint firstAttribute="bottom" secondItem="ryy-Gn-g4H" secondAttribute="bottom" id="KCs-0G-c43"/>
                                 <constraint firstAttribute="width" constant="100" id="adm-Ny-Pc6"/>
-                                <constraint firstAttribute="height" constant="20" id="h5K-Yp-4el"/>
+                                <constraint firstAttribute="height" constant="25" id="h5K-Yp-4el"/>
                                 <constraint firstAttribute="trailing" secondItem="ryy-Gn-g4H" secondAttribute="trailing" id="l3Z-a9-GLl"/>
                                 <constraint firstItem="ryy-Gn-g4H" firstAttribute="leading" secondItem="OSv-rN-0aG" secondAttribute="leading" id="yQF-dk-TYv"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjm-03-jdq" userLabel="Start View">
-                            <rect key="frame" x="190" y="0.0" width="100" height="20"/>
+                            <rect key="frame" x="150" y="0.0" width="100" height="25"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs0-Sf-Xir" userLabel="Start Level Button">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
                                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                     <state key="normal" title="Начальное"/>
                                     <connections>
@@ -102,7 +102,7 @@
                                 <constraint firstItem="Gs0-Sf-Xir" firstAttribute="top" secondItem="Zjm-03-jdq" secondAttribute="top" id="9Pg-Ii-egr"/>
                                 <constraint firstAttribute="width" constant="100" id="FE3-Ns-w1C"/>
                                 <constraint firstAttribute="bottom" secondItem="Gs0-Sf-Xir" secondAttribute="bottom" id="Hq8-4X-A87"/>
-                                <constraint firstAttribute="height" constant="20" id="ben-z5-G3l"/>
+                                <constraint firstAttribute="height" constant="25" id="ben-z5-G3l"/>
                                 <constraint firstAttribute="trailing" secondItem="Gs0-Sf-Xir" secondAttribute="trailing" id="dHb-eO-4Rz"/>
                                 <constraint firstItem="Gs0-Sf-Xir" firstAttribute="leading" secondItem="Zjm-03-jdq" secondAttribute="leading" id="ucN-L0-WnK"/>
                             </constraints>
@@ -111,6 +111,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Zjm-03-jdq" secondAttribute="bottom" id="Cva-Sp-vXS"/>
+                        <constraint firstItem="Zjm-03-jdq" firstAttribute="leading" secondItem="OSv-rN-0aG" secondAttribute="trailing" constant="50" id="H9S-xR-cIi"/>
                         <constraint firstItem="OSv-rN-0aG" firstAttribute="top" secondItem="tZe-0q-jOl" secondAttribute="top" id="Y8b-XP-HKr"/>
                         <constraint firstAttribute="trailing" secondItem="Zjm-03-jdq" secondAttribute="trailing" id="haS-Jc-rrx"/>
                         <constraint firstAttribute="bottom" secondItem="OSv-rN-0aG" secondAttribute="bottom" id="i4H-30-cV3"/>
@@ -122,7 +123,6 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="tZe-0q-jOl" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="03m-Pw-6Wy"/>
                 <constraint firstItem="MNE-VG-tkU" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="10" id="3A9-bU-sdE"/>
                 <constraint firstItem="vic-bJ-U3q" firstAttribute="top" secondItem="arR-df-p35" secondAttribute="bottom" constant="20" id="3qQ-ec-p2e"/>
                 <constraint firstItem="arR-df-p35" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="KZ5-Cy-BE3"/>

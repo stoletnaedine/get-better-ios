@@ -73,7 +73,7 @@ class OnboardingPageViewController: UIViewController {
     }
     
     @objc func exit() {
-        UserDefaults.standard.set(false, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+        UserDefaults.standard.set(false, forKey: Properties.UserDefaults.tutorialHasShowed)
         
         guard let user = user else {
             alertService.showErrorMessage(desc: R.string.localizable.onboardingUserError())
@@ -111,7 +111,7 @@ class OnboardingPageViewController: UIViewController {
         }
         
         if database.saveStartSphereMetrics(sphereMetrics) {
-            UserDefaults.standard.set(false, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+            UserDefaults.standard.set(false, forKey: Properties.UserDefaults.tutorialHasShowed)
             self.completion()
         }
     }

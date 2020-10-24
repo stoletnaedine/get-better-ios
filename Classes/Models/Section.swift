@@ -17,7 +17,7 @@ enum SectionType: Int {
     case profile
     case articles
     case notifications
-    case version
+    case aboutApp
 }
 
 struct Cell {

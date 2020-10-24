@@ -125,7 +125,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             guard let topic = NotificationTopic(rawValue: section.cells[indexPath.row].title ?? "")
                 else { return UITableViewCell() }
             return presenter.createPushNotifyCell(topic: topic)
-        case .version:
+        case .aboutApp:
             let cell = UITableViewCell()
             cell.textLabel?.text = section.cells[indexPath.row].title
             cell.textLabel?.textColor = .grey
@@ -195,37 +195,41 @@ extension SettingsViewController {
         
         tableSections = [
             Section(type: .profile,
-                         cells: [
-                            Cell(action: { [weak self] in
-                                self?.navigationController?.pushViewController(editProfileViewController, animated: true)
-                            })
-                         ]),
+                    cells: [
+                        Cell(action: { [weak self] in
+                            self?.navigationController?.pushViewController(editProfileViewController, animated: true)
+                        })
+                    ]),
             Section(type: .articles,
-                         cells: [
-                            Cell(title: R.string.localizable.aboutCircleTableTitle(),
-                                 action: { [weak self] in
-                                    self?.navigationController?.pushViewController(aboutCircleVC, animated: true)
-                                 }),
-                            Cell(title: R.string.localizable.aboutJournalTitle(),
-                                 action: { [weak self] in
-                                    self?.navigationController?.pushViewController(aboutJournalVC, animated: true)
-                                 }),
-                            Cell(title: R.string.localizable.aboutAppTitle(),
-                                 action: { [weak self] in
-                                    self?.navigationController?.pushViewController(aboutAppVC, animated: true)
-                                 })
+                    cells: [
+                        Cell(title: R.string.localizable.aboutCircleTableTitle(),
+                             action: { [weak self] in
+                                self?.navigationController?.pushViewController(aboutCircleVC, animated: true)
+                             }),
+                        Cell(title: R.string.localizable.aboutJournalTitle(),
+                             action: { [weak self] in
+                                self?.navigationController?.pushViewController(aboutJournalVC, animated: true)
+                             }),
+                        Cell(title: R.string.localizable.aboutAppTitle(),
+                             action: { [weak self] in
+                                self?.navigationController?.pushViewController(aboutAppVC, animated: true)
+                             })
                          ]),
             Section(type: .notifications,
-                         cells: [
-                            Cell(title: NotificationTopic.daily.rawValue)
-                         ]),
-            Section(type: .version,
-                         cells: [
-                            Cell(title: R.string.localizable.settingsVersionIs(GlobalDefinitions.appVersion),
-                                 action: { [weak self] in
-                                    self?.navigationController?.pushViewController(appVersionVC, animated: true)
-                                 })
-                         ])
+                    cells: [
+                        Cell(title: NotificationTopic.daily.rawValue)
+                    ]),
+            Section(type: .aboutApp,
+                    cells: [
+                        Cell(title: R.string.localizable.settingsVersionIs(Properties.appVersion),
+                             action: { [weak self] in
+                                self?.navigationController?.pushViewController(appVersionVC, animated: true)
+                             }),
+                        Cell(title: R.string.localizable.settingsAboutAppPostReview(), action: {
+                            UIApplication.shared.open(Properties.appStoreUrl,
+                                                      options: [:], completionHandler: nil)
+                        })
+                    ])
         ]
     }
     

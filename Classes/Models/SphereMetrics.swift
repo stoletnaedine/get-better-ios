@@ -22,6 +22,6 @@ struct SphereMetrics {
         let sphereValues = values.map { $0.value }
         
         return spheres != valuesSpheres
-            || sphereValues.contains(GlobalDefinitions.notValidSphereValue)
+            || sphereValues.contains(Properties.notValidSphereValue)
     }
 }

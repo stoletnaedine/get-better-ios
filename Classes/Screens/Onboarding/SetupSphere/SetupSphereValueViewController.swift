@@ -18,7 +18,7 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var arrowDownImageView: UIImageView!
     @IBOutlet weak var arrowUpImageView: UIImageView!
     
-    var sphereValue: Double = GlobalDefinitions.notValidSphereValue
+    var sphereValue: Double = Properties.notValidSphereValue
     var sphere: Sphere?
     let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     let valuesTitle = [R.string.localizable.onboarding10(),
@@ -60,7 +60,7 @@ class SetupSphereValueViewController: UIViewController {
     }
     
     private func showTutorial() {
-        let tutorialHasNotShowed = !UserDefaults.standard.bool(forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+        let tutorialHasNotShowed = !UserDefaults.standard.bool(forKey: Properties.UserDefaults.tutorialHasShowed)
         
         if tutorialHasNotShowed {
             let showcase = MaterialShowcase()
@@ -70,7 +70,7 @@ class SetupSphereValueViewController: UIViewController {
             showcase.primaryText = R.string.localizable.onboardingTutorialPrimaryText()
             showcase.secondaryText = R.string.localizable.onboardingTutorialSecondaryText()
             showcase.show(completion: {
-                UserDefaults.standard.set(true, forKey: GlobalDefinitions.UserDefaults.tutorialHasShowed)
+                UserDefaults.standard.set(true, forKey: Properties.UserDefaults.tutorialHasShowed)
             })
         }
     }

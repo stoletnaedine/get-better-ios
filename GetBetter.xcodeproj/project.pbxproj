@@ -27,7 +27,7 @@
 		C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C317E570247D6559001521FE /* NoInternetViewController.xib */; };
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
 		C328EE062447294100445704 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328EE042447294100445704 /* RegisterViewController.xib */; };
-		C32D4CE123D0F3FC00AD9863 /* GlobalDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* GlobalDefinitions.swift */; };
+		C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Properties.swift */; };
 		C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EA81A25043006009F6D52 /* CommonMetricsTableViewCell.swift */; };
 		C32EA81D25043007009F6D52 /* CommonMetricsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */; };
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
@@ -143,7 +143,7 @@
 		C317E570247D6559001521FE /* NoInternetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetViewController.xib; sourceTree = "<group>"; };
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C328EE042447294100445704 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
-		C32D4CE023D0F3FC00AD9863 /* GlobalDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDefinitions.swift; sourceTree = "<group>"; };
+		C32D4CE023D0F3FC00AD9863 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		C32EA81A25043006009F6D52 /* CommonMetricsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMetricsTableViewCell.swift; sourceTree = "<group>"; };
 		C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonMetricsTableViewCell.xib; sourceTree = "<group>"; };
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 			children = (
 				9277D387238C725200B3AECA /* AppDelegate.swift */,
 				C3E7EB7323C710BB0045B70A /* RootManager.swift */,
-				C32D4CE023D0F3FC00AD9863 /* GlobalDefinitions.swift */,
+				C32D4CE023D0F3FC00AD9863 /* Properties.swift */,
 				C390A75B24C0CF9800EAD48E /* Views */,
 				C3C873CF2436032400931E9B /* Error */,
 				C34B14E724475EA700B58B18 /* Helpers */,
@@ -896,7 +896,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F98135253B29850002CD13 /* ScrollViewController.swift in Sources */,
-				C32D4CE123D0F3FC00AD9863 /* GlobalDefinitions.swift in Sources */,
+				C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */,
 				6E7071F3245C474D00ED7D08 /* SphereValue.swift in Sources */,
 				C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */,
 				C3C9DD8724B843B3003C83BD /* String.swift in Sources */,
@@ -1108,7 +1108,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1133,7 +1133,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

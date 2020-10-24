@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct GlobalDefinitions {
+enum Properties {
     
-    struct Keychain {
+    enum Keychain {
         static let emailKey = "com.stoletnaedine.GetBetter.UserEmail"
     }
     
-    struct UserDefaults {
+    enum UserDefaults {
         static let tutorialHasShowed = "tutorialHasShowed"
     }
     
     static let notValidSphereValue = -1.0
-    
     static let appVersion = "1.6"
+    static let appStoreUrl = URL(string: "https://apps.apple.com/us/app/getbetter/id1522666671?uo=4")!
 }
