@@ -50,7 +50,7 @@
 		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
 		C37D0B3E23D79088005A1BCF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* Label.swift */; };
-		C3813FFE24D92F7000A3C6AA /* LifeCirclePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */; };
+		C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */; };
 		C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */; };
 		C38689EB2520FE9500BE9851 /* EditPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38689EA2520FE9500BE9851 /* EditPostViewController.swift */; };
 		C38689ED2521054300BE9851 /* EditPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C38689EC2521054300BE9851 /* EditPostViewController.xib */; };
@@ -67,6 +67,7 @@
 		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
 		C3B4760324596BAD0067A3C0 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* Section.swift */; };
 		C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760424596BCB0067A3C0 /* Profile.swift */; };
+		C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */; };
 		C3BFEBC52477E85F000B5B41 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* SettingsPresenter.swift */; };
 		C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC72477F5A3000B5B41 /* R.generated.swift */; };
 		C3BFEBCC2477F93E000B5B41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3BFEBCB2477F93E000B5B41 /* Localizable.strings */; };
@@ -165,7 +166,7 @@
 		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		C37D0B3D23D79088005A1BCF /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
-		C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCirclePresenter.swift; sourceTree = "<group>"; };
+		C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCircleService.swift; sourceTree = "<group>"; };
 		C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		C38689EA2520FE9500BE9851 /* EditPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostViewController.swift; sourceTree = "<group>"; };
 		C38689EC2521054300BE9851 /* EditPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditPostViewController.xib; path = Classes/Screens/EditPost/EditPostViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -182,6 +183,7 @@
 		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C3B4760224596BAD0067A3C0 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		C3B4760424596BCB0067A3C0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
 		C3BFEBC42477E85F000B5B41 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		C3BFEBC72477F5A3000B5B41 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C3BFEBCB2477F93E000B5B41 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -408,15 +410,6 @@
 			path = Tip;
 			sourceTree = "<group>";
 		};
-		C36DE9C4246E84BB005635E4 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				C396E23D246AC8E200DBF0E4 /* AchievementPresenter.swift */,
-				C3813FFD24D92F7000A3C6AA /* LifeCirclePresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
 		C3724EC423AFABD000D49AD6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +424,7 @@
 				C3724EC923AFAC5800D49AD6 /* LifeCircle */,
 				C3724ECA23AFAC5D00D49AD6 /* Journal */,
 				6E5AFCD32450C06800F283C4 /* AddPost */,
+				C3B5CC8A2544322400E55B82 /* Achievements */,
 				C38689E92520FE6000BE9851 /* EditPost */,
 				C3724EC723AFAC2400D49AD6 /* PostDetail */,
 				F1495F8E7917FD2E6FE4B9A6 /* SphereDetail */,
@@ -452,7 +446,6 @@
 		C3724EC923AFAC5800D49AD6 /* LifeCircle */ = {
 			isa = PBXGroup;
 			children = (
-				C36DE9C4246E84BB005635E4 /* Presenter */,
 				C3ED5A2823AFBF1300C7A492 /* LifeCircleViewController.swift */,
 				C3ED5A2923AFBF1300C7A492 /* LifeCircleViewController.xib */,
 				F149521D579776BEE4DF3881 /* Cell */,
@@ -546,6 +539,16 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		C3B5CC8A2544322400E55B82 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */,
+				C396E23D246AC8E200DBF0E4 /* AchievementPresenter.swift */,
+				F149540FB0998047F5E95EB4 /* Cell */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
 		C3BFEBC12477A291000B5B41 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,6 +584,7 @@
 				F14959BA831454BA379465FF /* FirebaseStorage.swift */,
 				F1495297F7AD9CAF4E9198A5 /* FirebaseDatabase.swift */,
 				C35D83722511D88B000C565E /* UserDefaultsService.swift */,
+				C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -623,19 +627,18 @@
 			isa = PBXGroup;
 			children = (
 				C32EA81925042FBD009F6D52 /* CommonMetrics */,
-				F149540FB0998047F5E95EB4 /* Achievements */,
 				F1495F97424957C89D347FB6 /* SphereMetrics */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		F149540FB0998047F5E95EB4 /* Achievements */ = {
+		F149540FB0998047F5E95EB4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				F149585F902A92E27328DFAE /* AchievementsTableViewCell.swift */,
 				F1495517C452EF92F48A6B72 /* AchievementsTableViewCell.xib */,
 			);
-			path = Achievements;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		F14954B63719E06420C4F676 /* Profile */ = {
@@ -909,7 +912,7 @@
 				C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */,
 				C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */,
 				C396E23E246AC8E200DBF0E4 /* AchievementPresenter.swift in Sources */,
-				C3813FFE24D92F7000A3C6AA /* LifeCirclePresenter.swift in Sources */,
+				C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */,
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,
 				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,
 				C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */,
@@ -928,6 +931,7 @@
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
 				C3BFEBC52477E85F000B5B41 /* SettingsPresenter.swift in Sources */,
 				C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */,
+				C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */,
 				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
 				6E6A217A2466C6FB00D8AC68 /* Atricle.swift in Sources */,
 				C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */,
@@ -1112,7 +1116,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1137,7 +1141,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

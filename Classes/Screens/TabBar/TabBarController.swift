@@ -38,8 +38,7 @@ class TabBarController: UITabBarController {
         fakeAddPostVC.tabBarItem.title = R.string.localizable.tabBarAddPost()
         fakeAddPostVC.tabBarItem.image = R.image.addPost()
         
-        // FIXME: add achievementsNC
-        let achievementsNC = UINavigationController(rootViewController: UIViewController())
+        let achievementsNC = UINavigationController(rootViewController: AchievementsViewController())
         achievementsNC.tabBarItem.image = R.image.achievements()
         achievementsNC.tabBarItem.title = R.string.localizable.tabBarAchievements()
 

@@ -9,14 +9,14 @@
 import Foundation
 import FirebaseAuth
 
-protocol LifeCirclePresenter {
+protocol LifeCircleService {
     func loadUserData(completion: @escaping (UserData) -> Void)
     func averageCurrentSphereValue() -> Double
     func daysFromUserCreation() -> Int
     func mostLessPopularSphere() -> (mostPopularSphere: Sphere?, lessPopularSphere: Sphere?)
 }
 
-class LifeCirclePresenterDefault: LifeCirclePresenter {
+class LifeCircleServiceDefault: LifeCircleService {
     private let database: GBDatabase = FirebaseDatabase()
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?

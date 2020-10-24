@@ -17,8 +17,8 @@ protocol AchievementPresenter {
 class AchievementPresenterDefault: AchievementPresenter {
     
     func calcAchievements(posts: [Post],
-                         startSphereMetrics: SphereMetrics,
-                         currentSphereMetrics: SphereMetrics) -> [Achievement] {
+                          startSphereMetrics: SphereMetrics,
+                          currentSphereMetrics: SphereMetrics) -> [Achievement] {
         let daysAchievements = getDaysAchievements(posts: posts)
         let maxValueAchievements = getMaxValueAchievements(currentSphereMetrics: currentSphereMetrics)
         let fromRedZoneAchievements = getFromRedZoneAchievements(startSphereMetrics: startSphereMetrics,

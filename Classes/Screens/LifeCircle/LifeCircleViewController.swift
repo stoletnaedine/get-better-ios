@@ -16,13 +16,11 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var chartView: RadarChartView!
     @IBOutlet weak var circleLegendView: UIView!
     @IBOutlet weak var metricsTableView: UITableView!
-    @IBOutlet weak var achievementsTableView: UITableView!
     @IBOutlet weak var currentLevelButton: UIButton!
     @IBOutlet weak var startLevelButton: UIButton!
     
     private let refreshControl = UIRefreshControl()
-    private let achievementPresenter: AchievementPresenter = AchievementPresenterDefault()
-    private let lifeCirclePresenter: LifeCirclePresenter = LifeCirclePresenterDefault()
+    private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
     private let database: GBDatabase = FirebaseDatabase()
     private let alertService: AlertService = AlertServiceDefault()
     private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
@@ -30,15 +28,12 @@ class LifeCircleViewController: UIViewController {
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
-    private var achievements: [Achievement] = []
     private var tips: [Tip] = []
     
     private let commonMetricsXibName = R.nib.commonMetricsTableViewCell.name
     private let commonMetricsReuseId = R.reuseIdentifier.commonMetricsCell.identifier
     private let sphereMetricsXibName = R.nib.sphereMetricsTableViewCell.name
     private let sphereMetricsReuseId = R.reuseIdentifier.sphereMetricsCell.identifier
-    private let achievementsXibName = R.nib.achievementsTableViewCell.name
-    private let achievementsReuseId = R.reuseIdentifier.achievementsCell.identifier
     private let sphereIconSize: CGFloat = 30
     
     private var isCurrentDataVisible = true
@@ -155,19 +150,12 @@ class LifeCircleViewController: UIViewController {
     }
     
     @objc private func loadAndShowData() {
-        lifeCirclePresenter.loadUserData(completion: { [weak self] (startSphereMetrics, currentSphereMetrics, posts) in
+        lifeCircleService.loadUserData(completion: { [weak self] (startSphereMetrics, currentSphereMetrics, posts) in
             guard let startSphereMetrics = startSphereMetrics else { return }
             guard let currentSphereMetrics = currentSphereMetrics else { return }
             self?.startSphereMetrics = startSphereMetrics
             self?.currentSphereMetrics = currentSphereMetrics
             self?.posts = posts
-            if let achievements = self?.achievementPresenter.calcAchievements(
-                posts: posts,
-                startSphereMetrics: startSphereMetrics,
-                currentSphereMetrics: currentSphereMetrics
-                ) {
-                self?.achievements = achievements
-            }
             DispatchQueue.main.async { [weak self] in
                 self?.reloadViews()
                 self?.refreshControl.endRefreshing()
@@ -178,7 +166,6 @@ class LifeCircleViewController: UIViewController {
     private func reloadViews() {
         setupChartView(animate: true)
         metricsTableView.reloadData()
-        achievementsTableView.reloadData()
     }
     
     private func setupChartView(animate: Bool) {
@@ -236,13 +223,6 @@ class LifeCircleViewController: UIViewController {
     }
     
     private func setupTableViews() {
-        achievementsTableView.dataSource = self
-        achievementsTableView.delegate = self
-        achievementsTableView.register(UINib(nibName: achievementsXibName, bundle: nil),
-                                       forCellReuseIdentifier: achievementsReuseId)
-        achievementsTableView.backgroundColor = .appBackground
-        achievementsTableView.separatorInset = UIEdgeInsets.zero
-        
         metricsTableView.dataSource = self
         metricsTableView.delegate = self
         metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil),
@@ -256,7 +236,6 @@ class LifeCircleViewController: UIViewController {
     private func setupSegmentedControl() {
         chartView.isHidden = false
         metricsTableView.isHidden = true
-        achievementsTableView.isHidden = true
         segmentedControl.setTitleTextAttributes(
                 [NSAttributedString.Key.foregroundColor : UIColor.darkGray,
                  NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)],
@@ -265,7 +244,6 @@ class LifeCircleViewController: UIViewController {
         segmentedControl.tintColor = .violet
         segmentedControl.setTitle(R.string.localizable.lifeCircleCircle(), forSegmentAt: 0)
         segmentedControl.setTitle(R.string.localizable.lifeCircleMetrics(), forSegmentAt: 1)
-        segmentedControl.setTitle(R.string.localizable.lifeCircleAchievements(), forSegmentAt: 2)
     }
     
     @IBAction func segmentedActionDidSelected(_ sender: UISegmentedControl) {
@@ -275,19 +253,16 @@ class LifeCircleViewController: UIViewController {
             containerView.isHidden = false
             circleLegendView.isHidden = false
             metricsTableView.isHidden = true
-            achievementsTableView.isHidden = true
         case 1:
             chartView.isHidden = true
             containerView.isHidden = true
             circleLegendView.isHidden = true
             metricsTableView.isHidden = false
-            achievementsTableView.isHidden = true
         default:
             chartView.isHidden = true
             containerView.isHidden = true
             circleLegendView.isHidden = true
             metricsTableView.isHidden = true
-            achievementsTableView.isHidden = false
         }
     }
 }
@@ -344,53 +319,34 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableView {
-        case metricsTableView:
-            if let rowsCount = currentSphereMetrics?.values.count {
-                return rowsCount + 1 // Для ячейки Common Metrics
-            } else {
-                return 0
-            }
-        case achievementsTableView:
-            return achievements.count
-        default:
+        if let rowsCount = currentSphereMetrics?.values.count {
+            return rowsCount + 1 // Для ячейки Common Metrics
+        } else {
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableView {
-        case metricsTableView:
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: commonMetricsReuseId,
-                                                         for: indexPath) as! CommonMetricsTableViewCell
-                let average = lifeCirclePresenter.averageCurrentSphereValue()
-                let daysFromUserCreation = lifeCirclePresenter.daysFromUserCreation()
-                cell.fillCell(viewModel: CommonMetricsViewModel(posts: posts.count,
-                                                                average: average,
-                                                                days: daysFromUserCreation))
-                cell.selectionStyle = .none
-                cell.backgroundColor = .appBackground
-                return cell
-            }
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseId,
-                                                     for: indexPath) as! SphereMetricsTableViewCell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: commonMetricsReuseId,
+                                                     for: indexPath) as! CommonMetricsTableViewCell
+            let average = lifeCircleService.averageCurrentSphereValue()
+            let daysFromUserCreation = lifeCircleService.daysFromUserCreation()
+            cell.fillCell(viewModel: CommonMetricsViewModel(posts: posts.count,
+                                                            average: average,
+                                                            days: daysFromUserCreation))
             cell.selectionStyle = .none
-             // indexPath.row - 1 для ячейки Common Metrics
-            guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return cell }
-            cell.fillCell(from: sphereValue)
+            cell.backgroundColor = .appBackground
             return cell
-        case achievementsTableView:
-            let achievement = achievements[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: achievementsReuseId,
-                                                     for: indexPath) as! AchievementsTableViewCell
-            cell.selectionStyle = .none
-            cell.fillCell(from: achievement)
-            return cell
-        default:
-            return UITableViewCell()
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseId,
+                                                 for: indexPath) as! SphereMetricsTableViewCell
+        cell.selectionStyle = .none
+         // indexPath.row - 1 для ячейки Common Metrics
+        guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return cell }
+        cell.fillCell(from: sphereValue)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -399,7 +355,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 return
             }
-            // indexPath.row - 1 для ячейки индекс счастья
+            // indexPath.row - 1 для ячейки Common Metrics
             guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return }
             let sphereDetailViewController = SphereDetailViewController()
             sphereDetailViewController.sphereValue = sphereValue
