@@ -11,6 +11,7 @@ import UIKit
 class TabBarController: UITabBarController {
     
     var showOnboardingCompletion: VoidClosure?
+    private let connectionHelper = ConnectionHelper()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,7 @@ extension TabBarController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController.title == R.string.localizable.tabBarAddPost() {
+            guard connectionHelper.connectionAvailable() else { return false }
             let journalVCIndex: Int = 1
             let addPostVC = AddPostViewController()
             if let journalNC = tabBarController.viewControllers?[journalVCIndex] as? UINavigationController,

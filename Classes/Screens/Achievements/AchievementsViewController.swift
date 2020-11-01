@@ -35,15 +35,9 @@ final class AchievementsViewController: UIViewController {
     
     private func loadData(completion: @escaping VoidClosure) {
         lifeCircleService.loadUserData { [weak self] userData in
-            guard let userData = userData else {
-                completion()
-                return
-            }
-            guard let startSphereMetrics = userData.start else {
-                completion()
-                return
-            }
-            guard let currentSphereMetrics = userData.current else {
+            guard let userData = userData,
+                  let startSphereMetrics = userData.start,
+                  let currentSphereMetrics = userData.current else {
                 completion()
                 return
             }

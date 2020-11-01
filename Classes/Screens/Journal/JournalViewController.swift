@@ -21,6 +21,7 @@ class JournalViewController: UIViewController {
     private let database: GBDatabase = FirebaseDatabase()
     private let alertService: AlertService = AlertServiceDefault()
     private let activityIndicator = UIActivityIndicatorView()
+    private let connectionHelper = ConnectionHelper()
     private var postSections: [JournalSection] = []
     
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ class JournalViewController: UIViewController {
     }
     
     @objc private func addPost() {
+        guard connectionHelper.connectionAvailable() else { return }
         let addPostViewController = AddPostViewController()
         addPostViewController.addedPostCompletion = { [weak self] in
             self?.updatePostsInTableView()

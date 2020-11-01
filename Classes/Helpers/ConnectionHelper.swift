@@ -8,7 +8,7 @@
 
 import Reachability
 
-class ConnectionHelper: UIViewController {
+class ConnectionHelper {
     
     private let alertService: AlertService = AlertServiceDefault()
     
