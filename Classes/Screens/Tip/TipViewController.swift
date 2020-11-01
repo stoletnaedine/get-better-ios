@@ -27,13 +27,8 @@ class TipViewController: UIViewController {
     @IBOutlet weak var cancelButton: CancelButton!
     
     var tip: Tip?
-    var like: Bool = false
-    let backgrounds: [TipBackground] = [
-        TipBackground(style: .light, image: R.image.lightBg1()),
-        TipBackground(style: .light, image: R.image.lightBg2()),
-        TipBackground(style: .light, image: R.image.lightBg3()),
-        TipBackground(style: .light, image: R.image.lightBg4()),
-        TipBackground(style: .light, image: R.image.lightBg5()),
+    private var like: Bool = false
+    private let backgrounds: [TipBackground] = [
         TipBackground(style: .dark, image: R.image.darkBg1()),
         TipBackground(style: .dark, image: R.image.darkBg2()),
         TipBackground(style: .dark, image: R.image.darkBg3()),
@@ -42,7 +37,22 @@ class TipViewController: UIViewController {
         TipBackground(style: .dark, image: R.image.darkBg6()),
         TipBackground(style: .dark, image: R.image.darkBg7()),
         TipBackground(style: .dark, image: R.image.darkBg8()),
-        TipBackground(style: .dark, image: R.image.darkBg9())
+        TipBackground(style: .dark, image: R.image.darkBg9()),
+        TipBackground(style: .dark, image: R.image.darkBg10()),
+        TipBackground(style: .dark, image: R.image.darkBg11()),
+        TipBackground(style: .dark, image: R.image.darkBg12()),
+        TipBackground(style: .dark, image: R.image.darkBg13()),
+        TipBackground(style: .dark, image: R.image.darkBg14()),
+        TipBackground(style: .dark, image: R.image.darkBg15()),
+        TipBackground(style: .dark, image: R.image.darkBg16()),
+        TipBackground(style: .dark, image: R.image.darkBg17()),
+        TipBackground(style: .dark, image: R.image.darkBg18()),
+        TipBackground(style: .dark, image: R.image.darkBg19()),
+        TipBackground(style: .dark, image: R.image.darkBg20()),
+        TipBackground(style: .dark, image: R.image.darkBg21()),
+        TipBackground(style: .dark, image: R.image.darkBg22()),
+        TipBackground(style: .dark, image: R.image.darkBg23()),
+        TipBackground(style: .dark, image: R.image.darkBg24())
     ]
     
     override func viewDidLoad() {
@@ -75,7 +85,6 @@ class TipViewController: UIViewController {
     
     private func setupView() {
         let days = Date().diffInDaysSince1970()
-        
         let imageIndex = days % backgrounds.count
         let tipBackground = backgrounds[imageIndex]
         
