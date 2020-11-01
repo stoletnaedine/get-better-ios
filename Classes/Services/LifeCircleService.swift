@@ -10,7 +10,7 @@ import Foundation
 import FirebaseAuth
 
 protocol LifeCircleService {
-    func loadUserData(completion: @escaping (UserData) -> Void)
+    func loadUserData(completion: @escaping (UserData?) -> Void)
     func averageCurrentSphereValue() -> Double
     func daysFromUserCreation() -> Int
     func mostLessPopularSphere() -> (mostPopularSphere: Sphere?, lessPopularSphere: Sphere?)
@@ -22,8 +22,7 @@ class LifeCircleServiceDefault: LifeCircleService {
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
     
-    func loadUserData(completion: @escaping (UserData) -> Void) {
-        
+    func loadUserData(completion: @escaping (UserData?) -> Void) {
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         database.getPosts { [weak self] result in
@@ -50,9 +49,15 @@ class LifeCircleServiceDefault: LifeCircleService {
         }
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion(nil)
+                return
+            }
             let spheresInPosts = self.posts.map { $0.sphere }
-            guard let startSphereMetrics = self.startSphereMetrics else { return }
+            guard let startSphereMetrics = self.startSphereMetrics else {
+                completion(nil)
+                return
+            }
             var currentSphereMetricsValues = startSphereMetrics.values
 
             // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 100 дней.

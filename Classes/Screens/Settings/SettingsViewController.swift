@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController {
     
     let presenter: SettingsPresenter = SettingsPresenterDefault()
     var profile: Profile?
-    var tableSections: [Section] = []
+    var tableSections: [SettingsSection] = []
     let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -194,38 +194,38 @@ extension SettingsViewController {
         appVersionVC.text = R.string.localizable.appVersions()
         
         tableSections = [
-            Section(type: .profile,
+            SettingsSection(type: .profile,
                     cells: [
-                        Cell(action: { [weak self] in
+                        SettingsCell(action: { [weak self] in
                             self?.navigationController?.pushViewController(editProfileViewController, animated: true)
                         })
                     ]),
-            Section(type: .articles,
+            SettingsSection(type: .articles,
                     cells: [
-                        Cell(title: R.string.localizable.aboutCircleTableTitle(),
+                        SettingsCell(title: R.string.localizable.aboutCircleTableTitle(),
                              action: { [weak self] in
                                 self?.navigationController?.pushViewController(aboutCircleVC, animated: true)
                              }),
-                        Cell(title: R.string.localizable.aboutJournalTitle(),
+                        SettingsCell(title: R.string.localizable.aboutJournalTitle(),
                              action: { [weak self] in
                                 self?.navigationController?.pushViewController(aboutJournalVC, animated: true)
                              }),
-                        Cell(title: R.string.localizable.aboutAppTitle(),
+                        SettingsCell(title: R.string.localizable.aboutAppTitle(),
                              action: { [weak self] in
                                 self?.navigationController?.pushViewController(aboutAppVC, animated: true)
                              })
                          ]),
-            Section(type: .notifications,
+            SettingsSection(type: .notifications,
                     cells: [
-                        Cell(title: NotificationTopic.daily.rawValue)
+                        SettingsCell(title: NotificationTopic.daily.rawValue)
                     ]),
-            Section(type: .aboutApp,
+            SettingsSection(type: .aboutApp,
                     cells: [
-                        Cell(title: R.string.localizable.settingsVersionIs(Properties.appVersion),
+                        SettingsCell(title: R.string.localizable.settingsVersionIs(Properties.appVersion),
                              action: { [weak self] in
                                 self?.navigationController?.pushViewController(appVersionVC, animated: true)
                              }),
-                        Cell(title: R.string.localizable.settingsAboutAppPostReview(), action: {
+                        SettingsCell(title: R.string.localizable.settingsAboutAppPostReview(), action: {
                             UIApplication.shared.open(Properties.appStoreUrl,
                                                       options: [:], completionHandler: nil)
                         })

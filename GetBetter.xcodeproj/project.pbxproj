@@ -21,7 +21,6 @@
 		9277D388238C725200B3AECA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277D387238C725200B3AECA /* AppDelegate.swift */; };
 		9277D38F238C725300B3AECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9277D38E238C725300B3AECA /* Assets.xcassets */; };
 		9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9277D390238C725300B3AECA /* LaunchScreen.storyboard */; };
-		C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C309ACB024655CE3007DF0DC /* PostsDateSection.swift */; };
 		C30C7A0F247E8DC400FD830F /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */; };
 		C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C317E56F247D6559001521FE /* NoInternetViewController.swift */; };
 		C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C317E570247D6559001521FE /* NoInternetViewController.xib */; };
@@ -30,6 +29,8 @@
 		C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Properties.swift */; };
 		C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32EA81A25043006009F6D52 /* CommonMetricsTableViewCell.swift */; };
 		C32EA81D25043007009F6D52 /* CommonMetricsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */; };
+		C33722AA254EB5C200191785 /* JournalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722A9254EB5C200191785 /* JournalSection.swift */; };
+		C33722AD254EB9BC00191785 /* VoidClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722AC254EB9BC00191785 /* VoidClosure.swift */; };
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
@@ -65,7 +66,7 @@
 		C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39A321E245710BC005D2EDF /* SettingsViewController.xib */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
 		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
-		C3B4760324596BAD0067A3C0 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* Section.swift */; };
+		C3B4760324596BAD0067A3C0 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsSection.swift */; };
 		C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760424596BCB0067A3C0 /* Profile.swift */; };
 		C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */; };
 		C3BFEBC52477E85F000B5B41 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* SettingsPresenter.swift */; };
@@ -137,7 +138,6 @@
 		9277D38E238C725300B3AECA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9277D391238C725300B3AECA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9277D393238C725300B3AECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C309ACB024655CE3007DF0DC /* PostsDateSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDateSection.swift; sourceTree = "<group>"; };
 		C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
 		C317E56F247D6559001521FE /* NoInternetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetViewController.swift; sourceTree = "<group>"; };
 		C317E570247D6559001521FE /* NoInternetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetViewController.xib; sourceTree = "<group>"; };
@@ -146,6 +146,8 @@
 		C32D4CE023D0F3FC00AD9863 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		C32EA81A25043006009F6D52 /* CommonMetricsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMetricsTableViewCell.swift; sourceTree = "<group>"; };
 		C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonMetricsTableViewCell.xib; sourceTree = "<group>"; };
+		C33722A9254EB5C200191785 /* JournalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalSection.swift; sourceTree = "<group>"; };
+		C33722AC254EB9BC00191785 /* VoidClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidClosure.swift; sourceTree = "<group>"; };
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -181,7 +183,7 @@
 		C39A321E245710BC005D2EDF /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		C3B4760224596BAD0067A3C0 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		C3B4760224596BAD0067A3C0 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
 		C3B4760424596BCB0067A3C0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
 		C3BFEBC42477E85F000B5B41 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				C3C9DD8624B843B3003C83BD /* String.swift */,
 				C3452B5624BE17BD00C973B1 /* UIButton.swift */,
 				C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */,
+				C33722AC254EB9BC00191785 /* VoidClosure.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -469,14 +472,14 @@
 				6EA85196244F691700D40E14 /* Sphere.swift */,
 				6EA8519A244F827A00D40E14 /* Post.swift */,
 				6E9E01BC245464360083499E /* SphereMetrics.swift */,
-				C3B4760224596BAD0067A3C0 /* Section.swift */,
+				C3B4760224596BAD0067A3C0 /* SettingsSection.swift */,
 				C3B4760424596BCB0067A3C0 /* Profile.swift */,
 				6E7071F2245C474D00ED7D08 /* SphereValue.swift */,
 				C35B38AE2462D57500E0C416 /* Photo.swift */,
 				6E045E9A24640A6A0001E378 /* Achievement.swift */,
-				C309ACB024655CE3007DF0DC /* PostsDateSection.swift */,
 				6E6A21792466C6FB00D8AC68 /* Atricle.swift */,
 				C35D835A250CF37D000C565E /* Tip.swift */,
+				C33722A9254EB5C200191785 /* JournalSection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -608,8 +611,8 @@
 		F14950043544FA4BEAF5A251 /* WelcomePage */ = {
 			isa = PBXGroup;
 			children = (
-				F14950B134A6B877EF737842 /* WelcomeViewController.xib */,
 				F14950C09BAEFB80A32F8E4F /* WelcomeViewController.swift */,
+				F14950B134A6B877EF737842 /* WelcomeViewController.xib */,
 			);
 			path = WelcomePage;
 			sourceTree = "<group>";
@@ -916,7 +919,7 @@
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,
 				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,
 				C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */,
-				C3B4760324596BAD0067A3C0 /* Section.swift in Sources */,
+				C3B4760324596BAD0067A3C0 /* SettingsSection.swift in Sources */,
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,
 				C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */,
@@ -945,16 +948,17 @@
 				C35D835D250CF4FA000C565E /* TipMapper.swift in Sources */,
 				C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */,
 				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
+				C33722AA254EB5C200191785 /* JournalSection.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
 				C35D835B250CF37D000C565E /* Tip.swift in Sources */,
 				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
-				C309ACB124655CE3007DF0DC /* PostsDateSection.swift in Sources */,
 				C3ED5A2A23AFBF1300C7A492 /* LifeCircleViewController.swift in Sources */,
 				F1495A2BAA0794DBE208648C /* UIView+Message.swift in Sources */,
 				F149571D8D5ACCC62F0EB363 /* CGRect.swift in Sources */,
 				F1495EC47C86B62C320FC93A /* CustomPopUpView.swift in Sources */,
+				C33722AD254EB9BC00191785 /* VoidClosure.swift in Sources */,
 				F1495CF0A1F9133C1BA23F4D /* SphereDetailViewController.swift in Sources */,
 				F1495D5C47D69919FE8AA4BF /* AchievementsTableViewCell.swift in Sources */,
 				F1495273E66F5AD91A5F822E /* SphereMetricsTableViewCell.swift in Sources */,

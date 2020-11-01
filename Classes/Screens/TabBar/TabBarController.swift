@@ -10,7 +10,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    var showOnboardingCompletion: (() -> Void)?
+    var showOnboardingCompletion: VoidClosure?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -152,7 +152,7 @@ class AddPostViewController: UIViewController {
         sphereView.layer.borderColor = UIColor.violet.cgColor
         selectSphereButton.setTitle(R.string.localizable.postChooseSphere(), for: .normal)
         selectSphereButton.titleLabel?.font = .journalButtonFont
-        selectSphereButton.setImage(R.image.arrowDown(), for: .normal)
+        selectSphereButton.setImage(R.image.arrowDownSmall(), for: .normal)
         selectSphereButton.tintColor = .violet
         selectSphereButton.setImageRightToText()
         selectSphereButton.centerTextAndImage(spacing: -5)

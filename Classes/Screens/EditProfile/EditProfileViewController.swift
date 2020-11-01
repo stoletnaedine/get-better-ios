@@ -29,7 +29,7 @@ class EditProfileViewController: UIViewController {
     let storage = FirebaseStorage()
     let alertService: AlertService = AlertServiceDefault()
     
-    var editProfileCompletion: () -> Void = {}
+    var editProfileCompletion: VoidClosure = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()

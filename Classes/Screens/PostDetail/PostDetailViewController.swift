@@ -16,7 +16,7 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var photoImageView: ScaledHeightImageView!
     
     var post: Post?
-    var editPostCompletion: (() -> Void)?
+    var editPostCompletion: VoidClosure?
     let alertService: AlertService = AlertServiceDefault()
     
     override func viewDidLoad() {

@@ -151,12 +151,13 @@ class LifeCircleViewController: UIViewController {
     }
     
     @objc private func loadAndShowData() {
-        lifeCircleService.loadUserData(completion: { [weak self] (startSphereMetrics, currentSphereMetrics, posts) in
-            guard let startSphereMetrics = startSphereMetrics else { return }
-            guard let currentSphereMetrics = currentSphereMetrics else { return }
+        lifeCircleService.loadUserData(completion: { [weak self] userData in
+            guard let userData = userData else { return }
+            guard let startSphereMetrics = userData.start else { return }
+            guard let currentSphereMetrics = userData.current else { return }
             self?.startSphereMetrics = startSphereMetrics
             self?.currentSphereMetrics = currentSphereMetrics
-            self?.posts = posts
+            self?.posts = userData.posts
             DispatchQueue.main.async { [weak self] in
                 self?.reloadViews()
                 self?.refreshControl.endRefreshing()

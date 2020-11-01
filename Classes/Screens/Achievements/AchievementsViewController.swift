@@ -13,11 +13,10 @@ final class AchievementsViewController: UIViewController {
     private let presenter: AchievementPresenter = AchievementPresenterDefault()
     private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
     private let tableView = UITableView()
-    private var viewModel: [Achievement] = []
+    private var achievements: [Achievement] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = R.string.localizable.achievementsTitle()
         addSubviews()
         setupTableView()
         makeConstraints()
@@ -25,24 +24,38 @@ final class AchievementsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadAndShowData()
-    }
-    
-    private func loadAndShowData() {
-        lifeCircleService.loadUserData(completion: { [weak self] (startSphereMetrics, currentSphereMetrics, posts) in
-            guard let startSphereMetrics = startSphereMetrics else { return }
-            guard let currentSphereMetrics = currentSphereMetrics else { return }
-            guard let self = self else { return }
-            let achievements = self.presenter.calcAchievements(
-                posts: posts,
-                startSphereMetrics: startSphereMetrics,
-                currentSphereMetrics: currentSphereMetrics
-            )
-            self.viewModel = achievements
-            DispatchQueue.main.async { [weak self] in
+        title = R.string.localizable.achievementsLoading()
+        loadData(completion: { [weak self] in
+            DispatchQueue.main.async {
+                self?.title = R.string.localizable.achievementsTitle()
                 self?.tableView.reloadData()
             }
         })
+    }
+    
+    private func loadData(completion: @escaping VoidClosure) {
+        lifeCircleService.loadUserData { [weak self] userData in
+            guard let userData = userData else {
+                completion()
+                return
+            }
+            guard let startSphereMetrics = userData.start else {
+                completion()
+                return
+            }
+            guard let currentSphereMetrics = userData.current else {
+                completion()
+                return
+            }
+            if let achievements = self?.presenter.calcAchievements(
+                posts: userData.posts,
+                startSphereMetrics: startSphereMetrics,
+                currentSphereMetrics: currentSphereMetrics
+            ) {
+                self?.achievements = achievements
+            }
+            completion()
+        }
     }
     
     private func addSubviews() {
@@ -71,11 +84,11 @@ final class AchievementsViewController: UIViewController {
 extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.count
+        return achievements.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let achievement = viewModel[indexPath.row]
+        let achievement = achievements[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseId,
                                                  for: indexPath) as! AchievementsTableViewCell
         cell.selectionStyle = .none

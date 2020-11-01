@@ -1,5 +1,5 @@
 //
-//  Section.swift
+//  SettingsSection.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 29.04.2020.
@@ -8,24 +8,24 @@
 
 import UIKit
 
-struct Section {
-    let type: SectionType
-    let cells: [Cell]
+struct SettingsSection {
+    let type: SettingsSectionType
+    let cells: [SettingsCell]
 }
 
-enum SectionType: Int {
+enum SettingsSectionType {
     case profile
     case articles
     case notifications
     case aboutApp
 }
 
-struct Cell {
+struct SettingsCell {
     let title: String?
     let subTitle: String?
-    let action: (() -> Void)?
+    let action: VoidClosure?
     
-    init(title: String? = nil, subTitle: String? = nil, action: (() -> Void)? = nil) {
+    init(title: String? = nil, subTitle: String? = nil, action: VoidClosure? = nil) {
         self.title = title
         self.subTitle = subTitle
         self.action = action

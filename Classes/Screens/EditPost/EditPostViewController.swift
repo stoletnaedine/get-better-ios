@@ -11,7 +11,7 @@ import UIKit
 class EditPostViewController: AddPostViewController {
     
     var post: Post?
-    var editPostCompletion: (() -> Void)?
+    var editPostCompletion: VoidClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
