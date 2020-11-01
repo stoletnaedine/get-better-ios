@@ -24,7 +24,6 @@ protocol GBDatabase {
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
     func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
-    func getTips(completion: @escaping ([Tip]?) -> Void)
     func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool)
     func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
 }
@@ -35,7 +34,6 @@ class FirebaseDatabase: GBDatabase {
         static let startMetricsPath = "start_sphere_level"
         static let usersPath = "users"
         static let postsPath = "post"
-        static let tipsPath = "tips"
         static let notificationsPath = "notifications"
     }
     
@@ -146,34 +144,6 @@ class FirebaseDatabase: GBDatabase {
                 }
             }) { error in
                 completion(.failure(AppError(error: error)!))
-        }
-    }
- 
-    func getTips(completion: @escaping ([Tip]?) -> Void) {
-        let mapper = TipMapper()
-        
-        ref
-            .child(Constants.tipsPath)
-            .observeSingleEvent(of: .value, with: { snapshot in
-                
-                let value = snapshot.value as? NSDictionary
-                
-                if let keys = value?.allKeys {
-                    var tips: [Tip] = []
-                    
-                    for key in keys.enumerated() {
-                        let id = key.element
-                        let entity = value?[id] as? NSDictionary
-                        
-                        let tip = mapper.map(entity: entity)
-                        tips.append(tip)
-                    }
-                    completion(tips)
-                } else {
-                    completion(nil)
-                }
-            }) { error in
-                completion(nil)
         }
     }
     

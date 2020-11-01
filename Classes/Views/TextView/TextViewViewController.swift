@@ -22,6 +22,6 @@ class TextViewViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textView.setContentOffset(.zero, animated: false)
-        textView.contentInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        textView.contentInset = .init(top: 0, left: 10, bottom: 0, right: 10)
     }
 }

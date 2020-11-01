@@ -21,6 +21,20 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var currentLevelView: UIView!
     @IBOutlet weak var startLevelView: UIView!
     
+    private enum Constants {
+        enum CommonMetrics {
+            static let xibName = R.nib.commonMetricsTableViewCell.name
+            static let reuseId = R.reuseIdentifier.commonMetricsCell.identifier
+        }
+        
+        enum SphereMetrics {
+            static let xibName = R.nib.sphereMetricsTableViewCell.name
+            static let reuseId = R.reuseIdentifier.sphereMetricsCell.identifier
+        }
+        
+        static let sphereIconSize: CGFloat = 30
+    }
+    
     private let refreshControl = UIRefreshControl()
     private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
     private let database: GBDatabase = FirebaseDatabase()
@@ -30,19 +44,12 @@ class LifeCircleViewController: UIViewController {
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
-    private var tips: [Tip] = []
-    
-    private let commonMetricsXibName = R.nib.commonMetricsTableViewCell.name
-    private let commonMetricsReuseId = R.reuseIdentifier.commonMetricsCell.identifier
-    private let sphereMetricsXibName = R.nib.sphereMetricsTableViewCell.name
-    private let sphereMetricsReuseId = R.reuseIdentifier.sphereMetricsCell.identifier
-    private let sphereIconSize: CGFloat = 30
     
     private var isCurrentDataVisible = true
     private var isValuesVisible = false
     private var isCurrentButtonSelected = true
     
-    var showOnboardingCompletion: () -> () = {}
+    var showOnboardingCompletion: VoidClosure = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,12 +60,14 @@ class LifeCircleViewController: UIViewController {
         setupRefreshControl()
         setupChartViewTap()
         setupBarButton()
-        getTips()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadAndShowData()
+        if !userDefaultsService.isTipOfTheDayShown() {
+            showTip()
+        }
     }
     
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
@@ -95,30 +104,16 @@ class LifeCircleViewController: UIViewController {
         startLevelView.backgroundColor = .white
     }
     
-    private func getTips() {
-        database.getTips(completion: { [weak self] tips in
-            guard let self = self else { return }
-            guard let tips = tips else { return }
-            self.tips = tips
-            if !self.userDefaultsService.isTipOfTheDayShown() {
-                self.showTip()
-            }
-        })
-    }
-    
     @objc private func showTip() {
-        guard !tips.isEmpty else { return }
-
+        let tips = TipStorage.tips
         let days = Date().diffInDaysSince1970()
-        let sortedTips = self.tips.sorted(by: { $0.id  < $1.id })
-        let tipsCount = sortedTips.count
-        let tipIndex = days % tipsCount
-        let tipOfTheDay = sortedTips[tipIndex]
+        let tipIndex = days % tips.count
+        let tipOfTheDay = tips[tipIndex]
         
-        let vc = TipViewController()
-        vc.modalPresentationStyle = .overFullScreen
-        vc.tip = tipOfTheDay
-        present(vc, animated: true, completion: nil)
+        let tipVC = TipViewController()
+        tipVC.modalPresentationStyle = .overFullScreen
+        tipVC.tip = tipOfTheDay
+        present(tipVC, animated: true, completion: nil)
         userDefaultsService.tipOfTheDayShown()
     }
     
@@ -147,7 +142,7 @@ class LifeCircleViewController: UIViewController {
     
     private func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(loadAndShowData), for: .valueChanged)
-        metricsTableView.addSubview(refreshControl)
+        metricsTableView.refreshControl = refreshControl
     }
     
     @objc private func loadAndShowData() {
@@ -181,7 +176,7 @@ class LifeCircleViewController: UIViewController {
         let xAxis = chartView.xAxis
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 9
-        xAxis.labelFont = .systemFont(ofSize: sphereIconSize)
+        xAxis.labelFont = .systemFont(ofSize: Constants.sphereIconSize)
         
         guard let startSphereMetrics = startSphereMetrics else { return }
         guard let currentSphereMetrics = currentSphereMetrics else { return }
@@ -227,10 +222,10 @@ class LifeCircleViewController: UIViewController {
     private func setupTableViews() {
         metricsTableView.dataSource = self
         metricsTableView.delegate = self
-        metricsTableView.register(UINib(nibName: sphereMetricsXibName, bundle: nil),
-                                  forCellReuseIdentifier: sphereMetricsReuseId)
-        metricsTableView.register(UINib(nibName: commonMetricsXibName, bundle: nil),
-                                  forCellReuseIdentifier: commonMetricsReuseId)
+        metricsTableView.register(UINib(nibName: Constants.SphereMetrics.xibName, bundle: nil),
+                                  forCellReuseIdentifier: Constants.SphereMetrics.reuseId)
+        metricsTableView.register(UINib(nibName: Constants.CommonMetrics.xibName, bundle: nil),
+                                  forCellReuseIdentifier: Constants.CommonMetrics.reuseId)
         metricsTableView.backgroundColor = .appBackground
         metricsTableView.separatorInset = UIEdgeInsets.zero
     }
@@ -330,7 +325,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: commonMetricsReuseId,
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CommonMetrics.reuseId,
                                                      for: indexPath) as! CommonMetricsTableViewCell
             let average = lifeCircleService.averageCurrentSphereValue()
             let daysFromUserCreation = lifeCircleService.daysFromUserCreation()
@@ -342,29 +337,26 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: sphereMetricsReuseId,
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SphereMetrics.reuseId,
                                                  for: indexPath) as! SphereMetricsTableViewCell
         cell.selectionStyle = .none
          // indexPath.row - 1 для ячейки Common Metrics
-        guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return cell }
+        let sphereIndex = indexPath.row - 1
+        guard let sphereValue = getSphereValue(index: sphereIndex) else { return cell }
         cell.fillCell(from: sphereValue)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch tableView {
-        case metricsTableView:
-            if indexPath.row == 0 {
-                return
-            }
-            // indexPath.row - 1 для ячейки Common Metrics
-            guard let sphereValue = getSphereValue(index: indexPath.row - 1) else { return }
-            let sphereDetailViewController = SphereDetailViewController()
-            sphereDetailViewController.sphereValue = sphereValue
-            present(sphereDetailViewController, animated: true, completion: nil)
-        default:
-            print("Not metricsTableView tapped in didSelectRowAt method!")
+        if indexPath.row == 0 {
+            return
         }
+        // indexPath.row - 1 для ячейки Common Metrics
+        let sphereIndex = indexPath.row - 1
+        guard let sphereValue = getSphereValue(index: sphereIndex) else { return }
+        let sphereDetailViewController = SphereDetailViewController()
+        sphereDetailViewController.sphereValue = sphereValue
+        present(sphereDetailViewController, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

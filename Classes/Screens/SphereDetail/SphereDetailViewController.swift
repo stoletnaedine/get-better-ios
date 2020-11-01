@@ -22,31 +22,16 @@ class SphereDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let sphereValue = sphereValue {
-            fillViewController(sphereValue)
-        }
-        registerGestureCopyLabelText()
-        customizeView()
+        setupView()
+        guard let sphereValue = sphereValue else { return }
+        configure(by: sphereValue)
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    func registerGestureCopyLabelText() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(copyLabelText))
-        textLabel.isUserInteractionEnabled = true
-        textLabel.addGestureRecognizer(tap)
-    }
-    
-    @objc func copyLabelText(_ sender: UITapGestureRecognizer) {
-        if let copyText = textLabel.text {
-            UIPasteboard.general.string = copyText
-            alertService.showSuccessMessage(desc: R.string.localizable.textCopyAlert())
-        }
-    }
 
-    func fillViewController(_ sphereValue: SphereValue) {
+    func configure(by sphereValue: SphereValue) {
         guard let sphere = sphereValue.sphere else { return }
         guard let value = sphereValue.value else { return }
         sphereLabel.text = sphere.name
@@ -55,7 +40,7 @@ class SphereDetailViewController: UIViewController {
         textLabel.text = sphere.description
     }
     
-    func customizeView() {
+    func setupView() {
         textLabel.font = UIFont.systemFont(ofSize: 16)
         sphereLabel.font = UIFont.boldSystemFont(ofSize: 24)
         sphereLabel.textColor = .violet

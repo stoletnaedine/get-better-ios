@@ -10,7 +10,7 @@
 		6E045E9B24640A6B0001E378 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E045E9A24640A6A0001E378 /* Achievement.swift */; };
 		6E5AE64424601DBC00418B23 /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */; };
 		6E5AE64624601DD200418B23 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */; };
-		6E6A217A2466C6FB00D8AC68 /* Atricle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6A21792466C6FB00D8AC68 /* Atricle.swift */; };
+		6E6A217A2466C6FB00D8AC68 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6A21792466C6FB00D8AC68 /* Article.swift */; };
 		6E7071F3245C474D00ED7D08 /* SphereValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7071F2245C474D00ED7D08 /* SphereValue.swift */; };
 		6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E01BC245464360083499E /* SphereMetrics.swift */; };
 		6EA85197244F691700D40E14 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA85196244F691700D40E14 /* Sphere.swift */; };
@@ -42,8 +42,6 @@
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
 		C35B38AF2462D57500E0C416 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38AE2462D57500E0C416 /* Photo.swift */; };
 		C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38B02462E1E700E0C416 /* UIImage.swift */; };
-		C35D835B250CF37D000C565E /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D835A250CF37D000C565E /* Tip.swift */; };
-		C35D835D250CF4FA000C565E /* TipMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D835C250CF4FA000C565E /* TipMapper.swift */; };
 		C35D8361250D40E5000C565E /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D835F250D40E5000C565E /* TipViewController.swift */; };
 		C35D8362250D40E5000C565E /* TipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35D8360250D40E5000C565E /* TipViewController.xib */; };
 		C35D83732511D88B000C565E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D83722511D88B000C565E /* UserDefaultsService.swift */; };
@@ -124,7 +122,7 @@
 		6E045E9A24640A6A0001E378 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = Classes/Screens/ResetPassword/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
 		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = Classes/Screens/ResetPassword/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
-		6E6A21792466C6FB00D8AC68 /* Atricle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atricle.swift; sourceTree = "<group>"; };
+		6E6A21792466C6FB00D8AC68 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		6E7071F2245C474D00ED7D08 /* SphereValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereValue.swift; sourceTree = "<group>"; };
 		6E9E01BC245464360083499E /* SphereMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetrics.swift; sourceTree = "<group>"; };
 		6EA85196244F691700D40E14 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
@@ -160,8 +158,6 @@
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
 		C35B38AE2462D57500E0C416 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		C35B38B02462E1E700E0C416 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		C35D835A250CF37D000C565E /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
-		C35D835C250CF4FA000C565E /* TipMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipMapper.swift; sourceTree = "<group>"; };
 		C35D835F250D40E5000C565E /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		C35D8360250D40E5000C565E /* TipViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipViewController.xib; sourceTree = "<group>"; };
 		C35D83722511D88B000C565E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
@@ -480,8 +476,7 @@
 				6E7071F2245C474D00ED7D08 /* SphereValue.swift */,
 				C35B38AE2462D57500E0C416 /* Photo.swift */,
 				6E045E9A24640A6A0001E378 /* Achievement.swift */,
-				6E6A21792466C6FB00D8AC68 /* Atricle.swift */,
-				C35D835A250CF37D000C565E /* Tip.swift */,
+				6E6A21792466C6FB00D8AC68 /* Article.swift */,
 				C33722A9254EB5C200191785 /* JournalSection.swift */,
 			);
 			path = Models;
@@ -520,7 +515,6 @@
 			isa = PBXGroup;
 			children = (
 				C392971E247FAE04000340DC /* PostMapper.swift */,
-				C35D835C250CF4FA000C565E /* TipMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -940,7 +934,7 @@
 				C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */,
 				C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */,
 				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
-				6E6A217A2466C6FB00D8AC68 /* Atricle.swift in Sources */,
+				6E6A217A2466C6FB00D8AC68 /* Article.swift in Sources */,
 				C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */,
 				6EA8519B244F827A00D40E14 /* Post.swift in Sources */,
 				C3ED5A3223AFBF6600C7A492 /* AddPostViewController.swift in Sources */,
@@ -949,12 +943,10 @@
 				C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */,
 				6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */,
 				C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */,
-				C35D835D250CF4FA000C565E /* TipMapper.swift in Sources */,
 				C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */,
 				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
 				C33722AA254EB5C200191785 /* JournalSection.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
-				C35D835B250CF37D000C565E /* Tip.swift in Sources */,
 				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,

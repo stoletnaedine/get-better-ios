@@ -1,5 +1,5 @@
 //
-//  Atricle.swift
+//  Article.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 09.05.2020.

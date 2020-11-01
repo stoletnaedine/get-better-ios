@@ -59,10 +59,8 @@ class SettingsViewController: UIViewController {
     }
     
     private func setupRefreshControl() {
-        refreshControl.addTarget(self,
-                                 action: #selector(loadProfileAndReloadTableView),
-                                 for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(loadProfileAndReloadTableView), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
     
     private func customizeBarButton() {
