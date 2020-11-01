@@ -6,31 +6,19 @@
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import UIKit
 import Reachability
 
 class ConnectionHelper: UIViewController {
     
     private let alertService: AlertService = AlertServiceDefault()
     
-    func isConnectionAvailable() -> Bool {
+    func connectionAvailable() -> Bool {
         let reachability = try! Reachability()
         print(reachability.connection)
-        return reachability.connection != .unavailable
-    }
-    
-    func checkConnectOnStartApp() {
-        let reachability = try! Reachability()
-        print(reachability.connection)
-        if reachability.connection == .unavailable {
-            NotificationCenter.default.post(name: .showNoInternetScreen, object: nil)
-        }
-    }
-    
-    func checkConnect() {
-        let reachability = try! Reachability()
         if reachability.connection == .unavailable {
             alertService.showErrorMessage(desc: R.string.localizable.errorNoInternet())
         }
+        return reachability.connection != .unavailable
     }
+    
 }

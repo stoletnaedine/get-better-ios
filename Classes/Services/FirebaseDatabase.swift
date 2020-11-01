@@ -69,10 +69,11 @@ class FirebaseDatabase: GBDatabase {
     
     func deletePost(_ post: Post) -> Bool {
         guard let ref = currentUserPath() else { return false }
+        guard let postId = post.id else { return false }
         
         ref
             .child(Constants.postsPath)
-            .child(post.id ?? "")
+            .child(postId)
             .removeValue()
         
         if let photoName = post.photoName, !photoName.isEmpty {
@@ -87,7 +88,10 @@ class FirebaseDatabase: GBDatabase {
     
     
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void) {
-        guard let ref = currentUserPath() else { return }
+        guard let ref = currentUserPath() else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
         
         ref
             .child(Constants.postsPath)
@@ -111,7 +115,7 @@ class FirebaseDatabase: GBDatabase {
                     completion(.success([]))
                 }
             }) { error in
-                completion(.failure(AppError(error: error)!))
+                completion(.failure(AppError(errorCode: .unexpected)))
         }
     }
     
@@ -126,7 +130,10 @@ class FirebaseDatabase: GBDatabase {
     }
     
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
-        guard let ref = currentUserPath() else { return }
+        guard let ref = currentUserPath() else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
         
         ref
             .child(Constants.startMetricsPath)
@@ -194,7 +201,7 @@ class FirebaseDatabase: GBDatabase {
     }
     
     private func currentUserPath() -> DatabaseReference? {
-        connectionHelper.checkConnect()
+        guard connectionHelper.connectionAvailable() else { return nil }
         
         guard let userId = user?.uid else { return nil }
         print("Request. UserId = \(userId)")

@@ -22,14 +22,14 @@ class RootManager {
         
         addObservers()
         
-        if connectionHelper.isConnectionAvailable() {
+        if connectionHelper.connectionAvailable() {
             enterApp()
         } else {
             showNoInternetViewController()
         }
     }
     
-    func addObservers() {
+    private func addObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(logout),
                                                name: .logout,
@@ -44,7 +44,7 @@ class RootManager {
                                                object: nil)
     }
     
-    @objc func enterApp() {
+    @objc private func enterApp() {
         if Auth.auth().currentUser == nil {
             showAuthController()
         } else {
@@ -59,7 +59,7 @@ class RootManager {
         }
     }
     
-    func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
+    private func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
         FirebaseDatabase().getStartSphereMetrics(completion: { [weak self] result in
             switch result {
             case .failure(let error):
@@ -74,17 +74,17 @@ class RootManager {
         })
     }
     
-    @objc func logout() {
+    @objc private func logout() {
         try! Auth.auth().signOut()
         showAuthController()
     }
     
-    @objc func showNoInternetViewController() {
+    @objc private func showNoInternetViewController() {
         let noInternetViewController = NoInternetViewController()
         window?.rootViewController = noInternetViewController
     }
     
-    @objc func showTabBarController() {
+    @objc private func showTabBarController() {
         let tabBarController = TabBarController()
         tabBarController.showOnboardingCompletion = { [weak self] in
             self?.showOnboardingPageViewController()
@@ -92,7 +92,7 @@ class RootManager {
         window?.rootViewController = tabBarController
     }
     
-    @objc func showOnboardingPageViewController() {
+    @objc private func showOnboardingPageViewController() {
         let onboardingPageViewController = OnboardingPageViewController()
         onboardingPageViewController.completion = { [weak self] in
             self?.showTabBarController()
@@ -100,7 +100,7 @@ class RootManager {
         window?.rootViewController = UINavigationController(rootViewController: onboardingPageViewController)
     }
     
-    func showAuthController() {
+    private func showAuthController() {
         let authViewController = AuthViewController()
         authViewController.signInCompletion = { [weak self] in
             self?.enterApp()

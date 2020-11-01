@@ -24,11 +24,9 @@ class NoInternetViewController: UIViewController {
     }
 
     @IBAction func retryButtonDidTap(_ sender: UIButton) {
-        if connectionHelper.isConnectionAvailable() {
+        if connectionHelper.connectionAvailable() {
             alertService.showSuccessMessage(desc: R.string.localizable.noInternetTryConnectAlert())
             NotificationCenter.default.post(name: .enterApp, object: nil)
-        } else {
-            alertService.showErrorMessage(desc: R.string.localizable.errorNoInternet())
         }
     }
     

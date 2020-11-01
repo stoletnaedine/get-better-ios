@@ -31,14 +31,17 @@ class FirebaseStorage: GBStorage {
         static let resizeWidthAvatar: CGFloat = 400
     }
     
-    let uuidString: String = UUID().uuidString
-    
+    private let uuidString: String = UUID().uuidString
     private let metadata = StorageMetadata()
     private let connectionHelper = ConnectionHelper()
+    private let alertService: AlertService = AlertServiceDefault()
     
     func uploadAvatar(photo: UIImage,
                       completion: @escaping (Result<URL, AppError>) -> Void) {
-        guard let currentUserRef = currentUserPath() else { return }
+        guard let currentUserRef = currentUserPath() else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
         guard let resizeImage = photo.resized(toWidth: Constants.resizeWidthAvatar) else { return }
         guard let imageData = resizeImage.jpegData(compressionQuality: Constants.photoQuality) else { return }
         metadata.contentType = Constants.contentType
@@ -69,7 +72,10 @@ class FirebaseStorage: GBStorage {
         var previewUrl: String?
         let dispatchGroup = DispatchGroup()
         
-        guard let currentUserRef = currentUserPath() else { return }
+        guard let currentUserRef = currentUserPath() else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
         guard let resizePhoto = photo.resized(toWidth: Constants.resizeWidthPhoto) else { return }
         guard let photoData = resizePhoto.jpegData(compressionQuality: Constants.photoQuality) else { return }
         metadata.contentType = Constants.contentType
@@ -153,7 +159,6 @@ class FirebaseStorage: GBStorage {
                     let urlString = "\(url)"
                     let result = (name: name, urlString: urlString)
                     completion(.success(result))
-                    print("Firebase saved file \(String(describing: name))")
                     dispatchGroup.leave()
                 })
             })
@@ -163,18 +168,17 @@ class FirebaseStorage: GBStorage {
         reference
             .child(imagePath)
             .child(imageName)
-            .delete { error in
+            .delete { [weak self] error in
                 if let error = error {
-                    print("Error delete file = \(imageName): \(error.localizedDescription)")
-                } else {
-                    print("File = \(imageName) successfully deleted")
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 }
         }
     }
     
     private func currentUserPath() -> StorageReference? {
-        connectionHelper.checkConnect()
+        guard connectionHelper.connectionAvailable() else { return nil }
         guard let userId = Auth.auth().currentUser?.uid else { return nil }
+        
         return Storage.storage().reference()
             .child(Constants.usersPath)
             .child(userId)
