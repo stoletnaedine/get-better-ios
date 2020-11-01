@@ -31,6 +31,7 @@
 		C32EA81D25043007009F6D52 /* CommonMetricsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */; };
 		C33722AA254EB5C200191785 /* JournalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722A9254EB5C200191785 /* JournalSection.swift */; };
 		C33722AD254EB9BC00191785 /* VoidClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722AC254EB9BC00191785 /* VoidClosure.swift */; };
+		C33722B4254EEA2800191785 /* TipStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722B3254EEA2800191785 /* TipStorage.swift */; };
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
@@ -148,6 +149,7 @@
 		C32EA81B25043006009F6D52 /* CommonMetricsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonMetricsTableViewCell.xib; sourceTree = "<group>"; };
 		C33722A9254EB5C200191785 /* JournalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalSection.swift; sourceTree = "<group>"; };
 		C33722AC254EB9BC00191785 /* VoidClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidClosure.swift; sourceTree = "<group>"; };
+		C33722B3254EEA2800191785 /* TipStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipStorage.swift; sourceTree = "<group>"; };
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 			children = (
 				C35D835F250D40E5000C565E /* TipViewController.swift */,
 				C35D8360250D40E5000C565E /* TipViewController.xib */,
+				C33722B3254EEA2800191785 /* TipStorage.swift */,
 			);
 			path = Tip;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				6E5AE64624601DD200418B23 /* ResetPasswordViewController.swift in Sources */,
 				C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */,
 				6E045E9B24640A6B0001E378 /* Achievement.swift in Sources */,
+				C33722B4254EEA2800191785 /* TipStorage.swift in Sources */,
 				C35D83732511D88B000C565E /* UserDefaultsService.swift in Sources */,
 				C30C7A0F247E8DC400FD830F /* ConnectionHelper.swift in Sources */,
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
@@ -1112,7 +1116,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1120,7 +1124,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1137,7 +1141,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1145,7 +1149,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
