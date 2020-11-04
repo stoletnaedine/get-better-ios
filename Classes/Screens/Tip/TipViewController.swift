@@ -27,7 +27,7 @@ class TipViewController: UIViewController {
     @IBOutlet weak var cancelButton: CancelButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likeCounterLabel: UILabel!
+    @IBOutlet weak var likesCounterLabel: UILabel!
     
     var tipEntity: TipEntity?
     
@@ -83,16 +83,17 @@ class TipViewController: UIViewController {
         guard let screenshot = self.view.takeScreenshot() else { return }
         setVisibleForUI(hidden: false)
         
-        let activityVC = UIActivityViewController(activityItems: [screenshot, R.string.localizable.shareText()], applicationActivities: nil)
-            activityVC.popoverPresentationController?.sourceView = self.view
-            self.present(activityVC, animated: true, completion: nil)
+        let activityVC = UIActivityViewController(activityItems: [screenshot, R.string.localizable.shareText()],
+                                                  applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     private func setVisibleForUI(hidden: Bool) {
         cancelButton.isHidden = hidden
         shareButton.isHidden = hidden
         likeButton.isHidden = hidden
-        likeCounterLabel.isHidden = hidden
+        likesCounterLabel.isHidden = hidden
     }
     
     private func setupShadow(for label: UILabel) {
@@ -106,7 +107,7 @@ class TipViewController: UIViewController {
     private func setupSwipeGesture() {
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissView))
         downSwipe.direction = .down
-        self.view.addGestureRecognizer(downSwipe)
+        view.addGestureRecognizer(downSwipe)
     }
     
     private func setupCancelButton() {
@@ -114,14 +115,14 @@ class TipViewController: UIViewController {
     }
 
     @objc private func dismissView() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     private func configure(tip: Tip) {
-        self.titleLabel.text = tip.title
-        self.textLabel.text = tip.text
-        self.titleLabel.sizeToFit()
-        self.textLabel.sizeToFit()
+        titleLabel.text = tip.title
+        textLabel.text = tip.text
+        titleLabel.sizeToFit()
+        textLabel.sizeToFit()
     }
     
     private func setupLikeButton() {
@@ -136,18 +137,18 @@ class TipViewController: UIViewController {
             }
         })
         
-        getTipLikeCount()
+        fetchLikesCount()
         
-        self.likeButton.addTarget(self, action: #selector(likeButtonDidTap), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeButtonDidTap), for: .touchUpInside)
     }
     
-    private func getTipLikeCount() {
+    private func fetchLikesCount() {
         guard let tipId = self.tipEntity?.id else { return }
         
         database.getTipLikesCount(for: tipId, completion: { [weak self] result in
             switch result {
-            case .success(let count):
-                self?.likeCounterLabel.text = "\(count)"
+            case .success(let likesCount):
+                self?.setupLikesCount(likesCount)
             case .failure:
                 break
             }
@@ -156,43 +157,52 @@ class TipViewController: UIViewController {
     
     @objc private func likeButtonDidTap() {
         guard let tipId = self.tipEntity?.id else { return }
-        if self.isLike {
+        var likesCount: Int = Int(self.likesCounterLabel.text ?? "0") ?? .zero
+        
+        if isLike {
             database.deleteTipLike(id: tipId)
+            likesCount -= 1
         } else {
             database.saveTipLike(id: tipId)
+            likesCount += 1
         }
-        self.isLike.toggle()
-        // TODO: засунуть в completion
-        getTipLikeCount()
+        
+        isLike.toggle()
+        setupLikesCount(likesCount)
+    }
+    
+    private func setupLikesCount(_ count: Int) {
+        let countString: String = count <= .zero ? "" : "\(count)"
+        likesCounterLabel.text = countString
     }
     
     private func setLikeButton() {
-        if self.isLike {
-            self.likeButton.setImage(R.image.likeOn(), for: .normal)
+        if isLike {
+            likeButton.setImage(R.image.likeOn(), for: .normal)
         } else {
-            self.likeButton.setImage(R.image.likeOff(), for: .normal)
+            likeButton.setImage(R.image.likeOff(), for: .normal)
         }
     }
     
     private func setupView() {
-        let days = Date().diffInDaysSince1970()
-        let imageIndex = days % backgrounds.count
+        guard let tipId = self.tipEntity?.id else { return }
+        let imageIndex = tipId % backgrounds.count
         let tipBackground = backgrounds[imageIndex]
         
-        self.imageView.image = tipBackground.image
+        imageView.image = tipBackground.image
+        cancelButton.style = .white
+        likesCounterLabel.textColor = .white
+        likesCounterLabel.font = UIFont.systemFont(ofSize: 14)
+        titleLabel.font = UIFont.systemFont(ofSize: 30)
+        textLabel.font = UIFont.systemFont(ofSize: 16)
+        
         switch tipBackground.style {
         case .light:
-            self.titleLabel.textColor = .black
-            self.textLabel.textColor = .black
+            titleLabel.textColor = .black
+            textLabel.textColor = .black
         case .dark:
-            self.titleLabel.textColor = .white
-            self.textLabel.textColor = .white
+            titleLabel.textColor = .white
+            textLabel.textColor = .white
         }
-        
-        self.cancelButton.style = .white
-        self.titleLabel.font = UIFont.systemFont(ofSize: 30)
-        self.textLabel.font = UIFont.systemFont(ofSize: 16)
-        self.likeCounterLabel.textColor = .white
-        self.likeCounterLabel.font = UIFont.systemFont(ofSize: 14)
     }
 }

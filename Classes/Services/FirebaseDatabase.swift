@@ -210,15 +210,15 @@ class FirebaseDatabase: GBDatabase {
                 let value = snapshot.value as? NSDictionary
                 if let keys = value?.allKeys {
                     var count = 0
-                    for key in keys.enumerated() {
+                    keys.enumerated().forEach { key in
                         let userId = key.element
-                        if let ids = value?[userId] as? [Int] {
-                            if ids.contains(id) {
-                                count += 1
-                            }
+                        if let ids = value?[userId] as? [Int], ids.contains(id) {
+                            count += 1
                         }
                     }
                     completion(.success(count))
+                } else {
+                    completion(.success(.zero))
                 }
             })
     }

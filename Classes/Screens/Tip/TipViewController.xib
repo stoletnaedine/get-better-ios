@@ -14,7 +14,7 @@
                 <outlet property="cancelButton" destination="ovu-xa-ycr" id="Ces-wR-N6D"/>
                 <outlet property="imageView" destination="s8v-61-MI6" id="Azb-WL-nNW"/>
                 <outlet property="likeButton" destination="zwx-3U-XLS" id="zKD-bJ-46V"/>
-                <outlet property="likeCounterLabel" destination="RGg-78-OIp" id="3dm-TP-AmY"/>
+                <outlet property="likesCounterLabel" destination="RGg-78-OIp" id="3dm-TP-AmY"/>
                 <outlet property="shareButton" destination="gW8-uR-FnE" id="iJn-tJ-LK7"/>
                 <outlet property="textLabel" destination="g4K-XL-PPI" id="oir-1l-Wx9"/>
                 <outlet property="titleLabel" destination="TgR-nU-RYd" id="hhZ-nh-nNJ"/>
@@ -63,7 +63,7 @@
                             </constraints>
                         </view>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="A9N-ca-3K9" userLabel="GetBetter">
-                            <rect key="frame" x="145" y="403.33333333333331" width="124" height="31"/>
+                            <rect key="frame" x="155.33333333333334" y="403.33333333333331" width="103.33333333333334" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="A9N-ca-3K9" secondAttribute="height" multiplier="4:1" id="sb0-Vd-IZ0"/>
                             </constraints>
@@ -73,7 +73,7 @@
                     <constraints>
                         <constraint firstItem="mjk-WW-N6g" firstAttribute="centerY" secondItem="IME-tg-cEj" secondAttribute="centerY" id="Dub-Ja-MJA"/>
                         <constraint firstItem="A9N-ca-3K9" firstAttribute="top" secondItem="mjk-WW-N6g" secondAttribute="bottom" constant="40" id="QVS-N6-09c"/>
-                        <constraint firstItem="A9N-ca-3K9" firstAttribute="width" secondItem="IME-tg-cEj" secondAttribute="width" multiplier="0.3" id="WLl-sO-JAz"/>
+                        <constraint firstItem="A9N-ca-3K9" firstAttribute="width" secondItem="IME-tg-cEj" secondAttribute="width" multiplier="0.25" id="WLl-sO-JAz"/>
                         <constraint firstItem="mjk-WW-N6g" firstAttribute="centerX" secondItem="IME-tg-cEj" secondAttribute="centerX" id="Zgb-ZN-QFs"/>
                         <constraint firstItem="mjk-WW-N6g" firstAttribute="width" secondItem="IME-tg-cEj" secondAttribute="width" multiplier="0.8" id="hgR-TW-j6T"/>
                         <constraint firstItem="A9N-ca-3K9" firstAttribute="centerX" secondItem="IME-tg-cEj" secondAttribute="centerX" id="p74-VA-iuE"/>
@@ -166,7 +166,7 @@
     </objects>
     <designables>
         <designable name="ovu-xa-ycr">
-            <size key="intrinsicContentSize" width="75" height="75"/>
+            <size key="intrinsicContentSize" width="46" height="30"/>
         </designable>
     </designables>
     <resources>
