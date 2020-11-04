@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol AchievementPresenter {
+protocol AchievementService {
     func calcAchievements(posts: [Post],
                           startSphereMetrics: SphereMetrics,
                           currentSphereMetrics: SphereMetrics) -> [Achievement]
 }
 
-class AchievementPresenterDefault: AchievementPresenter {
+class AchievementServiceDefault: AchievementService {
     
     func calcAchievements(posts: [Post],
                           startSphereMetrics: SphereMetrics,

@@ -61,7 +61,7 @@
 		C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39423D624404E8E0060CF50 /* AuthViewController.swift */; };
 		C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39423D724404E8E0060CF50 /* AuthViewController.xib */; };
 		C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23B246AC71E00DBF0E4 /* Double.swift */; };
-		C396E23E246AC8E200DBF0E4 /* AchievementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23D246AC8E200DBF0E4 /* AchievementPresenter.swift */; };
+		C396E23E246AC8E200DBF0E4 /* AchievementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23D246AC8E200DBF0E4 /* AchievementService.swift */; };
 		C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A321D245710BC005D2EDF /* SettingsViewController.swift */; };
 		C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39A321E245710BC005D2EDF /* SettingsViewController.xib */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
@@ -178,7 +178,7 @@
 		C39423D624404E8E0060CF50 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		C39423D724404E8E0060CF50 /* AuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
 		C396E23B246AC71E00DBF0E4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
-		C396E23D246AC8E200DBF0E4 /* AchievementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenter.swift; sourceTree = "<group>"; };
+		C396E23D246AC8E200DBF0E4 /* AchievementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementService.swift; sourceTree = "<group>"; };
 		C39A321D245710BC005D2EDF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C39A321E245710BC005D2EDF /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
@@ -546,7 +546,7 @@
 			isa = PBXGroup;
 			children = (
 				C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */,
-				C396E23D246AC8E200DBF0E4 /* AchievementPresenter.swift */,
+				C396E23D246AC8E200DBF0E4 /* AchievementService.swift */,
 				F149540FB0998047F5E95EB4 /* Cell */,
 			);
 			path = Achievements;
@@ -914,7 +914,7 @@
 				C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */,
 				C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */,
 				C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */,
-				C396E23E246AC8E200DBF0E4 /* AchievementPresenter.swift in Sources */,
+				C396E23E246AC8E200DBF0E4 /* AchievementService.swift in Sources */,
 				C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */,
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,
 				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,

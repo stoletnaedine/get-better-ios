@@ -10,7 +10,7 @@ import UIKit
 
 final class AchievementsViewController: UIViewController {
     
-    private let presenter: AchievementPresenter = AchievementPresenterDefault()
+    private let achievementService: AchievementService = AchievementServiceDefault()
     private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
     private let tableView = UITableView()
     private var achievements: [Achievement] = []
@@ -41,7 +41,7 @@ final class AchievementsViewController: UIViewController {
                 completion()
                 return
             }
-            if let achievements = self?.presenter.calcAchievements(
+            if let achievements = self?.achievementService.calcAchievements(
                 posts: userData.posts,
                 startSphereMetrics: startSphereMetrics,
                 currentSphereMetrics: currentSphereMetrics
