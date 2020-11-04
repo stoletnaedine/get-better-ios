@@ -22,6 +22,7 @@
 		9277D38F238C725300B3AECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9277D38E238C725300B3AECA /* Assets.xcassets */; };
 		9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9277D390238C725300B3AECA /* LaunchScreen.storyboard */; };
 		C30C7A0F247E8DC400FD830F /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */; };
+		C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */; };
 		C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C317E56F247D6559001521FE /* NoInternetViewController.swift */; };
 		C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C317E570247D6559001521FE /* NoInternetViewController.xib */; };
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
@@ -138,6 +139,7 @@
 		9277D391238C725300B3AECA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9277D393238C725300B3AECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
+		C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Screenshot.swift"; sourceTree = "<group>"; };
 		C317E56F247D6559001521FE /* NoInternetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetViewController.swift; sourceTree = "<group>"; };
 		C317E570247D6559001521FE /* NoInternetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetViewController.xib; sourceTree = "<group>"; };
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				C3452B5624BE17BD00C973B1 /* UIButton.swift */,
 				C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */,
 				C33722AC254EB9BC00191785 /* VoidClosure.swift */,
+				C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
 				C3BFEBC52477E85F000B5B41 /* SettingsPresenter.swift in Sources */,
+				C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */,
 				C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */,
 				C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */,
 				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,

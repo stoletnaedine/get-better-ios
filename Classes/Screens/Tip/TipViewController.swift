@@ -77,6 +77,22 @@ class TipViewController: UIViewController {
         configure(tip: tipEntity.tip)
     }
     
+    @IBAction private func shareButtonDidTap(_ sender: Any) {
+        setVisibleForUI(hidden: true)
+        guard let screenshot = self.view.takeScreenshot() else { return }
+        setVisibleForUI(hidden: false)
+        
+        let activityVC = UIActivityViewController(activityItems: [screenshot], applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = self.view
+            self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    private func setVisibleForUI(hidden: Bool) {
+        cancelButton.isHidden = hidden
+        shareButton.isHidden = hidden
+        likeButton.isHidden = hidden
+    }
+    
     private func setupShadow(for label: UILabel) {
         label.layer.shadowColor = UIColor.black.cgColor
         label.layer.shadowOffset = .init(width: 1, height: 1)
