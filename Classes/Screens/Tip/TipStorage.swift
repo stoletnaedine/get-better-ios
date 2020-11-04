@@ -8,14 +8,30 @@
 
 import Foundation
 
+struct TipEntity {
+    let id: Int
+    let tip: Tip
+}
+
 struct Tip {
     let title: String
     let text: String
 }
 
-enum TipStorage {
+class TipStorage {
     
-    static let tips: [Tip] = [
+    func tipEntities() -> [TipEntity] {
+        let ids: [Int] = Array(0...tipsRaw.count - 1)
+        var tips: [TipEntity] = []
+        ids.forEach { id in
+            tips.append(
+                TipEntity(id: id, tip: self.tipsRaw[id])
+            )
+        }
+        return tips
+    }
+    
+    private let tipsRaw: [Tip] = [
         Tip(title: "Ранний подъем",
             text: "Все успешные люди - пташки ранние. Что-то особенное и магическое есть в раннем подъеме. Эта часть дня, когда еще мир не проснулся, - самая важная и вдохновляющая. Те, кто встает до рассвета солнца, утверждают, что их жизнь стала полноценной. Попробуйте и вы вставать рано, и уже через месяц-другой вы будете с жалостью вспоминать те года, когда рассвет встречали в постели."),
         Tip(title: "Увлеченное чтение",

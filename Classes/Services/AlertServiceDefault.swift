@@ -97,7 +97,7 @@ class AlertServiceDefault: UIViewController, AlertService {
         attributes.popBehavior = .animated(
                 animation: .init(
                         translate: .init(duration: 0.3),
-                        scale: .init(from: 1, to: 0.7, duration: 0.7)
+                        scale: .init(from: 1, to: 0.7, duration: 1.0)
                 )
         )
         attributes.shadow = .active(

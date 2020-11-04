@@ -25,9 +25,19 @@ class TipViewController: UIViewController {
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var tomorrowLabel: UILabel!
     @IBOutlet weak var cancelButton: CancelButton!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     
-    var tip: Tip?
-    private var like: Bool = false
+    var tipEntity: TipEntity?
+    
+    private let database: GBDatabase = FirebaseDatabase()
+    
+    private var isLike: Bool = false {
+        didSet {
+            self.setLikeButton()
+        }
+    }
+    
     private let backgrounds: [TipBackground] = [
         TipBackground(style: .dark, image: R.image.darkBg1()),
         TipBackground(style: .dark, image: R.image.darkBg2()),
@@ -51,25 +61,38 @@ class TipViewController: UIViewController {
         TipBackground(style: .dark, image: R.image.darkBg20()),
         TipBackground(style: .dark, image: R.image.darkBg21()),
         TipBackground(style: .dark, image: R.image.darkBg22()),
-        TipBackground(style: .dark, image: R.image.darkBg23()),
-        TipBackground(style: .dark, image: R.image.darkBg24())
+        TipBackground(style: .dark, image: R.image.darkBg23())
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupTargets()
+        setupSwipeGesture()
+        setupCancelButton()
+        setupLikeButton()
+        setupShadow(for: self.titleLabel)
+        setupShadow(for: self.textLabel)
         
-        if let tip = self.tip {
-            configure(tip: tip)
-        }
+        guard let tipEntity = self.tipEntity else { return }
+        configure(tip: tipEntity.tip)
     }
     
-    private func setupTargets() {
+    private func setupShadow(for label: UILabel) {
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOffset = .init(width: 1, height: 1)
+        label.layer.shadowOpacity = 1
+        label.layer.shadowRadius = 10
+        label.layer.masksToBounds = false
+    }
+    
+    private func setupSwipeGesture() {
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissView))
         downSwipe.direction = .down
-        cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         self.view.addGestureRecognizer(downSwipe)
+    }
+    
+    private func setupCancelButton() {
+        cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }
 
     @objc private func dismissView() {
@@ -81,6 +104,39 @@ class TipViewController: UIViewController {
         self.textLabel.text = tip.text
         self.titleLabel.sizeToFit()
         self.textLabel.sizeToFit()
+    }
+    
+    private func setupLikeButton() {
+        guard let tipId = self.tipEntity?.id else { return }
+        
+        database.getTipLikes(completion: { [weak self] result in
+            switch result {
+            case .success(let ids):
+                self?.isLike = ids.contains(tipId)
+            case .failure:
+                self?.isLike = false
+            }
+        })
+        
+        self.likeButton.addTarget(self, action: #selector(likeButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc private func likeButtonDidTap() {
+        guard let tipId = self.tipEntity?.id else { return }
+        if self.isLike {
+            database.deleteTipLike(id: tipId)
+        } else {
+            database.saveTipLike(id: tipId)
+        }
+        self.isLike.toggle()
+    }
+    
+    private func setLikeButton() {
+        if self.isLike {
+            self.likeButton.setImage(R.image.likeOn(), for: .normal)
+        } else {
+            self.likeButton.setImage(R.image.likeOff(), for: .normal)
+        }
     }
     
     private func setupView() {
@@ -99,7 +155,7 @@ class TipViewController: UIViewController {
         }
         
         self.cancelButton.style = .white
-        self.titleLabel.font = UIFont.systemFont(ofSize: 26)
-        self.textLabel.font = UIFont.systemFont(ofSize: 18)
+        self.titleLabel.font = UIFont.systemFont(ofSize: 30)
+        self.textLabel.font = UIFont.systemFont(ofSize: 16)
     }
 }

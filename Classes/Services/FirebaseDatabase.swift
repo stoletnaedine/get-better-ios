@@ -26,6 +26,9 @@ protocol GBDatabase {
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
     func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool)
     func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
+    func getTipLikes(completion: @escaping (Result<[Int], AppError>) -> Void)
+    func saveTipLike(id: Int)
+    func deleteTipLike(id: Int)
 }
 
 class FirebaseDatabase: GBDatabase {
@@ -35,6 +38,7 @@ class FirebaseDatabase: GBDatabase {
         static let usersPath = "users"
         static let postsPath = "post"
         static let notificationsPath = "notifications"
+        static let tipLikesPath = "tip_likes"
     }
     
     private let connectionHelper = ConnectionHelper()
@@ -168,6 +172,74 @@ class FirebaseDatabase: GBDatabase {
                     completion(nil)
                 }
             })
+    }
+    
+    func getTipLikes(completion: @escaping (Result<[Int], AppError>) -> Void) {
+        guard connectionHelper.connectionAvailable() else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
+        guard let userId = user?.uid else {
+            completion(.failure(AppError(errorCode: .unexpected)))
+            return
+        }
+        
+        ref
+            .child(Constants.tipLikesPath)
+            .child(userId)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSArray
+                if let likeIds = value as? [Int] {
+                    completion(.success(likeIds))
+                } else {
+                    completion(.success([]))
+                }
+            })
+    }
+    
+    func saveTipLike(id: Int) {
+        guard connectionHelper.connectionAvailable() else { return }
+        guard let userId = user?.uid else { return }
+        
+        self.getTipLikes(completion: { [weak self] likeIds in
+            switch likeIds {
+            case .success(let ids):
+                if !ids.contains(id) {
+                    var newIds = ids
+                    newIds.append(id)
+                    
+                    self?.ref
+                        .child(Constants.tipLikesPath)
+                        .child(userId)
+                        .setValue(newIds)
+                }
+            case .failure:
+                break
+            }
+        })
+    }
+    
+    func deleteTipLike(id: Int) {
+        guard connectionHelper.connectionAvailable() else { return }
+        guard let userId = user?.uid else { return }
+        
+        self.getTipLikes(completion: { [weak self] likeIds in
+            switch likeIds {
+            case .success(let ids):
+                if ids.contains(id) {
+                    var newIds = ids
+                    guard let idIndex = newIds.firstIndex(of: id) else { return }
+                    newIds.remove(at: idIndex)
+                    
+                    self?.ref
+                        .child(Constants.tipLikesPath)
+                        .child(userId)
+                        .setValue(newIds)
+                }
+            case .failure:
+                break
+            }
+        })
     }
     
     private func currentUserPath() -> DatabaseReference? {

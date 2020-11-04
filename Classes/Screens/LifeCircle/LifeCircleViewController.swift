@@ -40,6 +40,7 @@ class LifeCircleViewController: UIViewController {
     private let database: GBDatabase = FirebaseDatabase()
     private let alertService: AlertService = AlertServiceDefault()
     private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
+    private let tipStorage = TipStorage()
     
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
@@ -105,14 +106,14 @@ class LifeCircleViewController: UIViewController {
     }
     
     @objc private func showTip() {
-        let tips = TipStorage.tips
+        let tipEntities = tipStorage.tipEntities()
         let days = Date().diffInDaysSince1970()
-        let tipIndex = days % tips.count
-        let tipOfTheDay = tips[tipIndex]
+        let tipIndex = days % tipEntities.count
+        let tipEntityOfTheDay = tipEntities[tipIndex]
         
         let tipVC = TipViewController()
         tipVC.modalPresentationStyle = .overFullScreen
-        tipVC.tip = tipOfTheDay
+        tipVC.tipEntity = tipEntityOfTheDay
         present(tipVC, animated: true, completion: nil)
         userDefaultsService.tipOfTheDayShown()
     }
