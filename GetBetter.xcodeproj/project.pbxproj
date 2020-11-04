@@ -104,7 +104,7 @@
 		F1495758B8B86F71B37096B8 /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495297F7AD9CAF4E9198A5 /* FirebaseDatabase.swift */; };
 		F14959446FAB1AE8F8479875 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F14955127BD3A7CAEE9EC9E4 /* ArticleViewController.xib */; };
 		F14959E6D1E7A2AB6E42BF31 /* SphereDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F149585E02FD93E6AE2E43E1 /* SphereDetailViewController.xib */; };
-		F1495A2BAA0794DBE208648C /* UIView+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14950817E129DCC6D81127A /* UIView+Message.swift */; };
+		F1495A2BAA0794DBE208648C /* UI+SwiftEntryKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14950817E129DCC6D81127A /* UI+SwiftEntryKit.swift */; };
 		F1495ADA5587A84C0A572A15 /* SetupSphereValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14953FDFB01D1F08106D959 /* SetupSphereValueViewController.swift */; };
 		F1495BDA4B981DA49805610D /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149566B1400A8755E893491 /* OnboardingPageViewController.swift */; };
 		F1495CCF35CE078ED01A9258 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F14958BF1B820ACB6FC09854 /* 1.png */; };
@@ -202,7 +202,7 @@
 		C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPostViewController.xib; sourceTree = "<group>"; };
 		C3F98134253B29850002CD13 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		E5FFE55E2D23BAEC331FB476 /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F14950817E129DCC6D81127A /* UIView+Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Message.swift"; sourceTree = "<group>"; };
+		F14950817E129DCC6D81127A /* UI+SwiftEntryKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UI+SwiftEntryKit.swift"; sourceTree = "<group>"; };
 		F14950B134A6B877EF737842 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		F14950C09BAEFB80A32F8E4F /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		F1495140518C692011416A1A /* SphereMetricsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SphereMetricsTableViewCell.xib; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 				C33B344C247BAE74008EA2D1 /* UITextView.swift */,
 				C33B3450247C111F008EA2D1 /* NSAttributedString.swift */,
 				C33B3452247C137A008EA2D1 /* UIFont.swift */,
-				F14950817E129DCC6D81127A /* UIView+Message.swift */,
+				F14950817E129DCC6D81127A /* UI+SwiftEntryKit.swift */,
 				F14955E497B188FBBB345A1A /* CGRect.swift */,
 				C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */,
 				C3C9DD8624B843B3003C83BD /* String.swift */,
@@ -955,7 +955,7 @@
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
 				C3ED5A2A23AFBF1300C7A492 /* LifeCircleViewController.swift in Sources */,
-				F1495A2BAA0794DBE208648C /* UIView+Message.swift in Sources */,
+				F1495A2BAA0794DBE208648C /* UI+SwiftEntryKit.swift in Sources */,
 				F149571D8D5ACCC62F0EB363 /* CGRect.swift in Sources */,
 				F1495EC47C86B62C320FC93A /* CustomPopUpView.swift in Sources */,
 				C33722AD254EB9BC00191785 /* VoidClosure.swift in Sources */,

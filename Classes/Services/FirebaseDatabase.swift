@@ -26,9 +26,10 @@ protocol GBDatabase {
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
     func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool)
     func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
-    func getTipLikes(completion: @escaping (Result<[Int], AppError>) -> Void)
+    func getTipLikeIds(completion: @escaping (Result<[Int], AppError>) -> Void)
     func saveTipLike(id: Int)
     func deleteTipLike(id: Int)
+    func getTipLikesCount(for id: Int, completion: @escaping (Result<Int, AppError>) -> Void)
 }
 
 class FirebaseDatabase: GBDatabase {
@@ -174,7 +175,7 @@ class FirebaseDatabase: GBDatabase {
             })
     }
     
-    func getTipLikes(completion: @escaping (Result<[Int], AppError>) -> Void) {
+    func getTipLikeIds(completion: @escaping (Result<[Int], AppError>) -> Void) {
         guard connectionHelper.connectionAvailable() else {
             completion(.failure(AppError(errorCode: .noInternet)))
             return
@@ -197,11 +198,36 @@ class FirebaseDatabase: GBDatabase {
             })
     }
     
+    func getTipLikesCount(for id: Int, completion: @escaping (Result<Int, AppError>) -> Void) {
+        guard connectionHelper.connectionAvailable() else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
+        
+        ref
+            .child(Constants.tipLikesPath)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSDictionary
+                if let keys = value?.allKeys {
+                    var count = 0
+                    for key in keys.enumerated() {
+                        let userId = key.element
+                        if let ids = value?[userId] as? [Int] {
+                            if ids.contains(id) {
+                                count += 1
+                            }
+                        }
+                    }
+                    completion(.success(count))
+                }
+            })
+    }
+    
     func saveTipLike(id: Int) {
         guard connectionHelper.connectionAvailable() else { return }
         guard let userId = user?.uid else { return }
         
-        self.getTipLikes(completion: { [weak self] likeIds in
+        self.getTipLikeIds(completion: { [weak self] likeIds in
             switch likeIds {
             case .success(let ids):
                 if !ids.contains(id) {
@@ -223,7 +249,7 @@ class FirebaseDatabase: GBDatabase {
         guard connectionHelper.connectionAvailable() else { return }
         guard let userId = user?.uid else { return }
         
-        self.getTipLikes(completion: { [weak self] likeIds in
+        self.getTipLikeIds(completion: { [weak self] likeIds in
             switch likeIds {
             case .success(let ids):
                 if ids.contains(id) {
