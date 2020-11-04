@@ -172,7 +172,7 @@ class TipViewController: UIViewController {
     }
     
     private func setupLikesCount(_ count: Int) {
-        let countString: String = count <= .zero ? "" : "\(count)"
+        let countString: String? = count <= .zero ? nil : "\(count)"
         likesCounterLabel.text = countString
     }
     
