@@ -29,7 +29,7 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s8v-61-MI6" userLabel="Background Image View">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip-footer" translatesAutoresizingMaskIntoConstraints="NO" id="2La-QQ-YLL">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tip/tip-footer" translatesAutoresizingMaskIntoConstraints="NO" id="2La-QQ-YLL">
                     <rect key="frame" x="0.0" y="566" width="414" height="170"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IME-tg-cEj" userLabel="Tip Outer Container">
@@ -85,7 +85,7 @@
                         <constraint firstAttribute="width" constant="30" id="bzU-Zv-vxa"/>
                         <constraint firstAttribute="height" constant="30" id="zvB-Rr-Edj"/>
                     </constraints>
-                    <state key="normal" title="share" image="share"/>
+                    <state key="normal" title="share" image="Tip/share"/>
                     <connections>
                         <action selector="shareButtonDidTap:" destination="-1" eventType="touchUpInside" id="exK-uf-GOj"/>
                     </connections>
@@ -170,10 +170,10 @@
         </designable>
     </designables>
     <resources>
+        <image name="Tip/share" width="90" height="90"/>
+        <image name="Tip/tip-footer" width="1125" height="170"/>
         <image name="like-off" width="90" height="90"/>
-        <image name="share" width="90" height="90"/>
         <image name="splash" width="633" height="108"/>
-        <image name="tip-footer" width="1125" height="170"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

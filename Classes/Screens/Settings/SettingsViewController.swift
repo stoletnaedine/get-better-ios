@@ -112,7 +112,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.fillCell(profile: profile)
             cell.selectionStyle = .none
             return cell
-        case .articles:
+        case .tips, .articles:
             let cell = UITableViewCell()
             cell.textLabel?.text = section.cells[indexPath.row].title ?? ""
             cell.selectionStyle = .none
@@ -172,6 +172,8 @@ extension SettingsViewController {
             self?.loadProfileAndReloadTableView()
         }
         
+        let tipsTableViewController = TipsTableViewController()
+        
         let aboutCircleVC = ArticleViewController()
         aboutCircleVC.article = Article(title: R.string.localizable.aboutCircleTitle(),
                                         text: R.string.localizable.aboutCircleDescription(),
@@ -196,6 +198,13 @@ extension SettingsViewController {
                     cells: [
                         SettingsCell(action: { [weak self] in
                             self?.navigationController?.pushViewController(editProfileViewController, animated: true)
+                        })
+                    ]),
+            SettingsSection(type: .tips,
+                    cells: [
+                        SettingsCell(title: R.string.localizable.tipsTitle(),
+                                     action: { [weak self] in
+                            self?.navigationController?.pushViewController(tipsTableViewController, animated: true)
                         })
                     ]),
             SettingsSection(type: .articles,

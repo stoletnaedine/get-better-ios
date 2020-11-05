@@ -39,30 +39,30 @@ class TipViewController: UIViewController {
         }
     }
     
-    private let backgrounds: [TipBackground] = [
-        TipBackground(style: .dark, image: R.image.darkBg1()),
-        TipBackground(style: .dark, image: R.image.darkBg2()),
-        TipBackground(style: .dark, image: R.image.darkBg3()),
-        TipBackground(style: .dark, image: R.image.darkBg4()),
-        TipBackground(style: .dark, image: R.image.darkBg5()),
-        TipBackground(style: .dark, image: R.image.darkBg6()),
-        TipBackground(style: .dark, image: R.image.darkBg7()),
-        TipBackground(style: .dark, image: R.image.darkBg8()),
-        TipBackground(style: .dark, image: R.image.darkBg9()),
-        TipBackground(style: .dark, image: R.image.darkBg10()),
-        TipBackground(style: .dark, image: R.image.darkBg11()),
-        TipBackground(style: .dark, image: R.image.darkBg12()),
-        TipBackground(style: .dark, image: R.image.darkBg13()),
-        TipBackground(style: .dark, image: R.image.darkBg14()),
-        TipBackground(style: .dark, image: R.image.darkBg15()),
-        TipBackground(style: .dark, image: R.image.darkBg16()),
-        TipBackground(style: .dark, image: R.image.darkBg17()),
-        TipBackground(style: .dark, image: R.image.darkBg18()),
-        TipBackground(style: .dark, image: R.image.darkBg19()),
-        TipBackground(style: .dark, image: R.image.darkBg20()),
-        TipBackground(style: .dark, image: R.image.darkBg21()),
-        TipBackground(style: .dark, image: R.image.darkBg22()),
-        TipBackground(style: .dark, image: R.image.darkBg23())
+    private let backgroundNames = [
+        R.image.tip.darkBg.darkBg1.name,
+        R.image.tip.darkBg.darkBg2.name,
+        R.image.tip.darkBg.darkBg3.name,
+        R.image.tip.darkBg.darkBg4.name,
+        R.image.tip.darkBg.darkBg5.name,
+        R.image.tip.darkBg.darkBg6.name,
+        R.image.tip.darkBg.darkBg7.name,
+        R.image.tip.darkBg.darkBg8.name,
+        R.image.tip.darkBg.darkBg9.name,
+        R.image.tip.darkBg.darkBg10.name,
+        R.image.tip.darkBg.darkBg11.name,
+        R.image.tip.darkBg.darkBg12.name,
+        R.image.tip.darkBg.darkBg13.name,
+        R.image.tip.darkBg.darkBg14.name,
+        R.image.tip.darkBg.darkBg15.name,
+        R.image.tip.darkBg.darkBg16.name,
+        R.image.tip.darkBg.darkBg17.name,
+        R.image.tip.darkBg.darkBg18.name,
+        R.image.tip.darkBg.darkBg19.name,
+        R.image.tip.darkBg.darkBg20.name,
+        R.image.tip.darkBg.darkBg21.name,
+        R.image.tip.darkBg.darkBg22.name,
+        R.image.tip.darkBg.darkBg23.name
     ]
     
     override func viewDidLoad() {
@@ -178,16 +178,17 @@ class TipViewController: UIViewController {
     
     private func setLikeButton() {
         if isLike {
-            likeButton.setImage(R.image.likeOn(), for: .normal)
+            likeButton.setImage(R.image.tip.likeOn(), for: .normal)
         } else {
-            likeButton.setImage(R.image.likeOff(), for: .normal)
+            likeButton.setImage(R.image.tip.likeOff(), for: .normal)
         }
     }
     
     private func setupView() {
         guard let tipId = self.tipEntity?.id else { return }
-        let imageIndex = tipId % backgrounds.count
-        let tipBackground = backgrounds[imageIndex]
+        let imageIndex = tipId % backgroundNames.count
+        let tipBackground = TipBackground(style: .dark,
+                                          image: UIImage(named: backgroundNames[imageIndex]))
         
         imageView.image = tipBackground.image
         cancelButton.style = .white
