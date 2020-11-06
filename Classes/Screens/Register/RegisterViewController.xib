@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,7 +66,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-Aj-A4O" userLabel="RegisterView">
                     <rect key="frame" x="20" y="338" width="374" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-fg-S8h">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-fg-S8h">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                             <state key="normal" title="EnterButton"/>
                             <connections>
@@ -91,7 +91,7 @@
                         <constraint firstAttribute="trailing" secondItem="B7w-fg-S8h" secondAttribute="trailing" id="ytb-1q-9SV"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Yk-fh-uCY" userLabel="Cancel Button" customClass="CancelButton" customModule="GetBetter" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Yk-fh-uCY" userLabel="Cancel Button" customClass="CancelButton" customModule="GetBetter" customModuleProvider="target">
                     <rect key="frame" x="369" y="64" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="cEs-2L-aDO"/>
@@ -103,6 +103,7 @@
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="mL2-UJ-v9r" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="01M-fA-vpf"/>
@@ -127,7 +128,6 @@
                 <constraint firstItem="OMc-X0-HHv" firstAttribute="top" secondItem="mL2-UJ-v9r" secondAttribute="bottom" constant="6" id="vV6-69-nb7"/>
                 <constraint firstItem="OMc-X0-HHv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="x2p-Kx-Djk"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>

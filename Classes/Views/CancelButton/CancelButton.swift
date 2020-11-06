@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class CancelButton: UIButton {
     
     enum Style {
