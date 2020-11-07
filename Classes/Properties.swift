@@ -19,6 +19,6 @@ enum Properties {
     }
     
     static let notValidSphereValue = -1.0
-    static let appVersion = "1.8"
+    static let appVersion = "1.8.1"
     static let appStoreUrl = URL(string: "https://apps.apple.com/us/app/getbetter/id1522666671?uo=4")!
 }
