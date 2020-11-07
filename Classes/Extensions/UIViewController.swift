@@ -56,20 +56,25 @@ extension UIViewController {
     
     // MARK: — Animations
     
-    func showAnimation(name: AnimationName, on view: UIView, speed: CGFloat = 1) {
+    func showAnimation(name: AnimationName, on view: UIView, size: CGSize? = nil, speed: CGFloat = 1) {
         animationView = AnimationView(name: name.value)
         guard let animationView = animationView else { return }
-        animationView.frame = view.bounds
+        var bounds: CGRect = .zero
+        if let size = size {
+            let origin = CGPoint(x: (view.frame.width - size.width) / 2,
+                                 y: (view.frame.height - size.height) / 2)
+            bounds = CGRect(origin: origin, size: size)
+        } else {
+            bounds = view.bounds
+        }
+        animationView.frame = bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
         animationView.animationSpeed = speed
         view.addSubview(animationView)
-        animationView.play()
+        animationView.play(completion: { _ in
+            animationView.removeFromSuperview()
+        })
     }
     
-    func stopAnimation() {
-        guard let animationView = animationView else { return }
-        animationView.stop()
-        animationView.removeFromSuperview()
-    }
 }
