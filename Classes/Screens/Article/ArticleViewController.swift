@@ -40,7 +40,7 @@ class ArticleViewController: UIViewController {
         imageView.image = article.image
         
         if let navBarTitleView = article.titleView {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(showAnimation))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(startAnimation))
             tap.numberOfTapsRequired = Constants.numberOfTapsRequired
             navBarTitleView.isUserInteractionEnabled = true
             navBarTitleView.addGestureRecognizer(tap)
@@ -48,15 +48,8 @@ class ArticleViewController: UIViewController {
         }
     }
     
-    @objc private func showAnimation() {
-        animationView = AnimationView(name: Constants.confettiAnimationName)
-        guard let animationView = animationView else { return }
-        animationView.frame = view.bounds
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .playOnce
-        animationView.animationSpeed = 0.5
-        view.addSubview(animationView)
-        animationView.play()
+    @objc private func startAnimation() {
+        self.showAnimation(name: .confetti, on: self.view, speed: 0.5)
     }
     
     private func setupView() {
@@ -72,7 +65,6 @@ class ArticleViewController: UIViewController {
 extension ArticleViewController {
     
     private enum Constants {
-        static let confettiAnimationName = "37723-confetti-partyyy"
         static let numberOfTapsRequired = 5
     }
     

@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Lottie
 
 var activityIndicatoriView: UIView?
+var animationView: AnimationView?
  
 extension UIViewController {
+    
+    // MARK: — Dismiss keyboard
     
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -21,9 +25,8 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-}
-
-extension UIViewController {
+    
+    // MARK: — Activity indicator
     
     func showActivityIndicator(onView : UIView) {
         let aiView = UIView.init(frame: UIScreen.main.bounds)
@@ -49,5 +52,24 @@ extension UIViewController {
             activityIndicatoriView?.removeFromSuperview()
             activityIndicatoriView = nil
         }
+    }
+    
+    // MARK: — Animations
+    
+    func showAnimation(name: AnimationName, on view: UIView, speed: CGFloat = 1) {
+        animationView = AnimationView(name: name.value)
+        guard let animationView = animationView else { return }
+        animationView.frame = view.bounds
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        animationView.animationSpeed = speed
+        view.addSubview(animationView)
+        animationView.play()
+    }
+    
+    func stopAnimation() {
+        guard let animationView = animationView else { return }
+        animationView.stop()
+        animationView.removeFromSuperview()
     }
 }

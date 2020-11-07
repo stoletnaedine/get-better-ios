@@ -25,7 +25,7 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var anonymButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     
-    var signInCompletion: () -> () = {}
+    var signInCompletion: VoidClosure?
     let alertService: AlertService = AlertServiceDefault()
     
     override func viewDidLoad() {
@@ -50,19 +50,19 @@ class AuthViewController: UIViewController {
         guard let password = passwordTextField.text else { return }
         
         if FormValidator.isFormValid(email: email, password: password) {
-            
             self.showActivityIndicator(onView: self.view)
 
-            Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
+            Auth.auth().signIn(withEmail: email,
+                               password: password,
+                               completion: { [weak self] authResult, error in
+                guard let self = self else { return }
+                self.removeActivityIndicator()
                 
-                self?.removeActivityIndicator()
-
-                if let error = error,
-                    let appError = AppError(firebaseError: error).name {
-                    self?.alertService.showErrorMessage(desc: appError)
+                if let error = error, let appError = AppError(firebaseError: error).name {
+                    self.alertService.showErrorMessage(desc: appError)
                 } else {
                     KeychainHelper.saveUserEmail(email)
-                    self?.signInCompletion()
+                    self.signInCompletion?()
                 }
             })
         }
@@ -76,7 +76,7 @@ class AuthViewController: UIViewController {
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
         let registerViewController = RegisterViewController()
         registerViewController.completion = { [weak self] in
-            self?.signInCompletion()
+            self?.signInCompletion?()
         }
         present(registerViewController, animated: true, completion: nil)
     }
@@ -92,7 +92,7 @@ class AuthViewController: UIViewController {
                 self?.removeActivityIndicator()
                 self?.alertService.showErrorMessage(desc: appError)
             } else {
-                self?.signInCompletion()
+                self?.signInCompletion?()
                 self?.removeActivityIndicator()
             }
         })
@@ -123,8 +123,10 @@ extension AuthViewController {
         
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterPassword(),
-                                                                     attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.authEnterPassword(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         passwordTextField.isSecureTextEntry = true
         eyeImageView.image = R.image.closedEye()
         eyeButton.setTitle("", for: .normal)
