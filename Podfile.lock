@@ -101,6 +101,7 @@ PODS:
     - Kingfisher/Core (= 5.14.1)
   - Kingfisher/Core (5.14.1)
   - leveldb-library (1.22)
+  - lottie-ios (3.1.9)
   - MaterialShowcase (0.7.1)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
@@ -127,6 +128,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - IQKeyboardManagerSwift
   - Kingfisher (~> 5.0)
+  - lottie-ios
   - MaterialShowcase
   - R.swift
   - ReachabilitySwift
@@ -153,6 +155,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - MaterialShowcase
     - nanopb
     - PromisesObjC
@@ -183,6 +186,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   MaterialShowcase: baaca60627058085d6b304f5a30ee952e99cee21
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
@@ -194,6 +198,6 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: 448a36c3d8714eb2633b8b9976909e1df6c45df4
+PODFILE CHECKSUM: 0fdd830fa36896ba3f699d9fecf29d1bcc5558c7
 
 COCOAPODS: 1.9.3

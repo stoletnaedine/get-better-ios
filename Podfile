@@ -1,3 +1,5 @@
+platform :ios, '11.0'
+
 target 'GetBetter' do
   use_frameworks!
 
@@ -14,4 +16,5 @@ target 'GetBetter' do
   pod 'ReachabilitySwift'
   pod 'MaterialShowcase'
   pod 'Kingfisher', '~> 5.0'
+  pod 'lottie-ios'
 end

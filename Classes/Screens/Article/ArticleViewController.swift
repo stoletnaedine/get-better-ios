@@ -7,18 +7,20 @@
 //
 
 import UIKit
+import Lottie
 
 class ArticleViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: ScaledHeightImageView!
+    private var animationView: AnimationView?
     
     var article: Article?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customizeView()
+        setupView()
         guard let article = self.article else { return }
         fillViewController(from: article)
     }
@@ -32,19 +34,46 @@ class ArticleViewController: UIViewController {
     }
 
     private func fillViewController(from article: Article) {
-        navigationItem.titleView = article.titleView
         titleLabel.text = article.title
         textView.attributedText = article.text.htmlToAttributedString
         textView.sizeToFit()
         imageView.image = article.image
+        
+        if let navBarTitleView = article.titleView {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(showAnimation))
+            tap.numberOfTapsRequired = Constants.numberOfTapsRequired
+            navBarTitleView.isUserInteractionEnabled = true
+            navBarTitleView.addGestureRecognizer(tap)
+            navigationItem.titleView = navBarTitleView
+        }
     }
     
-    private func customizeView() {
+    @objc private func showAnimation() {
+        animationView = AnimationView(name: Constants.confettiAnimationName)
+        guard let animationView = animationView else { return }
+        animationView.frame = view.bounds
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        animationView.animationSpeed = 0.5
+        view.addSubview(animationView)
+        animationView.play()
+    }
+    
+    private func setupView() {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
         textView.textContainer.lineFragmentPadding = .zero
         textView.textContainerInset = .zero
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.tintColor = .violet
+    }
+    
+}
+
+extension ArticleViewController {
+    
+    private enum Constants {
+        static let confettiAnimationName = "37723-confetti-partyyy"
+        static let numberOfTapsRequired = 5
     }
     
 }

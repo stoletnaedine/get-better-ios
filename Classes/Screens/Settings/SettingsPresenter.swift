@@ -37,10 +37,8 @@ class SettingsPresenterDefault: SettingsPresenter {
         let screenWidth = UIScreen.main.bounds.width
         let switchWidth: CGFloat = 49
         let switchHeight: CGFloat = 31
-        let switcher = UISwitch(frame: CGRect(x: screenWidth - switchWidth - 10,
-                                              y: 6,
-                                              width: switchWidth,
-                                              height: switchHeight))
+        let switcher = UISwitch(frame: CGRect(x: screenWidth - switchWidth - 10, y: 6,
+                                              width: switchWidth, height: switchHeight))
         
         database.getNotificationSettings(topic: topic, completion: { [weak self] isSubscribe in
             guard let self = self else { return }
