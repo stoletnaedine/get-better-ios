@@ -19,7 +19,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var registerButtonLabel: UILabel!
     
-    var completion: () -> () = {}
+    var completion: VoidClosure?
     let alertService: AlertService = AlertServiceDefault()
     
     override func viewDidLoad() {
@@ -29,27 +29,29 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
-        
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
         if FormValidator.isFormValid(email: email, password: password) {
-            self.showActivityIndicator(onView: self.view)
+            self.showLoadingAnimation(on: self.view)
             
-            Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] authResult, error in
-                self?.removeActivityIndicator()
+            Auth.auth().createUser(withEmail: email,
+                                   password: password,
+                                   completion: { [weak self] authResult, error in
+                guard let self = self else { return }
+                self.stopAnimation()
                 
                 if let error = error,
                     let appError = AppError(firebaseError: error).name {
-                    self?.alertService.showErrorMessage(desc: appError)
-                    return
-                }
-                
-                if let _ = Auth.auth().currentUser {
-                    self?.alertService.showSuccessMessage(desc: R.string.localizable.registerSuccessAlert())
-                    self?.completion()
+                    self.alertService.showErrorMessage(desc: appError)
                 } else {
-                    self?.dismiss(animated: true, completion: nil)
+                    if let _ = Auth.auth().currentUser {
+                        KeychainHelper.saveUserEmail(email)
+                        self.alertService.showSuccessMessage(desc: R.string.localizable.registerSuccessAlert())
+                        self.completion?()
+                    } else {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
             })
         }
@@ -67,16 +69,20 @@ class RegisterViewController: UIViewController {
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
-        emailTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterEmail(),
-                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.authEnterEmail(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         passwordLabel.textColor = .grey
         passwordLabel.font = .formLabelFieldFont
         passwordLabel.text = R.string.localizable.authPassword()
         
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterPassword(),
-                                                                     attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.authEnterPassword(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         registerView.backgroundColor = .violet
         registerView.layer.cornerRadius = 5
         

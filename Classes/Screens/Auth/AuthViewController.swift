@@ -50,13 +50,13 @@ class AuthViewController: UIViewController {
         guard let password = passwordTextField.text else { return }
         
         if FormValidator.isFormValid(email: email, password: password) {
-            self.showActivityIndicator(onView: self.view)
+            self.showLoadingAnimation(on: self.view)
 
             Auth.auth().signIn(withEmail: email,
                                password: password,
                                completion: { [weak self] authResult, error in
                 guard let self = self else { return }
-                self.removeActivityIndicator()
+                self.stopAnimation()
                 
                 if let error = error, let appError = AppError(firebaseError: error).name {
                     self.alertService.showErrorMessage(desc: appError)
@@ -82,18 +82,17 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func anonymousRegisterButtonDidTap(_ sender: UIButton) {
-        
-        self.showActivityIndicator(onView: self.view)
+        self.showLoadingAnimation(on: self.view)
         
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
+            guard let self = self else { return }
+            self.stopAnimation()
             
             if let error = error,
                 let appError = AppError(firebaseError: error).name {
-                self?.removeActivityIndicator()
-                self?.alertService.showErrorMessage(desc: appError)
+                self.alertService.showErrorMessage(desc: appError)
             } else {
-                self?.signInCompletion?()
-                self?.removeActivityIndicator()
+                self.signInCompletion?()
             }
         })
     }
@@ -111,8 +110,10 @@ extension AuthViewController {
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
-        emailTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterEmail(),
-                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.authEnterEmail(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         if let email = KeychainHelper.getUserEmail() {
             emailTextField.text = email
         }

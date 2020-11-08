@@ -15,13 +15,11 @@ class OnboardingPageViewController: UIViewController {
     let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
     let user = Auth.auth().currentUser
-    
-    var completion: () -> () = {}
+    var completion: VoidClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = R.string.localizable.onboardingTitle()
-
         fillViewControllers()
         setupPageControl()
         setupBarButton()
@@ -92,6 +90,8 @@ class OnboardingPageViewController: UIViewController {
                 }
                 NotificationCenter.default.post(name: .logout, object: nil)
             })
+        } else {
+            NotificationCenter.default.post(name: .logout, object: nil)
         }
     }
     
@@ -112,7 +112,7 @@ class OnboardingPageViewController: UIViewController {
         
         if database.saveStartSphereMetrics(sphereMetrics) {
             UserDefaults.standard.set(false, forKey: Properties.UserDefaults.tutorialHasShowed)
-            self.completion()
+            self.completion?()
         }
     }
 }

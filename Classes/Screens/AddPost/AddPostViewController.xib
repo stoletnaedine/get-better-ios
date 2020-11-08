@@ -66,7 +66,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Al-Gr6" userLabel="AttachView">
+                        <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Al-Gr6" userLabel="AttachView">
                             <rect key="frame" x="284" y="7.5" width="25" height="25"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO">
@@ -181,11 +181,6 @@
             <point key="canvasLocation" x="137.68115942028987" y="152.44565217391306"/>
         </view>
     </objects>
-    <designables>
-        <designable name="HyS-0w-vzY">
-            <size key="intrinsicContentSize" width="75" height="75"/>
-        </designable>
-    </designables>
     <resources>
         <image name="photo-gallery" width="75" height="75"/>
         <systemColor name="darkTextColor">

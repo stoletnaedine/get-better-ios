@@ -11,6 +11,7 @@ import Lottie
 
 var activityIndicatoriView: UIView?
 var animationView: AnimationView?
+var animationScreenView: UIView?
  
 extension UIViewController {
     
@@ -28,35 +29,39 @@ extension UIViewController {
     
     // MARK: — Activity indicator
     
-    func showActivityIndicator(onView : UIView) {
-        let aiView = UIView.init(frame: UIScreen.main.bounds)
-        aiView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.7)
-        var ai = UIActivityIndicatorView()
-        if #available(iOS 13.0, *) {
-            ai = UIActivityIndicatorView.init(style: .large)
-        }
-        ai.color = .white
-        ai.startAnimating()
-        ai.center = aiView.center
-        
-        DispatchQueue.main.async {
-            aiView.addSubview(ai)
-            onView.addSubview(aiView)
-        }
-        
-        activityIndicatoriView = aiView
-    }
-    
-    func removeActivityIndicator() {
-        DispatchQueue.main.async {
-            activityIndicatoriView?.removeFromSuperview()
-            activityIndicatoriView = nil
-        }
-    }
+//    func showActivityIndicator(onView : UIView) {
+//        let aiView = UIView.init(frame: UIScreen.main.bounds)
+//        aiView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.7)
+//        var ai = UIActivityIndicatorView()
+//        if #available(iOS 13.0, *) {
+//            ai = UIActivityIndicatorView.init(style: .large)
+//        }
+//        ai.color = .white
+//        ai.startAnimating()
+//        ai.center = aiView.center
+//        
+//        DispatchQueue.main.async {
+//            aiView.addSubview(ai)
+//            onView.addSubview(aiView)
+//        }
+//        
+//        activityIndicatoriView = aiView
+//    }
+//    
+//    func removeActivityIndicator() {
+//        DispatchQueue.main.async {
+//            activityIndicatoriView?.removeFromSuperview()
+//            activityIndicatoriView = nil
+//        }
+//    }
     
     // MARK: — Animations
     
-    func showAnimation(name: AnimationName, on view: UIView, size: CGSize? = nil, speed: CGFloat = 1) {
+    func showAnimation(name: AnimationName,
+                       on view: UIView,
+                       whiteScreen: Bool = false,
+                       size: CGSize? = nil,
+                       speed: CGFloat = 1) {
         animationView = AnimationView(name: name.value)
         guard let animationView = animationView else { return }
         var bounds: CGRect = .zero
@@ -71,10 +76,39 @@ extension UIViewController {
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
         animationView.animationSpeed = speed
-        view.addSubview(animationView)
+        
+        if whiteScreen {
+            animationScreenView = UIView.init(frame: UIScreen.main.bounds)
+            guard let animationScreenView = animationScreenView else { return }
+            animationScreenView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+            animationScreenView.addSubview(animationView)
+            view.addSubview(animationScreenView)
+        } else {
+            view.addSubview(animationView)
+        }
         animationView.play(completion: { _ in
             animationView.removeFromSuperview()
+            animationScreenView?.removeFromSuperview()
         })
+    }
+    
+    func stopAnimation() {
+        guard let animationView = animationView else { return }
+        animationView.stop()
+        animationView.removeFromSuperview()
+        
+        guard let animationScreenView = animationScreenView else { return }
+        animationScreenView.removeFromSuperview()
+    }
+    
+    func showLoadingAnimation(on view: UIView) {
+        showAnimation(
+            name: .loadingSuccess,
+            on: view,
+            whiteScreen: true,
+            size: .init(width: 50, height: 50),
+            speed: 2
+        )
     }
     
 }

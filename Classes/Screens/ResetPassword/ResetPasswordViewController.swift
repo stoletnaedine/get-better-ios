@@ -33,18 +33,17 @@ class ResetPasswordViewController: UIViewController {
                 alertService.showErrorMessage(desc: R.string.localizable.emailIsEmpty())
                 return
         }
+        self.showLoadingAnimation(on: self.view)
         
-        self.showActivityIndicator(onView: self.view)
         Auth.auth().sendPasswordReset(withEmail: email, completion: { [weak self] error in
+            guard let self = self else { return }
+            self.stopAnimation()
             
-            self?.removeActivityIndicator()
-            
-            if let error = error,
-                let appError = AppError(firebaseError: error).name {
-                self?.alertService.showErrorMessage(desc: appError)
+            if let error = error, let appError = AppError(firebaseError: error).name {
+                self.alertService.showErrorMessage(desc: appError)
             } else {
-                self?.alertService.showSuccessMessage(desc: R.string.localizable.resetPasswordAlertEmail())
-                self?.dismiss(animated: true, completion: nil)
+                self.alertService.showSuccessMessage(desc: R.string.localizable.resetPasswordAlertEmail())
+                self.dismiss(animated: true, completion: nil)
             }
         })
     }
@@ -60,8 +59,10 @@ class ResetPasswordViewController: UIViewController {
         emailLabel.font = .formLabelFieldFont
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
-        emailTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.authEnterEmail(),
-                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.authEnterEmail(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         resetPasswordView.backgroundColor = .violet
         resetPasswordView.layer.cornerRadius = 5
         resetPasswordButton.clipsToBounds = true

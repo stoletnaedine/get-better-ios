@@ -43,6 +43,7 @@ class EditPostViewController: AddPostViewController {
     
     override func savePost(text: String, sphere: Sphere, photoResult: Photo) {
         guard let post = post, let postId = post.id else { return }
+        
         database.savePost(
             Post(id: postId,
                  text: text,
@@ -55,9 +56,8 @@ class EditPostViewController: AddPostViewController {
         )
         
         DispatchQueue.main.async { [weak self] in
-            self?.removeActivityIndicator()
-            let description = R.string.localizable.postEditSuccess()
-            self?.alertService.showSuccessMessage(desc: description)
+            self?.stopAnimation()
+            self?.alertService.showSuccessMessage(desc: R.string.localizable.postEditSuccess())
             self?.editPostCompletion?()
             self?.dismiss(animated: true, completion: nil)
         }

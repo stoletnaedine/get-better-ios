@@ -29,7 +29,7 @@ class AddPostViewController: UIViewController {
     private let maxSymbolsCount: Int = 300
     private var isPhotoSelected: Bool = false
     
-    var addedPostCompletion: () -> () = {}
+    var addedPostCompletion: VoidClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +65,7 @@ class AddPostViewController: UIViewController {
         
         if let photo = attachButton.imageView?.image, isPhotoSelected {
             dispatchGroup.enter()
-            self.showActivityIndicator(onView: self.view)
+            self.showLoadingAnimation(on: self.view)
             
             storage.uploadPhoto(photo: photo, completion: { [weak self] result in
                 switch result {
@@ -74,7 +74,7 @@ class AddPostViewController: UIViewController {
                     dispatchGroup.leave()
                 case .failure(let error):
                     DispatchQueue.main.async { [weak self] in
-                        self?.removeActivityIndicator()
+                        self?.stopAnimation()
                     }
                     self?.alertService.showErrorMessage(desc: error.localizedDescription)
                     dispatchGroup.leave()
@@ -99,10 +99,10 @@ class AddPostViewController: UIViewController {
         database.savePost(post)
         
         DispatchQueue.main.async { [weak self] in
-            self?.removeActivityIndicator()
+            self?.stopAnimation()
             let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
             self?.alertService.showSuccessMessage(desc: description)
-            self?.addedPostCompletion()
+            self?.addedPostCompletion?()
             self?.dismiss(animated: true, completion: nil)
         }
     }

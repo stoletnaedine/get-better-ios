@@ -28,8 +28,7 @@ class EditProfileViewController: UIViewController {
     let user = Auth.auth().currentUser
     let storage = FirebaseStorage()
     let alertService: AlertService = AlertServiceDefault()
-    
-    var editProfileCompletion: VoidClosure = {}
+    var editProfileCompletion: VoidClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,18 +47,17 @@ class EditProfileViewController: UIViewController {
     
     @objc func saveProfile() {
         guard let user = user else { return }
-        
         let dispatchGroup = DispatchGroup()
+        self.showLoadingAnimation(on: self.view)
         
         if let newAvatar = avatarImageView.image {
             dispatchGroup.enter()
-            self.showActivityIndicator(onView: self.view)
             storage.uploadAvatar(photo: newAvatar, completion: { [weak self] result in
                 switch result {
                 case .success(let url):
                     let changeRequest = user.createProfileChangeRequest()
                     changeRequest.photoURL = url
-                    changeRequest.commitChanges(completion: { error in
+                    changeRequest.commitChanges(completion: { [weak self] error in
                         if let error = error {
                             self?.alertService.showErrorMessage(desc: error.localizedDescription)
                         }
@@ -73,8 +71,7 @@ class EditProfileViewController: UIViewController {
         }
         
         if let newName = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            !newName.isEmpty,
-            newName != user.displayName {
+            !newName.isEmpty, newName != user.displayName {
             dispatchGroup.enter()
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = newName
@@ -86,11 +83,8 @@ class EditProfileViewController: UIViewController {
             })
         }
         
-        if let newPassword = passwordTextField.text,
-            !newPassword.isEmpty {
-            
+        if let newPassword = passwordTextField.text, !newPassword.isEmpty {
             dispatchGroup.enter()
-            
             user.updatePassword(to: newPassword, completion: { [weak self] error in
                 if let error = error {
                     self?.alertService.showErrorMessage(desc: error.localizedDescription)
@@ -102,11 +96,8 @@ class EditProfileViewController: UIViewController {
         }
         
         if let newEmail = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            !newEmail.isEmpty,
-            newEmail != user.email {
-            
+            !newEmail.isEmpty, newEmail != user.email {
             dispatchGroup.enter()
-            
             user.updateEmail(to: newEmail, completion: { [weak self] error in
                 dispatchGroup.leave()
                 if let error = error {
@@ -116,10 +107,10 @@ class EditProfileViewController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
-            self?.removeActivityIndicator()
+            self?.stopAnimation()
             self?.navigationController?.popViewController(animated: true)
             self?.alertService.showSuccessMessage(desc: R.string.localizable.profileSuccessEdit())
-            self?.editProfileCompletion()
+            self?.editProfileCompletion?()
         })
     }
     
@@ -178,16 +169,20 @@ class EditProfileViewController: UIViewController {
         
         nameTextField.borderStyle = .none
         nameTextField.font = .formFieldFont
-        nameTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterName(),
-                                                                 attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        nameTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.profileEnterName(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         emailLabel.text = R.string.localizable.profileEmail()
         emailLabel.textColor = .grey
         emailLabel.font = .formLabelFieldFont
         
         emailTextField.borderStyle = .none
         emailTextField.font = .formFieldFont
-        emailTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterEmail(),
-                                                                  attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.profileEnterEmail(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         
         passwordLabel.text = R.string.localizable.profilePassword()
         passwordLabel.textColor = .grey
@@ -196,8 +191,10 @@ class EditProfileViewController: UIViewController {
         passwordTextField.placeholder = R.string.localizable.profileEnterPassword()
         passwordTextField.borderStyle = .none
         passwordTextField.font = .formFieldFont
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: R.string.localizable.profileEnterPassword(),
-                                                                     attributes: NSAttributedString.formFieldPlaceholderAttributes)
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: R.string.localizable.profileEnterPassword(),
+            attributes: NSAttributedString.formFieldPlaceholderAttributes
+        )
         noticeLabel.font = .formNoticeFont
         noticeLabel.textColor = .grey
         noticeLabel.text = R.string.localizable.profileWarning()
