@@ -41,7 +41,6 @@ class ArticleViewController: UIViewController {
         
         if let navBarTitleView = article.titleView {
             let tap = UITapGestureRecognizer(target: self, action: #selector(startAnimation))
-            tap.numberOfTapsRequired = Constants.numberOfTapsRequired
             navBarTitleView.isUserInteractionEnabled = true
             navBarTitleView.addGestureRecognizer(tap)
             navigationItem.titleView = navBarTitleView
@@ -58,14 +57,6 @@ class ArticleViewController: UIViewController {
         textView.textContainerInset = .zero
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.tintColor = .violet
-    }
-    
-}
-
-extension ArticleViewController {
-    
-    private enum Constants {
-        static let numberOfTapsRequired = 5
     }
     
 }

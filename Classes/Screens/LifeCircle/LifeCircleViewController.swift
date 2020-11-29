@@ -61,6 +61,7 @@ class LifeCircleViewController: UIViewController {
         setupRefreshControl()
         setupChartViewTap()
         setupBarButton()
+        loadAndShowData(animate: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,7 +147,7 @@ class LifeCircleViewController: UIViewController {
         metricsTableView.refreshControl = refreshControl
     }
     
-    @objc private func loadAndShowData() {
+    @objc private func loadAndShowData(animate: Bool = false) {
         lifeCircleService.loadUserData(completion: { [weak self] userData in
             guard let userData = userData else { return }
             guard let startSphereMetrics = userData.start else { return }
@@ -155,14 +156,14 @@ class LifeCircleViewController: UIViewController {
             self?.currentSphereMetrics = currentSphereMetrics
             self?.posts = userData.posts
             DispatchQueue.main.async { [weak self] in
-                self?.reloadViews()
+                self?.reloadViews(animate: animate)
                 self?.refreshControl.endRefreshing()
             }
         })
     }
     
-    private func reloadViews() {
-        setupChartView(animate: true)
+    private func reloadViews(animate: Bool) {
+        setupChartView(animate: animate)
         metricsTableView.reloadData()
     }
     
