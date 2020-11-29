@@ -78,14 +78,17 @@ class LifeCircleServiceDefault: LifeCircleService {
             spheresInPosts.forEach { sphere in
                 if let sphere = sphere?.rawValue,
                     let value = currentSphereMetricsValues[sphere],
-                    value <= maxValue {
+                    value < maxValue {
                     let newValue = (value * multiplier + diffValue * multiplier) / multiplier
                     currentSphereMetricsValues[sphere] = newValue
                 }
             }
             
             currentSphereMetricsValues.forEach { sphere, value in
-                currentSphereMetricsValues[sphere] = value.rounded(toPlaces: 1)
+                let newValue = value.rounded(toPlaces: 1) > maxValue
+                    ? maxValue
+                    : value.rounded(toPlaces: 1)
+                currentSphereMetricsValues[sphere] = newValue
             }
             
             self.currentSphereMetrics = SphereMetrics(values: currentSphereMetricsValues)
