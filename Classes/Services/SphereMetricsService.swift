@@ -27,16 +27,10 @@ class SphereMetricsServiceDefault: SphereMetricsService {
             .filter({ $0.sphere == sphere })
             .sorted(by: { $0.timestamp ?? 0 < $1.timestamp ?? 0 })
         
-        var maxValuePredictionDate = ""
-        if currentValue < Properties.maxSphereValue {
-            let date = getMaxValuePredictionDate(spherePosts: spherePosts, startValue: startValue)
-            maxValuePredictionDate = "\n\n💻 Суперкомпьютер даёт прогноз: при том же темпе ты достигнешь десяти баллов \(date).\n\n"
-        }
-        
         let postsCount = spherePosts.count
         
-        let rating = mostLessPopularSphere(posts: userData.posts)
         var isPopularOrNot = ""
+        var warning = ""
         
         if currentValue == Properties.maxSphereValue {
             isPopularOrNot = "💜 Невероятно!\nСфера \(sphere.icon)\(sphere.name) проработана на максимум.\nТеперь можешь обратить внимание на другие сферы.\n\n"
@@ -44,15 +38,25 @@ class SphereMetricsServiceDefault: SphereMetricsService {
             isPopularOrNot = "🚀 Отлично!\nТы прокачиваешь \(sphere.icon)\(sphere.name) и это заметно.\n\n"
         } else {
             isPopularOrNot = "😔 Ой! Если ты не фиксируешь события, значение сферы будет понемногу уменьшаться.\n\n"
+            warning = "\n\n❓ Почему текущее значение может быть меньше начального?\nВ приложении работает хитрый алгоритм, который уменьшает баллы за бездействие. Всё как в жизни: если мы забрасываем дело, его навык со временем теряется. Лучший способ исправить это — начать писать в дневник."
         }
+        
+        let rating = mostLessPopularSphere(posts: userData.posts)
         if sphere == rating.mostPopularSphere {
-            isPopularOrNot = "🤩 Потрясающе! Ты уделяешь сфере \(sphere.icon)\(sphere.name) больше всего внимания!\n\n"
+            isPopularOrNot = "🤩 Потрясающе! Ты уделяешь сфере \(sphere.icon)\(sphere.name) больше всего внимания.\n\n"
         }
         if sphere == rating.lessPopularSphere {
             isPopularOrNot = "❗️ Обрати внимание. Ты совсем не занимаешься этой сферой (или забываешь писать о ней).\n\n"
         }
         
-        let text = "\(isPopularOrNot)📈 Немного статистики:\n🌘 Начальное значение — \(startValue)\n🌖 Текущее значение — \(currentValue)\n\n✍️ Написано постов — \(postsCount)\(maxValuePredictionDate)"
+        var maxValuePredictionDate = ""
+        if currentValue < Properties.maxSphereValue {
+            if let date = getMaxValuePredictionDate(spherePosts: spherePosts, startValue: startValue) {
+                maxValuePredictionDate = "\n\n💻 Суперкомпьютер даёт прогноз: при том же темпе ты достигнешь десяти баллов \(date).\n\n"
+            }
+        }
+        
+        let text = "\(isPopularOrNot)✍️ Написано постов — \(postsCount)\n\n🌘 Начальное значение — \(startValue)\n🌖 Текущее значение — \(currentValue)\(warning)\(maxValuePredictionDate)"
         
         return text
     }
@@ -72,8 +76,9 @@ class SphereMetricsServiceDefault: SphereMetricsService {
         }
     }
     
-    private func getMaxValuePredictionDate(spherePosts: [Post], startValue: Double) -> String {
-        guard let userCreationDate = lifeCircleService.userCreationDate() else { return "" }
+    private func getMaxValuePredictionDate(spherePosts: [Post], startValue: Double) -> String? {
+        guard !spherePosts.isEmpty,
+              let userCreationDate = lifeCircleService.userCreationDate() else { return nil }
         let userCreationTimestamp = Int64(userCreationDate.timeIntervalSince1970)
         let currentTimestamp = Date.currentTimestamp
         let diffTimestamp = currentTimestamp - userCreationTimestamp

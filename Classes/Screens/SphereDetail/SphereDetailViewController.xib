@@ -45,8 +45,8 @@
                         <action selector="cancelButtonDidTap:" destination="-1" eventType="touchUpInside" id="Sgg-tu-l8d"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsP-c4-KX3">
-                    <rect key="frame" x="20" y="165.5" width="374" height="676.5"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsP-c4-KX3">
+                    <rect key="frame" x="20" y="165.5" width="374" height="696.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" systemColor="labelColor"/>
                     <attributedString key="attributedText">
@@ -55,7 +55,7 @@
                             <attributes>
                                 <color key="NSColor" systemColor="labelColor"/>
                                 <font key="NSFont" metaFont="system" size="16"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
                     </attributedString>
@@ -66,7 +66,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fXa-px-Xzn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="07R-ge-gA0"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fsP-c4-KX3" secondAttribute="bottom" constant="20" id="6PV-b6-hhv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fsP-c4-KX3" secondAttribute="bottom" id="6PV-b6-hhv"/>
                 <constraint firstItem="nh2-qN-pHk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="9LR-FV-6Ef"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fXa-px-Xzn" secondAttribute="trailing" constant="20" id="Pb4-WL-GmZ"/>
                 <constraint firstItem="Nwm-Ht-GLd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="YYP-KV-B6z"/>
