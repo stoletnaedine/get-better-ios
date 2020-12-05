@@ -25,8 +25,8 @@ class PostMapper {
     func map(id: Any, entity: NSDictionary?) -> Post {
         var maybeSphere: Sphere?
         if let sphereRawValue = entity?[PostField.sphere.rawValue] as? String,
-            let sphere = Sphere(rawValue: sphereRawValue) {
-             maybeSphere = sphere
+           let sphere = Sphere(rawValue: sphereRawValue) {
+            maybeSphere = sphere
         }
         
         return Post(id: id as? String ?? "",

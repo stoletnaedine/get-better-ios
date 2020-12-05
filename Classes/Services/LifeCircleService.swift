@@ -13,6 +13,8 @@ protocol LifeCircleService {
     func loadUserData(completion: @escaping (UserData?) -> Void)
     func averageCurrentSphereValue() -> Double
     func daysFromUserCreation() -> Int
+    func calcPrescriptionRate() -> Double
+    func userCreationDate() -> Date?
 }
 
 class LifeCircleServiceDefault: LifeCircleService {
@@ -59,11 +61,7 @@ class LifeCircleServiceDefault: LifeCircleService {
             }
             var currentSphereMetricsValues = startSphereMetrics.values
 
-            // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 100 дней.
-            let basePrescriptionRate: Double = 1.0
-            let decrementRate: Double = 0.1
-            let daysFromUserCreation = self.daysFromUserCreation()
-            let prescriptionRate = basePrescriptionRate - ((Double(daysFromUserCreation) / 100) * decrementRate)
+            let prescriptionRate = self.calcPrescriptionRate()
             
             currentSphereMetricsValues.forEach { sphere, value in
                 currentSphereMetricsValues[sphere] = value * prescriptionRate
@@ -71,7 +69,7 @@ class LifeCircleServiceDefault: LifeCircleService {
             
             // Прибавляем баллы за посты
             let diffValue: Double = 0.1
-            let maxValue: Double = 10.0
+            let maxValue: Double = Properties.maxSphereValue
             let multiplier: Double = 10.0
             
             spheresInPosts.forEach { sphere in
@@ -95,8 +93,22 @@ class LifeCircleServiceDefault: LifeCircleService {
         })
     }
     
+    func calcPrescriptionRate() -> Double {
+        // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 100 дней.
+        let basePrescriptionRate: Double = 1.0
+        let decrementRate: Double = 0.1
+        let daysForDecrement: Double = 100
+        let daysFromUserCreation = self.daysFromUserCreation()
+        let prescriptionRate = basePrescriptionRate - ((Double(daysFromUserCreation) / daysForDecrement) * decrementRate)
+        return prescriptionRate
+    }
+    
+    func userCreationDate() -> Date? {
+        return Auth.auth().currentUser?.metadata.creationDate
+    }
+    
     func daysFromUserCreation() -> Int {
-        guard let userCreationDate = Auth.auth().currentUser?.metadata.creationDate else { return 0 }
+        guard let userCreationDate = self.userCreationDate() else { return 0 }
         let daysFromUserCreation = Date.diffInDays(from: userCreationDate)
         return daysFromUserCreation
     }

@@ -43,9 +43,6 @@ class LifeCircleViewController: UIViewController {
     private let tipStorage = TipStorage()
     
     private var userData: UserData?
-    private var startSphereMetrics: SphereMetrics?
-    private var currentSphereMetrics: SphereMetrics?
-    private var posts: [Post] = []
     
     private var isCurrentDataVisible = true
     private var isValuesVisible = false
@@ -151,13 +148,8 @@ class LifeCircleViewController: UIViewController {
     @objc private func loadAndShowData(animate: Bool = false) {
         lifeCircleService.loadUserData(completion: { [weak self] userData in
             guard let self = self,
-                  let userData = userData,
-                  let startSphereMetrics = userData.start,
-                  let currentSphereMetrics = userData.current else { return }
+                  let userData = userData else { return }
             self.userData = userData
-            self.startSphereMetrics = startSphereMetrics
-            self.currentSphereMetrics = currentSphereMetrics
-            self.posts = userData.posts
             
             DispatchQueue.main.async { [weak self] in
                 self?.reloadViews(animate: animate)
@@ -184,8 +176,8 @@ class LifeCircleViewController: UIViewController {
         xAxis.axisMaximum = 9
         xAxis.labelFont = .systemFont(ofSize: Constants.sphereIconSize)
         
-        guard let startSphereMetrics = startSphereMetrics else { return }
-        guard let currentSphereMetrics = currentSphereMetrics else { return }
+        guard let startSphereMetrics = userData?.start else { return }
+        guard let currentSphereMetrics = userData?.current else { return }
         
         let titles = startSphereMetrics.sortedValues()
             .map { Sphere(rawValue: $0.key)?.icon ?? "" }
@@ -314,7 +306,7 @@ class DataSetValueFormatter: IValueFormatter {
 extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func getSphereValue(index: Int) -> SphereValue? {
-        let sphereValueDict = currentSphereMetrics?.sortedValues()[index]
+        let sphereValueDict = userData?.current?.sortedValues()[index]
         let sphereRawValue = sphereValueDict?.key ?? ""
         guard let sphere = Sphere(rawValue: sphereRawValue) else { return nil }
         let value = sphereValueDict?.value ?? 0
@@ -322,7 +314,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let rowsCount = currentSphereMetrics?.values.count {
+        if let rowsCount = userData?.current?.values.count {
             return rowsCount + 1 // Для ячейки Common Metrics
         } else {
             return 0
@@ -335,7 +327,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
                                                      for: indexPath) as! CommonMetricsTableViewCell
             let average = lifeCircleService.averageCurrentSphereValue()
             let daysFromUserCreation = lifeCircleService.daysFromUserCreation()
-            cell.fillCell(viewModel: CommonMetricsViewModel(posts: posts.count,
+            cell.fillCell(viewModel: CommonMetricsViewModel(posts: userData?.posts.count ?? .zero,
                                                             average: average,
                                                             days: daysFromUserCreation))
             cell.selectionStyle = .none

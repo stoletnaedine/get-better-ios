@@ -95,7 +95,7 @@ class AchievementServiceDefault: AchievementService {
     
     private func getMaxValueAchievements(currentSphereMetrics: SphereMetrics) -> [Achievement] {
         let maxValueSphereRawValues = currentSphereMetrics.values
-            .filter { $0.value == 10.0 }
+            .filter { $0.value == Properties.maxSphereValue }
             .map { $0.key }
         
         if maxValueSphereRawValues.isEmpty {
