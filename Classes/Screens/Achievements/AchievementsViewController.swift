@@ -17,6 +17,7 @@ final class AchievementsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = R.string.localizable.achievementsTitle()
         addSubviews()
         setupTableView()
         makeConstraints()
@@ -24,10 +25,8 @@ final class AchievementsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = R.string.localizable.achievementsLoading()
         loadData(completion: { [weak self] in
             DispatchQueue.main.async {
-                self?.title = R.string.localizable.achievementsTitle()
                 self?.tableView.reloadData()
             }
         })
@@ -35,19 +34,18 @@ final class AchievementsViewController: UIViewController {
     
     private func loadData(completion: @escaping VoidClosure) {
         lifeCircleService.loadUserData { [weak self] userData in
+            guard let self = self else { return }
             guard let userData = userData,
                   let startSphereMetrics = userData.start,
-                  let currentSphereMetrics = userData.current else {
-                completion()
-                return
-            }
-            if let achievements = self?.achievementService.calcAchievements(
+                  let currentSphereMetrics = userData.current else { return }
+            
+            let achievements = self.achievementService.calcAchievements(
                 posts: userData.posts,
                 startSphereMetrics: startSphereMetrics,
                 currentSphereMetrics: currentSphereMetrics
-            ) {
-                self?.achievements = achievements
-            }
+            )
+            
+            self.achievements = achievements
             completion()
         }
     }

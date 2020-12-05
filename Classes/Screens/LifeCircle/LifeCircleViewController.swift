@@ -42,6 +42,7 @@ class LifeCircleViewController: UIViewController {
     private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
     private let tipStorage = TipStorage()
     
+    private var userData: UserData?
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
@@ -149,12 +150,15 @@ class LifeCircleViewController: UIViewController {
     
     @objc private func loadAndShowData(animate: Bool = false) {
         lifeCircleService.loadUserData(completion: { [weak self] userData in
-            guard let userData = userData else { return }
-            guard let startSphereMetrics = userData.start else { return }
-            guard let currentSphereMetrics = userData.current else { return }
-            self?.startSphereMetrics = startSphereMetrics
-            self?.currentSphereMetrics = currentSphereMetrics
-            self?.posts = userData.posts
+            guard let self = self,
+                  let userData = userData,
+                  let startSphereMetrics = userData.start,
+                  let currentSphereMetrics = userData.current else { return }
+            self.userData = userData
+            self.startSphereMetrics = startSphereMetrics
+            self.currentSphereMetrics = currentSphereMetrics
+            self.posts = userData.posts
+            
             DispatchQueue.main.async { [weak self] in
                 self?.reloadViews(animate: animate)
                 self?.refreshControl.endRefreshing()
@@ -358,6 +362,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         guard let sphereValue = getSphereValue(index: sphereIndex) else { return }
         let sphereDetailViewController = SphereDetailViewController()
         sphereDetailViewController.sphereValue = sphereValue
+        sphereDetailViewController.userData = userData
         present(sphereDetailViewController, animated: true, completion: nil)
     }
     
