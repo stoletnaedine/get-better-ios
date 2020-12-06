@@ -20,23 +20,26 @@ class SphereMetricsServiceDefault: SphereMetricsService {
         guard let startAll = userData.start,
               let startValue = startAll.values[sphere.rawValue],
               let currentAll = userData.current,
-              let currentValue = currentAll.values[sphere.rawValue],
-              !userData.posts.isEmpty else { return "" }
+              let currentValue = currentAll.values[sphere.rawValue] else { return "" }
         
         let spherePosts = userData.posts
             .filter({ $0.sphere == sphere })
             .sorted(by: { $0.timestamp ?? 0 < $1.timestamp ?? 0 })
         
         let postsCount = spherePosts.count
-        
         var isPopularOrNot = ""
         var warning = ""
+        let postCountResult = postsCount == .zero
+            ? "⚠️ В этой сфере у тебя еще нет записей в дневник."
+            : "✍️ Написано постов — \(postsCount)"
+        
+        let values = "\n\n🌘 Начальное значение — \(startValue)\n🌖 Текущее значение — \(currentValue)"
         
         if currentValue == Properties.maxSphereValue {
             isPopularOrNot = "💜 Невероятно!\nСфера \(sphere.icon)\(sphere.name) проработана на максимум.\nТеперь можешь обратить внимание на другие сферы.\n\n"
         } else if currentValue > startValue {
             isPopularOrNot = "🚀 Отлично!\nТы прокачиваешь \(sphere.icon)\(sphere.name) и это заметно.\n\n"
-        } else {
+        } else if currentValue < startValue {
             isPopularOrNot = "😔 Ой! Если ты не фиксируешь события, значение сферы будет понемногу уменьшаться.\n\n"
             warning = "\n\n❓ Почему текущее значение может быть меньше начального?\nВ приложении работает хитрый алгоритм, который уменьшает баллы за бездействие. Всё как в жизни: если мы забрасываем дело, его навык со временем теряется. Лучший способ исправить это — начать писать в дневник."
         }
@@ -50,15 +53,13 @@ class SphereMetricsServiceDefault: SphereMetricsService {
         }
         
         var maxValuePredictionDate = ""
-        if currentValue < Properties.maxSphereValue {
+        if currentValue < Properties.maxSphereValue && postsCount > 2 {
             if let date = getMaxValuePredictionDate(spherePosts: spherePosts, startValue: startValue) {
-                maxValuePredictionDate = "\n\n💻 Суперкомпьютер даёт прогноз: при том же темпе ты достигнешь десяти баллов \(date).\n\n"
+                maxValuePredictionDate = "\n\n💻 Суперкомпьютер даёт прогноз: при том же темпе ты достигнешь десяти баллов \(date)"
             }
         }
         
-        let text = "\(isPopularOrNot)✍️ Написано постов — \(postsCount)\n\n🌘 Начальное значение — \(startValue)\n🌖 Текущее значение — \(currentValue)\(warning)\(maxValuePredictionDate)"
-        
-        return text
+        return "\(isPopularOrNot)\(postCountResult)\(values)\(warning)\(maxValuePredictionDate)"
     }
     
     private func mostLessPopularSphere(posts: [Post]) -> (mostPopularSphere: Sphere?, lessPopularSphere: Sphere?) {

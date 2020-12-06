@@ -9,7 +9,7 @@
 // MARK: Common
 
 "Success" = "Успешно";
-"Share.text" = "🚀 Советы дня в приложении GetBetter #getbetterapp";
+"Share.text" = "💜 Советы дня в приложении GetBetter #getbetterapp";
 
 // MARK: LifeCircle
 
@@ -18,17 +18,16 @@
 "LifeCircle.metrics" = "Метрики";
 "LifeCircle.current" = "Текущее";
 "LifeCircle.start" = "Начальное";
-"LifeCircle.averageCurrent" = "Колесо жизненного баланса в среднем: %@";
 
 // MARK: Common Metrics
 
-"Common.events" = "событий";
+"Common.events" = "записей";
 "Common.average" = "средний балл";
 "Common.days" = "дней";
 
 // MARK: Journal
 
-"Journal.loading" = "Загружаю 📲";
+"Journal.loading" = "Загружаю";
 "Journal.deletedPost" = "Пост удалён";
 "Journal.placeholder" = "Здесь будут посты твоего дневника. Каждый из них будет прокачивать колесо жизни. Попробуй добавить первую запись.";
 "Journal.tipOfTheDay" = "Совет дня";
@@ -40,7 +39,7 @@
 // MARK: Tips
 
 "Tips.title" = "Мои советы дня";
-"Tips.loading" = "Ищу лайки 💜";
+"Tips.loading" = "Ищу лайки";
 
 // MARK: NoInternet
 
@@ -105,7 +104,7 @@
 "Profile.enterEmail" = "Введи E-mail";
 "Profile.password" = "Пароль";
 "Profile.enterPassword" = "Введи новый пароль";
-"Profile.loadAvatar" = "Выбрать\nаватар";
+"Profile.loadAvatar" = "Загрузить\nаватар";
 "Profile.warning" = "После смены E-mail необходимо будет заново войти в приложение";
 "Profile.loading" = "Подождите, идет загрузка";
 "Profile.successEdit" = "Профиль обновлён";
