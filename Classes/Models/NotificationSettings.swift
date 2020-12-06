@@ -1,5 +1,5 @@
 //
-//  FBNotification.swift
+//  NotificationSettings.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 06.12.2020.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct FBNotification {
-    let topic: NotificationTopic
-    let isSubscribe: Bool
+struct NotificationSettings {
+    let daily: Bool
+    let tipOfTheDay: Bool
 }
 
 enum NotificationTopic: String {

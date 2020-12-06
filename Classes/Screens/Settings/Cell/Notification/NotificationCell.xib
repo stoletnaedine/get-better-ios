@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="NotificationCell" customModule="GetBetter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDA-tS-TME">
+                        <rect key="frame" x="261" y="10" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="SKy-u1-xDW"/>
+                            <constraint firstAttribute="height" constant="31" id="zWJ-Gs-sJ2"/>
+                        </constraints>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yql-6b-IVO">
+                        <rect key="frame" x="20" y="35.5" width="221" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enT-Cw-dLr">
+                        <rect key="frame" x="20" y="10" width="221" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ZDA-tS-TME" firstAttribute="leading" secondItem="Yql-6b-IVO" secondAttribute="trailing" constant="20" id="1Fj-Gm-Pbn"/>
+                    <constraint firstAttribute="trailing" secondItem="ZDA-tS-TME" secondAttribute="trailing" constant="10" id="1Oo-ks-t8I"/>
+                    <constraint firstAttribute="bottom" secondItem="ZDA-tS-TME" secondAttribute="bottom" constant="20" id="CZm-Zr-U7w"/>
+                    <constraint firstItem="Yql-6b-IVO" firstAttribute="top" secondItem="enT-Cw-dLr" secondAttribute="bottom" constant="5" id="Eiw-Bf-7Yh"/>
+                    <constraint firstItem="ZDA-tS-TME" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="UPw-1G-88R"/>
+                    <constraint firstItem="ZDA-tS-TME" firstAttribute="leading" secondItem="enT-Cw-dLr" secondAttribute="trailing" constant="20" id="cwZ-IM-Pnf"/>
+                    <constraint firstItem="enT-Cw-dLr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="fTV-YK-0d7"/>
+                    <constraint firstItem="enT-Cw-dLr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="gfe-0W-QOi"/>
+                    <constraint firstItem="Yql-6b-IVO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="m70-Bc-bMk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="Yql-6b-IVO" id="d0U-tX-7V8"/>
+                <outlet property="subscribeSwitch" destination="ZDA-tS-TME" id="p6g-cD-VgP"/>
+                <outlet property="titleLabel" destination="enT-Cw-dLr" id="5JG-1L-zQi"/>
+            </connections>
+            <point key="canvasLocation" x="89.855072463768124" y="136.60714285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

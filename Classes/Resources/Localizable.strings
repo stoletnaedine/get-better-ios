@@ -190,8 +190,10 @@
 "Settings.logout.alert.question" = "Выйти из GetBetter?";
 "Settings.logout.alert.yes" = "Выйти";
 "Settings.logout.alert.no" = "Нет";
-"Settings.Push.Daily" = "Напоминать вести дневник";
-"Settings.Push.Tip" = "Утренние советы дня";
+"Settings.Push.Daily.Title" = "Напоминать вести дневник";
+"Settings.Push.Daily.Description" = "Ежедневно в 19:00 МСК";
+"Settings.Push.Tip.Title" = "Утренние советы дня";
+"Settings.Push.Tip.Description" = "Ежедневно в 9:00 МСК";
 "Settings.Notification.Unsubscribe" = "Ты больше не будешь получать push-уведомления";
 "Settings.Notification.Subscribe" = "Ура! Подписка на push-уведомления 😍";
 "Settings.Logout.Alert.No.Email" = "Не указан e-mail. Ты больше не сможешь войти в GetBetter под этим профилем. Данные будут утеряны 😔";

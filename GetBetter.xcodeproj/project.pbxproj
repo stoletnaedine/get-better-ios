@@ -49,8 +49,11 @@
 		C35D83732511D88B000C565E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D83722511D88B000C565E /* UserDefaultsService.swift */; };
 		C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35EBD92244DE870004593CC /* GoogleService-Info.plist */; };
 		C3635183257B809900DA6713 /* SphereMetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3635182257B809900DA6713 /* SphereMetricsService.swift */; };
-		C3635188257CD7B700DA6713 /* FBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3635187257CD7B700DA6713 /* FBNotification.swift */; };
+		C3635188257CD7B700DA6713 /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3635187257CD7B700DA6713 /* NotificationSettings.swift */; };
 		C363518C257CD83B00DA6713 /* NotificationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363518B257CD83B00DA6713 /* NotificationMapper.swift */; };
+		C36351CE257D336300DA6713 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36351CC257D336300DA6713 /* NotificationCell.swift */; };
+		C36351CF257D336300DA6713 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36351CD257D336300DA6713 /* NotificationCell.xib */; };
+		C36351D3257D353600DA6713 /* NotificationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36351D2257D353600DA6713 /* NotificationCellViewModel.swift */; };
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
 		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
@@ -175,8 +178,11 @@
 		C35D83722511D88B000C565E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		C35EBD92244DE870004593CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3635182257B809900DA6713 /* SphereMetricsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetricsService.swift; sourceTree = "<group>"; };
-		C3635187257CD7B700DA6713 /* FBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBNotification.swift; sourceTree = "<group>"; };
+		C3635187257CD7B700DA6713 /* NotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
 		C363518B257CD83B00DA6713 /* NotificationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMapper.swift; sourceTree = "<group>"; };
+		C36351CC257D336300DA6713 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		C36351CD257D336300DA6713 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		C36351D2257D353600DA6713 /* NotificationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellViewModel.swift; sourceTree = "<group>"; };
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -436,6 +442,15 @@
 			path = Tip;
 			sourceTree = "<group>";
 		};
+		C36351CB257D332900DA6713 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				C36351CC257D336300DA6713 /* NotificationCell.swift */,
+				C36351CD257D336300DA6713 /* NotificationCell.xib */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		C3724EC423AFABD000D49AD6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,7 +518,8 @@
 				6E6A21792466C6FB00D8AC68 /* Article.swift */,
 				C33722A9254EB5C200191785 /* JournalSection.swift */,
 				C38158302556C28E0005C16E /* AnimationName.swift */,
-				C3635187257CD7B700DA6713 /* FBNotification.swift */,
+				C3635187257CD7B700DA6713 /* NotificationSettings.swift */,
+				C36351D2257D353600DA6713 /* NotificationCellViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -711,6 +727,7 @@
 		F14956856967235ACDF036FC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C36351CB257D332900DA6713 /* Notification */,
 				F14954B63719E06420C4F676 /* Profile */,
 			);
 			path = Cell;
@@ -855,6 +872,7 @@
 				F14950603E4BBFAB23440180 /* 7.png in Resources */,
 				C381582C2556BEBD0005C16E /* 15046-spark-animation.json in Resources */,
 				F14954FEAEF05672B805215A /* 8.png in Resources */,
+				C36351CF257D336300DA6713 /* NotificationCell.xib in Resources */,
 				F14955EA34AE8AA776A7C8ED /* 2.png in Resources */,
 				F1495D5ECDF0B97F424E8224 /* 5.png in Resources */,
 				F1495CCF35CE078ED01A9258 /* 1.png in Resources */,
@@ -950,10 +968,11 @@
 				C38158312556C28E0005C16E /* AnimationName.swift in Sources */,
 				C34434F824CEBD880045F1BD /* CancelButton.swift in Sources */,
 				C35D8361250D40E5000C565E /* TipViewController.swift in Sources */,
-				C3635188257CD7B700DA6713 /* FBNotification.swift in Sources */,
+				C3635188257CD7B700DA6713 /* NotificationSettings.swift in Sources */,
 				C392971F247FAE04000340DC /* PostMapper.swift in Sources */,
 				C38689EB2520FE9500BE9851 /* EditPostViewController.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
+				C36351CE257D336300DA6713 /* NotificationCell.swift in Sources */,
 				C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */,
 				C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */,
 				C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */,
@@ -1001,6 +1020,7 @@
 				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
 				C30FEE4D2553C6AA00CC84B9 /* TipsTableViewController.swift in Sources */,
+				C36351D3257D353600DA6713 /* NotificationCellViewModel.swift in Sources */,
 				6EA85199244F7E8F00D40E14 /* Date.swift in Sources */,
 				C3ED5A2A23AFBF1300C7A492 /* LifeCircleViewController.swift in Sources */,
 				F1495A2BAA0794DBE208648C /* UI+SwiftEntryKit.swift in Sources */,

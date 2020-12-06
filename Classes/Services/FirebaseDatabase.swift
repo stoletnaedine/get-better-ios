@@ -18,8 +18,8 @@ protocol GBDatabase {
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
     func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics, completion: VoidClosure?)
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
-    func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool)
-    func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
+    func saveNotificationSettings(_ settings: NotificationSettings)
+    func getNotificationSettings(completion: @escaping (NotificationSettings) -> Void)
     func getTipLikeIds(completion: @escaping (Result<[Int], AppError>) -> Void)
     func saveTipLike(id: Int)
     func deleteTipLike(id: Int)
@@ -149,26 +149,30 @@ class FirebaseDatabase: GBDatabase {
         }
     }
     
-    func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool) {
+    func saveNotificationSettings(_ settings: NotificationSettings) {
         guard let ref = currentUserPath() else { return }
+        let mapper = NotificationMapper()
         
         ref
             .child(Constants.notificationsPath)
-            .setValue([topic.rawValue : subscribe])
+            .setValue(mapper.map(settings: settings))
     }
     
-    func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void) {
+    func getNotificationSettings(completion: @escaping (NotificationSettings) -> Void) {
         guard let ref = currentUserPath() else { return }
+        let mapper = NotificationMapper()
         
         ref
             .child(Constants.notificationsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
                 let value = snapshot.value as? NSDictionary
-                if let isSubscribe = value?[topic.rawValue] as? Bool {
-                    completion(isSubscribe)
-                } else {
-                    completion(nil)
-                }
+                let settings = mapper.map(entity: value)
+                completion(settings)
+//                if let isSubscribe = value?[topic.rawValue] as? Bool {
+//                    completion(isSubscribe)
+//                } else {
+//                    completion(nil)
+//                }
             })
     }
     

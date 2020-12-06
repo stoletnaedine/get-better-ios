@@ -19,7 +19,7 @@ class SettingsViewController: UIViewController {
         static let profileNibName = R.nib.profileCell.name
     }
     
-    let presenter: SettingsPresenter = SettingsPresenterDefault()
+//    let presenter: SettingsPresenter = SettingsPresenterDefault()
     var profile: Profile?
     var tableSections: [SettingsSection] = []
     let refreshControl = UIRefreshControl()
@@ -53,6 +53,8 @@ class SettingsViewController: UIViewController {
     private func setupTableView() {
         tableView.register(UINib(nibName: Constants.profileNibName, bundle: nil),
                            forCellReuseIdentifier: Constants.profileCellId)
+        tableView.register(UINib(nibName: "NotificationCell", bundle: nil),
+                           forCellReuseIdentifier: "NotificationCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -119,10 +121,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryType = .disclosureIndicator
             return cell
         case .notifications:
-            // TODO: сделать нормально
-            guard let topic = NotificationTopic(rawValue: section.cells[indexPath.row].title ?? "")
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell") as? NotificationCell
                 else { return UITableViewCell() }
-            return presenter.createPushNotifyCell(topic: topic)
+            cell.configure(model: .init(
+                            title: section.cells[indexPath.row].title ?? "",
+                            description: section.cells[indexPath.row].subTitle ?? "",
+                            isOn: true))
+            cell.selectionStyle = .none
+            return cell
         case .aboutApp:
             let cell = UITableViewCell()
             cell.textLabel?.text = section.cells[indexPath.row].title
@@ -224,7 +230,10 @@ extension SettingsViewController {
                          ]),
             SettingsSection(type: .notifications,
                     cells: [
-                        SettingsCell(title: NotificationTopic.daily.rawValue)
+                        SettingsCell(title: R.string.localizable.settingsPushTipTitle(),
+                                     subTitle: R.string.localizable.settingsPushTipDescription()),
+                        SettingsCell(title: R.string.localizable.settingsPushDailyTitle(),
+                                     subTitle: R.string.localizable.settingsPushDailyDescription())
                     ]),
             SettingsSection(type: .aboutApp,
                     cells: [

@@ -10,25 +10,20 @@ import Foundation
 
 class NotificationMapper {
     
-    func map(notification: FBNotification) -> [String : Any] {
+    func map(settings: NotificationSettings) -> [String : Any] {
         return [
-            FBNotificationField.topic.rawValue : notification.topic.rawValue,
-            FBNotificationField.isSubscribe.rawValue : notification.isSubscribe
+            NotificationTopic.daily.rawValue : settings.daily,
+            NotificationTopic.tipOfTheDay.rawValue : settings.tipOfTheDay
         ]
     }
     
-    func map(entity: NSDictionary?) -> FBNotification? {
-        guard let topicName = entity?[FBNotificationField.topic.rawValue] as? String,
-              let topic = NotificationTopic(rawValue: topicName) else { return nil }
+    func map(entity: NSDictionary?) -> NotificationSettings {
+        let dailySubscribe = entity?[NotificationTopic.daily.rawValue] as? Bool ?? false
+        let tipOfTheDaySubscribe = entity?[NotificationTopic.tipOfTheDay.rawValue] as? Bool ?? false
         
-        return FBNotification(
-            topic: topic,
-            isSubscribe: entity?[FBNotificationField.isSubscribe.rawValue] as? Bool ?? false
+        return NotificationSettings(
+            daily: dailySubscribe,
+            tipOfTheDay: tipOfTheDaySubscribe
         )
     }
-}
-
-enum FBNotificationField: String {
-    case topic
-    case isSubscribe
 }
