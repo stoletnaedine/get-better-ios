@@ -59,13 +59,13 @@ class LifeCircleViewController: UIViewController {
         setupRefreshControl()
         setupChartViewTap()
         setupBarButton()
-        if !userDefaultsService.isTipOfTheDayShown() {
-            showTip()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if !userDefaultsService.isTipOfTheDayShown() {
+            showTip()
+        }
         loadAndShowData(animate: true)
     }
     

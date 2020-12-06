@@ -110,9 +110,9 @@ class OnboardingPageViewController: UIViewController {
             return
         }
         
-        if database.saveStartSphereMetrics(sphereMetrics) {
+        database.saveStartSphereMetrics(sphereMetrics) { [weak self] in
             UserDefaults.standard.set(false, forKey: Properties.UserDefaults.tutorialHasShowed)
-            self.completion?()
+            self?.completion?()
         }
     }
 }

@@ -173,9 +173,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let post = postSections[indexPath.section].posts?[indexPath.row] else { return }
-            if database.deletePost(post) {
-                alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
-                updatePostsInTableView()
+            database.deletePost(post) { [weak self] in
+                guard let self = self else { return }
+                self.alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
+                self.updatePostsInTableView()
             }
         }
     }

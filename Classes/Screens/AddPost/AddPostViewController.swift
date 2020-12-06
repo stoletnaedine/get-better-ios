@@ -96,14 +96,14 @@ class AddPostViewController: UIViewController {
                         photoName: photoResult.photoName,
                         previewUrl: photoResult.previewUrl,
                         previewName: photoResult.previewName)
-        database.savePost(post)
         
-        DispatchQueue.main.async { [weak self] in
-            self?.stopAnimation()
+        database.savePost(post) { [weak self] in
+            guard let self = self else { return }
+            self.stopAnimation()
             let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
-            self?.alertService.showSuccessMessage(desc: description)
-            self?.addedPostCompletion?()
-            self?.dismiss(animated: true, completion: nil)
+            self.alertService.showSuccessMessage(desc: description)
+            self.addedPostCompletion?()
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

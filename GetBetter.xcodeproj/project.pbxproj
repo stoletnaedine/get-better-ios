@@ -49,6 +49,8 @@
 		C35D83732511D88B000C565E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D83722511D88B000C565E /* UserDefaultsService.swift */; };
 		C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35EBD92244DE870004593CC /* GoogleService-Info.plist */; };
 		C3635183257B809900DA6713 /* SphereMetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3635182257B809900DA6713 /* SphereMetricsService.swift */; };
+		C3635188257CD7B700DA6713 /* FBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3635187257CD7B700DA6713 /* FBNotification.swift */; };
+		C363518C257CD83B00DA6713 /* NotificationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C363518B257CD83B00DA6713 /* NotificationMapper.swift */; };
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
 		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
@@ -173,6 +175,8 @@
 		C35D83722511D88B000C565E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		C35EBD92244DE870004593CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3635182257B809900DA6713 /* SphereMetricsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereMetricsService.swift; sourceTree = "<group>"; };
+		C3635187257CD7B700DA6713 /* FBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBNotification.swift; sourceTree = "<group>"; };
+		C363518B257CD83B00DA6713 /* NotificationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMapper.swift; sourceTree = "<group>"; };
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -499,6 +503,7 @@
 				6E6A21792466C6FB00D8AC68 /* Article.swift */,
 				C33722A9254EB5C200191785 /* JournalSection.swift */,
 				C38158302556C28E0005C16E /* AnimationName.swift */,
+				C3635187257CD7B700DA6713 /* FBNotification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				C392971E247FAE04000340DC /* PostMapper.swift */,
+				C363518B257CD83B00DA6713 /* NotificationMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -944,6 +950,7 @@
 				C38158312556C28E0005C16E /* AnimationName.swift in Sources */,
 				C34434F824CEBD880045F1BD /* CancelButton.swift in Sources */,
 				C35D8361250D40E5000C565E /* TipViewController.swift in Sources */,
+				C3635188257CD7B700DA6713 /* FBNotification.swift in Sources */,
 				C392971F247FAE04000340DC /* PostMapper.swift in Sources */,
 				C38689EB2520FE9500BE9851 /* EditPostViewController.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
@@ -989,6 +996,7 @@
 				C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */,
 				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
 				C33722AA254EB5C200191785 /* JournalSection.swift in Sources */,
+				C363518C257CD83B00DA6713 /* NotificationMapper.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
 				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,
 				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,

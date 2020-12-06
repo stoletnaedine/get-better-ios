@@ -44,22 +44,21 @@ class EditPostViewController: AddPostViewController {
     override func savePost(text: String, sphere: Sphere, photoResult: Photo) {
         guard let post = post, let postId = post.id else { return }
         
-        database.savePost(
-            Post(id: postId,
-                 text: text,
-                 sphere: post.sphere,
-                 timestamp: post.timestamp,
-                 photoUrl: post.photoUrl,
-                 photoName: post.photoName,
-                 previewUrl: post.previewUrl,
-                 previewName: post.previewName)
-        )
+        let postToSave = Post(id: postId,
+                        text: text,
+                        sphere: post.sphere,
+                        timestamp: post.timestamp,
+                        photoUrl: post.photoUrl,
+                        photoName: post.photoName,
+                        previewUrl: post.previewUrl,
+                        previewName: post.previewName)
         
-        DispatchQueue.main.async { [weak self] in
-            self?.stopAnimation()
-            self?.alertService.showSuccessMessage(desc: R.string.localizable.postEditSuccess())
-            self?.editPostCompletion?()
-            self?.dismiss(animated: true, completion: nil)
+        database.savePost(postToSave) { [weak self] in
+            guard let self = self else { return }
+            self.stopAnimation()
+            self.alertService.showSuccessMessage(desc: R.string.localizable.postEditSuccess())
+            self.editPostCompletion?()
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

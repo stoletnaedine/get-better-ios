@@ -12,17 +12,11 @@ import FirebaseAuth
 
 typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
 
-enum NotificationTopic: String {
-    case daily
-    case tipOfTheDay
-}
-
 protocol GBDatabase {
-    @discardableResult
-    func savePost(_ post: Post) -> Bool
-    func deletePost(_ post: Post) -> Bool
+    func savePost(_ post: Post, completion: VoidClosure?)
+    func deletePost(_ post: Post, completion: VoidClosure?)
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
-    func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool
+    func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics, completion: VoidClosure?)
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void)
     func saveNotificationSetting(topic: NotificationTopic, subscribe: Bool)
     func getNotificationSettings(topic: NotificationTopic, completion: @escaping (Bool?) -> Void)
@@ -47,8 +41,8 @@ class FirebaseDatabase: GBDatabase {
     private let storage: GBStorage = FirebaseStorage()
     private let user = Auth.auth().currentUser
     
-    func savePost(_ post: Post) -> Bool {
-        guard let ref = currentUserPath() else { return false }
+    func savePost(_ post: Post, completion: VoidClosure? = nil) {
+        guard let ref = currentUserPath() else { return }
         let mapper = PostMapper()
         
         if let postId = post.id {
@@ -56,37 +50,37 @@ class FirebaseDatabase: GBDatabase {
                 .child(Constants.postsPath)
                 .child(postId)
                 .setValue(
-                    mapper.map(post: post)
-            )
+                    mapper.map(post: post),
+                    withCompletionBlock: { _, _ in
+                        completion?()
+                    }
+                )
         } else {
             ref
                 .child(Constants.postsPath)
                 .childByAutoId()
                 .setValue(
-                    mapper.map(post: post)
-            )
+                    mapper.map(post: post),
+                    withCompletionBlock: { _, _ in
+                        completion?()
+                    }
+                )
         }
-        
-        return true
     }
     
-    func deletePost(_ post: Post) -> Bool {
-        guard let ref = currentUserPath() else { return false }
-        guard let postId = post.id else { return false }
+    func deletePost(_ post: Post, completion: VoidClosure? = nil) {
+        guard let ref = currentUserPath(),
+              let postId = post.id else { return }
         
         ref
             .child(Constants.postsPath)
             .child(postId)
-            .removeValue()
-        
-        if let photoName = post.photoName, !photoName.isEmpty {
-            storage.deletePhoto(name: photoName)
-        }
-        if let previewName = post.previewName, !previewName.isEmpty {
-            storage.deletePreview(name: previewName)
-        }
-        
-        return true
+            .removeValue(completionBlock: { [weak self] _, _ in
+                completion?()
+                guard let self = self else { return }
+                self.storage.deletePhoto(name: post.photoName)
+                self.storage.deletePreview(name: post.previewName)
+            })
     }
     
     
@@ -122,14 +116,17 @@ class FirebaseDatabase: GBDatabase {
         }
     }
     
-    func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics) -> Bool {
-        guard let ref = currentUserPath() else { return false }
+    func saveStartSphereMetrics(_ sphereMetrics: SphereMetrics, completion: VoidClosure? = nil) {
+        guard let ref = currentUserPath() else { return }
         
         ref
             .child(Constants.startMetricsPath)
-            .setValue(sphereMetrics.values)
-        
-        return true
+            .setValue(
+                sphereMetrics.values,
+                withCompletionBlock: { _, _ in
+                    completion?()
+                }
+            )
     }
     
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {

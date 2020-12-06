@@ -13,8 +13,8 @@ import FirebaseAuth
 protocol GBStorage {
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void)
     func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void)
-    func deletePreview(name: String)
-    func deletePhoto(name: String)
+    func deletePreview(name: String?)
+    func deletePhoto(name: String?)
 }
 
 class FirebaseStorage: GBStorage {
@@ -128,13 +128,17 @@ class FirebaseStorage: GBStorage {
         })
     }
     
-    func deletePreview(name: String) {
-        guard let ref = currentUserPath() else { return }
+    func deletePreview(name: String?) {
+        guard let ref = currentUserPath(),
+              let name = name,
+              !name.isEmpty else { return }
         delete(imageName: name, imagePath: Constants.previewsPath, reference: ref)
     }
     
-    func deletePhoto(name: String) {
-        guard let ref = currentUserPath() else { return }
+    func deletePhoto(name: String?) {
+        guard let ref = currentUserPath(),
+              let name = name,
+              !name.isEmpty else { return }
         delete(imageName: name, imagePath: Constants.photosPath, reference: ref)
     }
     
