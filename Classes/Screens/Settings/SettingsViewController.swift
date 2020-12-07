@@ -15,8 +15,8 @@ class SettingsViewController: UIViewController {
     
     private enum Constants {
         static let sectionHeaderHeight: CGFloat = 35
-        static let profileCellId = R.reuseIdentifier.profileCell.identifier
-        static let profileNibName = R.nib.profileCell.name
+        static let profileCell = R.reuseIdentifier.profileCell.identifier
+        static let notificationCell = R.nib.notificationCell.name
     }
     
 //    let presenter: SettingsPresenter = SettingsPresenterDefault()
@@ -51,10 +51,10 @@ class SettingsViewController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView.register(UINib(nibName: Constants.profileNibName, bundle: nil),
-                           forCellReuseIdentifier: Constants.profileCellId)
-        tableView.register(UINib(nibName: "NotificationCell", bundle: nil),
-                           forCellReuseIdentifier: "NotificationCell")
+        tableView.register(UINib(nibName: Constants.profileCell, bundle: nil),
+                           forCellReuseIdentifier: Constants.profileCell)
+        tableView.register(UINib(nibName: Constants.notificationCell, bundle: nil),
+                           forCellReuseIdentifier: Constants.notificationCell)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -108,7 +108,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let section = tableSections[indexPath.section]
         switch section.type {
         case .profile:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellId) as? ProfileCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell
                 else { return UITableViewCell() }
             guard let profile = self.profile else { return UITableViewCell() }
             cell.fillCell(profile: profile)
@@ -121,12 +121,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryType = .disclosureIndicator
             return cell
         case .notifications:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell") as? NotificationCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell) as? NotificationCell
                 else { return UITableViewCell() }
-            cell.configure(model: .init(
-                            title: section.cells[indexPath.row].title ?? "",
-                            description: section.cells[indexPath.row].subTitle ?? "",
-                            isOn: true))
+            cell.configure(
+                model: NotificationCellViewModel(
+                    title: section.cells[indexPath.row].title ?? "",
+                    description: section.cells[indexPath.row].subTitle ?? "",
+                    isOn: true
+                )
+            )
             cell.selectionStyle = .none
             return cell
         case .aboutApp:
@@ -144,7 +147,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let section = tableSections[indexPath.section]
         switch section.type {
         case .profile:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCellId) as? ProfileCell else { return 0 }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell else { return .zero }
+            return cell.frame.height
+        case .notifications:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell) as? NotificationCell
+            else { return .zero }
             return cell.frame.height
         default:
             return defaultHeight

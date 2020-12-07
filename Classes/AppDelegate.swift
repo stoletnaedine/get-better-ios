@@ -61,6 +61,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("Firebase registration token: \(fcmToken)")
     }
     
+    // Обработка push с ключом
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+
+        // Print message ID.
+        if let messageID = userInfo[Constants.gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        print(userInfo)
+
+        // completionHandler(UIBackgroundFetchResult.newData)
+    }
+
+    
     func applicationWillTerminate(_ application: UIApplication) {
     }
     
@@ -73,4 +93,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,
                                                             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
     }
+}
+
+extension AppDelegate {
+    
+    private enum Constants {
+            static let gcmMessageIDKey = "gcm.Message_ID"
+        }
+    
 }
