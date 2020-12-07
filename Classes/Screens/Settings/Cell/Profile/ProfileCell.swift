@@ -18,6 +18,7 @@ class ProfileCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         customizeView()
+        selectionStyle = .none
     }
     
     func fillCell(profile: Profile) {

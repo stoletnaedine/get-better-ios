@@ -9,7 +9,6 @@
 import Foundation
 
 struct NotificationCellViewModel {
-    let title: String
-    let description: String
-    let isOn: Bool
+    let title: String?
+    let description: String?
 }

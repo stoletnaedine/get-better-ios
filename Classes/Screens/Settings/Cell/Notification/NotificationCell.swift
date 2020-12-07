@@ -18,13 +18,17 @@ class NotificationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
     }
     
     func configure(model: NotificationCellViewModel) {
         titleLabel.text = model.title
         descriptionLabel.text = model.description
-        subscribeSwitch.isOn = model.isOn
         subscribeSwitch.addTarget(self, action: #selector(handleSwitch), for: .valueChanged)
+    }
+    
+    func setSwitchOn(_ isOn: Bool) {
+        subscribeSwitch.setOn(isOn, animated: true)
     }
     
     @objc private func handleSwitch() {

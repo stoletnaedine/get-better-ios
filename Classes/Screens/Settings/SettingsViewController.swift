@@ -19,7 +19,8 @@ class SettingsViewController: UIViewController {
         static let notificationCell = R.nib.notificationCell.name
     }
     
-//    let presenter: SettingsPresenter = SettingsPresenterDefault()
+    let notificationService: NotificationService = NotificationServiceDefault()
+    
     var profile: Profile?
     var tableSections: [SettingsSection] = []
     let refreshControl = UIRefreshControl()
@@ -106,32 +107,29 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = tableSections[indexPath.section]
+        let item = section.cells[indexPath.row]
+        
         switch section.type {
         case .profile:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell
-                else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell)
+                    as? ProfileCell else { return UITableViewCell() }
             guard let profile = self.profile else { return UITableViewCell() }
             cell.fillCell(profile: profile)
-            cell.selectionStyle = .none
             return cell
+            
         case .tips, .articles:
             let cell = UITableViewCell()
-            cell.textLabel?.text = section.cells[indexPath.row].title ?? ""
+            cell.textLabel?.text = item.title ?? ""
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
+            
         case .notifications:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell) as? NotificationCell
-                else { return UITableViewCell() }
-            cell.configure(
-                model: NotificationCellViewModel(
-                    title: section.cells[indexPath.row].title ?? "",
-                    description: section.cells[indexPath.row].subTitle ?? "",
-                    isOn: true
-                )
-            )
-            cell.selectionStyle = .none
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell)
+                    as? NotificationCell else { return UITableViewCell() }
+            notificationService.configure(cell: cell, by: item)
             return cell
+            
         case .aboutApp:
             let cell = UITableViewCell()
             cell.textLabel?.text = section.cells[indexPath.row].title
@@ -238,9 +236,11 @@ extension SettingsViewController {
             SettingsSection(type: .notifications,
                     cells: [
                         SettingsCell(title: R.string.localizable.settingsPushTipTitle(),
-                                     subTitle: R.string.localizable.settingsPushTipDescription()),
+                                     subTitle: R.string.localizable.settingsPushTipDescription(),
+                                     topic: .tipOfTheDay),
                         SettingsCell(title: R.string.localizable.settingsPushDailyTitle(),
-                                     subTitle: R.string.localizable.settingsPushDailyDescription())
+                                     subTitle: R.string.localizable.settingsPushDailyDescription(),
+                                     topic: .daily)
                     ]),
             SettingsSection(type: .aboutApp,
                     cells: [

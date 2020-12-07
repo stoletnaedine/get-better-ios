@@ -25,10 +25,15 @@ struct SettingsCell {
     let title: String?
     let subTitle: String?
     let action: VoidClosure?
+    let topic: NotificationTopic?
     
-    init(title: String? = nil, subTitle: String? = nil, action: VoidClosure? = nil) {
+    init(title: String? = nil,
+         subTitle: String? = nil,
+         action: VoidClosure? = nil,
+         topic: NotificationTopic? = nil) {
         self.title = title
         self.subTitle = subTitle
         self.action = action
+        self.topic = topic
     }
 }

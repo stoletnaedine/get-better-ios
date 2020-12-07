@@ -9,8 +9,8 @@
 import Foundation
 
 struct NotificationSettings {
-    let daily: Bool
-    let tipOfTheDay: Bool
+    var daily: Bool
+    var tipOfTheDay: Bool
 }
 
 enum NotificationTopic: String {

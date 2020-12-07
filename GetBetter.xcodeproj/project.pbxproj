@@ -82,7 +82,7 @@
 		C3B4760324596BAD0067A3C0 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsSection.swift */; };
 		C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760424596BCB0067A3C0 /* Profile.swift */; };
 		C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */; };
-		C3BFEBC52477E85F000B5B41 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* SettingsPresenter.swift */; };
+		C3BFEBC52477E85F000B5B41 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* NotificationService.swift */; };
 		C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC72477F5A3000B5B41 /* R.generated.swift */; };
 		C3BFEBCC2477F93E000B5B41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3BFEBCB2477F93E000B5B41 /* Localizable.strings */; };
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
@@ -212,7 +212,7 @@
 		C3B4760424596BCB0067A3C0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
 		C3BC51282573CFEC002E1772 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C3BFEBC42477E85F000B5B41 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		C3BFEBC42477E85F000B5B41 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C3BFEBC72477F5A3000B5B41 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C3BFEBCB2477F93E000B5B41 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
@@ -586,7 +586,6 @@
 		C39A321C2457109A005D2EDF /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				C3BFEBC42477E85F000B5B41 /* SettingsPresenter.swift */,
 				C39A321D245710BC005D2EDF /* SettingsViewController.swift */,
 				C39A321E245710BC005D2EDF /* SettingsViewController.xib */,
 				F14956856967235ACDF036FC /* Cell */,
@@ -642,6 +641,7 @@
 				C35D83722511D88B000C565E /* UserDefaultsService.swift */,
 				C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */,
 				C3635182257B809900DA6713 /* SphereMetricsService.swift */,
+				C3BFEBC42477E85F000B5B41 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -998,7 +998,7 @@
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
 				C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
-				C3BFEBC52477E85F000B5B41 /* SettingsPresenter.swift in Sources */,
+				C3BFEBC52477E85F000B5B41 /* NotificationService.swift in Sources */,
 				C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */,
 				C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */,
 				C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */,
@@ -1190,7 +1190,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1215,7 +1215,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
