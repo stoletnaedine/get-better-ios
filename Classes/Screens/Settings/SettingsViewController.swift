@@ -111,15 +111,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch section.type {
         case .profile:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell)
-                    as? ProfileCell else { return UITableViewCell() }
-            guard let profile = self.profile else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell,
+                  let profile = self.profile else { return UITableViewCell() }
             cell.fillCell(profile: profile)
             return cell
             
         case .tips, .articles:
             let cell = UITableViewCell()
-            cell.textLabel?.text = item.title ?? ""
+            cell.textLabel?.text = item.title
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
@@ -132,7 +131,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             
         case .aboutApp:
             let cell = UITableViewCell()
-            cell.textLabel?.text = section.cells[indexPath.row].title
+            cell.textLabel?.text = item.title
             cell.textLabel?.textColor = .grey
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
@@ -148,8 +147,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell else { return .zero }
             return cell.frame.height
         case .notifications:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell) as? NotificationCell
-            else { return .zero }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell) as? NotificationCell else { return .zero }
             return cell.frame.height
         default:
             return defaultHeight
