@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import IQKeyboardManagerSwift
+import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -62,22 +63,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     // Обработка push с ключом
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
-
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-
-        // Print message ID.
-        if let messageID = userInfo[Constants.gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
         
-        print(userInfo)
+        let info = userInfo as NSDictionary
+        if let topicName = info.value(forKey: Constants.topicKey) as? String,
+           let topic = NotificationTopic(rawValue: topicName) {
+            switch topic {
+            case .daily:
+                print("User open daily push")
+            case .tipOfTheDay:
+                print("User open tipOfTheDay push")
+            }
+        }
 
-        // completionHandler(UIBackgroundFetchResult.newData)
+        completionHandler(UIBackgroundFetchResult.newData)
     }
 
     
@@ -98,7 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate {
     
     private enum Constants {
-            static let gcmMessageIDKey = "gcm.Message_ID"
-        }
+        static let gcmMessageIDKey = "gcm.Message_ID"
+        static let topicKey = "topic"
+    }
     
 }
