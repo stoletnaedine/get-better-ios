@@ -11,9 +11,10 @@ import UIKit
 
 class RootManager {
     
-    var window: UIWindow?
-    let connectionHelper = ConnectionHelper()
-    let alertService: AlertService = AlertServiceDefault()
+    private var window: UIWindow?
+    private let connectionHelper = ConnectionHelper()
+    private lazy var alertService: AlertService = AlertServiceDefault()
+    private lazy var database: GBDatabase = FirebaseDatabase()
     
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -29,49 +30,27 @@ class RootManager {
         }
     }
     
-    private func addObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(logout),
-                                               name: .logout,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showNoInternetViewController),
-                                               name: .showNoInternetScreen,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(enterApp),
-                                               name: .enterApp,
-                                               object: nil)
-    }
-    
     @objc private func enterApp() {
         if Auth.auth().currentUser == nil {
             showAuthController()
         } else {
-            checkUserHasSetupSphere(completion: { [weak self] userHasSetupSphere in
+            checkUserHasSetupSphere { [weak self] userHasSetupSphere in
                 switch userHasSetupSphere {
                 case true:
                     self?.showTabBarController()
                 case false:
                     self?.showOnboardingPageViewController()
                 }
-            })
+            }
         }
     }
     
-    private func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
-        FirebaseDatabase().getStartSphereMetrics(completion: { [weak self] result in
-            switch result {
-            case .failure(let error):
-                if error.name == AppErrorCode.notFound.rawValue {
-                    completion(false)
-                } else {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
-                }
-            case .success:
-                completion(true)
-            }
-        })
+    private func showAuthController() {
+        let authViewController = AuthViewController()
+        authViewController.signInCompletion = { [weak self] in
+            self?.enterApp()
+        }
+        window?.rootViewController = UINavigationController(rootViewController: authViewController)
     }
     
     @objc private func logout() {
@@ -99,12 +78,40 @@ class RootManager {
         }
         window?.rootViewController = UINavigationController(rootViewController: onboardingPageViewController)
     }
+}
+
+// MARK: — Helpers
+
+extension RootManager {
     
-    private func showAuthController() {
-        let authViewController = AuthViewController()
-        authViewController.signInCompletion = { [weak self] in
-            self?.enterApp()
-        }
-        window?.rootViewController = UINavigationController(rootViewController: authViewController)
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(logout),
+                                               name: .logout,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showNoInternetViewController),
+                                               name: .showNoInternetScreen,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enterApp),
+                                               name: .enterApp,
+                                               object: nil)
     }
+    
+    private func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
+        database.getStartSphereMetrics { [weak self] result in
+            switch result {
+            case .failure(let error):
+                if error.name == AppErrorCode.notFound.rawValue {
+                    completion(false)
+                } else {
+                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                }
+            case .success:
+                completion(true)
+            }
+        }
+    }
+    
 }
