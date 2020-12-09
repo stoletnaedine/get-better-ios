@@ -48,8 +48,6 @@ class LifeCircleViewController: UIViewController {
     private var isValuesVisible = false
     private var isCurrentButtonSelected = true
     
-    var showOnboardingCompletion: VoidClosure = {}
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -103,7 +101,7 @@ class LifeCircleViewController: UIViewController {
         startLevelView.backgroundColor = .white
     }
     
-    @objc private func showTip() {
+    @objc func showTip() {
         let tipEntities = tipStorage.tipEntities()
         let days = Date().diffInDaysSince1970()
         let tipIndex = days % tipEntities.count

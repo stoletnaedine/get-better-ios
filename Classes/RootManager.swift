@@ -9,12 +9,19 @@
 import Firebase
 import UIKit
 
-class RootManager {
+protocol RootManagerProtocol {
+    func start()
+    func showAddPost()
+    func showTip()
+}
+
+class RootManager: RootManagerProtocol {
     
     private var window: UIWindow?
     private let connectionHelper = ConnectionHelper()
     private lazy var alertService: AlertService = AlertServiceDefault()
     private lazy var database: GBDatabase = FirebaseDatabase()
+    private var tabBarController: TabBarController?
     
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -27,6 +34,31 @@ class RootManager {
             enterApp()
         } else {
             showNoInternetViewController()
+        }
+    }
+    
+    func showAddPost() {
+        guard connectionHelper.connectionAvailable() else { return }
+        let addPostVC = AddPostViewController()
+        let journalVCIndex: Int = 1
+        if let tabBarController = self.tabBarController,
+           let journalNC = tabBarController.viewControllers?[journalVCIndex] as? UINavigationController,
+           let journalVC = journalNC.viewControllers.first as? JournalViewController {
+            addPostVC.addedPostCompletion = {
+                journalVC.updatePostsInTableView()
+                tabBarController.selectedIndex = journalVCIndex
+            }
+            tabBarController.present(addPostVC, animated: true, completion: nil)
+        }
+    }
+    
+    func showTip() {
+        guard connectionHelper.connectionAvailable() else { return }
+        let lifeCircleVCIndex: Int = 0
+        if let tabBarController = self.tabBarController,
+           let lifeCircleNC = tabBarController.viewControllers?[lifeCircleVCIndex] as? UINavigationController,
+           let lifeCircleVC = lifeCircleNC.viewControllers.first as? LifeCircleViewController {
+            lifeCircleVC.showTip()
         }
     }
     
@@ -65,9 +97,7 @@ class RootManager {
     
     @objc private func showTabBarController() {
         let tabBarController = TabBarController()
-        tabBarController.showOnboardingCompletion = { [weak self] in
-            self?.showOnboardingPageViewController()
-        }
+        self.tabBarController = tabBarController
         window?.rootViewController = tabBarController
     }
     

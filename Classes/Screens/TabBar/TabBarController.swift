@@ -10,7 +10,6 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    var showOnboardingCompletion: VoidClosure?
     private let connectionHelper = ConnectionHelper()
 
     override func viewDidLoad() {
@@ -23,9 +22,6 @@ class TabBarController: UITabBarController {
     
     func initViewControllers() {
         let lifeCircleVC = LifeCircleViewController()
-        lifeCircleVC.showOnboardingCompletion = { [weak self] in
-            self?.showOnboardingCompletion?()
-        }
         let lifeCircleNC = UINavigationController(rootViewController: lifeCircleVC)
         lifeCircleNC.tabBarItem.image = R.image.circle()
         lifeCircleNC.tabBarItem.title = R.string.localizable.tabBarLifeCircle()

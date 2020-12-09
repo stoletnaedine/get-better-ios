@@ -14,7 +14,7 @@ import FirebaseMessaging
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
-    private let rootManager = RootManager()
+    private let rootManager: RootManagerProtocol = RootManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -71,9 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
            let topic = NotificationTopic(rawValue: topicName) {
             switch topic {
             case .daily:
-                print("User open daily push")
+                rootManager.showAddPost()
             case .tipOfTheDay:
-                print("User open tipOfTheDay push")
+                rootManager.showTip()
             }
         }
 
