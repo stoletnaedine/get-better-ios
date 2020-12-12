@@ -74,7 +74,7 @@ extension UIViewController {
         }
         animationView.frame = bounds
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .playOnce
+        animationView.loopMode = .loop
         animationView.animationSpeed = speed
         
         if whiteScreen {
@@ -106,8 +106,7 @@ extension UIViewController {
             name: .loadingSuccess,
             on: view,
             whiteScreen: true,
-            size: .init(width: 50, height: 50),
-            speed: 2
+            size: .init(width: 75, height: 75)
         )
     }
     
