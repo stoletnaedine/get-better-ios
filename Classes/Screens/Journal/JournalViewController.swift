@@ -29,6 +29,11 @@ class JournalViewController: UIViewController {
         setupRefreshControl()
         setupTableView()
         setupBarButton()
+        title = R.string.localizable.tabBarJournal()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updatePostsInTableView()
     }
     
@@ -42,29 +47,28 @@ class JournalViewController: UIViewController {
     }
     
     @objc public func updatePostsInTableView() {
-        title = R.string.localizable.journalLoading()
         getPosts { [weak self] in
             self?.tableView.refreshControl?.endRefreshing()
             self?.tableView.reloadData()
-            self?.title = R.string.localizable.tabBarJournal()
         }
     }
     
     @objc private func getPosts(completion: @escaping VoidClosure) {
         database.getPosts(completion: { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .failure:
                 break
                 
             case .success(let posts):
                 if posts.isEmpty {
-                    self?.postSections = [
-                        JournalSection(
-                            type: .empty(info: R.string.localizable.journalPlaceholder())
-                        )
+                    self.postSections = [
+                        JournalSection(type: .empty(info: R.string.localizable.journalPlaceholder()))
                     ]
+                    self.showAnimation(name: .yoga, on: self.view, loopMode: .loop)
                 } else {
-                    self?.convertPostsToSections(posts)
+                    self.stopAnimation()
+                    self.convertPostsToSections(posts)
                 }
             }
             completion()

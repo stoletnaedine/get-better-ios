@@ -37,9 +37,8 @@ class FirebaseDatabase: GBDatabase {
     }
     
     private let connectionHelper = ConnectionHelper()
-    private let ref = Database.database().reference()
+    private let dbRef = Database.database().reference()
     private let storage: GBStorage = FirebaseStorage()
-    private let user = Auth.auth().currentUser
     
     func savePost(_ post: Post, completion: VoidClosure? = nil) {
         guard let ref = currentUserPath() else { return }
@@ -130,10 +129,7 @@ class FirebaseDatabase: GBDatabase {
     }
     
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
-        guard let ref = currentUserPath() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
+        guard let ref = currentUserPath() else { return }
         
         ref
             .child(Constants.startMetricsPath)
@@ -168,11 +164,6 @@ class FirebaseDatabase: GBDatabase {
                 let value = snapshot.value as? NSDictionary
                 let settings = mapper.map(entity: value)
                 completion(settings)
-//                if let isSubscribe = value?[topic.rawValue] as? Bool {
-//                    completion(isSubscribe)
-//                } else {
-//                    completion(nil)
-//                }
             })
     }
     
@@ -181,12 +172,12 @@ class FirebaseDatabase: GBDatabase {
             completion(.failure(AppError(errorCode: .noInternet)))
             return
         }
-        guard let userId = user?.uid else {
+        guard let userId = Auth.auth().currentUser?.uid else {
             completion(.failure(AppError(errorCode: .unexpected)))
             return
         }
         
-        ref
+        dbRef
             .child(Constants.tipLikesPath)
             .child(userId)
             .observeSingleEvent(of: .value, with: { snapshot in
@@ -205,7 +196,7 @@ class FirebaseDatabase: GBDatabase {
             return
         }
         
-        ref
+        dbRef
             .child(Constants.tipLikesPath)
             .observeSingleEvent(of: .value, with: { snapshot in
                 let value = snapshot.value as? NSDictionary
@@ -226,7 +217,7 @@ class FirebaseDatabase: GBDatabase {
     
     func saveTipLike(id: Int) {
         guard connectionHelper.connectionAvailable() else { return }
-        guard let userId = user?.uid else { return }
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         
         self.getTipLikeIds(completion: { [weak self] likeIds in
             switch likeIds {
@@ -235,7 +226,7 @@ class FirebaseDatabase: GBDatabase {
                     var newIds = ids
                     newIds.append(id)
                     
-                    self?.ref
+                    self?.dbRef
                         .child(Constants.tipLikesPath)
                         .child(userId)
                         .setValue(newIds)
@@ -248,7 +239,7 @@ class FirebaseDatabase: GBDatabase {
     
     func deleteTipLike(id: Int) {
         guard connectionHelper.connectionAvailable() else { return }
-        guard let userId = user?.uid else { return }
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         
         self.getTipLikeIds(completion: { [weak self] likeIds in
             switch likeIds {
@@ -258,7 +249,7 @@ class FirebaseDatabase: GBDatabase {
                     guard let idIndex = newIds.firstIndex(of: id) else { return }
                     newIds.remove(at: idIndex)
                     
-                    self?.ref
+                    self?.dbRef
                         .child(Constants.tipLikesPath)
                         .child(userId)
                         .setValue(newIds)
@@ -272,10 +263,10 @@ class FirebaseDatabase: GBDatabase {
     private func currentUserPath() -> DatabaseReference? {
         guard connectionHelper.connectionAvailable() else { return nil }
         
-        guard let userId = user?.uid else { return nil }
+        guard let userId = Auth.auth().currentUser?.uid else { return nil }
         print("Request. UserId = \(userId)")
         
-        return ref
+        return dbRef
             .child(Constants.usersPath)
             .child(userId)
     }

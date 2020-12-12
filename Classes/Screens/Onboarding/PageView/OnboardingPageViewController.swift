@@ -14,7 +14,6 @@ class OnboardingPageViewController: UIViewController {
     var viewControllers: [UIViewController] = []
     let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
-    let user = Auth.auth().currentUser
     var completion: VoidClosure?
     
     override func viewDidLoad() {
@@ -73,7 +72,7 @@ class OnboardingPageViewController: UIViewController {
     @objc func exit() {
         UserDefaults.standard.set(false, forKey: Properties.UserDefaults.tutorialHasShowed)
         
-        guard let user = user else {
+        guard let user = Auth.auth().currentUser else {
             alertService.showErrorMessage(desc: R.string.localizable.onboardingUserError())
             NotificationCenter.default.post(name: .logout, object: nil)
             return
@@ -90,8 +89,6 @@ class OnboardingPageViewController: UIViewController {
                 }
                 NotificationCenter.default.post(name: .logout, object: nil)
             })
-        } else {
-            NotificationCenter.default.post(name: .logout, object: nil)
         }
     }
     
