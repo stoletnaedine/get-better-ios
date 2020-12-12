@@ -11,6 +11,11 @@ import UIKit
 class TabBarController: UITabBarController {
     
     private let connectionHelper = ConnectionHelper()
+    
+    private enum Constants {
+        static let journalVCIndex: Int = 1
+        static let addPostVCIndex: Int = 2
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,23 +50,27 @@ class TabBarController: UITabBarController {
         
         viewControllers = [lifeCircleNC, journalNC, fakeAddPostVC, achievementsNC, settingsNC]
     }
+    
+    func showAddPost() {
+        guard connectionHelper.connectionAvailable() else { return }
+        let addPostVC = AddPostViewController()
+        if let journalNC = self.viewControllers?[Constants.journalVCIndex] as? UINavigationController,
+           let journalVC = journalNC.viewControllers.first as? JournalViewController {
+            addPostVC.addedPostCompletion = { [weak self] in
+                journalVC.updatePostsInTableView()
+                self?.selectedIndex = Constants.journalVCIndex
+            }
+        }
+        self.present(addPostVC, animated: true, completion: nil)
+    }
 }
 
 extension TabBarController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if viewController.title == R.string.localizable.tabBarAddPost() {
-            guard connectionHelper.connectionAvailable() else { return false }
-            let journalVCIndex: Int = 1
-            let addPostVC = AddPostViewController()
-            if let journalNC = tabBarController.viewControllers?[journalVCIndex] as? UINavigationController,
-               let journalVC = journalNC.viewControllers.first as? JournalViewController {
-                addPostVC.addedPostCompletion = { [weak self] in
-                    journalVC.updatePostsInTableView()
-                    self?.selectedIndex = journalVCIndex
-                }
-            }
-            self.present(addPostVC, animated: true, completion: nil)
+        if let addPostVC = viewControllers?[Constants.addPostVCIndex],
+           viewController == addPostVC {
+            showAddPost()
             return false
         }
         

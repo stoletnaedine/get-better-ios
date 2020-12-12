@@ -26,7 +26,7 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     
     var signInCompletion: VoidClosure?
-    let alertService: AlertService = AlertServiceDefault()
+    private let alertService: AlertService = AlertServiceDefault()
     
     override func viewDidLoad() {
         super.viewDidLoad()

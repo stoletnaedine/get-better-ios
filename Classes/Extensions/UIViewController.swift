@@ -59,6 +59,7 @@ extension UIViewController {
     
     func showAnimation(name: AnimationName,
                        on view: UIView,
+                       loopMode: LottieLoopMode = .repeat(5),
                        whiteScreen: Bool = false,
                        size: CGSize? = nil,
                        speed: CGFloat = 1) {
@@ -74,13 +75,13 @@ extension UIViewController {
         }
         animationView.frame = bounds
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .loop
+        animationView.loopMode = loopMode
         animationView.animationSpeed = speed
         
         if whiteScreen {
             animationScreenView = UIView.init(frame: UIScreen.main.bounds)
             guard let animationScreenView = animationScreenView else { return }
-            animationScreenView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+            animationScreenView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
             animationScreenView.addSubview(animationView)
             view.addSubview(animationScreenView)
         } else {
@@ -94,7 +95,6 @@ extension UIViewController {
     
     func stopAnimation() {
         guard let animationView = animationView else { return }
-        animationView.stop()
         animationView.removeFromSuperview()
         
         guard let animationScreenView = animationScreenView else { return }

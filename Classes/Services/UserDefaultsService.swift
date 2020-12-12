@@ -10,6 +10,7 @@ import Foundation
 
 protocol UserDefaultsService {
     func tipOfTheDayShown()
+    func setTipOfTheDayNotShown()
     func isTipOfTheDayShown() -> Bool
 }
 
@@ -23,6 +24,10 @@ class UserDefaultsServiceDefault: UserDefaultsService {
     
     func tipOfTheDayShown() {
         UserDefaults.standard.set(days, forKey: Constants.tipOfTheDay)
+    }
+    
+    func setTipOfTheDayNotShown() {
+        UserDefaults.standard.set(-1, forKey: Constants.tipOfTheDay)
     }
     
     func isTipOfTheDayShown() -> Bool {

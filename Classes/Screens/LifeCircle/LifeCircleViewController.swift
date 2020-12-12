@@ -41,9 +41,7 @@ class LifeCircleViewController: UIViewController {
     private let alertService: AlertService = AlertServiceDefault()
     private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
     private let tipStorage = TipStorage()
-    
     private var userData: UserData?
-    
     private var isCurrentDataVisible = true
     private var isValuesVisible = false
     private var isCurrentButtonSelected = true

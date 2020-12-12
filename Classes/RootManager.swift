@@ -22,57 +22,48 @@ class RootManager: RootManagerProtocol {
     private lazy var alertService: AlertService = AlertServiceDefault()
     private lazy var database: GBDatabase = FirebaseDatabase()
     private var tabBarController: TabBarController?
+    private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
     
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = R.storyboard.launchScreen().instantiateInitialViewController()
-        
         addObservers()
-        
-        if connectionHelper.connectionAvailable() {
-            enterApp()
-        } else {
-            showNoInternetViewController()
-        }
+        enterApp()
     }
     
     func showAddPost() {
-        guard connectionHelper.connectionAvailable() else { return }
-        let addPostVC = AddPostViewController()
-        let journalVCIndex: Int = 1
-        if let tabBarController = self.tabBarController,
-           let journalNC = tabBarController.viewControllers?[journalVCIndex] as? UINavigationController,
-           let journalVC = journalNC.viewControllers.first as? JournalViewController {
-            addPostVC.addedPostCompletion = {
-                journalVC.updatePostsInTableView()
-                tabBarController.selectedIndex = journalVCIndex
-            }
-            tabBarController.present(addPostVC, animated: true, completion: nil)
+        if let tabBarController = self.tabBarController {
+            tabBarController.showAddPost()
+            return
         }
+        
+        enterApp(completion: { tabBarController in
+            tabBarController.showAddPost()
+        })
     }
     
     func showTip() {
-        guard connectionHelper.connectionAvailable() else { return }
-        let lifeCircleVCIndex: Int = 0
-        if let tabBarController = self.tabBarController,
-           let lifeCircleNC = tabBarController.viewControllers?[lifeCircleVCIndex] as? UINavigationController,
-           let lifeCircleVC = lifeCircleNC.viewControllers.first as? LifeCircleViewController {
-            lifeCircleVC.showTip()
-        }
+        userDefaultsService.setTipOfTheDayNotShown()
+        enterApp()
     }
     
-    @objc private func enterApp() {
-        if Auth.auth().currentUser == nil {
+    @objc
+    private func enterApp(completion: ((TabBarController) -> Void)? = nil) {
+        guard connectionHelper.connectionAvailable() else {
+            showNoInternetViewController()
+            return
+        }
+        guard Auth.auth().currentUser != nil else {
             showAuthController()
-        } else {
-            checkUserHasSetupSphere { [weak self] userHasSetupSphere in
-                switch userHasSetupSphere {
-                case true:
-                    self?.showTabBarController()
-                case false:
-                    self?.showOnboardingPageViewController()
-                }
+            return
+        }
+        checkUserHasSetupSphere { [weak self] userHasSetupSphere in
+            switch userHasSetupSphere {
+            case true:
+                self?.showTabBarController(completion)
+            case false:
+                self?.showOnboardingPageViewController()
             }
         }
     }
@@ -85,23 +76,28 @@ class RootManager: RootManagerProtocol {
         window?.rootViewController = UINavigationController(rootViewController: authViewController)
     }
     
-    @objc private func logout() {
+    @objc
+    private func showTabBarController(_ completion: ((TabBarController) -> Void)? = nil) {
+        let tabBarController = TabBarController()
+        self.tabBarController = tabBarController
+        window?.rootViewController = tabBarController
+        completion?(tabBarController)
+    }
+    
+    @objc
+    private func logout() {
         try! Auth.auth().signOut()
         showAuthController()
     }
     
-    @objc private func showNoInternetViewController() {
+    @objc
+    private func showNoInternetViewController() {
         let noInternetViewController = NoInternetViewController()
         window?.rootViewController = noInternetViewController
     }
     
-    @objc private func showTabBarController() {
-        let tabBarController = TabBarController()
-        self.tabBarController = tabBarController
-        window?.rootViewController = tabBarController
-    }
-    
-    @objc private func showOnboardingPageViewController() {
+    @objc
+    private func showOnboardingPageViewController() {
         let onboardingPageViewController = OnboardingPageViewController()
         onboardingPageViewController.completion = { [weak self] in
             self?.showTabBarController()
