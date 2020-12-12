@@ -17,6 +17,7 @@ final class TipsTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = R.string.localizable.tipsTitle()
         addSubviews()
         setupTableView()
         makeConstraints()
@@ -24,10 +25,8 @@ final class TipsTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = R.string.localizable.tipsLoading()
         loadData(completion: { [weak self] in
             DispatchQueue.main.async {
-                self?.title = R.string.localizable.tipsTitle()
                 self?.tableView.reloadData()
             }
         })
@@ -35,15 +34,20 @@ final class TipsTableViewController: UIViewController {
     
     private func loadData(completion: @escaping VoidClosure) {
         database.getTipLikeIds(completion: { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let ids):
+                if ids.isEmpty {
+                    self.showAnimation(name: .travel, on: self.view, loopMode: .loop)
+                } else {
+                    self.stopAnimation()
+                }
                 var tips: [TipEntity] = []
                 ids.forEach { id in
-                    if let tip = self?.tipStorage.tipEntities()[id] {
-                        tips.append(tip)
-                    }
+                    let tip = self.tipStorage.tipEntities()[id]
+                    tips.append(tip)
                 }
-                self?.tips = tips
+                self.tips = tips
                 completion()
             case .failure:
                 break

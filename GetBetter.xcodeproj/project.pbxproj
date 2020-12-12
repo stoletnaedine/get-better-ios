@@ -88,6 +88,7 @@
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
 		C3C9DD8724B843B3003C83BD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9DD8624B843B3003C83BD /* String.swift */; };
 		C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */; };
+		C3D69D7825850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json in Resources */ = {isa = PBXBuildFile; fileRef = C3D69D7725850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json */; };
 		C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EB7323C710BB0045B70A /* RootManager.swift */; };
 		C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */; };
 		C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */; };
@@ -219,6 +220,7 @@
 		C3C9DD8624B843B3003C83BD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C3C9DD8924B9870B003C83BD /* GetBetter.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = GetBetter.entitlements; sourceTree = "<group>"; };
 		C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		C3D69D7725850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "19904-ski-touring-backcountry-skiing.json"; sourceTree = "<group>"; };
 		C3E7EB7323C710BB0045B70A /* RootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootManager.swift; sourceTree = "<group>"; };
 		C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalViewController.xib; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 		C38157AA2556B2AB0005C16E /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C3D69D7725850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json */,
 				C38158282556BEBD0005C16E /* 15046-spark-animation.json */,
 				C38158292556BEBD0005C16E /* 28592-yoga-nature.json */,
 				C38158272556BEBD0005C16E /* 35255-from-loading-to-success.json */,
@@ -885,6 +888,7 @@
 				F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */,
 				C38157AC2556B2BD0005C16E /* 37723-confetti-partyyy.json in Resources */,
 				F149557C8041D5BB75C0CA34 /* WelcomeViewController.xib in Resources */,
+				C3D69D7825850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json in Resources */,
 				F14959446FAB1AE8F8479875 /* ArticleViewController.xib in Resources */,
 				F149536F904F19914B26C190 /* EditProfileViewController.xib in Resources */,
 				F14951DADFEBD16EA7AA4EEE /* ProfileCell.xib in Resources */,

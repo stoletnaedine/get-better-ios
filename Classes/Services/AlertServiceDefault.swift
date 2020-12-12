@@ -120,7 +120,7 @@ class AlertServiceDefault: UIViewController, AlertService {
     }
 
     private func setupPopUpMessage(icon: String, title: String, description: String, buttonText: String) -> EKPopUpMessage {
-        let image = R.image.titleViewLogo()!
+        let image = R.image.gPoint()!
 
         let themeImage = EKPopUpMessage.ThemeImage(
                 image: EKProperty.ImageContent(
