@@ -21,11 +21,11 @@ class PostDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customizeView()
+        setupEditButton()
         if let post = self.post {
             fillViewController(post)
         }
-        customizeView()
-        setupEditButton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,7 +73,12 @@ class PostDetailViewController: UIViewController {
     }
     
     func customizeView() {
-        textView.font = UIFont.systemFont(ofSize: 16)
+        var textFont = UIFont.systemFont(ofSize: 16)
+        if let photoUrl = self.post?.photoUrl, photoUrl.isEmpty,
+           let text = self.post?.text, text.count < 30 {
+            textFont = UIFont.systemFont(ofSize: 26)
+        }
+        textView.font = textFont
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .grey
     }

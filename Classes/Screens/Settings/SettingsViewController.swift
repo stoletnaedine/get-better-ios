@@ -159,11 +159,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.action?()
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return Constants.sectionHeaderHeight
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == self.tableSections.count - 1 ? 1 : Constants.sectionHeaderHeight
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = .lifeCircleLineBack
         return view
