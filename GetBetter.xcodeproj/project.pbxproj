@@ -77,6 +77,7 @@
 		C396E23E246AC8E200DBF0E4 /* AchievementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23D246AC8E200DBF0E4 /* AchievementService.swift */; };
 		C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A321D245710BC005D2EDF /* SettingsViewController.swift */; };
 		C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39A321E245710BC005D2EDF /* SettingsViewController.xib */; };
+		C39EF07A258738010090BC35 /* 24118-japan-flow.json in Resources */ = {isa = PBXBuildFile; fileRef = C39EF079258738010090BC35 /* 24118-japan-flow.json */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
 		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
 		C3B4760324596BAD0067A3C0 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsSection.swift */; };
@@ -207,6 +208,7 @@
 		C396E23D246AC8E200DBF0E4 /* AchievementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementService.swift; sourceTree = "<group>"; };
 		C39A321D245710BC005D2EDF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C39A321E245710BC005D2EDF /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		C39EF079258738010090BC35 /* 24118-japan-flow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "24118-japan-flow.json"; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C3B4760224596BAD0067A3C0 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 		C38157AA2556B2AB0005C16E /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C39EF079258738010090BC35 /* 24118-japan-flow.json */,
 				C3D69D7725850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json */,
 				C38158282556BEBD0005C16E /* 15046-spark-animation.json */,
 				C38158292556BEBD0005C16E /* 28592-yoga-nature.json */,
@@ -874,6 +877,7 @@
 				F14951ADCAB034E8DF436B5D /* 6.png in Resources */,
 				F14950603E4BBFAB23440180 /* 7.png in Resources */,
 				C381582C2556BEBD0005C16E /* 15046-spark-animation.json in Resources */,
+				C39EF07A258738010090BC35 /* 24118-japan-flow.json in Resources */,
 				F14954FEAEF05672B805215A /* 8.png in Resources */,
 				C36351CF257D336300DA6713 /* NotificationCell.xib in Resources */,
 				F14955EA34AE8AA776A7C8ED /* 2.png in Resources */,
@@ -1186,7 +1190,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1211,7 +1215,7 @@
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3RF6BSH4ZX;
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

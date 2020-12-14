@@ -332,7 +332,6 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SphereMetrics.reuseId,
                                                  for: indexPath) as! SphereMetricsTableViewCell
-        cell.selectionStyle = .none
          // indexPath.row - 1 для ячейки Common Metrics
         let sphereIndex = indexPath.row - 1
         guard let sphereValue = getSphereValue(index: sphereIndex) else { return cell }

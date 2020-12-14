@@ -15,6 +15,7 @@ enum AnimationName {
     case loadingSuccess
     case loadingError
     case travel
+    case japan
 
     static let mapper: [AnimationName: String] = [
         .spark: "15046-spark-animation",
@@ -22,7 +23,8 @@ enum AnimationName {
         .yoga: "28592-yoga-nature",
         .loadingSuccess: "35255-from-loading-to-success",
         .loadingError: "35256-from-loading-to-error",
-        .travel: "19904-ski-touring-backcountry-skiing"
+        .travel: "19904-ski-touring-backcountry-skiing",
+        .japan: "24118-japan-flow"
     ]
 
     var value: String {

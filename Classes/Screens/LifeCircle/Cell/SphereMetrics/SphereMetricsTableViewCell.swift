@@ -19,6 +19,8 @@ class SphereMetricsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
+        selectionStyle = .none
+        backgroundColor = .appBackground
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,7 +35,6 @@ class SphereMetricsTableViewCell: UITableViewCell {
             valueView.backgroundColor = UIColor.color(for: value)
         }
         descriptionLabel.text = sphereValue.sphere?.description
-        
     }
     
     private func setupView() {

@@ -21,13 +21,17 @@ final class AchievementsViewController: UIViewController {
         addSubviews()
         setupTableView()
         makeConstraints()
+        view.backgroundColor = .appBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.alpha = 0
         loadData(completion: { [weak self] in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self.tableView.reloadData()
+                UIView.animate(withDuration: 0.5, animations: { self.tableView.alpha = 1 })
             }
         })
     }

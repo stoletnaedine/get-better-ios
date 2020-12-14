@@ -47,9 +47,12 @@ class JournalViewController: UIViewController {
     }
     
     @objc public func updatePostsInTableView() {
+        tableView.alpha = 0
         getPosts { [weak self] in
-            self?.tableView.refreshControl?.endRefreshing()
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.tableView.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
+            UIView.animate(withDuration: 0.5, animations: { self.tableView.alpha = 1 })
         }
     }
     
@@ -145,14 +148,14 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = UITableViewCell()
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = info
+            cell.backgroundColor = .appBackground
             return cell
         
         case .post:
-            guard let post = postSections[indexPath.section].posts?[indexPath.row] else { return UITableViewCell() }
+            guard let post = section.posts?[indexPath.row] else { return UITableViewCell() }
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellId,
                                                           for: indexPath) as! JournalTableViewCell
             cell.fillCell(from: post)
-            cell.selectionStyle = .none
             return cell
         }
     }

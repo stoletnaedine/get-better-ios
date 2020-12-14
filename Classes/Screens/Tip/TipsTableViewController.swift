@@ -38,7 +38,7 @@ final class TipsTableViewController: UIViewController {
             switch result {
             case .success(let ids):
                 if ids.isEmpty {
-                    self.showAnimation(name: .travel, on: self.view, loopMode: .loop)
+                    self.showAnimation(name: .japan, on: self.view, loopMode: .loop)
                 } else {
                     self.stopAnimation()
                 }

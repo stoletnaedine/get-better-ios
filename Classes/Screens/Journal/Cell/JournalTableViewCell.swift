@@ -22,6 +22,8 @@ class JournalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
+        selectionStyle = .none
+        backgroundColor = .appBackground
     }
     
     override func prepareForReuse() {
