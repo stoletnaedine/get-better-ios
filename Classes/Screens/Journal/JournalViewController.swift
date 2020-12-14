@@ -26,7 +26,6 @@ class JournalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupRefreshControl()
         setupTableView()
         setupBarButton()
         title = R.string.localizable.tabBarJournal()
@@ -37,6 +36,15 @@ class JournalViewController: UIViewController {
         updatePostsInTableView()
     }
     
+    func updatePostsInTableView() {
+        tableView.alpha = 0
+        getPosts { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            UIView.animate(withDuration: 0.5, animations: { self.tableView.alpha = 1 })
+        }
+    }
+    
     @objc private func addPost() {
         guard connectionHelper.connectionAvailable() else { return }
         let addPostViewController = AddPostViewController()
@@ -44,16 +52,6 @@ class JournalViewController: UIViewController {
             self?.updatePostsInTableView()
         }
         present(addPostViewController, animated: true, completion: nil)
-    }
-    
-    @objc public func updatePostsInTableView() {
-        tableView.alpha = 0
-        getPosts { [weak self] in
-            guard let self = self else { return }
-            self.tableView.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
-            UIView.animate(withDuration: 0.5, animations: { self.tableView.alpha = 1 })
-        }
     }
     
     @objc private func getPosts(completion: @escaping VoidClosure) {
@@ -110,12 +108,6 @@ class JournalViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(addPost))
-    }
-    
-    private func setupRefreshControl() {
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(updatePostsInTableView), for: .valueChanged)
-        tableView.refreshControl = refresh
     }
     
     private func setupTableView() {
