@@ -37,11 +37,9 @@ class JournalViewController: UIViewController {
     }
     
     func updatePostsInTableView() {
-        tableView.alpha = 0
         getPosts { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
-            UIView.animate(withDuration: 0.5, animations: { self.tableView.alpha = 1 })
         }
     }
     
