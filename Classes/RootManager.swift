@@ -22,7 +22,7 @@ class RootManager: RootManagerProtocol {
     private lazy var alertService: AlertService = AlertServiceDefault()
     private lazy var database: GBDatabase = FirebaseDatabase()
     private var tabBarController: TabBarController?
-    private let userDefaultsService: UserDefaultsService = UserDefaultsServiceDefault()
+    private let userDefaultsService: UserDefaultsService = UserDefaultsServiceImpl()
     
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)

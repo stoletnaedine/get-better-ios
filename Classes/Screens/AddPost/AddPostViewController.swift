@@ -25,7 +25,9 @@ class AddPostViewController: UIViewController {
     let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
     
+    private let userService: UserDefaultsService = UserDefaultsServiceImpl()
     private let storage: GBStorage = FirebaseStorage()
+    
     private let maxSymbolsCount: Int = 300
     private var isPhotoSelected: Bool = false
     
@@ -99,6 +101,7 @@ class AddPostViewController: UIViewController {
         
         database.savePost(post) { [weak self] in
             guard let self = self else { return }
+            self.userService.clearDraft()
             self.stopAnimation()
             let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
             self.alertService.showSuccessMessage(desc: description)
@@ -111,12 +114,15 @@ class AddPostViewController: UIViewController {
         selectSphereButton.addTarget(self, action: #selector(showPicker), for: .allTouchEvents)
     }
     
-    func setupTextView() {
+    private func setupTextView() {
         postTextView.delegate = self
         postTextView.becomeFirstResponder()
+        let draftText = userService.getDraft()
+        postTextView.text = draftText
+        placeholderLabel.isHidden = !draftText.isEmpty
     }
     
-    @objc func showPicker() {
+    @objc private func showPicker() {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
@@ -164,6 +170,7 @@ class AddPostViewController: UIViewController {
 }
 
 // MARK: UIPickerViewDelegate
+
 extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -188,9 +195,11 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 // MARK: UITextViewDelegate
+
 extension AddPostViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        userService.saveDraft(text: postTextView.text)
         let currentTextCount = postTextView.text.count
         symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
         placeholderLabel.isHidden = currentTextCount != 0
@@ -211,6 +220,7 @@ extension AddPostViewController: UITextViewDelegate {
 }
 
 // MARK: UIImagePickerControllerDelegate
+
 extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
