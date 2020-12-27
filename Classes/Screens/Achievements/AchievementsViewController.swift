@@ -39,17 +39,8 @@ final class AchievementsViewController: UIViewController {
     private func loadData(completion: @escaping VoidClosure) {
         lifeCircleService.loadUserData { [weak self] userData in
             guard let self = self else { return }
-            guard let userData = userData,
-                  let startSphereMetrics = userData.start,
-                  let currentSphereMetrics = userData.current else { return }
-            
-            let achievements = self.achievementService.calcAchievements(
-                posts: userData.posts,
-                startSphereMetrics: startSphereMetrics,
-                currentSphereMetrics: currentSphereMetrics
-            )
-            
-            self.achievements = achievements
+            guard let userData = userData else { return }
+            self.achievements = self.achievementService.calcAchievements(userData: userData)
             completion()
         }
     }

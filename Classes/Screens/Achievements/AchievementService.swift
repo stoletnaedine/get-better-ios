@@ -9,23 +9,19 @@
 import Foundation
 
 protocol AchievementService {
-    func calcAchievements(posts: [Post],
-                          startSphereMetrics: SphereMetrics,
-                          currentSphereMetrics: SphereMetrics) -> [Achievement]
+    func calcAchievements(userData: UserData) -> [Achievement]
 }
 
 class AchievementServiceDefault: AchievementService {
     
-    func calcAchievements(posts: [Post],
-                          startSphereMetrics: SphereMetrics,
-                          currentSphereMetrics: SphereMetrics) -> [Achievement] {
-        let daysAchievements = getDaysAchievements(posts: posts)
-        let maxValueAchievements = getMaxValueAchievements(currentSphereMetrics: currentSphereMetrics)
-        let fromRedZoneAchievements = getFromRedZoneAchievements(startSphereMetrics: startSphereMetrics,
-                                                                 currentSphereMetrics: currentSphereMetrics)
-        let plusOneAchievements = getPlusOneAchievements(posts: posts)
+    func calcAchievements(userData: UserData) -> [Achievement] {
+        let daysAchievements = getDaysAchievements(posts: userData.posts)
+        let maxValueAchievements = getMaxValueAchievements(current: userData.current)
+        let fromRedZoneAchievements = getFromRedZoneAchievements(start: userData.start, current: userData.current)
+        let plusOneAchievements = getPlusOneAchievements(posts: userData.posts)
+        let roundCountAchievements = getRoundCountAchievements(posts: userData.posts)
         
-        let achievements = daysAchievements + maxValueAchievements + fromRedZoneAchievements + plusOneAchievements
+        let achievements = daysAchievements + maxValueAchievements + fromRedZoneAchievements + plusOneAchievements + roundCountAchievements
         let sortedAchievements = achievements.sorted(by: { $0.unlocked && !$1.unlocked })
         return sortedAchievements
     }
@@ -93,8 +89,9 @@ class AchievementServiceDefault: AchievementService {
         return (countDaysInRowArray.max() ?? 0, countDaysInRowArray.last ?? 0)
     }
     
-    private func getMaxValueAchievements(currentSphereMetrics: SphereMetrics) -> [Achievement] {
-        let maxValueSphereRawValues = currentSphereMetrics.values
+    private func getMaxValueAchievements(current: SphereMetrics?) -> [Achievement] {
+        guard let current = current else { return [] }
+        let maxValueSphereRawValues = current.values
             .filter { $0.value == Properties.maxSphereValue }
             .map { $0.key }
         
@@ -116,7 +113,7 @@ class AchievementServiceDefault: AchievementService {
                 spheresAchievements.append(
                     Achievement(icon: sphere?.icon ?? "🏆",
                                 title: "\(sphere?.name ?? "") на максимум",
-                        description: "Отличная работа! Сфера \(sphere?.name ?? "") прокачена на 10 баллов",
+                                description: "Отличная работа! Сфера \(sphere?.name ?? "") прокачена на 10 баллов",
                                 unlocked: true))
             }
         }
@@ -124,10 +121,11 @@ class AchievementServiceDefault: AchievementService {
         return spheresAchievements
     }
     
-    private func getFromRedZoneAchievements(startSphereMetrics: SphereMetrics,
-                                            currentSphereMetrics: SphereMetrics) -> [Achievement] {
+    private func getFromRedZoneAchievements(start: SphereMetrics?,
+                                            current: SphereMetrics?) -> [Achievement] {
+        guard let current = current, let start = start else { return [] }
         let redZoneValue = 3.5
-        let redZoneSpheresStart = startSphereMetrics.values
+        let redZoneSpheresStart = start.values
             .filter { $0.value < redZoneValue }
             .map { $0.key }
         
@@ -137,7 +135,7 @@ class AchievementServiceDefault: AchievementService {
         
         var resultSpheres: [String] = []
         
-        let notRedZoneSpheresCurrent = currentSphereMetrics.values
+        let notRedZoneSpheresCurrent = current.values
             .filter { $0.value >= redZoneValue }
             .map { $0.key }
         
@@ -199,5 +197,23 @@ class AchievementServiceDefault: AchievementService {
         }
         
         return [achievement]
+    }
+    
+    private func getRoundCountAchievements(posts: [Post]) -> [Achievement] {
+        var achievements: [Achievement] = []
+        var roundCount: [Int] = []
+        for multi in 1...50 {
+            roundCount.append(multi * 50)
+        }
+        for round in roundCount {
+            if round <= posts.count {
+                achievements.append(Achievement(icon: "💯",
+                                                title: "Круглая цифра",
+                                                description: "Тобой написано уже \(round) постов, круто!",
+                                                unlocked: true))
+            }
+        }
+        guard let last = achievements.last else { return [] }
+        return last
     }
 }
