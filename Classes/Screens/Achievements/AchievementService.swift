@@ -163,7 +163,8 @@ class AchievementServiceDefault: AchievementService {
     private func getPlusOneAchievements(posts: [Post]) -> [Achievement] {
         let daysLimit = 5
         let postsCountCondition = 10
-        var achievement = Achievement(icon: "🚀", title: "Rocketman",
+        var achievement = Achievement(icon: "🚀",
+                                      title: "Rocketman",
                                       description: "Набрать 1 балл в любой сфере меньше, чем за \(daysLimit) дней")
         
         var fastSphereNames: [String] = []
@@ -191,7 +192,8 @@ class AchievementServiceDefault: AchievementService {
         
         if !fastSphereNames.isEmpty {
             let spheresString = fastSphereNames.joined(separator: ", ")
-            achievement = Achievement(icon: "🚀", title: "Rocketman",
+            achievement = Achievement(icon: "🚀",
+                                      title: "Rocketman",
                                       description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней",
                                       unlocked: true)
         }
@@ -200,20 +202,16 @@ class AchievementServiceDefault: AchievementService {
     }
     
     private func getRoundCountAchievements(posts: [Post]) -> [Achievement] {
-        var achievements: [Achievement] = []
-        var roundCount: [Int] = []
-        for multi in 1...50 {
-            roundCount.append(multi * 50)
-        }
-        for round in roundCount {
-            if round <= posts.count {
-                achievements.append(Achievement(icon: "💯",
-                                                title: "Круглая цифра",
-                                                description: "Тобой написано уже \(round) постов, круто!",
-                                                unlocked: true))
-            }
-        }
-        guard let last = achievements.last else { return [] }
-        return last
+        let roundCount = 50
+        let multiplier: Int = posts.count / roundCount
+        let isUnlocked = multiplier > 0
+        let description = isUnlocked
+            ? "Тобой написано уже \(multiplier * 50) постов"
+            : "Написать \(roundCount) постов"
+        let achievement = Achievement(icon: "💯",
+                                      title: "Круглая цифра",
+                                      description: description,
+                                      unlocked: isUnlocked)
+        return [achievement]
     }
 }
