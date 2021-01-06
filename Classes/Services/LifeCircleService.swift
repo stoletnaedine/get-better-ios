@@ -94,10 +94,10 @@ class LifeCircleServiceDefault: LifeCircleService {
     }
     
     func calcPrescriptionRate() -> Double {
-        // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 100 дней.
+        // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 150 дней.
         let basePrescriptionRate: Double = 1.0
         let decrementRate: Double = 0.1
-        let daysForDecrement: Double = 100
+        let daysForDecrement: Double = 150
         let daysFromUserCreation = self.daysFromUserCreation()
         let prescriptionRate = basePrescriptionRate - ((Double(daysFromUserCreation) / daysForDecrement) * decrementRate)
         return prescriptionRate
