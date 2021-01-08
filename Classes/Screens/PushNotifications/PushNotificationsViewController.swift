@@ -76,7 +76,6 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.numberOfLines = 0
-        cell.selectionStyle = .none
         cell.backgroundColor = .appBackground
         switch indexPath.section {
         case 0:
@@ -84,7 +83,8 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
         case 1:
             cell.textLabel?.text = settings.post.text
         default:
-            cell.textLabel?.text = "Выбери подходящее время и нажми Сохранить."
+            cell.selectionStyle = .none
+            cell.textLabel?.text = "Выбери подходящее время и нажми Сохранить"
         }
         return cell
     }

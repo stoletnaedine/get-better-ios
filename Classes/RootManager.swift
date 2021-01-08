@@ -50,9 +50,13 @@ class RootManager: RootManagerProtocol {
     }
     
     func showPushAlert() {
-        let alert = UIAlertController(title: "Теперь можно указать время для пушей 👍",
-                                      message: "Обновите push-уведомления в разделе Настройки",
+        let alert = UIAlertController(title: "⏰ Теперь можно указать время для push-уведомлений",
+                                      message: "Установить удобное время можно в разделе Настройки",
                                       preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Здорово", style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        })
+        alert.addAction(okAction)
         
         if let tabBarController = self.tabBarController {
             tabBarController.present(alert, animated: true, completion: nil)
