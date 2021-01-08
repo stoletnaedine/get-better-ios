@@ -116,17 +116,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.fillCell(profile: profile)
             return cell
             
-        case .tips, .articles:
+        case .tips, .articles, .notifications:
             let cell = UITableViewCell()
             cell.textLabel?.text = item.title
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
-            return cell
-            
-        case .notifications:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell)
-                    as? NotificationCell else { return UITableViewCell() }
-            notificationService.configure(cell: cell, by: item)
             return cell
             
         case .aboutApp:
@@ -140,17 +134,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let defaultHeight = UITableViewCell().frame.height
         let section = tableSections[indexPath.section]
         switch section.type {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell else { return .zero }
             return cell.frame.height
-        case .notifications:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.notificationCell) as? NotificationCell else { return .zero }
-            return cell.frame.height
         default:
-            return defaultHeight
+            return UITableViewCell().frame.height
         }
     }
     
@@ -180,8 +170,6 @@ extension SettingsViewController {
         editProfileViewController.editProfileCompletion = { [weak self] in
             self?.loadProfileAndReloadTableView()
         }
-        
-        let tipsTableViewController = TipsTableViewController()
         
         let aboutCircleVC = ArticleViewController()
         aboutCircleVC.article = Article(title: R.string.localizable.aboutCircleTitle(),
@@ -213,7 +201,7 @@ extension SettingsViewController {
                     cells: [
                         SettingsCell(title: R.string.localizable.tipsTitle(),
                                      action: { [weak self] in
-                            self?.navigationController?.pushViewController(tipsTableViewController, animated: true)
+                            self?.navigationController?.pushViewController(TipsTableViewController(), animated: true)
                         })
                     ]),
             SettingsSection(type: .articles,
@@ -233,12 +221,10 @@ extension SettingsViewController {
                          ]),
             SettingsSection(type: .notifications,
                     cells: [
-                        SettingsCell(title: R.string.localizable.settingsPushTipTitle(),
-                                     subTitle: R.string.localizable.settingsPushTipDescription(),
-                                     topic: .tipOfTheDay),
-                        SettingsCell(title: R.string.localizable.settingsPushDailyTitle(),
-                                     subTitle: R.string.localizable.settingsPushDailyDescription(),
-                                     topic: .daily)
+                        SettingsCell(title: R.string.localizable.settingsPushTitle(),
+                                     action: { [weak self] in
+                            self?.navigationController?.pushViewController(PushNotificationsViewController(), animated: true)
+                        })
                     ]),
             SettingsSection(type: .aboutApp,
                     cells: [

@@ -6,7 +6,6 @@
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 enum Sphere: String, CaseIterable {
@@ -49,6 +48,7 @@ extension Sphere {
         .creation: "Реализация потенциала, хобби, личностное развитие",
         .spirit: "Эмоции, душевное состояние, медитации"
     ]
+    
     var description: String {
         return Sphere.descriptionMapper[self]!
     }

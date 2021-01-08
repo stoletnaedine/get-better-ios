@@ -13,6 +13,7 @@ protocol RootManagerProtocol {
     func start()
     func showAddPost()
     func showTip()
+    func showPushAlert()
 }
 
 class RootManager: RootManagerProtocol {
@@ -46,6 +47,20 @@ class RootManager: RootManagerProtocol {
     func showTip() {
         userDefaultsService.setTipOfTheDayNotShown()
         enterApp()
+    }
+    
+    func showPushAlert() {
+        let alert = UIAlertController(title: "Теперь можно указать время для пушей 👍",
+                                      message: "Обновите push-уведомления в разделе Настройки",
+                                      preferredStyle: .alert)
+        
+        if let tabBarController = self.tabBarController {
+            tabBarController.present(alert, animated: true, completion: nil)
+            return
+        }
+        enterApp(completion: { tabBarController in
+            tabBarController.present(alert, animated: true, completion: nil)
+        })
     }
     
     @objc

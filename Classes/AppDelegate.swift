@@ -67,13 +67,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         let info = userInfo as NSDictionary
-        if let topicName = info.value(forKey: Constants.topicKey) as? String,
-           let topic = NotificationTopic(rawValue: topicName) {
-            switch topic {
-            case .daily:
-                rootManager.showAddPost()
-            case .tipOfTheDay:
-                rootManager.showTip()
+        if let topicName = info.value(forKey: Constants.topicKey) as? String {
+            if let topic = NotificationTopic(rawValue: topicName) {
+                switch topic {
+                case .post:
+                    rootManager.showAddPost()
+                case .tip:
+                    rootManager.showTip()
+                }
+            } else {
+                rootManager.showPushAlert()
             }
         }
 

@@ -45,13 +45,13 @@ class AchievementServiceDefault: AchievementService {
         
         let regularSevenDesc = "Добавлять события 7 дней подряд (\(maxCountDaysInRow >= 7 ? 7 : daysInRowLastTime)/7)"
         let regularSeven = Achievement(icon: "🤘",
-                                       title: "WeekStart",
+                                       title: "Неделя достижений",
                                        description: regularSevenDesc,
                                        unlocked: maxCountDaysInRow >= 7)
         
         let regularTenDesc = "Добавлять события 10 дней подряд (\(maxCountDaysInRow >= 10 ? 10 : daysInRowLastTime)/10)"
         let regularTen = Achievement(icon: "😎",
-                                     title: "Десятикратный",
+                                     title: "10x",
                                      description: regularTenDesc,
                                      unlocked: maxCountDaysInRow >= 10)
         return [regularThree, regularFive, regularSeven, regularTen]
@@ -206,7 +206,7 @@ class AchievementServiceDefault: AchievementService {
         let multiplier: Int = posts.count / roundCount
         let isUnlocked = multiplier > 0
         let description = isUnlocked
-            ? "Тобой написано уже \(multiplier * 50) постов"
+            ? "Ты написал уже \(multiplier * 50) постов"
             : "Написать \(roundCount) постов"
         let achievement = Achievement(icon: "💯",
                                       title: "Круглая цифра",

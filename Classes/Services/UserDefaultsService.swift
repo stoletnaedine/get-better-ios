@@ -15,6 +15,8 @@ protocol UserDefaultsService {
     func saveDraft(text: String)
     func getDraft() -> String
     func clearDraft()
+    func getNotificationSettings() -> NotificationSettings
+    func saveNotificationSettings(_ settings: NotificationSettings)
 }
 
 class UserDefaultsServiceImpl: UserDefaultsService {
@@ -25,21 +27,23 @@ class UserDefaultsServiceImpl: UserDefaultsService {
     
     private enum Constants {
         enum Key {
-            static let tipOfTheDay = "tipOfTheDay"
+            static let tipOfTheDayShown = "tipOfTheDayShown"
             static let draft = "draft"
+            static let tipPush = "tipPush"
+            static let postPush = "postPush"
         }
     }
     
     func tipOfTheDayShown() {
-        UserDefaults.standard.set(days, forKey: Constants.Key.tipOfTheDay)
+        UserDefaults.standard.set(days, forKey: Constants.Key.tipOfTheDayShown)
     }
     
     func setTipOfTheDayNotShown() {
-        UserDefaults.standard.set(-1, forKey: Constants.Key.tipOfTheDay)
+        UserDefaults.standard.set(-1, forKey: Constants.Key.tipOfTheDayShown)
     }
     
     func isTipOfTheDayShown() -> Bool {
-        return UserDefaults.standard.value(forKey: Constants.Key.tipOfTheDay) as? Int == days
+        return UserDefaults.standard.value(forKey: Constants.Key.tipOfTheDayShown) as? Int == days
     }
     
     func saveDraft(text: String) {
@@ -52,6 +56,22 @@ class UserDefaultsServiceImpl: UserDefaultsService {
     }
     
     func clearDraft() {
-        UserDefaults.standard.setValue("", forKey: Constants.Key.draft)
+        UserDefaults.standard.setValue(nil, forKey: Constants.Key.draft)
     }
+    
+    func getNotificationSettings() -> NotificationSettings {
+        let tipRawValue = UserDefaults.standard.value(forKey: Constants.Key.tipPush) as? String ?? ""
+        let tipTopic = TipTopic(tipRawValue)
+        
+        let postRawValue = UserDefaults.standard.value(forKey: Constants.Key.postPush) as? String ?? ""
+        let postTopic = PostTopic(postRawValue)
+        
+        return NotificationSettings(tip: tipTopic, post: postTopic)
+    }
+    
+    func saveNotificationSettings(_ settings: NotificationSettings) {
+        UserDefaults.standard.setValue(settings.tip.rawValue, forKey: Constants.Key.tipPush)
+        UserDefaults.standard.setValue(settings.post.rawValue, forKey: Constants.Key.postPush)
+    }
+    
 }
