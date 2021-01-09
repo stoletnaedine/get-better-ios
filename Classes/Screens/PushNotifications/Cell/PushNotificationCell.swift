@@ -36,20 +36,14 @@ class PushNotificationCell: UITableViewCell {
     }
     
     private func setupView() {
-        iconLabel.font = iconLabel.font.withSize(24)
+        iconLabel.font = iconLabel.font.withSize(30)
         nameLabel.font = UIFont.systemFont(ofSize: 18)
         nameLabel.textColor = .darkGray
         timeLabel.font = UIFont.systemFont(ofSize: 18)
         timeLabel.textColor = .white
         timeView.layer.cornerRadius = 10
         timeView.backgroundColor = .violet
-        
-        containerView.layer.cornerRadius = 10
-        containerView.backgroundColor = .white
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOffset = .init(width: 1, height: 1)
-        containerView.layer.shadowOpacity = 0.1
-        containerView.layer.shadowRadius = 10
+        containerView.backgroundColor = .clear
     }
     
 }

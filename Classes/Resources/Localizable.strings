@@ -199,6 +199,7 @@
 "PushNotifications.Header.Tip" = "Cовет дня";
 "PushNotifications.Header.Post" = "Итоги дня";
 "PushNotifications.save" = "Сохранить";
+"PushNotifications.description" = "Здесь можно настроить время отправки push-уведомлений. Выбери подходящее время и нажми Сохранить. Время указано московское. Пуши приходят каждый день.";
 
 // MARK: EditProfile
 

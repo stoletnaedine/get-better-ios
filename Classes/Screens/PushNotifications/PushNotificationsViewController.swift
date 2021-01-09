@@ -52,7 +52,6 @@ class PushNotificationsViewController: UIViewController {
         tableView.register(UINib(nibName: Constants.xibName, bundle: nil), forCellReuseIdentifier: Constants.reuseId)
         tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
-        tableView.separatorStyle = .none
     }
     
     private func customizeBarButton() {
@@ -88,7 +87,15 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        let view = UIView()
+        let label = UILabel()
+        view.addSubview(label)
+        label.numberOfLines = 0
+        label.textColor = .grey
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.text = R.string.localizable.pushNotificationsDescription()
+        label.frame = CGRect(x: 15, y: 5, width: UIScreen.main.bounds.size.width - 30, height: 100)
+        return view
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
