@@ -15,7 +15,8 @@ class EditPostViewController: AddPostViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.titleLabel.text = "Редактировать"
+        postType = .edit
+        self.titleLabel.text = R.string.localizable.postEditTitle()
     }
     
     override func setupSelectSphereButtonTapHandler() {

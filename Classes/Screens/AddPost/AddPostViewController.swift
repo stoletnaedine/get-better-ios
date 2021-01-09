@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum PostType {
+    case add
+    case edit
+}
+
 class AddPostViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,21 +29,20 @@ class AddPostViewController: UIViewController {
     var selectedSphere: Sphere?
     let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
+    let userService: UserDefaultsService = UserDefaultsServiceImpl()
+    var addedPostCompletion: VoidClosure?
+    var postType: PostType = .add
     
-    private let userService: UserDefaultsService = UserDefaultsServiceImpl()
     private let storage: GBStorage = FirebaseStorage()
-    
     private let maxSymbolsCount: Int = 300
     private var isPhotoSelected: Bool = false
-    
-    var addedPostCompletion: VoidClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        setupView()
-        setupSelectSphereButtonTapHandler()
         setupTextView()
+        setupSelectSphereButtonTapHandler()
+        setupView()
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
@@ -199,7 +203,9 @@ extension AddPostViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 extension AddPostViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        userService.saveDraft(text: postTextView.text)
+        if postType == .add {
+            userService.saveDraft(text: postTextView.text)
+        }
         let currentTextCount = postTextView.text.count
         symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
         placeholderLabel.isHidden = currentTextCount != 0
