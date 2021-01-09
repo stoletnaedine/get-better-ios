@@ -21,12 +21,12 @@ class ProfileCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func fillCell(profile: Profile) {
-        if let avatarURL = profile.avatarURL {
+    func configure(model: Profile) {
+        if let avatarURL = model.avatarURL {
             self.avatarImageView.kf.setImage(with: avatarURL)
         }
-        self.nameLabel.text = profile.name
-        self.emailLabel.text = profile.email
+        self.nameLabel.text = model.name
+        self.emailLabel.text = model.email
     }
     
     private func customizeView() {

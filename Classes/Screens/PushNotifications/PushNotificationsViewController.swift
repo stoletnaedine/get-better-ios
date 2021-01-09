@@ -15,6 +15,12 @@ class PushNotificationsViewController: UIViewController {
     private let notificationService: NotificationService = NotificationServiceDefault()
     private var settings = NotificationSettings(tip: .none, post: .none)
     private var currentTopic: NotificationTopic?
+    private var models: [PushNotificationModel] {
+        return [
+            PushNotificationModel(icon: "🤩", name: R.string.localizable.pushNotificationsHeaderTip(), time: settings.tip.text, topic: .tip),
+            PushNotificationModel(icon: "✍️", name: R.string.localizable.pushNotificationsHeaderPost(), time: settings.post.text, topic: .post)
+        ]
+    }
     private let customTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     override func viewDidLoad() {
@@ -46,6 +52,7 @@ class PushNotificationsViewController: UIViewController {
         tableView.register(UINib(nibName: Constants.xibName, bundle: nil), forCellReuseIdentifier: Constants.reuseId)
         tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
+        tableView.separatorStyle = .none
     }
     
     private func customizeBarButton() {
@@ -66,26 +73,17 @@ class PushNotificationsViewController: UIViewController {
 extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return models.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.numberOfLines = 0
-        cell.backgroundColor = .appBackground
-        switch indexPath.section {
-        case 0:
-            cell.textLabel?.text = settings.tip.text
-        case 1:
-            cell.textLabel?.text = settings.post.text
-        default:
-            cell.selectionStyle = .none
-            cell.textLabel?.text = "Выбери подходящее время и нажми Сохранить"
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseId, for: indexPath)
+                as? PushNotificationCell else { fatalError() }
+        cell.configure(model: models[indexPath.row])
         return cell
     }
     
@@ -95,14 +93,7 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         customTextField.resignFirstResponder()
-        switch indexPath.section {
-        case 0:
-            currentTopic = .tip
-        case 1:
-            currentTopic = .post
-        default:
-            return
-        }
+        currentTopic = models[indexPath.row].topic
         let uiPicker = UIPickerView()
         uiPicker.delegate = self
         uiPicker.dataSource = self
@@ -110,15 +101,8 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
         customTextField.becomeFirstResponder()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return R.string.localizable.pushNotificationsHeaderTip()
-        case 1:
-            return R.string.localizable.pushNotificationsHeaderPost()
-        default:
-            return nil
-        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
     
 }
@@ -128,8 +112,8 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
 extension PushNotificationsViewController {
     
     private enum Constants {
-        static let xibName = "PushCell"
-        static let reuseId = "PushCellId"
+        static let xibName = R.nib.pushNotificationCell.name
+        static let reuseId = "PushNotificationCell"
     }
     
 }

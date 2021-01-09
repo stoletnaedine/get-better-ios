@@ -44,6 +44,9 @@
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
 		C35B38AF2462D57500E0C416 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38AE2462D57500E0C416 /* Photo.swift */; };
 		C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38B02462E1E700E0C416 /* UIImage.swift */; };
+		C35CC98E25A9BBE100A9AA59 /* PushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CC98C25A9BBE100A9AA59 /* PushNotificationCell.swift */; };
+		C35CC98F25A9BBE100A9AA59 /* PushNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CC98D25A9BBE100A9AA59 /* PushNotificationCell.xib */; };
+		C35CC99225A9BDF900A9AA59 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CC99125A9BDF900A9AA59 /* PushNotificationModel.swift */; };
 		C35D8361250D40E5000C565E /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D835F250D40E5000C565E /* TipViewController.swift */; };
 		C35D8362250D40E5000C565E /* TipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35D8360250D40E5000C565E /* TipViewController.xib */; };
 		C35D83732511D88B000C565E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35D83722511D88B000C565E /* UserDefaultsService.swift */; };
@@ -175,6 +178,9 @@
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
 		C35B38AE2462D57500E0C416 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		C35B38B02462E1E700E0C416 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		C35CC98C25A9BBE100A9AA59 /* PushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationCell.swift; sourceTree = "<group>"; };
+		C35CC98D25A9BBE100A9AA59 /* PushNotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PushNotificationCell.xib; sourceTree = "<group>"; };
+		C35CC99125A9BDF900A9AA59 /* PushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
 		C35D835F250D40E5000C565E /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		C35D8360250D40E5000C565E /* TipViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipViewController.xib; sourceTree = "<group>"; };
 		C35D83722511D88B000C565E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
@@ -435,6 +441,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C35CC98A25A9BBC800A9AA59 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C35CC98C25A9BBE100A9AA59 /* PushNotificationCell.swift */,
+				C35CC98D25A9BBE100A9AA59 /* PushNotificationCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		C35D835E250D40C3000C565E /* Tip */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +540,7 @@
 				C38158302556C28E0005C16E /* AnimationName.swift */,
 				C3635187257CD7B700DA6713 /* NotificationSettings.swift */,
 				C36351D2257D353600DA6713 /* NotificationCellViewModel.swift */,
+				C35CC99125A9BDF900A9AA59 /* PushNotificationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				C389466625A84BAF00FEF40C /* PushNotificationsViewController.swift */,
+				C35CC98A25A9BBC800A9AA59 /* Cell */,
 			);
 			path = PushNotifications;
 			sourceTree = "<group>";
@@ -891,6 +908,7 @@
 				F14955EA34AE8AA776A7C8ED /* 2.png in Resources */,
 				F1495D5ECDF0B97F424E8224 /* 5.png in Resources */,
 				F1495CCF35CE078ED01A9258 /* 1.png in Resources */,
+				C35CC98F25A9BBE100A9AA59 /* PushNotificationCell.xib in Resources */,
 				F1495CE9448BA43B6273D3AB /* 4.png in Resources */,
 				F149568306069F87D911B76D /* 9.png in Resources */,
 				F14959E6D1E7A2AB6E42BF31 /* SphereDetailViewController.xib in Resources */,
@@ -1008,10 +1026,12 @@
 				C328EE052447294100445704 /* RegisterViewController.swift in Sources */,
 				6E5AE64624601DD200418B23 /* ResetPasswordViewController.swift in Sources */,
 				C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */,
+				C35CC98E25A9BBE100A9AA59 /* PushNotificationCell.swift in Sources */,
 				6E045E9B24640A6B0001E378 /* Achievement.swift in Sources */,
 				C33722B4254EEA2800191785 /* TipStorage.swift in Sources */,
 				C35D83732511D88B000C565E /* UserDefaultsService.swift in Sources */,
 				C30C7A0F247E8DC400FD830F /* ConnectionHelper.swift in Sources */,
+				C35CC99225A9BDF900A9AA59 /* PushNotificationModel.swift in Sources */,
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
 				C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,

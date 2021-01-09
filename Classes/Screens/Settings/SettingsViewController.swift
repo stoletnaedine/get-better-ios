@@ -113,7 +113,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell,
                   let profile = self.profile else { return UITableViewCell() }
-            cell.fillCell(profile: profile)
+            cell.configure(model: profile)
             return cell
             
         case .tips, .articles, .notifications:

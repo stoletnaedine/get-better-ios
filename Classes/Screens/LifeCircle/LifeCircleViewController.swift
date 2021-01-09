@@ -335,7 +335,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
          // indexPath.row - 1 для ячейки Common Metrics
         let sphereIndex = indexPath.row - 1
         guard let sphereValue = getSphereValue(index: sphereIndex) else { return cell }
-        cell.fillCell(from: sphereValue)
+        cell.configure(from: sphereValue)
         return cell
     }
     

@@ -196,8 +196,8 @@
 // MARK: PushNotifications
 
 "PushNotifications.title" = "Уведомления";
-"PushNotifications.Header.Tip" = "Присылать совет дня";
-"PushNotifications.Header.Post" = "Напоминать вести дневник";
+"PushNotifications.Header.Tip" = "Cовет дня";
+"PushNotifications.Header.Post" = "Итоги дня";
 "PushNotifications.save" = "Сохранить";
 
 // MARK: EditProfile

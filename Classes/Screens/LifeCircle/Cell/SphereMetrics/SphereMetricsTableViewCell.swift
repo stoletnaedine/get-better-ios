@@ -27,7 +27,7 @@ class SphereMetricsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func fillCell(from sphereValue: SphereValue) {
+    func configure(from sphereValue: SphereValue) {
         iconLabel.text = sphereValue.sphere?.icon
         nameLabel.text = sphereValue.sphere?.name
         if let value = sphereValue.value {
