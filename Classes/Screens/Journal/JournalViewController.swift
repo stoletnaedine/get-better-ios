@@ -20,7 +20,6 @@ class JournalViewController: UIViewController {
     
     private let database: GBDatabase = FirebaseDatabase()
     private let alertService: AlertService = AlertServiceDefault()
-    private let activityIndicator = UIActivityIndicatorView()
     private let connectionHelper = ConnectionHelper()
     private var postSections: [JournalSection] = []
     
