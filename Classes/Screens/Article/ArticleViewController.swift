@@ -48,7 +48,7 @@ class ArticleViewController: UIViewController {
     }
     
     @objc private func startAnimation() {
-        self.showAnimation(name: .confetti, on: self.view)
+        self.showAnimation(name: .confetti, on: self.view, loopMode: .playOnce)
     }
     
     private func setupView() {

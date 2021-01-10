@@ -101,7 +101,8 @@ class LifeCircleViewController: UIViewController {
     
     @objc func showTip() {
         let tipEntities = tipStorage.tipEntities()
-        let days = Date().diffInDaysSince1970()
+        // 36 - поправка для отображения новых советов дня
+        let days = Date().diffInDaysSince1970() + 36
         let tipIndex = days % tipEntities.count
         let tipEntityOfTheDay = tipEntities[tipIndex]
         
