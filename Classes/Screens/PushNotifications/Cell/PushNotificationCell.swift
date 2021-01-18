@@ -42,7 +42,7 @@ class PushNotificationCell: UITableViewCell {
         timeLabel.font = UIFont.systemFont(ofSize: 18)
         timeLabel.textColor = .white
         timeView.layer.cornerRadius = 10
-        timeView.backgroundColor = .violet
+        timeView.backgroundColor = .darkGray
         containerView.backgroundColor = .clear
     }
     
