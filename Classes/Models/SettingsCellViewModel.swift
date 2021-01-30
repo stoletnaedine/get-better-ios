@@ -1,5 +1,5 @@
 //
-//  SettingsSection.swift
+//  SettingsCellViewModel.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 29.04.2020.
@@ -8,32 +8,30 @@
 
 import UIKit
 
-struct SettingsSection {
-    let type: SettingsSectionType
-    let cells: [SettingsCell]
+struct SettingsCellViewModel {
+    let type: SettingsCellType
+    let cell: SettingsCell
 }
 
-enum SettingsSectionType {
+enum SettingsCellType {
     case profile
     case tips
-    case articles
-    case configuration
+    case article
+    case push
+    case difficultyLevel
     case aboutApp
 }
 
 struct SettingsCell {
     let title: String?
-    let subTitle: String?
+    let subtitle: String?
     let action: VoidClosure?
-    let topic: NotificationTopic?
     
     init(title: String? = nil,
          subTitle: String? = nil,
-         action: VoidClosure? = nil,
-         topic: NotificationTopic? = nil) {
+         action: VoidClosure? = nil) {
         self.title = title
-        self.subTitle = subTitle
+        self.subtitle = subTitle
         self.action = action
-        self.topic = topic
     }
 }

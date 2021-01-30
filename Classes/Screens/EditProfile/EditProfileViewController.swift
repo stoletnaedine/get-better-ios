@@ -28,7 +28,7 @@ class EditProfileViewController: UIViewController {
     let user = Auth.auth().currentUser
     let storage = FirebaseStorage()
     let alertService: AlertService = AlertServiceDefault()
-    var editProfileCompletion: VoidClosure?
+    var completion: VoidClosure?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +110,7 @@ class EditProfileViewController: UIViewController {
             self?.stopAnimation()
             self?.navigationController?.popViewController(animated: true)
             self?.alertService.showSuccessMessage(desc: R.string.localizable.profileSuccessEdit())
-            self?.editProfileCompletion?()
+            self?.completion?()
         })
     }
     

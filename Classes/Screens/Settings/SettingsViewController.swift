@@ -20,25 +20,24 @@ class SettingsViewController: UIViewController {
         static let titleSubtitleCell = R.nib.titleSubtitleCell.name
     }
     
-    private lazy var pushSubTitle: String = {
-        let pushSettings = self.userSettingsService.getNotificationSettings()
-        return "\(pushSettings.tip.text), \(pushSettings.post.text)"
-    }()
-    
     private let notificationService: NotificationService = NotificationServiceDefault()
     private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     
     private var profile: Profile?
-    private var tableSections: [SettingsSection] = []
+    private var notificationSettings: NotificationSettings?
+    private var difficultyLevel: DifficultyLevel?
+    private var models: [SettingsCellViewModel] = []
     private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        notificationSettings = userSettingsService.getNotificationSettings()
+        difficultyLevel = userSettingsService.getDifficultyLevel()
         customizeBarButton()
         setupView()
         setupRefreshControl()
         setupTableView()
-        fillCells()
+        fetchModels()
         loadProfileAndReloadTableView()
     }
     
@@ -46,10 +45,10 @@ class SettingsViewController: UIViewController {
     
     @objc private func loadProfileAndReloadTableView() {
         loadProfileInfo(completion: { [weak self] profile in
-            self?.profile = profile
-            self?.fillCells()
-            self?.tableView.reloadData()
-            self?.refreshControl.endRefreshing()
+            guard let self = self else { return }
+            self.profile = profile
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         })
     }
     
@@ -108,34 +107,48 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableSections.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableSections[section].cells.count
+        return models.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section = tableSections[indexPath.section]
-        let item = section.cells[indexPath.row]
+        let type = models[indexPath.row].type
+        let item = models[indexPath.row].cell
         
-        switch section.type {
+        switch type {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell,
                   let profile = self.profile else { return UITableViewCell() }
             cell.configure(model: profile)
             return cell
             
-        case .tips, .articles:
+        case .tips, .article:
             let cell = UITableViewCell()
             cell.textLabel?.text = item.title
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             return cell
             
-        case .configuration:
+        case .push:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell,
+                  let notificationSettings = self.notificationSettings else { return UITableViewCell() }
+            let model  = TitleSubtitleCellViewModel(
+                title: item.title ?? "",
+                subtitle: "\(notificationSettings.tip.text), \(notificationSettings.post.text)"
+            )
+            cell.configure(model: model)
+            return cell
+            
+        case .difficultyLevel:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell else { return UITableViewCell() }
-            let model  = TitleSubtitleCellViewModel(title: item.title ?? "", subtitle: item.subTitle ?? "")
+            cell.accessoryType = .detailButton
+            let model  = TitleSubtitleCellViewModel(
+                title: item.title ?? "",
+                subtitle: difficultyLevel?.rawValue ?? ""
+            )
             cell.configure(model: model)
             return cell
             
@@ -150,12 +163,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section = tableSections[indexPath.section]
-        switch section.type {
+        let type = models[indexPath.row].type
+        switch type {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell else { return .zero }
             return cell.frame.height
-        case .configuration:
+        case .push, .difficultyLevel:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell else { return .zero }
             return cell.frame.height
         default:
@@ -164,12 +177,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableSections[indexPath.section].cells[indexPath.row]
-        cell.action?()
+        models[indexPath.row].cell.action?()
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == self.tableSections.count - 1 ? 1 : Constants.sectionHeaderHeight
+        return section == self.models.count - 1 ? 1 : Constants.sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -184,9 +196,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SettingsViewController {
     
-    private func fillCells() {
+    private func fetchModels() {
         let editProfileViewController = EditProfileViewController()
-        editProfileViewController.editProfileCompletion = { [weak self] in
+        editProfileViewController.completion = { [weak self] in
             self?.loadProfileAndReloadTableView()
         }
         
@@ -206,64 +218,87 @@ extension SettingsViewController {
                                      text: R.string.localizable.aboutAppDescription(),
                                      image: R.image.aboutTeam())
         
+        let pushNotificationsVC = PushNotificationsViewController()
+        pushNotificationsVC.completion = { [weak self] in
+            self?.notificationSettings = self?.userSettingsService.getNotificationSettings()
+            self?.tableView.reloadData()
+        }
+        
         let appVersionVC = TextViewViewController()
         appVersionVC.text = R.string.localizable.appVersions()
         
-        tableSections = [
-            SettingsSection(type: .profile,
-                    cells: [
-                        SettingsCell(action: { [weak self] in
-                            self?.navigationController?.pushViewController(editProfileViewController, animated: true)
-                        })
-                    ]),
-            SettingsSection(type: .tips,
-                    cells: [
-                        SettingsCell(title: R.string.localizable.tipsTitle(),
-                                     action: { [weak self] in
-                            self?.navigationController?.pushViewController(TipsTableViewController(), animated: true)
-                        })
-                    ]),
-            SettingsSection(type: .articles,
-                    cells: [
-                        SettingsCell(title: R.string.localizable.aboutCircleTableTitle(),
-                             action: { [weak self] in
-                                self?.navigationController?.pushViewController(aboutCircleVC, animated: true)
-                             }),
-                        SettingsCell(title: R.string.localizable.aboutJournalTitle(),
-                             action: { [weak self] in
-                                self?.navigationController?.pushViewController(aboutJournalVC, animated: true)
-                             }),
-                        SettingsCell(title: R.string.localizable.aboutAppTitle(),
-                             action: { [weak self] in
-                                self?.navigationController?.pushViewController(aboutAppVC, animated: true)
-                             })
-                         ]),
-            SettingsSection(type: .configuration,
-                    cells: [
-                        SettingsCell(
-                            title: R.string.localizable.settingsPushTitle(),
-                            subTitle: pushSubTitle,
-                            action: { [weak self] in
-                                self?.navigationController?.pushViewController(PushNotificationsViewController(), animated: true)
-                            }),
-                        SettingsCell(
-                            title: R.string.localizable.settingsDiffLevelTitle(),
-                            subTitle: userSettingsService.getDifficultyLevel().rawValue,
-                            action: {
-                                // TODO: Уровень сложности
-                            })
-                    ]),
-            SettingsSection(type: .aboutApp,
-                    cells: [
-                        SettingsCell(title: R.string.localizable.settingsVersionIs(Properties.appVersion),
-                                     action: { [weak self] in
-                                self?.navigationController?.pushViewController(appVersionVC, animated: true)
-                             }),
-                        SettingsCell(title: R.string.localizable.settingsAboutAppPostReview(), action: {
-                            UIApplication.shared.open(Properties.appStoreUrl,
-                                                      options: [:], completionHandler: nil)
-                        })
-                    ])
+        models = [
+            SettingsCellViewModel(
+                type: .profile,
+                cell: SettingsCell(
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(editProfileViewController, animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .push,
+                cell: SettingsCell(
+                    title: R.string.localizable.settingsPushTitle(),
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(pushNotificationsVC, animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .difficultyLevel,
+                cell: SettingsCell(
+                    title: R.string.localizable.settingsDiffLevelTitle(),
+                    action: { [weak self] in
+                        // TODO: Уровень сложности
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .tips,
+                cell: SettingsCell(
+                    title: R.string.localizable.tipsTitle(),
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(TipsTableViewController(), animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .article,
+                cell: SettingsCell(
+                    title: R.string.localizable.aboutCircleTableTitle(),
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(aboutCircleVC, animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .article,
+                cell: SettingsCell(
+                    title: R.string.localizable.aboutJournalTitle(),
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(aboutJournalVC, animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .aboutApp,
+                cell: SettingsCell(
+                    title: R.string.localizable.aboutAppTitle(),
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(aboutAppVC, animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .aboutApp,
+                cell: SettingsCell(
+                    title: R.string.localizable.settingsVersionIs(Properties.appVersion),
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(appVersionVC, animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .aboutApp,
+                cell: SettingsCell(
+                    title: R.string.localizable.settingsAboutAppPostReview(),
+                    action: {
+                        UIApplication.shared.open(Properties.appStoreUrl, options: [:], completionHandler: nil)
+                    })
+            )
         ]
     }
     

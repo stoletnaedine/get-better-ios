@@ -87,7 +87,7 @@
 		C39EF07A258738010090BC35 /* 24118-japan-flow.json in Resources */ = {isa = PBXBuildFile; fileRef = C39EF079258738010090BC35 /* 24118-japan-flow.json */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
 		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
-		C3B4760324596BAD0067A3C0 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsSection.swift */; };
+		C3B4760324596BAD0067A3C0 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */; };
 		C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760424596BCB0067A3C0 /* Profile.swift */; };
 		C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */; };
 		C3BFEBC52477E85F000B5B41 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* NotificationService.swift */; };
@@ -225,7 +225,7 @@
 		C39EF079258738010090BC35 /* 24118-japan-flow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "24118-japan-flow.json"; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		C3B4760224596BAD0067A3C0 /* SettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
+		C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		C3B4760424596BCB0067A3C0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
 		C3BC51282573CFEC002E1772 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -547,7 +547,7 @@
 				6EA85196244F691700D40E14 /* Sphere.swift */,
 				6EA8519A244F827A00D40E14 /* Post.swift */,
 				6E9E01BC245464360083499E /* SphereMetrics.swift */,
-				C3B4760224596BAD0067A3C0 /* SettingsSection.swift */,
+				C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */,
 				C3B4760424596BCB0067A3C0 /* Profile.swift */,
 				6E7071F2245C474D00ED7D08 /* SphereValue.swift */,
 				C35B38AE2462D57500E0C416 /* Photo.swift */,
@@ -1039,7 +1039,7 @@
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,
 				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,
 				C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */,
-				C3B4760324596BAD0067A3C0 /* SettingsSection.swift in Sources */,
+				C3B4760324596BAD0067A3C0 /* SettingsCellViewModel.swift in Sources */,
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
 				C3635183257B809900DA6713 /* SphereMetricsService.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,

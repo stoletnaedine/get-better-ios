@@ -10,6 +10,8 @@ import UIKit
 
 class PushNotificationsViewController: UIViewController {
     
+    var completion: VoidClosure?
+    
     private let tableView = UITableView()
     private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     private let notificationService: NotificationService = NotificationServiceDefault()
@@ -17,8 +19,18 @@ class PushNotificationsViewController: UIViewController {
     private var currentTopic: NotificationTopic?
     private var models: [PushNotificationModel] {
         return [
-            PushNotificationModel(icon: "🤩", name: R.string.localizable.pushNotificationsHeaderTip(), time: settings.tip.text, topic: .tip),
-            PushNotificationModel(icon: "✍️", name: R.string.localizable.pushNotificationsHeaderPost(), time: settings.post.text, topic: .post)
+            PushNotificationModel(
+                icon: "🤩",
+                name: R.string.localizable.pushNotificationsHeaderTip(),
+                time: settings.tip.text,
+                topic: .tip
+            ),
+            PushNotificationModel(
+                icon: "✍️",
+                name: R.string.localizable.pushNotificationsHeaderPost(),
+                time: settings.post.text,
+                topic: .post
+            )
         ]
     }
     private let customTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -55,16 +67,19 @@ class PushNotificationsViewController: UIViewController {
     }
     
     private func customizeBarButton() {
-        let saveSettingsBarButton = UIBarButtonItem(title: R.string.localizable.pushNotificationsSave(),
-                                               style: .plain,
-                                               target: self,
-                                               action: #selector(saveSettings))
+        let saveSettingsBarButton = UIBarButtonItem(
+            title: R.string.localizable.pushNotificationsSave(),
+            style: .plain,
+            target: self,
+            action: #selector(saveSettings)
+        )
         navigationItem.rightBarButtonItem = saveSettingsBarButton
     }
     
     @objc private func saveSettings() {
         userDefaultsService.saveNotificationSettings(self.settings)
         notificationService.subscribe(to: settings)
+        completion?()
     }
     
 }
@@ -109,7 +124,7 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 70.0
     }
     
 }
