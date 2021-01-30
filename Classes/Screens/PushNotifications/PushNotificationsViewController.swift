@@ -12,6 +12,8 @@ class PushNotificationsViewController: UIViewController {
     
     var completion: VoidClosure?
     
+    // MARK: — Private properties
+    
     private let tableView = UITableView()
     private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     private let notificationService: NotificationService = NotificationServiceDefault()
@@ -33,7 +35,6 @@ class PushNotificationsViewController: UIViewController {
             )
         ]
     }
-    private let customTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +46,10 @@ class PushNotificationsViewController: UIViewController {
         customizeBarButton()
     }
     
+    // MARK: — Private methods
+    
     private func addSubviews() {
         view.addSubview(tableView)
-        view.addSubview(customTextField)
     }
     
     private func makeConstraints() {
@@ -77,12 +79,14 @@ class PushNotificationsViewController: UIViewController {
     }
     
     @objc private func saveSettings() {
-        userDefaultsService.saveNotificationSettings(self.settings)
+        userDefaultsService.saveNotificationSettings(settings)
         notificationService.subscribe(to: settings)
         completion?()
     }
     
 }
+
+// MARK: — UITableViewDelegate
 
 extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -114,17 +118,59 @@ extension PushNotificationsViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        customTextField.resignFirstResponder()
         currentTopic = models[indexPath.row].topic
-        let uiPicker = UIPickerView()
-        uiPicker.delegate = self
-        uiPicker.dataSource = self
-        customTextField.inputView = uiPicker
-        customTextField.becomeFirstResponder()
+        switch currentTopic {
+        case .tip:
+            let alert = UIAlertController()
+            TipTopic.allCases.forEach { topic in
+                let action = UIAlertAction(
+                    title: topic.text,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        guard let self = self else { return }
+                        self.settings.tip = topic
+                        self.tableView.reloadData()
+                    })
+                alert.addAction(action)
+            }
+            let cancelAction = UIAlertAction(
+                title: R.string.localizable.cancel(),
+                style: .cancel,
+                handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        
+        case .post:
+            let alert = UIAlertController()
+            PostTopic.allCases.forEach { topic in
+                let action = UIAlertAction(
+                    title: topic.text,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        guard let self = self else { return }
+                        self.settings.post = topic
+                        self.tableView.reloadData()
+                    })
+                alert.addAction(action)
+            }
+            let cancelAction = UIAlertAction(
+                title: R.string.localizable.cancel(),
+                style: .cancel,
+                handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+            
+        case .none:
+            break
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return Constants.heightForRow
     }
     
 }
@@ -136,48 +182,7 @@ extension PushNotificationsViewController {
     private enum Constants {
         static let xibName = R.nib.pushNotificationCell.name
         static let reuseId = "PushNotificationCell"
+        static let heightForRow: CGFloat = 70.0
     }
     
 }
-
-// MARK: UIPickerViewDelegate
-
-extension PushNotificationsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let topic = self.currentTopic else { fatalError() }
-        switch topic {
-        case .tip:
-            return TipTopic.allCases.count
-        case .post:
-            return PostTopic.allCases.count
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard let topic = self.currentTopic else { fatalError() }
-        switch topic {
-        case .tip:
-            return TipTopic.allCases[row].text
-        case .post:
-            return PostTopic.allCases[row].text
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let topic = self.currentTopic else { fatalError() }
-        switch topic {
-        case .tip:
-            settings.tip = TipTopic.allCases[row]
-        case .post:
-            settings.post = PostTopic.allCases[row]
-        }
-        tableView.reloadData()
-    }
-}
-
-

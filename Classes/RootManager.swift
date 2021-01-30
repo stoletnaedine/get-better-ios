@@ -49,9 +49,10 @@ class RootManager: RootManagerProtocol {
         enterApp()
     }
     
+    // TODO: удалить, когда все перейдут на 1.11
     func showPushAlert() {
         let alert = UIAlertController(title: "⏰ Теперь можно указать время для push-уведомлений",
-                                      message: "Установить удобное время можно в разделе Настройки",
+                                      message: "Установить удобное время можно в разделе Настройки. Без этого старые пуши не будут нормально работать",
                                       preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Здорово", style: .default, handler: { _ in
             alert.dismiss(animated: true, completion: nil)

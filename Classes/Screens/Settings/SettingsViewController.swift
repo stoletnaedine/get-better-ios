@@ -136,14 +136,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .push:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell,
                   let notificationSettings = self.notificationSettings else { return UITableViewCell() }
-            var subtitle = ""
-            if notificationSettings.tip != .none {
-                subtitle = notificationSettings.tip.text
-            }
-            if notificationSettings.post != .none {
-                subtitle = subtitle.isEmpty
-                    ? notificationSettings.post.text
-                    : subtitle + ", " + notificationSettings.post.text
+            var subtitle = R.string.localizable.settingsPushNone()
+            let tip: String? = notificationSettings.tip != .none ? notificationSettings.tip.text : nil
+            let post: String? = notificationSettings.post != .none ? notificationSettings.post.text : nil
+            let array: [String] = [tip, post].compactMap { $0 }
+            if !array.isEmpty {
+                subtitle = array.joined(separator: ", ")
             }
             let model  = TitleSubtitleCellViewModel(
                 title: item.title ?? "",
