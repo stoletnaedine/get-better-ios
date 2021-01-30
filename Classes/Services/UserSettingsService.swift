@@ -1,5 +1,5 @@
 //
-//  UserDefaultsService.swift
+//  UserSettingsService.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 16.09.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UserDefaultsService {
+protocol UserSettingsServiceProtocol {
     func tipOfTheDayShown()
     func setTipOfTheDayNotShown()
     func isTipOfTheDayShown() -> Bool
@@ -17,11 +17,13 @@ protocol UserDefaultsService {
     func clearDraft()
     func getNotificationSettings() -> NotificationSettings
     func saveNotificationSettings(_ settings: NotificationSettings)
+    func getDifficultyLevel() -> DifficultyLevel
+    func setDifficultyLevel(_ level: DifficultyLevel)
 }
 
-class UserDefaultsServiceImpl: UserDefaultsService {
+class UserSettingsService: UserSettingsServiceProtocol {
     
-    var days: Int = {
+    private var days: Int = {
         Date().diffInDaysSince1970()
     }()
     
@@ -31,6 +33,7 @@ class UserDefaultsServiceImpl: UserDefaultsService {
             static let draft = "draft"
             static let tipPush = "tipPush"
             static let postPush = "postPush"
+            static let difficultyLevel = "difficultyLevel"
         }
     }
     
@@ -72,6 +75,15 @@ class UserDefaultsServiceImpl: UserDefaultsService {
     func saveNotificationSettings(_ settings: NotificationSettings) {
         UserDefaults.standard.setValue(settings.tip.rawValue, forKey: Constants.Key.tipPush)
         UserDefaults.standard.setValue(settings.post.rawValue, forKey: Constants.Key.postPush)
+    }
+    
+    func getDifficultyLevel() -> DifficultyLevel {
+        let levelRawValue = UserDefaults.standard.value(forKey: Constants.Key.difficultyLevel) as? String ?? ""
+        return DifficultyLevel(rawValue: levelRawValue) ?? .easy
+    }
+    
+    func setDifficultyLevel(_ level: DifficultyLevel) {
+        UserDefaults.standard.setValue(level.rawValue, forKey: Constants.Key.difficultyLevel)
     }
     
 }

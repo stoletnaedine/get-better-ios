@@ -17,7 +17,7 @@ enum SettingsSectionType {
     case profile
     case tips
     case articles
-    case notifications
+    case configuration
     case aboutApp
 }
 

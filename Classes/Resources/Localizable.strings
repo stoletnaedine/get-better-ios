@@ -191,6 +191,7 @@
 "Settings.logout.alert.no" = "Нет";
 "Settings.Push.Title" = "Push-уведомления";
 "Settings.Push.Saved" = "Настройки уведомлений сохранены";
+"Settings.DiffLevel.Title" = "Уровень сложности";
 "Settings.Logout.Alert.No.Email" = "Не указан e-mail. Ты больше не сможешь войти в GetBetter под этим профилем. Данные будут утеряны 😔";
 "Settings.aboutApp.postReview" = "Оставить отзыв в AppStore";
 

@@ -11,7 +11,7 @@ import UIKit
 class PushNotificationsViewController: UIViewController {
     
     private let tableView = UITableView()
-    private let userDefaultsService: UserDefaultsService = UserDefaultsServiceImpl()
+    private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     private let notificationService: NotificationService = NotificationServiceDefault()
     private var settings = NotificationSettings(tip: .none, post: .none)
     private var currentTopic: NotificationTopic?

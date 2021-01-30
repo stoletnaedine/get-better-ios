@@ -20,8 +20,6 @@ class PushNotificationCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         backgroundColor = .appBackground
-        layer.masksToBounds = false
-        clipsToBounds = true
         setupView()
     }
 

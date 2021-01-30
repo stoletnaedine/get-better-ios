@@ -17,13 +17,20 @@ class SettingsViewController: UIViewController {
         static let sectionHeaderHeight: CGFloat = 35
         static let profileCell = R.reuseIdentifier.profileCell.identifier
         static let notificationCell = R.nib.notificationCell.name
+        static let titleSubtitleCell = R.nib.titleSubtitleCell.name
     }
     
-    let notificationService: NotificationService = NotificationServiceDefault()
+    private lazy var pushSubTitle: String = {
+        let pushSettings = self.userSettingsService.getNotificationSettings()
+        return "\(pushSettings.tip.text), \(pushSettings.post.text)"
+    }()
     
-    var profile: Profile?
-    var tableSections: [SettingsSection] = []
-    let refreshControl = UIRefreshControl()
+    private let notificationService: NotificationService = NotificationServiceDefault()
+    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
+    
+    private var profile: Profile?
+    private var tableSections: [SettingsSection] = []
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +47,7 @@ class SettingsViewController: UIViewController {
     @objc private func loadProfileAndReloadTableView() {
         loadProfileInfo(completion: { [weak self] profile in
             self?.profile = profile
+            self?.fillCells()
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
         })
@@ -56,6 +64,8 @@ class SettingsViewController: UIViewController {
                            forCellReuseIdentifier: Constants.profileCell)
         tableView.register(UINib(nibName: Constants.notificationCell, bundle: nil),
                            forCellReuseIdentifier: Constants.notificationCell)
+        tableView.register(UINib(nibName: Constants.titleSubtitleCell, bundle: nil),
+                           forCellReuseIdentifier: Constants.titleSubtitleCell)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -116,11 +126,17 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(model: profile)
             return cell
             
-        case .tips, .articles, .notifications:
+        case .tips, .articles:
             let cell = UITableViewCell()
             cell.textLabel?.text = item.title
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
+            return cell
+            
+        case .configuration:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell else { return UITableViewCell() }
+            let model  = TitleSubtitleCellViewModel(title: item.title ?? "", subtitle: item.subTitle ?? "")
+            cell.configure(model: model)
             return cell
             
         case .aboutApp:
@@ -138,6 +154,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch section.type {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell else { return .zero }
+            return cell.frame.height
+        case .configuration:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell else { return .zero }
             return cell.frame.height
         default:
             return UITableViewCell().frame.height
@@ -219,17 +238,25 @@ extension SettingsViewController {
                                 self?.navigationController?.pushViewController(aboutAppVC, animated: true)
                              })
                          ]),
-            SettingsSection(type: .notifications,
+            SettingsSection(type: .configuration,
                     cells: [
-                        SettingsCell(title: R.string.localizable.settingsPushTitle(),
-                                     action: { [weak self] in
-                            self?.navigationController?.pushViewController(PushNotificationsViewController(), animated: true)
-                        })
+                        SettingsCell(
+                            title: R.string.localizable.settingsPushTitle(),
+                            subTitle: pushSubTitle,
+                            action: { [weak self] in
+                                self?.navigationController?.pushViewController(PushNotificationsViewController(), animated: true)
+                            }),
+                        SettingsCell(
+                            title: R.string.localizable.settingsDiffLevelTitle(),
+                            subTitle: userSettingsService.getDifficultyLevel().rawValue,
+                            action: {
+                                // TODO: Уровень сложности
+                            })
                     ]),
             SettingsSection(type: .aboutApp,
                     cells: [
                         SettingsCell(title: R.string.localizable.settingsVersionIs(Properties.appVersion),
-                             action: { [weak self] in
+                                     action: { [weak self] in
                                 self?.navigationController?.pushViewController(appVersionVC, animated: true)
                              }),
                         SettingsCell(title: R.string.localizable.settingsAboutAppPostReview(), action: {

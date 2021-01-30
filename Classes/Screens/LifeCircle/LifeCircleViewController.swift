@@ -39,7 +39,7 @@ class LifeCircleViewController: UIViewController {
     private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
     private let database: GBDatabase = FirebaseDatabase()
     private let alertService: AlertService = AlertServiceDefault()
-    private let userDefaultsService: UserDefaultsService = UserDefaultsServiceImpl()
+    private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     private let tipStorage = TipStorage()
     private var userData: UserData?
     private var isCurrentDataVisible = true

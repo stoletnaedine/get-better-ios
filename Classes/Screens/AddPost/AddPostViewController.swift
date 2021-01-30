@@ -29,7 +29,7 @@ class AddPostViewController: UIViewController {
     var selectedSphere: Sphere?
     let database: GBDatabase = FirebaseDatabase()
     let alertService: AlertService = AlertServiceDefault()
-    let userService: UserDefaultsService = UserDefaultsServiceImpl()
+    let userService: UserSettingsServiceProtocol = UserSettingsService()
     var addedPostCompletion: VoidClosure?
     var postType: PostType = .add
     
