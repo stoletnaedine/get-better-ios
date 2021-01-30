@@ -22,6 +22,7 @@ class SettingsViewController: UIViewController {
     
     private let notificationService: NotificationService = NotificationServiceDefault()
     private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
+    private let alertService: AlertService = AlertServiceDefault()
     
     private var profile: Profile?
     private var notificationSettings: NotificationSettings?
@@ -135,9 +136,18 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .push:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell,
                   let notificationSettings = self.notificationSettings else { return UITableViewCell() }
+            var subtitle = ""
+            if notificationSettings.tip != .none {
+                subtitle = notificationSettings.tip.text
+            }
+            if notificationSettings.post != .none {
+                subtitle = subtitle.isEmpty
+                    ? notificationSettings.post.text
+                    : subtitle + ", " + notificationSettings.post.text
+            }
             let model  = TitleSubtitleCellViewModel(
                 title: item.title ?? "",
-                subtitle: "\(notificationSettings.tip.text), \(notificationSettings.post.text)"
+                subtitle: subtitle
             )
             cell.configure(model: model)
             return cell
@@ -147,7 +157,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryType = .detailButton
             let model  = TitleSubtitleCellViewModel(
                 title: item.title ?? "",
-                subtitle: difficultyLevel?.rawValue ?? ""
+                subtitle: difficultyLevel?.name ?? ""
             )
             cell.configure(model: model)
             return cell
@@ -180,6 +190,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         models[indexPath.row].cell.action?()
     }
     
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        guard models[indexPath.row].type == .difficultyLevel else { return }
+        alertService.showPopUpMessage(
+            title: R.string.localizable.settingsDiffLevelInfoTitle(),
+            description: R.string.localizable.settingsDiffLevelInfoDescription(),
+            buttonText: R.string.localizable.oK()
+        )
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == self.models.count - 1 ? 1 : Constants.sectionHeaderHeight
     }
@@ -192,9 +211,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-// MARK: — Fill Cells
+// MARK: — Models
 
-extension SettingsViewController {
+private extension SettingsViewController {
     
     private func fetchModels() {
         let editProfileViewController = EditProfileViewController()
@@ -222,6 +241,7 @@ extension SettingsViewController {
         pushNotificationsVC.completion = { [weak self] in
             self?.notificationSettings = self?.userSettingsService.getNotificationSettings()
             self?.tableView.reloadData()
+            pushNotificationsVC.navigationController?.popViewController(animated: true)
         }
         
         let appVersionVC = TextViewViewController()
@@ -247,9 +267,7 @@ extension SettingsViewController {
                 type: .difficultyLevel,
                 cell: SettingsCell(
                     title: R.string.localizable.settingsDiffLevelTitle(),
-                    action: { [weak self] in
-                        // TODO: Уровень сложности
-                    })
+                    action: difficultyLevelClosure())
             ),
             SettingsCellViewModel(
                 type: .tips,
@@ -302,11 +320,39 @@ extension SettingsViewController {
         ]
     }
     
+    func difficultyLevelClosure() -> VoidClosure {
+        return { [weak self] in
+            guard let self = self else { return }
+            let alert = UIAlertController()
+            DifficultyLevel.allCases.forEach { level in
+                let action = UIAlertAction(
+                    title: level.name,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        guard let self = self else { return }
+                        self.userSettingsService.setDifficultyLevel(level)
+                        self.alertService.showSuccessMessage(desc: R.string.localizable.settingsDiffLevelSave())
+                        self.difficultyLevel = self.userSettingsService.getDifficultyLevel()
+                        self.tableView.reloadData()
+                    })
+                alert.addAction(action)
+            }
+            let cancelAction = UIAlertAction(
+                title: R.string.localizable.cancel(),
+                style: .cancel,
+                handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
 }
 
 // MARK: — LoadProfileInfo
 
-extension SettingsViewController {
+private extension SettingsViewController {
     
     func loadProfileInfo(completion: @escaping (_ profile: Profile) -> Void) {
         guard let user = Auth.auth().currentUser else { return }

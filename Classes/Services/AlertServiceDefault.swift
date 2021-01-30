@@ -7,16 +7,16 @@ import UIKit
 import SwiftEntryKit
 
 protocol AlertService {
-    func showPopUpMessage(icon: String, title: String, description: String, buttonText: String)
+    func showPopUpMessage(title: String, description: String, buttonText: String)
     func showErrorMessage(desc: String)
     func showSuccessMessage(desc: String)
 }
 
 class AlertServiceDefault: UIViewController, AlertService {
 
-    func showPopUpMessage(icon: String, title: String, description: String, buttonText: String) {
+    func showPopUpMessage(title: String, description: String, buttonText: String) {
         let attributes = setupPopUpAttributes(duration: .infinity)
-        let message = setupPopUpMessage(icon: icon, title: title, description: description, buttonText: buttonText)
+        let message = setupPopUpMessage(title: title, description: description, buttonText: buttonText)
         SwiftEntryKit.display(entry: CustomPopUpView(with: message), using: attributes)
     }
 
@@ -119,7 +119,7 @@ class AlertServiceDefault: UIViewController, AlertService {
         return attributes
     }
 
-    private func setupPopUpMessage(icon: String, title: String, description: String, buttonText: String) -> EKPopUpMessage {
+    private func setupPopUpMessage(title: String, description: String, buttonText: String) -> EKPopUpMessage {
         let image = R.image.gPoint()!
 
         let themeImage = EKPopUpMessage.ThemeImage(

@@ -19,6 +19,7 @@ protocol LifeCircleService {
 
 class LifeCircleServiceDefault: LifeCircleService {
     private let database: GBDatabase = FirebaseDatabase()
+    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?
     private var posts: [Post] = []
@@ -93,11 +94,12 @@ class LifeCircleServiceDefault: LifeCircleService {
         })
     }
     
+    /// Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые daysForDecrement дней.
+    /// - Returns: Коэффициент давности
     func calcPrescriptionRate() -> Double {
-        // Коэффициент давности. Равен 1,0 и уменьшается на 0,1 каждые 150 дней.
         let basePrescriptionRate: Double = 1.0
         let decrementRate: Double = 0.1
-        let daysForDecrement: Double = 150
+        let daysForDecrement: Double = userSettingsService.getDifficultyLevel().daysForDecrement
         let daysFromUserCreation = self.daysFromUserCreation()
         let prescriptionRate = basePrescriptionRate - ((Double(daysFromUserCreation) / daysForDecrement) * decrementRate)
         return prescriptionRate
