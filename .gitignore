@@ -92,3 +92,5 @@ iOSInjectionProject/
 
 *.generated.swift
 .idea/
+
+Classes/Resources/GoogleService-Info.plist
