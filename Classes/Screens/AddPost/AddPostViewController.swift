@@ -151,6 +151,8 @@ class AddPostViewController: UIViewController {
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = .journalButtonFont
         attachButton.setTitle("", for: .normal)
+        attachButton.tintColor = .violet
+        attachButton.imageView?.contentMode = .scaleAspectFill
         dateLabel.font = .journalDateFont
         dateLabel.textColor = .grey
         dateLabel.text = Date.currentDateWithWeekday()
@@ -169,7 +171,6 @@ class AddPostViewController: UIViewController {
         placeholderLabel.text = R.string.localizable.postPlaceholder()
         placeholderLabel.font = postTextView.font?.withSize(16)
         placeholderLabel.textColor = .lightGrey
-        attachButton.tintColor = .violet
     }
 }
 
