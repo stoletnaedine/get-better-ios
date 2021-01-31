@@ -12,6 +12,7 @@ enum DifficultyLevel: String, CaseIterable {
     case easy
     case medium
     case hard
+    case hardcore
 }
 
 extension DifficultyLevel {
@@ -19,7 +20,8 @@ extension DifficultyLevel {
     static let nameMapper: [DifficultyLevel: String] = [
         .easy: R.string.localizable.settingsDiffLevelEasy(),
         .medium: R.string.localizable.settingsDiffLevelMedium(),
-        .hard: R.string.localizable.settingsDiffLevelHard()
+        .hard: R.string.localizable.settingsDiffLevelHard(),
+        .hardcore: R.string.localizable.settingsDiffLevelHardcore()
     ]
 
     var name: String {
@@ -29,7 +31,8 @@ extension DifficultyLevel {
     static let daysMapper: [DifficultyLevel: Double] = [
         .easy: 300,
         .medium: 200,
-        .hard: 100
+        .hard: 100,
+        .hardcore: 50
     ]
 
     var daysForDecrement: Double {
