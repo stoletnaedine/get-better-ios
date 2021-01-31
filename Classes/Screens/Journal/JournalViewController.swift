@@ -88,7 +88,10 @@ class JournalViewController: UIViewController {
             postSections.append(
                 JournalSection(
                     type: .post,
-                    header: month,
+                    header: JournalSection.Header(
+                        month: month,
+                        postsCount: "\(postsByDate.count)"
+                    ),
                     posts: postsByDate
                 )
             )
@@ -191,15 +194,32 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                                         width: tableView.bounds.width,
                                         height: Constants.sectionHeaderHeight))
         view.backgroundColor = .tableViewSectionColor
+        let boundsWidth = tableView.bounds.width
         
-        let label = UILabel()
-        view.addSubview(label)
-        label.frame = CGRect(x: 15, y: .zero,
-                             width: tableView.bounds.width - 30,
-                             height: Constants.sectionHeaderHeight)
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .white
-        label.text = postSections[section].header
+        let monthLabel = UILabel()
+        view.addSubview(monthLabel)
+        monthLabel.frame = CGRect(
+            x: 15,
+            y: .zero,
+            width: boundsWidth * 2 / 3,
+            height: Constants.sectionHeaderHeight
+        )
+        monthLabel.font = UIFont.systemFont(ofSize: 12)
+        monthLabel.textColor = .white
+        monthLabel.text = postSections[section].header?.month
+        
+        let countLabel = UILabel()
+        view.addSubview(countLabel)
+        countLabel.frame = CGRect(
+            x: boundsWidth - 40,
+            y: .zero,
+            width: 25,
+            height: Constants.sectionHeaderHeight
+        )
+        countLabel.font = UIFont.systemFont(ofSize: 12)
+        countLabel.textColor = .white
+        countLabel.textAlignment = .right
+        countLabel.text = postSections[section].header?.postsCount
         
         return view
     }

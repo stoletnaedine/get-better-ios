@@ -62,8 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("Firebase registration token: \(fcmToken)")
     }
     
-    // Обработка push с ключом
-    
+    /// Обработка push с ключом
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         let info = userInfo as NSDictionary

@@ -9,18 +9,24 @@
 import UIKit
 
 struct JournalSection {
-    let type: JournalSectionType
-    let header: String?
+    let type: SectionType
+    let header: Header?
     let posts: [Post]?
     
-    init(type: JournalSectionType, header: String? = nil, posts: [Post]? = nil) {
+    init(type: JournalSection.SectionType, header: JournalSection.Header? = nil, posts: [Post]? = nil) {
         self.type = type
         self.header = header
         self.posts = posts
     }
+    
+    enum SectionType {
+        case post
+        case empty(info: String)
+    }
+    
+    struct Header {
+        let month: String
+        let postsCount: String
+    }
 }
 
-enum JournalSectionType {
-    case post
-    case empty(info: String)
-}
