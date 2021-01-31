@@ -17,25 +17,25 @@ enum DifficultyLevel: String, CaseIterable {
 
 extension DifficultyLevel {
     
-    static let nameMapper: [DifficultyLevel: String] = [
+    var name: String {
+        return DifficultyLevel.nameMapper[self]!
+    }
+    
+    var daysForDecrement: Double {
+        return DifficultyLevel.daysMapper[self]!
+    }
+    
+    private static let nameMapper: [DifficultyLevel: String] = [
         .easy: R.string.localizable.settingsDiffLevelEasy(),
         .medium: R.string.localizable.settingsDiffLevelMedium(),
         .hard: R.string.localizable.settingsDiffLevelHard(),
         .hardcore: R.string.localizable.settingsDiffLevelHardcore()
     ]
-
-    var name: String {
-        return DifficultyLevel.nameMapper[self]!
-    }
     
-    static let daysMapper: [DifficultyLevel: Double] = [
+    private static let daysMapper: [DifficultyLevel: Double] = [
         .easy: 300,
         .medium: 200,
         .hard: 100,
         .hardcore: 50
     ]
-
-    var daysForDecrement: Double {
-        return DifficultyLevel.daysMapper[self]!
-    }
 }
