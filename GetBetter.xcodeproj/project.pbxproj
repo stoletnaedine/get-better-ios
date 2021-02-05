@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21B6ECA575E931CD18524080 /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA2F3EAEA4719E72763853F /* Pods_GetBetter.framework */; };
 		6E045E9B24640A6B0001E378 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E045E9A24640A6A0001E378 /* Achievement.swift */; };
 		6E5AE64424601DBC00418B23 /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */; };
 		6E5AE64624601DD200418B23 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */; };
@@ -21,7 +22,6 @@
 		9277D388238C725200B3AECA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277D387238C725200B3AECA /* AppDelegate.swift */; };
 		9277D38F238C725300B3AECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9277D38E238C725300B3AECA /* Assets.xcassets */; };
 		9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9277D390238C725300B3AECA /* LaunchScreen.storyboard */; };
-		9E79D9ADDB6CABE947ACB572 /* Pods_GetBetter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C23186A6E3BCD55A9D0666A /* Pods_GetBetter.framework */; };
 		C30350AC25C53B4D003B13BD /* DifficultyLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30350AB25C53B4D003B13BD /* DifficultyLevel.swift */; };
 		C30350B325C53CED003B13BD /* TitleSubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30350B125C53CED003B13BD /* TitleSubtitleCell.swift */; };
 		C30350B425C53CED003B13BD /* TitleSubtitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30350B225C53CED003B13BD /* TitleSubtitleCell.xib */; };
@@ -142,7 +142,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C23186A6E3BCD55A9D0666A /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EE00BC69E157A0A3D44B9F /* Pods-GetBetter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetBetter.release.xcconfig"; path = "Target Support Files/Pods-GetBetter/Pods-GetBetter.release.xcconfig"; sourceTree = "<group>"; };
+		1CA2F3EAEA4719E72763853F /* Pods_GetBetter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetBetter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E045E9A24640A6A0001E378 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		6E5AE64324601DBC00418B23 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPasswordViewController.xib; path = Classes/Screens/ResetPassword/ResetPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
 		6E5AE64524601DD200418B23 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordViewController.swift; path = Classes/Screens/ResetPassword/ResetPasswordViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -158,7 +159,6 @@
 		9277D387238C725200B3AECA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9277D38E238C725300B3AECA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9277D393238C725300B3AECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F25B847E5A22A9125AFEA88 /* Pods-GetBetter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetBetter.debug.xcconfig"; path = "Target Support Files/Pods-GetBetter/Pods-GetBetter.debug.xcconfig"; sourceTree = "<group>"; };
 		C30350AB25C53B4D003B13BD /* DifficultyLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevel.swift; sourceTree = "<group>"; };
 		C30350B125C53CED003B13BD /* TitleSubtitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleCell.swift; sourceTree = "<group>"; };
 		C30350B225C53CED003B13BD /* TitleSubtitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleSubtitleCell.xib; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 		C3ED5A3023AFBF6600C7A492 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		C3ED5A3123AFBF6600C7A492 /* AddPostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPostViewController.xib; sourceTree = "<group>"; };
 		C3F98134253B29850002CD13 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
-		DE8B2E85E8D419DCEDA1ACF3 /* Pods-GetBetter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetBetter.release.xcconfig"; path = "Target Support Files/Pods-GetBetter/Pods-GetBetter.release.xcconfig"; sourceTree = "<group>"; };
+		CFA049DC8701A211E3849507 /* Pods-GetBetter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetBetter.debug.xcconfig"; path = "Target Support Files/Pods-GetBetter/Pods-GetBetter.debug.xcconfig"; sourceTree = "<group>"; };
 		F14950817E129DCC6D81127A /* UI+SwiftEntryKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UI+SwiftEntryKit.swift"; sourceTree = "<group>"; };
 		F14950B134A6B877EF737842 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		F14950C09BAEFB80A32F8E4F /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E79D9ADDB6CABE947ACB572 /* Pods_GetBetter.framework in Frameworks */,
+				21B6ECA575E931CD18524080 /* Pods_GetBetter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +320,7 @@
 				9277D385238C725200B3AECA /* Products */,
 				A6B2429419AF3A5996472DBD /* Pods */,
 				F1495E7A4CBA011782A12B40 /* Pics */,
-				A46B6D66EBE9CCA47B00B731 /* Frameworks */,
+				F5731DA57A70F5B43DAE7D41 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -351,19 +351,11 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		A46B6D66EBE9CCA47B00B731 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0C23186A6E3BCD55A9D0666A /* Pods_GetBetter.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		A6B2429419AF3A5996472DBD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9F25B847E5A22A9125AFEA88 /* Pods-GetBetter.debug.xcconfig */,
-				DE8B2E85E8D419DCEDA1ACF3 /* Pods-GetBetter.release.xcconfig */,
+				CFA049DC8701A211E3849507 /* Pods-GetBetter.debug.xcconfig */,
+				05EE00BC69E157A0A3D44B9F /* Pods-GetBetter.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -836,6 +828,14 @@
 			path = SphereMetrics;
 			sourceTree = "<group>";
 		};
+		F5731DA57A70F5B43DAE7D41 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CA2F3EAEA4719E72763853F /* Pods_GetBetter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -843,12 +843,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9277D396238C725300B3AECA /* Build configuration list for PBXNativeTarget "GetBetter" */;
 			buildPhases = (
-				C530F66911E4E4B8285F6201 /* [CP] Check Pods Manifest.lock */,
+				EC6B600ECED28FF0E382C062 /* [CP] Check Pods Manifest.lock */,
 				C3BFEBC62477F3B4000B5B41 /* ShellScript */,
 				9277D380238C725200B3AECA /* Sources */,
 				9277D381238C725200B3AECA /* Frameworks */,
 				9277D382238C725200B3AECA /* Resources */,
-				0577015E60B46BE3237AD4AA /* [CP] Embed Pods Frameworks */,
+				F64718DC4FE2EEF40479B0D9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -949,23 +949,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0577015E60B46BE3237AD4AA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GetBetter/Pods-GetBetter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GetBetter/Pods-GetBetter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GetBetter/Pods-GetBetter-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C3BFEBC62477F3B4000B5B41 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -979,13 +962,13 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
-		C530F66911E4E4B8285F6201 /* [CP] Check Pods Manifest.lock */ = {
+		EC6B600ECED28FF0E382C062 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1005,6 +988,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F64718DC4FE2EEF40479B0D9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GetBetter/Pods-GetBetter-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GetBetter/Pods-GetBetter-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GetBetter/Pods-GetBetter-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1236,7 +1236,7 @@
 		};
 		9277D397238C725300B3AECA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F25B847E5A22A9125AFEA88 /* Pods-GetBetter.debug.xcconfig */;
+			baseConfigurationReference = CFA049DC8701A211E3849507 /* Pods-GetBetter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
@@ -1250,7 +1250,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.12.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1261,7 +1261,7 @@
 		};
 		9277D398238C725300B3AECA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE8B2E85E8D419DCEDA1ACF3 /* Pods-GetBetter.release.xcconfig */;
+			baseConfigurationReference = 05EE00BC69E157A0A3D44B9F /* Pods-GetBetter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GetBetter.entitlements;
@@ -1275,7 +1275,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.12.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
