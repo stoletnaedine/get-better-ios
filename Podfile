@@ -6,7 +6,7 @@ target 'GetBetter' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
-  pod 'Firebase/Analytics'
+  pod 'Firebase/Analytics', '~> 7.3.0'
   pod 'Firebase/Messaging'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftKeychainWrapper'
