@@ -167,19 +167,58 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let post = postSections[indexPath.section].posts?[indexPath.row] else { return }
-            database.deletePost(post) { [weak self] in
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title: nil) { [weak self] action, view, complete in
+            guard let self = self,
+                  let post = self.postSections[indexPath.section].posts?[indexPath.row] else { return }
+            let editPostVC = EditPostViewController()
+            editPostVC.post = post
+            editPostVC.editPostCompletion = { [weak self] in
                 guard let self = self else { return }
-                self.alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
                 self.updatePostsInTableView()
+                editPostVC.dismiss(animated: true, completion: nil)
             }
+            self.present(editPostVC, animated: true, completion: nil)
+            complete(true)
         }
+        editAction.image = R.image.edit()
+        editAction.backgroundColor = .darkGray
+
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] action, view, complete in
+            guard let self = self,
+                    let post = self.postSections[indexPath.section].posts?[indexPath.row] else { return }
+            let alert = UIAlertController(
+                title: R.string.localizable.journalAlertDeletePost(),
+                message: nil,
+                preferredStyle: .alert
+            )
+            let deleteAction = UIAlertAction(
+                title: R.string.localizable.journalAlertDelete(),
+                style: .destructive,
+                handler: { _ in
+                    self.database.deletePost(post) { [weak self] in
+                        guard let self = self else { return }
+                        self.alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
+                        self.updatePostsInTableView()
+                    }
+                })
+            let cancelAction = UIAlertAction(
+                title: R.string.localizable.cancel(),
+                style: .default,
+                handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+            complete(true)
+        }
+        deleteAction.image = R.image.delete()
+        deleteAction.backgroundColor = .red
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard let _ = postSections[section].posts else { return .zero }
         return Constants.sectionHeaderHeight
