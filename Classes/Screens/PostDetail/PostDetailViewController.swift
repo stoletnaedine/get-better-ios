@@ -54,16 +54,16 @@ class PostDetailViewController: UIViewController {
     }
 
     func fillViewController(_ post: Post) {
-        self.title = post.sphere?.name
-        self.textView.text = post.text
+        title = post.sphere?.name
+        textView.text = post.text
         if let timestamp = post.timestamp {
             self.dateLabel.text = Date.convertToFullDate(from: timestamp)
         }
         
         if let urlString = post.photoUrl,
             let url = URL(string: urlString) {
-            self.photoImageView.kf.indicatorType = .activity
-            self.photoImageView.kf.setImage(
+            photoImageView.kf.indicatorType = .activity
+            photoImageView.kf.setImage(
                 with: url,
                 options: [
                     .transition(.fade(1)),

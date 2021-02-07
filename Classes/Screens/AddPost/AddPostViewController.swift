@@ -34,10 +34,11 @@ class AddPostViewController: UIViewController {
     let userService: UserSettingsServiceProtocol = UserSettingsService()
     var addedPostCompletion: VoidClosure?
     var postType: PostType = .add
+    var isOldPhoto: Bool = true
+    let maxSymbolsCount: Int = 300
     
     private let storage: GBStorage = FirebaseStorage()
-    private let maxSymbolsCount: Int = 300
-    private var isPhotoSelected: Bool = false
+    private var imageToUpload: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,8 @@ class AddPostViewController: UIViewController {
     }
     
     @IBAction func cancelLoadButtonDidTap(_ sender: Any) {
+        imageToUpload = nil
+        isOldPhoto = false
         cancelLoadButton.isHidden = true
         loadImageButton.isHidden = false
         loadImageButton.alpha = 0
@@ -87,7 +90,12 @@ class AddPostViewController: UIViewController {
         var photoResult: Photo = Photo(photoUrl: nil, photoName: nil, previewUrl: nil, previewName: nil)
         let dispatchGroup = DispatchGroup()
         
-        if let photo = imageView.image, isPhotoSelected {
+        if let photo = imageToUpload {
+            guard !(postType == .edit && isOldPhoto) else {
+                savePost(text: text, sphere: sphere, photoResult: photoResult)
+                return
+            }
+            
             dispatchGroup.enter()
             self.showLoadingAnimation(on: self.view)
             
@@ -158,7 +166,7 @@ class AddPostViewController: UIViewController {
     
     // MARK: Setup View
     
-    func setupView() {
+    private func setupView() {
         postTextView.font = postTextView.font?.withSize(16)
         titleLabel.font = .journalTitleFont
         titleLabel.textColor = .violet
@@ -255,6 +263,7 @@ extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerCo
         loadImageButton.isHidden = true
         cancelLoadButton.isHidden = false
         imageView.image = image
-        isPhotoSelected = true
+        imageToUpload = image
+        isOldPhoto = false
     }
 }
