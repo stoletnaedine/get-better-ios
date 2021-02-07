@@ -20,11 +20,13 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var saveButtonView: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var attachButton: UIButton!
+    @IBOutlet weak var loadImageButton: UIButton!
     @IBOutlet weak var symbolsCountLabel: UILabel!
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var selectSphereButton: UIButton!
     @IBOutlet weak var placeholderLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var cancelLoadButton: UIButton!
     
     var selectedSphere: Sphere?
     let database: GBDatabase = FirebaseDatabase()
@@ -43,6 +45,7 @@ class AddPostViewController: UIViewController {
         setupTextView()
         setupSelectSphereButtonTapHandler()
         setupView()
+        cancelLoadButton.isHidden = true
     }
     
     @IBAction func cancelButtonDidTap(_ sender: UIButton) {
@@ -54,6 +57,21 @@ class AddPostViewController: UIViewController {
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelLoadButtonDidTap(_ sender: Any) {
+        cancelLoadButton.isHidden = true
+        loadImageButton.isHidden = false
+        loadImageButton.alpha = 0
+        UIView.animate(withDuration: 0.8,
+                       animations: {
+                        self.imageView.alpha = 0
+                        self.loadImageButton.alpha = 1
+                       },
+                       completion: { _ in
+                        self.imageView.alpha = 1
+                        self.imageView.image = nil
+                       })
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
@@ -69,7 +87,7 @@ class AddPostViewController: UIViewController {
         var photoResult: Photo = Photo(photoUrl: nil, photoName: nil, previewUrl: nil, previewName: nil)
         let dispatchGroup = DispatchGroup()
         
-        if let photo = attachButton.imageView?.image, isPhotoSelected {
+        if let photo = imageView.image, isPhotoSelected {
             dispatchGroup.enter()
             self.showLoadingAnimation(on: self.view)
             
@@ -150,9 +168,9 @@ class AddPostViewController: UIViewController {
         saveButton.setTitle(R.string.localizable.addPostSave(), for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = .journalButtonFont
-        attachButton.setTitle("", for: .normal)
-        attachButton.tintColor = .violet
-        attachButton.imageView?.contentMode = .scaleAspectFill
+        loadImageButton.setTitle("", for: .normal)
+        loadImageButton.tintColor = .violet
+        loadImageButton.imageView?.contentMode = .scaleAspectFill
         dateLabel.font = .journalDateFont
         dateLabel.textColor = .grey
         dateLabel.text = Date.currentDateWithWeekday()
@@ -234,7 +252,9 @@ extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerCo
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        attachButton.setImage(image, for: .normal)
+        loadImageButton.isHidden = true
+        cancelLoadButton.isHidden = false
+        imageView.image = image
         isPhotoSelected = true
     }
 }

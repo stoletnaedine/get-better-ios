@@ -39,7 +39,7 @@ class EditPostViewController: AddPostViewController {
         dateLabel.text = Date.convertToDateWithWeekday(from: post.timestamp ?? 0)
         
         placeholderLabel.isHidden = true
-        attachButton.isHidden = true
+        loadImageButton.isHidden = true
     }
     
     override func savePost(text: String, sphere: Sphere, photoResult: Photo) {
