@@ -16,16 +16,13 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var photoImageView: ScaledHeightImageView!
     
     var post: Post?
-    var editPostCompletion: VoidClosure?
     let alertService: AlertService = AlertServiceDefault()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeView()
         setupEditButton()
-        if let post = self.post {
-            fillViewController(post)
-        }
+        configure()
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,13 +44,18 @@ class PostDetailViewController: UIViewController {
     @objc private func editButtonDidTap() {
         let editPostVC = EditPostViewController()
         editPostVC.post = post
-        editPostVC.editPostCompletion = { [weak self] in
-            self?.editPostCompletion?()
+        editPostVC.editPostCompletion = { [weak self] postToSave in
+            guard let self = self else { return }
+            self.post = postToSave
+            self.configure()
+            self.customizeView()
+            editPostVC.dismiss(animated: true, completion: nil)
         }
         present(editPostVC, animated: true, completion: nil)
     }
 
-    func fillViewController(_ post: Post) {
+    func configure() {
+        guard let post = self.post else { return }
         title = post.sphere?.name
         textView.text = post.text
         if let timestamp = post.timestamp {
@@ -61,14 +63,16 @@ class PostDetailViewController: UIViewController {
         }
         
         if let urlString = post.photoUrl,
-            let url = URL(string: urlString) {
+           let url = URL(string: urlString) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(
                 with: url,
                 options: [
                     .transition(.fade(1)),
                     .cacheOriginalImage
-            ])
+                ])
+        } else {
+            photoImageView.image = nil
         }
     }
     
@@ -84,6 +88,8 @@ class PostDetailViewController: UIViewController {
     }
 }
 
+// MARK: — ScaledHeightImageView
+
 class ScaledHeightImageView: UIImageView {
 
     override var intrinsicContentSize: CGSize {
@@ -97,7 +103,7 @@ class ScaledHeightImageView: UIImageView {
 
             return CGSize(width: viewWidth, height: scaledHeight)
         }
-        return CGSize(width: -1.0, height: -1.0)
+        return CGSize(width: 0, height: 0)
     }
 
 }

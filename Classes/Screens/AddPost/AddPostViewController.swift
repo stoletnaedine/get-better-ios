@@ -87,7 +87,7 @@ class AddPostViewController: UIViewController {
             return
         }
         
-        var photoResult: Photo = Photo(photoUrl: nil, photoName: nil, previewUrl: nil, previewName: nil)
+        var photoResult = Photo()
         let dispatchGroup = DispatchGroup()
         
         if let photo = imageToUpload {
@@ -98,24 +98,30 @@ class AddPostViewController: UIViewController {
             
             dispatchGroup.enter()
             self.showLoadingAnimation(on: self.view)
+            self.selectSphereButton.isEnabled = false
+            self.saveButton.isEnabled = false
             
             storage.uploadPhoto(photo: photo, completion: { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let photo):
                     photoResult = photo
                     dispatchGroup.leave()
                 case .failure(let error):
-                    DispatchQueue.main.async { [weak self] in
-                        self?.stopAnimation()
+                    DispatchQueue.main.async {
+                        self.stopAnimation()
+                        self.selectSphereButton.isEnabled = true
+                        self.saveButton.isEnabled = true
                     }
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self.alertService.showErrorMessage(desc: error.localizedDescription)
                     dispatchGroup.leave()
                 }
             })
         }
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            self?.savePost(text: text, sphere: sphere, photoResult: photoResult)
+            guard let self = self else { return }
+            self.savePost(text: text, sphere: sphere, photoResult: photoResult)
         })
     }
     

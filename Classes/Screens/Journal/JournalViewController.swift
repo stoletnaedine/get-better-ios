@@ -46,7 +46,8 @@ class JournalViewController: UIViewController {
         guard connectionHelper.connectionAvailable() else { return }
         let addPostViewController = AddPostViewController()
         addPostViewController.addedPostCompletion = { [weak self] in
-            self?.updatePostsInTableView()
+            guard let self = self else { return }
+            self.updatePostsInTableView()
         }
         present(addPostViewController, animated: true, completion: nil)
     }
@@ -74,9 +75,7 @@ class JournalViewController: UIViewController {
     }
     
     private func convertPostsToSections(_ posts: [Post]) {
-        let months = posts.map {
-            Date.convertToMonthYear(from: $0.timestamp ?? 0)
-        }
+        let months = posts.map { Date.convertToMonthYear(from: $0.timestamp ?? 0) }
         let uniqueMonths = Array(Set(months))
         var postSections: [JournalSection] = []
 
@@ -90,8 +89,7 @@ class JournalViewController: UIViewController {
                     type: .post,
                     header: JournalSection.Header(
                         month: month,
-                        postsCount: "\(postsByDate.count)"
-                    ),
+                        postsCount: "\(postsByDate.count)"),
                     posts: postsByDate
                 )
             )
@@ -100,7 +98,6 @@ class JournalViewController: UIViewController {
         postSections = postSections.sorted(by: { first, second in
             first.posts?.first?.timestamp ?? 0 > second.posts?.first?.timestamp ?? 0
         })
-        
         self.postSections = postSections
     }
     
@@ -156,10 +153,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         guard let post = postSections[indexPath.section].posts?[indexPath.row] else { return }
         let postDetailViewController = PostDetailViewController()
         postDetailViewController.post = post
-        postDetailViewController.editPostCompletion = { [weak self] in
-            self?.updatePostsInTableView()
-            self?.navigationController?.popToRootViewController(animated: true)
-        }
+//        postDetailViewController.editPostCompletion = { [weak self] in
+//            guard let self = self else { return }
+//            self.updatePostsInTableView()
+//        }
         navigationController?.pushViewController(postDetailViewController, animated: true)
     }
     
@@ -173,7 +170,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                   let post = self.postSections[indexPath.section].posts?[indexPath.row] else { return }
             let editPostVC = EditPostViewController()
             editPostVC.post = post
-            editPostVC.editPostCompletion = { [weak self] in
+            editPostVC.editPostCompletion = { [weak self] _ in
                 guard let self = self else { return }
                 self.updatePostsInTableView()
                 editPostVC.dismiss(animated: true, completion: nil)

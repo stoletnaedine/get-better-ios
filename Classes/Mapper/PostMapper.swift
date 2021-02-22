@@ -23,20 +23,17 @@ class PostMapper {
     }
     
     func map(id: Any, entity: NSDictionary?) -> Post {
-        var maybeSphere: Sphere?
-        if let sphereRawValue = entity?[PostField.sphere.rawValue] as? String,
-           let sphere = Sphere(rawValue: sphereRawValue) {
-            maybeSphere = sphere
-        }
-        
-        return Post(id: id as? String ?? "",
-                    text: entity?[PostField.text.rawValue] as? String ?? R.string.localizable.errorNotLoading(),
-                    sphere: maybeSphere,
-                    timestamp: entity?[PostField.timestamp.rawValue] as? Int64 ?? 0,
-                    photoUrl: entity?[PostField.photoUrl.rawValue] as? String ?? "",
-                    photoName: entity?[PostField.photoName.rawValue] as? String ?? "",
-                    previewUrl: entity?[PostField.previewUrl.rawValue] as? String ?? "",
-                    previewName: entity?[PostField.previewName.rawValue] as? String ?? "")
+        let sphereRawValue = entity?[PostField.sphere.rawValue] as? String ?? ""
+
+        return Post(
+            id: id as? String ?? "",
+            text: entity?[PostField.text.rawValue] as? String ?? "",
+            sphere: Sphere(rawValue: sphereRawValue),
+            timestamp: entity?[PostField.timestamp.rawValue] as? Int64 ?? 0,
+            photoUrl: entity?[PostField.photoUrl.rawValue] as? String ?? "",
+            photoName: entity?[PostField.photoName.rawValue] as? String ?? "",
+            previewUrl: entity?[PostField.previewUrl.rawValue] as? String ?? "",
+            previewName: entity?[PostField.previewName.rawValue] as? String ?? "")
     }
 }
 

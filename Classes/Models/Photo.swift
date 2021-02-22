@@ -13,4 +13,11 @@ struct Photo {
     let photoName: String?
     let previewUrl: String?
     let previewName: String?
+
+    init(photoUrl: String? = nil, photoName: String? = nil, previewUrl: String? = nil, previewName: String? = nil) {
+        self.photoUrl = photoUrl
+        self.photoName = photoName
+        self.previewUrl = previewUrl
+        self.previewName = previewName
+    }
 }
