@@ -10,14 +10,14 @@ import UIKit
 import FirebaseStorage
 import FirebaseAuth
 
-protocol GBStorage {
+protocol FileStorageProtocol {
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void)
     func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void)
     func deletePreview(name: String?)
     func deletePhoto(name: String?)
 }
 
-class FirebaseStorage: GBStorage {
+class FirebaseStorage: FileStorageProtocol {
     
     private enum Constants {
         static let contentType = "image/jpeg"
@@ -34,7 +34,7 @@ class FirebaseStorage: GBStorage {
     private let uuidString: String = UUID().uuidString
     private let metadata = StorageMetadata()
     private let connectionHelper = ConnectionHelper()
-    private let alertService: AlertService = AlertServiceDefault()
+    private let alertService: AlertServiceProtocol = AlertService()
     
     func uploadAvatar(photo: UIImage,
                       completion: @escaping (Result<URL, AppError>) -> Void) {

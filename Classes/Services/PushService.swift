@@ -1,5 +1,5 @@
 //
-//  SettingsViewModel.swift
+//  PushService.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 22.05.2020.
@@ -9,13 +9,13 @@
 import UIKit
 import FirebaseMessaging
 
-protocol NotificationService {
+protocol PushServiceProtocol {
     func subscribe(to settings: NotificationSettings)
 }
 
-class NotificationServiceDefault: NotificationService {
+class PushService: PushServiceProtocol {
 
-    private let alertService: AlertService = AlertServiceDefault()
+    private let alertService: AlertServiceProtocol = AlertService()
     
     func subscribe(to settings: NotificationSettings) {
         // TODO: удалить когда все перейдут на версию 1.11

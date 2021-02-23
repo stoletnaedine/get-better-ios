@@ -36,9 +36,9 @@ class LifeCircleViewController: UIViewController {
     }
     
     private let refreshControl = UIRefreshControl()
-    private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
-    private let database: GBDatabase = FirebaseDatabase()
-    private let alertService: AlertService = AlertServiceDefault()
+    private let lifeCircleService: LifeCircleServiceProtocol = LifeCircleService()
+    private let database: DatabaseProtocol = FirebaseDatabase()
+    private let alertService: AlertServiceProtocol = AlertService()
     private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     private let tipStorage = TipStorage()
     private var userData: UserData?
@@ -59,7 +59,7 @@ class LifeCircleViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !userDefaultsService.isTipOfTheDayShown() {
+        if !userDefaultsService.isTipOfTheDayHasShown() {
             showTip()
         }
         loadAndShowData(animate: true)
@@ -110,14 +110,30 @@ class LifeCircleViewController: UIViewController {
         tipVC.modalPresentationStyle = .overFullScreen
         tipVC.tipEntity = tipEntityOfTheDay
         present(tipVC, animated: true, completion: nil)
-        userDefaultsService.tipOfTheDayShown()
+        userDefaultsService.tipOfTheDayHasShown(true)
     }
     
     private func setupBarButton() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: R.string.localizable.journalTipOfTheDay(),
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(showTip))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: R.string.localizable.journalTipOfTheDay(),
+            style: .plain,
+            target: self,
+            action: #selector(showTip))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: R.image.helpIcon(),
+            style: .plain,
+            target: self,
+            action: #selector(showLifeCircleTutorial))
+    }
+
+    @objc private func showLifeCircleTutorial() {
+        let vc = ArticleViewController()
+        vc.article = Article(
+            title: R.string.localizable.aboutCircleTitle(),
+            text: R.string.localizable.aboutCircleDescription(),
+            image: R.image.lifeCircleExample())
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupChartViewTap() {
@@ -184,11 +200,11 @@ class LifeCircleViewController: UIViewController {
         yAxis.axisMaximum = 9
         yAxis.drawTopYLabelEntryEnabled = false
         yAxis.enabled = false
-            
+
         let dataEntriesStart = startSphereMetrics.sortedValues()
-                .map { RadarChartDataEntry(value: $0.value) }
+            .map { RadarChartDataEntry(value: $0.value) }
         let dataEntriesCurrent = currentSphereMetrics.sortedValues()
-                .map { RadarChartDataEntry(value: $0.value) }
+            .map { RadarChartDataEntry(value: $0.value) }
         
         let dataSetStart = RadarChartDataSet(entries: dataEntriesStart, label: "")
         dataSetStart.lineWidth = 2
@@ -228,9 +244,9 @@ class LifeCircleViewController: UIViewController {
         chartView.isHidden = false
         metricsTableView.isHidden = true
         segmentedControl.setTitleTextAttributes(
-                [NSAttributedString.Key.foregroundColor : UIColor.darkGray,
-                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)],
-                for: .normal
+            [NSAttributedString.Key.foregroundColor : UIColor.darkGray,
+             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)],
+            for: .normal
         )
         segmentedControl.tintColor = .violet
         segmentedControl.setTitle(R.string.localizable.lifeCircleCircle(), forSegmentAt: 0)
@@ -333,7 +349,7 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SphereMetrics.reuseId,
                                                  for: indexPath) as! SphereMetricsTableViewCell
-         // indexPath.row - 1 для ячейки Common Metrics
+        // indexPath.row - 1 для ячейки Common Metrics
         let sphereIndex = indexPath.row - 1
         guard let sphereValue = getSphereValue(index: sphereIndex) else { return cell }
         cell.configure(from: sphereValue)

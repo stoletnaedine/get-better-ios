@@ -10,8 +10,8 @@ import UIKit
 
 final class AchievementsViewController: UIViewController {
     
-    private let achievementService: AchievementService = AchievementServiceDefault()
-    private let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
+    private let achievementService: AchievementServiceProtocol = AchievementService()
+    private let lifeCircleService: LifeCircleServiceProtocol = LifeCircleService()
     private let tableView = UITableView()
     private var achievements: [Achievement] = []
     

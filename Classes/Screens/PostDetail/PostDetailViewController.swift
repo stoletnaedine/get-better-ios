@@ -16,7 +16,7 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var photoImageView: ScaledHeightImageView!
     
     var post: Post?
-    let alertService: AlertService = AlertServiceDefault()
+    let alertService: AlertServiceProtocol = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ class PostDetailViewController: UIViewController {
         guard let post = self.post else { return }
         var textFont = UIFont.systemFont(ofSize: 16)
         if let photoUrl = post.photoUrl, photoUrl.isEmpty,
-           let text = self.post?.text, text.count < 30 {
+           let text = post.text, text.count < 30 {
             textFont = UIFont.systemFont(ofSize: 26)
         }
         textView.font = textFont

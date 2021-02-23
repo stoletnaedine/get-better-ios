@@ -31,7 +31,7 @@ class TipViewController: UIViewController {
     
     var tipEntity: TipEntity?
     
-    private let database: GBDatabase = FirebaseDatabase()
+    private let database: DatabaseProtocol = FirebaseDatabase()
     
     private var isLike: Bool = false {
         didSet {

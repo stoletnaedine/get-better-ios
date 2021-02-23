@@ -18,8 +18,8 @@ class JournalViewController: UIViewController {
         static let sectionHeaderHeight: CGFloat = 30
     }
     
-    private let database: GBDatabase = FirebaseDatabase()
-    private let alertService: AlertService = AlertServiceDefault()
+    private let database: DatabaseProtocol = FirebaseDatabase()
+    private let alertService: AlertServiceProtocol = AlertService()
     private let connectionHelper = ConnectionHelper()
     private var postSections: [JournalSection] = []
     
@@ -102,9 +102,25 @@ class JournalViewController: UIViewController {
     }
     
     func setupBarButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self,
-                                                            action: #selector(addPost))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addPost))
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: R.image.helpIcon(),
+            style: .plain,
+            target: self,
+            action: #selector(showJournalTutorial))
+    }
+
+    @objc private func showJournalTutorial() {
+        let vc = ArticleViewController()
+        vc.article = Article(
+            title: R.string.localizable.aboutJournalTitle(),
+            text: R.string.localizable.aboutJournalDescription(),
+            image: R.image.aboutEvents())
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupTableView() {
@@ -139,7 +155,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = info
             cell.backgroundColor = .appBackground
             return cell
-        
+
         case .post:
             guard let post = section.posts?[indexPath.row] else { return UITableViewCell() }
             let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellId,
@@ -153,10 +169,6 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         guard let post = postSections[indexPath.section].posts?[indexPath.row] else { return }
         let postDetailViewController = PostDetailViewController()
         postDetailViewController.post = post
-//        postDetailViewController.editPostCompletion = { [weak self] in
-//            guard let self = self else { return }
-//            self.updatePostsInTableView()
-//        }
         navigationController?.pushViewController(postDetailViewController, animated: true)
     }
     
@@ -183,7 +195,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
 
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] action, view, complete in
             guard let self = self,
-                    let post = self.postSections[indexPath.section].posts?[indexPath.row] else { return }
+                  let post = self.postSections[indexPath.section].posts?[indexPath.row] else { return }
             let alert = UIAlertController(
                 title: R.string.localizable.journalAlertDeletePost(),
                 message: nil,

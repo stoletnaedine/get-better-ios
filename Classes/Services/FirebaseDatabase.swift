@@ -12,7 +12,7 @@ import FirebaseAuth
 
 typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
 
-protocol GBDatabase {
+protocol DatabaseProtocol {
     func savePost(_ post: Post, completion: VoidClosure?)
     func deletePost(_ post: Post, completion: VoidClosure?)
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
@@ -24,7 +24,7 @@ protocol GBDatabase {
     func getTipLikesCount(for id: Int, completion: @escaping (Result<Int, AppError>) -> Void)
 }
 
-class FirebaseDatabase: GBDatabase {
+class FirebaseDatabase: DatabaseProtocol {
     
     private enum Constants {
         static let startMetricsPath = "start_sphere_level"
@@ -36,7 +36,7 @@ class FirebaseDatabase: GBDatabase {
     
     private let connectionHelper = ConnectionHelper()
     private let dbRef = Database.database().reference()
-    private let storage: GBStorage = FirebaseStorage()
+    private let storage: FileStorageProtocol = FirebaseStorage()
     
     func savePost(_ post: Post, completion: VoidClosure? = nil) {
         guard let ref = currentUserPath() else { return }

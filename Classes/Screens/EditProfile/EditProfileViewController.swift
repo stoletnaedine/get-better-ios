@@ -27,7 +27,7 @@ class EditProfileViewController: UIViewController {
     
     let user = Auth.auth().currentUser
     let storage = FirebaseStorage()
-    let alertService: AlertService = AlertServiceDefault()
+    let alertService: AlertServiceProtocol = AlertService()
     var completion: VoidClosure?
     
     override func viewDidLoad() {

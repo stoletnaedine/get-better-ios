@@ -17,7 +17,7 @@ class SphereDetailViewController: UIViewController {
     var sphereValue: SphereValue?
     var userData: UserData?
     
-    let sphereMetricsService: SphereMetricsService = SphereMetricsServiceDefault()
+    let sphereMetricsService: SphereMetricsServiceProtocol = SphereMetricsService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

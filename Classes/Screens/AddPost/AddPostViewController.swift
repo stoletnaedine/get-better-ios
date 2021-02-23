@@ -30,15 +30,15 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var cancelLoadButton: UIButton!
     
     var selectedSphere: Sphere?
-    let database: GBDatabase = FirebaseDatabase()
-    let alertService: AlertService = AlertServiceDefault()
+    let database: DatabaseProtocol = FirebaseDatabase()
+    let alertService: AlertServiceProtocol = AlertService()
     let userService: UserSettingsServiceProtocol = UserSettingsService()
     var addedPostCompletion: VoidClosure?
     var postType: PostType = .add
     var isOldPhoto: Bool = true
     let maxSymbolsCount: Int = 300
     
-    private let storage: GBStorage = FirebaseStorage()
+    private let storage: FileStorageProtocol = FirebaseStorage()
     private var imageToUpload: UIImage?
     
     override func viewDidLoad() {

@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseAuth
 
-protocol LifeCircleService {
+protocol LifeCircleServiceProtocol {
     func loadUserData(completion: @escaping (UserData?) -> Void)
     func averageCurrentSphereValue() -> Double
     func daysFromUserCreation() -> Int
@@ -17,8 +17,9 @@ protocol LifeCircleService {
     func userCreationDate() -> Date?
 }
 
-class LifeCircleServiceDefault: LifeCircleService {
-    private let database: GBDatabase = FirebaseDatabase()
+class LifeCircleService: LifeCircleServiceProtocol {
+    
+    private let database: DatabaseProtocol = FirebaseDatabase()
     private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     private var startSphereMetrics: SphereMetrics?
     private var currentSphereMetrics: SphereMetrics?

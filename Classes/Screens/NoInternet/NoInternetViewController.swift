@@ -16,7 +16,7 @@ class NoInternetViewController: UIViewController {
     @IBOutlet weak var retryButton: UIButton!
     
     private let connectionHelper = ConnectionHelper()
-    private let alertService: AlertService = AlertServiceDefault()
+    private let alertService: AlertServiceProtocol = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

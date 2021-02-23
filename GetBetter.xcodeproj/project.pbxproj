@@ -82,22 +82,20 @@
 		C39423D824404E8E0060CF50 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39423D624404E8E0060CF50 /* AuthViewController.swift */; };
 		C39423D924404E8E0060CF50 /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39423D724404E8E0060CF50 /* AuthViewController.xib */; };
 		C396E23C246AC71E00DBF0E4 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23B246AC71E00DBF0E4 /* Double.swift */; };
-		C396E23E246AC8E200DBF0E4 /* AchievementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23D246AC8E200DBF0E4 /* AchievementService.swift */; };
+		C396E23E246AC8E200DBF0E4 /* AchievementServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C396E23D246AC8E200DBF0E4 /* AchievementServiceProtocol.swift */; };
 		C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A321D245710BC005D2EDF /* SettingsViewController.swift */; };
 		C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39A321E245710BC005D2EDF /* SettingsViewController.xib */; };
-		C39EF07A258738010090BC35 /* 24118-japan-flow.json in Resources */ = {isa = PBXBuildFile; fileRef = C39EF079258738010090BC35 /* 24118-japan-flow.json */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
 		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
 		C3B4760324596BAD0067A3C0 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */; };
 		C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760424596BCB0067A3C0 /* Profile.swift */; };
 		C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */; };
-		C3BFEBC52477E85F000B5B41 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* NotificationService.swift */; };
+		C3BFEBC52477E85F000B5B41 /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* PushService.swift */; };
 		C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC72477F5A3000B5B41 /* R.generated.swift */; };
 		C3BFEBCC2477F93E000B5B41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3BFEBCB2477F93E000B5B41 /* Localizable.strings */; };
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
 		C3C9DD8724B843B3003C83BD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9DD8624B843B3003C83BD /* String.swift */; };
 		C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */; };
-		C3D69D7825850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json in Resources */ = {isa = PBXBuildFile; fileRef = C3D69D7725850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json */; };
 		C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7EB7323C710BB0045B70A /* RootManager.swift */; };
 		C3ED5A2623AFBECF00C7A492 /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */; };
 		C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */; };
@@ -111,7 +109,7 @@
 		F14951C7F023A062FD05EEEE /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495FAAE2CE65D0105BB9B3 /* ProfileCell.swift */; };
 		F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F149534A1EC55C2C73098FDB /* SetupSphereValueViewController.xib */; };
 		F14951DADFEBD16EA7AA4EEE /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495A99D279D2B2DE295323 /* ProfileCell.xib */; };
-		F14952606F9F2D69620BA836 /* AlertServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */; };
+		F14952606F9F2D69620BA836 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495A01F520BE9160623AFA /* AlertService.swift */; };
 		F1495267BF7181FA76BBDF88 /* AchievementsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495517C452EF92F48A6B72 /* AchievementsTableViewCell.xib */; };
 		F1495273E66F5AD91A5F822E /* SphereMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495C2FA436CF4A36B7F05F /* SphereMetricsTableViewCell.swift */; };
 		F149536F904F19914B26C190 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495ED73EC740C15F91A8CF /* EditProfileViewController.xib */; };
@@ -219,24 +217,22 @@
 		C39423D624404E8E0060CF50 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		C39423D724404E8E0060CF50 /* AuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
 		C396E23B246AC71E00DBF0E4 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
-		C396E23D246AC8E200DBF0E4 /* AchievementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementService.swift; sourceTree = "<group>"; };
+		C396E23D246AC8E200DBF0E4 /* AchievementServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementServiceProtocol.swift; sourceTree = "<group>"; };
 		C39A321D245710BC005D2EDF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C39A321E245710BC005D2EDF /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
-		C39EF079258738010090BC35 /* 24118-japan-flow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "24118-japan-flow.json"; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		C3B4760424596BCB0067A3C0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
 		C3BC51282573CFEC002E1772 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C3BFEBC42477E85F000B5B41 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		C3BFEBC42477E85F000B5B41 /* PushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
 		C3BFEBC72477F5A3000B5B41 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C3BFEBCB2477F93E000B5B41 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		C3C9DD8624B843B3003C83BD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C3C9DD8924B9870B003C83BD /* GetBetter.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = GetBetter.entitlements; sourceTree = "<group>"; };
 		C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		C3D69D7725850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "19904-ski-touring-backcountry-skiing.json"; sourceTree = "<group>"; };
 		C3E7EB7323C710BB0045B70A /* RootManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootManager.swift; sourceTree = "<group>"; };
 		C3ED5A2423AFBECF00C7A492 /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		C3ED5A2523AFBECF00C7A492 /* JournalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalViewController.xib; sourceTree = "<group>"; };
@@ -269,7 +265,7 @@
 		F14958C6AC488E270BB36001 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		F1495953C52FB85F7DABA142 /* CustomPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
 		F14959BA831454BA379465FF /* FirebaseStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
-		F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertServiceDefault.swift; sourceTree = "<group>"; };
+		F1495A01F520BE9160623AFA /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		F1495A3A1A8ED9AC4276F75C /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		F1495A99D279D2B2DE295323 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		F1495B637B114DD9251810C1 /* get-better-readme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "get-better-readme.jpg"; sourceTree = "<group>"; };
@@ -567,8 +563,6 @@
 		C38157AA2556B2AB0005C16E /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				C39EF079258738010090BC35 /* 24118-japan-flow.json */,
-				C3D69D7725850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json */,
 				C38158282556BEBD0005C16E /* 15046-spark-animation.json */,
 				C38158292556BEBD0005C16E /* 28592-yoga-nature.json */,
 				C38158272556BEBD0005C16E /* 35255-from-loading-to-success.json */,
@@ -648,7 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */,
-				C396E23D246AC8E200DBF0E4 /* AchievementService.swift */,
+				C396E23D246AC8E200DBF0E4 /* AchievementServiceProtocol.swift */,
 				F149540FB0998047F5E95EB4 /* Cell */,
 			);
 			path = Achievements;
@@ -686,13 +680,13 @@
 		C3F0141723D080CE009D83AD /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F1495A01F520BE9160623AFA /* AlertServiceDefault.swift */,
+				F1495A01F520BE9160623AFA /* AlertService.swift */,
 				F14959BA831454BA379465FF /* FirebaseStorage.swift */,
 				F1495297F7AD9CAF4E9198A5 /* FirebaseDatabase.swift */,
 				C35D83722511D88B000C565E /* UserSettingsService.swift */,
 				C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */,
 				C3635182257B809900DA6713 /* SphereMetricsService.swift */,
-				C3BFEBC42477E85F000B5B41 /* NotificationService.swift */,
+				C3BFEBC42477E85F000B5B41 /* PushService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -923,7 +917,6 @@
 				F14951ADCAB034E8DF436B5D /* 6.png in Resources */,
 				F14950603E4BBFAB23440180 /* 7.png in Resources */,
 				C381582C2556BEBD0005C16E /* 15046-spark-animation.json in Resources */,
-				C39EF07A258738010090BC35 /* 24118-japan-flow.json in Resources */,
 				F14954FEAEF05672B805215A /* 8.png in Resources */,
 				C36351CF257D336300DA6713 /* NotificationCell.xib in Resources */,
 				F14955EA34AE8AA776A7C8ED /* 2.png in Resources */,
@@ -939,7 +932,6 @@
 				F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */,
 				C38157AC2556B2BD0005C16E /* 37723-confetti-partyyy.json in Resources */,
 				F149557C8041D5BB75C0CA34 /* WelcomeViewController.xib in Resources */,
-				C3D69D7825850E9900BC64C9 /* 19904-ski-touring-backcountry-skiing.json in Resources */,
 				F14959446FAB1AE8F8479875 /* ArticleViewController.xib in Resources */,
 				F149536F904F19914B26C190 /* EditProfileViewController.xib in Resources */,
 				F14951DADFEBD16EA7AA4EEE /* ProfileCell.xib in Resources */,
@@ -1034,7 +1026,7 @@
 				C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */,
 				C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */,
 				C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */,
-				C396E23E246AC8E200DBF0E4 /* AchievementService.swift in Sources */,
+				C396E23E246AC8E200DBF0E4 /* AchievementServiceProtocol.swift in Sources */,
 				C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */,
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,
 				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,
@@ -1057,7 +1049,7 @@
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
 				C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
-				C3BFEBC52477E85F000B5B41 /* NotificationService.swift in Sources */,
+				C3BFEBC52477E85F000B5B41 /* PushService.swift in Sources */,
 				C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */,
 				C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */,
 				C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */,
@@ -1094,7 +1086,7 @@
 				F1495ADA5587A84C0A572A15 /* SetupSphereValueViewController.swift in Sources */,
 				F1495F5D467AC16BA57CE2BF /* WelcomeViewController.swift in Sources */,
 				F14957534493CFF9CA95F186 /* ArticleViewController.swift in Sources */,
-				F14952606F9F2D69620BA836 /* AlertServiceDefault.swift in Sources */,
+				F14952606F9F2D69620BA836 /* AlertService.swift in Sources */,
 				F14953B62F438A822C859E2D /* FirebaseStorage.swift in Sources */,
 				F1495758B8B86F71B37096B8 /* FirebaseDatabase.swift in Sources */,
 				F1495D08557F105CA2F17BBD /* EditProfileViewController.swift in Sources */,

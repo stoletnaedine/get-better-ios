@@ -16,7 +16,7 @@ class PushNotificationsViewController: UIViewController {
     
     private let tableView = UITableView()
     private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
-    private let notificationService: NotificationService = NotificationServiceDefault()
+    private let pushService: PushServiceProtocol = PushService()
     private var settings = NotificationSettings(tip: .none, post: .none)
     private var currentTopic: NotificationTopic?
     private var models: [PushNotificationModel] {
@@ -80,7 +80,7 @@ class PushNotificationsViewController: UIViewController {
     
     @objc private func saveSettings() {
         userDefaultsService.saveNotificationSettings(settings)
-        notificationService.subscribe(to: settings)
+        pushService.subscribe(to: settings)
         completion?()
     }
     

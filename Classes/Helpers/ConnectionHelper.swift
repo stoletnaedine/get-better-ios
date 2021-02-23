@@ -10,7 +10,7 @@ import Reachability
 
 class ConnectionHelper {
     
-    private let alertService: AlertService = AlertServiceDefault()
+    private let alertService: AlertServiceProtocol = AlertService()
     
     func connectionAvailable() -> Bool {
         let reachability = try! Reachability()

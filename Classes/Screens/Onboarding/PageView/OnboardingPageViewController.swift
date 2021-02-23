@@ -11,10 +11,12 @@ import FirebaseAuth
 
 class OnboardingPageViewController: UIViewController {
 
-    var viewControllers: [UIViewController] = []
-    let database: GBDatabase = FirebaseDatabase()
-    let alertService: AlertService = AlertServiceDefault()
     var completion: VoidClosure?
+
+    private var viewControllers: [UIViewController] = []
+    private let database: DatabaseProtocol = FirebaseDatabase()
+    private let alertService: AlertServiceProtocol = AlertService()
+    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +26,7 @@ class OnboardingPageViewController: UIViewController {
         setupBarButton()
     }
     
-    func fillViewControllers() {
+    private func fillViewControllers() {
         viewControllers.append(WelcomeViewController())
         
         for sphere in Sphere.allCases {
@@ -34,7 +36,7 @@ class OnboardingPageViewController: UIViewController {
         }
     }
     
-    func setupPageControl() {
+    private func setupPageControl() {
         guard let firstViewController = viewControllers.first else { return }
         let pageViewController = UIPageViewController(transitionStyle: .scroll,
                                                       navigationOrientation: .horizontal,
@@ -55,7 +57,7 @@ class OnboardingPageViewController: UIViewController {
         view.backgroundColor = .white
     }
     
-    func setupBarButton() {
+    private func setupBarButton() {
         let saveBarButton = UIBarButtonItem(title: R.string.localizable.onboardingSave(),
                                             style: .plain,
                                             target: self,
@@ -69,8 +71,8 @@ class OnboardingPageViewController: UIViewController {
         navigationItem.leftBarButtonItem = exitBarButton
     }
     
-    @objc func exit() {
-        UserDefaults.standard.set(false, forKey: Properties.UserDefaults.tutorialHasShowed)
+    @objc private func exit() {
+        userSettingsService.tutorialHasShown(false)
         
         guard let user = Auth.auth().currentUser else {
             alertService.showErrorMessage(desc: R.string.localizable.onboardingUserError())
@@ -84,15 +86,14 @@ class OnboardingPageViewController: UIViewController {
                     self?.alertService.showErrorMessage(desc: error.localizedDescription)
                 } else {
                     self?.alertService.showSuccessMessage(
-                            desc: R.string.localizable.onboardingDeleteAnonymousAccountSuccess()
-                    )
+                        desc: R.string.localizable.onboardingDeleteAnonymousAccountSuccess())
                 }
                 NotificationCenter.default.post(name: .logout, object: nil)
             })
         }
     }
     
-    @objc func saveSphereValues() {
+    @objc private func saveSphereValues() {
         let setupSphereValueViewControllers = viewControllers
             .filter { $0 is SetupSphereValueViewController }
             .map { $0 as! SetupSphereValueViewController }
@@ -108,16 +109,18 @@ class OnboardingPageViewController: UIViewController {
         }
         
         database.saveStartSphereMetrics(sphereMetrics) { [weak self] in
-            UserDefaults.standard.set(false, forKey: Properties.UserDefaults.tutorialHasShowed)
-            self?.completion?()
+            guard let self = self else { return }
+            self.userSettingsService.tutorialHasShown(false)
+            self.completion?()
         }
     }
 }
 
+// MARK: — UIPageViewControllerDataSource
+
 extension OnboardingPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return nil }
         let previousIndex = currentIndex - 1
@@ -127,8 +130,7 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource, UIPageVi
         return viewControllers[previousIndex]
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return nil }
         let nextIndex = currentIndex + 1

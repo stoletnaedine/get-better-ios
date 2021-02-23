@@ -14,15 +14,14 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private enum Constants {
-        static let sectionHeaderHeight: CGFloat = 35
         static let profileCell = R.reuseIdentifier.profileCell.identifier
         static let notificationCell = R.nib.notificationCell.name
         static let titleSubtitleCell = R.nib.titleSubtitleCell.name
     }
     
-    private let notificationService: NotificationService = NotificationServiceDefault()
+    private let pushService: PushServiceProtocol = PushService()
     private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
-    private let alertService: AlertService = AlertServiceDefault()
+    private let alertService: AlertServiceProtocol = AlertService()
     
     private var profile: Profile?
     private var notificationSettings: NotificationSettings?
@@ -55,7 +54,7 @@ class SettingsViewController: UIViewController {
     
     private func setupView() {
         title = R.string.localizable.settingsTitle()
-        tableView.backgroundColor = .lifeCircleLineBack
+        tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
     }
     
@@ -122,12 +121,16 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         switch type {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell,
-                  let profile = self.profile else { return UITableViewCell() }
+                  let profile = self.profile else {
+                return UITableViewCell()
+            }
+            cell.backgroundColor = .appBackground
             cell.configure(model: profile)
             return cell
             
-        case .tips, .article:
+        case .tips:
             let cell = UITableViewCell()
+            cell.backgroundColor = .appBackground
             cell.textLabel?.text = item.title
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
@@ -136,6 +139,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .push:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell,
                   let notificationSettings = self.notificationSettings else { return UITableViewCell() }
+            cell.backgroundColor = .appBackground
             var subtitle = R.string.localizable.settingsPushNone()
             let tip: String? = notificationSettings.tip != .none ? notificationSettings.tip.text : nil
             let post: String? = notificationSettings.post != .none ? notificationSettings.post.text : nil
@@ -152,6 +156,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             
         case .difficultyLevel:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell else { return UITableViewCell() }
+            cell.backgroundColor = .appBackground
             cell.accessoryType = .detailButton
             let model  = TitleSubtitleCellViewModel(
                 title: item.title ?? "",
@@ -162,6 +167,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             
         case .aboutApp:
             let cell = UITableViewCell()
+            cell.backgroundColor = .appBackground
             cell.textLabel?.text = item.title
             cell.textLabel?.textColor = .grey
             cell.selectionStyle = .none
@@ -193,18 +199,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         alertService.showPopUpMessage(
             title: R.string.localizable.settingsDiffLevelInfoTitle(),
             description: R.string.localizable.settingsDiffLevelInfoDescription(),
-            buttonText: R.string.localizable.oK()
-        )
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == self.models.count - 1 ? 1 : Constants.sectionHeaderHeight
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .lifeCircleLineBack
-        return view
+            buttonText: R.string.localizable.oK())
     }
     
 }
@@ -219,18 +214,9 @@ private extension SettingsViewController {
             self?.loadProfileAndReloadTableView()
         }
         
-        let aboutCircleVC = ArticleViewController()
-        aboutCircleVC.article = Article(title: R.string.localizable.aboutCircleTitle(),
-                                        text: R.string.localizable.aboutCircleDescription(),
-                                        image: R.image.lifeCircleExample())
-        
-        let aboutJournalVC = ArticleViewController()
-        aboutJournalVC.article = Article(title: R.string.localizable.aboutJournalTitle(),
-                                         text: R.string.localizable.aboutJournalDescription(),
-                                         image: R.image.aboutEvents())
-        
         let aboutAppVC = ArticleViewController()
-        aboutAppVC.article = Article(title: R.string.localizable.aboutAppTitle(),
+        aboutAppVC.article = Article(
+            title: R.string.localizable.aboutAppTitle(),
                                      titleView: UIImageView(image: R.image.titleViewLogo()),
                                      text: R.string.localizable.aboutAppDescription(),
                                      image: R.image.aboutTeam())
@@ -254,6 +240,14 @@ private extension SettingsViewController {
                     })
             ),
             SettingsCellViewModel(
+                type: .tips,
+                cell: SettingsCell(
+                    title: R.string.localizable.tipsTitle(),
+                    action: { [weak self] in
+                        self?.navigationController?.pushViewController(TipsTableViewController(), animated: true)
+                    })
+            ),
+            SettingsCellViewModel(
                 type: .push,
                 cell: SettingsCell(
                     title: R.string.localizable.settingsPushTitle(),
@@ -266,30 +260,6 @@ private extension SettingsViewController {
                 cell: SettingsCell(
                     title: R.string.localizable.settingsDiffLevelTitle(),
                     action: difficultyLevelClosure())
-            ),
-            SettingsCellViewModel(
-                type: .tips,
-                cell: SettingsCell(
-                    title: R.string.localizable.tipsTitle(),
-                    action: { [weak self] in
-                        self?.navigationController?.pushViewController(TipsTableViewController(), animated: true)
-                    })
-            ),
-            SettingsCellViewModel(
-                type: .article,
-                cell: SettingsCell(
-                    title: R.string.localizable.aboutCircleTableTitle(),
-                    action: { [weak self] in
-                        self?.navigationController?.pushViewController(aboutCircleVC, animated: true)
-                    })
-            ),
-            SettingsCellViewModel(
-                type: .article,
-                cell: SettingsCell(
-                    title: R.string.localizable.aboutJournalTitle(),
-                    action: { [weak self] in
-                        self?.navigationController?.pushViewController(aboutJournalVC, animated: true)
-                    })
             ),
             SettingsCellViewModel(
                 type: .aboutApp,

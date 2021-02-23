@@ -20,8 +20,8 @@ class RootManager: RootManagerProtocol {
     
     private var window: UIWindow?
     private let connectionHelper = ConnectionHelper()
-    private lazy var alertService: AlertService = AlertServiceDefault()
-    private lazy var database: GBDatabase = FirebaseDatabase()
+    private lazy var alertService: AlertServiceProtocol = AlertService()
+    private lazy var database: DatabaseProtocol = FirebaseDatabase()
     private var tabBarController: TabBarController?
     private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     
@@ -45,7 +45,7 @@ class RootManager: RootManagerProtocol {
     }
     
     func showTip() {
-        userDefaultsService.setTipOfTheDayNotShown()
+        userDefaultsService.tipOfTheDayHasShown(false)
         enterApp()
     }
     

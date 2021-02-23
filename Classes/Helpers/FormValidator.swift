@@ -12,7 +12,7 @@ class FormValidator {
 
     static func isFormValid(email: String, password: String) -> Bool {
 
-        let alertService: AlertService = AlertServiceDefault()
+        let alertService: AlertServiceProtocol = AlertService()
 
         switch true {
         case email.isEmpty:

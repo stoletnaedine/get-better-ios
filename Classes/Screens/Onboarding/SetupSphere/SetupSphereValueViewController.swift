@@ -17,21 +17,25 @@ class SetupSphereValueViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var arrowDownImageView: UIImageView!
     @IBOutlet weak var arrowUpImageView: UIImageView!
-    
-    var sphereValue: Double = Properties.notValidSphereValue
+
     var sphere: Sphere?
-    let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-    let valuesTitle = [R.string.localizable.onboarding10(),
-                       R.string.localizable.onboarding9(),
-                       R.string.localizable.onboarding8(),
-                       R.string.localizable.onboarding7(),
-                       R.string.localizable.onboarding6(),
-                       R.string.localizable.onboarding5(),
-                       R.string.localizable.onboarding4(),
-                       R.string.localizable.onboarding3(),
-                       R.string.localizable.onboarding2(),
-                       R.string.localizable.onboarding1(),
-                       R.string.localizable.onboarding0()]
+    var sphereValue: Double = Properties.notValidSphereValue
+
+    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
+    private let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    private let valuesTitle = [
+        R.string.localizable.onboarding10(),
+        R.string.localizable.onboarding9(),
+        R.string.localizable.onboarding8(),
+        R.string.localizable.onboarding7(),
+        R.string.localizable.onboarding6(),
+        R.string.localizable.onboarding5(),
+        R.string.localizable.onboarding4(),
+        R.string.localizable.onboarding3(),
+        R.string.localizable.onboarding2(),
+        R.string.localizable.onboarding1(),
+        R.string.localizable.onboarding0()
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,30 +64,30 @@ class SetupSphereValueViewController: UIViewController {
     }
     
     private func showTutorial() {
-        let tutorialHasNotShowed = !UserDefaults.standard.bool(forKey: Properties.UserDefaults.tutorialHasShowed)
-        
-        if tutorialHasNotShowed {
+        if !userSettingsService.isTutorialHasShown() {
             let showcase = MaterialShowcase()
             showcase.backgroundRadius = 1000
             showcase.backgroundAlpha = 0.9
             showcase.setTargetView(view: setupValueButton)
             showcase.primaryText = R.string.localizable.onboardingTutorialPrimaryText()
             showcase.secondaryText = R.string.localizable.onboardingTutorialSecondaryText()
-            showcase.show(completion: {
-                UserDefaults.standard.set(true, forKey: Properties.UserDefaults.tutorialHasShowed)
+            showcase.show(completion: { [weak self] in
+                guard let self = self else { return }
+                self.userSettingsService.tutorialHasShown(true)
             })
         }
     }
     
     private func fillView(from sphere: Sphere) {
-        self.sphereNameLabel.text = sphere.name
-        self.questionLabel.text = sphere.description
-        self.imageView.image = sphere.image
+        sphereNameLabel.text = sphere.name
+        questionLabel.text = sphere.description
+        imageView.image = sphere.image
         questionLabel.text = sphere.question
     }
 }
 
 // MARK: Setup View
+
 extension SetupSphereValueViewController {
     func setupView() {
         questionLabel.font = UIFont.systemFont(ofSize: 16)
@@ -97,6 +101,7 @@ extension SetupSphereValueViewController {
 }
 
 // MARK: UIPickerViewDelegate
+
 extension SetupSphereValueViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

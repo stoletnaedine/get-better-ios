@@ -9,9 +9,12 @@
 import Foundation
 
 protocol UserSettingsServiceProtocol {
-    func tipOfTheDayShown()
-    func setTipOfTheDayNotShown()
-    func isTipOfTheDayShown() -> Bool
+    func tutorialHasShown(_ shown: Bool)
+    func isTutorialHasShown() -> Bool
+    func lifeCircleTutorialHasShown(_ shown: Bool)
+    func isLifeCircleTutorialHasShown() -> Bool
+    func tipOfTheDayHasShown(_ shown: Bool)
+    func isTipOfTheDayHasShown() -> Bool
     func saveDraft(text: String)
     func getDraft() -> String
     func clearDraft()
@@ -34,19 +37,34 @@ class UserSettingsService: UserSettingsServiceProtocol {
             static let tipPush = "tipPush"
             static let postPush = "postPush"
             static let difficultyLevel = "difficultyLevel"
+            static let tutorialHasShowed = "tutorialHasShowed"
+            static let lifeCircleTutorialHasShowed = "lifeCircleTutorialHasShowed"
         }
     }
-    
-    func tipOfTheDayShown() {
-        UserDefaults.standard.set(days, forKey: Constants.Key.tipOfTheDayShown)
+
+    func tutorialHasShown(_ shown: Bool) {
+        UserDefaults.standard.set(shown, forKey: Constants.Key.tutorialHasShowed)
+    }
+
+    func isTutorialHasShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: Constants.Key.tutorialHasShowed)
+    }
+
+    func lifeCircleTutorialHasShown(_ shown: Bool) {
+        UserDefaults.standard.set(shown, forKey: Constants.Key.lifeCircleTutorialHasShowed)
+    }
+
+    func isLifeCircleTutorialHasShown() -> Bool {
+        return UserDefaults.standard.bool(forKey: Constants.Key.lifeCircleTutorialHasShowed)
+    }
+
+    func tipOfTheDayHasShown(_ shown: Bool) {
+        let value = shown ? self.days : -1
+        UserDefaults.standard.set(value, forKey: Constants.Key.tipOfTheDayShown)
     }
     
-    func setTipOfTheDayNotShown() {
-        UserDefaults.standard.set(-1, forKey: Constants.Key.tipOfTheDayShown)
-    }
-    
-    func isTipOfTheDayShown() -> Bool {
-        return UserDefaults.standard.value(forKey: Constants.Key.tipOfTheDayShown) as? Int == days
+    func isTipOfTheDayHasShown() -> Bool {
+        return UserDefaults.standard.value(forKey: Constants.Key.tipOfTheDayShown) as? Int == self.days
     }
     
     func saveDraft(text: String) {

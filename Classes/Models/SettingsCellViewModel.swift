@@ -16,7 +16,6 @@ struct SettingsCellViewModel {
 enum SettingsCellType {
     case profile
     case tips
-    case article
     case push
     case difficultyLevel
     case aboutApp

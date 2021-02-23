@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol SphereMetricsService {
+protocol SphereMetricsServiceProtocol {
     func text(for sphere: Sphere, userData: UserData) -> String
 }
 
-class SphereMetricsServiceDefault: SphereMetricsService {
+class SphereMetricsService: SphereMetricsServiceProtocol {
     
-    let lifeCircleService: LifeCircleService = LifeCircleServiceDefault()
+    let lifeCircleService: LifeCircleServiceProtocol = LifeCircleService()
     
     func text(for sphere: Sphere, userData: UserData) -> String {
         guard let startAll = userData.start,

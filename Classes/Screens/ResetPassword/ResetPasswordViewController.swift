@@ -18,7 +18,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var resetPasswordButtonLabel: UILabel!
     @IBOutlet weak var noticeLabel: UILabel!
     
-    let alertService: AlertService = AlertServiceDefault()
+    let alertService: AlertServiceProtocol = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

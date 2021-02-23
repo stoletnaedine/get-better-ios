@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerButtonLabel: UILabel!
     
     var completion: VoidClosure?
-    let alertService: AlertService = AlertServiceDefault()
+    let alertService: AlertServiceProtocol = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

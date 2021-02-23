@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol AchievementService {
+protocol AchievementServiceProtocol {
     func calcAchievements(userData: UserData) -> [Achievement]
 }
 
-class AchievementServiceDefault: AchievementService {
+class AchievementService: AchievementServiceProtocol {
     
     func calcAchievements(userData: UserData) -> [Achievement] {
         let daysAchievements = getDaysAchievements(posts: userData.posts)
