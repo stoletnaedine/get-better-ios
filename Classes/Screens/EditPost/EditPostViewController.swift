@@ -22,6 +22,7 @@ class EditPostViewController: AddPostViewController {
         guard let post = post else { return }
         
         loadImageButton.isHidden = false
+        bigLoadImageButton.isHidden = false
         cancelLoadButton.isHidden = true
         placeholderLabel.isHidden = true
         
@@ -44,6 +45,7 @@ class EditPostViewController: AddPostViewController {
             imageView.kf.setImage(with: url)
             cancelLoadButton.isHidden = false
             loadImageButton.isHidden = true
+            bigLoadImageButton.isHidden = true
         }
     }
     

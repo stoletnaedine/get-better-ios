@@ -77,8 +77,9 @@ class PostDetailViewController: UIViewController {
     }
     
     func customizeView() {
+        guard let post = self.post else { return }
         var textFont = UIFont.systemFont(ofSize: 16)
-        if let photoUrl = self.post?.photoUrl, photoUrl.isEmpty,
+        if let photoUrl = post.photoUrl, photoUrl.isEmpty,
            let text = self.post?.text, text.count < 30 {
             textFont = UIFont.systemFont(ofSize: 26)
         }

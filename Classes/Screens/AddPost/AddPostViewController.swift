@@ -21,6 +21,7 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var loadImageButton: UIButton!
+    @IBOutlet weak var bigLoadImageButton: UIButton!
     @IBOutlet weak var symbolsCountLabel: UILabel!
     @IBOutlet weak var sphereView: UIView!
     @IBOutlet weak var selectSphereButton: UIButton!
@@ -53,18 +54,20 @@ class AddPostViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func attachButtonDidTap(_ sender: UIButton) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true, completion: nil)
+    @IBAction func loadImageButtonDidTap(_ sender: UIButton) {
+        openImagePickerController()
     }
-    
+
+    @IBAction func bigLoadImageButtonDidTap(_ sender: UIButton) {
+        openImagePickerController()
+    }
+
     @IBAction func cancelLoadButtonDidTap(_ sender: Any) {
         imageToUpload = nil
         isOldPhoto = false
         cancelLoadButton.isHidden = true
         loadImageButton.isHidden = false
+        bigLoadImageButton.isHidden = false
         loadImageButton.alpha = 0
         UIView.animate(withDuration: 0.8,
                        animations: {
@@ -170,7 +173,16 @@ class AddPostViewController: UIViewController {
         customTextField.becomeFirstResponder()
     }
     
-    // MARK: Setup View
+    // MARK: — Private methods
+
+    private func openImagePickerController() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.navigationBar.tintColor = .white
+        picker.navigationBar.barTintColor = .violet
+        present(picker, animated: true, completion: nil)
+    }
     
     private func setupView() {
         postTextView.font = postTextView.font?.withSize(16)
@@ -182,7 +194,6 @@ class AddPostViewController: UIViewController {
         saveButton.setTitle(R.string.localizable.addPostSave(), for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = .journalButtonFont
-        loadImageButton.setTitle("", for: .normal)
         loadImageButton.tintColor = .violet
         loadImageButton.imageView?.contentMode = .scaleAspectFill
         dateLabel.font = .journalDateFont
@@ -267,6 +278,7 @@ extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerCo
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         loadImageButton.isHidden = true
+        bigLoadImageButton.isHidden = true
         cancelLoadButton.isHidden = false
         imageView.image = image
         imageToUpload = image

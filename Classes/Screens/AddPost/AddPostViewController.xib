@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddPostViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
+                <outlet property="bigLoadImageButton" destination="4Rv-d6-ylr" id="Vy1-cS-mFf"/>
                 <outlet property="cancelLoadButton" destination="EZe-wT-mmk" id="x0z-Q3-ZJ7"/>
                 <outlet property="dateLabel" destination="EdK-CD-Y8S" id="9kl-0w-jNK"/>
                 <outlet property="imageView" destination="VpW-Ud-OKu" id="9nT-Qo-Yf2"/>
@@ -140,6 +141,23 @@
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VpW-Ud-OKu">
                             <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Rv-d6-ylr" userLabel="BigLoadImageButton">
+                            <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                            <connections>
+                                <action selector="bigLoadImageButtonDidTap:" destination="-1" eventType="touchUpInside" id="tDh-Rk-YT5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO" userLabel="LoadImageButton">
+                            <rect key="frame" x="45" y="45" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="fs1-ba-HgD"/>
+                                <constraint firstAttribute="height" constant="25" id="g02-2h-vVi"/>
+                            </constraints>
+                            <state key="normal" image="photo-gallery"/>
+                            <connections>
+                                <action selector="loadImageButtonDidTap:" destination="-1" eventType="touchUpInside" id="I9m-DA-FjP"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZe-wT-mmk" userLabel="CancelLoadButton">
                             <rect key="frame" x="90" y="5" width="20" height="20"/>
                             <constraints>
@@ -151,28 +169,21 @@
                                 <action selector="cancelLoadButtonDidTap:" destination="-1" eventType="touchUpInside" id="DiR-0f-Mt4"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-MY-RhO" userLabel="LoadImageButton">
-                            <rect key="frame" x="45" y="45" width="25" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="25" id="fs1-ba-HgD"/>
-                                <constraint firstAttribute="height" constant="25" id="g02-2h-vVi"/>
-                            </constraints>
-                            <state key="normal" title="Button" image="photo-gallery"/>
-                            <connections>
-                                <action selector="attachButtonDidTap:" destination="-1" eventType="touchUpInside" id="I9m-DA-FjP"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                     <constraints>
+                        <constraint firstItem="4Rv-d6-ylr" firstAttribute="top" secondItem="u7B-OM-3DA" secondAttribute="top" id="08a-Wn-DGa"/>
                         <constraint firstItem="kDR-MY-RhO" firstAttribute="centerX" secondItem="u7B-OM-3DA" secondAttribute="centerX" id="14s-9B-pwp"/>
                         <constraint firstAttribute="bottom" secondItem="VpW-Ud-OKu" secondAttribute="bottom" id="3SY-Wi-l10"/>
                         <constraint firstItem="kDR-MY-RhO" firstAttribute="centerY" secondItem="u7B-OM-3DA" secondAttribute="centerY" id="8OW-17-y6a"/>
                         <constraint firstAttribute="width" constant="115" id="FW4-uz-29p"/>
                         <constraint firstAttribute="trailing" secondItem="EZe-wT-mmk" secondAttribute="trailing" constant="5" id="GFh-tF-dQH"/>
                         <constraint firstAttribute="trailing" secondItem="VpW-Ud-OKu" secondAttribute="trailing" id="KvU-gg-FuU"/>
+                        <constraint firstAttribute="trailing" secondItem="4Rv-d6-ylr" secondAttribute="trailing" id="aT6-Lb-f7R"/>
                         <constraint firstItem="VpW-Ud-OKu" firstAttribute="leading" secondItem="u7B-OM-3DA" secondAttribute="leading" id="dB9-3i-Nke"/>
+                        <constraint firstItem="4Rv-d6-ylr" firstAttribute="leading" secondItem="u7B-OM-3DA" secondAttribute="leading" id="ezT-ak-LfQ"/>
                         <constraint firstItem="VpW-Ud-OKu" firstAttribute="top" secondItem="u7B-OM-3DA" secondAttribute="top" id="h3C-HK-8A0"/>
+                        <constraint firstAttribute="bottom" secondItem="4Rv-d6-ylr" secondAttribute="bottom" id="n2T-x0-WYC"/>
                         <constraint firstAttribute="height" constant="115" id="qqy-bg-ezK"/>
                         <constraint firstItem="EZe-wT-mmk" firstAttribute="top" secondItem="u7B-OM-3DA" secondAttribute="top" constant="5" id="sVz-6j-0pY"/>
                     </constraints>
