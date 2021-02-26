@@ -30,12 +30,12 @@ final class TipsTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData(completion: { [weak self] in
+        loadData { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-        })
+        }
     }
 
     // MARK: — Private methods
@@ -55,7 +55,7 @@ final class TipsTableViewController: UIViewController {
                     ]
                 } else {
                     self.stopAnimation()
-                    tips = ids.map { self.tipStorage.tipEntities()[$0] }
+                    tips = ids.map { self.tipStorage.tipEntities[$0] }
                 }
                 self.tips = tips
                 completion()
