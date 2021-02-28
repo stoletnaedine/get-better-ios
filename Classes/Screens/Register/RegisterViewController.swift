@@ -20,7 +20,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var registerButtonLabel: UILabel!
     
     var completion: VoidClosure?
-    let alertService: AlertServiceProtocol = AlertService()
+
+    private let alertService: AlertServiceProtocol = AlertService()
+    private var userDataService: UserDataServiceProtocol = UserDataService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +48,7 @@ class RegisterViewController: UIViewController {
                     self.alertService.showErrorMessage(desc: appError)
                 } else {
                     if let _ = Auth.auth().currentUser {
-                        KeychainHelper.saveUserEmail(email)
+                        self.userDataService.email = email
                         self.alertService.showSuccessMessage(desc: R.string.localizable.registerSuccessAlert())
                         self.completion?()
                     } else {

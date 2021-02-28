@@ -62,7 +62,7 @@
 		C36351CF257D336300DA6713 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36351CD257D336300DA6713 /* NotificationCell.xib */; };
 		C36351D3257D353600DA6713 /* NotificationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36351D2257D353600DA6713 /* NotificationCellViewModel.swift */; };
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
-		C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* KeychainHelper.swift */; };
+		C36F66462449AC3C00293246 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* UserDataService.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
 		C37D0B3E23D79088005A1BCF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* Label.swift */; };
 		C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */; };
@@ -197,7 +197,7 @@
 		C36351CD257D336300DA6713 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		C36351D2257D353600DA6713 /* NotificationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellViewModel.swift; sourceTree = "<group>"; };
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		C36F66452449AC3C00293246 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		C36F66452449AC3C00293246 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		C37D0B3D23D79088005A1BCF /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCircleService.swift; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				C34B14E824475ED000B58B18 /* FormValidator.swift */,
-				C36F66452449AC3C00293246 /* KeychainHelper.swift */,
+				C36F66452449AC3C00293246 /* UserDataService.swift */,
 				C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */,
 			);
 			path = Helpers;
@@ -1064,7 +1064,7 @@
 				6EA8519E244F86FA00D40E14 /* JournalTableViewCell.swift in Sources */,
 				C3E7EB7423C710BB0045B70A /* RootManager.swift in Sources */,
 				C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */,
-				C36F66462449AC3C00293246 /* KeychainHelper.swift in Sources */,
+				C36F66462449AC3C00293246 /* UserDataService.swift in Sources */,
 				C33722AA254EB5C200191785 /* JournalSection.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
 				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,

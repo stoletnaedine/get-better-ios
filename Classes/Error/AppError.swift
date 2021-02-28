@@ -27,19 +27,25 @@ class AppError: Error {
     
     init(firebaseError: Error) {
         if let errorCode = AuthErrorCode(rawValue: firebaseError._code) {
-        switch errorCode {
-        case .emailAlreadyInUse:
-            self.name = "Этот E-mail уже используется другим пользователем"
-        case .wrongPassword:
-            self.name = "Неверный пароль"
-        case .tooManyRequests:
-            self.name = "Слишком много неудачных попыток. Попробуйте позже"
-        case .userNotFound:
-            self.name = "Пользователь не найден"
-        case .networkError:
-            self.name = "Нет подключения к интернету"
-        default:
-            self.name = firebaseError.localizedDescription
+            switch errorCode {
+            case .emailAlreadyInUse:
+                self.name = "Этот E-mail уже используется другим пользователем"
+            case .wrongPassword:
+                self.name = "Неверный пароль"
+            case .weakPassword:
+                self.name = "Этот пароль слишком легко подобрать"
+            case .invalidEmail:
+                self.name = "Некорректный E-mail"
+            case .tooManyRequests:
+                self.name = "Слишком много неудачных попыток. Попробуйте позже"
+            case .userNotFound:
+                self.name = "Пользователь не найден"
+            case .networkError:
+                self.name = "Нет подключения к интернету"
+            case .requiresRecentLogin:
+                self.name = "Для продолжения нужно снова авторизоваться"
+            default:
+                self.name = firebaseError.localizedDescription
             }
         }
     }

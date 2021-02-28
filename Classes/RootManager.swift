@@ -23,7 +23,7 @@ class RootManager: RootManagerProtocol {
     private lazy var alertService: AlertServiceProtocol = AlertService()
     private lazy var database: DatabaseProtocol = FirebaseDatabase()
     private var tabBarController: TabBarController?
-    private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
+    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -45,7 +45,7 @@ class RootManager: RootManagerProtocol {
     }
     
     func showTip() {
-        userDefaultsService.tipOfTheDayHasShown(false)
+        userSettingsService.tipOfTheDayHasShown(false)
         enterApp()
     }
     
@@ -67,6 +67,8 @@ class RootManager: RootManagerProtocol {
             tabBarController.present(alert, animated: true, completion: nil)
         })
     }
+
+    // MARK: — Private methods
     
     @objc
     private func enterApp(completion: ((TabBarController) -> Void)? = nil) {

@@ -27,6 +27,7 @@ class AuthViewController: UIViewController {
     
     var signInCompletion: VoidClosure?
     private let alertService: AlertServiceProtocol = AlertService()
+    private var userDataService: UserDataServiceProtocol = UserDataService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +62,7 @@ class AuthViewController: UIViewController {
                 if let error = error, let appError = AppError(firebaseError: error).name {
                     self.alertService.showErrorMessage(desc: appError)
                 } else {
-                    KeychainHelper.saveUserEmail(email)
+                    self.userDataService.email = email
                     self.signInCompletion?()
                 }
             })
@@ -114,7 +115,7 @@ extension AuthViewController {
             string: R.string.localizable.authEnterEmail(),
             attributes: NSAttributedString.formFieldPlaceholderAttributes
         )
-        if let email = KeychainHelper.getUserEmail() {
+        if let email = userDataService.email {
             emailTextField.text = email
         }
 

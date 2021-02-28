@@ -63,7 +63,7 @@ class OnboardingPageViewController: UIViewController {
                                             target: self,
                                             action: #selector(saveSphereValues))
         navigationItem.rightBarButtonItem = saveBarButton
-        
+
         let exitBarButton = UIBarButtonItem(title: R.string.localizable.onboardingExit(),
                                             style: .plain,
                                             target: self,
