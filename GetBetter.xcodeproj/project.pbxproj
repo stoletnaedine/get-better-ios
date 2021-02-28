@@ -76,6 +76,7 @@
 		C38689EB2520FE9500BE9851 /* EditPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38689EA2520FE9500BE9851 /* EditPostViewController.swift */; };
 		C38689ED2521054300BE9851 /* EditPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C38689EC2521054300BE9851 /* EditPostViewController.xib */; };
 		C389466725A84BAF00FEF40C /* PushNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C389466625A84BAF00FEF40C /* PushNotificationsViewController.swift */; };
+		C38F673725EBA2B50076097B /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = C38F673625EBA2B50076097B /* loading.json */; };
 		C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */; };
 		C390A76024C0CFC900EAD48E /* TextViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */; };
 		C392971F247FAE04000340DC /* PostMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C392971E247FAE04000340DC /* PostMapper.swift */; };
@@ -211,6 +212,7 @@
 		C38689EA2520FE9500BE9851 /* EditPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostViewController.swift; sourceTree = "<group>"; };
 		C38689EC2521054300BE9851 /* EditPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditPostViewController.xib; path = Classes/Screens/EditPost/EditPostViewController.xib; sourceTree = SOURCE_ROOT; };
 		C389466625A84BAF00FEF40C /* PushNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationsViewController.swift; sourceTree = "<group>"; };
+		C38F673625EBA2B50076097B /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		C390A75D24C0CFC900EAD48E /* TextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
 		C390A75E24C0CFC900EAD48E /* TextViewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewViewController.xib; sourceTree = "<group>"; };
 		C392971E247FAE04000340DC /* PostMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMapper.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 		C38157AA2556B2AB0005C16E /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C38F673625EBA2B50076097B /* loading.json */,
 				C38158282556BEBD0005C16E /* 15046-spark-animation.json */,
 				C38158292556BEBD0005C16E /* 28592-yoga-nature.json */,
 				C38158272556BEBD0005C16E /* 35255-from-loading-to-success.json */,
@@ -935,6 +938,7 @@
 				F14959446FAB1AE8F8479875 /* ArticleViewController.xib in Resources */,
 				F149536F904F19914B26C190 /* EditProfileViewController.xib in Resources */,
 				F14951DADFEBD16EA7AA4EEE /* ProfileCell.xib in Resources */,
+				C38F673725EBA2B50076097B /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

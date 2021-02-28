@@ -13,6 +13,7 @@ enum AnimationName {
     case confetti
     case yoga
     case loadingSuccess
+    case loading
     case loadingError
     case travel
     case japan
@@ -22,6 +23,7 @@ enum AnimationName {
         .confetti: "37723-confetti-partyyy",
         .yoga: "28592-yoga-nature",
         .loadingSuccess: "35255-from-loading-to-success",
+        .loading: "loading",
         .loadingError: "35256-from-loading-to-error",
         .travel: "19904-ski-touring-backcountry-skiing",
         .japan: "24118-japan-flow"

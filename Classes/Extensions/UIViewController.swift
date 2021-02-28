@@ -103,10 +103,10 @@ extension UIViewController {
     
     func showLoadingAnimation(on view: UIView) {
         showAnimation(
-            name: .loadingSuccess,
+            name: .loading,
             on: view,
             whiteScreen: true,
-            size: .init(width: 75, height: 75)
+            size: .init(width: 150, height: 150)
         )
     }
     

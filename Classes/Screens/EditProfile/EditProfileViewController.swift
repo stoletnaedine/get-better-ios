@@ -108,10 +108,12 @@ class EditProfileViewController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main, execute: { [weak self] in
-            self?.stopAnimation()
-            self?.navigationController?.popViewController(animated: true)
-            self?.alertService.showSuccessMessage(desc: R.string.localizable.profileSuccessEdit())
-            self?.completion?()
+            guard let self = self else { return }
+            self.passwordTextField.text = nil
+            self.stopAnimation()
+            self.navigationController?.popViewController(animated: true)
+            self.alertService.showSuccessMessage(desc: R.string.localizable.profileSuccessEdit())
+            self.completion?()
         })
     }
     
