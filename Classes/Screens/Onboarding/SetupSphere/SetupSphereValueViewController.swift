@@ -55,6 +55,7 @@ class SetupSphereValueViewController: UIViewController {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
+        picker.selectRow(values.count / 2, inComponent: 0, animated: false)
         
         let customTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.addSubview(customTextField)
