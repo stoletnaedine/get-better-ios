@@ -39,6 +39,10 @@
 		C33722AA254EB5C200191785 /* JournalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722A9254EB5C200191785 /* JournalSection.swift */; };
 		C33722AD254EB9BC00191785 /* VoidClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722AC254EB9BC00191785 /* VoidClosure.swift */; };
 		C33722B4254EEA2800191785 /* TipStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33722B3254EEA2800191785 /* TipStorage.swift */; };
+		C33792FD25F4D7A1005898BB /* TipLikesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33792FC25F4D7A1005898BB /* TipLikesViewModel.swift */; };
+		C337930425F4DBBE005898BB /* TipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C337930225F4DBBE005898BB /* TipCell.swift */; };
+		C337930525F4DBBE005898BB /* TipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C337930325F4DBBE005898BB /* TipCell.xib */; };
+		C337930925F4DDD8005898BB /* TipLikeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C337930825F4DDD8005898BB /* TipLikeCellViewModel.swift */; };
 		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
@@ -175,6 +179,10 @@
 		C33722A9254EB5C200191785 /* JournalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalSection.swift; sourceTree = "<group>"; };
 		C33722AC254EB9BC00191785 /* VoidClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidClosure.swift; sourceTree = "<group>"; };
 		C33722B3254EEA2800191785 /* TipStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipStorage.swift; sourceTree = "<group>"; };
+		C33792FC25F4D7A1005898BB /* TipLikesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipLikesViewModel.swift; sourceTree = "<group>"; };
+		C337930225F4DBBE005898BB /* TipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCell.swift; sourceTree = "<group>"; };
+		C337930325F4DBBE005898BB /* TipCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipCell.xib; sourceTree = "<group>"; };
+		C337930825F4DDD8005898BB /* TipLikeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipLikeCellViewModel.swift; sourceTree = "<group>"; };
 		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -419,6 +427,24 @@
 			path = CommonMetrics;
 			sourceTree = "<group>";
 		};
+		C337930025F4DB78005898BB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C337930225F4DBBE005898BB /* TipCell.swift */,
+				C337930325F4DBBE005898BB /* TipCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		C337930125F4DB7E005898BB /* List */ = {
+			isa = PBXGroup;
+			children = (
+				C30FEE4C2553C6AA00CC84B9 /* TipsTableViewController.swift */,
+				C337930025F4DB78005898BB /* Cell */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		C33AD1D9245191A500A08006 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,10 +494,10 @@
 		C35D835E250D40C3000C565E /* Tip */ = {
 			isa = PBXGroup;
 			children = (
+				C337930125F4DB7E005898BB /* List */,
 				C35D835F250D40E5000C565E /* TipViewController.swift */,
 				C35D8360250D40E5000C565E /* TipViewController.xib */,
 				C33722B3254EEA2800191785 /* TipStorage.swift */,
-				C30FEE4C2553C6AA00CC84B9 /* TipsTableViewController.swift */,
 			);
 			path = Tip;
 			sourceTree = "<group>";
@@ -558,6 +584,8 @@
 				C35CC99125A9BDF900A9AA59 /* PushNotificationModel.swift */,
 				C30350AB25C53B4D003B13BD /* DifficultyLevel.swift */,
 				C30350B925C53E32003B13BD /* TitleSubtitleCellViewModel.swift */,
+				C33792FC25F4D7A1005898BB /* TipLikesViewModel.swift */,
+				C337930825F4DDD8005898BB /* TipLikeCellViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -895,6 +923,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E5AE64424601DBC00418B23 /* ResetPasswordViewController.xib in Resources */,
+				C337930525F4DBBE005898BB /* TipCell.xib in Resources */,
 				C381582D2556BEBD0005C16E /* 28592-yoga-nature.json in Resources */,
 				9277D392238C725300B3AECA /* LaunchScreen.storyboard in Resources */,
 				C38689ED2521054300BE9851 /* EditPostViewController.xib in Resources */,
@@ -1021,6 +1050,7 @@
 				C34434F824CEBD880045F1BD /* CancelButton.swift in Sources */,
 				C35D8361250D40E5000C565E /* TipViewController.swift in Sources */,
 				C3635188257CD7B700DA6713 /* NotificationSettings.swift in Sources */,
+				C33792FD25F4D7A1005898BB /* TipLikesViewModel.swift in Sources */,
 				C392971F247FAE04000340DC /* PostMapper.swift in Sources */,
 				C38689EB2520FE9500BE9851 /* EditPostViewController.swift in Sources */,
 				C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */,
@@ -1039,6 +1069,7 @@
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
 				C3635183257B809900DA6713 /* SphereMetricsService.swift in Sources */,
 				C36F66482449BE0000293246 /* UIViewController.swift in Sources */,
+				C337930425F4DBBE005898BB /* TipCell.swift in Sources */,
 				C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */,
 				C328EE052447294100445704 /* RegisterViewController.swift in Sources */,
 				6E5AE64624601DD200418B23 /* ResetPasswordViewController.swift in Sources */,
@@ -1051,6 +1082,7 @@
 				C30C7A0F247E8DC400FD830F /* ConnectionHelper.swift in Sources */,
 				C35CC99225A9BDF900A9AA59 /* PushNotificationModel.swift in Sources */,
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
+				C337930925F4DDD8005898BB /* TipLikeCellViewModel.swift in Sources */,
 				C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
 				C3BFEBC52477E85F000B5B41 /* PushService.swift in Sources */,
@@ -1246,7 +1278,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.14;
+				MARKETING_VERSION = 1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1271,7 +1303,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.14;
+				MARKETING_VERSION = 1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stoletnaedine.GetBetter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

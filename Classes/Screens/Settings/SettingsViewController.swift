@@ -326,10 +326,10 @@ private extension SettingsViewController {
         guard let user = Auth.auth().currentUser else { return }
         DispatchQueue.main.async {
             completion(
-                Profile(avatarURL: user.photoURL,
-                        name: user.displayName ?? R.string.localizable.settingsDefaultName(),
-                        email: user.email ?? R.string.localizable.settingsDefaultEmail())
-            )
+                Profile(
+                    avatarURL: user.photoURL,
+                    name: user.displayName ?? R.string.localizable.settingsDefaultName(),
+                    email: user.email ?? R.string.localizable.settingsDefaultEmail()))
         }
     }
     

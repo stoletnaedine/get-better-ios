@@ -6,7 +6,7 @@
 //  Copyright © 2020 Artur Islamgulov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct TipEntity {
     let id: Int
@@ -26,6 +26,46 @@ class TipStorage {
             TipEntity(id: $0, tip: self.tipsRaw[$0])
         }
     }
+
+    var currentTip: TipEntity {
+        return self.tipEntities[currentTipId]
+    }
+
+    var currentTipId: Int {
+        let days = Date().diffInDaysSince1970() + 36
+        return days % tipsRaw.count
+    }
+
+    func image(for tipId: Int) -> UIImage? {
+        let imageIndex = tipId % backgroundNames.count
+        return UIImage(named: self.backgroundNames[imageIndex])
+    }
+
+    private let backgroundNames = [
+        R.image.tip.darkBg.darkBg1.name,
+        R.image.tip.darkBg.darkBg2.name,
+        R.image.tip.darkBg.darkBg3.name,
+        R.image.tip.darkBg.darkBg4.name,
+        R.image.tip.darkBg.darkBg5.name,
+        R.image.tip.darkBg.darkBg6.name,
+        R.image.tip.darkBg.darkBg7.name,
+        R.image.tip.darkBg.darkBg8.name,
+        R.image.tip.darkBg.darkBg9.name,
+        R.image.tip.darkBg.darkBg10.name,
+        R.image.tip.darkBg.darkBg11.name,
+        R.image.tip.darkBg.darkBg12.name,
+        R.image.tip.darkBg.darkBg13.name,
+        R.image.tip.darkBg.darkBg14.name,
+        R.image.tip.darkBg.darkBg15.name,
+        R.image.tip.darkBg.darkBg16.name,
+        R.image.tip.darkBg.darkBg17.name,
+        R.image.tip.darkBg.darkBg18.name,
+        R.image.tip.darkBg.darkBg19.name,
+        R.image.tip.darkBg.darkBg20.name,
+        R.image.tip.darkBg.darkBg21.name,
+        R.image.tip.darkBg.darkBg22.name,
+        R.image.tip.darkBg.darkBg23.name
+    ]
     
     private let tipsRaw: [Tip] = [
         Tip(title: "Ранний подъем",

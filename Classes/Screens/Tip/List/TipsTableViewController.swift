@@ -12,11 +12,12 @@ final class TipsTableViewController: UIViewController {
     
     private let database: DatabaseProtocol = FirebaseDatabase()
     private let tableView = UITableView()
+    private let alertService: AlertServiceProtocol = AlertService()
     private var tips: [TipEntity] = []
+    private var tipLikes: [TipLikesViewModel] = []
     private let tipStorage = TipStorage()
     private enum Constants {
-        static let xibName = "TipCell"
-        static let reuseId = "TipCellId"
+        static let tipCell = R.nib.tipCell.name
         static let placeholderTipId = -1
     }
     
@@ -30,37 +31,39 @@ final class TipsTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        showLoadingAnimation(on: self.view)
         loadData { [weak self] in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.stopAnimation()
+            self.tableView.reloadData()
         }
     }
 
     // MARK: — Private methods
-    
+
     private func loadData(completion: @escaping VoidClosure) {
-        database.getTipLikeIds(completion: { [weak self] result in
+        database.userTipsLikes(completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let ids):
-                var tips: [TipEntity]
-                if ids.isEmpty {
+            case let .success(models):
+                guard !models.isEmpty else {
                     self.showAnimation(name: .yoga, on: self.view, loopMode: .loop)
-                    tips = [
+                    self.tips = [
                         TipEntity(
                             id: Constants.placeholderTipId,
                             tip: Tip(title: R.string.localizable.tipsIfEmpty(), text: ""))
                     ]
-                } else {
-                    self.stopAnimation()
-                    tips = ids.map { self.tipStorage.tipEntities[$0] }
+                    completion()
+                    return
                 }
-                self.tips = tips
+
+                self.stopAnimation()
+                self.tipLikes = models
+                self.tips = models.map { self.tipStorage.tipEntities[$0.tipId] }
                 completion()
-            case .failure:
-                break
+            case let .failure(error):
+                guard let errorName = error.name else { return }
+                self.alertService.showErrorMessage(desc: errorName)
             }
         })
     }
@@ -80,10 +83,9 @@ final class TipsTableViewController: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: Constants.xibName, bundle: nil),
-                           forCellReuseIdentifier: Constants.reuseId)
+        tableView.register(UINib(nibName: Constants.tipCell, bundle: nil), forCellReuseIdentifier: Constants.tipCell)
         tableView.backgroundColor = .appBackground
-        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.separatorStyle = .none
     }
     
 }
@@ -98,17 +100,20 @@ extension TipsTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tipEntity = tips[indexPath.row]
-        let cell = UITableViewCell()
-        cell.selectionStyle = .none
-        if tipEntity.id == Constants.placeholderTipId {
+        guard tipEntity.id != Constants.placeholderTipId else {
+            let cell = UITableViewCell()
             cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.text = tipEntity.tip.title
+            return cell
         }
-        cell.textLabel?.text = tipEntity.tip.title
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tipCell) as? TipCell else {
+            return UITableViewCell()
+        }
+        let cellTitle = tipEntity.tip.title
+        let likeCount = self.tipLikes[indexPath.row].likeCount
+        let model = TipLikeCellViewModel(tipId: tipEntity.id, title: cellTitle, likeCount: likeCount)
+        cell.configure(from: model)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -118,6 +123,14 @@ extension TipsTableViewController: UITableViewDelegate, UITableViewDataSource {
         tipVC.modalPresentationStyle = .overFullScreen
         tipVC.tipEntity = tipEntity
         present(tipVC, animated: true, completion: nil)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let tipEntity = tips[indexPath.row]
+        guard tipEntity.id != Constants.placeholderTipId else {
+            return 80
+        }
+        return 60
     }
     
 }

@@ -22,6 +22,7 @@ protocol DatabaseProtocol {
     func saveTipLike(id: Int)
     func deleteTipLike(id: Int)
     func getTipLikesCount(for id: Int, completion: @escaping (Result<Int, AppError>) -> Void)
+    func userTipsLikes(completion: @escaping (Result<[TipLikesViewModel], AppError>) -> Void)
 }
 
 class FirebaseDatabase: DatabaseProtocol {
@@ -152,7 +153,7 @@ class FirebaseDatabase: DatabaseProtocol {
             completion(.failure(AppError(errorCode: .unexpected)))
             return
         }
-        
+
         dbRef
             .child(Constants.tipLikesPath)
             .child(userId)
@@ -171,7 +172,7 @@ class FirebaseDatabase: DatabaseProtocol {
             completion(.failure(AppError(errorCode: .noInternet)))
             return
         }
-        
+
         dbRef
             .child(Constants.tipLikesPath)
             .observeSingleEvent(of: .value, with: { snapshot in
@@ -235,6 +236,33 @@ class FirebaseDatabase: DatabaseProtocol {
             }
         })
     }
+
+    func userTipsLikes(completion: @escaping (Result<[TipLikesViewModel], AppError>) -> Void) {
+        guard connectionHelper.connectionAvailable(),
+              let userId = Auth.auth().currentUser?.uid else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
+
+        dbRef
+            .child(Constants.tipLikesPath)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                guard let dict = snapshot.value as? NSDictionary,
+                      let array = dict.allValues as? [[Int]],
+                      let userTipIds = dict[userId] as? [Int] else {
+                    completion(.failure(.init(errorCode: .serverError)))
+                    return
+                }
+                let allTipIds = array.reduce([], +)
+                let result = userTipIds.map { tipId -> TipLikesViewModel in
+                    let likeCount = allTipIds.filter { $0 == tipId }.count
+                    return TipLikesViewModel(tipId: tipId, likeCount: likeCount)
+                }
+                completion(.success(result))
+            })
+    }
+
+    // MARK: — Private methods
     
     private func currentUserPath() -> DatabaseReference? {
         guard connectionHelper.connectionAvailable() else { return nil }

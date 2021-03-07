@@ -32,38 +32,13 @@ class TipViewController: UIViewController {
     var tipEntity: TipEntity?
     
     private let database: DatabaseProtocol = FirebaseDatabase()
+    private let tipStorage = TipStorage()
     
     private var isLike: Bool = false {
         didSet {
             self.setLikeButton()
         }
     }
-    
-    private let backgroundNames = [
-        R.image.tip.darkBg.darkBg1.name,
-        R.image.tip.darkBg.darkBg2.name,
-        R.image.tip.darkBg.darkBg3.name,
-        R.image.tip.darkBg.darkBg4.name,
-        R.image.tip.darkBg.darkBg5.name,
-        R.image.tip.darkBg.darkBg6.name,
-        R.image.tip.darkBg.darkBg7.name,
-        R.image.tip.darkBg.darkBg8.name,
-        R.image.tip.darkBg.darkBg9.name,
-        R.image.tip.darkBg.darkBg10.name,
-        R.image.tip.darkBg.darkBg11.name,
-        R.image.tip.darkBg.darkBg12.name,
-        R.image.tip.darkBg.darkBg13.name,
-        R.image.tip.darkBg.darkBg14.name,
-        R.image.tip.darkBg.darkBg15.name,
-        R.image.tip.darkBg.darkBg16.name,
-        R.image.tip.darkBg.darkBg17.name,
-        R.image.tip.darkBg.darkBg18.name,
-        R.image.tip.darkBg.darkBg19.name,
-        R.image.tip.darkBg.darkBg20.name,
-        R.image.tip.darkBg.darkBg21.name,
-        R.image.tip.darkBg.darkBg22.name,
-        R.image.tip.darkBg.darkBg23.name
-    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,9 +161,8 @@ class TipViewController: UIViewController {
     
     private func setupView() {
         guard let tipId = self.tipEntity?.id else { return }
-        let imageIndex = tipId % backgroundNames.count
-        let tipBackground = TipBackground(style: .dark,
-                                          image: UIImage(named: backgroundNames[imageIndex]))
+        let image = tipStorage.image(for: tipId)
+        let tipBackground = TipBackground(style: .dark, image: image)
         
         imageView.image = tipBackground.image
         cancelButton.style = .white
