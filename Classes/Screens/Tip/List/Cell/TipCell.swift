@@ -26,17 +26,10 @@ class TipCell: UITableViewCell {
         heartImageView.image = R.image.tip.likeOn()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        backImageView.image = nil
-    }
-
     func configure(from model: TipLikeCellViewModel) {
         titleLabel.text = model.title
         likesCountLabel.text = "\(model.likeCount)"
-        // TODO: переиспользовать картинку извне, чтобы оптимизировать ресурсы
-        let image = tipStorage.image(for: model.tipId)
-        backImageView.image = image
+        backImageView.image = model.backgroundImage
     }
 
 }

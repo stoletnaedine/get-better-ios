@@ -12,8 +12,14 @@ import Lottie
 var activityIndicatoriView: UIView?
 var animationView: AnimationView?
 var animationScreenView: UIView?
- 
+
 extension UIViewController {
+
+    // MARK: — Remove back button title
+
+    func removeBackButtonTitle() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
     
     // MARK: — Dismiss keyboard
     
@@ -26,34 +32,6 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    // MARK: — Activity indicator
-    
-//    func showActivityIndicator(onView : UIView) {
-//        let aiView = UIView.init(frame: UIScreen.main.bounds)
-//        aiView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.7)
-//        var ai = UIActivityIndicatorView()
-//        if #available(iOS 13.0, *) {
-//            ai = UIActivityIndicatorView.init(style: .large)
-//        }
-//        ai.color = .white
-//        ai.startAnimating()
-//        ai.center = aiView.center
-//        
-//        DispatchQueue.main.async {
-//            aiView.addSubview(ai)
-//            onView.addSubview(aiView)
-//        }
-//        
-//        activityIndicatoriView = aiView
-//    }
-//    
-//    func removeActivityIndicator() {
-//        DispatchQueue.main.async {
-//            activityIndicatoriView?.removeFromSuperview()
-//            activityIndicatoriView = nil
-//        }
-//    }
     
     // MARK: — Animations
     
@@ -81,7 +59,7 @@ extension UIViewController {
         if whiteScreen {
             animationScreenView = UIView.init(frame: UIScreen.main.bounds)
             guard let animationScreenView = animationScreenView else { return }
-            animationScreenView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+            animationScreenView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
             animationScreenView.addSubview(animationView)
             view.addSubview(animationScreenView)
         } else {
@@ -94,11 +72,13 @@ extension UIViewController {
     }
     
     func stopAnimation() {
-        guard let animationView = animationView else { return }
-        animationView.removeFromSuperview()
-        
-        guard let animationScreenView = animationScreenView else { return }
-        animationScreenView.removeFromSuperview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [weak animationView, animationScreenView] in
+            guard let animationView = animationView else { return }
+            animationView.removeFromSuperview()
+
+            guard let animationScreenView = animationScreenView else { return }
+            animationScreenView.removeFromSuperview()
+        })
     }
     
     func showLoadingAnimation(on view: UIView) {
@@ -106,8 +86,7 @@ extension UIViewController {
             name: .loading,
             on: view,
             whiteScreen: true,
-            size: .init(width: 150, height: 150)
-        )
+            size: .init(width: 150, height: 150))
     }
     
 }

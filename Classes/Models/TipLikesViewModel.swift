@@ -6,7 +6,7 @@
 //  Copyright © 2021 Artur Islamgulov. All rights reserved.
 //
 
-struct TipLikesViewModel {
+struct TipLikesViewModel: Equatable {
     let tipId: Int
     let likeCount: Int
 }

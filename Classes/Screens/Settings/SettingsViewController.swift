@@ -31,6 +31,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        removeBackButtonTitle()
         notificationSettings = userSettingsService.getNotificationSettings()
         difficultyLevel = userSettingsService.getDifficultyLevel()
         customizeBarButton()
@@ -248,6 +249,7 @@ private extension SettingsViewController {
         }
         
         let appVersionVC = TextViewViewController()
+        appVersionVC.title = R.string.localizable.appVersionsTitle()
         appVersionVC.text = R.string.localizable.appVersions()
         
         models = [

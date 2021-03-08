@@ -6,8 +6,11 @@
 //  Copyright © 2021 Artur Islamgulov. All rights reserved.
 //
 
+import UIKit
+
 struct TipLikeCellViewModel {
     let tipId: Int
     let title: String
     let likeCount: Int
+    let backgroundImage: UIImage?
 }

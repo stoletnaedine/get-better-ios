@@ -248,9 +248,12 @@ class FirebaseDatabase: DatabaseProtocol {
             .child(Constants.tipLikesPath)
             .observeSingleEvent(of: .value, with: { snapshot in
                 guard let dict = snapshot.value as? NSDictionary,
-                      let array = dict.allValues as? [[Int]],
-                      let userTipIds = dict[userId] as? [Int] else {
+                      let array = dict.allValues as? [[Int]] else {
                     completion(.failure(.init(errorCode: .serverError)))
+                    return
+                }
+                guard let userTipIds = dict[userId] as? [Int] else {
+                    completion(.success([]))
                     return
                 }
                 let allTipIds = array.reduce([], +)

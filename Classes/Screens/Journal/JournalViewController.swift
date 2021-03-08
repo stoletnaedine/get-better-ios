@@ -25,6 +25,7 @@ class JournalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        removeBackButtonTitle()
         setupTableView()
         setupBarButton()
         title = R.string.localizable.tabBarJournal()

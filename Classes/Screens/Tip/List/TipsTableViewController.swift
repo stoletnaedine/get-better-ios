@@ -12,6 +12,7 @@ final class TipsTableViewController: UIViewController {
     
     private let database: DatabaseProtocol = FirebaseDatabase()
     private let tableView = UITableView()
+    private let refreshControl = UIRefreshControl()
     private let alertService: AlertServiceProtocol = AlertService()
     private var tips: [TipEntity] = []
     private var tipLikes: [TipLikesViewModel] = []
@@ -20,6 +21,10 @@ final class TipsTableViewController: UIViewController {
         static let tipCell = R.nib.tipCell.name
         static let placeholderTipId = -1
     }
+
+    private lazy var backgroundImages: [UIImage?] = {
+        return tipStorage.backgroundNames.map { UIImage(named: $0) }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,23 +32,27 @@ final class TipsTableViewController: UIViewController {
         addSubviews()
         setupTableView()
         makeConstraints()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        showLoadingAnimation(on: self.view)
-        loadData { [weak self] in
-            guard let self = self else { return }
-            self.stopAnimation()
-            self.tableView.reloadData()
-        }
+        setupRefreshControl()
+        loadData()
     }
 
     // MARK: — Private methods
 
-    private func loadData(completion: @escaping VoidClosure) {
+    private func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+
+    @objc private func loadData() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.showLoadingAnimation(on: self.view)
+        }
         database.userTipsLikes(completion: { [weak self] result in
             guard let self = self else { return }
+            self.stopAnimation()
+            self.refreshControl.endRefreshing()
+
             switch result {
             case let .success(models):
                 guard !models.isEmpty else {
@@ -53,17 +62,18 @@ final class TipsTableViewController: UIViewController {
                             id: Constants.placeholderTipId,
                             tip: Tip(title: R.string.localizable.tipsIfEmpty(), text: ""))
                     ]
-                    completion()
+                    self.tableView.reloadData()
                     return
                 }
-
-                self.stopAnimation()
+                guard self.tipLikes != models else { return }
                 self.tipLikes = models
                 self.tips = models.map { self.tipStorage.tipEntities[$0.tipId] }
-                completion()
+                self.tableView.reloadData()
             case let .failure(error):
                 guard let errorName = error.name else { return }
                 self.alertService.showErrorMessage(desc: errorName)
+                self.stopAnimation()
+                self.refreshControl.endRefreshing()
             }
         })
     }
@@ -111,7 +121,13 @@ extension TipsTableViewController: UITableViewDelegate, UITableViewDataSource {
         }
         let cellTitle = tipEntity.tip.title
         let likeCount = self.tipLikes[indexPath.row].likeCount
-        let model = TipLikeCellViewModel(tipId: tipEntity.id, title: cellTitle, likeCount: likeCount)
+        let tipId = tipEntity.id
+        let imageIndex = tipStorage.index(for: tipId)
+        let model = TipLikeCellViewModel(
+            tipId: tipId,
+            title: cellTitle,
+            likeCount: likeCount,
+            backgroundImage: backgroundImages[imageIndex])
         cell.configure(from: model)
         return cell
     }

@@ -32,16 +32,11 @@ class TipStorage {
     }
 
     var currentTipId: Int {
-        let days = Date().diffInDaysSince1970() + 36
+        let days = Date().diffInDaysSince1970()
         return days % tipsRaw.count
     }
 
-    func image(for tipId: Int) -> UIImage? {
-        let imageIndex = tipId % backgroundNames.count
-        return UIImage(named: self.backgroundNames[imageIndex])
-    }
-
-    private let backgroundNames = [
+    let backgroundNames = [
         R.image.tip.darkBg.darkBg1.name,
         R.image.tip.darkBg.darkBg2.name,
         R.image.tip.darkBg.darkBg3.name,
@@ -66,7 +61,16 @@ class TipStorage {
         R.image.tip.darkBg.darkBg22.name,
         R.image.tip.darkBg.darkBg23.name
     ]
-    
+
+    func index(for tipId: Int) -> Int {
+        return tipId % backgroundNames.count
+    }
+
+    func image(for tipId: Int) -> UIImage? {
+        let imageIndex = index(for: tipId)
+        return UIImage(named: self.backgroundNames[imageIndex])
+    }
+
     private let tipsRaw: [Tip] = [
         Tip(title: "Ранний подъем",
             text: "Все успешные люди - пташки ранние. Что-то особенное и магическое есть в раннем подъеме. Эта часть дня, когда еще мир не проснулся, - самая важная и вдохновляющая. Те, кто встает до рассвета солнца, утверждают, что их жизнь стала полноценной. Попробуйте и вы вставать рано, и уже через месяц-другой вы будете с жалостью вспоминать те года, когда рассвет встречали в постели."),
