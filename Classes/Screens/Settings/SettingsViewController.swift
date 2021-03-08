@@ -155,7 +155,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
             
         case .difficultyLevel:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell)
+                    as? TitleSubtitleCell else { return UITableViewCell() }
             cell.backgroundColor = .appBackground
             cell.accessoryType = .detailButton
             let model  = TitleSubtitleCellViewModel(
@@ -169,9 +170,18 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = UITableViewCell()
             cell.backgroundColor = .appBackground
             cell.textLabel?.text = item.title
-            cell.textLabel?.textColor = .grey
+            cell.textLabel?.textColor = .gray
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
+            return cell
+
+        case .version:
+            let cell = UITableViewCell()
+            cell.backgroundColor = .appBackground
+            cell.textLabel?.text = item.title
+            cell.textLabel?.textColor = .violet
+            cell.selectionStyle = .none
+            cell.accessoryType = .detailButton
             return cell
         }
     }
@@ -195,11 +205,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        guard models[indexPath.row].type == .difficultyLevel else { return }
-        alertService.showPopUpMessage(
-            title: R.string.localizable.settingsDiffLevelInfoTitle(),
-            description: R.string.localizable.settingsDiffLevelInfoDescription(),
-            buttonText: R.string.localizable.oK())
+        switch models[indexPath.row].type {
+        case .difficultyLevel:
+            alertService.showPopUpMessage(
+                title: R.string.localizable.settingsDiffLevelInfoTitle(),
+                description: R.string.localizable.settingsDiffLevelInfoDescription(),
+                buttonText: R.string.localizable.oK())
+        case .version:
+            alertService.showPopUpMessage(
+                title: R.string.localizable.newVersionAlertTitle(),
+                description: R.string.localizable.newVersionAlertMessage(),
+                buttonText: R.string.localizable.newVersionAlertButton())
+        default:
+            break
+        }
     }
     
 }
@@ -262,19 +281,19 @@ private extension SettingsViewController {
                     action: difficultyLevelClosure())
             ),
             SettingsCellViewModel(
-                type: .aboutApp,
+                type: .version,
                 cell: SettingsCell(
-                    title: R.string.localizable.aboutAppTitle(),
+                    title: R.string.localizable.settingsVersionIs(),
                     action: { [weak self] in
-                        self?.navigationController?.pushViewController(aboutAppVC, animated: true)
+                        self?.navigationController?.pushViewController(appVersionVC, animated: true)
                     })
             ),
             SettingsCellViewModel(
                 type: .aboutApp,
                 cell: SettingsCell(
-                    title: R.string.localizable.settingsVersionIs(Properties.appVersion),
+                    title: R.string.localizable.aboutAppTitle(),
                     action: { [weak self] in
-                        self?.navigationController?.pushViewController(appVersionVC, animated: true)
+                        self?.navigationController?.pushViewController(aboutAppVC, animated: true)
                     })
             ),
             SettingsCellViewModel(

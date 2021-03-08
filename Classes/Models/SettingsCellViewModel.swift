@@ -19,6 +19,7 @@ enum SettingsCellType {
     case push
     case difficultyLevel
     case aboutApp
+    case version
 }
 
 struct SettingsCell {
