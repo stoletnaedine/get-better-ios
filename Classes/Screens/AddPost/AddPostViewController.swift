@@ -83,11 +83,11 @@ class AddPostViewController: UIViewController {
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
         guard let text = postTextView.text, !text.isEmpty else {
-            alertService.showErrorMessage(desc: R.string.localizable.postEmptyText())
+            alertService.showErrorMessage(R.string.localizable.postEmptyText())
             return
         }
         guard let sphere = selectedSphere else {
-            alertService.showErrorMessage(desc: R.string.localizable.postEmptySphere())
+            alertService.showErrorMessage(R.string.localizable.postEmptySphere())
             return
         }
         
@@ -117,7 +117,7 @@ class AddPostViewController: UIViewController {
                         self.selectSphereButton.isEnabled = true
                         self.saveButton.isEnabled = true
                     }
-                    self.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self.alertService.showErrorMessage(error.localizedDescription)
                     dispatchGroup.leave()
                 }
             })
@@ -144,7 +144,7 @@ class AddPostViewController: UIViewController {
             self.userService.clearDraft()
             self.stopAnimation()
             let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
-            self.alertService.showSuccessMessage(desc: description)
+            self.alertService.showSuccessMessage(description)
             self.addedPostCompletion?()
             self.dismiss(animated: true, completion: nil)
         }
@@ -261,7 +261,7 @@ extension AddPostViewController: UITextViewDelegate {
         placeholderLabel.isHidden = !currentText.isEmpty
         if text.count > maxSymbolsCount {
             alertService.showErrorMessage(
-                desc: R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))
+                R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))
             )
         }
         guard let stringRange = Range(range, in: currentText) else { return false }

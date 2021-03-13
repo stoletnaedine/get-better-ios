@@ -20,10 +20,10 @@ class OnboardingPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = R.string.localizable.onboardingTitle()
         fillViewControllers()
         setupPageControl()
         setupBarButton()
+        navigationItem.titleView = UIImageView(image: R.image.titleViewLogo())
     }
     
     private func fillViewControllers() {
@@ -38,19 +38,21 @@ class OnboardingPageViewController: UIViewController {
     
     private func setupPageControl() {
         guard let firstViewController = viewControllers.first else { return }
-        let pageViewController = UIPageViewController(transitionStyle: .scroll,
-                                                      navigationOrientation: .horizontal,
-                                                      options: nil)
+        let pageViewController = UIPageViewController(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal,
+            options: nil)
         pageViewController.delegate = self
         
         let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
         appearance.pageIndicatorTintColor = .thirtyGrey
         appearance.currentPageIndicatorTintColor = .violet
         
-        pageViewController.setViewControllers([firstViewController],
-                                              direction: .forward,
-                                              animated: true,
-                                              completion: nil)
+        pageViewController.setViewControllers(
+            [firstViewController],
+            direction: .forward,
+            animated: true,
+            completion: nil)
         pageViewController.dataSource = self
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
@@ -75,7 +77,7 @@ class OnboardingPageViewController: UIViewController {
         userSettingsService.tutorialHasShown(false)
         
         guard let user = Auth.auth().currentUser else {
-            alertService.showErrorMessage(desc: R.string.localizable.onboardingUserError())
+            alertService.showErrorMessage(R.string.localizable.onboardingUserError())
             NotificationCenter.default.post(name: .logout, object: nil)
             return
         }
@@ -83,10 +85,10 @@ class OnboardingPageViewController: UIViewController {
         if user.isAnonymous {
             user.delete(completion: { [weak self] error in
                 if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self?.alertService.showErrorMessage(error.localizedDescription)
                 } else {
                     self?.alertService.showSuccessMessage(
-                        desc: R.string.localizable.onboardingDeleteAnonymousAccountSuccess())
+                        R.string.localizable.onboardingDeleteAnonymousAccountSuccess())
                 }
                 NotificationCenter.default.post(name: .logout, object: nil)
             })
@@ -104,14 +106,16 @@ class OnboardingPageViewController: UIViewController {
         let sphereMetrics = SphereMetrics(values: metricsArray)
         
         if sphereMetrics.notValid() {
-            alertService.showErrorMessage(desc: R.string.localizable.onboardingEmptyValuesWarning())
+            alertService.showErrorMessage(R.string.localizable.onboardingEmptyValuesWarning())
             return
         }
-        
+
+        showLoadingAnimation(on: self.view)
         database.saveStartSphereMetrics(sphereMetrics) { [weak self] in
             guard let self = self else { return }
             self.userSettingsService.tutorialHasShown(false)
             self.completion?()
+            self.stopAnimation()
         }
     }
 }

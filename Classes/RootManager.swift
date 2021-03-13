@@ -135,7 +135,7 @@ extension RootManager {
                 if error.name == AppErrorCode.notFound.rawValue {
                     completion(false)
                 } else {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self?.alertService.showErrorMessage(error.localizedDescription)
                 }
             case .success:
                 completion(true)

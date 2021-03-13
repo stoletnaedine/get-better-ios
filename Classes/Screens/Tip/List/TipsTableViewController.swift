@@ -71,7 +71,7 @@ final class TipsTableViewController: UIViewController {
                 self.tableView.reloadData()
             case let .failure(error):
                 guard let errorName = error.name else { return }
-                self.alertService.showErrorMessage(desc: errorName)
+                self.alertService.showErrorMessage(errorName)
                 self.stopAnimation()
                 self.refreshControl.endRefreshing()
             }

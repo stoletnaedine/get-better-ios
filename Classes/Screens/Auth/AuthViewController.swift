@@ -61,7 +61,7 @@ class AuthViewController: UIViewController {
             self.stopAnimation()
 
             if let error = error, let appError = AppError(firebaseError: error).name {
-                self.alertService.showErrorMessage(desc: appError)
+                self.alertService.showErrorMessage(appError)
             } else {
                 self.userDataService.email = email
                 self.signInCompletion?()
@@ -93,7 +93,7 @@ class AuthViewController: UIViewController {
             
             if let error = error,
                 let appError = AppError(firebaseError: error).name {
-                self.alertService.showErrorMessage(desc: appError)
+                self.alertService.showErrorMessage(appError)
             } else {
                 self.signInCompletion?()
             }
@@ -105,8 +105,6 @@ class AuthViewController: UIViewController {
 extension AuthViewController {
     
     func setupView() {
-        self.title = R.string.localizable.authTitle()
-        
         emailLabel.text = R.string.localizable.authEmail()
         emailLabel.textColor = .grey
         emailLabel.font = .formLabelFieldFont

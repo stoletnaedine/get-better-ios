@@ -45,11 +45,11 @@ class RegisterViewController: UIViewController {
                 
                 if let error = error,
                     let appError = AppError(firebaseError: error).name {
-                    self.alertService.showErrorMessage(desc: appError)
+                    self.alertService.showErrorMessage(appError)
                 } else {
                     if let _ = Auth.auth().currentUser {
                         self.userDataService.email = email
-                        self.alertService.showSuccessMessage(desc: R.string.localizable.registerSuccessAlert())
+                        self.alertService.showSuccessMessage(R.string.localizable.registerSuccessAlert())
                         self.completion?()
                     } else {
                         self.dismiss(animated: true, completion: nil)

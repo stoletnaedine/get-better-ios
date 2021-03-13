@@ -208,7 +208,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                 handler: { _ in
                     self.database.deletePost(post) { [weak self] in
                         guard let self = self else { return }
-                        self.alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
+                        self.alertService.showSuccessMessage(R.string.localizable.journalDeletedPost())
                         self.updatePostsInTableView()
                     }
                 })

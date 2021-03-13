@@ -15,7 +15,7 @@ class ConnectionHelper {
     func isConnect() -> Bool {
         let reachability = try! Reachability()
         if reachability.connection == .unavailable {
-            alertService.showErrorMessage(desc: R.string.localizable.errorNoInternet())
+            alertService.showErrorMessage(R.string.localizable.errorNoInternet())
         }
         return reachability.connection != .unavailable
     }
@@ -23,7 +23,7 @@ class ConnectionHelper {
     func checkConnect() {
         let reachability = try! Reachability()
         if reachability.connection == .unavailable {
-            alertService.showErrorMessage(desc: R.string.localizable.errorNoInternet())
+            alertService.showErrorMessage(R.string.localizable.errorNoInternet())
         }
     }
     

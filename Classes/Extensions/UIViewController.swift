@@ -72,13 +72,15 @@ extension UIViewController {
     }
     
     func stopAnimation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [weak animationView, animationScreenView] in
-            guard let animationView = animationView else { return }
-            animationView.removeFromSuperview()
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + 0.5,
+            execute: { [weak animationView, animationScreenView] in
+                guard let animationView = animationView else { return }
+                animationView.removeFromSuperview()
 
-            guard let animationScreenView = animationScreenView else { return }
-            animationScreenView.removeFromSuperview()
-        })
+                guard let animationScreenView = animationScreenView else { return }
+                animationScreenView.removeFromSuperview()
+            })
     }
     
     func showLoadingAnimation(on view: UIView) {

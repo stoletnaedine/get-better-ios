@@ -28,7 +28,7 @@ class PushService: PushServiceProtocol {
         if settings.tip != .none {
             Messaging.messaging().subscribe(toTopic: settings.tip.rawValue) { [weak self] error in
                 if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self?.alertService.showErrorMessage(error.localizedDescription)
                     return
                 }
             }
@@ -40,14 +40,14 @@ class PushService: PushServiceProtocol {
         if settings.post != .none {
             Messaging.messaging().subscribe(toTopic: settings.post.rawValue) { [weak self] error in
                 if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self?.alertService.showErrorMessage(error.localizedDescription)
                     return
                 }
             }
         }
         
         self.alertService.showSuccessMessage(
-            desc: R.string.localizable.settingsPushSaved()
+            R.string.localizable.settingsPushSaved()
         )
     }
 }

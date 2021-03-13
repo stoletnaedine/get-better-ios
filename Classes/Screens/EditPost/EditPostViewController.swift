@@ -79,7 +79,7 @@ class EditPostViewController: AddPostViewController {
             guard let self = self else { return }
             self.stopAnimation()
             self.editPostCompletion?(postToSave)
-            self.alertService.showSuccessMessage(desc: R.string.localizable.postEditSuccess())
+            self.alertService.showSuccessMessage(R.string.localizable.postEditSuccess())
             self.dismiss(animated: true, completion: nil)
         }
     }

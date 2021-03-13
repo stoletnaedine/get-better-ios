@@ -237,9 +237,9 @@ private extension SettingsViewController {
         let aboutAppVC = ArticleViewController()
         aboutAppVC.article = Article(
             title: R.string.localizable.aboutAppTitle(),
-                                     titleView: UIImageView(image: R.image.titleViewLogo()),
-                                     text: R.string.localizable.aboutAppDescription(),
-                                     image: R.image.aboutTeam())
+            titleView: UIImageView(image: R.image.titleViewLogo()),
+            text: R.string.localizable.aboutAppDescription(),
+            image: R.image.aboutTeam())
         
         let pushNotificationsVC = PushNotificationsViewController()
         pushNotificationsVC.completion = { [weak self] in
@@ -320,7 +320,7 @@ private extension SettingsViewController {
                     handler: { [weak self] _ in
                         guard let self = self else { return }
                         self.userSettingsService.setDifficultyLevel(level)
-                        self.alertService.showSuccessMessage(desc: R.string.localizable.settingsDiffLevelSave())
+                        self.alertService.showSuccessMessage(R.string.localizable.settingsDiffLevelSave())
                         self.difficultyLevel = self.userSettingsService.getDifficultyLevel()
                         self.tableView.reloadData()
                     })
