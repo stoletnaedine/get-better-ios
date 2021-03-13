@@ -29,8 +29,6 @@
 		C30C7A0F247E8DC400FD830F /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */; };
 		C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */; };
 		C30FEE4D2553C6AA00CC84B9 /* TipsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30FEE4C2553C6AA00CC84B9 /* TipsTableViewController.swift */; };
-		C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C317E56F247D6559001521FE /* NoInternetViewController.swift */; };
-		C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C317E570247D6559001521FE /* NoInternetViewController.xib */; };
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
 		C328EE062447294100445704 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C328EE042447294100445704 /* RegisterViewController.xib */; };
 		C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32D4CE023D0F3FC00AD9863 /* Properties.swift */; };
@@ -169,8 +167,6 @@
 		C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
 		C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Screenshot.swift"; sourceTree = "<group>"; };
 		C30FEE4C2553C6AA00CC84B9 /* TipsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsTableViewController.swift; sourceTree = "<group>"; };
-		C317E56F247D6559001521FE /* NoInternetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetViewController.swift; sourceTree = "<group>"; };
-		C317E570247D6559001521FE /* NoInternetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetViewController.xib; sourceTree = "<group>"; };
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		C328EE042447294100445704 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		C32D4CE023D0F3FC00AD9863 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
@@ -400,15 +396,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C317E56E247D6531001521FE /* NoInternet */ = {
-			isa = PBXGroup;
-			children = (
-				C317E56F247D6559001521FE /* NoInternetViewController.swift */,
-				C317E570247D6559001521FE /* NoInternetViewController.xib */,
-			);
-			path = NoInternet;
-			sourceTree = "<group>";
-		};
 		C328EE022447291200445704 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,7 +503,6 @@
 			children = (
 				C389466525A84B8B00FEF40C /* PushNotifications */,
 				C35D835E250D40C3000C565E /* Tip */,
-				C317E56E247D6531001521FE /* NoInternet */,
 				C3BFEBC12477A291000B5B41 /* TabBar */,
 				C39A321C2457109A005D2EDF /* Settings */,
 				C33AD1D9245191A500A08006 /* Onboarding */,
@@ -942,7 +928,6 @@
 				C35EBD93244DE870004593CC /* GoogleService-Info.plist in Resources */,
 				C30350B425C53CED003B13BD /* TitleSubtitleCell.xib in Resources */,
 				C381582E2556BEBD0005C16E /* 35256-from-loading-to-error.json in Resources */,
-				C317E572247D6559001521FE /* NoInternetViewController.xib in Resources */,
 				C3ED5A3323AFBF6600C7A492 /* AddPostViewController.xib in Resources */,
 				F1495E1F759594DE3F707CCF /* get-better-readme.jpg in Resources */,
 				F149566708A477FB446667C9 /* 3.png in Resources */,
@@ -1083,7 +1068,6 @@
 				C35CC99225A9BDF900A9AA59 /* PushNotificationModel.swift in Sources */,
 				9277D388238C725200B3AECA /* AppDelegate.swift in Sources */,
 				C337930925F4DDD8005898BB /* TipLikeCellViewModel.swift in Sources */,
-				C317E571247D6559001521FE /* NoInternetViewController.swift in Sources */,
 				C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */,
 				C3BFEBC52477E85F000B5B41 /* PushService.swift in Sources */,
 				C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */,

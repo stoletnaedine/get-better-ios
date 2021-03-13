@@ -69,15 +69,16 @@ class AddPostViewController: UIViewController {
         loadImageButton.isHidden = false
         bigLoadImageButton.isHidden = false
         loadImageButton.alpha = 0
-        UIView.animate(withDuration: 0.8,
-                       animations: {
-                        self.imageView.alpha = 0
-                        self.loadImageButton.alpha = 1
-                       },
-                       completion: { _ in
-                        self.imageView.alpha = 1
-                        self.imageView.image = nil
-                       })
+        UIView.animate(
+            withDuration: 0.8,
+            animations: {
+                self.imageView.alpha = 0
+                self.loadImageButton.alpha = 1
+            },
+            completion: { _ in
+                self.imageView.alpha = 1
+                self.imageView.image = nil
+            })
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {

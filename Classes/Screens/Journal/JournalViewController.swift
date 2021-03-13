@@ -44,7 +44,7 @@ class JournalViewController: UIViewController {
     }
     
     @objc private func addPost() {
-        guard connectionHelper.connectionAvailable() else { return }
+        guard connectionHelper.isConnect() else { return }
         let addPostViewController = AddPostViewController()
         addPostViewController.addedPostCompletion = { [weak self] in
             guard let self = self else { return }

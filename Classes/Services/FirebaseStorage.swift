@@ -64,8 +64,7 @@ class FirebaseStorage: FileStorageProtocol {
         })
     }
     
-    func uploadPhoto(photo: UIImage,
-                     completion: @escaping (Result<Photo, AppError>) -> Void) {
+    func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
         var photoName: String?
         var photoUrl: String?
         var previewName: String?
@@ -180,7 +179,7 @@ class FirebaseStorage: FileStorageProtocol {
     }
     
     private func currentUserPath() -> StorageReference? {
-        guard connectionHelper.connectionAvailable() else { return nil }
+        guard connectionHelper.isConnect() else { return nil }
         guard let userId = Auth.auth().currentUser?.uid else { return nil }
         
         return Storage.storage().reference()

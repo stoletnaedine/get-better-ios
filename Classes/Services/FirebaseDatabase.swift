@@ -83,10 +83,7 @@ class FirebaseDatabase: DatabaseProtocol {
     
     
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void) {
-        guard let ref = currentUserPath() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
+        guard let ref = currentUserPath() else { return }
         
         ref
             .child(Constants.postsPath)
@@ -145,14 +142,8 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func getTipLikeIds(completion: @escaping (Result<[Int], AppError>) -> Void) {
-        guard connectionHelper.connectionAvailable() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
-        guard let userId = Auth.auth().currentUser?.uid else {
-            completion(.failure(AppError(errorCode: .unexpected)))
-            return
-        }
+        connectionHelper.checkConnect()
+        guard let userId = Auth.auth().currentUser?.uid else { return }
 
         dbRef
             .child(Constants.tipLikesPath)
@@ -168,10 +159,7 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func getTipLikesCount(for id: Int, completion: @escaping (Result<Int, AppError>) -> Void) {
-        guard connectionHelper.connectionAvailable() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
+        connectionHelper.checkConnect()
 
         dbRef
             .child(Constants.tipLikesPath)
@@ -193,7 +181,7 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func saveTipLike(id: Int) {
-        guard connectionHelper.connectionAvailable() else { return }
+        connectionHelper.checkConnect()
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
         self.getTipLikeIds(completion: { [weak self] likeIds in
@@ -215,7 +203,7 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func deleteTipLike(id: Int) {
-        guard connectionHelper.connectionAvailable() else { return }
+        connectionHelper.checkConnect()
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
         self.getTipLikeIds(completion: { [weak self] likeIds in
@@ -238,11 +226,8 @@ class FirebaseDatabase: DatabaseProtocol {
     }
 
     func userTipsLikes(completion: @escaping (Result<[TipLikesViewModel], AppError>) -> Void) {
-        guard connectionHelper.connectionAvailable(),
-              let userId = Auth.auth().currentUser?.uid else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
+        connectionHelper.checkConnect()
+        guard let userId = Auth.auth().currentUser?.uid else { return }
 
         dbRef
             .child(Constants.tipLikesPath)
@@ -268,7 +253,7 @@ class FirebaseDatabase: DatabaseProtocol {
     // MARK: — Private methods
     
     private func currentUserPath() -> DatabaseReference? {
-        guard connectionHelper.connectionAvailable() else { return nil }
+        connectionHelper.checkConnect()
         
         guard let userId = Auth.auth().currentUser?.uid else { return nil }
         print("Request. UserId = \(userId)")

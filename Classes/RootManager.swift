@@ -70,21 +70,15 @@ class RootManager: RootManagerProtocol {
 
     // MARK: — Private methods
     
-    @objc
-    private func enterApp(completion: ((TabBarController) -> Void)? = nil) {
-        guard connectionHelper.connectionAvailable() else {
-            showNoInternetViewController()
-            return
-        }
+    @objc private func enterApp(completion: ((TabBarController) -> Void)? = nil) {
         guard Auth.auth().currentUser != nil else {
             showAuthController()
             return
         }
         checkUserHasSetupSphere { [weak self] userHasSetupSphere in
-            switch userHasSetupSphere {
-            case true:
+            if userHasSetupSphere {
                 self?.showTabBarController(completion)
-            case false:
+            } else {
                 self?.showOnboardingPageViewController()
             }
         }
@@ -98,28 +92,19 @@ class RootManager: RootManagerProtocol {
         window?.rootViewController = UINavigationController(rootViewController: authViewController)
     }
     
-    @objc
-    private func showTabBarController(_ completion: ((TabBarController) -> Void)? = nil) {
+    @objc private func showTabBarController(_ completion: ((TabBarController) -> Void)? = nil) {
         let tabBarController = TabBarController()
         self.tabBarController = tabBarController
         window?.rootViewController = tabBarController
         completion?(tabBarController)
     }
     
-    @objc
-    private func logout() {
+    @objc private func logout() {
         try! Auth.auth().signOut()
         showAuthController()
     }
     
-    @objc
-    private func showNoInternetViewController() {
-        let noInternetViewController = NoInternetViewController()
-        window?.rootViewController = noInternetViewController
-    }
-    
-    @objc
-    private func showOnboardingPageViewController() {
+    @objc private func showOnboardingPageViewController() {
         let onboardingPageViewController = OnboardingPageViewController()
         onboardingPageViewController.completion = { [weak self] in
             self?.showTabBarController()
@@ -136,10 +121,6 @@ extension RootManager {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(logout),
                                                name: .logout,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showNoInternetViewController),
-                                               name: .showNoInternetScreen,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(enterApp),

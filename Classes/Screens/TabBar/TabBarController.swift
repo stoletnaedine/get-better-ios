@@ -52,7 +52,7 @@ class TabBarController: UITabBarController {
     }
     
     func showAddPost() {
-        guard connectionHelper.connectionAvailable() else { return }
+        guard connectionHelper.isConnect() else { return }
         let addPostVC = AddPostViewController()
         if let journalNC = self.viewControllers?[Constants.journalVCIndex] as? UINavigationController,
            let journalVC = journalNC.viewControllers.first as? JournalViewController {

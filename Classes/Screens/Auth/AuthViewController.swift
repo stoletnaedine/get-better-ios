@@ -28,6 +28,7 @@ class AuthViewController: UIViewController {
     var signInCompletion: VoidClosure?
     private let alertService: AlertServiceProtocol = AlertService()
     private var userDataService: UserDataServiceProtocol = UserDataService()
+    private let connectionHelper = ConnectionHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,34 +48,35 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func enterButtonDidPressed(_ sender: UIButton) {
+        guard connectionHelper.isConnect() else { return }
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        
-        if FormValidator.isFormValid(email: email, password: password) {
-            self.showLoadingAnimation(on: self.view)
+        guard FormValidator.isFormValid(email: email, password: password) else { return }
 
-            Auth.auth().signIn(withEmail: email,
-                               password: password,
-                               completion: { [weak self] authResult, error in
-                guard let self = self else { return }
-                self.stopAnimation()
-                
-                if let error = error, let appError = AppError(firebaseError: error).name {
-                    self.alertService.showErrorMessage(desc: appError)
-                } else {
-                    self.userDataService.email = email
-                    self.signInCompletion?()
-                }
-            })
-        }
+        self.showLoadingAnimation(on: self.view)
+        Auth.auth().signIn(withEmail: email,
+                           password: password,
+                           completion: { [weak self] authResult, error in
+            guard let self = self else { return }
+            self.stopAnimation()
+
+            if let error = error, let appError = AppError(firebaseError: error).name {
+                self.alertService.showErrorMessage(desc: appError)
+            } else {
+                self.userDataService.email = email
+                self.signInCompletion?()
+            }
+        })
     }
     
     @IBAction func forgotPasswordDidPressed(_ sender: UIButton) {
+        guard connectionHelper.isConnect() else { return }
         let resetPasswordViewController = ResetPasswordViewController()
         present(resetPasswordViewController, animated: true, completion: nil)
     }
     
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {
+        guard connectionHelper.isConnect() else { return }
         let registerViewController = RegisterViewController()
         registerViewController.completion = { [weak self] in
             self?.signInCompletion?()
@@ -83,8 +85,8 @@ class AuthViewController: UIViewController {
     }
     
     @IBAction func anonymousRegisterButtonDidTap(_ sender: UIButton) {
+        guard connectionHelper.isConnect() else { return }
         self.showLoadingAnimation(on: self.view)
-        
         Auth.auth().signInAnonymously(completion: { [weak self] authResult, error in
             guard let self = self else { return }
             self.stopAnimation()
