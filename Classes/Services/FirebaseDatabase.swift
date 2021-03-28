@@ -74,8 +74,8 @@ class FirebaseDatabase: DatabaseProtocol {
             .child(Constants.postsPath)
             .child(postId)
             .removeValue(completionBlock: { [weak self] _, _ in
-                completion?()
                 guard let self = self else { return }
+                completion?()
                 self.storage.deletePhoto(name: post.photoName)
                 self.storage.deletePreview(name: post.previewName)
             })

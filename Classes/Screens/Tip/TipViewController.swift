@@ -122,7 +122,7 @@ class TipViewController: UIViewController {
         
         database.getTipLikesCount(for: tipId, completion: { [weak self] result in
             switch result {
-            case .success(let likesCount):
+            case let .success(likesCount):
                 self?.setupLikesCount(likesCount)
             case .failure:
                 break

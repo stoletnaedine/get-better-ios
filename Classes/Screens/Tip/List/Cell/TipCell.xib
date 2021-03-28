@@ -20,10 +20,14 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zQa-ir-Z2M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     </imageView>
-                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Pr-yk-Ebw" userLabel="Dark View">
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lit-i6-FnQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hRo-0V-2NU">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <blurEffect style="dark"/>
+                    </visualEffectView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eo-tm-9uG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                         <subviews>
@@ -60,24 +64,24 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Lit-i6-FnQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="09Q-wK-a2u"/>
+                    <constraint firstItem="Lit-i6-FnQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="A2a-ju-AVl"/>
                     <constraint firstItem="6eo-tm-9uG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CId-M9-Bmi"/>
-                    <constraint firstAttribute="trailing" secondItem="6Pr-yk-Ebw" secondAttribute="trailing" id="CPG-Da-umj"/>
+                    <constraint firstAttribute="bottom" secondItem="Lit-i6-FnQ" secondAttribute="bottom" id="F49-Fd-P3u"/>
                     <constraint firstAttribute="bottom" secondItem="zQa-ir-Z2M" secondAttribute="bottom" id="HWI-kz-p2f"/>
                     <constraint firstItem="6eo-tm-9uG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JIr-kj-gkh"/>
                     <constraint firstAttribute="trailing" secondItem="6eo-tm-9uG" secondAttribute="trailing" id="W0B-gH-j9J"/>
                     <constraint firstItem="zQa-ir-Z2M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Y8g-JQ-RoD"/>
-                    <constraint firstItem="6Pr-yk-Ebw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dER-QT-LMa"/>
-                    <constraint firstAttribute="bottom" secondItem="6Pr-yk-Ebw" secondAttribute="bottom" id="fhk-eo-aSM"/>
+                    <constraint firstAttribute="trailing" secondItem="Lit-i6-FnQ" secondAttribute="trailing" id="hzX-Py-hPe"/>
                     <constraint firstAttribute="bottom" secondItem="6eo-tm-9uG" secondAttribute="bottom" id="mi5-8N-5b6"/>
                     <constraint firstItem="zQa-ir-Z2M" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="soI-b4-o7E"/>
-                    <constraint firstItem="6Pr-yk-Ebw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uwv-DV-jlC"/>
                     <constraint firstAttribute="trailing" secondItem="zQa-ir-Z2M" secondAttribute="trailing" id="xjU-iT-czc"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="backImageView" destination="zQa-ir-Z2M" id="rc2-vr-l27"/>
-                <outlet property="backView" destination="6eo-tm-9uG" id="25R-oB-DJ6"/>
+                <outlet property="containerView" destination="6eo-tm-9uG" id="25R-oB-DJ6"/>
                 <outlet property="heartImageView" destination="84N-IK-R7W" id="SEG-tt-W3P"/>
                 <outlet property="likesCountLabel" destination="11b-ae-npi" id="HRr-os-80W"/>
                 <outlet property="titleLabel" destination="0lJ-rO-Q24" id="C0l-1B-aIp"/>

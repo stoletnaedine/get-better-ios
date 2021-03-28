@@ -11,7 +11,7 @@ import UIKit
 class TipCell: UITableViewCell {
 
     @IBOutlet weak var backImageView: UIImageView!
-    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var heartImageView: UIImageView!
     @IBOutlet weak var likesCountLabel: UILabel!

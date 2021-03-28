@@ -17,13 +17,17 @@ final class TipsTableViewController: UIViewController {
     private var tips: [TipEntity] = []
     private var tipLikes: [TipLikesViewModel] = []
     private let tipStorage = TipStorage()
+
     private enum Constants {
         static let tipCell = R.nib.tipCell.name
         static let placeholderTipId = -1
+        static let backgroundImageWidth: CGFloat = 30
     }
 
     private lazy var backgroundImages: [UIImage?] = {
-        return tipStorage.backgroundNames.map { UIImage(named: $0) }
+        return tipStorage.backgroundNames.map {
+            UIImage(named: $0)?.resized(toWidth: Constants.backgroundImageWidth)
+        }
     }()
     
     override func viewDidLoad() {
@@ -46,7 +50,7 @@ final class TipsTableViewController: UIViewController {
     @objc private func loadData() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.showLoadingAnimation(on: self.view)
+            self.showLoadingAnimation(on: self.view, whiteScreen: false)
         }
         database.userTipsLikes(completion: { [weak self] result in
             guard let self = self else { return }
@@ -66,14 +70,15 @@ final class TipsTableViewController: UIViewController {
                     return
                 }
                 guard self.tipLikes != models else { return }
-                self.tipLikes = models
-                self.tips = models.map { self.tipStorage.tipEntities[$0.tipId] }
+                let sortedModels = models
+                    .sorted(by: { $0.tipId == self.tipStorage.currentTipId && $1.tipId != self.tipStorage.currentTipId })
+                self.tipLikes = sortedModels
+                self.tips = sortedModels.map { self.tipStorage.tipEntities[$0.tipId] }
                 self.tableView.reloadData()
             case let .failure(error):
                 guard let errorName = error.name else { return }
                 self.alertService.showErrorMessage(errorName)
                 self.stopAnimation()
-                self.refreshControl.endRefreshing()
             }
         })
     }
