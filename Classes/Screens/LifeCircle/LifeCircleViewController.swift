@@ -39,7 +39,7 @@ class LifeCircleViewController: UIViewController {
     private let lifeCircleService: LifeCircleServiceProtocol = LifeCircleService()
     private let database: DatabaseProtocol = FirebaseDatabase()
     private let alertService: AlertServiceProtocol = AlertService()
-    private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
+    private var userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     private let tipStorage = TipStorage()
     private var userData: UserData?
     private var isCurrentDataVisible = true
@@ -55,14 +55,15 @@ class LifeCircleViewController: UIViewController {
         setupRefreshControl()
         setupChartViewTap()
         setupBarButton()
+        loadAndShowData(animate: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !userDefaultsService.isTipOfTheDayHasShown() {
+        if !userDefaultsService.tipOfTheDayHasShown {
             showTip()
         }
-        loadAndShowData(animate: true)
+        loadAndShowData(animate: false)
     }
     
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
@@ -106,7 +107,7 @@ class LifeCircleViewController: UIViewController {
         tipVC.modalPresentationStyle = .overFullScreen
         tipVC.tipEntity = tipEntityOfTheDay
         present(tipVC, animated: true, completion: nil)
-        userDefaultsService.tipOfTheDayHasShown(true)
+        userDefaultsService.tipOfTheDayHasShown = true
     }
     
     private func setupBarButton() {

@@ -7,14 +7,12 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol UserSettingsServiceProtocol {
-    func tutorialHasShown(_ shown: Bool)
-    func isTutorialHasShown() -> Bool
-    func lifeCircleTutorialHasShown(_ shown: Bool)
-    func isLifeCircleTutorialHasShown() -> Bool
-    func tipOfTheDayHasShown(_ shown: Bool)
-    func isTipOfTheDayHasShown() -> Bool
+    var tutorialHasShown: Bool { get set }
+    var lifeCircleTutorialHasShown: Bool { get set }
+    var tipOfTheDayHasShown: Bool { get set }
     func saveDraft(text: String)
     func getDraft() -> String
     func clearDraft()
@@ -25,83 +23,92 @@ protocol UserSettingsServiceProtocol {
 }
 
 class UserSettingsService: UserSettingsServiceProtocol {
-    
+
     private var days: Int = {
         Date().diffInDaysSince1970()
     }()
     
     private enum Constants {
         enum Key {
-            static let tipOfTheDayShown = "tipOfTheDayShown"
             static let draft = "draft"
             static let tipPush = "tipPush"
             static let postPush = "postPush"
             static let difficultyLevel = "difficultyLevel"
-            static let tutorialHasShowed = "tutorialHasShowed"
-            static let lifeCircleTutorialHasShowed = "lifeCircleTutorialHasShowed"
+            static let tutorialHasShown = "tutorialHasShown"
+            static let lifeCircleTutorialHasShown = "lifeCircleTutorialHasShown"
+            static let tipOfTheDayHasShown = "tipOfTheDayHasShown"
         }
     }
 
-    func tutorialHasShown(_ shown: Bool) {
-        UserDefaults.standard.set(shown, forKey: Constants.Key.tutorialHasShowed)
+    var tutorialHasShown: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: userIdKey(with: Constants.Key.tutorialHasShown))
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: userIdKey(with: Constants.Key.tutorialHasShown))
+        }
     }
 
-    func isTutorialHasShown() -> Bool {
-        return UserDefaults.standard.bool(forKey: Constants.Key.tutorialHasShowed)
+    var lifeCircleTutorialHasShown: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: userIdKey(with: Constants.Key.lifeCircleTutorialHasShown))
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: userIdKey(with: Constants.Key.lifeCircleTutorialHasShown))
+        }
     }
 
-    func lifeCircleTutorialHasShown(_ shown: Bool) {
-        UserDefaults.standard.set(shown, forKey: Constants.Key.lifeCircleTutorialHasShowed)
-    }
-
-    func isLifeCircleTutorialHasShown() -> Bool {
-        return UserDefaults.standard.bool(forKey: Constants.Key.lifeCircleTutorialHasShowed)
-    }
-
-    func tipOfTheDayHasShown(_ shown: Bool) {
-        let value = shown ? self.days : -1
-        UserDefaults.standard.set(value, forKey: Constants.Key.tipOfTheDayShown)
-    }
-    
-    func isTipOfTheDayHasShown() -> Bool {
-        return UserDefaults.standard.value(forKey: Constants.Key.tipOfTheDayShown) as? Int == self.days
+    var tipOfTheDayHasShown: Bool {
+        get {
+            return UserDefaults.standard.value(forKey: userIdKey(with: Constants.Key.tipOfTheDayHasShown)) as? Int == self.days
+        }
+        set {
+            let value = newValue ? self.days : -1
+            UserDefaults.standard.set(value, forKey: userIdKey(with: Constants.Key.tipOfTheDayHasShown))
+        }
     }
     
     func saveDraft(text: String) {
-        UserDefaults.standard.setValue(text, forKey: Constants.Key.draft)
+        UserDefaults.standard.setValue(text, forKey: userIdKey(with: Constants.Key.draft))
     }
     
     func getDraft() -> String {
-        guard let text = UserDefaults.standard.value(forKey: Constants.Key.draft) as? String else { return "" }
+        guard let text = UserDefaults.standard.value(forKey: userIdKey(with: Constants.Key.draft)) as? String else { return "" }
         return text
     }
     
     func clearDraft() {
-        UserDefaults.standard.setValue(nil, forKey: Constants.Key.draft)
+        UserDefaults.standard.setValue(nil, forKey: userIdKey(with: Constants.Key.draft))
     }
     
     func getNotificationSettings() -> NotificationSettings {
-        let tipRawValue = UserDefaults.standard.value(forKey: Constants.Key.tipPush) as? String ?? ""
+        let tipRawValue = UserDefaults.standard.value(forKey: userIdKey(with: Constants.Key.tipPush)) as? String ?? ""
         let tipTopic = TipTopic(tipRawValue)
         
-        let postRawValue = UserDefaults.standard.value(forKey: Constants.Key.postPush) as? String ?? ""
+        let postRawValue = UserDefaults.standard.value(forKey: userIdKey(with: Constants.Key.postPush)) as? String ?? ""
         let postTopic = PostTopic(postRawValue)
         
         return NotificationSettings(tip: tipTopic, post: postTopic)
     }
     
     func saveNotificationSettings(_ settings: NotificationSettings) {
-        UserDefaults.standard.setValue(settings.tip.rawValue, forKey: Constants.Key.tipPush)
-        UserDefaults.standard.setValue(settings.post.rawValue, forKey: Constants.Key.postPush)
+        UserDefaults.standard.setValue(settings.tip.rawValue, forKey: userIdKey(with: Constants.Key.tipPush))
+        UserDefaults.standard.setValue(settings.post.rawValue, forKey: userIdKey(with: Constants.Key.postPush))
     }
     
     func getDifficultyLevel() -> DifficultyLevel {
-        let levelRawValue = UserDefaults.standard.value(forKey: Constants.Key.difficultyLevel) as? String ?? ""
+        let levelRawValue = UserDefaults.standard.value(forKey: userIdKey(with: Constants.Key.difficultyLevel)) as? String ?? ""
         return DifficultyLevel(rawValue: levelRawValue) ?? .easy
     }
     
     func setDifficultyLevel(_ level: DifficultyLevel) {
-        UserDefaults.standard.setValue(level.rawValue, forKey: Constants.Key.difficultyLevel)
+        UserDefaults.standard.setValue(level.rawValue, forKey: userIdKey(with: Constants.Key.difficultyLevel))
+    }
+
+    // MARK: — Private methods
+
+    private func userIdKey(with key: String) -> String {
+        return "\(Auth.auth().currentUser?.uid ?? "")_\(key)"
     }
     
 }

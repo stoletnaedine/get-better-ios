@@ -21,7 +21,7 @@ class SetupSphereValueViewController: UIViewController {
     var sphere: Sphere?
     var sphereValue: Double = Properties.notValidSphereValue
 
-    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
+    private var userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     private let values = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     private let valuesTitle = [
         R.string.localizable.onboarding10(),
@@ -65,7 +65,7 @@ class SetupSphereValueViewController: UIViewController {
     }
     
     private func showTutorial() {
-        if !userSettingsService.isTutorialHasShown() {
+        if !userSettingsService.tutorialHasShown {
             let showcase = MaterialShowcase()
             showcase.backgroundRadius = 1000
             showcase.backgroundAlpha = 0.9
@@ -74,7 +74,7 @@ class SetupSphereValueViewController: UIViewController {
             showcase.secondaryText = R.string.localizable.onboardingTutorialSecondaryText()
             showcase.show(completion: { [weak self] in
                 guard let self = self else { return }
-                self.userSettingsService.tutorialHasShown(true)
+                self.userSettingsService.tutorialHasShown = true
             })
         }
     }

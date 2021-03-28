@@ -13,7 +13,6 @@ protocol RootManagerProtocol {
     func start()
     func showAddPost()
     func showTip()
-    func showPushAlert()
 }
 
 class RootManager: RootManagerProtocol {
@@ -23,7 +22,7 @@ class RootManager: RootManagerProtocol {
     private lazy var alertService: AlertServiceProtocol = AlertService()
     private lazy var database: DatabaseProtocol = FirebaseDatabase()
     private var tabBarController: TabBarController?
-    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
+    private var userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     
     func start() {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -45,27 +44,8 @@ class RootManager: RootManagerProtocol {
     }
     
     func showTip() {
-        userSettingsService.tipOfTheDayHasShown(false)
+        userSettingsService.tipOfTheDayHasShown = false
         enterApp()
-    }
-    
-    // TODO: удалить, когда все перейдут на 1.11
-    func showPushAlert() {
-        let alert = UIAlertController(title: "⏰ Теперь можно указать время для push-уведомлений",
-                                      message: "Установить удобное время можно в разделе Настройки. Без этого старые пуши не будут нормально работать",
-                                      preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Здорово", style: .default, handler: { _ in
-            alert.dismiss(animated: true, completion: nil)
-        })
-        alert.addAction(okAction)
-        
-        if let tabBarController = self.tabBarController {
-            tabBarController.present(alert, animated: true, completion: nil)
-            return
-        }
-        enterApp(completion: { tabBarController in
-            tabBarController.present(alert, animated: true, completion: nil)
-        })
     }
 
     // MARK: — Private methods

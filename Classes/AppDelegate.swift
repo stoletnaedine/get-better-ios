@@ -75,8 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 case .tip:
                     rootManager.showTip()
                 }
-            } else {
-                rootManager.showPushAlert()
             }
         }
 

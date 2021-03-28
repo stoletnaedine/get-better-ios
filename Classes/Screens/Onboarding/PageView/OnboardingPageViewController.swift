@@ -16,7 +16,7 @@ class OnboardingPageViewController: UIViewController {
     private var viewControllers: [UIViewController] = []
     private let database: DatabaseProtocol = FirebaseDatabase()
     private let alertService: AlertServiceProtocol = AlertService()
-    private let userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
+    private var userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class OnboardingPageViewController: UIViewController {
     }
     
     @objc private func exit() {
-        userSettingsService.tutorialHasShown(false)
+        userSettingsService.tutorialHasShown = false
         
         guard let user = Auth.auth().currentUser else {
             alertService.showErrorMessage(R.string.localizable.onboardingUserError())
@@ -113,7 +113,7 @@ class OnboardingPageViewController: UIViewController {
         showLoadingAnimation(on: self.view)
         database.saveStartSphereMetrics(sphereMetrics) { [weak self] in
             guard let self = self else { return }
-            self.userSettingsService.tutorialHasShown(false)
+            self.userSettingsService.tutorialHasShown = false
             self.completion?()
             self.stopAnimation()
         }
