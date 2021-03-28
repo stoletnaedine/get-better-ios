@@ -36,7 +36,10 @@ class AddPostViewController: UIViewController {
     var addedPostCompletion: VoidClosure?
     var postType: PostType = .add
     var isOldPhoto: Bool = true
-    let maxSymbolsCount: Int = 300
+
+    enum Constants {
+        static let maxSymbolsCount: Int = 1000
+    }
     
     private let storage: FileStorageProtocol = FirebaseStorage()
     private var imageToUpload: UIImage?
@@ -202,7 +205,7 @@ class AddPostViewController: UIViewController {
         dateLabel.text = Date.currentDateWithWeekday()
         symbolsCountLabel.font = .journalDateFont
         symbolsCountLabel.textColor = .grey
-        symbolsCountLabel.text = "\(postTextView.text.count)/\(maxSymbolsCount)"
+        symbolsCountLabel.text = "\(postTextView.text.count)/\(Constants.maxSymbolsCount)"
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
@@ -252,21 +255,21 @@ extension AddPostViewController: UITextViewDelegate {
             userService.saveDraft(text: postTextView.text)
         }
         let currentTextCount = postTextView.text.count
-        symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
+        symbolsCountLabel.text = "\(currentTextCount)/\(Constants.maxSymbolsCount)"
         placeholderLabel.isHidden = currentTextCount != 0
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         placeholderLabel.isHidden = !currentText.isEmpty
-        if text.count > maxSymbolsCount {
+        if text.count > Constants.maxSymbolsCount {
             alertService.showErrorMessage(
-                R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))
+                R.string.localizable.addPostMaxSymbolAlert(String(Constants.maxSymbolsCount))
             )
         }
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
-        return updatedText.count <= maxSymbolsCount
+        return updatedText.count <= Constants.maxSymbolsCount
     }
 }
 

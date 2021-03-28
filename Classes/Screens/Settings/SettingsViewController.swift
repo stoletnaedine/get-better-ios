@@ -167,22 +167,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(model: model)
             return cell
             
-        case .aboutApp:
+        case .aboutApp, .version:
             let cell = UITableViewCell()
             cell.backgroundColor = .appBackground
             cell.textLabel?.text = item.title
             cell.textLabel?.textColor = .gray
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
-            return cell
-
-        case .version:
-            let cell = UITableViewCell()
-            cell.backgroundColor = .appBackground
-            cell.textLabel?.text = item.title
-            cell.textLabel?.textColor = .violet
-            cell.selectionStyle = .none
-            cell.accessoryType = .detailButton
             return cell
         }
     }
@@ -212,11 +203,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 title: R.string.localizable.settingsDiffLevelInfoTitle(),
                 description: R.string.localizable.settingsDiffLevelInfoDescription(),
                 buttonText: R.string.localizable.oK())
-        case .version:
-            alertService.showPopUpMessage(
-                title: R.string.localizable.newVersionAlertTitle(),
-                description: R.string.localizable.newVersionAlertMessage(),
-                buttonText: R.string.localizable.newVersionAlertButton())
         default:
             break
         }
@@ -285,7 +271,7 @@ private extension SettingsViewController {
             SettingsCellViewModel(
                 type: .version,
                 cell: SettingsCell(
-                    title: R.string.localizable.settingsVersionIs(),
+                    title: R.string.localizable.settingsVersionIs(Properties.appVersion),
                     action: { [weak self] in
                         self?.navigationController?.pushViewController(appVersionVC, animated: true)
                     })

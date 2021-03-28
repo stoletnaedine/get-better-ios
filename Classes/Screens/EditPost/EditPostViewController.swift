@@ -36,7 +36,7 @@ class EditPostViewController: AddPostViewController {
         selectedSphere = post.sphere
         postTextView.text = post.text
         if let textCount = post.text?.count {
-            symbolsCountLabel.text = "\(textCount)/\(super.maxSymbolsCount)"
+            symbolsCountLabel.text = "\(textCount)/\(Constants.maxSymbolsCount)"
         }
         dateLabel.text = Date.convertToDateWithWeekday(from: post.timestamp ?? 0)
         
