@@ -18,7 +18,8 @@ class PostMapper {
             PostField.photoUrl.rawValue : post.photoUrl ?? "",
             PostField.photoName.rawValue : post.photoName ?? "",
             PostField.previewUrl.rawValue : post.previewUrl ?? "",
-            PostField.previewName.rawValue : post.previewName ?? ""
+            PostField.previewName.rawValue : post.previewName ?? "",
+            PostField.addPhotos.rawValue : self.map(photos: post.addPhotos ?? [])
         ]
     }
     
@@ -33,7 +34,27 @@ class PostMapper {
             photoUrl: entity?[PostField.photoUrl.rawValue] as? String ?? "",
             photoName: entity?[PostField.photoName.rawValue] as? String ?? "",
             previewUrl: entity?[PostField.previewUrl.rawValue] as? String ?? "",
-            previewName: entity?[PostField.previewName.rawValue] as? String ?? "")
+            previewName: entity?[PostField.previewName.rawValue] as? String ?? "",
+            addPhotos: self.map(photosEntity: entity?[PostField.addPhotos.rawValue] as? NSArray))
+    }
+
+    func map(photos: [Photo]) -> [String: String] {
+        var result: [String: String] = [:]
+        photos.enumerated().forEach { index, photo in
+            result["\(index)"] = photo.photoUrl ?? ""
+        }
+        return result
+    }
+
+    func map(photosEntity: NSArray?) -> [Photo] {
+        var result: [Photo] = []
+        photosEntity?.forEach {
+            if let url = $0 as? String {
+                result.append(
+                    Photo(photoUrl: url))
+            }
+        }
+        return result
     }
 }
 
@@ -45,4 +66,5 @@ enum PostField: String {
     case photoName
     case previewUrl
     case previewName
+    case addPhotos
 }

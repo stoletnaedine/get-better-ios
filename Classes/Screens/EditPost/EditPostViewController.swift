@@ -53,7 +53,7 @@ class EditPostViewController: AddPostViewController {
         // disabled
     }
     
-    override func savePost(text: String, sphere: Sphere, photoResult: Photo) {
+    override func savePost(text: String, sphere: Sphere, firstPhoto: Photo, addPhotos: [Photo]?) {
         guard let post = self.post,
               let postId = post.id else { return }
         
@@ -63,7 +63,7 @@ class EditPostViewController: AddPostViewController {
                 photoName: post.photoName,
                 previewUrl: post.previewUrl,
                 previewName: post.previewName)
-            : photoResult
+            : firstPhoto
         
         let postToSave = Post(
             id: postId,
@@ -73,7 +73,8 @@ class EditPostViewController: AddPostViewController {
             photoUrl: photo.photoUrl,
             photoName: photo.photoName,
             previewUrl: photo.previewUrl,
-            previewName: photo.previewName)
+            previewName: photo.previewName,
+            addPhotos: addPhotos)
         
         database.savePost(postToSave) { [weak self] in
             guard let self = self else { return }

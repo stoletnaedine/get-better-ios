@@ -108,14 +108,19 @@ PODS:
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
   - PromisesObjC (1.2.12)
+  - PryntTrimmerView (4.0.2)
   - QuickLayout (3.0.0)
   - R.swift (5.3.1):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
   - ReachabilitySwift (5.0.0)
+  - SteviaLayout (4.7.3)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - SwiftKeychainWrapper (4.0.1)
+  - YPImagePicker (4.4.0):
+    - PryntTrimmerView (~> 4.0.2)
+    - SteviaLayout (~> 4.7.3)
 
 DEPENDENCIES:
   - Charts
@@ -132,6 +137,7 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SwiftEntryKit (= 1.2.3)
   - SwiftKeychainWrapper
+  - YPImagePicker
 
 SPEC REPOS:
   trunk:
@@ -157,12 +163,15 @@ SPEC REPOS:
     - MaterialShowcase
     - nanopb
     - PromisesObjC
+    - PryntTrimmerView
     - QuickLayout
     - R.swift
     - R.swift.Library
     - ReachabilitySwift
+    - SteviaLayout
     - SwiftEntryKit
     - SwiftKeychainWrapper
+    - YPImagePicker
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
@@ -187,13 +196,16 @@ SPEC CHECKSUMS:
   MaterialShowcase: 245a465768dee8cce70fe72674ae2490ac41bfca
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   R.swift: 56ec7e3aef34b9eee47a659e42462db2c1cc5ac3
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
+  YPImagePicker: 15aed8bcaa4dad976e11b6114126d731a2f9f3c9
 
-PODFILE CHECKSUM: fda9397fb187a511e436e7071d3f3491564cf4c5
+PODFILE CHECKSUM: dc14abafab9db0c4477513511a1a7ecda99aedac
 
 COCOAPODS: 1.10.1

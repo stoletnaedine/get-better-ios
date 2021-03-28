@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YPImagePicker
 
 enum PostType {
     case add
@@ -42,7 +43,11 @@ class AddPostViewController: UIViewController {
     }
     
     private let storage: FileStorageProtocol = FirebaseStorage()
-    private var imageToUpload: UIImage?
+    private var imagesToUpload: [UIImage] = [] {
+        didSet {
+            imageView.image = imagesToUpload.first
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +71,7 @@ class AddPostViewController: UIViewController {
     }
 
     @IBAction func cancelLoadButtonDidTap(_ sender: Any) {
-        imageToUpload = nil
+        imagesToUpload = []
         isOldPhoto = false
         cancelLoadButton.isHidden = true
         loadImageButton.isHidden = false
@@ -94,27 +99,29 @@ class AddPostViewController: UIViewController {
             return
         }
         
-        var photoResult = Photo()
+        var firstPhotoResult = Photo()
+        var addPhotos: [Photo]?
         let dispatchGroup = DispatchGroup()
         
-        if let photo = imageToUpload {
-            guard !(postType == .edit && isOldPhoto) else {
-                savePost(text: text, sphere: sphere, photoResult: photoResult)
-                return
-            }
-            
-            dispatchGroup.enter()
+        if !imagesToUpload.isEmpty {
             self.showLoadingAnimation(on: self.view)
             self.selectSphereButton.isEnabled = false
             self.saveButton.isEnabled = false
-            
-            storage.uploadPhoto(photo: photo, completion: { [weak self] result in
+
+            guard !(postType == .edit && isOldPhoto) else {
+                savePost(text: text, sphere: sphere, firstPhoto: firstPhotoResult, addPhotos: nil) // ???
+                return
+            }
+
+            let firstPhoto = imagesToUpload.first ?? UIImage()
+            dispatchGroup.enter()
+            self.storage.uploadPhoto(photo: firstPhoto, completion: { [weak self] result in
                 guard let self = self else { return }
                 switch result {
-                case .success(let photo):
-                    photoResult = photo
+                case let .success(photo):
+                    firstPhotoResult = photo
                     dispatchGroup.leave()
-                case .failure(let error):
+                case let .failure(error):
                     DispatchQueue.main.async {
                         self.stopAnimation()
                         self.selectSphereButton.isEnabled = true
@@ -124,23 +131,45 @@ class AddPostViewController: UIViewController {
                     dispatchGroup.leave()
                 }
             })
+
+            var otherPhotos = imagesToUpload
+            otherPhotos.removeFirst()
+            storage.uploadPhotos(
+                photos: otherPhotos,
+                completion: { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case let .success(photos):
+                        addPhotos = photos
+                    case let .failure(error):
+                        DispatchQueue.main.async {
+                            self.stopAnimation()
+                            self.selectSphereButton.isEnabled = true
+                            self.saveButton.isEnabled = true
+                        }
+                        self.alertService.showErrorMessage(error.localizedDescription)
+                        dispatchGroup.leave()
+                    }
+                })
         }
         
         dispatchGroup.notify(queue: .global(), execute: { [weak self] in
             guard let self = self else { return }
-            self.savePost(text: text, sphere: sphere, photoResult: photoResult)
+            self.savePost(text: text, sphere: sphere, firstPhoto: firstPhotoResult, addPhotos: addPhotos)
         })
     }
     
-    func savePost(text: String, sphere: Sphere, photoResult: Photo) {
-        let post = Post(id: nil,
-                        text: text,
-                        sphere: sphere,
-                        timestamp: Date.currentTimestamp,
-                        photoUrl: photoResult.photoUrl,
-                        photoName: photoResult.photoName,
-                        previewUrl: photoResult.previewUrl,
-                        previewName: photoResult.previewName)
+    func savePost(text: String, sphere: Sphere, firstPhoto: Photo, addPhotos: [Photo]?) {
+        let post = Post(
+            id: nil,
+            text: text,
+            sphere: sphere,
+            timestamp: Date.currentTimestamp,
+            photoUrl: firstPhoto.photoUrl,
+            photoName: firstPhoto.photoName,
+            previewUrl: firstPhoto.previewUrl,
+            previewName: firstPhoto.previewName,
+            addPhotos: addPhotos)
         
         database.savePost(post) { [weak self] in
             guard let self = self else { return }
@@ -180,11 +209,26 @@ class AddPostViewController: UIViewController {
     // MARK: — Private methods
 
     private func openImagePickerController() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = .photoLibrary
-        picker.navigationBar.tintColor = .white
-        picker.navigationBar.barTintColor = .violet
+        var config = YPImagePickerConfiguration()
+        config.library.maxNumberOfItems = 3
+        config.onlySquareImagesFromCamera = false
+        let picker = YPImagePicker(configuration: config)
+        picker.didFinishPicking { [weak self, picker] items, _ in
+            guard let self = self else { return }
+            self.loadImageButton.isHidden = true
+            self.bigLoadImageButton.isHidden = true
+            self.cancelLoadButton.isHidden = false
+            self.isOldPhoto = false
+            for item in items {
+                switch item {
+                case let .photo(photo):
+                    self.imagesToUpload.append(photo.image)
+                case .video:
+                    break
+                }
+            }
+            picker.dismiss(animated: true, completion: nil)
+        }
         present(picker, animated: true, completion: nil)
     }
     
@@ -270,22 +314,5 @@ extension AddPostViewController: UITextViewDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
         return updatedText.count <= Constants.maxSymbolsCount
-    }
-}
-
-// MARK: UIImagePickerControllerDelegate
-
-extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        loadImageButton.isHidden = true
-        bigLoadImageButton.isHidden = true
-        cancelLoadButton.isHidden = false
-        imageView.image = image
-        imageToUpload = image
-        isOldPhoto = false
     }
 }

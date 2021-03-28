@@ -17,4 +17,5 @@ target 'GetBetter' do
   pod 'MaterialShowcase'
   pod 'Kingfisher', '~> 5.0'
   pod 'lottie-ios'
+  pod 'YPImagePicker'
 end

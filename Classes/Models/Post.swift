@@ -17,4 +17,5 @@ struct Post {
     let photoName: String?
     let previewUrl: String?
     let previewName: String?
+    let addPhotos: [Photo]?
 }

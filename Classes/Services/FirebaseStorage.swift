@@ -13,6 +13,7 @@ import FirebaseAuth
 protocol FileStorageProtocol {
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void)
     func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void)
+    func uploadPhotos(photos: [UIImage], completion: @escaping (Result<[Photo], AppError>) -> Void)
     func deletePreview(name: String?)
     func deletePhoto(name: String?)
 }
@@ -26,7 +27,7 @@ class FirebaseStorage: FileStorageProtocol {
         static let previewsPath = "previews"
         static let usersPath = "users"
         static let photoQuality: CGFloat = 0.8
-        static let resizeWidthPhoto: CGFloat = 1000
+        static let resizeWidthPhoto: CGFloat = 800
         static let resizeWidthPreview: CGFloat = 200
         static let resizeWidthAvatar: CGFloat = 400
     }
@@ -50,18 +51,18 @@ class FirebaseStorage: FileStorageProtocol {
         
         avatarRef
             .putData(imageData, metadata: metadata, completion: { (metadata, error) in
-            guard let _ = metadata else {
-                completion(.failure(AppError(error: error)!))
-                return
-            }
-            avatarRef.downloadURL(completion: { (url, error) in
-                guard let url = url else {
+                guard let _ = metadata else {
                     completion(.failure(AppError(error: error)!))
                     return
                 }
-                completion(.success(url))
+                avatarRef.downloadURL(completion: { (url, error) in
+                    guard let url = url else {
+                        completion(.failure(AppError(error: error)!))
+                        return
+                    }
+                    completion(.success(url))
+                })
             })
-        })
     }
     
     func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
@@ -88,14 +89,14 @@ class FirebaseStorage: FileStorageProtocol {
                     data: photoData,
                     dispatchGroup: dispatchGroup,
                     completion: { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let photo):
-                photoName = photo.name
-                photoUrl = photo.urlString
-            }
-        })
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(error))
+                        case .success(let photo):
+                            photoName = photo.name
+                            photoUrl = photo.urlString
+                        }
+                    })
         
         guard let resizePreview = photo.resized(toWidth: Constants.resizeWidthPreview) else { return }
         guard let previewData = resizePreview.jpegData(compressionQuality: Constants.photoQuality) else { return }
@@ -109,14 +110,14 @@ class FirebaseStorage: FileStorageProtocol {
                     data: previewData,
                     dispatchGroup: dispatchGroup,
                     completion: { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let photo):
-                previewName = photo.name
-                previewUrl = photo.urlString
-            }
-        })
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(error))
+                        case .success(let photo):
+                            previewName = photo.name
+                            previewUrl = photo.urlString
+                        }
+                    })
         
         dispatchGroup.notify(queue: .global(), execute: {
             let photo = Photo(photoUrl: photoUrl,
@@ -124,6 +125,43 @@ class FirebaseStorage: FileStorageProtocol {
                               previewUrl: previewUrl,
                               previewName: previewName)
             completion(.success(photo))
+        })
+    }
+
+    func uploadPhotos(photos: [UIImage], completion: @escaping (Result<[Photo], AppError>) -> Void) {
+        guard let currentUserRef = currentUserPath() else {
+            completion(.failure(AppError(errorCode: .noInternet)))
+            return
+        }
+
+        let dispatchGroup = DispatchGroup()
+        var photoResult: [Photo] = []
+        photos.forEach { photo in
+            guard let resizePhoto = photo.resized(toWidth: Constants.resizeWidthPhoto),
+                  let photoData = resizePhoto.jpegData(compressionQuality: Constants.photoQuality) else { return }
+            self.metadata.contentType = Constants.contentType
+
+            let photoRef = currentUserRef
+                .child(Constants.photosPath)
+                .child(self.uuidString)
+
+            dispatchGroup.enter()
+            self.uploadPhoto(
+                ref: photoRef,
+                data: photoData,
+                dispatchGroup: dispatchGroup,
+                completion: { result in
+                    switch result {
+                    case let .success(photo):
+                        photoResult.append(Photo(photoUrl: photo.urlString))
+                    case let .failure(error):
+                        completion(.failure(error))
+                    }
+                })
+        }
+
+        dispatchGroup.notify(queue: .global(), execute: {
+            completion(.success(photoResult))
         })
     }
     
@@ -140,6 +178,8 @@ class FirebaseStorage: FileStorageProtocol {
               !name.isEmpty else { return }
         delete(imageName: name, imagePath: Constants.photosPath, reference: ref)
     }
+
+    // MARK: — Private methods
     
     private func uploadPhoto(ref: StorageReference,
                              data: Data,
@@ -175,12 +215,12 @@ class FirebaseStorage: FileStorageProtocol {
                 if let error = error {
                     self?.alertService.showErrorMessage(error.localizedDescription)
                 }
-        }
+            }
     }
     
     private func currentUserPath() -> StorageReference? {
-        guard connectionHelper.isConnect() else { return nil }
-        guard let userId = Auth.auth().currentUser?.uid else { return nil }
+        guard connectionHelper.isConnect(),
+              let userId = Auth.auth().currentUser?.uid else { return nil }
         
         return Storage.storage().reference()
             .child(Constants.usersPath)
