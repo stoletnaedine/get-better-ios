@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import Lightbox
 
 class PostDetailViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class PostDetailViewController: UIViewController {
         super.viewDidLoad()
         customizeView()
         setupEditButton()
+        setupPhotoImageViewTapHandler()
         configure()
     }
     
@@ -39,6 +41,30 @@ class PostDetailViewController: UIViewController {
     
     private func setupEditButton() {
         navigationItem.rightBarButtonItem = .init(image: R.image.edit(), style: .plain, target: self, action: #selector(editButtonDidTap))
+    }
+
+    private func setupPhotoImageViewTapHandler() {
+        photoImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(photoImageViewDidTap))
+        photoImageView.addGestureRecognizer(tap)
+    }
+
+    @objc private func photoImageViewDidTap() {
+        LightboxConfig.loadImage = { imageView, URL, completion in
+            imageView.kf.setImage(with: URL)
+        }
+        LightboxConfig.makeLoadingIndicator = { UIView() }
+
+        let mainPhotoUrl = post?.photoUrl
+        let additionalPhotosUrls = post?.addPhotos?.map { $0.main.url } ?? []
+        let imageUrls = [mainPhotoUrl] + additionalPhotosUrls
+        let images: [LightboxImage] = imageUrls.compactMap {
+            guard let url = $0, let imageUrl = URL(string: url) else { return nil }
+            return LightboxImage(imageURL: imageUrl)
+        }
+        let controller = LightboxController(images: images, startIndex: 0)
+        controller.dynamicBackground = true
+        present(controller, animated: true, completion: nil)
     }
     
     @objc private func editButtonDidTap() {

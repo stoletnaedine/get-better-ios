@@ -9,15 +9,11 @@
 import Foundation
 
 struct Photo {
-    let photoUrl: String?
-    let photoName: String?
-    let previewUrl: String?
-    let previewName: String?
+    let main: PhotoNameURL
+    let preview: PhotoNameURL?
+}
 
-    init(photoUrl: String? = nil, photoName: String? = nil, previewUrl: String? = nil, previewName: String? = nil) {
-        self.photoUrl = photoUrl
-        self.photoName = photoName
-        self.previewUrl = previewUrl
-        self.previewName = previewName
-    }
+struct PhotoNameURL {
+    let name: String?
+    let url: String
 }

@@ -18,4 +18,5 @@ target 'GetBetter' do
   pod 'Kingfisher', '~> 5.0'
   pod 'lottie-ios'
   pod 'YPImagePicker'
+  pod 'Lightbox'
 end

@@ -12,8 +12,7 @@ import FirebaseAuth
 
 protocol FileStorageProtocol {
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void)
-    func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void)
-    func uploadPhotos(photos: [UIImage], completion: @escaping (Result<[Photo], AppError>) -> Void)
+    func uploadPhotos(_ photos: [UIImage], needFirstPhotoPreview: Bool, completion: @escaping (Result<[Photo], AppError>) -> Void)
     func deletePreview(name: String?)
     func deletePhoto(name: String?)
 }
@@ -27,13 +26,10 @@ class FirebaseStorage: FileStorageProtocol {
         static let previewsPath = "previews"
         static let usersPath = "users"
         static let photoQuality: CGFloat = 0.8
-        static let resizeWidthPhoto: CGFloat = 800
         static let resizeWidthPreview: CGFloat = 200
         static let resizeWidthAvatar: CGFloat = 400
     }
-    
-    private let uuidString: String = UUID().uuidString
-    private let metadata = StorageMetadata()
+
     private let connectionHelper = ConnectionHelper()
     private let alertService: AlertServiceProtocol = AlertService()
     
@@ -45,12 +41,12 @@ class FirebaseStorage: FileStorageProtocol {
         }
         guard let resizeImage = photo.resized(toWidth: Constants.resizeWidthAvatar) else { return }
         guard let imageData = resizeImage.jpegData(compressionQuality: Constants.photoQuality) else { return }
-        metadata.contentType = Constants.contentType
         
         let avatarRef = currentUserRef.child(Constants.avatarFileName)
-        
-        avatarRef
-            .putData(imageData, metadata: metadata, completion: { (metadata, error) in
+        let metadata = StorageMetadata()
+        metadata.contentType = Constants.contentType
+
+        avatarRef.putData(imageData, metadata: metadata, completion: { (metadata, error) in
                 guard let _ = metadata else {
                     completion(.failure(AppError(error: error)!))
                     return
@@ -64,118 +60,85 @@ class FirebaseStorage: FileStorageProtocol {
                 })
             })
     }
-    
-    func uploadPhoto(photo: UIImage, completion: @escaping (Result<Photo, AppError>) -> Void) {
-        var photoName: String?
-        var photoUrl: String?
-        var previewName: String?
-        var previewUrl: String?
-        let dispatchGroup = DispatchGroup()
-        
-        guard let currentUserRef = currentUserPath() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
-        guard let resizePhoto = photo.resized(toWidth: Constants.resizeWidthPhoto) else { return }
-        guard let photoData = resizePhoto.jpegData(compressionQuality: Constants.photoQuality) else { return }
-        metadata.contentType = Constants.contentType
-        
-        let photoRef = currentUserRef
-            .child(Constants.photosPath)
-            .child(uuidString)
-        
-        dispatchGroup.enter()
-        uploadPhoto(ref: photoRef,
-                    data: photoData,
-                    dispatchGroup: dispatchGroup,
-                    completion: { result in
-                        switch result {
-                        case .failure(let error):
-                            completion(.failure(error))
-                        case .success(let photo):
-                            photoName = photo.name
-                            photoUrl = photo.urlString
-                        }
-                    })
-        
-        guard let resizePreview = photo.resized(toWidth: Constants.resizeWidthPreview) else { return }
-        guard let previewData = resizePreview.jpegData(compressionQuality: Constants.photoQuality) else { return }
-        
-        let previewRef = currentUserRef
-            .child(Constants.previewsPath)
-            .child(uuidString)
-        
-        dispatchGroup.enter()
-        uploadPhoto(ref: previewRef,
-                    data: previewData,
-                    dispatchGroup: dispatchGroup,
-                    completion: { result in
-                        switch result {
-                        case .failure(let error):
-                            completion(.failure(error))
-                        case .success(let photo):
-                            previewName = photo.name
-                            previewUrl = photo.urlString
-                        }
-                    })
-        
-        dispatchGroup.notify(queue: .global(), execute: {
-            let photo = Photo(photoUrl: photoUrl,
-                              photoName: photoName,
-                              previewUrl: previewUrl,
-                              previewName: previewName)
-            completion(.success(photo))
-        })
-    }
 
-    func uploadPhotos(photos: [UIImage], completion: @escaping (Result<[Photo], AppError>) -> Void) {
+    func uploadPhotos(_ photos: [UIImage],
+                      needFirstPhotoPreview: Bool,
+                      completion: @escaping (Result<[Photo], AppError>) -> Void) {
         guard let currentUserRef = currentUserPath() else {
             completion(.failure(AppError(errorCode: .noInternet)))
             return
         }
 
-        let dispatchGroup = DispatchGroup()
+        let group = DispatchGroup()
         var photoResult: [Photo] = []
-        photos.forEach { photo in
-            guard let resizePhoto = photo.resized(toWidth: Constants.resizeWidthPhoto),
-                  let photoData = resizePhoto.jpegData(compressionQuality: Constants.photoQuality) else { return }
-            self.metadata.contentType = Constants.contentType
+
+        photos.enumerated().forEach { index, photo in
+            group.enter()
+
+            // First photo preview
+            var firstPhotoPreviewNameUrl: PhotoNameURL? = nil
+            let previewGroup = DispatchGroup()
+            previewGroup.enter()
+            if needFirstPhotoPreview && index == 0,
+               let resizedPreview = photo.resized(toWidth: Constants.resizeWidthPreview),
+               let previewData = resizedPreview.jpegData(compressionQuality: Constants.photoQuality) {
+                let previewRef = currentUserRef
+                    .child(Constants.previewsPath)
+                    .child(UUID().uuidString)
+                self.uploadPhoto(ref: previewRef, data: previewData) { result in
+                    switch result {
+                    case let .success(photoNameURL):
+                        firstPhotoPreviewNameUrl = photoNameURL
+                        previewGroup.leave()
+                    case .failure:
+                        previewGroup.leave()
+                    }
+                }
+            } else {
+                previewGroup.leave()
+            }
+
+            guard let photoData = photo.pngData() else {
+                group.leave()
+                return
+            }
 
             let photoRef = currentUserRef
                 .child(Constants.photosPath)
-                .child(self.uuidString)
+                .child(UUID().uuidString)
 
-            dispatchGroup.enter()
             self.uploadPhoto(
                 ref: photoRef,
-                data: photoData,
-                dispatchGroup: dispatchGroup,
-                completion: { result in
-                    switch result {
-                    case let .success(photo):
-                        photoResult.append(Photo(photoUrl: photo.urlString))
-                    case let .failure(error):
-                        completion(.failure(error))
-                    }
-                })
+                data: photoData) { result in
+                switch result {
+                case let .success(photoNameUrl):
+                    previewGroup.notify(queue: .global(), execute: {
+                        let photo = Photo(
+                            main: photoNameUrl,
+                            preview: firstPhotoPreviewNameUrl)
+                        photoResult.append(photo)
+                        group.leave()
+                    })
+                case .failure:
+                    group.leave()
+                }
+            }
         }
 
-        dispatchGroup.notify(queue: .global(), execute: {
+        group.notify(queue: .global(), execute: {
             completion(.success(photoResult))
         })
     }
     
     func deletePreview(name: String?) {
         guard let ref = currentUserPath(),
-              let name = name,
-              !name.isEmpty else { return }
+              let name = name, !name.isEmpty else { return }
         delete(imageName: name, imagePath: Constants.previewsPath, reference: ref)
     }
     
     func deletePhoto(name: String?) {
         guard let ref = currentUserPath(),
-              let name = name,
-              !name.isEmpty else { return }
+              let name = name, !name.isEmpty else { return }
         delete(imageName: name, imagePath: Constants.photosPath, reference: ref)
     }
 
@@ -183,28 +146,23 @@ class FirebaseStorage: FileStorageProtocol {
     
     private func uploadPhoto(ref: StorageReference,
                              data: Data,
-                             dispatchGroup: DispatchGroup,
-                             completion: @escaping (Result<(name: String, urlString: String), AppError>) -> Void) {
-        ref
-            .putData(data, metadata: metadata, completion: { (metadata, error) in
-                guard let _ = metadata else {
-                    completion(.failure(AppError(error: error)!))
-                    dispatchGroup.leave()
+                             completion: @escaping (Result<PhotoNameURL, AppError>) -> Void) {
+        let metadata = StorageMetadata()
+        metadata.contentType = Constants.contentType
+        ref.putData(data, metadata: metadata) { metadata, error in
+            guard let _ = metadata else {
+                completion(.failure(.init(errorCode: .serverError)))
+                return
+            }
+            ref.downloadURL { url, error in
+                guard let downloadURL = url else {
+                    completion(.failure(.init(errorCode: .serverError)))
                     return
                 }
-                ref.downloadURL(completion: { (url, error) in
-                    guard let url = url else {
-                        completion(.failure(AppError(error: error)!))
-                        dispatchGroup.leave()
-                        return
-                    }
-                    let name = ref.name
-                    let urlString = "\(url)"
-                    let result = (name: name, urlString: urlString)
-                    completion(.success(result))
-                    dispatchGroup.leave()
-                })
-            })
+                let result = PhotoNameURL(name: ref.name, url: "\(downloadURL)")
+                completion(.success(result))
+            }
+        }
     }
     
     private func delete(imageName: String, imagePath: String, reference: StorageReference) {

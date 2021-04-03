@@ -41,7 +41,7 @@ class PostMapper {
     func map(photos: [Photo]) -> [String: String] {
         var result: [String: String] = [:]
         photos.enumerated().forEach { index, photo in
-            result["\(index)"] = photo.photoUrl ?? ""
+            result["\(index)"] = photo.main.url
         }
         return result
     }
@@ -51,7 +51,9 @@ class PostMapper {
         photosEntity?.forEach {
             if let url = $0 as? String {
                 result.append(
-                    Photo(photoUrl: url))
+                    Photo(
+                        main: PhotoNameURL(name: nil, url: url),
+                        preview: nil))
             }
         }
         return result
