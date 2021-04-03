@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        Database.database().isPersistenceEnabled = true
+//        Database.database().isPersistenceEnabled = true
         setupNavigationBar()
         Auth.auth().languageCode = "ru"
         IQKeyboardManager.shared.enable = true

@@ -10,7 +10,7 @@ import Foundation
 
 struct Photo {
     let main: PhotoNameURL
-    let preview: PhotoNameURL?
+    var preview: PhotoNameURL?
 }
 
 struct PhotoNameURL {

@@ -26,7 +26,7 @@ class FirebaseStorage: FileStorageProtocol {
         static let previewsPath = "previews"
         static let usersPath = "users"
         static let photoQuality: CGFloat = 0.8
-        static let resizeWidthPreview: CGFloat = 200
+        static let resizeWidthPreview: CGFloat = 300
         static let resizeWidthAvatar: CGFloat = 400
     }
 
@@ -71,61 +71,57 @@ class FirebaseStorage: FileStorageProtocol {
 
         let group = DispatchGroup()
         var photoResult: [Photo] = []
+        var firstPhotoPreviewNameUrl: PhotoNameURL? = nil
 
         photos.enumerated().forEach { index, photo in
-            group.enter()
+            let photoId = UUID().uuidString
 
             // First photo preview
-            var firstPhotoPreviewNameUrl: PhotoNameURL? = nil
-            let previewGroup = DispatchGroup()
-            previewGroup.enter()
             if needFirstPhotoPreview && index == 0,
                let resizedPreview = photo.resized(toWidth: Constants.resizeWidthPreview),
                let previewData = resizedPreview.jpegData(compressionQuality: Constants.photoQuality) {
+                group.enter()
                 let previewRef = currentUserRef
                     .child(Constants.previewsPath)
-                    .child(UUID().uuidString)
+                    .child(photoId)
                 self.uploadPhoto(ref: previewRef, data: previewData) { result in
                     switch result {
                     case let .success(photoNameURL):
                         firstPhotoPreviewNameUrl = photoNameURL
-                        previewGroup.leave()
+                        group.leave()
                     case .failure:
-                        previewGroup.leave()
+                        group.leave()
                     }
                 }
-            } else {
-                previewGroup.leave()
             }
 
-            guard let photoData = photo.pngData() else {
-                group.leave()
-                return
-            }
+            if let photoData = photo.jpegData(compressionQuality: Constants.photoQuality) {
+                group.enter()
+                let photoRef = currentUserRef
+                    .child(Constants.photosPath)
+                    .child(photoId)
 
-            let photoRef = currentUserRef
-                .child(Constants.photosPath)
-                .child(UUID().uuidString)
-
-            self.uploadPhoto(
-                ref: photoRef,
-                data: photoData) { result in
-                switch result {
-                case let .success(photoNameUrl):
-                    previewGroup.notify(queue: .global(), execute: {
+                self.uploadPhoto(ref: photoRef, data: photoData) { result in
+                    switch result {
+                    case let .success(photoNameUrl):
                         let photo = Photo(
                             main: photoNameUrl,
-                            preview: firstPhotoPreviewNameUrl)
+                            preview: nil)
                         photoResult.append(photo)
                         group.leave()
-                    })
-                case .failure:
-                    group.leave()
+                    case .failure:
+                        group.leave()
+                    }
                 }
             }
         }
 
         group.notify(queue: .global(), execute: {
+            if let firstPhotoPreview = firstPhotoPreviewNameUrl,
+               let previewPhotoIndex = photoResult.firstIndex(where: { $0.main.name == firstPhotoPreview.name }) {
+                photoResult[previewPhotoIndex].preview = firstPhotoPreview
+            }
+            photoResult.sort(by: { $0.preview != nil && $1.preview == nil })
             completion(.success(photoResult))
         })
     }
