@@ -113,8 +113,8 @@ class AddPostViewController: UIViewController {
             self.storage.uploadPhotos(imagesToUpload, needFirstPhotoPreview: true) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
-                case let .success(photos):
-                    self.savePost(text: text, sphere: sphere, photos: photos)
+                case let .success(postPhotos):
+                    self.savePost(text: text, sphere: sphere, postPhotos: postPhotos)
                 case let .failure(error):
                     DispatchQueue.main.async {
                         self.stopAnimation()
@@ -125,26 +125,19 @@ class AddPostViewController: UIViewController {
                 }
             }
         } else {
-            self.savePost(text: text, sphere: sphere, photos: [])
+            self.savePost(text: text, sphere: sphere, postPhotos: nil)
         }
     }
     
-    func savePost(text: String, sphere: Sphere, photos: [Photo]) {
-        let firstPhoto = photos.first
-        var addPhotos: [Photo]? = nil
-        if photos.count > 1 {
-            addPhotos = Array(photos.dropFirst())
-        }
+    func savePost(text: String, sphere: Sphere, postPhotos: PostPhotos?) {
         let post = Post(
             id: nil,
             text: text,
             sphere: sphere,
             timestamp: Date.currentTimestamp,
-            photoUrl: firstPhoto?.main.url,
-            photoName: firstPhoto?.main.name,
-            previewUrl: firstPhoto?.preview?.url,
-            previewName: firstPhoto?.preview?.name,
-            addPhotos: addPhotos)
+            previewUrl: postPhotos?.preview?.url,
+            previewName: postPhotos?.preview?.name,
+            photos: postPhotos?.photos)
         
         database.savePost(post) { [weak self] in
             guard let self = self else { return }

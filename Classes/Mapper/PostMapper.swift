@@ -12,61 +12,68 @@ class PostMapper {
     
     func map(post: Post) -> [String : Any] {
         return [
-            PostField.text.rawValue : post.text ?? "",
-            PostField.sphere.rawValue : post.sphere?.rawValue ?? "",
-            PostField.timestamp.rawValue : post.timestamp ?? "",
-            PostField.photoUrl.rawValue : post.photoUrl ?? "",
-            PostField.photoName.rawValue : post.photoName ?? "",
-            PostField.previewUrl.rawValue : post.previewUrl ?? "",
-            PostField.previewName.rawValue : post.previewName ?? "",
-            PostField.addPhotos.rawValue : self.map(photos: post.addPhotos ?? [])
+            PostField.text : post.text ?? "",
+            PostField.sphere : post.sphere?.rawValue ?? "",
+            PostField.timestamp : post.timestamp ?? "",
+            PostField.previewUrl : post.previewUrl ?? "",
+            PostField.previewName : post.previewName ?? "",
+            PostField.photos : self.map(photos: post.photos ?? [])
         ]
     }
     
     func map(id: Any, entity: NSDictionary?) -> Post {
-        let sphereRawValue = entity?[PostField.sphere.rawValue] as? String ?? ""
+        let sphereRawValue = entity?[PostField.sphere] as? String ?? ""
 
         return Post(
             id: id as? String ?? "",
-            text: entity?[PostField.text.rawValue] as? String ?? "",
+            text: entity?[PostField.text] as? String ?? "",
             sphere: Sphere(rawValue: sphereRawValue),
-            timestamp: entity?[PostField.timestamp.rawValue] as? Int64 ?? 0,
-            photoUrl: entity?[PostField.photoUrl.rawValue] as? String ?? "",
-            photoName: entity?[PostField.photoName.rawValue] as? String ?? "",
-            previewUrl: entity?[PostField.previewUrl.rawValue] as? String ?? "",
-            previewName: entity?[PostField.previewName.rawValue] as? String ?? "",
-            addPhotos: self.map(photosEntity: entity?[PostField.addPhotos.rawValue] as? NSArray))
+            timestamp: entity?[PostField.timestamp] as? Int64 ?? 0,
+            // Для поддержки постов, написанных до версии 2.0
+            photoUrl: entity?[PostField.photoUrl] as? String ?? "",
+            // Для поддержки постов, написанных до версии 2.0
+            photoName: entity?[PostField.photoName] as? String ?? "",
+            previewUrl: entity?[PostField.previewUrl] as? String ?? "",
+            previewName: entity?[PostField.previewName] as? String ?? "",
+            photos: self.map(photosEntity: entity?[PostField.photos] as? NSArray))
     }
 
-    func map(photos: [Photo]) -> [String: String] {
-        var result: [String: String] = [:]
+    func map(photos: [PhotoNameURL]) -> [String: [String: String]] {
+        var result = [String: [String: String]]()
         photos.enumerated().forEach { index, photo in
-            result["\(index)"] = photo.main.url
+            var object = [String: String]()
+            object[PhotoField.name] = photo.name
+            object[PhotoField.url] = photo.url
+            result["\(index)"] = object
         }
         return result
     }
 
-    func map(photosEntity: NSArray?) -> [Photo] {
-        var result: [Photo] = []
+    func map(photosEntity: NSArray?) -> [PhotoNameURL] {
+        var result: [PhotoNameURL] = []
         photosEntity?.forEach {
-            if let url = $0 as? String {
-                result.append(
-                    Photo(
-                        main: PhotoNameURL(name: nil, url: url),
-                        preview: nil))
-            }
+            guard let entity = $0 as? NSDictionary else { return }
+            result.append(
+                PhotoNameURL(
+                    name: entity[PhotoField.name] as? String ?? "",
+                    url: entity[PhotoField.url] as? String ?? ""))
         }
         return result
     }
 }
 
-enum PostField: String {
-    case text
-    case sphere
-    case timestamp
-    case photoUrl
-    case photoName
-    case previewUrl
-    case previewName
-    case addPhotos
+private enum PostField {
+    static let text = "text"
+    static let sphere = "sphere"
+    static let timestamp = "timestamp"
+    static let photoUrl = "photoUrl"
+    static let photoName = "photoName"
+    static let previewUrl = "previewUrl"
+    static let previewName = "previewName"
+    static let photos = "photos"
+}
+
+private enum PhotoField {
+    static let name = "name"
+    static let url = "url"
 }

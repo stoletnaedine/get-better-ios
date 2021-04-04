@@ -74,7 +74,13 @@ class FirebaseDatabase: DatabaseProtocol {
             .child(postId)
             .removeValue(completionBlock: { [weak self] _, _ in
                 guard let self = self else { return }
-                self.storage.deletePhoto(name: post.photoName)
+                var photoNamesForDelete = [String?]()
+                photoNamesForDelete.append(post.photoName)
+                let photoNames = post.photos?.map { $0.name }
+                photoNamesForDelete.append(contentsOf: photoNames ?? [])
+                photoNamesForDelete.forEach {
+                    self.storage.deletePhoto(name: $0)
+                }
                 self.storage.deletePreview(name: post.previewName)
                 completion?()
             })

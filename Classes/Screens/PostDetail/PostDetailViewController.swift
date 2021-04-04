@@ -56,7 +56,7 @@ class PostDetailViewController: UIViewController {
         LightboxConfig.makeLoadingIndicator = { UIView() }
 
         let mainPhotoUrl = post?.photoUrl
-        let additionalPhotosUrls = post?.addPhotos?.map { $0.main.url } ?? []
+        let additionalPhotosUrls = post?.photos?.map { $0.url } ?? []
         let imageUrls = [mainPhotoUrl] + additionalPhotosUrls
         let images: [LightboxImage] = imageUrls.compactMap {
             guard let url = $0, let imageUrl = URL(string: url) else { return nil }
@@ -90,6 +90,15 @@ class PostDetailViewController: UIViewController {
         
         if let urlString = post.photoUrl,
            let url = URL(string: urlString) {
+            photoImageView.kf.indicatorType = .activity
+            photoImageView.kf.setImage(
+                with: url,
+                options: [
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
+        } else if let urlString = post.photos?.first?.url,
+                  let url = URL(string: urlString) {
             photoImageView.kf.indicatorType = .activity
             photoImageView.kf.setImage(
                 with: url,

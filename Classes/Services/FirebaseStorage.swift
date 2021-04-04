@@ -12,7 +12,7 @@ import FirebaseAuth
 
 protocol FileStorageProtocol {
     func uploadAvatar(photo: UIImage, completion: @escaping (Result<URL, AppError>) -> Void)
-    func uploadPhotos(_ photos: [UIImage], needFirstPhotoPreview: Bool, completion: @escaping (Result<[Photo], AppError>) -> Void)
+    func uploadPhotos(_ photos: [UIImage], needFirstPhotoPreview: Bool, completion: @escaping (Result<PostPhotos, AppError>) -> Void)
     func deletePreview(name: String?)
     func deletePhoto(name: String?)
 }
@@ -63,15 +63,15 @@ class FirebaseStorage: FileStorageProtocol {
 
     func uploadPhotos(_ photos: [UIImage],
                       needFirstPhotoPreview: Bool,
-                      completion: @escaping (Result<[Photo], AppError>) -> Void) {
+                      completion: @escaping (Result<PostPhotos, AppError>) -> Void) {
         guard let currentUserRef = currentUserPath() else {
             completion(.failure(AppError(errorCode: .noInternet)))
             return
         }
 
         let group = DispatchGroup()
-        var photoResult: [Photo] = []
-        var firstPhotoPreviewNameUrl: PhotoNameURL? = nil
+        var photoNameUrls: [PhotoNameURL] = []
+        var previewNameUrl: PhotoNameURL? = nil
 
         photos.enumerated().forEach { index, photo in
             let photoId = UUID().uuidString
@@ -87,7 +87,7 @@ class FirebaseStorage: FileStorageProtocol {
                 self.uploadPhoto(ref: previewRef, data: previewData) { result in
                     switch result {
                     case let .success(photoNameURL):
-                        firstPhotoPreviewNameUrl = photoNameURL
+                        previewNameUrl = photoNameURL
                         group.leave()
                     case .failure:
                         group.leave()
@@ -103,11 +103,12 @@ class FirebaseStorage: FileStorageProtocol {
 
                 self.uploadPhoto(ref: photoRef, data: photoData) { result in
                     switch result {
-                    case let .success(photoNameUrl):
-                        let photo = Photo(
-                            main: photoNameUrl,
-                            preview: nil)
-                        photoResult.append(photo)
+                    case let .success(photo):
+                        photoNameUrls.append(
+                            PhotoNameURL(
+                                order: index,
+                                name: photo.name,
+                                url: photo.url))
                         group.leave()
                     case .failure:
                         group.leave()
@@ -117,11 +118,10 @@ class FirebaseStorage: FileStorageProtocol {
         }
 
         group.notify(queue: .global(), execute: {
-            if let firstPhotoPreview = firstPhotoPreviewNameUrl,
-               let previewPhotoIndex = photoResult.firstIndex(where: { $0.main.name == firstPhotoPreview.name }) {
-                photoResult[previewPhotoIndex].preview = firstPhotoPreview
-            }
-            photoResult.sort(by: { $0.preview != nil && $1.preview == nil })
+            photoNameUrls.sort(by: { $0.order ?? 0 < $1.order ?? 0 })
+            let photoResult = PostPhotos(
+                photos: photoNameUrls,
+                preview: previewNameUrl)
             completion(.success(photoResult))
         })
     }

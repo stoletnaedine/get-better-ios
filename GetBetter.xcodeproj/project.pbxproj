@@ -49,7 +49,7 @@
 		C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B14E824475ED000B58B18 /* FormValidator.swift */; };
 		C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35750D224507E7B00BA7006 /* PostDetailViewController.swift */; };
 		C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35750D324507E7B00BA7006 /* PostDetailViewController.xib */; };
-		C35B38AF2462D57500E0C416 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38AE2462D57500E0C416 /* Photo.swift */; };
+		C35B38AF2462D57500E0C416 /* PostPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38AE2462D57500E0C416 /* PostPhotos.swift */; };
 		C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35B38B02462E1E700E0C416 /* UIImage.swift */; };
 		C35CC98E25A9BBE100A9AA59 /* PushNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35CC98C25A9BBE100A9AA59 /* PushNotificationCell.swift */; };
 		C35CC98F25A9BBE100A9AA59 /* PushNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35CC98D25A9BBE100A9AA59 /* PushNotificationCell.xib */; };
@@ -187,7 +187,7 @@
 		C34B14E824475ED000B58B18 /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		C35750D224507E7B00BA7006 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		C35750D324507E7B00BA7006 /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
-		C35B38AE2462D57500E0C416 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		C35B38AE2462D57500E0C416 /* PostPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotos.swift; sourceTree = "<group>"; };
 		C35B38B02462E1E700E0C416 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		C35CC98C25A9BBE100A9AA59 /* PushNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationCell.swift; sourceTree = "<group>"; };
 		C35CC98D25A9BBE100A9AA59 /* PushNotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PushNotificationCell.xib; sourceTree = "<group>"; };
@@ -560,7 +560,7 @@
 				C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */,
 				C3B4760424596BCB0067A3C0 /* Profile.swift */,
 				6E7071F2245C474D00ED7D08 /* SphereValue.swift */,
-				C35B38AE2462D57500E0C416 /* Photo.swift */,
+				C35B38AE2462D57500E0C416 /* PostPhotos.swift */,
 				6E045E9A24640A6A0001E378 /* Achievement.swift */,
 				6E6A21792466C6FB00D8AC68 /* Article.swift */,
 				C33722A9254EB5C200191785 /* JournalSection.swift */,
@@ -1073,7 +1073,7 @@
 				C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */,
 				C32EA81C25043007009F6D52 /* CommonMetricsTableViewCell.swift in Sources */,
 				C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */,
-				C35B38AF2462D57500E0C416 /* Photo.swift in Sources */,
+				C35B38AF2462D57500E0C416 /* PostPhotos.swift in Sources */,
 				6E6A217A2466C6FB00D8AC68 /* Article.swift in Sources */,
 				C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */,
 				6EA8519B244F827A00D40E14 /* Post.swift in Sources */,
