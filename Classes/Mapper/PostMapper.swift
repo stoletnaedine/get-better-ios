@@ -11,14 +11,25 @@ import Foundation
 class PostMapper {
     
     func map(post: Post) -> [String : Any] {
-        return [
-            PostField.text : post.text ?? "",
-            PostField.sphere : post.sphere?.rawValue ?? "",
-            PostField.timestamp : post.timestamp ?? "",
-            PostField.previewUrl : post.previewUrl ?? "",
-            PostField.previewName : post.previewName ?? "",
-            PostField.photos : self.map(photos: post.photos ?? [])
+        var entity: [String : Any] = [
+            PostField.text: post.text ?? "",
+            PostField.sphere: post.sphere?.rawValue ?? "",
+            PostField.timestamp: post.timestamp ?? "",
         ]
+        if let previewName = post.previewName,
+           let previewUrl = post.previewUrl {
+            entity[PostField.previewName] = previewName
+            entity[PostField.previewUrl] = previewUrl
+        }
+        if let photoName = post.photoName,
+           let photoUrl = post.photoUrl {
+            entity[PostField.photoName] = photoName
+            entity[PostField.photoUrl] = photoUrl
+        }
+        if let photos = post.photos {
+            entity[PostField.photos] = self.map(photos: photos)
+        }
+        return entity
     }
     
     func map(id: Any, entity: NSDictionary?) -> Post {
