@@ -46,8 +46,8 @@ class TipViewController: UIViewController {
         setupSwipeGesture()
         setupCancelButton()
         setupLikeButton()
-        setupShadow(for: self.titleLabel)
-        setupShadow(for: self.textLabel)
+        self.titleLabel.addShadow()
+        self.textLabel.addShadow()
         
         guard let tipEntity = self.tipEntity else { return }
         configure(tip: tipEntity.tip)
@@ -69,14 +69,6 @@ class TipViewController: UIViewController {
         shareButton.isHidden = hidden
         likeButton.isHidden = hidden
         likesCounterLabel.isHidden = hidden
-    }
-    
-    private func setupShadow(for label: UILabel) {
-        label.layer.shadowColor = UIColor.black.cgColor
-        label.layer.shadowOffset = .init(width: 1, height: 1)
-        label.layer.shadowOpacity = 1
-        label.layer.shadowRadius = 10
-        label.layer.masksToBounds = false
     }
     
     private func setupSwipeGesture() {

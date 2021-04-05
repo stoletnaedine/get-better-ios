@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    
+
     func takeScreenshot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }

@@ -16,6 +16,7 @@
                 <outlet property="dateLabel" destination="EdK-CD-Y8S" id="9kl-0w-jNK"/>
                 <outlet property="imageView" destination="VpW-Ud-OKu" id="9nT-Qo-Yf2"/>
                 <outlet property="loadImageButton" destination="kDR-MY-RhO" id="Jji-vQ-wGh"/>
+                <outlet property="photoCounterLabel" destination="lfM-Vh-VdP" id="6HE-L7-I6z"/>
                 <outlet property="placeholderLabel" destination="gqB-hQ-rk0" id="jjN-Bp-769"/>
                 <outlet property="postTextView" destination="sLD-WP-KS7" id="pAl-6V-DAG"/>
                 <outlet property="saveButton" destination="G4Y-RJ-AVC" id="PCU-mk-02P"/>
@@ -169,6 +170,12 @@
                                 <action selector="cancelLoadButtonDidTap:" destination="-1" eventType="touchUpInside" id="DiR-0f-Mt4"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfM-Vh-VdP">
+                            <rect key="frame" x="89" y="89" width="21" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                     <constraints>
@@ -176,10 +183,12 @@
                         <constraint firstItem="kDR-MY-RhO" firstAttribute="centerX" secondItem="u7B-OM-3DA" secondAttribute="centerX" id="14s-9B-pwp"/>
                         <constraint firstAttribute="bottom" secondItem="VpW-Ud-OKu" secondAttribute="bottom" id="3SY-Wi-l10"/>
                         <constraint firstItem="kDR-MY-RhO" firstAttribute="centerY" secondItem="u7B-OM-3DA" secondAttribute="centerY" id="8OW-17-y6a"/>
+                        <constraint firstAttribute="bottom" secondItem="lfM-Vh-VdP" secondAttribute="bottom" constant="5" id="FOj-oH-w9o"/>
                         <constraint firstAttribute="width" constant="115" id="FW4-uz-29p"/>
                         <constraint firstAttribute="trailing" secondItem="EZe-wT-mmk" secondAttribute="trailing" constant="5" id="GFh-tF-dQH"/>
                         <constraint firstAttribute="trailing" secondItem="VpW-Ud-OKu" secondAttribute="trailing" id="KvU-gg-FuU"/>
                         <constraint firstAttribute="trailing" secondItem="4Rv-d6-ylr" secondAttribute="trailing" id="aT6-Lb-f7R"/>
+                        <constraint firstAttribute="trailing" secondItem="lfM-Vh-VdP" secondAttribute="trailing" constant="5" id="c4n-57-Zln"/>
                         <constraint firstItem="VpW-Ud-OKu" firstAttribute="leading" secondItem="u7B-OM-3DA" secondAttribute="leading" id="dB9-3i-Nke"/>
                         <constraint firstItem="4Rv-d6-ylr" firstAttribute="leading" secondItem="u7B-OM-3DA" secondAttribute="leading" id="ezT-ak-LfQ"/>
                         <constraint firstItem="VpW-Ud-OKu" firstAttribute="top" secondItem="u7B-OM-3DA" secondAttribute="top" id="h3C-HK-8A0"/>

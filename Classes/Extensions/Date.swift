@@ -87,7 +87,9 @@ extension Date {
         case 12:
             return "Декабрь"
         default:
-            return "Хм, какой это месяц?"
+            assertionFailure()
+            return ""
         }
     }
+    
 }

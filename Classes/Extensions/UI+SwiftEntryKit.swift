@@ -8,6 +8,7 @@ import SwiftEntryKit
 
 // MARK: - UILabel
 extension UILabel {
+
     var style: EKProperty.LabelStyle {
         set {
             font = newValue.font
@@ -33,10 +34,12 @@ extension UILabel {
             return EKProperty.LabelContent(text: text ?? "", style: style)
         }
     }
+
 }
 
 // MARK: - UIButton
 extension UIButton {
+
     var buttonContent: EKProperty.ButtonContent {
         set {
             setTitle(newValue.label.text, for: .normal)
@@ -51,10 +54,12 @@ extension UIButton {
             fatalError("buttonContent doesn't have a getter")
         }
     }
+    
 }
 
 // MARK: - UIImageView
 extension UIImageView {
+
     var imageContent: EKProperty.ImageContent {
         set {
             stopAnimating()
@@ -111,4 +116,5 @@ extension UIImageView {
             fatalError("imageContent doesn't have a getter")
         }
     }
+
 }

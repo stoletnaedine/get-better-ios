@@ -41,7 +41,6 @@
 		C337930425F4DBBE005898BB /* TipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C337930225F4DBBE005898BB /* TipCell.swift */; };
 		C337930525F4DBBE005898BB /* TipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C337930325F4DBBE005898BB /* TipCell.xib */; };
 		C337930925F4DDD8005898BB /* TipLikeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C337930825F4DDD8005898BB /* TipLikeCellViewModel.swift */; };
-		C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B344C247BAE74008EA2D1 /* UITextView.swift */; };
 		C33B3451247C111F008EA2D1 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3450247C111F008EA2D1 /* NSAttributedString.swift */; };
 		C33B3453247C137A008EA2D1 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33B3452247C137A008EA2D1 /* UIFont.swift */; };
 		C34434F824CEBD880045F1BD /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34434F724CEBD880045F1BD /* CancelButton.swift */; };
@@ -66,7 +65,7 @@
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
 		C36F66462449AC3C00293246 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* UserDataService.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
-		C37D0B3E23D79088005A1BCF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* Label.swift */; };
+		C37D0B3E23D79088005A1BCF /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* UILabel.swift */; };
 		C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */; };
 		C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */; };
 		C38157AC2556B2BD0005C16E /* 37723-confetti-partyyy.json in Resources */ = {isa = PBXBuildFile; fileRef = C38157AB2556B2BD0005C16E /* 37723-confetti-partyyy.json */; };
@@ -89,7 +88,7 @@
 		C39A321F245710BC005D2EDF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A321D245710BC005D2EDF /* SettingsViewController.swift */; };
 		C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C39A321E245710BC005D2EDF /* SettingsViewController.xib */; };
 		C39FD71C24499E7700F96307 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39FD71B24499E7700F96307 /* NotificationName.swift */; };
-		C3A1058F23AC045D008F5F9B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* Color.swift */; };
+		C3A1058F23AC045D008F5F9B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A1058E23AC045D008F5F9B /* UIColor.swift */; };
 		C3B4760324596BAD0067A3C0 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */; };
 		C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B4760424596BCB0067A3C0 /* Profile.swift */; };
 		C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */; };
@@ -179,7 +178,6 @@
 		C337930225F4DBBE005898BB /* TipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCell.swift; sourceTree = "<group>"; };
 		C337930325F4DBBE005898BB /* TipCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipCell.xib; sourceTree = "<group>"; };
 		C337930825F4DDD8005898BB /* TipLikeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipLikeCellViewModel.swift; sourceTree = "<group>"; };
-		C33B344C247BAE74008EA2D1 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		C33B3450247C111F008EA2D1 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		C33B3452247C137A008EA2D1 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C34434F724CEBD880045F1BD /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
@@ -204,7 +202,7 @@
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C36F66452449AC3C00293246 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		C37D0B3D23D79088005A1BCF /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		C37D0B3D23D79088005A1BCF /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCircleService.swift; sourceTree = "<group>"; };
 		C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		C38157AB2556B2BD0005C16E /* 37723-confetti-partyyy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "37723-confetti-partyyy.json"; sourceTree = "<group>"; };
@@ -227,7 +225,7 @@
 		C39A321D245710BC005D2EDF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C39A321E245710BC005D2EDF /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		C39FD71B24499E7700F96307 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
-		C3A1058E23AC045D008F5F9B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C3A1058E23AC045D008F5F9B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C3B4760224596BAD0067A3C0 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		C3B4760424596BCB0067A3C0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewController.swift; sourceTree = "<group>"; };
@@ -374,14 +372,13 @@
 		C306790C23AC990500B6E105 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C3A1058E23AC045D008F5F9B /* Color.swift */,
-				C37D0B3D23D79088005A1BCF /* Label.swift */,
+				C3A1058E23AC045D008F5F9B /* UIColor.swift */,
+				C37D0B3D23D79088005A1BCF /* UILabel.swift */,
 				C39FD71B24499E7700F96307 /* NotificationName.swift */,
 				C36F66472449BE0000293246 /* UIViewController.swift */,
 				6EA85198244F7E8F00D40E14 /* Date.swift */,
 				C35B38B02462E1E700E0C416 /* UIImage.swift */,
 				C396E23B246AC71E00DBF0E4 /* Double.swift */,
-				C33B344C247BAE74008EA2D1 /* UITextView.swift */,
 				C33B3450247C111F008EA2D1 /* NSAttributedString.swift */,
 				C33B3452247C137A008EA2D1 /* UIFont.swift */,
 				F14950817E129DCC6D81127A /* UI+SwiftEntryKit.swift */,
@@ -1027,7 +1024,6 @@
 				C3F98135253B29850002CD13 /* ScrollViewController.swift in Sources */,
 				C32D4CE123D0F3FC00AD9863 /* Properties.swift in Sources */,
 				6E7071F3245C474D00ED7D08 /* SphereValue.swift in Sources */,
-				C33B344D247BAE74008EA2D1 /* UITextView.swift in Sources */,
 				C3C9DD8724B843B3003C83BD /* String.swift in Sources */,
 				C34B14E924475ED000B58B18 /* FormValidator.swift in Sources */,
 				C38158312556C28E0005C16E /* AnimationName.swift in Sources */,
@@ -1048,7 +1044,7 @@
 				C396E23E246AC8E200DBF0E4 /* AchievementServiceProtocol.swift in Sources */,
 				C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */,
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,
-				C3A1058F23AC045D008F5F9B /* Color.swift in Sources */,
+				C3A1058F23AC045D008F5F9B /* UIColor.swift in Sources */,
 				C35750D424507E7B00BA7006 /* PostDetailViewController.swift in Sources */,
 				C3B4760324596BAD0067A3C0 /* SettingsCellViewModel.swift in Sources */,
 				6EA85197244F691700D40E14 /* Sphere.swift in Sources */,
@@ -1088,7 +1084,7 @@
 				C33722AA254EB5C200191785 /* JournalSection.swift in Sources */,
 				C3C873D12436033400931E9B /* AppError.swift in Sources */,
 				C390A75F24C0CFC900EAD48E /* TextViewViewController.swift in Sources */,
-				C37D0B3E23D79088005A1BCF /* Label.swift in Sources */,
+				C37D0B3E23D79088005A1BCF /* UILabel.swift in Sources */,
 				C30350B325C53CED003B13BD /* TitleSubtitleCell.swift in Sources */,
 				C30FEE4D2553C6AA00CC84B9 /* TipsTableViewController.swift in Sources */,
 				C36351D3257D353600DA6713 /* NotificationCellViewModel.swift in Sources */,

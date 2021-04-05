@@ -6,7 +6,7 @@
 import UIKit
 
 extension CGRect {
-    var minEdge: CGFloat {
-        return min(width, height)
-    }
+
+    var minEdge: CGFloat { min(width, height) }
+
 }

@@ -14,6 +14,11 @@ enum PostType {
     case edit
 }
 
+enum ImageViewState {
+    case empty
+    case fill
+}
+
 class AddPostViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -29,23 +34,26 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelLoadButton: UIButton!
-    
-    var selectedSphere: Sphere?
-    let database: DatabaseProtocol = FirebaseDatabase()
-    let alertService: AlertServiceProtocol = AlertService()
-    let userService: UserSettingsServiceProtocol = UserSettingsService()
-    var addedPostCompletion: VoidClosure?
-    var postType: PostType = .add
-    var isOldPhoto: Bool = true
+    @IBOutlet weak var photoCounterLabel: UILabel!
 
     enum Constants {
         static let maxSymbolsCount: Int = 1000
     }
-    
-    private let storage: FileStorageProtocol = FirebaseStorage()
-    private var imagesToUpload: [UIImage] = [] {
+
+    let database: DatabaseProtocol = FirebaseDatabase()
+    let storage: FileStorageProtocol = FirebaseStorage()
+    let alertService: AlertServiceProtocol = AlertService()
+    let userService: UserSettingsServiceProtocol = UserSettingsService()
+    var selectedSphere: Sphere?
+    var addedPostCompletion: VoidClosure?
+    var postType: PostType = .add
+    var isClearedPhotos = false
+    var imagesToUpload: [UIImage] = [] {
         didSet {
             imageView.image = imagesToUpload.first
+            photoCounterLabel.text = self.imagesToUpload.count > 1
+                ? "+\(self.imagesToUpload.count - 1)"
+                : nil
         }
     }
     
@@ -72,24 +80,15 @@ class AddPostViewController: UIViewController {
 
     @IBAction func cancelLoadButtonDidTap(_ sender: Any) {
         imagesToUpload = []
-        isOldPhoto = false
-        cancelLoadButton.isHidden = true
-        loadImageButton.isHidden = false
-        bigLoadImageButton.isHidden = false
-        loadImageButton.alpha = 0
-        UIView.animate(
-            withDuration: 0.8,
-            animations: {
-                self.imageView.alpha = 0
-                self.loadImageButton.alpha = 1
-            },
-            completion: { _ in
-                self.imageView.alpha = 1
-                self.imageView.image = nil
-            })
+        isClearedPhotos = true
+        setupImageView(.empty)
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
+        self.configurePostAndSave()
+    }
+
+    func configurePostAndSave() {
         guard let text = postTextView.text, !text.isEmpty else {
             alertService.showErrorMessage(R.string.localizable.postEmptyText())
             return
@@ -98,23 +97,29 @@ class AddPostViewController: UIViewController {
             alertService.showErrorMessage(R.string.localizable.postEmptySphere())
             return
         }
-        
+        guard self.postType == .add else { return }
+
         if !imagesToUpload.isEmpty {
             self.showLoadingAnimation(on: self.view)
             self.selectSphereButton.isEnabled = false
             self.saveButton.isEnabled = false
-
-            guard !(postType == .edit && isOldPhoto) else {
-                // FIXME: edit post
-//                savePost(text: text, sphere: sphere, firstPhoto: firstPhotoResult, addPhotos: nil) // ???
-                return
+            if #available(iOS 13.0, *) {
+                self.isModalInPresentation = true
             }
 
             self.storage.uploadPhotos(imagesToUpload, needFirstPhotoPreview: true) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case let .success(postPhotos):
-                    self.savePost(text: text, sphere: sphere, postPhotos: postPhotos)
+                    let post = Post(
+                        id: nil,
+                        text: text,
+                        sphere: sphere,
+                        timestamp: Date.currentTimestamp,
+                        previewUrl: postPhotos.preview?.url,
+                        previewName: postPhotos.preview?.name,
+                        photos: postPhotos.photos)
+                    self.savePost(post)
                 case let .failure(error):
                     DispatchQueue.main.async {
                         self.stopAnimation()
@@ -125,25 +130,24 @@ class AddPostViewController: UIViewController {
                 }
             }
         } else {
-            self.savePost(text: text, sphere: sphere, postPhotos: nil)
+            let post = Post(
+                id: nil,
+                text: text,
+                sphere: sphere,
+                timestamp: Date.currentTimestamp,
+                previewUrl: nil,
+                previewName: nil,
+                photos: nil)
+            self.savePost(post)
         }
     }
     
-    func savePost(text: String, sphere: Sphere, postPhotos: PostPhotos?) {
-        let post = Post(
-            id: nil,
-            text: text,
-            sphere: sphere,
-            timestamp: Date.currentTimestamp,
-            previewUrl: postPhotos?.preview?.url,
-            previewName: postPhotos?.preview?.name,
-            photos: postPhotos?.photos)
-        
+    func savePost(_ post: Post) {
         database.savePost(post) { [weak self] in
             guard let self = self else { return }
             self.userService.clearDraft()
             self.stopAnimation()
-            let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
+            let description = "\(post.sphere?.name) \(R.string.localizable.postSuccessValue())"
             self.alertService.showSuccessMessage(description)
             self.addedPostCompletion?()
             self.dismiss(animated: true, completion: nil)
@@ -178,18 +182,21 @@ class AddPostViewController: UIViewController {
 
     private func openImagePickerController() {
         var config = YPImagePickerConfiguration()
-        config.library.maxNumberOfItems = 3
+        config.library.maxNumberOfItems = 5
         config.onlySquareImagesFromCamera = false
         config.albumName = "GetBetter"
         config.startOnScreen = .library
         config.targetImageSize = .cappedTo(size: 1200)
         let picker = YPImagePicker(configuration: config)
-        picker.didFinishPicking { [weak self, picker] items, _ in
+        picker.didFinishPicking { [weak self, picker] items, isCancelled in
             guard let self = self else { return }
-            self.loadImageButton.isHidden = true
-            self.bigLoadImageButton.isHidden = true
-            self.cancelLoadButton.isHidden = false
-            self.isOldPhoto = false
+            guard !isCancelled else {
+                self.setupImageView(.empty)
+                self.imagesToUpload = []
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+            self.setupImageView(.fill)
             for item in items {
                 switch item {
                 case let .photo(photo):
@@ -201,6 +208,32 @@ class AddPostViewController: UIViewController {
             picker.dismiss(animated: true, completion: nil)
         }
         present(picker, animated: true, completion: nil)
+    }
+
+    private func setupImageView(_ state: ImageViewState) {
+        switch state {
+        case .empty:
+            photoCounterLabel.isHidden = true
+            cancelLoadButton.isHidden = true
+            loadImageButton.isHidden = false
+            bigLoadImageButton.isHidden = false
+            loadImageButton.alpha = 0
+            UIView.animate(
+                withDuration: 0.6,
+                animations: {
+                    self.imageView.alpha = 0
+                    self.loadImageButton.alpha = 1
+                },
+                completion: { _ in
+                    self.imageView.alpha = 1
+                    self.imageView.image = nil
+                })
+        case .fill:
+            self.loadImageButton.isHidden = true
+            self.bigLoadImageButton.isHidden = true
+            self.cancelLoadButton.isHidden = false
+            photoCounterLabel.isHidden = false
+        }
     }
     
     private func setupView() {
@@ -233,6 +266,10 @@ class AddPostViewController: UIViewController {
         placeholderLabel.text = R.string.localizable.postPlaceholder()
         placeholderLabel.font = postTextView.font?.withSize(16)
         placeholderLabel.textColor = .lightGrey
+        photoCounterLabel.textColor = .white
+        photoCounterLabel.font = .journalButtonFont
+        photoCounterLabel.text = nil
+        photoCounterLabel.addShadow(shadowRadius: 2)
     }
 }
 

@@ -9,6 +9,7 @@
 import Foundation
 
 extension Double {
+
     func stringWithComma() -> String {
         return String(self).replacingOccurrences(of: ".", with: ",")
     }
@@ -17,4 +18,5 @@ extension Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
+    
 }
