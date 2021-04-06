@@ -16,17 +16,13 @@ class EditPostViewController: AddPostViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         postType = .edit
-        self.titleLabel.text = R.string.localizable.postEditTitle()
+        titleLabel.text = R.string.localizable.postEditTitle()
+        placeholderLabel.isHidden = true
+        selectSphereButton.isEnabled = false
 
         guard let post = post else { return }
-        
-        loadImageButton.isHidden = false
-        bigLoadImageButton.isHidden = false
-        cancelLoadButton.isHidden = true
-        placeholderLabel.isHidden = true
-        
-        selectSphereButton.isEnabled = false
         selectSphereButton.setTitle(post.sphere?.name, for: .normal)
         selectSphereButton.setImage(nil, for: .normal)
         selectSphereButton.tintColor = .violet
@@ -46,9 +42,9 @@ class EditPostViewController: AddPostViewController {
         if let urlString = post.previewUrl,
            let url = URL(string: urlString) {
             imageView.kf.setImage(with: url)
-            cancelLoadButton.isHidden = false
-            loadImageButton.isHidden = true
-            bigLoadImageButton.isHidden = true
+            setupImageView(.fill)
+        } else {
+            setupImageView(.empty)
         }
     }
     
@@ -56,7 +52,7 @@ class EditPostViewController: AddPostViewController {
         // disabled
     }
 
-    override func configurePostAndSave() {
+    override func configurePost(completion: @escaping (Post) -> Void) {
         guard let text = postTextView.text, !text.isEmpty else {
             alertService.showErrorMessage(R.string.localizable.postEmptyText())
             return
@@ -89,7 +85,7 @@ class EditPostViewController: AddPostViewController {
                         previewUrl: postPhotos.preview?.url,
                         previewName: postPhotos.preview?.name,
                         photos: postPhotos.photos)
-                    self.savePost(post)
+                    completion(post)
                 case let .failure(error):
                     DispatchQueue.main.async {
                         self.stopAnimation()
@@ -110,7 +106,7 @@ class EditPostViewController: AddPostViewController {
                 previewUrl: super.isClearedPhotos ? nil : post.previewUrl,
                 previewName: super.isClearedPhotos ? nil : post.previewName,
                 photos: super.isClearedPhotos ? nil : post.photos)
-            self.savePost(post)
+            completion(post)
         }
     }
 

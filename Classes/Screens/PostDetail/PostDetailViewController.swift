@@ -15,7 +15,8 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var photoImageView: ScaledHeightImageView!
-    
+    @IBOutlet weak var photoCounterLabel: UILabel!
+
     var post: Post?
     let alertService: AlertServiceProtocol = AlertService()
     
@@ -73,8 +74,8 @@ class PostDetailViewController: UIViewController {
         editPostVC.editPostCompletion = { [weak self] postToSave in
             guard let self = self else { return }
             self.post = postToSave
-            self.configure()
             self.customizeView()
+            self.configure()
             editPostVC.dismiss(animated: true, completion: nil)
         }
         present(editPostVC, animated: true, completion: nil)
@@ -109,6 +110,15 @@ class PostDetailViewController: UIViewController {
         } else {
             photoImageView.image = nil
         }
+        if let photos = post.photos {
+            var count = photos.count
+            if let mainPhotoUrl = post.photoUrl, !mainPhotoUrl.isEmpty  {
+                count += 1
+            }
+            if count > 1 {
+                photoCounterLabel.text = "+\(count - 1)"
+            }
+        }
     }
     
     func customizeView() {
@@ -121,6 +131,10 @@ class PostDetailViewController: UIViewController {
         textView.font = textFont
         dateLabel.font = UIFont.systemFont(ofSize: 14)
         dateLabel.textColor = .grey
+        photoCounterLabel.textColor = .white
+        photoCounterLabel.font = .photoCounterFont
+        photoCounterLabel.addShadow(shadowRadius: 2)
+        photoCounterLabel.text = nil
     }
 }
 

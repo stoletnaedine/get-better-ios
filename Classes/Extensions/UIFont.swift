@@ -43,6 +43,10 @@ extension UIFont {
     static var journalTitleFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 22)
     }
+
+    static var photoCounterFont: UIFont {
+        return UIFont.boldSystemFont(ofSize: 28)
+    }
     
     static var journalButtonFont: UIFont {
         return UIFont.boldSystemFont(ofSize: 18)

@@ -26,7 +26,7 @@ class FirebaseStorage: FileStorageProtocol {
         static let previewsPath = "previews"
         static let usersPath = "users"
         static let photoQuality: CGFloat = 0.8
-        static let resizeWidthPreview: CGFloat = 300
+        static let resizeWidthPreview: CGFloat = 250
         static let resizeWidthAvatar: CGFloat = 400
     }
 

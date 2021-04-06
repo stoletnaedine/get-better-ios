@@ -85,10 +85,13 @@ class AddPostViewController: UIViewController {
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
-        self.configurePostAndSave()
+        self.configurePost() { [weak self] post in
+            guard let self = self else { return }
+            self.savePost(post)
+        }
     }
 
-    func configurePostAndSave() {
+    func configurePost(completion: @escaping (Post) -> Void) {
         guard let text = postTextView.text, !text.isEmpty else {
             alertService.showErrorMessage(R.string.localizable.postEmptyText())
             return
@@ -119,7 +122,7 @@ class AddPostViewController: UIViewController {
                         previewUrl: postPhotos.preview?.url,
                         previewName: postPhotos.preview?.name,
                         photos: postPhotos.photos)
-                    self.savePost(post)
+                    completion(post)
                 case let .failure(error):
                     DispatchQueue.main.async {
                         self.stopAnimation()
@@ -138,7 +141,7 @@ class AddPostViewController: UIViewController {
                 previewUrl: nil,
                 previewName: nil,
                 photos: nil)
-            self.savePost(post)
+            completion(post)
         }
     }
     
@@ -147,7 +150,7 @@ class AddPostViewController: UIViewController {
             guard let self = self else { return }
             self.userService.clearDraft()
             self.stopAnimation()
-            let description = "\(post.sphere?.name) \(R.string.localizable.postSuccessValue())"
+            let description = "\(post.sphere?.name ?? "") \(R.string.localizable.postSuccessValue())"
             self.alertService.showSuccessMessage(description)
             self.addedPostCompletion?()
             self.dismiss(animated: true, completion: nil)
@@ -156,6 +159,32 @@ class AddPostViewController: UIViewController {
     
     func setupSelectSphereButtonTapHandler() {
         selectSphereButton.addTarget(self, action: #selector(showSpherePicker), for: .allTouchEvents)
+    }
+
+    func setupImageView(_ state: ImageViewState) {
+        switch state {
+        case .empty:
+            photoCounterLabel.isHidden = true
+            cancelLoadButton.isHidden = true
+            loadImageButton.isHidden = false
+            bigLoadImageButton.isHidden = false
+            loadImageButton.alpha = 0
+            UIView.animate(
+                withDuration: 0.6,
+                animations: {
+                    self.imageView.alpha = 0
+                    self.loadImageButton.alpha = 1
+                },
+                completion: { _ in
+                    self.imageView.alpha = 1
+                    self.imageView.image = nil
+                })
+        case .fill:
+            loadImageButton.isHidden = true
+            bigLoadImageButton.isHidden = true
+            cancelLoadButton.isHidden = false
+            photoCounterLabel.isHidden = false
+        }
     }
 
     // MARK: — Private methods
@@ -208,32 +237,6 @@ class AddPostViewController: UIViewController {
             picker.dismiss(animated: true, completion: nil)
         }
         present(picker, animated: true, completion: nil)
-    }
-
-    private func setupImageView(_ state: ImageViewState) {
-        switch state {
-        case .empty:
-            photoCounterLabel.isHidden = true
-            cancelLoadButton.isHidden = true
-            loadImageButton.isHidden = false
-            bigLoadImageButton.isHidden = false
-            loadImageButton.alpha = 0
-            UIView.animate(
-                withDuration: 0.6,
-                animations: {
-                    self.imageView.alpha = 0
-                    self.loadImageButton.alpha = 1
-                },
-                completion: { _ in
-                    self.imageView.alpha = 1
-                    self.imageView.image = nil
-                })
-        case .fill:
-            self.loadImageButton.isHidden = true
-            self.bigLoadImageButton.isHidden = true
-            self.cancelLoadButton.isHidden = false
-            photoCounterLabel.isHidden = false
-        }
     }
     
     private func setupView() {
