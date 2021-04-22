@@ -56,13 +56,13 @@ class LifeCircleViewController: UIViewController {
         setupChartViewTap()
         setupBarButton()
         loadAndShowData(animate: true)
+        if !userDefaultsService.tipOfTheDayHasShown {
+            showTipOfTheDay()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !userDefaultsService.tipOfTheDayHasShown {
-            showTip()
-        }
         loadAndShowData(animate: false)
     }
     
@@ -100,7 +100,7 @@ class LifeCircleViewController: UIViewController {
         startLevelView.backgroundColor = .white
     }
     
-    @objc func showTip() {
+    @objc func showTipOfTheDay() {
         let tipEntityOfTheDay = tipStorage.currentTip
         
         let tipVC = TipViewController()
@@ -115,7 +115,7 @@ class LifeCircleViewController: UIViewController {
             title: R.string.localizable.journalTipOfTheDay(),
             style: .plain,
             target: self,
-            action: #selector(showTip))
+            action: #selector(showTipOfTheDay))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: R.image.helpIcon(),
