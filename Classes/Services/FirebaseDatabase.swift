@@ -13,6 +13,7 @@ import FirebaseAuth
 typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
 
 protocol DatabaseProtocol {
+    func keepSyncedPosts()
     func savePost(_ post: Post, completion: VoidClosure?)
     func deletePost(_ post: Post, completion: VoidClosure?)
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
@@ -38,6 +39,13 @@ class FirebaseDatabase: DatabaseProtocol {
     private let connectionHelper = ConnectionHelper()
     private let dbRef = Database.database().reference()
     private let storage: FileStorageProtocol = FirebaseStorage()
+
+    func keepSyncedPosts() {
+        guard let ref = currentUserPath() else { return }
+        ref
+            .child(Constants.postsPath)
+            .keepSynced(true)
+    }
     
     func savePost(_ post: Post, completion: VoidClosure? = nil) {
         guard let ref = currentUserPath() else { return }
@@ -51,8 +59,7 @@ class FirebaseDatabase: DatabaseProtocol {
                     mapper.map(post: post),
                     withCompletionBlock: { _, _ in
                         completion?()
-                    }
-                )
+                    })
         } else {
             ref
                 .child(Constants.postsPath)
@@ -93,9 +100,7 @@ class FirebaseDatabase: DatabaseProtocol {
         ref
             .child(Constants.postsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
-                
                 let value = snapshot.value as? NSDictionary
-                
                 if let keys = value?.allKeys {
                     var posts: [Post] = []
                     
@@ -125,8 +130,7 @@ class FirebaseDatabase: DatabaseProtocol {
                 sphereMetrics.values,
                 withCompletionBlock: { _, _ in
                     completion?()
-                }
-            )
+                })
     }
     
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {

@@ -57,8 +57,9 @@ class TabBarController: UITabBarController {
         if let journalNC = self.viewControllers?[Constants.journalVCIndex] as? UINavigationController,
            let journalVC = journalNC.viewControllers.first as? JournalViewController {
             addPostVC.addedPostCompletion = { [weak self] in
+                guard let self = self else { return }
                 journalVC.updatePostsInTableView()
-                self?.selectedIndex = Constants.journalVCIndex
+                self.selectedIndex = Constants.journalVCIndex
             }
         }
         self.present(addPostVC, animated: true, completion: nil)

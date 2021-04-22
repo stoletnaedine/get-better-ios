@@ -22,23 +22,22 @@ class JournalViewController: UIViewController {
     private let alertService: AlertServiceProtocol = AlertService()
     private let connectionHelper = ConnectionHelper()
     private var postSections: [JournalSection] = []
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         removeBackButtonTitle()
         setupTableView()
         setupBarButton()
+        setupRefreshControl()
         title = R.string.localizable.tabBarJournal()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         updatePostsInTableView()
     }
     
-    func updatePostsInTableView() {
+    @objc func updatePostsInTableView() {
         getPosts { [weak self] in
             guard let self = self else { return }
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         }
     }
@@ -60,12 +59,10 @@ class JournalViewController: UIViewController {
             case .failure:
                 break
                 
-            case .success(let posts):
+            case let .success(posts):
                 if posts.isEmpty {
-                    self.postSections = [
-                        JournalSection(type: .empty(info: R.string.localizable.journalPlaceholder()))
-                    ]
-                    self.showAnimation(name: .yoga, on: self.view, loopMode: .loop)
+                    self.postSections = [JournalSection(type: .empty(info: R.string.localizable.journalPlaceholder()))]
+                    self.showAnimation(name: .yoga, on: self.view)
                 } else {
                     self.stopAnimation()
                     self.convertPostsToSections(posts)
@@ -91,9 +88,7 @@ class JournalViewController: UIViewController {
                     header: JournalSection.Header(
                         month: month,
                         postsCount: "\(postsByDate.count)"),
-                    posts: postsByDate
-                )
-            )
+                    posts: postsByDate))
         }
         
         postSections = postSections.sorted(by: { first, second in
@@ -102,7 +97,7 @@ class JournalViewController: UIViewController {
         self.postSections = postSections
     }
     
-    func setupBarButton() {
+    private func setupBarButton() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
@@ -113,6 +108,11 @@ class JournalViewController: UIViewController {
             style: .plain,
             target: self,
             action: #selector(showJournalTutorial))
+    }
+
+    private func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(updatePostsInTableView), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
 
     @objc private func showJournalTutorial() {
@@ -235,9 +235,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let _ = postSections[section].posts else {
-            return UIView()
-        }
+        guard let _ = postSections[section].posts else { return UIView() }
         
         let view = UIView(frame: CGRect(x: .zero, y: .zero,
                                         width: tableView.bounds.width,
@@ -251,8 +249,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             x: 15,
             y: .zero,
             width: boundsWidth * 2 / 3,
-            height: Constants.sectionHeaderHeight
-        )
+            height: Constants.sectionHeaderHeight)
         monthLabel.font = UIFont.systemFont(ofSize: 12)
         monthLabel.textColor = .white
         monthLabel.text = postSections[section].header?.month
@@ -263,8 +260,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             x: boundsWidth - 40,
             y: .zero,
             width: 25,
-            height: Constants.sectionHeaderHeight
-        )
+            height: Constants.sectionHeaderHeight)
         countLabel.font = UIFont.systemFont(ofSize: 12)
         countLabel.textColor = .white
         countLabel.textAlignment = .right

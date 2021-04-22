@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 import IQKeyboardManagerSwift
 import FirebaseMessaging
 
@@ -15,11 +17,13 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     private let rootManager: RootManagerProtocol = RootManager()
+    private lazy var database: DatabaseProtocol = FirebaseDatabase()
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-//        Database.database().isPersistenceEnabled = true
+        Database.database().isPersistenceEnabled = true
+        database.keepSyncedPosts()
         Auth.auth().languageCode = "ru"
         IQKeyboardManager.shared.enable = true
         

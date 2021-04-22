@@ -126,7 +126,7 @@ class PostDetailViewController: UIViewController {
         var textFont = UIFont.systemFont(ofSize: 16)
         if let photoUrl = post.photoUrl, photoUrl.isEmpty,
            let text = post.text, text.count < 30 {
-            textFont = UIFont.systemFont(ofSize: 26)
+            textFont = UIFont.systemFont(ofSize: 20)
         }
         textView.font = textFont
         dateLabel.font = UIFont.systemFont(ofSize: 14)
