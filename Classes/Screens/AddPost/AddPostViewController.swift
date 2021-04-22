@@ -211,13 +211,21 @@ class AddPostViewController: UIViewController {
 
     private func openImagePickerController() {
         var config = YPImagePickerConfiguration()
-        config.library.maxNumberOfItems = 5
         config.onlySquareImagesFromCamera = false
         config.albumName = "GetBetter"
         config.startOnScreen = .library
         config.targetImageSize = .cappedTo(size: 1200)
+        config.hidesStatusBar = true
+        config.library.maxNumberOfItems = 5
+        config.library.mediaType = .photo
+        config.gallery.hidesRemoveButton = false
+        config.colors.tintColor = .violet
         let picker = YPImagePicker(configuration: config)
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         picker.didFinishPicking { [weak self, picker] items, isCancelled in
+            UINavigationBar.appearance().barTintColor = .violet
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
             guard let self = self else { return }
             guard !isCancelled else {
                 self.setupImageView(.empty)
