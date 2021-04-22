@@ -18,6 +18,7 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var photoCounterLabel: UILabel!
 
     var post: Post?
+    var editPostCompletion: VoidClosure?
     let alertService: AlertServiceProtocol = AlertService()
     
     override func viewDidLoad() {
@@ -76,6 +77,7 @@ class PostDetailViewController: UIViewController {
             self.post = postToSave
             self.customizeView()
             self.configure()
+            self.editPostCompletion?()
             editPostVC.dismiss(animated: true, completion: nil)
         }
         present(editPostVC, animated: true, completion: nil)

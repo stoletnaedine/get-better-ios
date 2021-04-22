@@ -56,6 +56,10 @@ class AddPostViewController: UIViewController {
                 : nil
         }
     }
+
+    // MARK: — Private properties
+
+    private var selectedItems: [YPMediaItem]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +84,7 @@ class AddPostViewController: UIViewController {
 
     @IBAction func cancelLoadButtonDidTap(_ sender: Any) {
         imagesToUpload = []
+        selectedItems = nil
         isClearedPhotos = true
         setupImageView(.empty)
     }
@@ -181,7 +186,6 @@ class AddPostViewController: UIViewController {
                 })
         case .fill:
             loadImageButton.isHidden = true
-            bigLoadImageButton.isHidden = true
             cancelLoadButton.isHidden = false
             photoCounterLabel.isHidden = false
         }
@@ -216,10 +220,11 @@ class AddPostViewController: UIViewController {
         config.startOnScreen = .library
         config.targetImageSize = .cappedTo(size: 1200)
         config.hidesStatusBar = true
-        config.library.maxNumberOfItems = 5
-        config.library.mediaType = .photo
         config.gallery.hidesRemoveButton = false
         config.colors.tintColor = .violet
+        config.library.maxNumberOfItems = 5
+        config.library.mediaType = .photo
+        config.library.preselectedItems = selectedItems
         let picker = YPImagePicker(configuration: config)
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
@@ -227,21 +232,21 @@ class AddPostViewController: UIViewController {
             UINavigationBar.appearance().barTintColor = .violet
             UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
             guard let self = self else { return }
-            guard !isCancelled else {
-                self.setupImageView(.empty)
-                self.imagesToUpload = []
+            if isCancelled {
+                if self.selectedItems == nil && self.postType == .add {
+                    self.setupImageView(.empty)
+                    self.imagesToUpload = []
+                }
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
             self.setupImageView(.fill)
-            for item in items {
-                switch item {
-                case let .photo(photo):
-                    self.imagesToUpload.append(photo.image)
-                case .video:
-                    break
-                }
+            let images = items.compactMap { item -> UIImage? in
+                guard case .photo(let photo) = item else { return nil }
+                return photo.image
             }
+            self.imagesToUpload = images
+            self.selectedItems = items
             picker.dismiss(animated: true, completion: nil)
         }
         present(picker, animated: true, completion: nil)

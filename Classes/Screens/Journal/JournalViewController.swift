@@ -170,6 +170,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         guard let post = postSections[indexPath.section].posts?[indexPath.row] else { return }
         let postDetailViewController = PostDetailViewController()
         postDetailViewController.post = post
+        postDetailViewController.editPostCompletion = { [weak self] in
+            guard let self = self else { return }
+            self.updatePostsInTableView()
+        }
         navigationController?.pushViewController(postDetailViewController, animated: true)
     }
     
