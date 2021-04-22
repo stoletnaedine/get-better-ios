@@ -37,7 +37,7 @@ extension UIViewController {
     
     func showAnimation(name: AnimationName,
                        on view: UIView,
-                       loopMode: LottieLoopMode = .repeat(5),
+                       loopMode: LottieLoopMode = .loop,
                        whiteScreen: Bool = false,
                        size: CGSize? = nil,
                        speed: CGFloat = 1) {

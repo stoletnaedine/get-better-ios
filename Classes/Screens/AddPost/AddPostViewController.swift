@@ -37,7 +37,7 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var photoCounterLabel: UILabel!
 
     enum Constants {
-        static let maxSymbolsCount: Int = 1000
+        static let maxSymbolsCount: Int = 2000
     }
 
     let database: DatabaseProtocol = FirebaseDatabase()
