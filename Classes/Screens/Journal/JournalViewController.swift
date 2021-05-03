@@ -21,11 +21,14 @@ class JournalViewController: UIViewController {
     private let database: DatabaseProtocol = FirebaseDatabase()
     private let alertService: AlertServiceProtocol = AlertService()
     private let connectionHelper = ConnectionHelper()
+    private var posts: [Post] = []
     private var postSections: [JournalSection] = []
     private let refreshControl = UIRefreshControl()
+    private let searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchBar()
         removeBackButtonTitle()
         setupTableView()
         setupBarButton()
@@ -65,6 +68,7 @@ class JournalViewController: UIViewController {
                     self.showAnimation(name: .yoga, on: self.view)
                 } else {
                     self.stopAnimation()
+                    self.posts = posts
                     self.convertPostsToSections(posts)
                 }
             }
@@ -95,6 +99,15 @@ class JournalViewController: UIViewController {
             first.posts?.first?.timestamp ?? 0 > second.posts?.first?.timestamp ?? 0
         })
         self.postSections = postSections
+    }
+
+    private func setupSearchBar() {
+        searchController.searchBar.isTranslucent = false
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
     }
     
     private func setupBarButton() {
@@ -280,4 +293,19 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
+}
+
+extension JournalViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text?.lowercased(),
+           searchText.count > 2 {
+            let filteredPosts = posts.filter {
+                $0.text?.lowercased().contains(searchText) ?? false
+            }
+            convertPostsToSections(filteredPosts)
+            tableView.reloadData()
+        }
+    }
+
 }

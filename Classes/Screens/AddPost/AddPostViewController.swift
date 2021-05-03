@@ -296,6 +296,7 @@ class AddPostViewController: UIViewController {
         photoCounterLabel.text = nil
         photoCounterLabel.addShadow(shadowRadius: 2)
         notAddSphereValueLabel.font = .journalDateFont
+        notAddSphereValueLabel.text = R.string.localizable.addPostNotAddSphereValue()
     }
 }
 
