@@ -15,6 +15,7 @@ class PostMapper {
             PostField.text: post.text ?? "",
             PostField.sphere: post.sphere?.rawValue ?? "",
             PostField.timestamp: post.timestamp ?? "",
+            PostField.notAddSphereValue: post.notAddSphereValue
         ]
         if let previewName = post.previewName,
            let previewUrl = post.previewUrl {
@@ -46,7 +47,8 @@ class PostMapper {
             photoName: entity?[PostField.photoName] as? String ?? "",
             previewUrl: entity?[PostField.previewUrl] as? String ?? "",
             previewName: entity?[PostField.previewName] as? String ?? "",
-            photos: self.map(photosEntity: entity?[PostField.photos] as? NSArray))
+            photos: self.map(photosEntity: entity?[PostField.photos] as? NSArray),
+            notAddSphereValue: entity?[PostField.notAddSphereValue] as? Bool ?? false)
     }
 
     func map(photos: [PhotoNameURL]) -> [String: [String: String]] {
@@ -82,6 +84,7 @@ private enum PostField {
     static let previewUrl = "previewUrl"
     static let previewName = "previewName"
     static let photos = "photos"
+    static let notAddSphereValue = "notAddSphereValue"
 }
 
 private enum PhotoField {

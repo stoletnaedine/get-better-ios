@@ -35,7 +35,9 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelLoadButton: UIButton!
     @IBOutlet weak var photoCounterLabel: UILabel!
-
+    @IBOutlet weak var notAddSphereValueLabel: UILabel!
+    @IBOutlet weak var notAddSphereValueSwitch: UISwitch!
+    
     enum Constants {
         static let maxSymbolsCount: Int = 2000
     }
@@ -56,6 +58,7 @@ class AddPostViewController: UIViewController {
                 : nil
         }
     }
+    var isNotAddSphereValue = false
 
     // MARK: — Private properties
 
@@ -96,6 +99,10 @@ class AddPostViewController: UIViewController {
         }
     }
 
+    @IBAction func notAddSphereValueSwitchChanged(_ sender: UISwitch) {
+        isNotAddSphereValue = sender.isOn
+    }
+
     func configurePost(completion: @escaping (Post) -> Void) {
         guard let text = postTextView.text, !text.isEmpty else {
             alertService.showErrorMessage(R.string.localizable.postEmptyText())
@@ -126,7 +133,8 @@ class AddPostViewController: UIViewController {
                         timestamp: Date.currentTimestamp,
                         previewUrl: postPhotos.preview?.url,
                         previewName: postPhotos.preview?.name,
-                        photos: postPhotos.photos)
+                        photos: postPhotos.photos,
+                        notAddSphereValue: self.isNotAddSphereValue)
                     completion(post)
                 case let .failure(error):
                     DispatchQueue.main.async {
@@ -145,7 +153,8 @@ class AddPostViewController: UIViewController {
                 timestamp: Date.currentTimestamp,
                 previewUrl: nil,
                 previewName: nil,
-                photos: nil)
+                photos: nil,
+                notAddSphereValue: self.isNotAddSphereValue)
             completion(post)
         }
     }
@@ -218,7 +227,7 @@ class AddPostViewController: UIViewController {
         config.onlySquareImagesFromCamera = false
         config.albumName = "GetBetter"
         config.startOnScreen = .library
-        config.targetImageSize = .cappedTo(size: 1200)
+        config.targetImageSize = .cappedTo(size: 1000)
         config.hidesStatusBar = true
         config.gallery.hidesRemoveButton = false
         config.colors.tintColor = .violet
@@ -286,6 +295,7 @@ class AddPostViewController: UIViewController {
         photoCounterLabel.font = .journalButtonFont
         photoCounterLabel.text = nil
         photoCounterLabel.addShadow(shadowRadius: 2)
+        notAddSphereValueLabel.font = .journalDateFont
     }
 }
 
@@ -332,8 +342,7 @@ extension AddPostViewController: UITextViewDelegate {
         placeholderLabel.isHidden = !currentText.isEmpty
         if text.count > Constants.maxSymbolsCount {
             alertService.showErrorMessage(
-                R.string.localizable.addPostMaxSymbolAlert(String(Constants.maxSymbolsCount))
-            )
+                R.string.localizable.addPostMaxSymbolAlert(String(Constants.maxSymbolsCount)))
         }
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)

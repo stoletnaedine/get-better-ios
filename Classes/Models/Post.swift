@@ -19,7 +19,8 @@ struct Post {
          photoName: String? = nil,
          previewUrl: String?,
          previewName: String?,
-         photos: [PhotoNameURL]?) {
+         photos: [PhotoNameURL]?,
+         notAddSphereValue: Bool) {
         self.id = id
         self.text = text
         self.sphere = sphere
@@ -29,6 +30,7 @@ struct Post {
         self.previewUrl = previewUrl
         self.previewName = previewName
         self.photos = photos
+        self.notAddSphereValue = notAddSphereValue
     }
 
     let id: String?
@@ -40,4 +42,5 @@ struct Post {
     let previewUrl: String?
     let previewName: String?
     let photos: [PhotoNameURL]?
+    let notAddSphereValue: Bool
 }

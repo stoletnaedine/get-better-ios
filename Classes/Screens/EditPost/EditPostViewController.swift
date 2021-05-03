@@ -46,6 +46,9 @@ class EditPostViewController: AddPostViewController {
         } else {
             setupImageView(.empty)
         }
+
+        isNotAddSphereValue = post.notAddSphereValue
+        notAddSphereValueSwitch.isOn = post.notAddSphereValue
     }
     
     override func setupSelectSphereButtonTapHandler() {
@@ -84,7 +87,8 @@ class EditPostViewController: AddPostViewController {
                         timestamp: post.timestamp,
                         previewUrl: postPhotos.preview?.url,
                         previewName: postPhotos.preview?.name,
-                        photos: postPhotos.photos)
+                        photos: postPhotos.photos,
+                        notAddSphereValue: self.isNotAddSphereValue)
                     completion(post)
                 case let .failure(error):
                     DispatchQueue.main.async {
@@ -105,7 +109,8 @@ class EditPostViewController: AddPostViewController {
                 photoName: super.isClearedPhotos ? nil : post.photoName,
                 previewUrl: super.isClearedPhotos ? nil : post.previewUrl,
                 previewName: super.isClearedPhotos ? nil : post.previewName,
-                photos: super.isClearedPhotos ? nil : post.photos)
+                photos: super.isClearedPhotos ? nil : post.photos,
+                notAddSphereValue: self.isNotAddSphereValue)
             completion(post)
         }
     }
