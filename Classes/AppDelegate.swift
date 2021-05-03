@@ -16,7 +16,7 @@ import FirebaseMessaging
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
-    private let rootManager: RootManagerProtocol = RootManager()
+    private let rootRouter: RootRouterProtocol = RootRouter()
     private lazy var database: DatabaseProtocol = FirebaseDatabase()
     
     func application(_ application: UIApplication,
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         setupNavigationBar()
 
-        rootManager.start()
+        rootRouter.startApp(completion: nil)
         
         return true
     }
@@ -73,9 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if let topic = NotificationTopic(rawValue: topicName) {
                 switch topic {
                 case .post:
-                    rootManager.showAddPost()
+                    rootRouter.showAddPost()
                 case .tip:
-                    rootManager.showTip()
+                    rootRouter.showTip()
                 }
             }
         }

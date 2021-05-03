@@ -1,5 +1,5 @@
 //
-//  RootManager.swift
+//  RootRouter.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 09.03.2020.
@@ -9,13 +9,13 @@
 import Firebase
 import UIKit
 
-protocol RootManagerProtocol {
-    func start()
+protocol RootRouterProtocol {
+    func startApp(completion: ((TabBarController) -> Void)?)
     func showAddPost()
     func showTip()
 }
 
-class RootManager: RootManagerProtocol {
+class RootRouter: RootRouterProtocol {
     
     private var window: UIWindow?
     private let connectionHelper = ConnectionHelper()
@@ -23,34 +23,15 @@ class RootManager: RootManagerProtocol {
     private lazy var database: DatabaseProtocol = FirebaseDatabase()
     private var tabBarController: TabBarController?
     private var userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
-    
-    func start() {
+
+    init() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = R.storyboard.launchScreen().instantiateInitialViewController()
         addObservers()
-        enterApp()
     }
     
-    func showAddPost() {
-        if let tabBarController = self.tabBarController {
-            tabBarController.showAddPost()
-            return
-        }
-        
-        enterApp(completion: { tabBarController in
-            tabBarController.showAddPost()
-        })
-    }
-    
-    func showTip() {
-        userSettingsService.tipOfTheDayHasShown = false
-        enterApp()
-    }
-
-    // MARK: — Private methods
-    
-    @objc private func enterApp(completion: ((TabBarController) -> Void)? = nil) {
+    func startApp(completion: ((TabBarController) -> Void)? = nil) {
         guard Auth.auth().currentUser != nil else {
             showAuthController()
             return
@@ -63,11 +44,29 @@ class RootManager: RootManagerProtocol {
             }
         }
     }
+
+    func showAddPost() {
+        if let tabBarController = self.tabBarController {
+            tabBarController.showAddPost()
+            return
+        }
+
+        startApp(completion: { tabBarController in
+            tabBarController.showAddPost()
+        })
+    }
+
+    func showTip() {
+        userSettingsService.tipOfTheDayHasShown = false
+        startApp()
+    }
+
+    // MARK: — Private methods
     
     private func showAuthController() {
         let authViewController = AuthViewController()
         authViewController.signInCompletion = { [weak self] in
-            self?.enterApp()
+            self?.startApp()
         }
         window?.rootViewController = UINavigationController(rootViewController: authViewController)
     }
@@ -95,17 +94,14 @@ class RootManager: RootManagerProtocol {
 
 // MARK: — Helpers
 
-extension RootManager {
+extension RootRouter {
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(logout),
-                                               name: .logout,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(enterApp),
-                                               name: .enterApp,
-                                               object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(logout),
+            name: .logout,
+            object: nil)
     }
     
     private func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
