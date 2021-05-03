@@ -164,7 +164,8 @@ class AddPostViewController: UIViewController {
             guard let self = self else { return }
             self.userService.clearDraft()
             self.stopAnimation()
-            let description = "\(post.sphere?.name ?? "") \(R.string.localizable.postSuccessValue())"
+            let valueDescription = self.isNotAddSphereValue ? R.string.localizable.postNotAddValue() : R.string.localizable.postSuccessValue()
+            let description = "\(post.sphere?.name ?? "") \(valueDescription)"
             self.alertService.showSuccessMessage(description)
             self.addedPostCompletion?()
             self.dismiss(animated: true, completion: nil)
