@@ -105,7 +105,7 @@ class JournalViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         let searchBar = searchController.searchBar
         searchBar.delegate = self
-        searchBar.placeholder = "Type a word"
+        searchBar.placeholder = "Поиск"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
