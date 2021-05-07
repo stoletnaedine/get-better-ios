@@ -102,12 +102,12 @@ class JournalViewController: UIViewController {
     }
 
     private func setupSearchBar() {
-        searchController.searchBar.isTranslucent = false
-        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        let searchBar = searchController.searchBar
+        searchBar.delegate = self
+        searchBar.placeholder = "Type a word"
         navigationItem.searchController = searchController
-        searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
     }
     
     private func setupBarButton() {
@@ -295,17 +295,23 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension JournalViewController: UISearchResultsUpdating {
+extension JournalViewController: UISearchBarDelegate {
 
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text?.lowercased(),
-           searchText.count > 2 {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let searchText = searchController.searchBar.text,
+           searchText.count > 1 {
+            let lowerCasedText = searchText.lowercased()
             let filteredPosts = posts.filter {
-                $0.text?.lowercased().contains(searchText) ?? false
+                $0.text?.lowercased().contains(lowerCasedText) ?? false
             }
             convertPostsToSections(filteredPosts)
             tableView.reloadData()
         }
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        convertPostsToSections(posts)
+        tableView.reloadData()
     }
 
 }
