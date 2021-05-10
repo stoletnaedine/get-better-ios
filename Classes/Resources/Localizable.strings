@@ -35,6 +35,7 @@
 "Journal.placeholder" = "Здесь будут посты твоего дневника. Каждый из них будет прокачивать колесо жизни. Попробуй добавить первую запись.";
 "Journal.tipOfTheDay" = "Совет дня";
 "Journal.edit" = "Редактировать";
+"Journal.search" = "Поиск";
 
 // MARK: Achievements
 

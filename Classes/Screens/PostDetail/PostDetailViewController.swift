@@ -56,6 +56,8 @@ class PostDetailViewController: UIViewController {
             imageView.kf.setImage(with: URL)
         }
         LightboxConfig.makeLoadingIndicator = { UIView() }
+        LightboxConfig.CloseButton.text = ""
+        LightboxConfig.CloseButton.image = R.image.cancelDownload()
 
         let mainPhotoUrl = post?.photoUrl
         let additionalPhotosUrls = post?.photos?.map { $0.url } ?? []

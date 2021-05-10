@@ -236,11 +236,7 @@ class AddPostViewController: UIViewController {
         config.library.mediaType = .photo
         config.library.preselectedItems = selectedItems
         let picker = YPImagePicker(configuration: config)
-        UINavigationBar.appearance().barTintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
         picker.didFinishPicking { [weak self, picker] items, isCancelled in
-            UINavigationBar.appearance().barTintColor = .violet
-            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
             guard let self = self else { return }
             if isCancelled {
                 if self.selectedItems == nil && self.postType == .add {
@@ -264,8 +260,7 @@ class AddPostViewController: UIViewController {
     
     private func setupView() {
         postTextView.font = postTextView.font?.withSize(16)
-        titleLabel.font = .journalTitleFont
-        titleLabel.textColor = .violet
+        titleLabel.font = .journalButtonFont
         titleLabel.text = R.string.localizable.addPostTitle()
         saveButtonView.backgroundColor = .grey
         saveButtonView.layer.cornerRadius = 20
@@ -298,6 +293,7 @@ class AddPostViewController: UIViewController {
         photoCounterLabel.addShadow(shadowRadius: 2)
         notAddSphereValueLabel.font = .journalDateFont
         notAddSphereValueLabel.text = R.string.localizable.addPostNotAddSphereValue()
+        notAddSphereValueSwitch.onTintColor = .violet
     }
 }
 

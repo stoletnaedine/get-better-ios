@@ -221,9 +221,13 @@ private extension SettingsViewController {
         }
         
         let aboutAppVC = ArticleViewController()
+        let aboutAppTitleView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        let aboutAppImageView = UIImageView(image: R.image.titleViewLogo())
+        aboutAppImageView.frame = CGRect(origin: CGPoint(x: 35, y: 5), size: CGSize(width: 30, height: 30))
+        aboutAppTitleView.addSubview(aboutAppImageView)
         aboutAppVC.article = Article(
             title: R.string.localizable.aboutAppTitle(),
-            titleView: UIImageView(image: R.image.titleViewLogo()),
+            titleView: aboutAppTitleView,
             text: R.string.localizable.aboutAppDescription(),
             image: R.image.aboutTeam())
         

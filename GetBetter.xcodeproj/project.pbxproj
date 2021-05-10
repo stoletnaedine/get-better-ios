@@ -112,7 +112,7 @@
 		F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F149534A1EC55C2C73098FDB /* SetupSphereValueViewController.xib */; };
 		F14951DADFEBD16EA7AA4EEE /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495A99D279D2B2DE295323 /* ProfileCell.xib */; };
 		F14952606F9F2D69620BA836 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495A01F520BE9160623AFA /* AlertService.swift */; };
-		F1495267BF7181FA76BBDF88 /* AchievementsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495517C452EF92F48A6B72 /* AchievementsTableViewCell.xib */; };
+		F1495267BF7181FA76BBDF88 /* AchievementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495517C452EF92F48A6B72 /* AchievementCell.xib */; };
 		F1495273E66F5AD91A5F822E /* SphereMetricsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495C2FA436CF4A36B7F05F /* SphereMetricsTableViewCell.swift */; };
 		F149536F904F19914B26C190 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495ED73EC740C15F91A8CF /* EditProfileViewController.xib */; };
 		F14953B62F438A822C859E2D /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14959BA831454BA379465FF /* FirebaseStorage.swift */; };
@@ -133,7 +133,7 @@
 		F1495CE9448BA43B6273D3AB /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495D61E9E5A5FE7FF55202 /* 4.png */; };
 		F1495CF0A1F9133C1BA23F4D /* SphereDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1495E175756D8C81C491673 /* SphereDetailViewController.swift */; };
 		F1495D08557F105CA2F17BBD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14953380D25A47E53AF9652 /* EditProfileViewController.swift */; };
-		F1495D5C47D69919FE8AA4BF /* AchievementsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149585F902A92E27328DFAE /* AchievementsTableViewCell.swift */; };
+		F1495D5C47D69919FE8AA4BF /* AchievementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149585F902A92E27328DFAE /* AchievementCell.swift */; };
 		F1495D5ECDF0B97F424E8224 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = F1495DC187F39C709B8B85F8 /* 5.png */; };
 		F1495DEDB16766BBCE6BE394 /* SphereMetricsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1495140518C692011416A1A /* SphereMetricsTableViewCell.xib */; };
 		F1495E1F759594DE3F707CCF /* get-better-readme.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F1495B637B114DD9251810C1 /* get-better-readme.jpg */; };
@@ -258,13 +258,13 @@
 		F14953E2C36B7AC09151054D /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		F14953FDFB01D1F08106D959 /* SetupSphereValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupSphereValueViewController.swift; sourceTree = "<group>"; };
 		F14955127BD3A7CAEE9EC9E4 /* ArticleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
-		F1495517C452EF92F48A6B72 /* AchievementsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementsTableViewCell.xib; sourceTree = "<group>"; };
+		F1495517C452EF92F48A6B72 /* AchievementCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementCell.xib; sourceTree = "<group>"; };
 		F14955E497B188FBBB345A1A /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		F149566B1400A8755E893491 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		F149568D8593B53F43E6DF5E /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		F1495722D8909D273691A8A4 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		F149585E02FD93E6AE2E43E1 /* SphereDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SphereDetailViewController.xib; sourceTree = "<group>"; };
-		F149585F902A92E27328DFAE /* AchievementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewCell.swift; sourceTree = "<group>"; };
+		F149585F902A92E27328DFAE /* AchievementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementCell.swift; sourceTree = "<group>"; };
 		F14958BF1B820ACB6FC09854 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F14958C6AC488E270BB36001 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		F1495953C52FB85F7DABA142 /* CustomPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpView.swift; sourceTree = "<group>"; };
@@ -743,8 +743,8 @@
 		F149540FB0998047F5E95EB4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				F149585F902A92E27328DFAE /* AchievementsTableViewCell.swift */,
-				F1495517C452EF92F48A6B72 /* AchievementsTableViewCell.xib */,
+				F149585F902A92E27328DFAE /* AchievementCell.swift */,
+				F1495517C452EF92F48A6B72 /* AchievementCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -940,7 +940,7 @@
 				F1495CE9448BA43B6273D3AB /* 4.png in Resources */,
 				F149568306069F87D911B76D /* 9.png in Resources */,
 				F14959E6D1E7A2AB6E42BF31 /* SphereDetailViewController.xib in Resources */,
-				F1495267BF7181FA76BBDF88 /* AchievementsTableViewCell.xib in Resources */,
+				F1495267BF7181FA76BBDF88 /* AchievementCell.xib in Resources */,
 				F1495DEDB16766BBCE6BE394 /* SphereMetricsTableViewCell.xib in Resources */,
 				C32EA81D25043007009F6D52 /* CommonMetricsTableViewCell.xib in Resources */,
 				F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */,
@@ -1096,7 +1096,7 @@
 				F1495EC47C86B62C320FC93A /* CustomPopUpView.swift in Sources */,
 				C33722AD254EB9BC00191785 /* VoidClosure.swift in Sources */,
 				F1495CF0A1F9133C1BA23F4D /* SphereDetailViewController.swift in Sources */,
-				F1495D5C47D69919FE8AA4BF /* AchievementsTableViewCell.swift in Sources */,
+				F1495D5C47D69919FE8AA4BF /* AchievementCell.swift in Sources */,
 				F1495273E66F5AD91A5F822E /* SphereMetricsTableViewCell.swift in Sources */,
 				F1495BDA4B981DA49805610D /* OnboardingPageViewController.swift in Sources */,
 				F1495ADA5587A84C0A572A15 /* SetupSphereValueViewController.swift in Sources */,

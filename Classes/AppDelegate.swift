@@ -89,15 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
     }
-    
-    private func setupNavigationBar() {
-        UINavigationBar.appearance().barTintColor = .violet
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.white,
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)
-        ]
-    }
+
 }
 
 extension AppDelegate {
@@ -105,6 +97,13 @@ extension AppDelegate {
     private enum Constants {
         static let gcmMessageIDKey = "gcm.Message_ID"
         static let topicKey = "topic"
+    }
+
+    private func setupNavigationBar() {
+        UINavigationBar.appearance().tintColor = .darkGray
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
+        ]
     }
     
 }

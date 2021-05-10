@@ -28,6 +28,11 @@ class TipViewController: UIViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesCounterLabel: UILabel!
+    @IBOutlet weak var footerGradientImageView: UIImageView!
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     var tipEntity: TipEntity?
     
@@ -39,15 +44,16 @@ class TipViewController: UIViewController {
             self.setLikeButton()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupSwipeGesture()
         setupCancelButton()
         setupLikeButton()
-        self.titleLabel.addShadow()
-        self.textLabel.addShadow()
+        titleLabel.addShadow()
+        textLabel.addShadow()
+        setNeedsStatusBarAppearanceUpdate()
         
         guard let tipEntity = self.tipEntity else { return }
         configure(tip: tipEntity.tip)
@@ -58,8 +64,9 @@ class TipViewController: UIViewController {
         guard let screenshot = self.view.takeScreenshot() else { return }
         setVisibleForUI(hidden: false)
         
-        let activityVC = UIActivityViewController(activityItems: [screenshot, R.string.localizable.shareText()],
-                                                  applicationActivities: nil)
+        let activityVC = UIActivityViewController(
+            activityItems: [screenshot, R.string.localizable.shareText()],
+            applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
     }
@@ -69,6 +76,7 @@ class TipViewController: UIViewController {
         shareButton.isHidden = hidden
         likeButton.isHidden = hidden
         likesCounterLabel.isHidden = hidden
+        footerGradientImageView.isHidden = hidden
     }
     
     private func setupSwipeGesture() {

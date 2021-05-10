@@ -102,12 +102,11 @@ class JournalViewController: UIViewController {
     }
 
     private func setupSearchBar() {
-        searchController.obscuresBackgroundDuringPresentation = false
         let searchBar = searchController.searchBar
         searchBar.delegate = self
-        searchBar.placeholder = "Поиск"
+        searchBar.placeholder = R.string.localizable.journalSearch()
+        searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func setupBarButton() {
@@ -142,8 +141,10 @@ class JournalViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: Constants.cellXibName, bundle: nil),
-                           forCellReuseIdentifier: Constants.cellId)
+        tableView.register(
+            UINib(nibName: Constants.cellXibName, bundle: nil),
+            forCellReuseIdentifier: Constants.cellId)
+        tableView.showsVerticalScrollIndicator = false
     }
 }
 
@@ -294,6 +295,8 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
 }
+
+// MARK: — UISearchBarDelegate
 
 extension JournalViewController: UISearchBarDelegate {
 

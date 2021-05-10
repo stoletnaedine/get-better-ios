@@ -76,9 +76,9 @@ extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let achievement = achievements[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseId,
-                                                 for: indexPath) as! AchievementsTableViewCell
-        cell.selectionStyle = .none
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: Constants.reuseId,
+                for: indexPath) as? AchievementCell else { fatalError("AchievementCell not found") }
         cell.fillCell(from: achievement)
         return cell
     }
@@ -92,7 +92,7 @@ extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource
 extension AchievementsViewController {
     
     private enum Constants {
-        static let xibName = R.nib.achievementsTableViewCell.name
+        static let xibName = R.nib.achievementCell.name
         static let reuseId = R.reuseIdentifier.achievementsCell.identifier
     }
     
