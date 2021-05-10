@@ -27,6 +27,8 @@
 		C30350B425C53CED003B13BD /* TitleSubtitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30350B225C53CED003B13BD /* TitleSubtitleCell.xib */; };
 		C30350BA25C53E32003B13BD /* TitleSubtitleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30350B925C53E32003B13BD /* TitleSubtitleCellViewModel.swift */; };
 		C30C7A0F247E8DC400FD830F /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */; };
+		C30E225A26491EF10093F0F1 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30E225926491EF10093F0F1 /* AppLanguage.swift */; };
+		C30E22A726499BFC0093F0F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30E22A926499BFC0093F0F1 /* Localizable.strings */; };
 		C30FEE482553045F00CC84B9 /* UIView+Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */; };
 		C30FEE4D2553C6AA00CC84B9 /* TipsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30FEE4C2553C6AA00CC84B9 /* TipsTableViewController.swift */; };
 		C328EE052447294100445704 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C328EE032447294100445704 /* RegisterViewController.swift */; };
@@ -94,7 +96,6 @@
 		C3B5CC8C2544325B00E55B82 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B5CC8B2544325B00E55B82 /* AchievementsViewController.swift */; };
 		C3BFEBC52477E85F000B5B41 /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC42477E85F000B5B41 /* PushService.swift */; };
 		C3BFEBC82477F5A4000B5B41 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BFEBC72477F5A3000B5B41 /* R.generated.swift */; };
-		C3BFEBCC2477F93E000B5B41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3BFEBCB2477F93E000B5B41 /* Localizable.strings */; };
 		C3C873D12436033400931E9B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C873D02436033400931E9B /* AppError.swift */; };
 		C3C9DD8724B843B3003C83BD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9DD8624B843B3003C83BD /* String.swift */; };
 		C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4AA8F24ADC72800F1BAD8 /* UIImageView.swift */; };
@@ -164,6 +165,10 @@
 		C30350B225C53CED003B13BD /* TitleSubtitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleSubtitleCell.xib; sourceTree = "<group>"; };
 		C30350B925C53E32003B13BD /* TitleSubtitleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleCellViewModel.swift; sourceTree = "<group>"; };
 		C30C7A0E247E8DC400FD830F /* ConnectionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
+		C30E225926491EF10093F0F1 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		C30E22A826499BFC0093F0F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C30E22D326499CED0093F0F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C30E23682649A4F30093F0F1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Screenshot.swift"; sourceTree = "<group>"; };
 		C30FEE4C2553C6AA00CC84B9 /* TipsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsTableViewController.swift; sourceTree = "<group>"; };
 		C328EE032447294100445704 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -232,7 +237,6 @@
 		C3BC51282573CFEC002E1772 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3BFEBC42477E85F000B5B41 /* PushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
 		C3BFEBC72477F5A3000B5B41 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
-		C3BFEBCB2477F93E000B5B41 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		C3C873D02436033400931E9B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		C3C9DD8624B843B3003C83BD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C3C9DD8924B9870B003C83BD /* GetBetter.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = GetBetter.entitlements; sourceTree = "<group>"; };
@@ -347,6 +351,7 @@
 				C3724ECC23AFAD6E00D49AD6 /* Models */,
 				C306790C23AC990500B6E105 /* Extensions */,
 				C3BFEBC92477F8F3000B5B41 /* Resources */,
+				C30E225926491EF10093F0F1 /* AppLanguage.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -678,7 +683,7 @@
 				9277D390238C725300B3AECA /* LaunchScreen.storyboard */,
 				C35EBD92244DE870004593CC /* GoogleService-Info.plist */,
 				9277D393238C725300B3AECA /* Info.plist */,
-				C3BFEBCB2477F93E000B5B41 /* Localizable.strings */,
+				C30E22A926499BFC0093F0F1 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -914,7 +919,7 @@
 				9277D38F238C725300B3AECA /* Assets.xcassets in Resources */,
 				C3ED5A2723AFBECF00C7A492 /* JournalViewController.xib in Resources */,
 				C3ED5A2B23AFBF1300C7A492 /* LifeCircleViewController.xib in Resources */,
-				C3BFEBCC2477F93E000B5B41 /* Localizable.strings in Resources */,
+				C30E22A726499BFC0093F0F1 /* Localizable.strings in Resources */,
 				C35750D524507E7B00BA7006 /* PostDetailViewController.xib in Resources */,
 				C39A3220245710BC005D2EDF /* SettingsViewController.xib in Resources */,
 				C381582B2556BEBD0005C16E /* 35255-from-loading-to-success.json in Resources */,
@@ -1106,6 +1111,7 @@
 				F14953B62F438A822C859E2D /* FirebaseStorage.swift in Sources */,
 				F1495758B8B86F71B37096B8 /* FirebaseDatabase.swift in Sources */,
 				F1495D08557F105CA2F17BBD /* EditProfileViewController.swift in Sources */,
+				C30E225A26491EF10093F0F1 /* AppLanguage.swift in Sources */,
 				F14951C7F023A062FD05EEEE /* ProfileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,8 +1123,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				C3BC51282573CFEC002E1772 /* ru */,
+				C30E22D326499CED0093F0F1 /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C30E22A926499BFC0093F0F1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C30E22A826499BFC0093F0F1 /* en */,
+				C30E23682649A4F30093F0F1 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -1,0 +1,397 @@
+/* 
+  Localizable.strings
+  GetBetter
+
+  Created by Artur Islamgulov on 10.05.2021.
+  Copyright © 2020 Artur Islamgulov. All rights reserved.
+*/
+
+// MARK: Common
+
+"Success" = "Success";
+"Cancel" = "Cancel";
+"OK" = "OK";
+"Share.text" = "💜 Tips of the Day in GetBetter #getbetterapp";
+
+// MARK: LifeCircle
+
+"LifeCircle.loading" = "Loading...";
+"LifeCircle.circle" = "Wheel";
+"LifeCircle.metrics" = "Metrics";
+"LifeCircle.current" = "Current";
+"LifeCircle.start" = "Initial";
+
+// MARK: Common Metrics
+
+"Common.events" = "entries";
+"Common.average" = "average score";
+"Common.days" = "days";
+
+// MARK: Journal
+
+"Journal.alert.deletePost" = "Are you sure you want to delete this post?";
+"Journal.alert.delete" = "Delete";
+"Journal.deletedPost" = "Post deleted";
+"Journal.placeholder" = "Your diary posts will be here. Each of them will pump up the wheel of life. Try adding the first entry.";
+"Journal.tipOfTheDay" = "Tip of the Day";
+"Journal.edit" = "Edit";
+"Journal.search" = "Search";
+
+// MARK: Achievements
+
+"Achievements.title" = "Achievements";
+
+// MARK: Tips
+
+"Tips.title" = "My Tips of the Day";
+"Tips.ifEmpty" = "Tips of the day you liked will be here.";
+
+// MARK: NoInternet
+
+"NoInternet.Title" = "Oops, where's the internet?";
+"NoInternet.Notice" = "The application cannot work without the Internet.";
+"NoInternet.Button" = "Retry";
+"NoInternet.tryConnectAlert" = "Trying to connect";
+
+// Mark: TabBar
+
+"TabBar.lifeCircle" = "Wheel";
+"TabBar.journal" = "Diary";
+"TabBar.addPost" = "New Post";
+"TabBar.achievements" = "Achievements";
+"TabBar.settings" = "Settings";
+
+// MARK: Auth
+
+"Auth.email" = "E-mail";
+"Auth.enterEmail" = "Enter your E-mail";
+"Auth.password" = "Password";
+"Auth.enterPassword" = "Please enter your password";
+"Auth.enter" = "Login";
+"Auth.doRegister" = "Register";
+"Auth.forgotPassword" = "I forgot my password";
+"Auth.register" = "Registration";
+"Auth.successRegister" = "You are registered 🤟";
+"Auth.anonymButton" = "Continue without registering";
+
+// MARK: RegisterValidate
+
+"emailIsEmpty" = "Please enter your E-mail";
+"emailIsNotValid" = "Please enter a valid E-mail";
+"passwordIsEmpty" = "Please enter your password";
+
+// MARK: ResetPassword
+
+"ResetPassword.alertEmail" = "The letter was sent to your E-mail. Check your mail";
+"ResetPassword.title" = "Reset Password";
+"ResetPassword.button" = "Reset Password";
+"ResetPassword.noticeLabel" = "A link will be sent to the specified E-mail, by which you can set a new password";
+
+// MARK: Register
+
+"Register.successAlert" = "You have successfully registered";
+
+// MARK: Error
+
+"Error" = "Error";
+"Error.NoInternet" = "No network connection";
+"Error.default.message" = "Something went wrong. Please try again";
+
+// MARK: Profile
+
+"Profile.editTitle" = "Edit";
+"Profile.signOut" = "Sign Out";
+"Profile.update" = "Update";
+"Profile.name" = "Name";
+"Profile.enterName" = "Please enter a name";
+"Profile.email" = "E-mail";
+"Profile.enterEmail" = "Please enter your E-mail";
+"Profile.password" = "Password";
+"Profile.enterPassword" = "Please enter a new password";
+"Profile.loadAvatar" = "Load\navatar";
+"Profile.warning" = "After changing your E-mail, you will need to re-enter the application";
+"Profile.loading" = "Please wait, loading in progress";
+"Profile.successEdit" = "Profile updated";
+
+// MARK: Onboarding
+
+"Onboarding.unselect" = "?";
+"Onboarding.save" = "Save";
+"Onboarding.exit" = "Cancel";
+"Onboarding.emptyValuesWarning" = "All questions must be answered first";
+"Onboarding.10" = "10 is perfect";
+"Onboarding.9" = "9 - excellent";
+"Onboarding.8" = "8 is good";
+"Onboarding.7" = "7 is not bad";
+"Onboarding.6" = "6 - Above Average";
+"Onboarding.5" = "5 - Medium";
+"Onboarding.4" = "4 - below average";
+"Onboarding.3" = "3 - so-so";
+"Onboarding.2" = "2 - bad";
+"Onboarding.1" = "1 - terrible";
+"Onboarding.0" = "0 - I don't have this";
+"Onboarding.Tutorial.PrimaryText" = "Click";
+"Onboarding.Tutorial.SecondaryText" = "to select a value";
+"Onboarding.DeleteAnonymousAccount.Success" = "Anonymous account has been deleted. \ NSee you soon!";
+"Onboarding.User.Error" = "Could not identify user";
+
+// MARK: Post
+
+"Post.title" = "Add Event";
+"Post.emptySphere" = "Select a sphere";
+"Post.chooseSphere" = "Choose a sphere";
+"Post.titleDefault" = "Event";
+"Post.successValue" = "+0.1 points";
+"Post.notAddValue" = "no changes";
+"Post.emptyText" = "The text field is empty";
+"Post.placeholder" = "For example, morning exercises, a chapter of a book has been read, a new acquaintance...";
+"Post.edit.success" = "Post edited";
+"Post.edit.title" = "Edit";
+
+// MARK: Welcome
+
+"Welcome.title" = "What is GetBetter?";
+"Welcome.description" = "This is an application that will help you determine which areas of life you need to pump in order to achieve harmony.\n\nFirst, let's determine your current level.\n\nScroll right\n\nDo not rush to answer, be honest with yourself.";
+
+// MARK: AboutApp
+
+"AboutApp.title" = "About App";
+"AboutApp.description" = "<p style = \"font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px;\"><b><span style = \"color: #7d4df1\">GetBetter</span></b> is an application that helps you determine if <b><span style = \"color: #7d4df1\"> what spheres should be pumped to achieve harmony.</span></b></p>
+<p></p>
+<p style = \"font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; \">
+<b>Idea and development</b><br>
+<a href=\"https://www.notion.so/Artur-Islamgulov-72c202cd6d954fce9dc0f00cba8270d6\"> Artur Islamgulov </a> <br> <br>
+<b> Here's how this app is made </b> <br>
+<a href=\"https://t.me/getbetterapp\"> GetBetter on Telegram </a> <br> <br>
+<b> Visual style </b> <br>
+<a href=\"https://alekseybusygin.com\"> Alexey Busygin </a> </p> ";
+
+// MARK: AboutCircle
+
+"AboutCircle.title" = "Wheel of Life";
+"AboutCircle.tableTitle" = "Wheel of Life";
+"AboutCircle.description" = "<p style = \" font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; \">This graph shows which areas of your life are already at a good level, and <b> <span style = \"color: #7d4df1 \"> which areas should be pumped. </span> </b> <br>
+To make the wheel round, you need to align the values ​​- reduce the importance of one or do something in other areas.
+<b> <span style = \"color: #7d4df1\"> Keep notes in the Diary section regularly. </span> </b> This way you will clearly see the results. ";
+
+// MARK: AboutJournal
+
+"AboutJournal.title" = "Game Rules";
+"AboutJournal.tableTitle" = "Game Rules";
+"AboutJournal.description" = "<p style = \" font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; \">Every time you add an event to your diary, you will receive for it <b> <span style = \"color: #7d4df1 \"> plus 0.1 point to the current level </span> </b>. For example, I did exercises - plus 0.1 to health. Closed an important deal - plus 0.1 to work. And so on. <br>
+Every day, with due effort, the wheel will straighten its edges more and more. <b> <span style = \"color: #7d4df1 \"> This is the meaning of GetBetter. </span> </b> <br>
+Do not forget to regularly multiply bright events and do not throw in areas that require attention. ";
+
+// MARK: Settings
+
+"Settings.title" = "Settings";
+"Settings.exit" = "Exit";
+"Settings.defaultName" = "Anonymous user";
+"Settings.defaultEmail" = "Email not specified";
+"Settings.versionIs" = "Version %@";
+"Settings.logout.alert.question" = "Sign out of GetBetter?";
+"Settings.logout.alert.yes" = "Sign Out";
+"Settings.logout.alert.no" = "No";
+"Settings.Push.Title" = "Push Notifications";
+"Settings.Push.Saved" = "Notification settings saved";
+"Settings.Push.None" = "Don't come";
+"Settings.DiffLevel.Easy" = "Low";
+"Settings.DiffLevel.Medium" = "Normal";
+"Settings.DiffLevel.Hard" = "High";
+"Settings.DiffLevel.Hardcore" = "Hardcore";
+"Settings.DiffLevel.Title" = "Difficulty level";
+"Settings.DiffLevel.Save" = "Difficulty level set";
+"Settings.DiffLevel.Info.Title" = "Difficulty level";
+"Settings.DiffLevel.Info.Description" = "At low difficulty you will gain points faster than at high difficulty.\nHardcore is a real challenge to yourself.";
+"Settings.Logout.Alert.No.Email" = "No e-mail specified. You will no longer be able to log into GetBetter with this profile. Data will be lost 😔";
+"Settings.aboutApp.postReview" = "Leave a review in the AppStore";
+
+// MARK: PushNotifications
+
+"PushNotifications.title" = "Notifications";
+"PushNotifications.Header.Tip" = "Tip of the Day";
+"PushNotifications.Header.Post" = "Day summary";
+"PushNotifications.save" = "Save";
+"PushNotifications.description" = "Here you can configure the time for sending push notifications. Choose a suitable time and click Save. The time is indicated in Moscow. Pushes come every day.";
+
+// MARK: EditProfile
+
+"EditProfile.successPassChanged" = "Password changed successfully";
+"EditProfile.delete.alert.title" = "Are you sure you want to delete this account?";
+"EditProfile.delete.alert.message" = "You may need to enter your password";
+"EditProfile.delete.alert.yes" = "Yes, delete";
+"EditProfile.delete.alert.no" = "No";
+"EditProfile.delete.alert.success" = "Account deleted successfully. Until next time!";
+"EditProfile.delete.button" = "Delete Account";
+"EditProfile.save" = "Save";
+"EditProfile.reauth.alert.title" = "Please enter your account password";
+"EditProfile.reauth.alert.ok" = "Remove Account";
+"EditProfile.reauth.error" = "The password may be incorrect. Please try again";
+
+// MARK: AddPost
+
+"AddPost.title" = "Add Post";
+"AddPost.save" = "Save";
+"AddPost.maxSymbolAlert" = "No more than %@ characters";
+"AddPost.notAddSphereValue" = "Do not add points";
+
+// Mark: AppVersions
+
+"AppVersions.title" = "Version History";
+"NewVersion.alert.title" = "GetBetter 2.0";
+
+"AppVersions" =
+"
+🌚 2.0:
+• Redesign of my Tips of the Day list
+• Downloaded data is saved on the device and available without a network
+• 2000 characters per post
+• Selecting photos via camera or gallery
+• Filters for photos
+• You can upload multiple photos in one post
+• Gallery to view photos in a post
+• Added the ability not to add points for the post
+• Search in the Diary
+• English in the app
+• Numerous improvements and fixes
+
+🤟 1.14.1:
+• Announcement of version 2.0
+
+🔨 1.14:
+• If you go to the post and edit it, then the post is immediately updated
+• Increased the button for selecting a photo in a post
+• The rules of the game have been moved to the Wheel of Balance and Diary sections
+• Fixed a bug with deleting an account (thanks to Mary for finding a bug)
+• New loading animation
+• Code refactoring
+
+🏞 1.13:
+• Large preview of the image in the post
+• When editing a post, you can now add or change a picture
+• Added swipe-actions in the Diary: you can edit or delete the post
+• Fix bug counting characters when editing a post
+
+🧐 1.12.1:
+• Fix bug with Firebase / Analytics
+
+🏟 1.12:
+• Added difficulty level (for those who write actively or rarely write)
+• Setting the time of pushing has become more convenient
+• Added the number of posts by month
+• Minor improvements
+
+🐪 1.11:
+• Updated the application icon: after all, New Year, Christmas and International Fasting Day
+• Added time setting for push notifications
+• The text of the post is saved in the draft if the post was not sent
+• Added new Tips of the Day
+• Added achievement Round number
+• A clever algorithm for reducing the wheel of life slightly reduced its ardor
+
+👻 1.10.1:
+• Added animation japan
+• Corrected cell colors
+• Fix crash when adding a post after pushing
+
+📬 1.10:
+• Added push notifications for tips of the day. Added an indication of the time of sending.
+• When tapping on push notifications, screens open to add a post or advice of the day
+• Improved text logic in spheres detailing
+• Large print inside the post if there is little text
+• Added animations to Diary and My Tips of the Day if there is no content
+• Fix registration bugs
+
+🗿 1.9:
+• Added detailing of spheres. You can find it like this: Wheel -> Metrics -> click on the Sphere
+• Russian localization in the project settings
+• For those who have not found the easter egg - try clicking on the GetBetter logo in the section \"About the application\"
+
+🎉 1.8.2:
+• Updated loading animation
+
+🎉 1.8.1:
+• Added Easter egg
+• Updated third party libraries
+
+💜 1.8:
+• Tips of the day can now be liked, they are counted for all users
+• Added a section with the tips of the day you liked
+• Tip of the day can be shared on social networks and messengers or saved to the gallery
+• Optimization of memory usage
+
+🎐 1.7:
+• Added new tips of the day (principles). Moved the tips of the day to the app
+• Added new backgrounds for tips of the day
+• Replaced the sphere selection icon in the post with a neat one (Alexey, now everything is ok)
+• Checking for network availability on requests (fixed critical bugs)
+
+🤳 1.6:
+• Made achievements in a separate section
+• Added a button to the tabbar to add a post
+• Updated icons for adding a photo and closing the pop-up window
+• Buttons current / start wheel now toggle without bugs
+• Corrected texts
+
+🎓 1.5:
+• Corrected the display of pictures in the tutorials in the settings
+• In the absence of the Internet, alerts about a connection error are now displayed
+• Changed the display of the profile in the settings
+• The photo in the post is now displayed on top and across the entire width (thanks to Lesha for the hint)
+• Minor improvements
+
+🐸 1.4:
+• In posts, you can now edit the text
+• Added new cool backgrounds for tips of the day
+• Tip of the day opens in full screen, you can close it with a swipe down
+• Corrected colors in metrics
+
+🧶 1.3:
+• Added tip of the day for inspiration
+• Notification subscription settings are now stored in the cloud instead of on the device
+
+🍭 1.2:
+• Added an algorithm for the natural decrease in the level of the wheel of life over time
+• Profile photo is now centered
+• Scroll for FAQ in settings
+• In unopened achievements for 3, 5, 7, 10 days, now only the last number of days of diary keeping in a row is shown
+• Added statistics to the metrics: number of posts, days in the application, average score
+• Corrected the layout in editing the profile: all items now fit on SE
+
+🗽 1.1.3:
+• Added push notifications. Now GetBetter can remind you to write down the results of the day in order to level up the spheres. You can enable notifications in the application settings
+• Corrected the layout of buttons in the wheel of life
+
+🧴 1.1.1:
+• By clicking on the wheel of life, you can now see the values ​​in the spheres
+• Added statistics in metrics
+• Replaced the icon for attaching a photo when writing a post
+
+🧲 1.1.0:
+• Added switching of the current and initial wheel of life
+• CancelButton moved to components
+
+🤸 1.0.6:
+• The logic of the calculation of the current level in the spheres was brought to the client (and became faster)
+• Fixed color segmented control on the \"Wheel of Life\" screen for iOS 12
+• Added caching of all pictures in the application
+• Added animation when uploading photos
+
+🍄 1.0.5:
+• When you exit onboarding, the anonymous account is deleted
+• Added activity indicator to login without registration
+• Added placeholder when adding a post
+• Added a hint if the diary is empty
+• Added alert when exiting the application
+• Highlighted phrases in articles. Put links in the section Our team
+• Labels are replaced with buttons wherever needed
+• Increased the area of ​​pressing the value selection button in onboarding
+
+🎍 1.0.1:
+• Added training for the first launch of the application.
+• Minor improvements.
+
+💆‍♂️ 1.0.0:
+• a visual pie chart showing progress in areas of life (work, health, creativity, and so on)
+• diary of the main events of your life with photos
+• data is stored in the cloud and accessible from any iOS device";

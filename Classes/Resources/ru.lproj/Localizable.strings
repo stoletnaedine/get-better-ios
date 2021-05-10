@@ -1,9 +1,9 @@
 /* 
-  Localizable.strings
+  Localizable_ru.strings
   GetBetter
 
-  Created by Artur Islamgulov on 22.05.2020.
-  Copyright © 2020 Artur Islamgulov. All rights reserved.
+  Created by Artur Islamgulov on 10.05.2021.
+  Copyright © 2021 Artur Islamgulov. All rights reserved.
 */
 
 // MARK: Common
@@ -15,7 +15,7 @@
 
 // MARK: LifeCircle
 
-"LifeCircle.loading" = "Подождите, идет загрузка";
+"LifeCircle.loading" = "Loading...";
 "LifeCircle.circle" = "Колесо";
 "LifeCircle.metrics" = "Метрики";
 "LifeCircle.current" = "Текущее";

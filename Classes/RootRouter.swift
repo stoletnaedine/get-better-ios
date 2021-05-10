@@ -27,7 +27,7 @@ class RootRouter: RootRouterProtocol {
     init() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = R.storyboard.launchScreen().instantiateInitialViewController()
+        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         addObservers()
     }
     

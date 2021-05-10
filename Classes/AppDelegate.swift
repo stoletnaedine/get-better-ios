@@ -24,7 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         database.keepSyncedPosts()
-        Auth.auth().languageCode = "ru"
+        if Locale.current.languageCode == "ru" {
+            Auth.auth().languageCode = "ru"
+        }
         IQKeyboardManager.shared.enable = true
         
         if #available(iOS 10.0, *) {
