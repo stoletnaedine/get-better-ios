@@ -3,7 +3,7 @@
   GetBetter
 
   Created by Artur Islamgulov on 10.05.2021.
-  Copyright © 2020 Artur Islamgulov. All rights reserved.
+  Copyright © 2021 Artur Islamgulov. All rights reserved.
 */
 
 // MARK: Common
@@ -40,6 +40,25 @@
 // MARK: Achievements
 
 "Achievements.title" = "Achievements";
+"Achievements.regular.few.description" = "Add events %d in a row (%d/%d)";
+"Achievements.regular.many.description" = "Add events %d in a row (%d/%d)";
+"Achievements.regularThree.title" = "Not bad";
+"Achievements.regularFive.title" = "High five!";
+"Achievements.regularSeven.title" = "Week of Achievements";
+"Achievements.regularTen.title" = "10x";
+"Achievements.maxValue.lock.title" = "Achieved";
+"Achievements.maxValue.lock.description" = "Upgrade any sphere up to 10 points";
+"Achievements.maxValue.unlock.title" = "%@ to maximum";
+"Achievements.maxValue.unlock.description" = "Excellent work! Sphere %@ leveled 10 points";
+"Achievements.looser.title" = "Goodbye Looser";
+"Achievements.looser.lock.description" = "Exit the red zone in any sphere";
+"Achievements.looser.unlock.description" = "%@: is no longer in the red zone";
+"Achievements.rocket.title" = "Rocketman";
+"Achievements.rocket.lock.description" = "Achieve 1 point in any area in less than %d days";
+"Achievements.rocket.unlock.description" = "%@: got %d points faster than %d days";
+"Achievements.roundCount.title" = "Round Number";
+"Achievements.roundCount.lock.description" = "Write %d posts";
+"Achievements.roundCount.unlock.description" = "You have already written %d posts";
 
 // MARK: Tips
 

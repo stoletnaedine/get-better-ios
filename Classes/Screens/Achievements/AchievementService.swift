@@ -21,39 +21,54 @@ class AchievementService: AchievementServiceProtocol {
         let plusOneAchievements = getPlusOneAchievements(posts: userData.posts)
         let roundCountAchievements = getRoundCountAchievements(posts: userData.posts)
         
-        let achievements = daysAchievements + maxValueAchievements + fromRedZoneAchievements + plusOneAchievements + roundCountAchievements
+        let achievements = daysAchievements
+            + maxValueAchievements
+            + fromRedZoneAchievements
+            + plusOneAchievements
+            + roundCountAchievements
         let sortedAchievements = achievements.sorted(by: { $0.unlocked && !$1.unlocked })
         return sortedAchievements
     }
+
+    // MARK: — Private methods
     
     private func getDaysAchievements(posts: [Post]) -> [Achievement] {
         let daysInRowTuple = calcMaxCountDaysInRow(from: posts)
         let maxCountDaysInRow = daysInRowTuple.maxDaysInRowAllTime
         let daysInRowLastTime = daysInRowTuple.daysInRowLastTime
+
+        let regularThreeCurrentDays = maxCountDaysInRow >= 3 ? 3 : daysInRowLastTime
+        let regularThreeDesc = R.string.localizable.achievementsRegularFewDescription(3, regularThreeCurrentDays, 3)
+        let regularThree = Achievement(
+            icon: "⚡️",
+            title: R.string.localizable.achievementsRegularThreeTitle(),
+            description: regularThreeDesc,
+            unlocked: maxCountDaysInRow >= 3)
         
-        let regularThreeDesc = "Добавлять события 3 дня подряд (\(maxCountDaysInRow >= 3 ? 3 : daysInRowLastTime)/3)"
-        let regularThree = Achievement(icon: "⚡️",
-                                       title: "Not bad",
-                                       description: regularThreeDesc,
-                                       unlocked: maxCountDaysInRow >= 3)
+        let regularFiveCurrentDays = maxCountDaysInRow >= 5 ? 5 : daysInRowLastTime
+        let regularFiveDesc = R.string.localizable.achievementsRegularManyDescription(5, regularFiveCurrentDays, 5)
+        let regularFive = Achievement(
+            icon: "🖐",
+            title: R.string.localizable.achievementsRegularFiveTitle(),
+            description: regularFiveDesc,
+            unlocked: maxCountDaysInRow >= 5)
         
-        let regularFiveDesc = "Добавлять события 5 дней подряд (\(maxCountDaysInRow >= 5 ? 5 : daysInRowLastTime)/5)"
-        let regularFive = Achievement(icon: "🖐",
-                                      title: "Дай пять!",
-                                      description: regularFiveDesc,
-                                      unlocked: maxCountDaysInRow >= 5)
+        let regularSevenCurrentDays = maxCountDaysInRow >= 7 ? 7 : daysInRowLastTime
+        let regularSevenDesc = R.string.localizable.achievementsRegularManyDescription(7, regularSevenCurrentDays, 7)
+        let regularSeven = Achievement(
+            icon: "🤘",
+            title: R.string.localizable.achievementsRegularSevenTitle(),
+            description: regularSevenDesc,
+            unlocked: maxCountDaysInRow >= 7)
         
-        let regularSevenDesc = "Добавлять события 7 дней подряд (\(maxCountDaysInRow >= 7 ? 7 : daysInRowLastTime)/7)"
-        let regularSeven = Achievement(icon: "🤘",
-                                       title: "Неделя достижений",
-                                       description: regularSevenDesc,
-                                       unlocked: maxCountDaysInRow >= 7)
-        
-        let regularTenDesc = "Добавлять события 10 дней подряд (\(maxCountDaysInRow >= 10 ? 10 : daysInRowLastTime)/10)"
-        let regularTen = Achievement(icon: "😎",
-                                     title: "10x",
-                                     description: regularTenDesc,
-                                     unlocked: maxCountDaysInRow >= 10)
+        let regularTenCurrentDays = maxCountDaysInRow >= 10 ? 10 : daysInRowLastTime
+        let regularTenDesc = R.string.localizable.achievementsRegularManyDescription(10, regularTenCurrentDays, 10)
+        let regularTen = Achievement(
+            icon: "😎",
+            title: R.string.localizable.achievementsRegularTenTitle(),
+            description: regularTenDesc,
+            unlocked: maxCountDaysInRow >= 10)
+
         return [regularThree, regularFive, regularSeven, regularTen]
     }
     
@@ -95,7 +110,7 @@ class AchievementService: AchievementServiceProtocol {
             .filter { $0.value == Properties.maxSphereValue }
             .map { $0.key }
         
-        if maxValueSphereRawValues.isEmpty {
+        guard !maxValueSphereRawValues.isEmpty else {
             return []
         }
         
@@ -104,17 +119,19 @@ class AchievementService: AchievementServiceProtocol {
         var spheresAchievements: [Achievement] = []
         if spheres.isEmpty {
             spheresAchievements = [
-                Achievement(icon: "🏆",
-                            title: "Прокачано",
-                            description: "Прокачать любую сферу до 10 баллов")
+                Achievement(
+                    icon: "🏆",
+                    title: R.string.localizable.achievementsMaxValueLockTitle(),
+                    description: R.string.localizable.achievementsMaxValueLockDescription())
             ]
         } else {
             for sphere in spheres {
                 spheresAchievements.append(
-                    Achievement(icon: sphere?.icon ?? "🏆",
-                                title: "\(sphere?.name ?? "") на максимум",
-                                description: "Отличная работа! Сфера \(sphere?.name ?? "") прокачена на 10 баллов",
-                                unlocked: true))
+                    Achievement(
+                        icon: sphere?.icon ?? "🏆",
+                        title: R.string.localizable.achievementsMaxValueUnlockTitle(sphere?.name ?? ""),
+                        description: R.string.localizable.achievementsMaxValueUnlockDescription(sphere?.name ?? ""),
+                        unlocked: true))
             }
         }
 
@@ -146,15 +163,18 @@ class AchievementService: AchievementServiceProtocol {
         }
         
         let fromRedZoneSpheres = resultSpheres.map { Sphere(rawValue: $0)?.name ?? "" }
-        var byeLooser = Achievement(icon: "👻",
-                                    title: "Прощай, лузер",
-                                    description: "Выйти в любой сфере из красной зоны",
+        var byeLooser = Achievement(
+            icon: "👻",
+            title: R.string.localizable.achievementsLooserTitle(),
+            description: R.string.localizable.achievementsLooserLockDescription(),
                                     unlocked: false)
         if !fromRedZoneSpheres.isEmpty {
             let spheresString = fromRedZoneSpheres.joined(separator: ", ")
-            byeLooser = Achievement(icon: "👻",
-                                    title: "Прощай, лузер",
-                                    description: "\(spheresString): теперь не в красной зоне", unlocked: true)
+            byeLooser = Achievement(
+                icon: "👻",
+                title: R.string.localizable.achievementsLooserTitle(),
+                description: R.string.localizable.achievementsLooserUnlockDescription(spheresString),
+                unlocked: true)
         }
         
         return [byeLooser]
@@ -163,9 +183,10 @@ class AchievementService: AchievementServiceProtocol {
     private func getPlusOneAchievements(posts: [Post]) -> [Achievement] {
         let daysLimit = 5
         let postsCountCondition = 10
-        var achievement = Achievement(icon: "🚀",
-                                      title: "Rocketman",
-                                      description: "Набрать 1 балл в любой сфере меньше, чем за \(daysLimit) дней")
+        var achievement = Achievement(
+            icon: "🚀",
+            title: R.string.localizable.achievementsRocketTitle(),
+            description: R.string.localizable.achievementsRocketLockDescription(daysLimit))
         
         var fastSphereNames: [String] = []
         for sphere in Sphere.allCases {
@@ -192,10 +213,13 @@ class AchievementService: AchievementServiceProtocol {
         
         if !fastSphereNames.isEmpty {
             let spheresString = fastSphereNames.joined(separator: ", ")
-            achievement = Achievement(icon: "🚀",
-                                      title: "Rocketman",
-                                      description: "\(spheresString): набрал \(postsCountCondition / 10) балл быстрее, чем за \(daysLimit) дней",
-                                      unlocked: true)
+            let points = postsCountCondition / 10
+            let description = R.string.localizable.achievementsRocketUnlockDescription(spheresString, points, daysLimit)
+            achievement = Achievement(
+                icon: "🚀",
+                title: R.string.localizable.achievementsRocketTitle(),
+                description: description,
+                unlocked: true)
         }
         
         return [achievement]
@@ -206,12 +230,13 @@ class AchievementService: AchievementServiceProtocol {
         let multiplier: Int = posts.count / roundCount
         let isUnlocked = multiplier > 0
         let description = isUnlocked
-            ? "Ты написал уже \(multiplier * 50) постов"
-            : "Написать \(roundCount) постов"
-        let achievement = Achievement(icon: "💯",
-                                      title: "Круглая цифра",
-                                      description: description,
-                                      unlocked: isUnlocked)
+            ? R.string.localizable.achievementsRoundCountUnlockDescription(multiplier * 50)
+            : R.string.localizable.achievementsRoundCountLockDescription(roundCount)
+        let achievement = Achievement(
+            icon: "💯",
+            title: R.string.localizable.achievementsRoundCountTitle(),
+            description: description,
+            unlocked: isUnlocked)
         return [achievement]
     }
 }

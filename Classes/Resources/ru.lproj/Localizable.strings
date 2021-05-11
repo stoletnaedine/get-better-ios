@@ -1,5 +1,5 @@
 /* 
-  Localizable_ru.strings
+  Localizable.strings
   GetBetter
 
   Created by Artur Islamgulov on 10.05.2021.
@@ -15,7 +15,7 @@
 
 // MARK: LifeCircle
 
-"LifeCircle.loading" = "Loading...";
+"LifeCircle.loading" = "Загрузка...";
 "LifeCircle.circle" = "Колесо";
 "LifeCircle.metrics" = "Метрики";
 "LifeCircle.current" = "Текущее";
@@ -40,6 +40,25 @@
 // MARK: Achievements
 
 "Achievements.title" = "Достижения";
+"Achievements.regular.few.description" = "Добавлять события %d дня подряд (%d/%d)";
+"Achievements.regular.many.description" = "Добавлять события %d дней подряд (%d/%d)";
+"Achievements.regularThree.title" = "Not bad";
+"Achievements.regularFive.title" = "Дай пять!";
+"Achievements.regularSeven.title" = "Неделя достижений";
+"Achievements.regularTen.title" = "10x";
+"Achievements.maxValue.lock.title" = "Прокачано";
+"Achievements.maxValue.lock.description" = "Прокачать любую сферу до 10 баллов";
+"Achievements.maxValue.unlock.title" = "%@ на максимум";
+"Achievements.maxValue.unlock.description" = "Отличная работа! Сфера %@ прокачена на 10 баллов";
+"Achievements.looser.title" = "Прощай, лузер";
+"Achievements.looser.lock.description" = "Выйти в любой сфере из красной зоны";
+"Achievements.looser.unlock.description" = "%@: теперь не в красной зоне";
+"Achievements.rocket.title" = "Rocketman";
+"Achievements.rocket.lock.description" = "Набрать 1 балл в любой сфере меньше, чем за %d дней";
+"Achievements.rocket.unlock.description" = "%@: набрал %d балл быстрее, чем за %d дней";
+"Achievements.roundCount.title" = "Круглая цифра";
+"Achievements.roundCount.lock.description" = "Написать %d постов";
+"Achievements.roundCount.unlock.description" = "Ты написал уже %d постов";
 
 // MARK: Tips
 
