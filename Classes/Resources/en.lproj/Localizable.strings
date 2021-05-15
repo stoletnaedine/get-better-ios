@@ -13,6 +13,43 @@
 "OK" = "OK";
 "Share.text" = "💜 Tips of the Day in GetBetter #getbetterapp";
 
+// Mark: TabBar
+
+"TabBar.lifeCircle" = "Wheel";
+"TabBar.journal" = "Journal";
+"TabBar.addPost" = "New Post";
+"TabBar.achievements" = "Achievements";
+"TabBar.settings" = "Settings";
+
+// MARK: Sphere
+
+"Sphere.relations" = "Relations";
+"Sphere.health" = "Health";
+"Sphere.environment" = "Environment";
+"Sphere.finance" = "Finance";
+"Sphere.work" = "Work";
+"Sphere.relax" = "Rest";
+"Sphere.creation" = "Creativity";
+"Sphere.spirit" = "Spirituality";
+
+"Sphere.relations.desc" = "Relationship with a partner, love";
+"Sphere.health.desc" = "Energy, wellness, well-being";
+"Sphere.environment.desc" = "Children, parents, relatives, close friends";
+"Sphere.finance.desc" = "Income, expenses, liabilities, assets";
+"Sphere.work.desc" = "Place of work, professional skills, career growth";
+"Sphere.relax.desc" = "Brightness of life, communication, travel, entertainment, sleep";
+"Sphere.creation.desc" = "Potential realization, hobbies, personal development";
+"Sphere.spirit.desc" = " Emotions, state of mind, meditations";
+
+"Sphere.relations.question" = "How many points would you rate your relationship with a loved one, close people within the family?";
+"Sphere.health.question" = "How many points would you rate your well-being? Do you play sports? What is your attitude to health?";
+"Sphere.environment.question" = "How many points would you rate your relationship with your parents, children, relatives, close friends?";
+"Sphere.finance.question" = "How many points would you estimate your income, assets? How well do you know about finance?";
+"Sphere.work.question" = "How many points would you rate your place of work, professional skills, career growth?";
+"Sphere.relax.question" = "How many points would you rate the brightness of your life, communication, travel, entertainment, quality of sleep?";
+"Sphere.creation.question" = "How many points would you rate the realization of your potential, hobbies, personal development?";
+"Sphere.spirit.question" = "How many points would you rate your emotions, state of mind? Do you practice meditation?\nAfter all the ratings, click Save.";
+
 // MARK: LifeCircle
 
 "LifeCircle.loading" = "Loading...";
@@ -32,7 +69,7 @@
 "Journal.alert.deletePost" = "Are you sure you want to delete this post?";
 "Journal.alert.delete" = "Delete";
 "Journal.deletedPost" = "Post deleted";
-"Journal.placeholder" = "Your diary posts will be here. Each of them will pump up the wheel of life. Try adding the first entry.";
+"Journal.placeholder" = "Your journal posts will be here. Each of them will pump up the wheel of life. Try adding the first entry.";
 "Journal.tipOfTheDay" = "Tip of the Day";
 "Journal.edit" = "Edit";
 "Journal.search" = "Search";
@@ -71,14 +108,6 @@
 "NoInternet.Notice" = "The application cannot work without the Internet.";
 "NoInternet.Button" = "Retry";
 "NoInternet.tryConnectAlert" = "Trying to connect";
-
-// Mark: TabBar
-
-"TabBar.lifeCircle" = "Wheel";
-"TabBar.journal" = "Diary";
-"TabBar.addPost" = "New Post";
-"TabBar.achievements" = "Achievements";
-"TabBar.settings" = "Settings";
 
 // MARK: Auth
 
@@ -138,12 +167,12 @@
 "Onboarding.save" = "Save";
 "Onboarding.exit" = "Cancel";
 "Onboarding.emptyValuesWarning" = "All questions must be answered first";
-"Onboarding.10" = "10 is perfect";
+"Onboarding.10" = "10 — is perfect";
 "Onboarding.9" = "9 - excellent";
-"Onboarding.8" = "8 is good";
-"Onboarding.7" = "7 is not bad";
-"Onboarding.6" = "6 - Above Average";
-"Onboarding.5" = "5 - Medium";
+"Onboarding.8" = "8 — is good";
+"Onboarding.7" = "7 — is not bad";
+"Onboarding.6" = "6 - above average";
+"Onboarding.5" = "5 - medium";
 "Onboarding.4" = "4 - below average";
 "Onboarding.3" = "3 - so-so";
 "Onboarding.2" = "2 - bad";
@@ -151,7 +180,7 @@
 "Onboarding.0" = "0 - I don't have this";
 "Onboarding.Tutorial.PrimaryText" = "Click";
 "Onboarding.Tutorial.SecondaryText" = "to select a value";
-"Onboarding.DeleteAnonymousAccount.Success" = "Anonymous account has been deleted. \ NSee you soon!";
+"Onboarding.DeleteAnonymousAccount.Success" = "Anonymous account has been deleted.\nSee you soon!";
 "Onboarding.User.Error" = "Could not identify user";
 
 // MARK: Post
@@ -191,13 +220,13 @@
 "AboutCircle.tableTitle" = "Wheel of Life";
 "AboutCircle.description" = "<p style = \" font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; \">This graph shows which areas of your life are already at a good level, and <b> <span style = \"color: #7d4df1 \"> which areas should be pumped. </span> </b> <br>
 To make the wheel round, you need to align the values ​​- reduce the importance of one or do something in other areas.
-<b> <span style = \"color: #7d4df1\"> Keep notes in the Diary section regularly. </span> </b> This way you will clearly see the results. ";
+<b> <span style = \"color: #7d4df1\"> Keep notes in the journal section regularly. </span> </b> This way you will clearly see the results. ";
 
 // MARK: AboutJournal
 
 "AboutJournal.title" = "Game Rules";
 "AboutJournal.tableTitle" = "Game Rules";
-"AboutJournal.description" = "<p style = \" font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; \">Every time you add an event to your diary, you will receive for it <b> <span style = \"color: #7d4df1 \"> plus 0.1 point to the current level </span> </b>. For example, I did exercises - plus 0.1 to health. Closed an important deal - plus 0.1 to work. And so on. <br>
+"AboutJournal.description" = "<p style = \" font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; \">Every time you add an event to your journal, you will receive for it <b> <span style = \"color: #7d4df1 \"> plus 0.1 point to the current level </span> </b>. For example, I did exercises - plus 0.1 to health. Closed an important deal - plus 0.1 to work. And so on. <br>
 Every day, with due effort, the wheel will straighten its edges more and more. <b> <span style = \"color: #7d4df1 \"> This is the meaning of GetBetter. </span> </b> <br>
 Do not forget to regularly multiply bright events and do not throw in areas that require attention. ";
 
@@ -447,7 +476,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 • You can upload multiple photos in one post
 • Gallery to view photos in a post
 • Added the ability not to add points for the post
-• Search in the Diary
+• Search in the Journal
 • English in the app
 • Numerous improvements and fixes
 
@@ -457,7 +486,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 🔨 1.14:
 • If you go to the post and edit it, then the post is immediately updated
 • Increased the button for selecting a photo in a post
-• The rules of the game have been moved to the Wheel of Balance and Diary sections
+• The rules of the game have been moved to the Wheel of Balance and Journal sections
 • Fixed a bug with deleting an account (thanks to Mary for finding a bug)
 • New loading animation
 • Code refactoring
@@ -465,7 +494,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 🏞 1.13:
 • Large preview of the image in the post
 • When editing a post, you can now add or change a picture
-• Added swipe-actions in the Diary: you can edit or delete the post
+• Added swipe-actions in the Journal: you can edit or delete the post
 • Fix bug counting characters when editing a post
 
 🧐 1.12.1:
@@ -495,7 +524,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 • When tapping on push notifications, screens open to add a post or advice of the day
 • Improved text logic in spheres detailing
 • Large print inside the post if there is little text
-• Added animations to Diary and My Tips of the Day if there is no content
+• Added animations to Journal and My Tips of the Day if there is no content
 • Fix registration bugs
 
 🗿 1.9:
@@ -550,7 +579,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 • Added an algorithm for the natural decrease in the level of the wheel of life over time
 • Profile photo is now centered
 • Scroll for FAQ in settings
-• In unopened achievements for 3, 5, 7, 10 days, now only the last number of days of diary keeping in a row is shown
+• In unopened achievements for 3, 5, 7, 10 days, now only the last number of days of Journal keeping in a row is shown
 • Added statistics to the metrics: number of posts, days in the application, average score
 • Corrected the layout in editing the profile: all items now fit on SE
 
@@ -577,7 +606,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 • When you exit onboarding, the anonymous account is deleted
 • Added activity indicator to login without registration
 • Added placeholder when adding a post
-• Added a hint if the diary is empty
+• Added a hint if the Journal is empty
 • Added alert when exiting the application
 • Highlighted phrases in articles. Put links in the section Our team
 • Labels are replaced with buttons wherever needed
@@ -588,7 +617,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 • Minor improvements.
 
 💆‍♂️ 1.0.0:
-• a visual pie chart showing progress in areas of life (work, health, creativity, and so on)
-• diary of the main events of your life with photos
-• data is stored in the cloud and accessible from any iOS device
+• A visual pie chart showing progress in areas of life (work, health, creativity, and so on)
+• Journal of the main events of your life with photos
+• Data is stored in the cloud and accessible from any iOS device
 ";

@@ -24,14 +24,14 @@ enum Sphere: String, CaseIterable {
 extension Sphere {
 
     static let nameMapper: [Sphere: String] = [
-        .relations: "Отношения",
-        .health: "Здоровье",
-        .environment: "Окружение",
-        .finance: "Финансы",
-        .work: "Работа",
-        .relax: "Отдых",
-        .creation: "Творчество",
-        .spirit: "Духовность"
+        .relations: R.string.localizable.sphereRelations(),
+        .health: R.string.localizable.sphereHealth(),
+        .environment: R.string.localizable.sphereEnvironment(),
+        .finance: R.string.localizable.sphereFinance(),
+        .work: R.string.localizable.sphereWork(),
+        .relax: R.string.localizable.sphereRelax(),
+        .creation: R.string.localizable.sphereCreation(),
+        .spirit: R.string.localizable.sphereSpirit()
     ]
 
     var name: String {
@@ -39,14 +39,14 @@ extension Sphere {
     }
 
     static let descriptionMapper: [Sphere: String] = [
-        .relations: "Взаимоотношения с партнером, любовь",
-        .health: "Энергия, оздоровление, самочувствие",
-        .environment: "Дети, родители, родственники, близкие друзья",
-        .finance: "Доходы, расходы, пассивы, активы",
-        .work: "Место работы, профессиональные навыки, карьерный рост",
-        .relax: "Яркость жизни, общение, путешествия, развлечения, сон",
-        .creation: "Реализация потенциала, хобби, личностное развитие",
-        .spirit: "Эмоции, душевное состояние, медитации"
+        .relations: R.string.localizable.sphereRelationsDesc(),
+        .health: R.string.localizable.sphereHealthDesc(),
+        .environment: R.string.localizable.sphereEnvironmentDesc(),
+        .finance: R.string.localizable.sphereFinanceDesc(),
+        .work: R.string.localizable.sphereWorkDesc(),
+        .relax: R.string.localizable.sphereRelaxDesc(),
+        .creation: R.string.localizable.sphereCreationDesc(),
+        .spirit: R.string.localizable.sphereSpiritDesc()
     ]
     
     var description: String {
@@ -54,14 +54,14 @@ extension Sphere {
     }
 
     static let questionMapper: [Sphere: String] = [
-        .relations: "На сколько баллов ты бы оценил свои отношения с любимым человеком, близкими людьми внутри семьи?",
-        .health: "На сколько баллов ты бы оценил своё самочувствие? Занимаешься ли спортом? Какое у тебя отношение к здоровью?",
-        .environment: "На сколько баллов ты бы оценил свои отношения с родителями, детьми, родственниками, близкими друзьями?",
-        .finance: "На сколько баллов ты бы оценил свои доходы, активы? Насколько хорошо ты разбираешься в финансах?",
-        .work: "На сколько баллов ты бы оценил своё место работы, профессиональные навыки, карьерный рост?",
-        .relax: "На сколько баллов ты бы оценил яркость своей жизни, общение, путешествия, развлечения, качество сна?",
-        .creation: "На сколько баллов ты бы оценил реализацию своего потенциала, занятия хобби, личностное развитие?",
-        .spirit: "На сколько баллов ты бы оценил свои эмоции, душевное состояние? Практикуешь ли медитации?\nПосле всех оценок нажми Сохранить."
+        .relations: R.string.localizable.sphereRelationsQuestion(),
+        .health: R.string.localizable.sphereHealthQuestion(),
+        .environment: R.string.localizable.sphereEnvironmentQuestion(),
+        .finance: R.string.localizable.sphereFinanceQuestion(),
+        .work: R.string.localizable.sphereWorkQuestion(),
+        .relax: R.string.localizable.sphereRelaxQuestion(),
+        .creation: R.string.localizable.sphereCreationQuestion(),
+        .spirit: R.string.localizable.sphereSpiritQuestion()
     ]
 
     var question: String {
