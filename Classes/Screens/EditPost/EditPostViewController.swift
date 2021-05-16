@@ -69,14 +69,13 @@ class EditPostViewController: AddPostViewController {
               let postId = post.id else { return }
 
         if !imagesToUpload.isEmpty {
-            self.showLoadingAnimation(on: self.view)
-            self.selectSphereButton.isEnabled = false
-            self.saveButton.isEnabled = false
-            if #available(iOS 13.0, *) {
-                self.isModalInPresentation = true
-            }
+            showLoadingAnimation(on: self.view)
+            selectSphereButton.isEnabled = false
+            saveButton.isEnabled = false
+            isModalInPresentation = true
+            deletePhotos(for: post)
 
-            self.storage.uploadPhotos(imagesToUpload, needFirstPhotoPreview: true) { [weak self] result in
+            storage.uploadPhotos(imagesToUpload, needFirstPhotoPreview: true) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case let .success(postPhotos):
@@ -100,6 +99,9 @@ class EditPostViewController: AddPostViewController {
                 }
             }
         } else {
+            if super.isClearedPhotos {
+                deletePhotos(for: post)
+            }
             let post = Post(
                 id: postId,
                 text: text,
@@ -122,6 +124,20 @@ class EditPostViewController: AddPostViewController {
             self.editPostCompletion?(post)
             self.alertService.showSuccessMessage(R.string.localizable.postEditSuccess())
             self.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    private func deletePhotos(for post: Post) {
+        var photoNamesForDelete = [String]()
+        let photoNames = post.photos?.compactMap { $0.name } ?? []
+        photoNamesForDelete.append(contentsOf: photoNames)
+        if let mainPhotoName = post.photoName {
+            photoNamesForDelete.append(mainPhotoName)
+        }
+        photoNamesForDelete.forEach { storage.deletePhoto(name: $0) }
+
+        if let previewName = post.previewName {
+            storage.deletePreview(name: previewName)
         }
     }
     

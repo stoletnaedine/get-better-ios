@@ -166,8 +166,8 @@ class FirebaseStorage: FileStorageProtocol {
             .child(imagePath)
             .child(imageName)
             .delete { [weak self] error in
-                if let error = error {
-                    self?.alertService.showErrorMessage(error.localizedDescription)
+                if error != nil {
+                    self?.alertService.showErrorMessage(R.string.localizable.errorStorageDelete())
                 }
             }
     }

@@ -144,6 +144,7 @@
 "Error" = "Error";
 "Error.NoInternet" = "No network connection";
 "Error.default.message" = "Something went wrong. Please try again";
+"Error.storage.delete" = "Failed to delete photo";
 
 // MARK: Profile
 

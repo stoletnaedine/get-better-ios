@@ -144,6 +144,7 @@
 "Error" = "Ошибка";
 "Error.NoInternet" = "Нет подключения к сети";
 "Error.default.message" = "Что-то пошло не так. Попробуйте снова";
+"Error.storage.delete" = "Не удалось удалить фото";
 
 // MARK: Profile
 
