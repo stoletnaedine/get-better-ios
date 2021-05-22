@@ -68,7 +68,7 @@ class RootRouter: RootRouterProtocol {
         authViewController.signInCompletion = { [weak self] in
             self?.startApp()
         }
-        window?.rootViewController = UINavigationController(rootViewController: authViewController)
+        window?.rootViewController = authViewController
     }
     
     @objc private func showTabBarController(_ completion: ((TabBarController) -> Void)? = nil) {

@@ -66,6 +66,8 @@
 		C36D8454239BF322004FEFD5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D8453239BF322004FEFD5 /* TabBarController.swift */; };
 		C36F66462449AC3C00293246 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66452449AC3C00293246 /* UserDataService.swift */; };
 		C36F66482449BE0000293246 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36F66472449BE0000293246 /* UIViewController.swift */; };
+		C376E3D42659752300010F83 /* UIView+AppLogoNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C376E3D32659752300010F83 /* UIView+AppLogoNavBar.swift */; };
+		C376E3D726597A3600010F83 /* login-face.json in Resources */ = {isa = PBXBuildFile; fileRef = C376E3D626597A3600010F83 /* login-face.json */; };
 		C37D0B3E23D79088005A1BCF /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D0B3D23D79088005A1BCF /* UILabel.swift */; };
 		C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */; };
 		C381400024D9396E00A3C6AA /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */; };
@@ -205,6 +207,8 @@
 		C36D8453239BF322004FEFD5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C36F66452449AC3C00293246 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		C36F66472449BE0000293246 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		C376E3D32659752300010F83 /* UIView+AppLogoNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AppLogoNavBar.swift"; sourceTree = "<group>"; };
+		C376E3D626597A3600010F83 /* login-face.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "login-face.json"; sourceTree = "<group>"; };
 		C37D0B3D23D79088005A1BCF /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		C3813FFD24D92F7000A3C6AA /* LifeCircleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCircleService.swift; sourceTree = "<group>"; };
 		C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
@@ -391,6 +395,7 @@
 				C3813FFF24D9396E00A3C6AA /* Collection+Extension.swift */,
 				C33722AC254EB9BC00191785 /* VoidClosure.swift */,
 				C30FEE472553045F00CC84B9 /* UIView+Screenshot.swift */,
+				C376E3D32659752300010F83 /* UIView+AppLogoNavBar.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -578,6 +583,7 @@
 		C38157AA2556B2AB0005C16E /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C376E3D626597A3600010F83 /* login-face.json */,
 				C38F673625EBA2B50076097B /* loading.json */,
 				C38158282556BEBD0005C16E /* 15046-spark-animation.json */,
 				C38158292556BEBD0005C16E /* 28592-yoga-nature.json */,
@@ -945,6 +951,7 @@
 				F1495267BF7181FA76BBDF88 /* AchievementCell.xib in Resources */,
 				F1495DEDB16766BBCE6BE394 /* SphereMetricsTableViewCell.xib in Resources */,
 				C32EA81D25043007009F6D52 /* CommonMetricsTableViewCell.xib in Resources */,
+				C376E3D726597A3600010F83 /* login-face.json in Resources */,
 				F14951CA8AC3C5CA80AB7DCC /* SetupSphereValueViewController.xib in Resources */,
 				C38157AC2556B2BD0005C16E /* 37723-confetti-partyyy.json in Resources */,
 				F149557C8041D5BB75C0CA34 /* WelcomeViewController.xib in Resources */,
@@ -1043,6 +1050,7 @@
 				C35B38B12462E1E700E0C416 /* UIImage.swift in Sources */,
 				C3D4AA9024ADC72800F1BAD8 /* UIImageView.swift in Sources */,
 				C3B4760524596BCB0067A3C0 /* Profile.swift in Sources */,
+				C376E3D42659752300010F83 /* UIView+AppLogoNavBar.swift in Sources */,
 				C396E23E246AC8E200DBF0E4 /* AchievementService.swift in Sources */,
 				C3813FFE24D92F7000A3C6AA /* LifeCircleService.swift in Sources */,
 				6E9E01BD245464360083499E /* SphereMetrics.swift in Sources */,

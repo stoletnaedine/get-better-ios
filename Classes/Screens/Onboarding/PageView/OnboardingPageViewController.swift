@@ -23,7 +23,7 @@ class OnboardingPageViewController: UIViewController {
         fillViewControllers()
         setupPageControl()
         setupBarButton()
-        navigationItem.titleView = UIImageView(image: R.image.titleViewLogo())
+        navigationItem.titleView = UIView.appLogo()
     }
     
     private func fillViewControllers() {

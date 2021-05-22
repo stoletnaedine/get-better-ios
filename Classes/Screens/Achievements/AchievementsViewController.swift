@@ -18,18 +18,19 @@ final class AchievementsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = R.string.localizable.achievementsTitle()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = .appBackground
         addSubviews()
         setupTableView()
         makeConstraints()
-        view.backgroundColor = .appBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.alpha = 0
         loadData(completion: { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.tableView.alpha = 0
                 self.tableView.reloadData()
                 UIView.animate(withDuration: 0.5, animations: { self.tableView.alpha = 1 })
             }
@@ -40,7 +41,9 @@ final class AchievementsViewController: UIViewController {
         lifeCircleService.loadUserData { [weak self] userData in
             guard let self = self else { return }
             guard let userData = userData else { return }
-            self.achievements = self.achievementService.calcAchievements(userData: userData)
+            let newAchievements = self.achievementService.calcAchievements(userData: userData)
+            guard newAchievements.count != self.achievements.count else { return }
+            self.achievements = newAchievements
             completion()
         }
     }
@@ -60,8 +63,8 @@ final class AchievementsViewController: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: Constants.xibName, bundle: nil),
-                           forCellReuseIdentifier: Constants.reuseId)
+//        tableView.register(UINib(nibName: Constants.xibName, bundle: nil), forCellReuseIdentifier: Constants.reuseId)
+        tableView.register(R.nib.achievementCell)
         tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
     }
@@ -76,9 +79,12 @@ extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let achievement = achievements[indexPath.row]
+//        guard let cell = tableView.dequeueReusableCell(
+//                withIdentifier: Constants.reuseId,
+//                for: indexPath) as? AchievementCell else { fatalError("AchievementCell not found") }
         guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.reuseId,
-                for: indexPath) as? AchievementCell else { fatalError("AchievementCell not found") }
+                withIdentifier: R.nib.achievementCell.identifier,
+                for: indexPath)  as? AchievementCell else { fatalError("AchievementCell not found") }
         cell.fillCell(from: achievement)
         return cell
     }
@@ -89,11 +95,11 @@ extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource
     
 }
 
-extension AchievementsViewController {
-    
-    private enum Constants {
-        static let xibName = R.nib.achievementCell.name
-        static let reuseId = R.reuseIdentifier.achievementsCell.identifier
-    }
-    
-}
+//extension AchievementsViewController {
+//
+//    private enum Constants {
+//        static let xibName = R.nib.achievementCell.name
+//        static let reuseId = R.reuseIdentifier.achievementsCell.identifier
+//    }
+//
+//}

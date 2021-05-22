@@ -121,7 +121,7 @@ class LifeCircleViewController: UIViewController {
             action: #selector(showTipOfTheDay))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: R.image.helpIcon(),
+            image: R.image.info(),
             style: .plain,
             target: self,
             action: #selector(showLifeCircleTutorial))
@@ -129,10 +129,17 @@ class LifeCircleViewController: UIViewController {
 
     @objc private func showLifeCircleTutorial() {
         let vc = ArticleViewController()
+        var exampleImage: UIImage?
+        switch Locale.current.languageCode {
+        case "ru":
+            exampleImage = R.image.lifeCircleExampleRus()
+        default:
+            exampleImage = R.image.lifeCircleExampleEng()
+        }
         vc.article = Article(
             title: R.string.localizable.aboutCircleTitle(),
             text: R.string.localizable.aboutCircleDescription(),
-            image: R.image.lifeCircleExample())
+            image: exampleImage)
         navigationController?.pushViewController(vc, animated: true)
     }
     

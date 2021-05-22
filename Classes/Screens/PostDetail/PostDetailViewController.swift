@@ -26,7 +26,7 @@ class PostDetailViewController: UIViewController {
         customizeView()
         setupEditButton()
         setupPhotoImageViewTapHandler()
-        configure()
+        configurePost()
     }
     
     override func viewDidLayoutSubviews() {
@@ -78,14 +78,14 @@ class PostDetailViewController: UIViewController {
             guard let self = self else { return }
             self.post = postToSave
             self.customizeView()
-            self.configure()
+            self.configurePost()
             self.editPostCompletion?()
             editPostVC.dismiss(animated: true, completion: nil)
         }
         present(editPostVC, animated: true, completion: nil)
     }
 
-    func configure() {
+    func configurePost() {
         guard let post = self.post else { return }
         title = post.sphere?.name
         textView.text = post.text
@@ -126,6 +126,7 @@ class PostDetailViewController: UIViewController {
     }
     
     func customizeView() {
+        navigationItem.largeTitleDisplayMode = .never
         guard let post = self.post else { return }
         var textFont = UIFont.systemFont(ofSize: 16)
         if let photoUrl = post.photoUrl, photoUrl.isEmpty,

@@ -31,7 +31,7 @@ class JournalViewController: UIViewController {
         setupSearchBar()
         removeBackButtonTitle()
         setupTableView()
-        setupBarButton()
+        setupNavigationBar()
         setupRefreshControl()
         title = R.string.localizable.tabBarJournal()
         updatePostsInTableView()
@@ -40,8 +40,10 @@ class JournalViewController: UIViewController {
     @objc func updatePostsInTableView() {
         getPosts { [weak self] in
             guard let self = self else { return }
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
     }
     
@@ -60,6 +62,7 @@ class JournalViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .failure:
+                completion()
                 break
                 
             case let .success(posts):
@@ -71,8 +74,8 @@ class JournalViewController: UIViewController {
                     self.posts = posts
                     self.convertPostsToSections(posts)
                 }
+                completion()
             }
-            completion()
         })
     }
     
@@ -107,19 +110,23 @@ class JournalViewController: UIViewController {
         searchBar.placeholder = R.string.localizable.journalSearch()
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-    private func setupBarButton() {
+    private func setupNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(addPost))
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: R.image.helpIcon(),
+            image: R.image.info(),
             style: .plain,
             target: self,
             action: #selector(showJournalTutorial))
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .automatic
     }
 
     private func setupRefreshControl() {
@@ -303,9 +310,11 @@ extension JournalViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if let searchText = searchController.searchBar.text,
            searchText.count > 1 {
-            let lowerCasedText = searchText.lowercased()
+            let searchLowercasedText = searchText.lowercased()
             let filteredPosts = posts.filter {
-                $0.text?.lowercased().contains(lowerCasedText) ?? false
+                $0.text?.lowercased().contains(searchLowercasedText) ?? false
+                    || $0.sphere?.name.lowercased().contains(searchLowercasedText) ?? false
+                    || Date.convertToMonthYear(from: $0.timestamp ?? 0).lowercased().contains(searchLowercasedText)
             }
             convertPostsToSections(filteredPosts)
             tableView.reloadData()

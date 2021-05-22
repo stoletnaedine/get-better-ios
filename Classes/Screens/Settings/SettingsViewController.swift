@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController {
         removeBackButtonTitle()
         notificationSettings = userSettingsService.getNotificationSettings()
         difficultyLevel = userSettingsService.getDifficultyLevel()
-        customizeBarButton()
+        setupNavigationBar()
         setupView()
         setupRefreshControl()
         setupTableView()
@@ -76,11 +76,12 @@ class SettingsViewController: UIViewController {
         tableView.refreshControl = refreshControl
     }
     
-    private func customizeBarButton() {
-        let signOutBarButton = UIBarButtonItem(title: R.string.localizable.settingsExit(),
-                                               style: .plain,
-                                               target: self,
-                                               action: #selector(logoutButtonDidTap))
+    private func setupNavigationBar() {
+        let signOutBarButton = UIBarButtonItem(
+            title: R.string.localizable.settingsExit(),
+            style: .plain,
+            target: self,
+            action: #selector(logoutButtonDidTap))
         navigationItem.rightBarButtonItem = signOutBarButton
     }
     
@@ -212,7 +213,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: — Models
 
-private extension SettingsViewController {
+extension SettingsViewController {
     
     private func fetchModels() {
         let editProfileViewController = EditProfileViewController()
@@ -221,13 +222,9 @@ private extension SettingsViewController {
         }
         
         let aboutAppVC = ArticleViewController()
-        let aboutAppTitleView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-        let aboutAppImageView = UIImageView(image: R.image.titleViewLogo())
-        aboutAppImageView.frame = CGRect(origin: CGPoint(x: 35, y: 5), size: CGSize(width: 30, height: 30))
-        aboutAppTitleView.addSubview(aboutAppImageView)
         aboutAppVC.article = Article(
             title: R.string.localizable.aboutAppTitle(),
-            titleView: aboutAppTitleView,
+            titleView: UIView.appLogo(),
             text: R.string.localizable.aboutAppDescription(),
             image: R.image.aboutTeam())
         
@@ -299,7 +296,7 @@ private extension SettingsViewController {
         ]
     }
     
-    func difficultyLevelClosure() -> VoidClosure {
+    private func difficultyLevelClosure() -> VoidClosure {
         return { [weak self] in
             guard let self = self else { return }
             let alert = UIAlertController()

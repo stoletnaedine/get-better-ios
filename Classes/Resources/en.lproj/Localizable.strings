@@ -50,6 +50,18 @@
 "Sphere.creation.question" = "How many points would you rate the realization of your potential, hobbies, personal development?";
 "Sphere.spirit.question" = "How many points would you rate your emotions, state of mind? Do you practice meditation?\nAfter all the ratings, click Save.";
 
+// MARK: Sphere Detail
+
+"Sphere.detail.posts.empty" = "⚠️ In this field you have no records in the journal.";
+"Sphere.detail.posts.notEmpty" = "✍️ Written posts — %@";
+"Sphere.detail.startValue" = "\n\n 🌘 Initial value — %@\n 🌖 The current value is %@";
+"Sphere.detail.max" = "💜 Incredible!\nThe %@ sphere is worked out to the maximum.\nYou can now pay attention to other areas.\n\n";
+"Sphere.detail.good" = "🚀 Excellent!\n You pump %@ and it is noticeable.\n\n";
+"Sphere.detail.warning" = "\n\n ❓ Why can the current value be less than the initial value?\nThe application uses a clever algorithm that reduces the points for inactivity. It's just like in real life: if we abandon the case, its skill is lost over time. The best way to fix this is to start writing in your journal.";
+"Sphere.detail.MaxAttention" = "🤩 Awesome! You pay the most attention to the %@ sphere.\n\n";
+"Sphere.detail.minAttention" = "❗Pay attention. In this area, the least posts are written.\n\n";
+"Sphere.detail.superComputer" = "\n\n 💻 The supercomputer makes a prediction: at the same rate, you will reach ten points %@";
+
 // MARK: LifeCircle
 
 "LifeCircle.loading" = "Loading...";
@@ -72,7 +84,7 @@
 "Journal.placeholder" = "Your journal posts will be here. Each of them will pump up the wheel of life. Try adding the first entry.";
 "Journal.tipOfTheDay" = "Tip of the Day";
 "Journal.edit" = "Edit";
-"Journal.search" = "Search";
+"Journal.search" = "Search by text, sphere, date";
 
 // MARK: Achievements
 
@@ -166,7 +178,7 @@
 
 "Onboarding.unselect" = "?";
 "Onboarding.save" = "Save";
-"Onboarding.exit" = "Cancel";
+"Onboarding.exit" = "Exit";
 "Onboarding.emptyValuesWarning" = "All questions must be answered first";
 "Onboarding.10" = "10 — is perfect";
 "Onboarding.9" = "9 - excellent";
@@ -200,7 +212,7 @@
 // MARK: Welcome
 
 "Welcome.title" = "What is GetBetter?";
-"Welcome.description" = "This is an application that will help you determine which areas of life you need to pump in order to achieve harmony.\n\nFirst, let's determine your current level.\n\nScroll right\n\nDo not rush to answer, be honest with yourself.";
+"Welcome.description" = "This is an application that will help you determine which areas of life you need to pump in order to achieve harmony.\n\nFirst, let's determine your current level.\n\nScroll right ➡️➡️➡️\n\nDo not rush to answer, be honest with yourself.";
 
 // MARK: AboutApp
 
@@ -211,9 +223,9 @@
 <b>Idea and development</b><br>
 <a href=\"https://www.notion.so/Artur-Islamgulov-72c202cd6d954fce9dc0f00cba8270d6\"> Artur Islamgulov </a> <br> <br>
 <b> Here's how this app is made </b> <br>
-<a href=\"https://t.me/getbetterapp\"> GetBetter on Telegram </a> <br> <br>
+<a href=\"https://t.me/getbetterapp\">GetBetter on Telegram</a> <br> <br>
 <b> Visual style </b> <br>
-<a href=\"https://alekseybusygin.com\"> Alexey Busygin </a> </p> ";
+<a href=\"https://alekseybusygin.com\">Alexey Busygin</a> </p> ";
 
 // MARK: AboutCircle
 
@@ -477,7 +489,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 • You can upload multiple photos in one post
 • Gallery to view photos in a post
 • Added the ability not to add points for the post
-• Search in the Journal
+• Search by text, sphere, date in the Journal
 • English in the app
 • Numerous improvements and fixes
 
