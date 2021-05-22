@@ -27,20 +27,32 @@ class RootRouter: RootRouterProtocol {
     init() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+        window?.rootViewController = SplashScreenViewController()
         addObservers()
     }
     
     func startApp(completion: ((TabBarController) -> Void)? = nil) {
-        guard Auth.auth().currentUser != nil else {
-            showAuthController()
-            return
+        var deadline: TimeInterval = .zero
+        if window?.rootViewController is SplashScreenViewController {
+            deadline = 2
         }
-        checkUserHasSetupSphere { [weak self] userHasSetupSphere in
-            if userHasSetupSphere {
-                self?.showTabBarController(completion)
-            } else {
-                self?.showOnboardingPageViewController()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + deadline, execute: { [weak self] in
+            guard let self = self else { return }
+            self.startAuthFlow(completion: completion)
+        })
+    }
+
+    private func startAuthFlow(completion: ((TabBarController) -> Void)?) {
+        if Auth.auth().currentUser == nil {
+            showAuthController()
+        } else {
+            checkUserHasSetupSphere { [weak self] userHasSetupSphere in
+                if userHasSetupSphere {
+                    self?.showTabBarController(completion)
+                } else {
+                    self?.showOnboardingPageViewController()
+                }
             }
         }
     }

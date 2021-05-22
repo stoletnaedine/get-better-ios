@@ -23,6 +23,7 @@ class ArticleViewController: UIViewController {
         setupView()
         guard let article = self.article else { return }
         fillViewController(from: article)
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewDidLayoutSubviews() {

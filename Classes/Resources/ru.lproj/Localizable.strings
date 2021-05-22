@@ -276,6 +276,15 @@
 "PushNotifications.Header.Tip" = "Cовет дня";
 "PushNotifications.Header.Post" = "Итоги дня";
 "PushNotifications.save" = "Сохранить";
+"PushNotifications.notSelect" = "Не выбрано";
+"PushNotifications.tip6" = "6:00 МСК";
+"PushNotifications.tip8" = "8:00 МСК";
+"PushNotifications.tip10" = "10:00 МСК";
+"PushNotifications.tip12" = "12:00 МСК";
+"PushNotifications.post16" = "16:00 МСК";
+"PushNotifications.post18" = "18:00 МСК";
+"PushNotifications.post20" = "20:00 МСК";
+"PushNotifications.post22" = "22:00 МСК";
 "PushNotifications.description" = "Здесь можно настроить время отправки push-уведомлений. Выбери подходящее время и нажми Сохранить. Время указано московское. Пуши приходят каждый день.";
 
 // MARK: EditProfile

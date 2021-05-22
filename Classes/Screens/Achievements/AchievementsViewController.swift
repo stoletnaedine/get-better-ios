@@ -39,11 +39,9 @@ final class AchievementsViewController: UIViewController {
     
     private func loadData(completion: @escaping VoidClosure) {
         lifeCircleService.loadUserData { [weak self] userData in
-            guard let self = self else { return }
-            guard let userData = userData else { return }
-            let newAchievements = self.achievementService.calcAchievements(userData: userData)
-            guard newAchievements.count != self.achievements.count else { return }
-            self.achievements = newAchievements
+            guard let self = self,
+                  let userData = userData else { return }
+            self.achievements = self.achievementService.calcAchievements(userData: userData)
             completion()
         }
     }
@@ -63,7 +61,6 @@ final class AchievementsViewController: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.register(UINib(nibName: Constants.xibName, bundle: nil), forCellReuseIdentifier: Constants.reuseId)
         tableView.register(R.nib.achievementCell)
         tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
@@ -79,9 +76,6 @@ extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let achievement = achievements[indexPath.row]
-//        guard let cell = tableView.dequeueReusableCell(
-//                withIdentifier: Constants.reuseId,
-//                for: indexPath) as? AchievementCell else { fatalError("AchievementCell not found") }
         guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: R.nib.achievementCell.identifier,
                 for: indexPath)  as? AchievementCell else { fatalError("AchievementCell not found") }
@@ -94,12 +88,3 @@ extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
 }
-
-//extension AchievementsViewController {
-//
-//    private enum Constants {
-//        static let xibName = R.nib.achievementCell.name
-//        static let reuseId = R.reuseIdentifier.achievementsCell.identifier
-//    }
-//
-//}

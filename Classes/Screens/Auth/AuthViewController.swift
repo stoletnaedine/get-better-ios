@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import Lottie
 
 class AuthViewController: UIViewController {
     
@@ -72,8 +71,7 @@ class AuthViewController: UIViewController {
     
     @IBAction func forgotPasswordDidPressed(_ sender: UIButton) {
         guard connectionHelper.isConnect() else { return }
-        let resetPasswordViewController = ResetPasswordViewController()
-        present(resetPasswordViewController, animated: true, completion: nil)
+        present(ResetPasswordViewController(), animated: true, completion: nil)
     }
     
     @IBAction func registerButtonDidPressed(_ sender: UIButton) {

@@ -273,6 +273,15 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 "PushNotifications.Header.Tip" = "Tip of the Day";
 "PushNotifications.Header.Post" = "Day summary";
 "PushNotifications.save" = "Save";
+"PushNotifications.notSelect" = "Not select";
+"PushNotifications.tip6" = "6:00 MSK (GMT+3)";
+"PushNotifications.tip8" = "8:00 MSK (GMT+3)";
+"PushNotifications.tip10" = "10:00 MSK (GMT+3)";
+"PushNotifications.tip12" = "12:00 MSK (GMT+3)";
+"PushNotifications.post16" = "16:00 MSK (GMT+3)";
+"PushNotifications.post18" = "18:00 MSK (GMT+3)";
+"PushNotifications.post20" = "20:00 MSK (GMT+3)";
+"PushNotifications.post22" = "22:00 MSK (GMT+3)";
 "PushNotifications.description" = "Here you can configure the time for sending push notifications. Choose a suitable time and click Save. The time is indicated in Moscow. Pushes come every day.";
 
 // MARK: EditProfile
