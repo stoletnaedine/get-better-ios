@@ -54,7 +54,7 @@
 
 "Sphere.detail.posts.empty" = "⚠️ In this field you have no records in the journal.";
 "Sphere.detail.posts.notEmpty" = "✍️ Written posts — %@";
-"Sphere.detail.startValue" = "\n\n 🌘 Initial value — %@\n 🌖 The current value is %@";
+"Sphere.detail.startValue" = "\n\n🌘 Initial value — %@\n🌖 The current value — %@";
 "Sphere.detail.max" = "💜 Incredible!\nThe %@ sphere is worked out to the maximum.\nYou can now pay attention to other areas.\n\n";
 "Sphere.detail.good" = "🚀 Excellent!\n You pump %@ and it is noticeable.\n\n";
 "Sphere.detail.warning" = "\n\n ❓ Why can the current value be less than the initial value?\nThe application uses a clever algorithm that reduces the points for inactivity. It's just like in real life: if we abandon the case, its skill is lost over time. The best way to fix this is to start writing in your journal.";

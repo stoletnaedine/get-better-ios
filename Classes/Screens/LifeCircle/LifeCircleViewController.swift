@@ -311,12 +311,12 @@ class DataSetValueFormatter: IValueFormatter {
         if dataSetIndex == currentDataSetIndex
             && isCurrentDataVisible
             && isValuesVisible {
-            return value.stringWithComma()
+            return value.toString()
         }
         if dataSetIndex == startDataSetIndex
             && !isCurrentDataVisible
             && isValuesVisible {
-            return value.stringWithComma()
+            return value.toString()
         }
         return ""
     }

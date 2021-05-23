@@ -25,13 +25,8 @@ final class SplashScreenViewController: UIViewController {
         animationView.frame = bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
-
         view.addSubview(animationView)
-
-        animationView.play(completion: { _ in
-            animationView.removeFromSuperview()
-            animationScreenView?.removeFromSuperview()
-        })
+        animationView.play()
     }
 
 }

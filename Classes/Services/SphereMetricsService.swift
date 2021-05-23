@@ -33,7 +33,7 @@ class SphereMetricsService: SphereMetricsServiceProtocol {
             ? R.string.localizable.sphereDetailPostsEmpty()
             : R.string.localizable.sphereDetailPostsNotEmpty("\(postsCount)")
 
-        let values = R.string.localizable.sphereDetailStartValue("\(startValue)", "\(currentValue)")
+        let values = R.string.localizable.sphereDetailStartValue(startValue.toString(), currentValue.toString())
 
         let sphereString = "\(sphere.icon)\u{00a0}\(sphere.name)"
         if currentValue == Properties.maxSphereValue {

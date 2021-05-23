@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class JournalViewController: UIViewController {
 
@@ -25,6 +26,7 @@ class JournalViewController: UIViewController {
     private var postSections: [JournalSection] = []
     private let refreshControl = UIRefreshControl()
     private let searchController = UISearchController()
+    private let emptyPostsAnimateView = AnimationView(name: AnimationName.yoga.value)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +35,16 @@ class JournalViewController: UIViewController {
         setupTableView()
         setupNavigationBar()
         setupRefreshControl()
+        setupAnimateView()
         title = R.string.localizable.tabBarJournal()
         updatePostsInTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !emptyPostsAnimateView.isHidden {
+            emptyPostsAnimateView.play()
+        }
     }
     
     @objc func updatePostsInTableView() {
@@ -45,6 +55,17 @@ class JournalViewController: UIViewController {
                 self.refreshControl.endRefreshing()
             }
         }
+    }
+
+    // MARK: — Private methods
+
+    private func setupAnimateView() {
+        tableView.addSubview(emptyPostsAnimateView)
+        emptyPostsAnimateView.frame = tableView.frame
+        emptyPostsAnimateView.contentMode = .scaleAspectFit
+        emptyPostsAnimateView.loopMode = .loop
+        emptyPostsAnimateView.animationSpeed = 1
+        emptyPostsAnimateView.isHidden = true
     }
     
     @objc private func addPost() {
@@ -67,10 +88,12 @@ class JournalViewController: UIViewController {
                 
             case let .success(posts):
                 if posts.isEmpty {
+                    self.emptyPostsAnimateView.isHidden = false
+                    self.emptyPostsAnimateView.play()
                     self.postSections = [JournalSection(type: .empty(info: R.string.localizable.journalPlaceholder()))]
-                    self.showAnimation(name: .yoga, on: self.view)
                 } else {
-                    self.stopAnimation()
+                    self.emptyPostsAnimateView.isHidden = true
+                    self.emptyPostsAnimateView.stop()
                     self.posts = posts
                     self.convertPostsToSections(posts)
                 }
@@ -308,6 +331,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
 extension JournalViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !posts.isEmpty else { return }
         if let searchText = searchController.searchBar.text,
            searchText.count > 1 {
             let searchLowercasedText = searchText.lowercased()
@@ -322,6 +346,7 @@ extension JournalViewController: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard !posts.isEmpty else { return }
         convertPostsToSections(posts)
         tableView.reloadData()
     }

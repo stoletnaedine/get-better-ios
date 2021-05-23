@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 final class TipsTableViewController: UIViewController {
     
@@ -17,6 +18,7 @@ final class TipsTableViewController: UIViewController {
     private var tips: [TipEntity] = []
     private var tipLikes: [TipLikesViewModel] = []
     private let tipStorage = TipStorage()
+    private let emptyPostsAnimateView = AnimationView(name: AnimationName.yoga.value)
 
     private enum Constants {
         static let tipCell = R.nib.tipCell.name
@@ -37,7 +39,15 @@ final class TipsTableViewController: UIViewController {
         setupTableView()
         makeConstraints()
         setupRefreshControl()
+        setupAnimateView()
         loadData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !emptyPostsAnimateView.isHidden {
+            emptyPostsAnimateView.play()
+        }
     }
 
     // MARK: — Private methods
@@ -47,44 +57,53 @@ final class TipsTableViewController: UIViewController {
         tableView.refreshControl = refreshControl
     }
 
+    private func setupAnimateView() {
+        emptyPostsAnimateView.frame = view.bounds
+        emptyPostsAnimateView.contentMode = .scaleAspectFit
+        emptyPostsAnimateView.loopMode = .loop
+        emptyPostsAnimateView.animationSpeed = 1
+        emptyPostsAnimateView.isHidden = true
+    }
+
     @objc private func loadData() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.showLoadingAnimation(on: self.view, whiteScreen: false)
-        }
         database.userTipsLikes(completion: { [weak self] result in
             guard let self = self else { return }
-            self.stopAnimation()
             self.refreshControl.endRefreshing()
 
             switch result {
             case let .success(models):
-                guard !models.isEmpty else {
-                    self.showAnimation(name: .yoga, on: self.view, loopMode: .loop)
+                if models.isEmpty {
+                    self.emptyPostsAnimateView.isHidden = false
+                    self.emptyPostsAnimateView.play()
                     self.tips = [
                         TipEntity(
                             id: Constants.placeholderTipId,
                             tip: Tip(title: R.string.localizable.tipsIfEmpty(), text: ""))
                     ]
                     self.tableView.reloadData()
-                    return
+                } else {
+                    self.emptyPostsAnimateView.isHidden = true
+                    self.emptyPostsAnimateView.stop()
+                    guard self.tipLikes != models else { return }
+                    let sortedModels = models
+                        .sorted(by: {
+                                    $0.tipId == self.tipStorage.currentTipId
+                                        && $1.tipId != self.tipStorage.currentTipId
+                        })
+                    self.tipLikes = sortedModels
+                    self.tips = sortedModels.map { self.tipStorage.tipEntities[$0.tipId] }
+                    self.tableView.reloadData()
                 }
-                guard self.tipLikes != models else { return }
-                let sortedModels = models
-                    .sorted(by: { $0.tipId == self.tipStorage.currentTipId && $1.tipId != self.tipStorage.currentTipId })
-                self.tipLikes = sortedModels
-                self.tips = sortedModels.map { self.tipStorage.tipEntities[$0.tipId] }
-                self.tableView.reloadData()
             case let .failure(error):
                 guard let errorName = error.name else { return }
                 self.alertService.showErrorMessage(errorName)
-                self.stopAnimation()
             }
         })
     }
     
     private func addSubviews() {
         view.addSubview(tableView)
+        tableView.addSubview(emptyPostsAnimateView)
     }
     
     private func makeConstraints() {

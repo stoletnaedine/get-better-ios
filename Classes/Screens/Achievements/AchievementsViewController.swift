@@ -27,10 +27,10 @@ final class AchievementsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.alpha = 0
         loadData(completion: { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.tableView.alpha = 0
                 self.tableView.reloadData()
                 UIView.animate(withDuration: 0.5, animations: { self.tableView.alpha = 1 })
             }

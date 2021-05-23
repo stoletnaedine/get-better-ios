@@ -21,12 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Firebase config
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         database.keepSyncedPosts()
-        if Locale.current.languageCode == "ru" {
-            Auth.auth().languageCode = "ru"
-        }
+        Auth.auth().languageCode = Locale.current.languageCode == "ru" ? "ru" : "en"
+
         IQKeyboardManager.shared.enable = true
         
         if #available(iOS 10.0, *) {
@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
 
@@ -84,7 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         completionHandler(UIBackgroundFetchResult.newData)
     }
-
     
     func applicationWillTerminate(_ application: UIApplication) {
     }

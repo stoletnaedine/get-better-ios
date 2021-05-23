@@ -10,8 +10,10 @@ import Foundation
 
 extension Double {
 
-    func stringWithComma() -> String {
-        return String(self).replacingOccurrences(of: ".", with: ",")
+    func toString() -> String {
+        return Locale.current.languageCode == "ru"
+            ? String(self).replacingOccurrences(of: ".", with: ",")
+            : String(self)
     }
     
     func rounded(toPlaces places:Int) -> Double {
