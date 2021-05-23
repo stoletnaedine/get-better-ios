@@ -21,7 +21,6 @@ class RootRouter: RootRouterProtocol {
     private let connectionHelper = ConnectionHelper()
     private lazy var alertService: AlertServiceProtocol = AlertService()
     private lazy var database: DatabaseProtocol = FirebaseDatabase()
-    private var tabBarController: TabBarController?
     private var userSettingsService: UserSettingsServiceProtocol = UserSettingsService()
 
     init() {
@@ -58,14 +57,13 @@ class RootRouter: RootRouterProtocol {
     }
 
     func showAddPost() {
-        if let tabBarController = self.tabBarController {
+        if let tabBarController = window?.rootViewController as? TabBarController {
             tabBarController.showAddPost()
-            return
+        } else {
+            startApp(completion: { tabBarController in
+                tabBarController.showAddPost()
+            })
         }
-
-        startApp(completion: { tabBarController in
-            tabBarController.showAddPost()
-        })
     }
 
     func showTip() {
@@ -85,7 +83,6 @@ class RootRouter: RootRouterProtocol {
     
     @objc private func showTabBarController(_ completion: ((TabBarController) -> Void)? = nil) {
         let tabBarController = TabBarController()
-        self.tabBarController = tabBarController
         window?.rootViewController = tabBarController
         completion?(tabBarController)
     }
