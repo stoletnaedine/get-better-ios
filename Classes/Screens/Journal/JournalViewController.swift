@@ -149,7 +149,7 @@ class JournalViewController: UIViewController {
             action: #selector(showJournalTutorial))
 
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.largeTitleDisplayMode = .always
     }
 
     private func setupRefreshControl() {
