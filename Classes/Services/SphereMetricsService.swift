@@ -23,43 +23,45 @@ class SphereMetricsService: SphereMetricsServiceProtocol {
               let currentValue = currentAll.values[sphere.rawValue] else { return "" }
         
         let spherePosts = userData.posts
-            .filter({ $0.sphere == sphere })
+            .filter { $0.sphere == sphere }
             .sorted(by: { $0.timestamp ?? 0 < $1.timestamp ?? 0 })
         
-        let postsCount = spherePosts.count
         var isPopularOrNot = ""
         var warning = ""
+        let postsCount = spherePosts.count
         let postCountResult = postsCount == .zero
-            ? "⚠️ В этой сфере у тебя еще нет записей в дневник."
-            : "✍️ Написано постов — \(postsCount)"
-        
-        let values = "\n\n🌘 Начальное значение — \(startValue)\n🌖 Текущее значение — \(currentValue)"
-        
+            ? R.string.localizable.sphereDetailPostsEmpty()
+            : R.string.localizable.sphereDetailPostsNotEmpty("\(postsCount)")
+
+        let values = R.string.localizable.sphereDetailStartValue(startValue.toString(), currentValue.toString())
+
+        let sphereString = "\(sphere.icon)\u{00a0}\(sphere.name)"
         if currentValue == Properties.maxSphereValue {
-            isPopularOrNot = "💜 Невероятно!\nСфера \(sphere.icon)\(sphere.name) проработана на максимум.\nТеперь можешь обратить внимание на другие сферы.\n\n"
+            isPopularOrNot = R.string.localizable.sphereDetailMax(sphereString)
         } else if currentValue > startValue {
-            isPopularOrNot = "🚀 Отлично!\nТы прокачиваешь \(sphere.icon)\(sphere.name) и это заметно.\n\n"
+            isPopularOrNot = R.string.localizable.sphereDetailGood(sphereString)
         } else if currentValue < startValue {
-            warning = "\n\n❓ Почему текущее значение может быть меньше начального?\nВ приложении работает хитрый алгоритм, который уменьшает баллы за бездействие. Всё как в жизни: если мы забрасываем дело, его навык со временем теряется. Лучший способ исправить это — начать писать в дневник."
+            warning = R.string.localizable.sphereDetailWarning()
         }
         
         let rating = mostLessPopularSphere(posts: userData.posts)
         if sphere == rating.mostPopularSphere {
-            isPopularOrNot = "🤩 Потрясающе! Ты уделяешь сфере \(sphere.icon)\(sphere.name) больше всего внимания.\n\n"
+            isPopularOrNot = R.string.localizable.sphereDetailMaxAttention(sphereString)
         }
         if sphere == rating.lessPopularSphere {
-            isPopularOrNot = "❗️ Обрати внимание. Ты совсем не занимаешься этой сферой (или забываешь писать о ней).\n\n"
+            isPopularOrNot = R.string.localizable.sphereDetailMinAttention()
         }
         
         var maxValuePredictionDate = ""
-        if currentValue < Properties.maxSphereValue && postsCount > 2 {
-            if let date = getMaxValuePredictionDate(spherePosts: spherePosts, startValue: startValue) {
-                maxValuePredictionDate = "\n\n💻 Суперкомпьютер даёт прогноз: при том же темпе ты достигнешь десяти баллов \(date)"
-            }
+        if currentValue < Properties.maxSphereValue && postsCount > 2,
+           let date = getMaxValuePredictionDate(spherePosts: spherePosts, startValue: startValue) {
+            maxValuePredictionDate = R.string.localizable.sphereDetailSuperComputer(date)
         }
         
         return "\(isPopularOrNot)\(postCountResult)\(values)\(warning)\(maxValuePredictionDate)"
     }
+
+    // MARK: — Private methods
     
     private func mostLessPopularSphere(posts: [Post]) -> (mostPopularSphere: Sphere?, lessPopularSphere: Sphere?) {
         if posts.count > 3 {

@@ -60,12 +60,12 @@ class EditProfileViewController: UIViewController {
                     changeRequest.photoURL = url
                     changeRequest.commitChanges(completion: { [weak self] error in
                         if let error = error {
-                            self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                            self?.alertService.showErrorMessage(error.localizedDescription)
                         }
                         dispatchGroup.leave()
                     })
                 case .failure(let error):
-                    self?.alertService.showErrorMessage(desc: String(describing: error.name))
+                    self?.alertService.showErrorMessage(String(describing: error.name))
                     dispatchGroup.leave()
                 }
             })
@@ -78,7 +78,7 @@ class EditProfileViewController: UIViewController {
             changeRequest.displayName = newName
             changeRequest.commitChanges(completion: { [weak self] error in
                 if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self?.alertService.showErrorMessage(error.localizedDescription)
                 }
                 dispatchGroup.leave()
             })
@@ -88,9 +88,9 @@ class EditProfileViewController: UIViewController {
             dispatchGroup.enter()
             user.updatePassword(to: newPassword, completion: { [weak self] error in
                 if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self?.alertService.showErrorMessage(error.localizedDescription)
                 } else {
-                    self?.alertService.showSuccessMessage(desc: R.string.localizable.editProfileSuccessPassChanged())
+                    self?.alertService.showSuccessMessage(R.string.localizable.editProfileSuccessPassChanged())
                 }
                 dispatchGroup.leave()
             })
@@ -102,7 +102,7 @@ class EditProfileViewController: UIViewController {
             user.updateEmail(to: newEmail, completion: { [weak self] error in
                 dispatchGroup.leave()
                 if let error = error {
-                    self?.alertService.showErrorMessage(desc: error.localizedDescription)
+                    self?.alertService.showErrorMessage(error.localizedDescription)
                 }
             })
         }
@@ -112,7 +112,7 @@ class EditProfileViewController: UIViewController {
             self.passwordTextField.text = nil
             self.stopAnimation()
             self.navigationController?.popViewController(animated: true)
-            self.alertService.showSuccessMessage(desc: R.string.localizable.profileSuccessEdit())
+            self.alertService.showSuccessMessage(R.string.localizable.profileSuccessEdit())
             self.completion?()
         })
     }
@@ -135,7 +135,7 @@ class EditProfileViewController: UIViewController {
                     guard error == nil else {
                         guard let firebaseError = error,
                               let appError = AppError(firebaseError: firebaseError).name else { return }
-                        self.alertService.showErrorMessage(desc: appError)
+                        self.alertService.showErrorMessage(appError)
                         self.showPasswordAlert { password in
                             guard let email = user.email else { return }
                             let credential = EmailAuthProvider.credential(withEmail: email, password: password)
@@ -144,14 +144,14 @@ class EditProfileViewController: UIViewController {
                             user.reauthenticate(with: credential) { _, error in
                                 self.stopAnimation()
                                 guard error == nil else {
-                                    self.alertService.showErrorMessage(desc: R.string.localizable.editProfileReauthError())
+                                    self.alertService.showErrorMessage(R.string.localizable.editProfileReauthError())
                                     alert.dismiss(animated: true, completion: nil)
                                     return
                                 }
                                 // try delete account
                                 user.delete(completion: { error in
                                     guard error == nil else {
-                                        self.alertService.showErrorMessage(desc: R.string.localizable.errorDefaultMessage())
+                                        self.alertService.showErrorMessage(R.string.localizable.errorDefaultMessage())
                                         alert.dismiss(animated: true, completion: nil)
                                         return
                                     }
@@ -180,7 +180,7 @@ class EditProfileViewController: UIViewController {
     private func logout() {
         userDataService.deleteCredentials()
         self.alertService.showSuccessMessage(
-            desc: R.string.localizable.editProfileDeleteAlertSuccess())
+            R.string.localizable.editProfileDeleteAlertSuccess())
         NotificationCenter.default.post(name: .logout, object: nil)
     }
 

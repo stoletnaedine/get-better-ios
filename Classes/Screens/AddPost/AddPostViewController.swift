@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import YPImagePicker
 
 enum PostType {
     case add
     case edit
+}
+
+enum ImageViewState {
+    case empty
+    case fill
 }
 
 class AddPostViewController: UIViewController {
@@ -28,18 +34,35 @@ class AddPostViewController: UIViewController {
     @IBOutlet weak var placeholderLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cancelLoadButton: UIButton!
+    @IBOutlet weak var photoCounterLabel: UILabel!
+    @IBOutlet weak var notAddSphereValueLabel: UILabel!
+    @IBOutlet weak var notAddSphereValueSwitch: UISwitch!
     
-    var selectedSphere: Sphere?
+    enum Constants {
+        static let maxSymbolsCount: Int = 2000
+    }
+
     let database: DatabaseProtocol = FirebaseDatabase()
+    let storage: FileStorageProtocol = FirebaseStorage()
     let alertService: AlertServiceProtocol = AlertService()
     let userService: UserSettingsServiceProtocol = UserSettingsService()
+    var selectedSphere: Sphere?
     var addedPostCompletion: VoidClosure?
     var postType: PostType = .add
-    var isOldPhoto: Bool = true
-    let maxSymbolsCount: Int = 300
-    
-    private let storage: FileStorageProtocol = FirebaseStorage()
-    private var imageToUpload: UIImage?
+    var isClearedPhotos = false
+    var imagesToUpload: [UIImage] = [] {
+        didSet {
+            imageView.image = imagesToUpload.first
+            photoCounterLabel.text = self.imagesToUpload.count > 1
+                ? "+\(self.imagesToUpload.count - 1)"
+                : nil
+        }
+    }
+    var isNotAddSphereValue = false
+
+    // MARK: — Private properties
+
+    private var selectedItems: [YPMediaItem]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,95 +86,122 @@ class AddPostViewController: UIViewController {
     }
 
     @IBAction func cancelLoadButtonDidTap(_ sender: Any) {
-        imageToUpload = nil
-        isOldPhoto = false
-        cancelLoadButton.isHidden = true
-        loadImageButton.isHidden = false
-        bigLoadImageButton.isHidden = false
-        loadImageButton.alpha = 0
-        UIView.animate(withDuration: 0.8,
-                       animations: {
-                        self.imageView.alpha = 0
-                        self.loadImageButton.alpha = 1
-                       },
-                       completion: { _ in
-                        self.imageView.alpha = 1
-                        self.imageView.image = nil
-                       })
+        imagesToUpload = []
+        selectedItems = nil
+        isClearedPhotos = true
+        setupImageView(.empty)
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
+        self.configurePost() { [weak self] post in
+            guard let self = self else { return }
+            self.savePost(post)
+        }
+    }
+
+    @IBAction func notAddSphereValueSwitchChanged(_ sender: UISwitch) {
+        isNotAddSphereValue = sender.isOn
+    }
+
+    func configurePost(completion: @escaping (Post) -> Void) {
         guard let text = postTextView.text, !text.isEmpty else {
-            alertService.showErrorMessage(desc: R.string.localizable.postEmptyText())
+            alertService.showErrorMessage(R.string.localizable.postEmptyText())
             return
         }
         guard let sphere = selectedSphere else {
-            alertService.showErrorMessage(desc: R.string.localizable.postEmptySphere())
+            alertService.showErrorMessage(R.string.localizable.postEmptySphere())
             return
         }
-        
-        var photoResult = Photo()
-        let dispatchGroup = DispatchGroup()
-        
-        if let photo = imageToUpload {
-            guard !(postType == .edit && isOldPhoto) else {
-                savePost(text: text, sphere: sphere, photoResult: photoResult)
-                return
-            }
-            
-            dispatchGroup.enter()
+        guard self.postType == .add else { return }
+
+        if !imagesToUpload.isEmpty {
             self.showLoadingAnimation(on: self.view)
             self.selectSphereButton.isEnabled = false
             self.saveButton.isEnabled = false
-            
-            storage.uploadPhoto(photo: photo, completion: { [weak self] result in
+            if #available(iOS 13.0, *) {
+                self.isModalInPresentation = true
+            }
+
+            self.storage.uploadPhotos(imagesToUpload, needFirstPhotoPreview: true) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
-                case .success(let photo):
-                    photoResult = photo
-                    dispatchGroup.leave()
-                case .failure(let error):
+                case let .success(postPhotos):
+                    let post = Post(
+                        id: nil,
+                        text: text,
+                        sphere: sphere,
+                        timestamp: Date.currentTimestamp,
+                        previewUrl: postPhotos.preview?.url,
+                        previewName: postPhotos.preview?.name,
+                        photos: postPhotos.photos,
+                        notAddSphereValue: self.isNotAddSphereValue)
+                    completion(post)
+                case let .failure(error):
                     DispatchQueue.main.async {
                         self.stopAnimation()
                         self.selectSphereButton.isEnabled = true
                         self.saveButton.isEnabled = true
                     }
-                    self.alertService.showErrorMessage(desc: error.localizedDescription)
-                    dispatchGroup.leave()
+                    self.alertService.showErrorMessage(error.localizedDescription)
                 }
-            })
+            }
+        } else {
+            let post = Post(
+                id: nil,
+                text: text,
+                sphere: sphere,
+                timestamp: Date.currentTimestamp,
+                previewUrl: nil,
+                previewName: nil,
+                photos: nil,
+                notAddSphereValue: self.isNotAddSphereValue)
+            completion(post)
         }
-        
-        dispatchGroup.notify(queue: .global(), execute: { [weak self] in
-            guard let self = self else { return }
-            self.savePost(text: text, sphere: sphere, photoResult: photoResult)
-        })
     }
     
-    func savePost(text: String, sphere: Sphere, photoResult: Photo) {
-        let post = Post(id: nil,
-                        text: text,
-                        sphere: sphere,
-                        timestamp: Date.currentTimestamp,
-                        photoUrl: photoResult.photoUrl,
-                        photoName: photoResult.photoName,
-                        previewUrl: photoResult.previewUrl,
-                        previewName: photoResult.previewName)
-        
+    func savePost(_ post: Post) {
         database.savePost(post) { [weak self] in
             guard let self = self else { return }
             self.userService.clearDraft()
             self.stopAnimation()
-            let description = "\(sphere.name) \(R.string.localizable.postSuccessValue())"
-            self.alertService.showSuccessMessage(desc: description)
+            let valueDescription = self.isNotAddSphereValue ? R.string.localizable.postNotAddValue() : R.string.localizable.postSuccessValue()
+            let description = "\(post.sphere?.name ?? "") \(valueDescription)"
+            self.alertService.showSuccessMessage(description)
             self.addedPostCompletion?()
             self.dismiss(animated: true, completion: nil)
         }
     }
     
     func setupSelectSphereButtonTapHandler() {
-        selectSphereButton.addTarget(self, action: #selector(showPicker), for: .allTouchEvents)
+        selectSphereButton.addTarget(self, action: #selector(showSpherePicker), for: .allTouchEvents)
     }
+
+    func setupImageView(_ state: ImageViewState) {
+        switch state {
+        case .empty:
+            photoCounterLabel.isHidden = true
+            cancelLoadButton.isHidden = true
+            loadImageButton.isHidden = false
+            bigLoadImageButton.isHidden = false
+            loadImageButton.alpha = 0
+            UIView.animate(
+                withDuration: 0.6,
+                animations: {
+                    self.imageView.alpha = 0
+                    self.loadImageButton.alpha = 1
+                },
+                completion: { _ in
+                    self.imageView.alpha = 1
+                    self.imageView.image = nil
+                })
+        case .fill:
+            loadImageButton.isHidden = true
+            cancelLoadButton.isHidden = false
+            photoCounterLabel.isHidden = false
+        }
+    }
+
+    // MARK: — Private methods
     
     private func setupTextView() {
         postTextView.delegate = self
@@ -161,33 +211,56 @@ class AddPostViewController: UIViewController {
         placeholderLabel.isHidden = !draftText.isEmpty
     }
     
-    @objc private func showPicker() {
+    @objc private func showSpherePicker() {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
         
-        let customTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.addSubview(customTextField)
+        let hiddenTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.addSubview(hiddenTextField)
         
-        customTextField.inputView = picker
-        customTextField.becomeFirstResponder()
+        hiddenTextField.inputView = picker
+        hiddenTextField.becomeFirstResponder()
     }
-    
-    // MARK: — Private methods
 
     private func openImagePickerController() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = .photoLibrary
-        picker.navigationBar.tintColor = .white
-        picker.navigationBar.barTintColor = .violet
+        var config = YPImagePickerConfiguration()
+        config.onlySquareImagesFromCamera = false
+        config.albumName = "GetBetter"
+        config.startOnScreen = .library
+        config.targetImageSize = .cappedTo(size: 1000)
+        config.hidesStatusBar = true
+        config.gallery.hidesRemoveButton = false
+        config.colors.tintColor = .violet
+        config.library.maxNumberOfItems = 5
+        config.library.mediaType = .photo
+        config.library.preselectedItems = selectedItems
+        let picker = YPImagePicker(configuration: config)
+        picker.didFinishPicking { [weak self, picker] items, isCancelled in
+            guard let self = self else { return }
+            if isCancelled {
+                if self.selectedItems == nil && self.postType == .add {
+                    self.setupImageView(.empty)
+                    self.imagesToUpload = []
+                }
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+            self.setupImageView(.fill)
+            let images = items.compactMap { item -> UIImage? in
+                guard case .photo(let photo) = item else { return nil }
+                return photo.image
+            }
+            self.imagesToUpload = images
+            self.selectedItems = items
+            picker.dismiss(animated: true, completion: nil)
+        }
         present(picker, animated: true, completion: nil)
     }
     
     private func setupView() {
         postTextView.font = postTextView.font?.withSize(16)
-        titleLabel.font = .journalTitleFont
-        titleLabel.textColor = .violet
+        titleLabel.font = .journalButtonFont
         titleLabel.text = R.string.localizable.addPostTitle()
         saveButtonView.backgroundColor = .grey
         saveButtonView.layer.cornerRadius = 20
@@ -201,7 +274,7 @@ class AddPostViewController: UIViewController {
         dateLabel.text = Date.currentDateWithWeekday()
         symbolsCountLabel.font = .journalDateFont
         symbolsCountLabel.textColor = .grey
-        symbolsCountLabel.text = "\(postTextView.text.count)/\(maxSymbolsCount)"
+        symbolsCountLabel.text = "\(postTextView.text.count)/\(Constants.maxSymbolsCount)"
         sphereView.layer.cornerRadius = 20
         sphereView.layer.borderWidth = 3
         sphereView.layer.borderColor = UIColor.violet.cgColor
@@ -214,6 +287,13 @@ class AddPostViewController: UIViewController {
         placeholderLabel.text = R.string.localizable.postPlaceholder()
         placeholderLabel.font = postTextView.font?.withSize(16)
         placeholderLabel.textColor = .lightGrey
+        photoCounterLabel.textColor = .white
+        photoCounterLabel.font = .journalButtonFont
+        photoCounterLabel.text = nil
+        photoCounterLabel.addShadow(shadowRadius: 2)
+        notAddSphereValueLabel.font = .journalDateFont
+        notAddSphereValueLabel.text = R.string.localizable.addPostNotAddSphereValue()
+        notAddSphereValueSwitch.onTintColor = .violet
     }
 }
 
@@ -251,37 +331,19 @@ extension AddPostViewController: UITextViewDelegate {
             userService.saveDraft(text: postTextView.text)
         }
         let currentTextCount = postTextView.text.count
-        symbolsCountLabel.text = "\(currentTextCount)/\(maxSymbolsCount)"
+        symbolsCountLabel.text = "\(currentTextCount)/\(Constants.maxSymbolsCount)"
         placeholderLabel.isHidden = currentTextCount != 0
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         placeholderLabel.isHidden = !currentText.isEmpty
-        if text.count > maxSymbolsCount {
+        if text.count > Constants.maxSymbolsCount {
             alertService.showErrorMessage(
-                desc: R.string.localizable.addPostMaxSymbolAlert(String(maxSymbolsCount))
-            )
+                R.string.localizable.addPostMaxSymbolAlert(String(Constants.maxSymbolsCount)))
         }
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
-        return updatedText.count <= maxSymbolsCount
-    }
-}
-
-// MARK: UIImagePickerControllerDelegate
-
-extension AddPostViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        loadImageButton.isHidden = true
-        bigLoadImageButton.isHidden = true
-        cancelLoadButton.isHidden = false
-        imageView.image = image
-        imageToUpload = image
-        isOldPhoto = false
+        return updatedText.count <= Constants.maxSymbolsCount
     }
 }

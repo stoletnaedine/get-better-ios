@@ -31,9 +31,10 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        removeBackButtonTitle()
         notificationSettings = userSettingsService.getNotificationSettings()
         difficultyLevel = userSettingsService.getDifficultyLevel()
-        customizeBarButton()
+        setupNavigationBar()
         setupView()
         setupRefreshControl()
         setupTableView()
@@ -75,11 +76,12 @@ class SettingsViewController: UIViewController {
         tableView.refreshControl = refreshControl
     }
     
-    private func customizeBarButton() {
-        let signOutBarButton = UIBarButtonItem(title: R.string.localizable.settingsExit(),
-                                               style: .plain,
-                                               target: self,
-                                               action: #selector(logoutButtonDidTap))
+    private func setupNavigationBar() {
+        let signOutBarButton = UIBarButtonItem(
+            title: R.string.localizable.settingsExit(),
+            style: .plain,
+            target: self,
+            action: #selector(logoutButtonDidTap))
         navigationItem.rightBarButtonItem = signOutBarButton
     }
     
@@ -166,22 +168,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(model: model)
             return cell
             
-        case .aboutApp:
+        case .aboutApp, .version:
             let cell = UITableViewCell()
             cell.backgroundColor = .appBackground
             cell.textLabel?.text = item.title
             cell.textLabel?.textColor = .gray
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
-            return cell
-
-        case .version:
-            let cell = UITableViewCell()
-            cell.backgroundColor = .appBackground
-            cell.textLabel?.text = item.title
-            cell.textLabel?.textColor = .violet
-            cell.selectionStyle = .none
-            cell.accessoryType = .detailButton
             return cell
         }
     }
@@ -211,11 +204,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 title: R.string.localizable.settingsDiffLevelInfoTitle(),
                 description: R.string.localizable.settingsDiffLevelInfoDescription(),
                 buttonText: R.string.localizable.oK())
-        case .version:
-            alertService.showPopUpMessage(
-                title: R.string.localizable.newVersionAlertTitle(),
-                description: R.string.localizable.newVersionAlertMessage(),
-                buttonText: R.string.localizable.newVersionAlertButton())
         default:
             break
         }
@@ -225,7 +213,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: — Models
 
-private extension SettingsViewController {
+extension SettingsViewController {
     
     private func fetchModels() {
         let editProfileViewController = EditProfileViewController()
@@ -236,9 +224,9 @@ private extension SettingsViewController {
         let aboutAppVC = ArticleViewController()
         aboutAppVC.article = Article(
             title: R.string.localizable.aboutAppTitle(),
-                                     titleView: UIImageView(image: R.image.titleViewLogo()),
-                                     text: R.string.localizable.aboutAppDescription(),
-                                     image: R.image.aboutTeam())
+            titleView: UIView.appLogo(),
+            text: R.string.localizable.aboutAppDescription(),
+            image: R.image.aboutTeam())
         
         let pushNotificationsVC = PushNotificationsViewController()
         pushNotificationsVC.completion = { [weak self] in
@@ -248,6 +236,7 @@ private extension SettingsViewController {
         }
         
         let appVersionVC = TextViewViewController()
+        appVersionVC.title = R.string.localizable.appVersionsTitle()
         appVersionVC.text = R.string.localizable.appVersions()
         
         models = [
@@ -283,7 +272,7 @@ private extension SettingsViewController {
             SettingsCellViewModel(
                 type: .version,
                 cell: SettingsCell(
-                    title: R.string.localizable.settingsVersionIs(),
+                    title: R.string.localizable.settingsVersionIs(Properties.appVersion),
                     action: { [weak self] in
                         self?.navigationController?.pushViewController(appVersionVC, animated: true)
                     })
@@ -307,7 +296,7 @@ private extension SettingsViewController {
         ]
     }
     
-    func difficultyLevelClosure() -> VoidClosure {
+    private func difficultyLevelClosure() -> VoidClosure {
         return { [weak self] in
             guard let self = self else { return }
             let alert = UIAlertController()
@@ -318,7 +307,7 @@ private extension SettingsViewController {
                     handler: { [weak self] _ in
                         guard let self = self else { return }
                         self.userSettingsService.setDifficultyLevel(level)
-                        self.alertService.showSuccessMessage(desc: R.string.localizable.settingsDiffLevelSave())
+                        self.alertService.showSuccessMessage(R.string.localizable.settingsDiffLevelSave())
                         self.difficultyLevel = self.userSettingsService.getDifficultyLevel()
                         self.tableView.reloadData()
                     })
@@ -345,10 +334,10 @@ private extension SettingsViewController {
         guard let user = Auth.auth().currentUser else { return }
         DispatchQueue.main.async {
             completion(
-                Profile(avatarURL: user.photoURL,
-                        name: user.displayName ?? R.string.localizable.settingsDefaultName(),
-                        email: user.email ?? R.string.localizable.settingsDefaultEmail())
-            )
+                Profile(
+                    avatarURL: user.photoURL,
+                    name: user.displayName ?? R.string.localizable.settingsDefaultName(),
+                    email: user.email ?? R.string.localizable.settingsDefaultEmail()))
         }
     }
     

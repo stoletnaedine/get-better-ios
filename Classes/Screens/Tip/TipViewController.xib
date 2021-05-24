@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="ovu-xa-ycr" id="Ces-wR-N6D"/>
+                <outlet property="footerGradientImageView" destination="2La-QQ-YLL" id="IvK-vm-eh4"/>
                 <outlet property="imageView" destination="s8v-61-MI6" id="Azb-WL-nNW"/>
                 <outlet property="likeButton" destination="zwx-3U-XLS" id="zKD-bJ-46V"/>
                 <outlet property="likesCounterLabel" destination="RGg-78-OIp" id="3dm-TP-AmY"/>
@@ -29,7 +30,7 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s8v-61-MI6" userLabel="Background Image View">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tip/tip-footer" translatesAutoresizingMaskIntoConstraints="NO" id="2La-QQ-YLL">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tip/tip-footer" translatesAutoresizingMaskIntoConstraints="NO" id="2La-QQ-YLL">
                     <rect key="frame" x="0.0" y="566" width="414" height="170"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IME-tg-cEj" userLabel="Tip Outer Container">

@@ -9,6 +9,7 @@
 import Foundation
 
 extension String {
+
     var htmlToAttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return NSAttributedString() }
         do {
@@ -17,7 +18,9 @@ extension String {
             return NSAttributedString()
         }
     }
+
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
     }
+    
 }

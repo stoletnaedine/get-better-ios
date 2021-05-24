@@ -34,7 +34,7 @@ class SphereDetailViewController: UIViewController {
         guard let sphere = sphereValue.sphere else { return }
         guard let value = sphereValue.value else { return }
         sphereLabel.text = sphere.name
-        valueLabel.text = value.stringWithComma()
+        valueLabel.text = value.toString()
         textView.text = text
     }
     

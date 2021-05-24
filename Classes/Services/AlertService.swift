@@ -8,8 +8,8 @@ import SwiftEntryKit
 
 protocol AlertServiceProtocol {
     func showPopUpMessage(title: String, description: String, buttonText: String)
-    func showErrorMessage(desc: String)
-    func showSuccessMessage(desc: String)
+    func showErrorMessage(_ message: String)
+    func showSuccessMessage(_ message: String)
 }
 
 class AlertService: UIViewController, AlertServiceProtocol {
@@ -20,19 +20,19 @@ class AlertService: UIViewController, AlertServiceProtocol {
         SwiftEntryKit.display(entry: CustomPopUpView(with: message), using: attributes)
     }
 
-    func showErrorMessage(desc: String) {
+    func showErrorMessage(_ message: String) {
         showNotificationMessage(
             title: R.string.localizable.error(),
-            desc: desc,
+            desc: message,
             textColor: .white,
             colors: [EKColor(.coral), EKColor(.violet)],
             image: R.image.error())
     }
 
-    func showSuccessMessage(desc: String) {
+    func showSuccessMessage(_ message: String) {
         showNotificationMessage(
             title: R.string.localizable.success(),
-            desc: desc,
+            desc: message,
             textColor: .white,
             colors: [EKColor(.violet), EKColor(.coral)],
             image: R.image.success())

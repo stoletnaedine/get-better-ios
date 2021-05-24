@@ -1,4 +1,4 @@
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 target 'GetBetter' do
   use_frameworks!
@@ -17,4 +17,6 @@ target 'GetBetter' do
   pod 'MaterialShowcase'
   pod 'Kingfisher', '~> 5.0'
   pod 'lottie-ios'
+  pod 'YPImagePicker'
+  pod 'Lightbox'
 end

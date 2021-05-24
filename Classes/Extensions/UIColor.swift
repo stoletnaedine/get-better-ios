@@ -1,5 +1,5 @@
 //
-//  Color.swift
+//  UIColor.swift
 //  GetBetter
 //
 //  Created by Artur Islamgulov on 19.03.2020.

@@ -39,7 +39,7 @@ class LifeCircleViewController: UIViewController {
     private let lifeCircleService: LifeCircleServiceProtocol = LifeCircleService()
     private let database: DatabaseProtocol = FirebaseDatabase()
     private let alertService: AlertServiceProtocol = AlertService()
-    private let userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
+    private var userDefaultsService: UserSettingsServiceProtocol = UserSettingsService()
     private let tipStorage = TipStorage()
     private var userData: UserData?
     private var isCurrentDataVisible = true
@@ -55,14 +55,18 @@ class LifeCircleViewController: UIViewController {
         setupRefreshControl()
         setupChartViewTap()
         setupBarButton()
+        loadAndShowData(animate: true)
+        if !userDefaultsService.tipOfTheDayHasShown {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [weak self] in
+                guard let self = self else { return }
+                self.showTipOfTheDay()
+            })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !userDefaultsService.isTipOfTheDayHasShown() {
-            showTip()
-        }
-        loadAndShowData(animate: true)
+        loadAndShowData(animate: false)
     }
     
     @IBAction func currentLevelButtonDidTap(_ sender: UIButton) {
@@ -99,18 +103,14 @@ class LifeCircleViewController: UIViewController {
         startLevelView.backgroundColor = .white
     }
     
-    @objc func showTip() {
-        let tipEntities = tipStorage.tipEntities
-        // 36 - поправка для отображения новых советов дня
-        let days = Date().diffInDaysSince1970() + 36
-        let tipIndex = days % tipEntities.count
-        let tipEntityOfTheDay = tipEntities[tipIndex]
+    @objc func showTipOfTheDay() {
+        let tipEntityOfTheDay = tipStorage.currentTip
         
         let tipVC = TipViewController()
         tipVC.modalPresentationStyle = .overFullScreen
         tipVC.tipEntity = tipEntityOfTheDay
         present(tipVC, animated: true, completion: nil)
-        userDefaultsService.tipOfTheDayHasShown(true)
+        userDefaultsService.tipOfTheDayHasShown = true
     }
     
     private func setupBarButton() {
@@ -118,10 +118,10 @@ class LifeCircleViewController: UIViewController {
             title: R.string.localizable.journalTipOfTheDay(),
             style: .plain,
             target: self,
-            action: #selector(showTip))
+            action: #selector(showTipOfTheDay))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: R.image.helpIcon(),
+            image: R.image.info(),
             style: .plain,
             target: self,
             action: #selector(showLifeCircleTutorial))
@@ -129,10 +129,17 @@ class LifeCircleViewController: UIViewController {
 
     @objc private func showLifeCircleTutorial() {
         let vc = ArticleViewController()
+        var exampleImage: UIImage?
+        switch Locale.current.languageCode {
+        case "ru":
+            exampleImage = R.image.lifeCircleExampleRus()
+        default:
+            exampleImage = R.image.lifeCircleExampleEng()
+        }
         vc.article = Article(
             title: R.string.localizable.aboutCircleTitle(),
             text: R.string.localizable.aboutCircleDescription(),
-            image: R.image.lifeCircleExample())
+            image: exampleImage)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -304,12 +311,12 @@ class DataSetValueFormatter: IValueFormatter {
         if dataSetIndex == currentDataSetIndex
             && isCurrentDataVisible
             && isValuesVisible {
-            return value.stringWithComma()
+            return value.toString()
         }
         if dataSetIndex == startDataSetIndex
             && !isCurrentDataVisible
             && isValuesVisible {
-            return value.stringWithComma()
+            return value.toString()
         }
         return ""
     }

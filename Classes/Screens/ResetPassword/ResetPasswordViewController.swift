@@ -30,7 +30,7 @@ class ResetPasswordViewController: UIViewController {
         
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
             !email.isEmpty else {
-                alertService.showErrorMessage(desc: R.string.localizable.emailIsEmpty())
+                alertService.showErrorMessage(R.string.localizable.emailIsEmpty())
                 return
         }
         self.showLoadingAnimation(on: self.view)
@@ -40,9 +40,9 @@ class ResetPasswordViewController: UIViewController {
             self.stopAnimation()
             
             if let error = error, let appError = AppError(firebaseError: error).name {
-                self.alertService.showErrorMessage(desc: appError)
+                self.alertService.showErrorMessage(appError)
             } else {
-                self.alertService.showSuccessMessage(desc: R.string.localizable.resetPasswordAlertEmail())
+                self.alertService.showSuccessMessage(R.string.localizable.resetPasswordAlertEmail())
                 self.dismiss(animated: true, completion: nil)
             }
         })

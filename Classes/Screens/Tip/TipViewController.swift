@@ -28,51 +28,32 @@ class TipViewController: UIViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesCounterLabel: UILabel!
+    @IBOutlet weak var footerGradientImageView: UIImageView!
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     var tipEntity: TipEntity?
     
     private let database: DatabaseProtocol = FirebaseDatabase()
+    private let tipStorage = TipStorage()
     
     private var isLike: Bool = false {
         didSet {
             self.setLikeButton()
         }
     }
-    
-    private let backgroundNames = [
-        R.image.tip.darkBg.darkBg1.name,
-        R.image.tip.darkBg.darkBg2.name,
-        R.image.tip.darkBg.darkBg3.name,
-        R.image.tip.darkBg.darkBg4.name,
-        R.image.tip.darkBg.darkBg5.name,
-        R.image.tip.darkBg.darkBg6.name,
-        R.image.tip.darkBg.darkBg7.name,
-        R.image.tip.darkBg.darkBg8.name,
-        R.image.tip.darkBg.darkBg9.name,
-        R.image.tip.darkBg.darkBg10.name,
-        R.image.tip.darkBg.darkBg11.name,
-        R.image.tip.darkBg.darkBg12.name,
-        R.image.tip.darkBg.darkBg13.name,
-        R.image.tip.darkBg.darkBg14.name,
-        R.image.tip.darkBg.darkBg15.name,
-        R.image.tip.darkBg.darkBg16.name,
-        R.image.tip.darkBg.darkBg17.name,
-        R.image.tip.darkBg.darkBg18.name,
-        R.image.tip.darkBg.darkBg19.name,
-        R.image.tip.darkBg.darkBg20.name,
-        R.image.tip.darkBg.darkBg21.name,
-        R.image.tip.darkBg.darkBg22.name,
-        R.image.tip.darkBg.darkBg23.name
-    ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupSwipeGesture()
         setupCancelButton()
         setupLikeButton()
-        setupShadow(for: self.titleLabel)
-        setupShadow(for: self.textLabel)
+        titleLabel.addShadow()
+        textLabel.addShadow()
+        setNeedsStatusBarAppearanceUpdate()
         
         guard let tipEntity = self.tipEntity else { return }
         configure(tip: tipEntity.tip)
@@ -83,8 +64,9 @@ class TipViewController: UIViewController {
         guard let screenshot = self.view.takeScreenshot() else { return }
         setVisibleForUI(hidden: false)
         
-        let activityVC = UIActivityViewController(activityItems: [screenshot, R.string.localizable.shareText()],
-                                                  applicationActivities: nil)
+        let activityVC = UIActivityViewController(
+            activityItems: [screenshot, R.string.localizable.shareText()],
+            applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
     }
@@ -94,14 +76,7 @@ class TipViewController: UIViewController {
         shareButton.isHidden = hidden
         likeButton.isHidden = hidden
         likesCounterLabel.isHidden = hidden
-    }
-    
-    private func setupShadow(for label: UILabel) {
-        label.layer.shadowColor = UIColor.black.cgColor
-        label.layer.shadowOffset = .init(width: 1, height: 1)
-        label.layer.shadowOpacity = 1
-        label.layer.shadowRadius = 10
-        label.layer.masksToBounds = false
+        footerGradientImageView.isHidden = hidden
     }
     
     private func setupSwipeGesture() {
@@ -147,7 +122,7 @@ class TipViewController: UIViewController {
         
         database.getTipLikesCount(for: tipId, completion: { [weak self] result in
             switch result {
-            case .success(let likesCount):
+            case let .success(likesCount):
                 self?.setupLikesCount(likesCount)
             case .failure:
                 break
@@ -186,9 +161,8 @@ class TipViewController: UIViewController {
     
     private func setupView() {
         guard let tipId = self.tipEntity?.id else { return }
-        let imageIndex = tipId % backgroundNames.count
-        let tipBackground = TipBackground(style: .dark,
-                                          image: UIImage(named: backgroundNames[imageIndex]))
+        let image = tipStorage.image(for: tipId)
+        let tipBackground = TipBackground(style: .dark, image: image)
         
         imageView.image = tipBackground.image
         cancelButton.style = .white

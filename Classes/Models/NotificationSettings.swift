@@ -44,15 +44,15 @@ enum TipTopic: String, CaseIterable {
     var text: String {
         switch self {
         case .none:
-            return "Не выбрано"
+            return R.string.localizable.pushNotificationsNotSelect()
         case .tip6:
-            return "6:00 МСК"
+            return R.string.localizable.pushNotificationsTip6()
         case .tip8:
-            return "8:00 МСК"
+            return R.string.localizable.pushNotificationsTip8()
         case .tip10 :
-            return "10:00 МСК"
+            return R.string.localizable.pushNotificationsTip10()
         case .tip12:
-            return "12:00 МСК"
+            return R.string.localizable.pushNotificationsTip12()
         }
     }
 }
@@ -83,15 +83,15 @@ enum PostTopic: String, CaseIterable {
     var text: String {
         switch self {
         case .none:
-            return "Не выбрано"
+            return R.string.localizable.pushNotificationsNotSelect()
         case .post16:
-            return "16:00 МСК"
+            return R.string.localizable.pushNotificationsPost16()
         case .post18:
-            return "18:00 МСК"
+            return R.string.localizable.pushNotificationsPost18()
         case .post20 :
-            return "20:00 МСК"
+            return R.string.localizable.pushNotificationsPost20()
         case .post22:
-            return "22:00 МСК"
+            return R.string.localizable.pushNotificationsPost22()
         }
     }
 }

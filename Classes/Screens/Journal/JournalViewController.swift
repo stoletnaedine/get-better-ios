@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class JournalViewController: UIViewController {
 
@@ -21,29 +22,54 @@ class JournalViewController: UIViewController {
     private let database: DatabaseProtocol = FirebaseDatabase()
     private let alertService: AlertServiceProtocol = AlertService()
     private let connectionHelper = ConnectionHelper()
+    private var posts: [Post] = []
     private var postSections: [JournalSection] = []
+    private let refreshControl = UIRefreshControl()
+    private let searchController = UISearchController()
+    private let emptyPostsAnimateView = AnimationView(name: AnimationName.yoga.value)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchBar()
+        removeBackButtonTitle()
         setupTableView()
-        setupBarButton()
+        setupNavigationBar()
+        setupRefreshControl()
+        setupAnimateView()
         title = R.string.localizable.tabBarJournal()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         updatePostsInTableView()
     }
-    
-    func updatePostsInTableView() {
-        getPosts { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !emptyPostsAnimateView.isHidden {
+            emptyPostsAnimateView.play()
         }
     }
     
+    @objc func updatePostsInTableView() {
+        getPosts { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+    }
+
+    // MARK: — Private methods
+
+    private func setupAnimateView() {
+        tableView.addSubview(emptyPostsAnimateView)
+        emptyPostsAnimateView.frame = tableView.frame
+        emptyPostsAnimateView.contentMode = .scaleAspectFit
+        emptyPostsAnimateView.loopMode = .loop
+        emptyPostsAnimateView.animationSpeed = 1
+        emptyPostsAnimateView.isHidden = true
+    }
+    
     @objc private func addPost() {
-        guard connectionHelper.connectionAvailable() else { return }
+        guard connectionHelper.isConnect() else { return }
         let addPostViewController = AddPostViewController()
         addPostViewController.addedPostCompletion = { [weak self] in
             guard let self = self else { return }
@@ -57,20 +83,22 @@ class JournalViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .failure:
+                completion()
                 break
                 
-            case .success(let posts):
+            case let .success(posts):
                 if posts.isEmpty {
-                    self.postSections = [
-                        JournalSection(type: .empty(info: R.string.localizable.journalPlaceholder()))
-                    ]
-                    self.showAnimation(name: .yoga, on: self.view, loopMode: .loop)
+                    self.emptyPostsAnimateView.isHidden = false
+                    self.emptyPostsAnimateView.play()
+                    self.postSections = [JournalSection(type: .empty(info: R.string.localizable.journalPlaceholder()))]
                 } else {
-                    self.stopAnimation()
+                    self.emptyPostsAnimateView.isHidden = true
+                    self.emptyPostsAnimateView.stop()
+                    self.posts = posts
                     self.convertPostsToSections(posts)
                 }
+                completion()
             }
-            completion()
         })
     }
     
@@ -90,9 +118,7 @@ class JournalViewController: UIViewController {
                     header: JournalSection.Header(
                         month: month,
                         postsCount: "\(postsByDate.count)"),
-                    posts: postsByDate
-                )
-            )
+                    posts: postsByDate))
         }
         
         postSections = postSections.sorted(by: { first, second in
@@ -100,18 +126,35 @@ class JournalViewController: UIViewController {
         })
         self.postSections = postSections
     }
+
+    private func setupSearchBar() {
+        let searchBar = searchController.searchBar
+        searchBar.delegate = self
+        searchBar.placeholder = R.string.localizable.journalSearch()
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
     
-    func setupBarButton() {
+    private func setupNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(addPost))
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: R.image.helpIcon(),
+            image: R.image.info(),
             style: .plain,
             target: self,
             action: #selector(showJournalTutorial))
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+    }
+
+    private func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(updatePostsInTableView), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
 
     @objc private func showJournalTutorial() {
@@ -128,8 +171,10 @@ class JournalViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: Constants.cellXibName, bundle: nil),
-                           forCellReuseIdentifier: Constants.cellId)
+        tableView.register(
+            UINib(nibName: Constants.cellXibName, bundle: nil),
+            forCellReuseIdentifier: Constants.cellId)
+        tableView.showsVerticalScrollIndicator = false
     }
 }
 
@@ -169,6 +214,10 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
         guard let post = postSections[indexPath.section].posts?[indexPath.row] else { return }
         let postDetailViewController = PostDetailViewController()
         postDetailViewController.post = post
+        postDetailViewController.editPostCompletion = { [weak self] in
+            guard let self = self else { return }
+            self.updatePostsInTableView()
+        }
         navigationController?.pushViewController(postDetailViewController, animated: true)
     }
     
@@ -207,7 +256,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
                 handler: { _ in
                     self.database.deletePost(post) { [weak self] in
                         guard let self = self else { return }
-                        self.alertService.showSuccessMessage(desc: R.string.localizable.journalDeletedPost())
+                        self.alertService.showSuccessMessage(R.string.localizable.journalDeletedPost())
                         self.updatePostsInTableView()
                     }
                 })
@@ -234,9 +283,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let _ = postSections[section].posts else {
-            return UIView()
-        }
+        guard let _ = postSections[section].posts else { return UIView() }
         
         let view = UIView(frame: CGRect(x: .zero, y: .zero,
                                         width: tableView.bounds.width,
@@ -250,8 +297,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             x: 15,
             y: .zero,
             width: boundsWidth * 2 / 3,
-            height: Constants.sectionHeaderHeight
-        )
+            height: Constants.sectionHeaderHeight)
         monthLabel.font = UIFont.systemFont(ofSize: 12)
         monthLabel.textColor = .white
         monthLabel.text = postSections[section].header?.month
@@ -262,8 +308,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
             x: boundsWidth - 40,
             y: .zero,
             width: 25,
-            height: Constants.sectionHeaderHeight
-        )
+            height: Constants.sectionHeaderHeight)
         countLabel.font = UIFont.systemFont(ofSize: 12)
         countLabel.textColor = .white
         countLabel.textAlignment = .right
@@ -279,4 +324,31 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
+}
+
+// MARK: — UISearchBarDelegate
+
+extension JournalViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !posts.isEmpty else { return }
+        if let searchText = searchController.searchBar.text,
+           searchText.count > 1 {
+            let searchLowercasedText = searchText.lowercased()
+            let filteredPosts = posts.filter {
+                $0.text?.lowercased().contains(searchLowercasedText) ?? false
+                    || $0.sphere?.name.lowercased().contains(searchLowercasedText) ?? false
+                    || Date.convertToMonthYear(from: $0.timestamp ?? 0).lowercased().contains(searchLowercasedText)
+            }
+            convertPostsToSections(filteredPosts)
+            tableView.reloadData()
+        }
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard !posts.isEmpty else { return }
+        convertPostsToSections(posts)
+        tableView.reloadData()
+    }
+
 }

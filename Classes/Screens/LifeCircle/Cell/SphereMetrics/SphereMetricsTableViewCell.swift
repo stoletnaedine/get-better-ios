@@ -31,7 +31,7 @@ class SphereMetricsTableViewCell: UITableViewCell {
         iconLabel.text = sphereValue.sphere?.icon
         nameLabel.text = sphereValue.sphere?.name
         if let value = sphereValue.value {
-            valueLabel.text = value.stringWithComma()
+            valueLabel.text = value.toString()
             valueView.backgroundColor = UIColor.color(for: value)
         }
         descriptionLabel.text = sphereValue.sphere?.description

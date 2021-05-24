@@ -13,6 +13,7 @@ import FirebaseAuth
 typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
 
 protocol DatabaseProtocol {
+    func keepSyncedPosts()
     func savePost(_ post: Post, completion: VoidClosure?)
     func deletePost(_ post: Post, completion: VoidClosure?)
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
@@ -22,6 +23,7 @@ protocol DatabaseProtocol {
     func saveTipLike(id: Int)
     func deleteTipLike(id: Int)
     func getTipLikesCount(for id: Int, completion: @escaping (Result<Int, AppError>) -> Void)
+    func userTipsLikes(completion: @escaping (Result<[TipLikesViewModel], AppError>) -> Void)
 }
 
 class FirebaseDatabase: DatabaseProtocol {
@@ -37,6 +39,13 @@ class FirebaseDatabase: DatabaseProtocol {
     private let connectionHelper = ConnectionHelper()
     private let dbRef = Database.database().reference()
     private let storage: FileStorageProtocol = FirebaseStorage()
+
+    func keepSyncedPosts() {
+        guard let ref = currentUserPath() else { return }
+        ref
+            .child(Constants.postsPath)
+            .keepSynced(true)
+    }
     
     func savePost(_ post: Post, completion: VoidClosure? = nil) {
         guard let ref = currentUserPath() else { return }
@@ -50,8 +59,7 @@ class FirebaseDatabase: DatabaseProtocol {
                     mapper.map(post: post),
                     withCompletionBlock: { _, _ in
                         completion?()
-                    }
-                )
+                    })
         } else {
             ref
                 .child(Constants.postsPath)
@@ -60,8 +68,7 @@ class FirebaseDatabase: DatabaseProtocol {
                     mapper.map(post: post),
                     withCompletionBlock: { _, _ in
                         completion?()
-                    }
-                )
+                    })
         }
     }
     
@@ -73,26 +80,27 @@ class FirebaseDatabase: DatabaseProtocol {
             .child(Constants.postsPath)
             .child(postId)
             .removeValue(completionBlock: { [weak self] _, _ in
-                completion?()
                 guard let self = self else { return }
-                self.storage.deletePhoto(name: post.photoName)
+                var photoNamesForDelete = [String?]()
+                photoNamesForDelete.append(post.photoName)
+                let photoNames = post.photos?.map { $0.name }
+                photoNamesForDelete.append(contentsOf: photoNames ?? [])
+                photoNamesForDelete.forEach {
+                    self.storage.deletePhoto(name: $0)
+                }
                 self.storage.deletePreview(name: post.previewName)
+                completion?()
             })
     }
     
     
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void) {
-        guard let ref = currentUserPath() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
+        guard let ref = currentUserPath() else { return }
         
         ref
             .child(Constants.postsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
-                
                 let value = snapshot.value as? NSDictionary
-                
                 if let keys = value?.allKeys {
                     var posts: [Post] = []
                     
@@ -122,8 +130,7 @@ class FirebaseDatabase: DatabaseProtocol {
                 sphereMetrics.values,
                 withCompletionBlock: { _, _ in
                     completion?()
-                }
-            )
+                })
     }
     
     func getStartSphereMetrics(completion: @escaping (Result<SphereMetrics, AppError>) -> Void) {
@@ -144,15 +151,9 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func getTipLikeIds(completion: @escaping (Result<[Int], AppError>) -> Void) {
-        guard connectionHelper.connectionAvailable() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
-        guard let userId = Auth.auth().currentUser?.uid else {
-            completion(.failure(AppError(errorCode: .unexpected)))
-            return
-        }
-        
+        connectionHelper.checkConnect()
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+
         dbRef
             .child(Constants.tipLikesPath)
             .child(userId)
@@ -167,11 +168,8 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func getTipLikesCount(for id: Int, completion: @escaping (Result<Int, AppError>) -> Void) {
-        guard connectionHelper.connectionAvailable() else {
-            completion(.failure(AppError(errorCode: .noInternet)))
-            return
-        }
-        
+        connectionHelper.checkConnect()
+
         dbRef
             .child(Constants.tipLikesPath)
             .observeSingleEvent(of: .value, with: { snapshot in
@@ -192,7 +190,7 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func saveTipLike(id: Int) {
-        guard connectionHelper.connectionAvailable() else { return }
+        connectionHelper.checkConnect()
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
         self.getTipLikeIds(completion: { [weak self] likeIds in
@@ -214,7 +212,7 @@ class FirebaseDatabase: DatabaseProtocol {
     }
     
     func deleteTipLike(id: Int) {
-        guard connectionHelper.connectionAvailable() else { return }
+        connectionHelper.checkConnect()
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
         self.getTipLikeIds(completion: { [weak self] likeIds in
@@ -235,9 +233,36 @@ class FirebaseDatabase: DatabaseProtocol {
             }
         })
     }
+
+    func userTipsLikes(completion: @escaping (Result<[TipLikesViewModel], AppError>) -> Void) {
+        connectionHelper.checkConnect()
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+
+        dbRef
+            .child(Constants.tipLikesPath)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                guard let dict = snapshot.value as? NSDictionary,
+                      let array = dict.allValues as? [[Int]] else {
+                    completion(.failure(.init(errorCode: .serverError)))
+                    return
+                }
+                guard let userTipIds = dict[userId] as? [Int] else {
+                    completion(.success([]))
+                    return
+                }
+                let allTipIds = array.reduce([], +)
+                let result = userTipIds.map { tipId -> TipLikesViewModel in
+                    let likeCount = allTipIds.filter { $0 == tipId }.count
+                    return TipLikesViewModel(tipId: tipId, likeCount: likeCount)
+                }
+                completion(.success(result))
+            })
+    }
+
+    // MARK: — Private methods
     
     private func currentUserPath() -> DatabaseReference? {
-        guard connectionHelper.connectionAvailable() else { return nil }
+        connectionHelper.checkConnect()
         
         guard let userId = Auth.auth().currentUser?.uid else { return nil }
         print("Request. UserId = \(userId)")

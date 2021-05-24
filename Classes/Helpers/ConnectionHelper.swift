@@ -12,13 +12,19 @@ class ConnectionHelper {
     
     private let alertService: AlertServiceProtocol = AlertService()
     
-    func connectionAvailable() -> Bool {
+    func isConnect() -> Bool {
         let reachability = try! Reachability()
-        print(reachability.connection)
         if reachability.connection == .unavailable {
-            alertService.showErrorMessage(desc: R.string.localizable.errorNoInternet())
+            alertService.showErrorMessage(R.string.localizable.errorNoInternet())
         }
         return reachability.connection != .unavailable
+    }
+
+    func checkConnect() {
+        let reachability = try! Reachability()
+        if reachability.connection == .unavailable {
+            alertService.showErrorMessage(R.string.localizable.errorNoInternet())
+        }
     }
     
 }

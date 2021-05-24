@@ -10,6 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let logout = Notification.Name("logout")
-    static let showNoInternetScreen = Notification.Name("showNoInternetScreen")
     static let enterApp = Notification.Name("enterApp")
 }

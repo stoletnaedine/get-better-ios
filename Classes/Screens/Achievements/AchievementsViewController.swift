@@ -18,10 +18,11 @@ final class AchievementsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = R.string.localizable.achievementsTitle()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = .appBackground
         addSubviews()
         setupTableView()
         makeConstraints()
-        view.backgroundColor = .appBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,8 +39,8 @@ final class AchievementsViewController: UIViewController {
     
     private func loadData(completion: @escaping VoidClosure) {
         lifeCircleService.loadUserData { [weak self] userData in
-            guard let self = self else { return }
-            guard let userData = userData else { return }
+            guard let self = self,
+                  let userData = userData else { return }
             self.achievements = self.achievementService.calcAchievements(userData: userData)
             completion()
         }
@@ -60,8 +61,7 @@ final class AchievementsViewController: UIViewController {
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: Constants.xibName, bundle: nil),
-                           forCellReuseIdentifier: Constants.reuseId)
+        tableView.register(R.nib.achievementCell)
         tableView.backgroundColor = .appBackground
         tableView.separatorInset = UIEdgeInsets.zero
     }
@@ -76,24 +76,15 @@ extension AchievementsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let achievement = achievements[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseId,
-                                                 for: indexPath) as! AchievementsTableViewCell
-        cell.selectionStyle = .none
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: R.nib.achievementCell.identifier,
+                for: indexPath)  as? AchievementCell else { fatalError("AchievementCell not found") }
         cell.fillCell(from: achievement)
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
-    }
-    
-}
-
-extension AchievementsViewController {
-    
-    private enum Constants {
-        static let xibName = R.nib.achievementsTableViewCell.name
-        static let reuseId = R.reuseIdentifier.achievementsCell.identifier
     }
     
 }

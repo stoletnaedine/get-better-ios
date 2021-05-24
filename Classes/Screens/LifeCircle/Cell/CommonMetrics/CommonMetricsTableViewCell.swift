@@ -39,7 +39,7 @@ class CommonMetricsTableViewCell: UITableViewCell {
         } else {
             postsValueLabel.textColor = .darkGray
         }
-        averageValueLabel.text = viewModel.average.stringWithComma()
+        averageValueLabel.text = viewModel.average.toString()
         averageValueLabel.textColor = UIColor.color(for: viewModel.average)
         daysValueLabel.text = "\(viewModel.days)"
     }

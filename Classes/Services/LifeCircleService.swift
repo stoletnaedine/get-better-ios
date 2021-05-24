@@ -56,7 +56,9 @@ class LifeCircleService: LifeCircleServiceProtocol {
                 completion(nil)
                 return
             }
-            let spheresInPosts = self.posts.map { $0.sphere }
+            let spheresInPosts = self.posts
+                .filter { $0.notAddSphereValue == false }
+                .map { $0.sphere }
             guard let startSphereMetrics = self.startSphereMetrics else {
                 completion(nil)
                 return
