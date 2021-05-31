@@ -485,10 +485,13 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 // Mark: AppVersions
 
 "AppVersions.title" = "Version History";
-"NewVersion.alert.title" = "GetBetter 2.0";
 
 "AppVersions" =
 "
+💜 2.1.0:
+• Likes in Tips of the Day are now counted correctly.
+• Sort up in the section my Tips of the day: the current advice from above, below - those that were in yesterday, the day before yesterday, etc.
+
 🐗 2.0.1:
 • New app icon
 

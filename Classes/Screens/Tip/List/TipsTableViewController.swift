@@ -85,13 +85,24 @@ final class TipsTableViewController: UIViewController {
                     self.emptyPostsAnimateView.isHidden = true
                     self.emptyPostsAnimateView.stop()
                     guard self.tipLikes != models else { return }
-                    let sortedModels = models
-                        .sorted(by: {
-                                    $0.tipId == self.tipStorage.currentTipId
-                                        && $1.tipId != self.tipStorage.currentTipId
-                        })
-                    self.tipLikes = sortedModels
-                    self.tips = sortedModels.map { self.tipStorage.tipEntities[$0.tipId] }
+
+                    let currentTipId = self.tipStorage.currentTipId
+                    var resultModels = [TipLikesViewModel]()
+                    if let currentTip = models.filter({ $0.tipId == currentTipId }).first {
+                        resultModels.append(currentTip)
+                    }
+                    let pastTips = models
+                        .filter({ $0.tipId < currentTipId })
+                        .sorted(by: { $0.tipId > $1.tipId })
+                    resultModels.append(contentsOf: pastTips)
+
+                    let futureTips = models
+                        .filter({ $0.tipId > currentTipId })
+                        .sorted(by: { $0.tipId < $1.tipId })
+                    resultModels.append(contentsOf: futureTips)
+
+                    self.tipLikes = resultModels
+                    self.tips = resultModels.map { self.tipStorage.tipEntities[$0.tipId] }
                     self.tableView.reloadData()
                 }
             case let .failure(error):

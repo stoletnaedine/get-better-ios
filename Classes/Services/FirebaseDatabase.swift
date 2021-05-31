@@ -13,7 +13,7 @@ import FirebaseAuth
 typealias UserData = (start: SphereMetrics?, current: SphereMetrics?, posts: [Post])
 
 protocol DatabaseProtocol {
-    func keepSyncedPosts()
+    func keepSynced()
     func savePost(_ post: Post, completion: VoidClosure?)
     func deletePost(_ post: Post, completion: VoidClosure?)
     func getPosts(completion: @escaping (Result<[Post], AppError>) -> Void)
@@ -40,10 +40,14 @@ class FirebaseDatabase: DatabaseProtocol {
     private let dbRef = Database.database().reference()
     private let storage: FileStorageProtocol = FirebaseStorage()
 
-    func keepSyncedPosts() {
+    func keepSynced() {
         guard let ref = currentUserPath() else { return }
         ref
             .child(Constants.postsPath)
+            .keepSynced(true)
+
+        dbRef
+            .child(Constants.tipLikesPath)
             .keepSynced(true)
     }
     

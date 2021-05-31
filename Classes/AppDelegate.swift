@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Firebase config
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-        database.keepSyncedPosts()
+        database.keepSynced()
         Auth.auth().languageCode = Locale.current.languageCode == "ru" ? "ru" : "en"
 
         registerPushNotifications()
