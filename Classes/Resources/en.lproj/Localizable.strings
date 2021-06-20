@@ -58,7 +58,7 @@
 "Sphere.detail.max" = "💜 Incredible!\nThe %@ sphere is worked out to the maximum.\nYou can now pay attention to other areas.\n\n";
 "Sphere.detail.good" = "🚀 Excellent!\n You pump %@ and it is noticeable.\n\n";
 "Sphere.detail.warning" = "\n\n ❓ Why can the current value be less than the initial value?\nThe application uses a clever algorithm that reduces the points for inactivity. It's just like in real life: if we abandon the case, its skill is lost over time. The best way to fix this is to start writing in your journal.";
-"Sphere.detail.MaxAttention" = "🤩 Awesome! You pay the most attention to the %@ sphere.\n\n";
+"Sphere.detail.maxAttention" = "🤩 Awesome! You pay the most attention to the %@ sphere.\n\n";
 "Sphere.detail.minAttention" = "❗Pay attention. In this area, the least posts are written.\n\n";
 "Sphere.detail.superComputer" = "\n\n 💻 The supercomputer makes a prediction: at the same rate, you will reach ten points %@";
 
