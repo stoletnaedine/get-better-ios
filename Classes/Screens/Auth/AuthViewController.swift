@@ -23,6 +23,7 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var forgotButton: UIButton!
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var anonymButton: UIButton!
+    @IBOutlet weak var needHelpButton: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     
     var signInCompletion: VoidClosure?
@@ -98,6 +99,10 @@ class AuthViewController: UIViewController {
             }
         })
     }
+
+    @IBAction func needHelpButtonDidTap(_ sender: UIButton) {
+        UIApplication.shared.open(Properties.stoletnaedineTelegram, options: [:], completionHandler: nil)
+    }
 }
 
 // MARK: Setup View
@@ -154,6 +159,11 @@ extension AuthViewController {
         anonymButton.setTitleColor(.violet, for: .normal)
         anonymButton.titleLabel?.font = .formButtonFont
         anonymButton.titleLabel?.underline()
+
+        needHelpButton.setTitle(R.string.localizable.settingsAboutAppNeedHelp(), for: .normal)
+        needHelpButton.setTitleColor(.violet, for: .normal)
+        needHelpButton.titleLabel?.font = .formButtonFont
+        needHelpButton.titleLabel?.underline()
         
         logoImageView.tint(with: .violet)
         eyeImageView.tint(with: .grey)

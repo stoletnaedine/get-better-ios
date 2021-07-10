@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import StoreKit
 
 class SettingsViewController: UIViewController {
 
@@ -287,7 +288,15 @@ extension SettingsViewController {
                 cell: SettingsCell(
                     title: R.string.localizable.settingsAboutAppPostReview(),
                     action: {
-                        UIApplication.shared.open(Properties.appStoreUrl, options: [:], completionHandler: nil)
+                        SKStoreReviewController.requestReview()
+                    })
+            ),
+            SettingsCellViewModel(
+                type: .aboutApp,
+                cell: SettingsCell(
+                    title: R.string.localizable.settingsAboutAppNeedHelp(),
+                    action: {
+                        UIApplication.shared.open(Properties.stoletnaedineTelegram, options: [:], completionHandler: nil)
                     })
             )
         ]

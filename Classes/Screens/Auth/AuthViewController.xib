@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthViewController" customModule="GetBetter" customModuleProvider="target">
             <connections>
-                <outlet property="anonymButton" destination="Ljx-Yx-3Ve" id="7X9-5M-Hqm"/>
+                <outlet property="anonymButton" destination="O9b-JY-xLu" id="3vD-ZG-XZ6"/>
                 <outlet property="emailLabel" destination="63r-mi-DNe" id="xbD-Ri-WBi"/>
                 <outlet property="emailTextField" destination="x1Y-p6-RA7" id="WII-29-VDg"/>
                 <outlet property="enterButton" destination="6he-NM-usf" id="9RV-uc-fJO"/>
@@ -20,6 +20,7 @@
                 <outlet property="eyeImageView" destination="00U-eu-FlQ" id="zPP-re-8Et"/>
                 <outlet property="forgotButton" destination="mgQ-53-M4R" id="Gi4-Fu-aUS"/>
                 <outlet property="logoImageView" destination="LHU-Vk-Nle" id="c5D-vM-1KP"/>
+                <outlet property="needHelpButton" destination="Ljx-Yx-3Ve" id="mnr-8D-Ip2"/>
                 <outlet property="passwordLabel" destination="Gfm-7J-n5v" id="B59-5j-4Og"/>
                 <outlet property="passwordTextField" destination="Fhy-F2-hxh" id="1Tj-AT-e1T"/>
                 <outlet property="registrationButton" destination="PZt-5D-8rw" id="FIR-zw-MNf"/>
@@ -129,11 +130,11 @@
                         <action selector="registerButtonDidPressed:" destination="-1" eventType="touchUpInside" id="b52-SB-vxg"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-Yx-3Ve">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-Yx-3Ve" userLabel="NeedHelpButton">
                     <rect key="frame" x="184" y="812" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
-                        <action selector="anonymousRegisterButtonDidTap:" destination="-1" eventType="touchUpInside" id="cTp-ux-GFS"/>
+                        <action selector="needHelpButtonDidTap:" destination="-1" eventType="touchUpInside" id="5rP-B2-ocJ"/>
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="LHU-Vk-Nle">
@@ -142,6 +143,13 @@
                         <constraint firstAttribute="width" secondItem="LHU-Vk-Nle" secondAttribute="height" multiplier="633:108" id="lGf-zc-9Ab"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9b-JY-xLu" userLabel="AnonymRegButton">
+                    <rect key="frame" x="184" y="543.5" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="anonymousRegisterButtonDidTap:" destination="-1" eventType="touchUpInside" id="ntT-CY-LpL"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -167,6 +175,7 @@
                 <constraint firstItem="00U-eu-FlQ" firstAttribute="leading" secondItem="Fhy-F2-hxh" secondAttribute="trailing" id="PCF-Nw-e0D"/>
                 <constraint firstItem="AKX-OO-QJt" firstAttribute="leading" secondItem="Fhy-F2-hxh" secondAttribute="trailing" id="RmU-7v-ysP"/>
                 <constraint firstItem="SSa-m3-k8D" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Ugm-tg-8xw"/>
+                <constraint firstItem="O9b-JY-xLu" firstAttribute="top" secondItem="mgQ-53-M4R" secondAttribute="bottom" constant="50" id="Wz0-5E-JH3"/>
                 <constraint firstItem="Ljx-Yx-3Ve" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="WzI-yN-JAF"/>
                 <constraint firstItem="x1Y-p6-RA7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="aZP-Td-1zY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5F3-Be-xeX" secondAttribute="trailing" constant="20" id="bQe-8t-SIS"/>
@@ -176,6 +185,7 @@
                 <constraint firstItem="PZt-5D-8rw" firstAttribute="top" secondItem="5F3-Be-xeX" secondAttribute="bottom" constant="20" id="oJp-6l-UpY"/>
                 <constraint firstItem="00U-eu-FlQ" firstAttribute="bottom" secondItem="Fhy-F2-hxh" secondAttribute="bottom" id="qOb-hr-fVE"/>
                 <constraint firstItem="Fhy-F2-hxh" firstAttribute="top" secondItem="Gfm-7J-n5v" secondAttribute="bottom" constant="6" id="rE9-Lt-w6l"/>
+                <constraint firstItem="O9b-JY-xLu" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="rg6-My-vxc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x1Y-p6-RA7" secondAttribute="trailing" constant="20" id="sgK-ZQ-QoB"/>
                 <constraint firstAttribute="trailing" secondItem="SSa-m3-k8D" secondAttribute="trailing" constant="20" id="x8W-hC-cyd"/>
             </constraints>

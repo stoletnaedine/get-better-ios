@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol SphereMetricsServiceProtocol {
     func text(for sphere: Sphere, userData: UserData) -> String
@@ -36,20 +37,24 @@ class SphereMetricsService: SphereMetricsServiceProtocol {
         let values = R.string.localizable.sphereDetailStartValue(startValue.toString(), currentValue.toString())
 
         let sphereString = "\(sphere.icon)\u{00a0}\(sphere.name)"
+        var userNameString = ""
+        if let userName = Auth.auth().currentUser?.displayName {
+            userNameString = ", \(userName)"
+        }
         if currentValue == Properties.maxSphereValue {
-            isPopularOrNot = R.string.localizable.sphereDetailMax(sphereString)
+            isPopularOrNot = R.string.localizable.sphereDetailMax(userNameString, sphereString)
         } else if currentValue > startValue {
-            isPopularOrNot = R.string.localizable.sphereDetailGood(sphereString)
+            isPopularOrNot = R.string.localizable.sphereDetailGood(userNameString, sphereString)
         } else if currentValue < startValue {
             warning = R.string.localizable.sphereDetailWarning()
         }
         
         let rating = mostLessPopularSphere(posts: userData.posts)
         if sphere == rating.mostPopularSphere {
-            isPopularOrNot = R.string.localizable.sphereDetailMaxAttention(sphereString)
+            isPopularOrNot = R.string.localizable.sphereDetailMaxAttention(userNameString, sphereString)
         }
         if sphere == rating.lessPopularSphere {
-            isPopularOrNot = R.string.localizable.sphereDetailMinAttention()
+            isPopularOrNot = R.string.localizable.sphereDetailMinAttention(userNameString)
         }
         
         var maxValuePredictionDate = ""

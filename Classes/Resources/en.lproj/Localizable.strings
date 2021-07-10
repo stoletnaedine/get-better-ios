@@ -55,11 +55,11 @@
 "Sphere.detail.posts.empty" = "⚠️ In this field you have no records in the journal.";
 "Sphere.detail.posts.notEmpty" = "✍️ Written posts — %@";
 "Sphere.detail.startValue" = "\n\n🌘 Initial value — %@\n🌖 The current value — %@";
-"Sphere.detail.max" = "💜 Incredible!\nThe %@ sphere is worked out to the maximum.\nYou can now pay attention to other areas.\n\n";
-"Sphere.detail.good" = "🚀 Excellent!\n You pump %@ and it is noticeable.\n\n";
+"Sphere.detail.max" = "💜 Incredible%@!\nThe %@ sphere is worked out to the maximum.\nYou can now pay attention to other areas.\n\n";
+"Sphere.detail.good" = "🚀 Excellent%@!\n You pump %@ and it is noticeable.\n\n";
 "Sphere.detail.warning" = "\n\n ❓ Why can the current value be less than the initial value?\nThe application uses a clever algorithm that reduces the points for inactivity. It's just like in real life: if we abandon the case, its skill is lost over time. The best way to fix this is to start writing in your journal.";
-"Sphere.detail.maxAttention" = "🤩 Awesome! You pay the most attention to the %@ sphere.\n\n";
-"Sphere.detail.minAttention" = "❗Pay attention. In this area, the least posts are written.\n\n";
+"Sphere.detail.maxAttention" = "🤩 Awesome%@! You pay the most attention to the %@ sphere.\n\n";
+"Sphere.detail.minAttention" = "❗Pay attention%@. In this area, the least posts are written.\n\n";
 "Sphere.detail.superComputer" = "\n\n 💻 The supercomputer makes a prediction: at the same rate, you will reach ten points %@";
 
 // MARK: LifeCircle
@@ -265,7 +265,8 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 "Settings.DiffLevel.Info.Title" = "Difficulty level";
 "Settings.DiffLevel.Info.Description" = "At low difficulty you will gain points faster than at high difficulty.\nHardcore is a real challenge to yourself.";
 "Settings.Logout.Alert.No.Email" = "No e-mail specified. You will no longer be able to log into GetBetter with this profile. Data will be lost 😔";
-"Settings.aboutApp.postReview" = "Write a review in the AppStore";
+"Settings.aboutApp.postReview" = "Rate the app";
+"Settings.aboutApp.needHelp" = "Write to developer";
 
 // MARK: PushNotifications
 
@@ -485,9 +486,13 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 // Mark: AppVersions
 
 "AppVersions.title" = "Version History";
-
 "AppVersions" =
 "
+🤷🏿 2.1.1:
+• Fixed bug with updating the Journal feed.
+• Fixed localization in metrics. Added call by user name.
+• Added the ability to quickly write to the developer.
+
 💜 2.1.0:
 • Likes in Tips of the Day are now counted correctly.
 • Sort up in the section my Tips of the day: the current advice from above, below - those that were in yesterday, the day before yesterday, etc.
