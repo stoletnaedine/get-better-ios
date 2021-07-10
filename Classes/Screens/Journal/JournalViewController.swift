@@ -14,8 +14,6 @@ class JournalViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private enum Constants {
-        static let cellId = R.reuseIdentifier.journalCell.identifier
-        static let cellXibName = R.nib.journalTableViewCell.name
         static let sectionHeaderHeight: CGFloat = 30
     }
     
@@ -48,11 +46,10 @@ class JournalViewController: UIViewController {
     }
     
     @objc func updatePostsInTableView() {
+        refreshControl.endRefreshing()
         getPosts { [weak self] in
-            guard let self = self else { return }
             DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
+                self?.tableView.reloadData()
             }
         }
     }
@@ -171,9 +168,7 @@ class JournalViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(
-            UINib(nibName: Constants.cellXibName, bundle: nil),
-            forCellReuseIdentifier: Constants.cellId)
+        tableView.register(R.nib.journalTableViewCell)
         tableView.showsVerticalScrollIndicator = false
     }
 }
@@ -203,7 +198,7 @@ extension JournalViewController: UITableViewDelegate, UITableViewDataSource {
 
         case .post:
             guard let post = section.posts?[indexPath.row] else { return UITableViewCell() }
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellId,
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: R.nib.journalTableViewCell.identifier,
                                                           for: indexPath) as! JournalTableViewCell
             cell.fillCell(from: post)
             return cell

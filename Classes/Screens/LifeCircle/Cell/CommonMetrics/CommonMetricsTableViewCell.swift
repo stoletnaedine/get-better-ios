@@ -62,6 +62,9 @@ class CommonMetricsTableViewCell: UITableViewCell {
         daysLabel.font = UIFont.systemFont(ofSize: 14)
         daysLabel.textColor = .grey
         daysLabel.text = R.string.localizable.commonDays()
+
+        backgroundColor = .appBackground
+        selectionStyle = .none
     }
     
 }

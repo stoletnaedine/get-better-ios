@@ -265,7 +265,7 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 "Settings.DiffLevel.Info.Title" = "Difficulty level";
 "Settings.DiffLevel.Info.Description" = "At low difficulty you will gain points faster than at high difficulty.\nHardcore is a real challenge to yourself.";
 "Settings.Logout.Alert.No.Email" = "No e-mail specified. You will no longer be able to log into GetBetter with this profile. Data will be lost 😔";
-"Settings.aboutApp.postReview" = "Leave a review in the AppStore";
+"Settings.aboutApp.postReview" = "Write a review in the AppStore";
 
 // MARK: PushNotifications
 

@@ -14,7 +14,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private enum Constants {
-        static let profileCell = R.reuseIdentifier.profileCell.identifier
         static let notificationCell = R.nib.notificationCell.name
         static let titleSubtitleCell = R.nib.titleSubtitleCell.name
     }
@@ -60,8 +59,7 @@ class SettingsViewController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView.register(UINib(nibName: Constants.profileCell, bundle: nil),
-                           forCellReuseIdentifier: Constants.profileCell)
+        tableView.register(R.nib.profileCell)
         tableView.register(UINib(nibName: Constants.notificationCell, bundle: nil),
                            forCellReuseIdentifier: Constants.notificationCell)
         tableView.register(UINib(nibName: Constants.titleSubtitleCell, bundle: nil),
@@ -122,11 +120,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch type {
         case .profile:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.profileCell.identifier) as? ProfileCell,
                   let profile = self.profile else {
                 return UITableViewCell()
             }
-            cell.backgroundColor = .appBackground
             cell.configure(model: profile)
             return cell
             
@@ -183,7 +180,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let type = models[indexPath.row].type
         switch type {
         case .profile:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileCell) as? ProfileCell else { return .zero }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.profileCell.identifier) as? ProfileCell else { return .zero }
             return cell.frame.height
         case .push, .difficultyLevel:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleSubtitleCell) as? TitleSubtitleCell else { return .zero }

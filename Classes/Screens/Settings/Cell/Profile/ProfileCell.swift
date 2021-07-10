@@ -19,6 +19,7 @@ class ProfileCell: UITableViewCell {
         super.awakeFromNib()
         customizeView()
         selectionStyle = .none
+        backgroundColor = .appBackground
     }
     
     func configure(model: Profile) {

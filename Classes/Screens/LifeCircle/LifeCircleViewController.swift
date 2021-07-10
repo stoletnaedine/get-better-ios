@@ -22,16 +22,6 @@ class LifeCircleViewController: UIViewController {
     @IBOutlet weak var startLevelView: UIView!
     
     private enum Constants {
-        enum CommonMetrics {
-            static let xibName = R.nib.commonMetricsTableViewCell.name
-            static let reuseId = R.reuseIdentifier.commonMetricsCell.identifier
-        }
-        
-        enum SphereMetrics {
-            static let xibName = R.nib.sphereMetricsTableViewCell.name
-            static let reuseId = R.reuseIdentifier.sphereMetricsCell.identifier
-        }
-        
         static let sphereIconSize: CGFloat = 30
     }
     
@@ -239,10 +229,8 @@ class LifeCircleViewController: UIViewController {
     private func setupTableViews() {
         metricsTableView.dataSource = self
         metricsTableView.delegate = self
-        metricsTableView.register(UINib(nibName: Constants.SphereMetrics.xibName, bundle: nil),
-                                  forCellReuseIdentifier: Constants.SphereMetrics.reuseId)
-        metricsTableView.register(UINib(nibName: Constants.CommonMetrics.xibName, bundle: nil),
-                                  forCellReuseIdentifier: Constants.CommonMetrics.reuseId)
+        metricsTableView.register(R.nib.sphereMetricsTableViewCell)
+        metricsTableView.register(R.nib.commonMetricsTableViewCell)
         metricsTableView.backgroundColor = .appBackground
         metricsTableView.separatorInset = UIEdgeInsets.zero
     }
@@ -341,32 +329,33 @@ extension LifeCircleViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CommonMetrics.reuseId,
-                                                     for: indexPath) as! CommonMetricsTableViewCell
+        if indexPath.row == 0,
+           let cell = tableView.dequeueReusableCell(
+            withIdentifier: R.nib.commonMetricsTableViewCell.identifier,
+            for: indexPath) as? CommonMetricsTableViewCell {
             let average = lifeCircleService.averageCurrentSphereValue()
             let daysFromUserCreation = lifeCircleService.daysFromUserCreation()
             cell.fillCell(viewModel: CommonMetricsViewModel(posts: userData?.posts.count ?? .zero,
                                                             average: average,
                                                             days: daysFromUserCreation))
-            cell.selectionStyle = .none
-            cell.backgroundColor = .appBackground
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SphereMetrics.reuseId,
-                                                 for: indexPath) as! SphereMetricsTableViewCell
-        // indexPath.row - 1 для ячейки Common Metrics
-        let sphereIndex = indexPath.row - 1
-        guard let sphereValue = getSphereValue(index: sphereIndex) else { return cell }
-        cell.configure(from: sphereValue)
-        return cell
+        if let cell = tableView.dequeueReusableCell(
+            withIdentifier: R.nib.sphereMetricsTableViewCell.identifier,
+            for: indexPath) as? SphereMetricsTableViewCell {
+            // indexPath.row - 1 для ячейки Common Metrics
+            let sphereIndex = indexPath.row - 1
+            guard let sphereValue = getSphereValue(index: sphereIndex) else { return cell }
+            cell.configure(from: sphereValue)
+            return cell
+        }
+
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            return
-        }
+        guard indexPath.row != 0 else { return }
         // indexPath.row - 1 для ячейки Common Metrics
         let sphereIndex = indexPath.row - 1
         guard let sphereValue = getSphereValue(index: sphereIndex) else { return }
