@@ -87,11 +87,12 @@ class OnboardingPageViewController: UIViewController {
                 if let error = error {
                     self?.alertService.showErrorMessage(error.localizedDescription)
                 } else {
-                    self?.alertService.showSuccessMessage(
-                        R.string.localizable.onboardingDeleteAnonymousAccountSuccess())
+                    self?.alertService.showSuccessMessage(R.string.localizable.onboardingDeleteAnonymousSuccess())
                 }
                 NotificationCenter.default.post(name: .logout, object: nil)
             })
+        } else {
+            NotificationCenter.default.post(name: .logout, object: nil)
         }
     }
     

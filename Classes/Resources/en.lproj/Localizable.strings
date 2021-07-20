@@ -154,9 +154,20 @@
 // MARK: Error
 
 "Error" = "Error";
-"Error.NoInternet" = "No network connection";
+"Error.noInternet" = "No network connection";
 "Error.default.message" = "Something went wrong. Please try again";
 "Error.storage.delete" = "Failed to delete photo";
+"Error.emailAlreadyInUse" = "This email is already in use by another user";
+"Error.wrongPassword" = "Invalid password";
+"Error.weakPassword" = "This password is too easy to guess";
+"Error.invalidEmail" = "Invalid E-mail";
+"Error.tooManyRequests" = "Too many failed attempts. Please try later";
+"Error.userNotFound" = "User not found";
+"Error.networkError" = "No internet connection";
+"Error.requiresRecentLogin" = "You need to login again to continue";
+"Error.serverError" = "Server error";
+"Error.notFound" = "Can not load data from server";
+"Error.unexpected" = "Something went wrong";
 
 // MARK: Profile
 
@@ -193,7 +204,7 @@
 "Onboarding.0" = "0 - I don't have this";
 "Onboarding.Tutorial.PrimaryText" = "Click";
 "Onboarding.Tutorial.SecondaryText" = "to select a value";
-"Onboarding.DeleteAnonymousAccount.Success" = "Anonymous account has been deleted.\nSee you soon!";
+"Onboarding.DeleteAnonymous.Success" = "Anonymous account has been deleted.\nSee you soon!";
 "Onboarding.User.Error" = "Could not identify user";
 
 // MARK: Post
@@ -296,8 +307,9 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 "EditProfile.delete.button" = "Delete Account";
 "EditProfile.save" = "Save";
 "EditProfile.reauth.alert.title" = "Please enter your account password";
-"EditProfile.reauth.alert.ok" = "Remove Account";
+"EditProfile.reauth.alert.remove" = "Remove Account";
 "EditProfile.reauth.error" = "The password may be incorrect. Please try again";
+"EditProfile.reauth.empty.error" = "You did not enter password";
 
 // MARK: AddPost
 
@@ -488,6 +500,11 @@ Do not forget to regularly multiply bright events and do not throw in areas that
 "AppVersions.title" = "Version History";
 "AppVersions" =
 "
+🍳 2.1.2:
+• Fixed a bug when it was impossible to log out of the account without answering questions about areas of life
+• Localization of error texts
+• Added a disclaimer for users from Crimea: you can use the application only through VPN
+
 🤷🏿 2.1.1:
 • Fixed bug with updating the Journal feed.
 • Fixed localization in metrics. Added call by user name.

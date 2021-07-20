@@ -143,15 +143,16 @@ class FirebaseDatabase: DatabaseProtocol {
         ref
             .child(Constants.startMetricsPath)
             .observeSingleEvent(of: .value, with: { snapshot in
-                if let value = snapshot.value as? NSDictionary {
-                    let sphereMetrics = SphereMetrics(values: value as! [String : Double])
+                if let dict = snapshot.value as? NSDictionary,
+                   let values = dict as? [String : Double] {
+                    let sphereMetrics = SphereMetrics(values: values)
                     completion(.success(sphereMetrics))
                 } else {
                     completion(.failure(AppError(errorCode: .notFound)))
                 }
             }) { error in
                 completion(.failure(AppError(error: error)!))
-        }
+            }
     }
     
     func getTipLikeIds(completion: @escaping (Result<[Int], AppError>) -> Void) {

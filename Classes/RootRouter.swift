@@ -116,10 +116,9 @@ extension RootRouter {
     private func checkUserHasSetupSphere(completion: @escaping (Bool) -> Void) {
         database.getStartSphereMetrics { [weak self] result in
             switch result {
-            case .failure(let error):
-                if error.name == AppErrorCode.notFound.rawValue {
-                    completion(false)
-                } else {
+            case let .failure(error):
+                completion(false)
+                if error.code != .notFound {
                     self?.alertService.showErrorMessage(error.localizedDescription)
                 }
             case .success:

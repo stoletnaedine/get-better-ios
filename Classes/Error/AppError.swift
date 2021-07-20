@@ -12,6 +12,7 @@ import Firebase
 class AppError: Error {
     
     var name: String?
+    var code: AppErrorCode?
     
     init?(error: Error?) {
         if let error = error {
@@ -22,28 +23,38 @@ class AppError: Error {
     }
     
     init(errorCode: AppErrorCode) {
-        self.name = errorCode.rawValue
+        self.code = errorCode
+        switch errorCode {
+        case .noInternet:
+            self.name = R.string.localizable.errorNoInternet()
+        case .notFound:
+            self.name = R.string.localizable.errorNotFound()
+        case .serverError:
+            self.name = R.string.localizable.errorServerError()
+        case .unexpected:
+            self.name = R.string.localizable.errorUnexpected()
+        }
     }
     
     init(firebaseError: Error) {
         if let errorCode = AuthErrorCode(rawValue: firebaseError._code) {
             switch errorCode {
             case .emailAlreadyInUse:
-                self.name = "Этот E-mail уже используется другим пользователем"
+                self.name = R.string.localizable.errorEmailAlreadyInUse()
             case .wrongPassword:
-                self.name = "Неверный пароль"
+                self.name = R.string.localizable.errorWrongPassword()
             case .weakPassword:
-                self.name = "Этот пароль слишком легко подобрать"
+                self.name = R.string.localizable.errorWeakPassword()
             case .invalidEmail:
-                self.name = "Некорректный E-mail"
+                self.name = R.string.localizable.errorInvalidEmail()
             case .tooManyRequests:
-                self.name = "Слишком много неудачных попыток. Попробуйте позже"
+                self.name = R.string.localizable.errorTooManyRequests()
             case .userNotFound:
-                self.name = "Пользователь не найден"
+                self.name = R.string.localizable.errorUserNotFound()
             case .networkError:
-                self.name = "Нет подключения к интернету"
+                self.name = R.string.localizable.errorNetworkError()
             case .requiresRecentLogin:
-                self.name = "Для продолжения нужно снова авторизоваться"
+                self.name = R.string.localizable.errorRequiresRecentLogin()
             default:
                 self.name = firebaseError.localizedDescription
             }
@@ -51,11 +62,9 @@ class AppError: Error {
     }
 }
 
-enum AppErrorCode: String {
-    case error = "Ошибка"
-    case noInternet = "Нет подключения к интернету"
-    case unauthorized = "Вы не авторизованы"
-    case serverError = "Ошибка сервера"
-    case notFound = "Не удалось обновить данные с сервера"
-    case unexpected = "Что-то пошло не так"
+enum AppErrorCode {
+    case noInternet
+    case serverError
+    case notFound
+    case unexpected
 }

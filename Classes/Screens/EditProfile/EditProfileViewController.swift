@@ -190,17 +190,23 @@ class EditProfileViewController: UIViewController {
             message: nil,
             preferredStyle: .alert)
         alert.addTextField { _ in }
-        let okAction = UIAlertAction(
-            title: R.string.localizable.editProfileReauthAlertOk(),
+        let removeAction = UIAlertAction(
+            title: R.string.localizable.editProfileReauthAlertRemove(),
             style: .destructive,
-            handler: { [weak alert] _ in
-                guard let alert = alert,
-                      let textField = alert.textFields?.first,
+            handler: { [weak self] _ in
+                guard let textField = alert.textFields?.first,
                       let text = textField.text,
-                      !text.isEmpty else { return }
+                      !text.isEmpty else {
+                    self?.alertService.showErrorMessage(R.string.localizable.editProfileReauthEmptyError())
+                    return
+                }
                 completion(text)
             })
-        alert.addAction(okAction)
+        let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        })
+        alert.addAction(removeAction)
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
 
